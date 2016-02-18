@@ -7,7 +7,10 @@
     "ember-load-initializers": "0.1.7",
     "ember-qunit-notifications": "0.1.0",
     "jquery": "1.11.3",
-    "loader.js": "^3.5.0"
+    "loader.js": "^3.5.0",
+    "pretender": "~0.10.1",
+    "lodash": "~3.7.0",
+    "Faker": "~3.0.0"
   },
   "resolutions": {
     "ember": "2.2.0"

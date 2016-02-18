@@ -1,0 +1,32 @@
+<thead>
+  <tr>
+    {{#each table.visibleColumnGroups as |column|}}
+      {{lt-column column=column click=(action 'onColumnClick' column)}}
+    {{/each}}
+  </tr>
+  <tr>
+    {{#each table.visibleSubColumns as |column|}}
+      {{lt-column column=column rowspan=1 click=(action 'onColumnClick' column)}}
+    {{/each}}
+  </tr>
+</thead>
+<tbody>
+  {{#each rows as |row|}}
+    {{lt-row columns=table.visibleColumns row=row canExpand=canExpand click=(action 'onRowClick' row)}}
+    {{#if canExpand}}
+      {{#if row.expanded}}
+        {{component expandedRowComponent tagName="tr" classNames="lt-row lt-expanded-row" colspan=table.visibleColumns.length row=row}}
+      {{/if}}
+    {{/if}}
+  {{/each}}
+
+  {{#if isLoading}}
+    {{component loadingComponent tagName="tr" classNames="lt-row lt-loading" colspan=table.visibleColumns.length}}
+  {{else if hasNoData}}
+    {{#if noDataComponent}}
+      {{component noDataComponent tagName="tr" classNames="lt-row lt-no-data" colspan=table.visibleColumns.length}}
+    {{else}}
+      {{noDataText}}
+    {{/if}}
+  {{/if}}
+</tbody>
