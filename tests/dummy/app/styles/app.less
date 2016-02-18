@@ -3,6 +3,10 @@ html,body {
   min-width: 100%;
 }
 
+.row-toggle {
+  font-size: 12px;
+}
+
 .ember-light-table {
   width: 80%;
   margin: 0 auto;
@@ -43,6 +47,12 @@ html,body {
 
     &:nth-child(odd) {
       background-color: #F5F4F4;
+    }
+
+    &.lt-expanded-row {
+      td {
+        padding: 15px;
+      }
     }
 
     td {

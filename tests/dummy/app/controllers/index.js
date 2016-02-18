@@ -15,8 +15,16 @@ export default Ember.Controller.extend({
 
   columns: computed(function() {
     return [{
+      label: '',
+      valuePath: '',
+      sortable: false,
+      width: '30px',
+      align: 'center',
+      cellComponent: 'row-toggle'
+      }, {
       label: 'Avatar',
       valuePath: 'avatar',
+      width: '100px',
       sortable: false,
       align: 'center',
       cellComponent: 'user-avatar'
