@@ -9,24 +9,29 @@ const {
 } = Ember;
 
 export default class Table extends Ember.Object {
-  constructor(rows = [], columns = []) {
+  constructor(columns = [], rows = []) {
     super();
 
     this.rows = emberArray(Table.createRows(rows));
     this.columns = emberArray(Table.createColumns(columns));
 
+    this._setupComputedProperties();
+  }
+
+  _setupComputedProperties() {
+    this.expandedRows = computed.filterBy('rows', 'expanded', true);
+    this.selectedRows = computed.filterBy('rows', 'selected', true);
+    this.sortedColumns = computed.filterBy('visibleColumns', 'sorted', true);
+    this.sortableColumns = computed.filterBy('visibleColumns', 'sortable', true);
     this.visibleColumnGroups = computed.filterBy('columns', 'hidden', false);
 
     this.visibleSubColumns = computed('columns.@each.visibleSubColumns', function() {
-      return [].concat(...this.columns.getEach('visibleSubColumns'));
+      return emberArray([].concat(...this.columns.getEach('visibleSubColumns')));
     });
 
     this.visibleColumns = computed('columns.@each.visibleColumns', function() {
-      return [].concat(...this.columns.getEach('visibleColumns'));
+      return emberArray([].concat(...this.columns.getEach('visibleColumns')));
     });
-
-    this.expandedRows = computed.filterBy('rows', 'expanded', true);
-    this.selectedRows = computed.filterBy('rows', 'selected', true);
   }
 
   // Rows

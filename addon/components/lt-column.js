@@ -11,12 +11,13 @@ export default Ember.Component.extend({
   tagName: 'th',
   classNames: ['lt-column'],
   attributeBindings: ['width', 'colspan', 'rowspan'],
-  classNameBindings: ['align', 'isGroup:lt-group-column'],
+  classNameBindings: ['align', 'isGroup:lt-group-column', 'isSortable', 'isSorted'],
+  tableActions: null,
   column: null,
-
   width: computed.oneWay('column.width'),
-
   isGroup: computed.oneWay('column.isVisibleGroupColumn'),
+  isSortable: computed.oneWay('column.sortable'),
+  isSorted: computed.oneWay('column.sorted'),
 
   colspan: computed('column', 'column.visibleSubColumns.[]', function() {
     let subColumns = this.get('column.visibleSubColumns');
@@ -29,6 +30,6 @@ export default Ember.Component.extend({
   }),
 
   align: computed('column.align', function() {
-    return `lt-align-${this.get('column.align')}`;
+    return `align-${this.get('column.align')}`;
   })
 });

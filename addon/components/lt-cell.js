@@ -10,13 +10,16 @@ export default Ember.Component.extend({
   layout,
   tagName: 'td',
   classNames: ['lt-cell'],
-  classNameBindings: ['align'],
+  classNameBindings: ['align', 'isSorted'],
+  tableActions: null,
   column: null,
   row: null,
 
   align: computed('column.align', function() {
-    return `lt-align-${this.get('column.align')}`;
+    return `align-${this.get('column.align')}`;
   }),
+
+  isSorted: computed.oneWay('column.sorted'),
 
   value: computed('row', 'column', function() {
     let valuePath = this.get('column.valuePath');

@@ -10,6 +10,8 @@ const {
 const defaultOptions = {
   hidden: false,
   ascending: true,
+  sortable: true,
+  sorted: false,
   label: '',
   subColumns: null,
   headerComponent: null,
@@ -27,13 +29,16 @@ export default class Column extends Ember.Object {
     super();
     var options = merge({}, defaultOptions);
     merge(options, column);
-
     Object.keys(options).forEach(k => this[k] = options[k]);
 
     if(!isEmpty(this.subColumns)) {
-      this.subColumns = emberArray(this.subColumns.map(sh => new Column(sh)));
+      this.subColumns = emberArray(this.subColumns.map(sc => new Column(sc)));
     }
 
+    this._setupComputedProperties();
+  }
+
+  _setupComputedProperties() {
     this.visibleSubColumns = computed.filterBy('subColumns', 'hidden', false);
     this.visibleColumns = computed('hidden', 'visibleSubColumns.[]', this._getVisibleColumns);
     this.isVisibleGroupColumn = computed('visibleSubColumns.[]', 'hidden', function() {

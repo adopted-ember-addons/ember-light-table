@@ -14,6 +14,7 @@ export default Ember.Component.extend(TableScroll, {
 
   // Possible Options
   table: null,
+  tableActions: null,
   expandedRowComponent: null,
   noDataComponent: null,
   loadingComponent: null,
@@ -21,11 +22,23 @@ export default Ember.Component.extend(TableScroll, {
   canSelect: true,
   isLoading: false,
   multiRowExpansion: true,
+  multiColumnSort: false,
+  iconAscending: '',
+  iconDescending: '',
 
-  canExpand: computed.notEmpty('expandedRowComponent'),
   rows: computed.oneWay('table.rows'),
   columns: computed.oneWay('table.columns'),
+
+  canExpand: computed.notEmpty('expandedRowComponent'),
   hasNoData: computed.empty('rows'),
+
+  sortIcons: computed('iconAscending', 'iconDescending', function() {
+    return this.getProperties(['iconAscending', 'iconDescending']);
+  }),
+
+  visibleColumns: computed.oneWay('table.visibleColumns'),
+  visibleColumnGroups: computed.oneWay('table.visibleColumnGroups'),
+  visibleSubColumns: computed.oneWay('table.visibleSubColumns'),
 
   togglExpandedRow(row) {
     let multi = this.get('multiRowExpansion');
@@ -47,6 +60,16 @@ export default Ember.Component.extend(TableScroll, {
 
   actions: {
     onColumnClick(column) {
+      if(column.sortable) {
+        if(column.sorted) {
+          column.toggleProperty('ascending');
+        } else {
+          if(!this.get('multiColumnSort')) {
+            this.get('table.sortedColumns').setEach('sorted', false);
+          }
+          column.set('sorted', true);
+        }
+      }
       this._callAction('onColumnClick', column);
     },
 
@@ -60,6 +83,14 @@ export default Ember.Component.extend(TableScroll, {
       }
 
       this._callAction('onRowClick', row);
+    },
+
+    onColumnDoubleClick(column) {
+      this._callAction('onColumnDoubleClick', column);
+    },
+
+    onRowDoubleClick(row) {
+      this._callAction('onRowDoubleClick', row);
     },
 
     onScrolledToBottom() {

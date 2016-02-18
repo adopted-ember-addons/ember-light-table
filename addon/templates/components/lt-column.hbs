@@ -1,5 +1,8 @@
 {{#if column.headerComponent}}
-  {{component column.headerComponent column=column}}
+  {{component column.headerComponent tableActions=tableActions column=column}}
 {{else}}
   {{column.label}}
+  {{#if column.sorted}}
+    <span class="{{if column.ascending sortIcons.iconAscending sortIcons.iconDescending}}"></span>
+  {{/if}}
 {{/if}}
