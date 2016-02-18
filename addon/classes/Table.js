@@ -25,8 +25,8 @@ export default class Table extends Ember.Object {
       return [].concat(...this.columns.getEach('visibleColumns'));
     });
 
-    this.expandedRows = computed.filterBy('rows', 'expanded', 'true');
-    this.selectedRows = computed.filterBy('rows', 'selected', 'true');
+    this.expandedRows = computed.filterBy('rows', 'expanded', true);
+    this.selectedRows = computed.filterBy('rows', 'selected', true);
   }
 
   // Rows

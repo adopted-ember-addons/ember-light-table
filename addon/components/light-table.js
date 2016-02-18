@@ -28,14 +28,13 @@ export default Ember.Component.extend(TableScroll, {
   hasNoData: computed.empty('rows'),
 
   togglExpandedRow(row) {
-    let rows = this.get('rows');
     let multi = this.get('multiRowExpansion');
     let shouldExpand = !row.expanded;
 
     if(multi) {
       row.toggleProperty('expanded');
     } else {
-      rows.setEach('expanded', false);
+      this.get('table.expandedRows').setEach('expanded', false);
       row.set('expanded', shouldExpand);
     }
   },
