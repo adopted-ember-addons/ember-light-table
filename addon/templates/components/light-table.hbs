@@ -15,16 +15,22 @@
     {{lt-row columns=table.visibleColumns row=row canExpand=canExpand click=(action 'onRowClick' row)}}
     {{#if canExpand}}
       {{#if row.expanded}}
-        {{component expandedRowComponent tagName="tr" classNames="lt-row lt-expanded-row" colspan=table.visibleColumns.length row=row}}
+        <tr class="lt-row lt-expanded-row" colspan={{table.visibleColumns.length}}>
+          {{component expandedRowComponent tagName="" row=row}}
+        </tr>
       {{/if}}
     {{/if}}
   {{/each}}
 
   {{#if isLoading}}
-    {{component loadingComponent tagName="tr" classNames="lt-row lt-loading" colspan=table.visibleColumns.length}}
+    <tr class="lt-row lt-is-loading" colspan={{table.visibleColumns.length}}>
+      {{component loadingComponent tagName=""}}
+    </tr>
   {{else if hasNoData}}
     {{#if noDataComponent}}
-      {{component noDataComponent tagName="tr" classNames="lt-row lt-no-data" colspan=table.visibleColumns.length}}
+      <tr class="lt-row lt-no-data" colspan={{table.visibleColumns.length}}>
+        {{component noDataComponent tagName=""}}
+      </tr>
     {{else}}
       {{noDataText}}
     {{/if}}
