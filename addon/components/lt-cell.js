@@ -11,9 +11,10 @@ export default Ember.Component.extend({
   tagName: 'td',
   classNames: ['lt-cell'],
   classNameBindings: ['align', 'isSorted'],
-  tableActions: null,
+
   column: null,
   row: null,
+  tableActions: null,
 
   align: computed('column.align', function() {
     return `align-${this.get('column.align')}`;

@@ -45,11 +45,23 @@ html,body {
       cursor: pointer;
     }
 
+    &.is-selected {
+      background-color: #E88100 !important;
+      color: white;
+    }
+
+    &:not(.is-selected):hover {
+      background-color: #C7C7C7 !important;
+    }
+
     &:nth-child(odd) {
       background-color: #F5F4F4;
     }
 
     &.lt-expanded-row {
+      &:hover {
+        background-color: transparent !important;
+      }
       td {
         padding: 15px;
       }

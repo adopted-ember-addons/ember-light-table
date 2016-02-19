@@ -1,0 +1,24 @@
+{
+  "name": "Ember Light Table",
+  "description": "",
+  "url": "https://github.com/offirgolan/ember-light-table",
+  "options": {
+    "enabledEnvironments": ["production"],
+    "paths": [
+      "addon"
+    ],
+    "external": {
+      "data": [{
+        "base": "http://emberjs.com/api/",
+        "json": "http://builds.emberjs.com/tags/v2.0.0/ember-docs.json"
+      }]
+    },
+    "exclude": "vendor",
+    "outdir": "docs",
+    "linkNatives": true,
+    "quiet": true,
+    "parseOnly": false,
+    "lint": false,
+    "nocode": false
+  }
+}

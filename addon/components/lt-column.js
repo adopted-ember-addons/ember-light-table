@@ -12,8 +12,11 @@ export default Ember.Component.extend({
   classNames: ['lt-column'],
   attributeBindings: ['width', 'colspan', 'rowspan'],
   classNameBindings: ['align', 'isGroup:lt-group-column', 'isSortable', 'isSorted'],
-  tableActions: null,
+
   column: null,
+  tableActions: null,
+  sortIcons: null,
+
   width: computed.oneWay('column.width'),
   isGroup: computed.oneWay('column.isVisibleGroupColumn'),
   isSortable: computed.oneWay('column.sortable'),

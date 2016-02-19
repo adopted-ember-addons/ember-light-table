@@ -7,23 +7,84 @@ const {
   canInvoke
 } = Ember;
 
+/**
+ * @module Components
+ * @class Light-Table
+ * @extends Ember.Component
+ * @uses TableScroll
+ */
+
 export default Ember.Component.extend(TableScroll, {
   layout,
   tagName: 'table',
   classNames: ['ember-light-table'],
 
-  // Possible Options
+  /**
+   * @property table
+   * @type {Table}
+   */
   table: null,
+  /**
+   * @property tableActions
+   * @type {Object}
+   */
   tableActions: null,
+  /**
+   * @property expandedRowComponent
+   * @type {String}
+   */
   expandedRowComponent: null,
+  /**
+   * @property noDataComponent
+   * @type {String}
+   */
   noDataComponent: null,
+  /**
+   * @property loadingComponent
+   * @type {String}
+   */
   loadingComponent: null,
+  /**
+   * @property noDataText
+   * @type {String}
+   * @default 'No data.'
+   */
   noDataText: 'No data.',
+  /**
+   * @property canSelect
+   * @type {Boolean}
+   * @default true
+   */
   canSelect: true,
+  /**
+   * @property isLoading
+   * @type {Boolean}
+   * @default false
+   */
   isLoading: false,
+  /**
+   * @property multiRowExpansion
+   * @type {Boolean}
+   * @default true
+   */
   multiRowExpansion: true,
+  /**
+   * @property multiColumnSort
+   * @type {Boolean}
+   * @default false
+   */
   multiColumnSort: false,
+  /**
+   * @property iconAscending
+   * @type {String}
+   * @default ''
+   */
   iconAscending: '',
+  /**
+   * @property iconDescending
+   * @type {String}
+   * @default ''
+   */
   iconDescending: '',
 
   rows: computed.oneWay('table.rows'),
