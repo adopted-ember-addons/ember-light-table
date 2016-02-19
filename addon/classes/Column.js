@@ -39,20 +39,13 @@ export default class Column extends Ember.Object {
   }
 
   _setupComputedProperties() {
-    this.visibleSubColumns = computed.filterBy('subColumns', 'hidden', false);
-    this.visibleColumns = computed('hidden', 'visibleSubColumns.[]', this._getVisibleColumns);
     this.isVisibleGroupColumn = computed('visibleSubColumns.[]', 'hidden', function() {
       return !isEmpty(this.get('visibleSubColumns')) && !this.get('hidden');
     });
-  }
 
-  _getVisibleColumns() {
-    let visibleColumns = [];
-    if(this.get('isVisibleGroupColumn')) {
-      visibleColumns = this.get('visibleSubColumns');
-    } else if(!this.get('hidden')) {
-      visibleColumns.push(this);
-    }
-    return visibleColumns;
+    this.visibleSubColumns = computed('subColumns.[]', 'hidden', function() {
+      let subColumns = this.get('subColumns');
+      return isEmpty(subColumns) || this.get('hidden') ? [] : subColumns.filterBy('hidden', false);
+    });
   }
 }

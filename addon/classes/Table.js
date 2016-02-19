@@ -29,8 +29,17 @@ export default class Table extends Ember.Object {
       return emberArray([].concat(...this.columns.getEach('visibleSubColumns')));
     });
 
-    this.visibleColumns = computed('columns.@each.visibleColumns', function() {
-      return emberArray([].concat(...this.columns.getEach('visibleColumns')));
+    this.visibleColumns = computed('columns.@each.isVisibleGroupColumn', function() {
+      let visibleColumns = this.columns.map(c => {
+        if(c.get('isVisibleGroupColumn')) {
+            return c.get('visibleSubColumns');
+          } else if(!c.get('hidden')) {
+            return [c];
+          } else {
+            return [];
+          }
+      });
+      return emberArray([].concat(...visibleColumns));
     });
   }
 
@@ -91,7 +100,6 @@ export default class Table extends Ember.Object {
   removeColumns(columns = []) {
     return this.columns.removeObjects(columns);
   }
-
 
   static createRow(data) {
     return new Row(data);

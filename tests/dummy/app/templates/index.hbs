@@ -1,3 +1,8 @@
+{{#each table.columns as |column|}}
+  {{input type="checkbox" name=column.valuePath checked=column.hidden}}
+  <label for={{column.valuePath}}>{{column.label}}</label>
+{{/each}}
+
 {{light-table
   table=table
   onScrolledToBottom=(action 'onScrolledToBottom')
