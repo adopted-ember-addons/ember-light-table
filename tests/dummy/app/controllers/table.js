@@ -5,12 +5,14 @@ export default Ember.Controller.extend({
   isLoading: false,
   page: 1,
   limit: 20,
+  sort: null,
+  dir: 'asc',
   columns: null,
   table: null,
 
   fetchRecords() {
     this.set('isLoading', true);
-    this.store.query('user', this.getProperties(['page', 'limit'])).then(records => {
+    this.store.query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then(records => {
       this.table.addRows(records.toArray());
       this.set('isLoading', false);
     });
@@ -25,6 +27,18 @@ export default Ember.Controller.extend({
     onScrolledToBottom() {
       this.incrementProperty('page');
       this.fetchRecords();
+    },
+
+    onColumnClick(column) {
+      if (column.sorted) {
+        this.setProperties({
+          dir: column.ascending ? 'asc' : 'desc',
+          sort: column.get('valuePath'),
+          page: 1
+        });
+        this.table.setRows([]);
+        this.fetchRecords();
+      }
     }
   }
 });

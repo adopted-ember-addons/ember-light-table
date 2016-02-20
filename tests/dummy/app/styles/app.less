@@ -41,6 +41,37 @@ html,body {
 .panel {
   width: 75%;
   margin: 0 auto;
+  position: relative;
+
+  .table-actions {
+    position: absolute;
+    left: -41px;
+    width: 40px;
+    background-color: white;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border: 1px solid #ccc;
+    border-right-width: 0;
+    top: 35%;
+    cursor: pointer;
+
+    .table-action {
+      font-size: 20px;
+      text-align: center;
+      display: block;
+      margin: 10px;
+      color: #191919;
+      opacity: 0.8;
+
+      &:hover, &:active {
+        opacity: 1;
+      }
+
+      &.delete {
+        color: @accent-color;
+      }
+    }
+  }
 
   .panel-heading {
     background-color: @accent-color;

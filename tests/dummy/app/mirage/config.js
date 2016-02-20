@@ -12,16 +12,22 @@ export default function() {
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
   this.get('/users', function(db, request) {
-    var { page, limit } = request.queryParams;
+    var { page, limit, sort, dir } = request.queryParams;
     var users = db.users;
 
     page = page || 1;
     limit = limit || 20;
+    dir = dir || 'asc';
 
-    var startIndex = (page - 1) * limit;
-    var endIndex = page * limit;
+    if(sort) {
+      users = _.sortBy(users, sort);
+      if(dir !== 'asc') {
+        users = users.reverse();
+      }
+    }
 
-    users = users.length > endIndex ? users.slice(startIndex, endIndex) : [];
+    var offset = (page - 1) * limit;
+    users = _.take(_.drop(users, offset), limit);
 
     return {
       users

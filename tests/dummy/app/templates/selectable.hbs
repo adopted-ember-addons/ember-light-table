@@ -1,5 +1,13 @@
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
+    <div class="table-actions">
+      {{#if hasSelection}}
+        <div class="table-action fa fa-check-circle-o" {{action 'deselectAll'}}></div>
+        <div class="table-action fa fa-trash-o delete" {{action 'deleteAll'}}></div>
+      {{else}}
+        <div class="table-action fa fa-check-circle" {{action 'selectAll'}}></div>
+      {{/if}}
+    </div>
     <div class="panel-heading" role="tab" id="table-1">
       <a role="button" data-toggle="collapse" data-parent="#accordion" href="#code-snippet" aria-expanded="true" aria-controls="code-snippet">
         <h4 class="panel-title">Selectable Rows Table <span class="code-icon fa fa-code pull-right"></span></h4>

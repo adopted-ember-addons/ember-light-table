@@ -1,9 +1,10 @@
 {{light-table
   table=table
   onScrolledToBottom=(action 'onScrolledToBottom')
+  onColumnClick=(action 'onColumnClick')
   isLoading=isLoading
-  canSelect=false
   scrollContainer='.table-container'
   loadingComponent='table-loader'
+  noDataComponent='no-data'
   iconAscending='fa fa-sort-asc'
   iconDescending='fa fa-sort-desc'}}
