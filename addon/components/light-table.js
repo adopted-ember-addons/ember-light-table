@@ -69,6 +69,12 @@ export default Ember.Component.extend(TableScroll, {
    */
   multiRowExpansion: true,
   /**
+   * @property expandOnClick
+   * @type {Boolean}
+   * @default true
+   */
+  expandOnClick: true,
+  /**
    * @property multiColumnSort
    * @type {Boolean}
    * @default false
@@ -139,7 +145,7 @@ export default Ember.Component.extend(TableScroll, {
         row.toggleProperty('selected');
       }
 
-      if(this.get('canExpand')) {
+      if(this.get('canExpand') && this.get('expandOnClick')) {
         this.togglExpandedRow(row);
       }
 

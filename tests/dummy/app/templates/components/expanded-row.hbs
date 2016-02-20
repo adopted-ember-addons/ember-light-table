@@ -1,3 +1,14 @@
-<label>Email:</label> {{row.data.email}}
-<br>
-<label>Username:</label> {{row.data.username}}
+<div class="row">
+  <div class="col-md-2">
+    <img src={{row.data.avatar}} style="border-radius: 50%; border: 1px solid #ccc;"/>
+  </div>
+  <div class="col-md-8">
+    <p>{{row.data.bio}}</p>
+
+    <div class="user-actions">
+      <a class="fa fa-envelope" href="mailto:{{{row.data.email}}}"></a>
+      <a class="fa fa-facebook"></a>
+      <a class="fa fa-twitter"></a>
+    </div>
+  </div>
+</div>

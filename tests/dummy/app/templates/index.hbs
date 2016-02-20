@@ -1,17 +1,6 @@
-{{#each table.iterableColumns as |column|}}
+{{!-- {{#each table.iterableColumns as |column|}}
   {{input type="checkbox" name=column.valuePath checked=column.hidden}}
   <label for={{column.valuePath}}>{{column.label}}</label>
-{{/each}}
+{{/each}} --}}
 
-{{light-table
-  table=table
-  onScrolledToBottom=(action 'onScrolledToBottom')
-  isLoading=isLoading
-  loadingComponent='is-loading'
-  expandedRowComponent='expanded-row'
-  iconAscending='fa fa-sort-asc'
-  iconDescending='fa fa-sort-desc'
-  tableActions=(hash
-    deleteUser=(action 'deleteUser')
-  )
-}}
+<h2>Welcome</h2>

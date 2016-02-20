@@ -11,5 +11,6 @@ export default DS.Model.extend({
   state: attr('string'),
   email: attr('string'),
   username: attr('string'),
-  avatar: attr('string')
+  avatar: attr('string'),
+  bio: attr('string')
 });

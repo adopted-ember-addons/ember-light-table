@@ -1,80 +1,91 @@
+@import "./loader.less";
+@import "./table.less";
+
+@accent-color: #dd6a58;
+
 html,body {
   min-height: 100%;
   min-width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #F3F3F3;
+}
+
+.navbar.navbar-default {
+  background-color: white;
+
+  .navbar-brand {
+      color: #797979;
+      font-size: 16px;
+      font-weight: 400;
+  }
+
+  .navbar-nav>li>a {
+      font-size: 14px;
+      font-weight: 200;
+  }
+
+  .navbar-nav>li>a:focus, .navbar-nav>li>a:hover {
+    color: @accent-color;
+  }
+
+  .navbar-nav>.active>a, .navbar-nav>.active>a:focus, .navbar-nav>.active>a:hover {
+    color: @accent-color;
+    background-color: transparent;
+  }
 }
 
 .row-toggle {
   font-size: 12px;
 }
 
-.ember-light-table {
-  width: 80%;
+.panel {
+  width: 75%;
   margin: 0 auto;
-  border-collapse: collapse;
-  font-family: 'Arial, Helvetica, sans-serif';
 
-  .align-left {
-    text-align: left;
-  }
+  .panel-heading {
+    background-color: @accent-color;
+    padding: 0;
+    a {
+      color: #F9F9F9;
+      text-decoration: none;
 
-  .align-right {
-    text-align: right;
-  }
-
-  .align-center {
-    text-align: center;
-  }
-
-  .lt-column {
-    border-bottom: 2px solid #DADADA;
-
-    &.is-sortable {
-      cursor: pointer;
-    }
-
-    &.lt-group-column {
-      border: none !important;
-      padding-bottom: 10px;
-    }
-  }
-
-  .lt-row {
-    height: 50px;
-
-    &.is-expandable, &.is-selectable {
-      cursor: pointer;
-    }
-
-    &.is-selected {
-      background-color: #E88100 !important;
-      color: white;
-    }
-
-    &:not(.is-selected):hover {
-      background-color: #C7C7C7 !important;
-    }
-
-    &:nth-child(odd) {
-      background-color: #F5F4F4;
-    }
-
-    &.lt-expanded-row {
-      &:hover {
-        background-color: transparent !important;
-      }
-      td {
+      .panel-title {
+        font-weight: 200;
         padding: 15px;
       }
     }
+  }
 
-    td {
-      border-color: #DADADA;
-      border-width: 1px 0;
-      border-style: solid;
+  .code-snippet {
+    background-color: #f8f8f8;
+    height: 500px;
+    overflow-y: auto;
 
-      &.is-sorted {
-        background-color: #DADADA;
-      }
+    pre {
+      border: none;
     }
   }
 }
+
+.table-container {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.user-actions {
+  a {
+    color: @accent-color;
+    padding-right: 10px;
+    font-size: 18px;
+    width: 30px;
+    text-decoration: none;
+    cursor: pointer;
+    padding-top: 10px;
+
+    &:hover, &:active, &:focus {
+      color: darken(@accent-color, 5%)
+    }
+  }
+}
+
+

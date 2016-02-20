@@ -1,0 +1,19 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="table-1">
+      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#code-snippet" aria-expanded="true" aria-controls="code-snippet">
+        <h4 class="panel-title">Expandable Row Table <span class="code-icon fa fa-code pull-right"></span></h4>
+      </a>
+    </div>
+    <div id="code-snippet" class="panel-collapse collapse" role="tabpanel" aria-labelledby="table-1">
+      <div class="panel-body code-snippet">
+       {{code-snippet name="expandable-table.js"}}
+       <hr>
+       {{code-snippet name="expandable-table.hbs"}}
+      </div>
+    </div>
+    <div class="panel-body table-container">
+      {{partial 'snippets/expandable-table'}}
+    </div>
+  </div>
+</div>

@@ -21,7 +21,7 @@ export default function() {
     var startIndex = (page - 1) * limit;
     var endIndex = page * limit;
 
-    users = users.slice(startIndex, endIndex);
+    users = users.length > endIndex ? users.slice(startIndex, endIndex) : [];
 
     return {
       users
