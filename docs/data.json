@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "0.0.0.1c0040b2"
+        "version": "0.0.0.20840ace"
     },
     "files": {
         "addon/classes/Column.js": {
