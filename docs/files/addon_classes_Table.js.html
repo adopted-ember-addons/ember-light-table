@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/classes/Table.js - Ember Light Table</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Ember Light Table" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.0.4493e2e7</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Column.html">Column</a></li>
+                                <li><a href="../classes/Light-Table.html">Light-Table</a></li>
+                                <li><a href="../classes/Row.html">Row</a></li>
+                                <li><a href="../classes/Table.html">Table</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/Classes.html">Classes</a></li>
+                                <li><a href="../modules/Components.html">Components</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: addon/classes/Table.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import Row from &#x27;./Row&#x27;;
+import Column from &#x27;./Column&#x27;;
+
+const {
+  computed,
+  makeArray,
+  isNone,
+  isEmpty,
+  A: emberArray
+} = Ember;
+
+/**
+ * @module Classes
+ * @class Table
+ * @extends Ember.Object
+ */
+export default class Table extends Ember.Object {
+  /**
+   * @class Table
+   * @constructor
+   * @param  {Array} columns
+   * @param  {Array} rows
+   */
+  constructor(columns = [], rows = []) {
+    super();
+
+    /**
+     * @property rows
+     * @type {Ember.Array}
+     * @default []
+     */
+    this.rows = emberArray(Table.createRows(rows));
+
+    /**
+     * @property columns
+     * @type {Ember.Array}
+     * @default []
+     */
+    this.columns = emberArray(Table.createColumns(columns));
+
+    this._setupComputedProperties();
+  }
+
+  /**
+   * Sets up computed properties for the class
+   * @method  _setupComputedProperties
+   * @private
+   */
+  _setupComputedProperties() {
+    /**
+     * @property expandedRows
+     * @type {Ember.Array}
+     */
+    this.expandedRows = computed.filterBy(&#x27;rows&#x27;, &#x27;expanded&#x27;, true);
+    /**
+     * @property selectedRows
+     * @type {Ember.Array}
+     */
+    this.selectedRows = computed.filterBy(&#x27;rows&#x27;, &#x27;selected&#x27;, true);
+    /**
+     * @property sortedColumns
+     * @type {Ember.Array}
+     */
+    this.sortedColumns = computed.filterBy(&#x27;visibleColumns&#x27;, &#x27;sorted&#x27;, true);
+    /**
+     * @property sortableColumns
+     * @type {Ember.Array}
+     */
+    this.sortableColumns = computed.filterBy(&#x27;visibleColumns&#x27;, &#x27;sortable&#x27;, true);
+    /**
+     * @property visibleColumns
+     * @type {Ember.Array}
+     */
+    this.visibleColumns = computed.filterBy(&#x27;iterableColumns&#x27;, &#x27;hidden&#x27;, false);
+    /**
+     * @property visibleColumns
+     * @type {Ember.Array}
+     */
+    this.visibleColumnGroups = computed(&#x27;columns.@each.hidden&#x27;,&#x27;columns.@each.isVisibleGroupColumn&#x27;, function() {
+      return emberArray(this.columns.reduce((arr, c) =&gt; {
+        if(c.get(&#x27;isVisibleGroupColumn&#x27;) || (!c.get(&#x27;isGroupColumn&#x27;) &amp;&amp; !c.get(&#x27;hidden&#x27;))) {
+          arr.push(c);
+        }
+        return arr;
+      }, []));
+    });
+    /**
+     * @property visibleSubColumns
+     * @type {Ember.Array}
+     */
+    this.visibleSubColumns = computed(&#x27;columns.@each.visibleSubColumns&#x27;, function() {
+      return emberArray([].concat(...this.columns.getEach(&#x27;visibleSubColumns&#x27;)));
+    });
+    /**
+     * @property iterableColumns
+     * @type {Ember.Array}
+     */
+    this.iterableColumns = computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.subColumns&#x27;, function() {
+      return emberArray(this.columns.reduce((arr, c) =&gt; {
+        let subColumns = c.get(&#x27;subColumns&#x27;);
+        if(isEmpty(subColumns)) {
+          arr.push(c);
+        } else {
+          subColumns.forEach(sc =&gt; arr.push(sc));
+        }
+        return arr;
+      }, []));
+    });
+  }
+
+  // Rows
+
+  /**
+   * Replace all the row&#x27;s content with content of the argument. If argument is an empty array receiver will be cleared.
+   * @method setRows
+   * @param  {Array} rows
+   */
+  setRows(rows = []) {
+    this.rows.setObjects(Table.createRows(rows));
+  }
+
+  /**
+   * Push the object onto the end of the row array if it is not already present.
+   * @method addRow
+   * @param  {Object} row
+   */
+  addRow(row) {
+    if(row instanceof Row) {
+      this.rows.addObject(row);
+    } else if(isNone(this.rows.findBy(&#x27;data&#x27;, row))) {
+      this.pushRow(row);
+    }
+  }
+
+  /**
+   * Push the objects onto the end of the row array if it is not already present.
+   * @method addRows
+   * @param  {Array} rows
+   */
+  addRows(rows = []) {
+    rows.forEach(r =&gt; this.addRow(r));
+  }
+
+  /**
+   * Push the object onto the end of the row array.
+   * @method pushRow
+   * @param  {Object} row
+   */
+  pushRow(row)  {
+    this.rows.pushObject(Table.createRow(row));
+  }
+
+  /**
+   * Push the object onto the end of the row array.
+   * @method pushRows
+   * @param  {Array}  rows
+   */
+  pushRows(rows = []) {
+    this.rows.pushObjects(Table.createRows(rows));
+  }
+
+  /**
+   * Remove all occurrences of an object in the rows
+   * @method removeRow
+   * @param  {Object}  row
+   */
+  removeRow(row) {
+    if(row instanceof Row) {
+      this.rows.removeObject(row);
+    } else {
+      this.rows.removeObject(this.rows.findBy(&#x27;data&#x27;, row));
+    }
+  }
+
+  /**
+   * Removes each object in the passed enumerable from the rows.
+   * @method removeRows
+   * @param  {Array}    rows
+   */
+  removeRows(rows = []) {
+    rows.forEach(r =&gt; this.removeRow(r));
+  }
+
+  // Columns
+
+  /**
+   * Replace all the column&#x27;s content with content of the argument. If argument is an empty array receiver will be cleared.
+   * @method setColumns
+   * @param  {Array} columns
+   */
+  setColumns(columns = []) {
+    return this.columns.setObjects(Table.createColumns(columns));
+  }
+
+  /**
+   * Push the object onto the end of the column array if it is not already present.
+   * @method addColumn
+   * @param  {Object} column
+   */
+  addColumn(column) {
+    return this.columns.addObject(Table.createColumn(column));
+  }
+
+  /**
+   * Push the objects onto the end of the column array if it is not already present.
+   * @method addColumns
+   * @param  {Array} columns
+   */
+  addColumns(columns = []) {
+    return this.columns.addObjects(Table.createColumns(columns));
+  }
+
+  /**
+   * Push the object onto the end of the column array.
+   * @method pushColumn
+   * @param  {Object} column
+   */
+  pushColumn(column)  {
+    return this.columns.pushObject(Table.createColumn(column));
+  }
+
+  /**
+   * Push the object onto the end of the column array.
+   * @method pushColumns
+   * @param  {Array}  columns
+   */
+  pushColumns(columns = []) {
+    return this.columns.pushObjects(Table.createColumns(columns));
+  }
+
+  /**
+   * Remove all occurrences of an object in the columns
+   * @method removeColumn
+   * @param  {Object}  column
+   */
+  removeColumn(column) {
+    return this.columns.removeObject(column);
+  }
+
+  /**
+   * Removes each object in the passed enumerable from the columns.
+   * @method removeColumns
+   * @param  {Array}    columns
+   */
+  removeColumns(columns = []) {
+    return this.columns.removeObjects(columns);
+  }
+
+  /**
+   * Create a Row object with the given data
+   * @method createRow
+   * @static
+   * @param  {Object}  data
+   * @return {Row}
+   */
+  static createRow(data) {
+    return new Row(data);
+  }
+
+  /**
+   * Create a collection of Row objects with the given datum
+   * @method createRows
+   * @static
+   * @param  {Array}  datum
+   * @return {Array}
+   */
+  static createRows(datum = []) {
+    return makeArray(datum).map(d =&gt; new Row(d));
+  }
+
+  /**
+   * Create a Column object with the given options
+   * @method createColumn
+   * @static
+   * @param  {Object}  column
+   * @return {Column}
+   */
+  static createColumn(column) {
+    return new Column(column);
+  }
+
+  /**
+   * Create a collection of Column objects with the given options
+   * @method createColumns
+   * @static
+   * @param  {Array}  columns
+   * @return {Array}
+   */
+  static createColumns(columns = []) {
+    return makeArray(columns).map(c =&gt; new Column(c));
+  }
+}
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
