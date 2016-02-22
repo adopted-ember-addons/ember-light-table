@@ -6,7 +6,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('simple');
   this.route('grouped');
   this.route('expandable');
   this.route('selectable');

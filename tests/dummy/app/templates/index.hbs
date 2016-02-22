@@ -1,6 +1,19 @@
-{{!-- {{#each table.iterableColumns as |column|}}
-  {{input type="checkbox" name=column.valuePath checked=column.hidden}}
-  <label for={{column.valuePath}}>{{column.label}}</label>
-{{/each}} --}}
-
-<h2>Welcome</h2>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="table-1">
+      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#code-snippet" aria-expanded="true" aria-controls="code-snippet">
+        <h4 class="panel-title">Simple Example <span class="code-icon fa fa-code pull-right"></span></h4>
+      </a>
+    </div>
+    <div id="code-snippet" class="panel-collapse collapse" role="tabpanel" aria-labelledby="table-1">
+      <div class="panel-body code-snippet">
+       {{code-snippet name="simple-table.js"}}
+       <hr>
+       {{code-snippet name="simple-table.hbs"}}
+      </div>
+    </div>
+    <div class="panel-body table-container">
+      {{partial 'snippets/simple-table'}}
+    </div>
+  </div>
+</div>
