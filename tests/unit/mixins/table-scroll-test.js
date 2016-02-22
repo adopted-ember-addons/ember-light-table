@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import TableScrollMixin from '../../../mixins/table-scroll';
+import TableScrollMixin from 'ember-light-table/mixins/table-scroll';
 import { module, test } from 'qunit';
 
 module('Unit | Mixin | table scroll');

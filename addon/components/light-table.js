@@ -162,6 +162,6 @@ export default Ember.Component.extend(TableScroll, {
 
     onScrolledToBottom() {
       this._callAction('onScrolledToBottom');
-    },
+    }
   }
 });

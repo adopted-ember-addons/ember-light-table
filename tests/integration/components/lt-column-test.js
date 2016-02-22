@@ -10,15 +10,5 @@ test('it renders', function(assert) {
   // Handle any actions with this.on('myAction', function(val) { ... });"
 
   this.render(hbs`{{lt-column}}`);
-
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:"
-  this.render(hbs`
-    {{#lt-column}}
-      template block text
-    {{/lt-column}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });
