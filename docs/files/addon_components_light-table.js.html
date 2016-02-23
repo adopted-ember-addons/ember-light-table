@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="Ember Light Table" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.0.20840ace</em>
+            <em>API Docs for: 0.0.0.1aa4e3ce</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -105,6 +105,7 @@ export default Ember.Component.extend(TableScroll, {
   layout,
   tagName: &#x27;table&#x27;,
   classNames: [&#x27;ember-light-table&#x27;],
+  classNameBindings: [&#x27;isLoading&#x27;, &#x27;canSelect&#x27;, &#x27;multiSelect&#x27;, &#x27;isSelecting&#x27;,&#x27;canExpand&#x27;],
 
   /**
    * @property table
@@ -143,6 +144,12 @@ export default Ember.Component.extend(TableScroll, {
    * @default true
    */
   canSelect: true,
+  /**
+   * @property multiSelect
+   * @type {Boolean}
+   * @default true
+   */
+  multiSelect: false,
   /**
    * @property isLoading
    * @type {Boolean}
@@ -194,6 +201,10 @@ export default Ember.Component.extend(TableScroll, {
   visibleColumnGroups: computed.oneWay(&#x27;table.visibleColumnGroups&#x27;),
   visibleSubColumns: computed.oneWay(&#x27;table.visibleSubColumns&#x27;),
 
+  isSelecting: false,
+  _currSelectedIndex: -1,
+  _prevSelectedIndex: -1,
+
   togglExpandedRow(row) {
     let multi = this.get(&#x27;multiRowExpansion&#x27;);
     let shouldExpand = !row.expanded;
@@ -224,32 +235,57 @@ export default Ember.Component.extend(TableScroll, {
           column.set(&#x27;sorted&#x27;, true);
         }
       }
-      this._callAction(&#x27;onColumnClick&#x27;, column);
+      this._callAction(&#x27;onColumnClick&#x27;, ...arguments);
     },
 
-    onRowClick(row) {
-      if(this.get(&#x27;canSelect&#x27;)) {
-        row.toggleProperty(&#x27;selected&#x27;);
+    onRowClick(row, e) {
+      let rows = this.get(&#x27;table.rows&#x27;);
+      let multiSelect = this.get(&#x27;multiSelect&#x27;);
+      let canSelect = this.get(&#x27;canSelect&#x27;);
+      let isSelected = row.get(&#x27;selected&#x27;);
+      let currIndex = rows.indexOf(row);
+      let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
+
+      this._currSelectedIndex = currIndex;
+      this._prevSelectedIndex = prevIndex;
+
+      if(canSelect) {
+        this.set(&#x27;isSelecting&#x27;, true);
+        if (e.shiftKey &amp;&amp; multiSelect) {
+          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach(r =&gt; r.set(&#x27;selected&#x27;, !isSelected));
+          this._prevSelectedIndex = currIndex;
+        } else if((e.ctrlKey || e.metaKey) &amp;&amp; multiSelect) {
+          row.toggleProperty(&#x27;selected&#x27;);
+        } else {
+          this.set(&#x27;isSelecting&#x27;, false);
+          this.get(&#x27;table.selectedRows&#x27;).setEach(&#x27;selected&#x27;, false);
+          row.set(&#x27;selected&#x27;, !isSelected);
+
+          if (this.get(&#x27;canExpand&#x27;) &amp;&amp; this.get(&#x27;expandOnClick&#x27;)) {
+            this.togglExpandedRow(row);
+          }
+        }
+        this._prevSelectedIndex = currIndex;
+      } else {
+        if (this.get(&#x27;canExpand&#x27;) &amp;&amp; this.get(&#x27;expandOnClick&#x27;)) {
+          this.togglExpandedRow(row);
+        }
       }
 
-      if(this.get(&#x27;canExpand&#x27;) &amp;&amp; this.get(&#x27;expandOnClick&#x27;)) {
-        this.togglExpandedRow(row);
-      }
+      this._callAction(&#x27;onRowClick&#x27;, ...arguments);
+   },
 
-      this._callAction(&#x27;onRowClick&#x27;, row);
+    onColumnDoubleClick(/* column */) {
+      this._callAction(&#x27;onColumnDoubleClick&#x27;, ...arguments);
     },
 
-    onColumnDoubleClick(column) {
-      this._callAction(&#x27;onColumnDoubleClick&#x27;, column);
-    },
-
-    onRowDoubleClick(row) {
-      this._callAction(&#x27;onRowDoubleClick&#x27;, row);
+    onRowDoubleClick(/* row */) {
+      this._callAction(&#x27;onRowDoubleClick&#x27;, ...arguments);
     },
 
     onScrolledToBottom() {
-      this._callAction(&#x27;onScrolledToBottom&#x27;);
-    },
+      this._callAction(&#x27;onScrolledToBottom&#x27;, ...arguments);
+    }
   }
 });
 

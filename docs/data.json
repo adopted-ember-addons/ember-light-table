@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "0.0.0.20840ace"
+        "version": "0.0.0.1aa4e3ce"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -760,7 +760,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 22,
+            "line": 23,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -769,7 +769,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 27,
+            "line": 28,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -778,7 +778,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 32,
+            "line": 33,
             "itemtype": "property",
             "name": "expandedRowComponent",
             "type": "{String}",
@@ -787,7 +787,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 37,
+            "line": 38,
             "itemtype": "property",
             "name": "noDataComponent",
             "type": "{String}",
@@ -796,7 +796,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 42,
+            "line": 43,
             "itemtype": "property",
             "name": "loadingComponent",
             "type": "{String}",
@@ -805,7 +805,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 47,
+            "line": 48,
             "itemtype": "property",
             "name": "noDataText",
             "type": "{String}",
@@ -815,7 +815,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 53,
+            "line": 54,
             "itemtype": "property",
             "name": "canSelect",
             "type": "{Boolean}",
@@ -825,7 +825,17 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 59,
+            "line": 60,
+            "itemtype": "property",
+            "name": "multiSelect",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Light-Table",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/light-table.js",
+            "line": 66,
             "itemtype": "property",
             "name": "isLoading",
             "type": "{Boolean}",
@@ -835,7 +845,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 65,
+            "line": 72,
             "itemtype": "property",
             "name": "multiRowExpansion",
             "type": "{Boolean}",
@@ -845,7 +855,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 71,
+            "line": 78,
             "itemtype": "property",
             "name": "expandOnClick",
             "type": "{Boolean}",
@@ -855,7 +865,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 77,
+            "line": 84,
             "itemtype": "property",
             "name": "multiColumnSort",
             "type": "{Boolean}",
@@ -865,7 +875,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 83,
+            "line": 90,
             "itemtype": "property",
             "name": "iconAscending",
             "type": "{String}",
@@ -875,7 +885,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 89,
+            "line": 96,
             "itemtype": "property",
             "name": "iconDescending",
             "type": "{String}",
