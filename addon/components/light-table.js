@@ -18,6 +18,7 @@ export default Ember.Component.extend(TableScroll, {
   layout,
   tagName: 'table',
   classNames: ['ember-light-table'],
+  classNameBindings: ['isLoading', 'canSelect', 'multiSelect', 'isSelecting','canExpand'],
 
   /**
    * @property table
@@ -56,6 +57,12 @@ export default Ember.Component.extend(TableScroll, {
    * @default true
    */
   canSelect: true,
+  /**
+   * @property multiSelect
+   * @type {Boolean}
+   * @default true
+   */
+  multiSelect: false,
   /**
    * @property isLoading
    * @type {Boolean}
@@ -107,6 +114,10 @@ export default Ember.Component.extend(TableScroll, {
   visibleColumnGroups: computed.oneWay('table.visibleColumnGroups'),
   visibleSubColumns: computed.oneWay('table.visibleSubColumns'),
 
+  isSelecting: false,
+  _currSelectedIndex: -1,
+  _prevSelectedIndex: -1,
+
   togglExpandedRow(row) {
     let multi = this.get('multiRowExpansion');
     let shouldExpand = !row.expanded;
@@ -137,31 +148,56 @@ export default Ember.Component.extend(TableScroll, {
           column.set('sorted', true);
         }
       }
-      this._callAction('onColumnClick', column);
+      this._callAction('onColumnClick', ...arguments);
     },
 
-    onRowClick(row) {
-      if(this.get('canSelect')) {
-        row.toggleProperty('selected');
+    onRowClick(row, e) {
+      let rows = this.get('table.rows');
+      let multiSelect = this.get('multiSelect');
+      let canSelect = this.get('canSelect');
+      let isSelected = row.get('selected');
+      let currIndex = rows.indexOf(row);
+      let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
+
+      this._currSelectedIndex = currIndex;
+      this._prevSelectedIndex = prevIndex;
+
+      if(canSelect) {
+        this.set('isSelecting', true);
+        if (e.shiftKey && multiSelect) {
+          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach(r => r.set('selected', !isSelected));
+          this._prevSelectedIndex = currIndex;
+        } else if((e.ctrlKey || e.metaKey) && multiSelect) {
+          row.toggleProperty('selected');
+        } else {
+          this.set('isSelecting', false);
+          this.get('table.selectedRows').setEach('selected', false);
+          row.set('selected', !isSelected);
+
+          if (this.get('canExpand') && this.get('expandOnClick')) {
+            this.togglExpandedRow(row);
+          }
+        }
+        this._prevSelectedIndex = currIndex;
+      } else {
+        if (this.get('canExpand') && this.get('expandOnClick')) {
+          this.togglExpandedRow(row);
+        }
       }
 
-      if(this.get('canExpand') && this.get('expandOnClick')) {
-        this.togglExpandedRow(row);
-      }
+      this._callAction('onRowClick', ...arguments);
+   },
 
-      this._callAction('onRowClick', row);
+    onColumnDoubleClick(/* column */) {
+      this._callAction('onColumnDoubleClick', ...arguments);
     },
 
-    onColumnDoubleClick(column) {
-      this._callAction('onColumnDoubleClick', column);
-    },
-
-    onRowDoubleClick(row) {
-      this._callAction('onRowDoubleClick', row);
+    onRowDoubleClick(/* row */) {
+      this._callAction('onRowDoubleClick', ...arguments);
     },
 
     onScrolledToBottom() {
-      this._callAction('onScrolledToBottom');
+      this._callAction('onScrolledToBottom', ...arguments);
     }
   }
 });
