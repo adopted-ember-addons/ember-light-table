@@ -6,20 +6,23 @@ module.exports = {
   }, {
     name: 'ember-2.0',
     dependencies: {
-      ember: '~2.0.0',
-      'ember-data': '~2.0.0'
+      'ember': '~2.0.0',
+      'ember-data': '~2.0.0',
+      'ember-cli-shims': '0.0.6'
     }
   }, {
     name: 'ember-2.1',
     dependencies: {
-      ember: '~2.1.0',
-      'ember-data': '~2.1.0'
+      'ember': '~2.1.0',
+      'ember-data': '~2.1.0',
+      'ember-cli-shims': '0.0.6'
     }
   }, {
     name: 'ember-2.2',
     dependencies: {
-      ember: '~2.2.0',
-      'ember-data': '~2.2.0'
+      'ember': '~2.2.0',
+      'ember-data': '~2.2.0',
+      'ember-cli-shims': '0.0.6'
     }
   }, {
     name: 'ember-release',
