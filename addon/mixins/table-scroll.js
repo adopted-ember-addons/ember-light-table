@@ -13,8 +13,8 @@ export default Ember.Mixin.create({
 
   _setupScrollEvents: on('didInsertElement', function () {
     Ember.run.scheduleOnce('afterRender', this, function () {
-      $(this.get('touchMoveContainer')).on('touchmove.light-table', this._scrollHandler.bind(this, '_touchmoveTimer'));
-      $(this.get('scrollContainer')).on('scroll.light-table', this._scrollHandler.bind(this, '_scrollTimer'));
+      $(this.get('touchMoveContainer')).on('touchmove.light-table', run.bind(this, this._scrollHandler, '_touchmoveTimer'));
+      $(this.get('scrollContainer')).on('scroll.light-table', run.bind(this, this._scrollHandler, '_scrollTimer'));
     });
   }),
 
