@@ -4,4 +4,7 @@ import Row from './classes/Row';
 
 export default Table;
 
+/**
+ * @module Home
+ */
 export { Table, Column, Row };

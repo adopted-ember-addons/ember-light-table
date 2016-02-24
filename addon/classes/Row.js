@@ -1,49 +1,45 @@
 import Ember from 'ember';
 
-const {
-  merge
-} = Ember;
-
-
 /**
  * @module Classes
- * @class Row
- * @extends Ember.Object
  */
 
-const defaultOptions = {
+ /**
+  * @class Row
+  * @extends Ember.Object
+  */
+export default class Row extends Ember.Object.extend({
   /**
    * @property data
    * @type {Object}
    */
   data: null,
+
   /**
    * @property expanded
    * @type {Boolean}
    * @default false
    */
   expanded: false,
+
   /**
    * @property selected
    * @type {Boolean}
    * @default false
    */
   selected: false
-};
-
-export default class Row extends Ember.Object {
+}) {
   /**
    * @class Row
    * @constructor
-   * @param  {Object} data
+   * @param {Object} data
    */
   constructor(data) {
-    if(data instanceof Row) {
+    if (data instanceof Row) {
       return data;
     }
+
     super();
-    var options = merge({}, defaultOptions);
-    options.data = data;
-    Object.keys(options).forEach(k => this[k] = options[k]);
+    this.set('data', data);
   }
 }

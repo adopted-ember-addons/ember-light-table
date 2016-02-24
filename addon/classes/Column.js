@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 const {
-  merge,
   isEmpty,
   computed,
   A: emberArray
@@ -9,35 +8,41 @@ const {
 
 /**
  * @module Classes
- * @class Column
- * @extends Ember.Object
  */
 
-const defaultOptions = {
+ /**
+  * @class Column
+  * @extends Ember.Object
+  */
+export default class Column extends Ember.Object.extend({
   /**
    * @property hidden
    * @type {Boolean}
    * @default false
    */
   hidden: false,
+
   /**
    * @property ascending
    * @type {Boolean}
    * @default true
    */
   ascending: true,
+
   /**
    * @property sortable
    * @type {Boolean}
    * @default true
    */
   sortable: true,
+
   /**
    * @property sorted
    * @type {Boolean}
    * @default false
    */
   sorted: false,
+
   /**
    * Column header label
    * @property label
@@ -45,6 +50,7 @@ const defaultOptions = {
    * @default ''
    */
   label: '',
+
   /**
    * Text alignment. Possible values are ['left', 'right', 'center']
    * @property align
@@ -52,6 +58,7 @@ const defaultOptions = {
    * @default 'left'
    */
   align: 'left',
+
   /**
    * An array of sub columns to be grouped together
    * @property subColumns
@@ -59,6 +66,7 @@ const defaultOptions = {
    * @optional
    */
   subColumns: null,
+
   /**
    * Component name for the column header
    * @property headerComponent
@@ -66,6 +74,7 @@ const defaultOptions = {
    * @optional
    */
   headerComponent: null,
+
   /**
    * Component name for the column cells
    * @property cellComponent
@@ -73,69 +82,57 @@ const defaultOptions = {
    * @optional
    */
   cellComponent: null,
+
   /**
    * @property valuePath
    * @type {String}
    */
   valuePath: null,
+
   /**
    * @property width
    * @type {String}
    */
-  width: null
-};
+  width: null,
 
-export default class Column extends Ember.Object {
+  /**
+   * @property isGroupColumn
+   * @type {Boolean}
+   */
+  isGroupColumn: computed.notEmpty('subColumns'),
 
+  /**
+   * @property isVisibleGroupColumn
+   * @type {Boolean}
+   */
+  isVisibleGroupColumn: computed('visibleSubColumns.[]', 'hidden', function() {
+    return !isEmpty(this.get('visibleSubColumns')) && !this.get('hidden');
+  }),
+
+  /**
+   * @property visibleSubColumns
+   * @type {Array}
+   */
+  visibleSubColumns: computed('subColumns.@each.hidden', 'hidden', function() {
+    let subColumns = this.get('subColumns');
+    return isEmpty(subColumns) || this.get('hidden') ? [] : subColumns.filterBy('hidden', false);
+  })
+}) {
   /**
    * @class Column
    * @constructor
-   * @param {Object} column Column options
+   * @param {Object} options
    */
-  constructor(column = {}) {
-    if(column instanceof Column) {
-      return column;
+  constructor(options = {}) {
+    if(options instanceof Column) {
+      return options;
     }
+
     super();
-    var options = merge({}, defaultOptions);
-    merge(options, column);
-    Object.keys(options).forEach(k => this[k] = options[k]);
+    this.setProperties(options);
 
-    if(!isEmpty(this.subColumns)) {
-      this.subColumns = emberArray(this.subColumns.map(sc => new Column(sc)));
+    if(!isEmpty(options.subColumns)) {
+      this.set('subColumns', emberArray(options.subColumns.map(sc => new Column(sc))));
     }
-
-    this._setupComputedProperties();
-  }
-
-  /**
-   * Sets up computed properties for the class
-   * @method  _setupComputedProperties
-   * @private
-   */
-  _setupComputedProperties() {
-
-    /**
-     * @property isGroupColumn
-     * @type {Boolean}
-     */
-    this.isGroupColumn = computed.notEmpty('subColumns');
-
-    /**
-     * @property isVisibleGroupColumn
-     * @type {Boolean}
-     */
-    this.isVisibleGroupColumn = computed('visibleSubColumns.[]', 'hidden', function() {
-      return !isEmpty(this.get('visibleSubColumns')) && !this.get('hidden');
-    });
-
-    /**
-     * @property visibleSubColumns
-     * @type {Array}
-     */
-    this.visibleSubColumns = computed('subColumns.@each.hidden', 'hidden', function() {
-      let subColumns = this.get('subColumns');
-      return isEmpty(subColumns) || this.get('hidden') ? [] : subColumns.filterBy('hidden', false);
-    });
   }
 }
