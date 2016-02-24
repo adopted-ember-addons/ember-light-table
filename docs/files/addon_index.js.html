@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components - Ember Light Table</title>
+    <title>addon/index.js - Ember Light Table</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -28,7 +28,7 @@
                    <li  >
                      <a href="../modules/Classes.html">Classes</a>
                    </li>
-                   <li  class="active" >
+                   <li  >
                      <a href="../modules/Components.html">Components</a>
                    </li>
                    <li  >
@@ -77,44 +77,24 @@
                         </form>
                     
 <div class="page-header">
-    <h1>Components</h1>
+    <h1>addon/index.js <small>File</small></h1>
 </div>
 
-<div class="clearfix well well-small">
+<div class="file">
+    <pre class="prettyprint linenums">
+import Table from &#x27;./classes/Table&#x27;;
+import Column from &#x27;./classes/Column&#x27;;
+import Row from &#x27;./classes/Row&#x27;;
 
+export default Table;
 
-        <div class="foundat">
-            Defined in: <a href="../files/addon_mixins_table-scroll.js.html#l8"><code>addon&#x2F;mixins&#x2F;table-scroll.js:8</code></a>
-        </div>
+/**
+ * @module Home
+ */
+export { Table, Column, Row };
 
+    </pre>
 </div>
-
-
-<div class="moduledesc page-section">
-    
-</div>
-
-
-    <div class="yui3-g footer">
-            <div class="yui3-u-1-2">
-                    <p>This module provides the following classes:</p>
-
-                    <ul class="module-classes">
-                        <li class="module-class">
-                            <a href="../classes/Light-Table.html">
-                                Light-Table
-                            </a>
-                        </li>
-                        <li class="module-class">
-                            <a href="../classes/TableScrollMixin.html">
-                                TableScrollMixin
-                            </a>
-                        </li>
-                    </ul>
-            </div>
-
-
-    </div>
                     </div>
                 </div>
             </div>

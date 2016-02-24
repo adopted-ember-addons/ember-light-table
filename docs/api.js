@@ -4,11 +4,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "Column",
         "Light-Table",
         "Row",
-        "Table"
+        "Table",
+        "TableScrollMixin"
     ],
     "modules": [
         "Classes",
-        "Components"
+        "Components",
+        "Home"
     ],
     "allModules": [
         {
@@ -18,6 +20,10 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Components",
             "name": "Components"
+        },
+        {
+            "displayName": "Home",
+            "name": "Home"
         }
     ],
     "elements": []

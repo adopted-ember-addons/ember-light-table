@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components - Ember Light Table</title>
+    <title>addon/mixins/table-scroll.js - Ember Light Table</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -28,7 +28,7 @@
                    <li  >
                      <a href="../modules/Classes.html">Classes</a>
                    </li>
-                   <li  class="active" >
+                   <li  >
                      <a href="../modules/Components.html">Components</a>
                    </li>
                    <li  >
@@ -77,44 +77,95 @@
                         </form>
                     
 <div class="page-header">
-    <h1>Components</h1>
+    <h1>addon/mixins/table-scroll.js <small>File</small></h1>
 </div>
 
-<div class="clearfix well well-small">
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
 
+const {
+  $,
+  run
+} = Ember;
 
-        <div class="foundat">
-            Defined in: <a href="../files/addon_mixins_table-scroll.js.html#l8"><code>addon&#x2F;mixins&#x2F;table-scroll.js:8</code></a>
-        </div>
+/**
+ * @class TableScrollMixin
+ * @extends Ember.Mixin
+ */
+export default Ember.Mixin.create({
+  /**
+   * @property scrollBuffer
+   * @type {Number}
+   * @default 500
+   */
+  scrollBuffer: 500,
 
+  /**
+   * @property scrollContainer
+   * @type {String | Object}
+   * @default window
+   */
+  scrollContainer: window,
+
+  /**
+   * @property touchMoveContainer
+   * @type {String | Object}
+   * @default document
+   */
+  touchMoveContainer: document,
+
+  didInsertElement() {
+    this._super(...arguments);
+    Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this._setupScrollEvents);
+  },
+
+  destroy() {
+    this._super(...arguments);
+    this._teardownScrollEvents();
+  },
+
+  _setupScrollEvents() {
+    $(this.get(&#x27;touchMoveContainer&#x27;)).on(&#x27;touchmove.light-table&#x27;, run.bind(this, this._scrollHandler, &#x27;_touchmoveTimer&#x27;));
+    $(this.get(&#x27;scrollContainer&#x27;)).on(&#x27;scroll.light-table&#x27;, run.bind(this, this._scrollHandler, &#x27;_scrollTimer&#x27;));
+  },
+
+  _teardownScrollEvents() {
+    var scrollContainer = this.get(&#x27;scrollContainer&#x27;);
+    var touchMoveContainer = this.get(&#x27;touchMoveContainer&#x27;);
+
+    if (scrollContainer) {
+      $(scrollContainer).off(&#x27;scroll.light-table&#x27;);
+    }
+
+    if (touchMoveContainer) {
+      $(touchMoveContainer).off(&#x27;touchmove.light-table&#x27;);
+    }
+
+    run.cancel(this.get(&#x27;_touchmoveTimer&#x27;));
+    run.cancel(this.get(&#x27;_scrollTimer&#x27;));
+  },
+
+  _scrollHandler(timer) {
+    this.set(timer, run.throttle(this, this._onScroll, 100));
+  },
+
+  _onScroll() {
+    if (this.isScrolledToBottom()) {
+      Ember.run(() =&gt; this.send(&#x27;onScrolledToBottom&#x27;));
+    }
+  },
+
+  isScrolledToBottom() {
+    var element = this.get(&#x27;element&#x27;);
+    if (element) {
+      return element.getBoundingClientRect().bottom &lt;= window.innerHeight + this.get(&#x27;scrollBuffer&#x27;);
+    }
+  }
+});
+
+    </pre>
 </div>
-
-
-<div class="moduledesc page-section">
-    
-</div>
-
-
-    <div class="yui3-g footer">
-            <div class="yui3-u-1-2">
-                    <p>This module provides the following classes:</p>
-
-                    <ul class="module-classes">
-                        <li class="module-class">
-                            <a href="../classes/Light-Table.html">
-                                Light-Table
-                            </a>
-                        </li>
-                        <li class="module-class">
-                            <a href="../classes/TableScrollMixin.html">
-                                TableScrollMixin
-                            </a>
-                        </li>
-                    </ul>
-            </div>
-
-
-    </div>
                     </div>
                 </div>
             </div>
