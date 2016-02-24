@@ -2,10 +2,10 @@
   <div class="panel panel-default">
     <div class="table-actions">
       {{#if hasSelection}}
-        <div class="table-action fa fa-check-circle-o" {{action 'deselectAll'}}></div>
-        <div class="table-action fa fa-trash-o delete" {{action 'deleteAll'}}></div>
+        <div class="table-action fa fa-check-square-o" title="Deselect all" {{action 'deselectAll'}}></div>
+        <div class="table-action fa fa-trash-o delete" title="Delete selected" {{action 'deleteAll'}}></div>
       {{else}}
-        <div class="table-action fa fa-check-circle" {{action 'selectAll'}}></div>
+        <div class="table-action fa fa-square-o" title="Select all" {{action 'selectAll'}}></div>
       {{/if}}
     </div>
     <div class="panel-heading" role="tab" id="table-1">
@@ -13,13 +13,26 @@
         <h4 class="panel-title">Selectable Rows <span class="code-icon fa fa-code pull-right"></span></h4>
       </a>
     </div>
+
     <div id="code-snippet" class="panel-collapse collapse" role="tabpanel" aria-labelledby="table-1">
       <div class="panel-body code-snippet">
-       {{code-snippet name="selectable-table.js"}}
-       <hr>
-       {{code-snippet name="selectable-table.hbs"}}
-      </div>
+       <ul class="nav nav-tabs" role="tablist">
+           <li role="presentation" class="active"><a href="#component" aria-controls="component" role="tab" data-toggle="tab">component.js</a></li>
+           <li role="presentation"><a href="#template" aria-controls="template" role="tab" data-toggle="tab">template.hbs</a></li>
+           <li role="presentation"><a href="#user-avatar" aria-controls="user-avatar" role="tab" data-toggle="tab">user-avatar.hbs</a></li>
+           <li role="presentation"><a href="#no-data" aria-controls="no-data" role="tab" data-toggle="tab">no-data.hbs</a></li>
+           <li role="presentation"><a href="#table-loader" aria-controls="table-loader" role="tab" data-toggle="tab">table-loader.hbs</a></li>
+         </ul>
+         <div class="tab-content">
+           <div role="tabpanel" class="tab-pane fade in active" id="component">{{code-snippet name="selectable-table.js"}}</div>
+           <div role="tabpanel" class="tab-pane fade" id="template">{{code-snippet name="selectable-table.hbs"}}</div>
+           <div role="tabpanel" class="tab-pane fade" id="user-avatar">{{code-snippet name="user-avatar.hbs"}}</div>
+           <div role="tabpanel" class="tab-pane fade" id="no-data">{{code-snippet name="no-data.hbs"}}</div>
+           <div role="tabpanel" class="tab-pane fade" id="table-loader">{{code-snippet name="table-loader.hbs"}}</div>
+         </div>
+       </div>
     </div>
+
     <div class="panel-body table-container">
       {{partial 'snippets/selectable-table'}}
     </div>
