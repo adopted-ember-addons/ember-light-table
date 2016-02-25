@@ -34,7 +34,19 @@
     </div>
 
     <div class="panel-body table-container">
-      {{partial 'snippets/selectable-table'}}
+      {{!-- BEGIN-SNIPPET selectable-table --}}
+      {{light-table
+        table=table
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        onColumnClick=(action 'onColumnClick')
+        isLoading=isLoading
+        multiSelect=true
+        scrollContainer='.table-container'
+        loadingComponent='table-loader'
+        noDataComponent='no-data'
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'}}
+      {{!-- END-SNIPPET --}}
     </div>
   </div>
 </div>

@@ -1,1 +1,16 @@
-{{partial 'snippets/expanded-row'}}
+{{!-- BEGIN-SNIPPET expanded-row --}}
+<div class="row">
+  <div class="col-md-2">
+    <img src={{row.data.avatar}} class="user-avatar"/>
+  </div>
+  <div class="col-md-8">
+    <p>{{row.data.bio}}</p>
+
+    <div class="user-actions">
+      <a class="fa fa-envelope" href="mailto:{{{row.data.email}}}"></a>
+      <a class="fa fa-facebook"></a>
+      <a class="fa fa-twitter"></a>
+    </div>
+  </div>
+</div>
+{{!-- END-SNIPPET --}}

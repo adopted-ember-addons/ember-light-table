@@ -22,7 +22,18 @@
       </div>
     </div>
     <div class="panel-body table-container">
-      {{partial 'snippets/simple-table'}}
+      {{!-- BEGIN-SNIPPET simple-table --}}
+      {{light-table
+        table=table
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        onColumnClick=(action 'onColumnClick')
+        isLoading=isLoading
+        canSelect=false
+        scrollContainer='.table-container'
+        loadingComponent='table-loader'
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'}}
+      {{!-- END-SNIPPET --}}
     </div>
   </div>
 </div>

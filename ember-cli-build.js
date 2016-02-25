@@ -4,8 +4,9 @@ var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
   var app = new EmberAddon(defaults, {
-    snippetSearchPaths: ['app', 'addon', 'tests/dummy/app'],
-    snippetPaths: ['snippets', 'tests/dummy/app/snippets', 'tests/dummy/app/templates/snippets']
+    snippetSearchPaths: ['addon','tests/dummy/app'],
+    snippetPaths: ['snippets','tests/dummy/snippets']
   });
+
   return app.toTree();
 };
