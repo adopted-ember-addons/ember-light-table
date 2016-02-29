@@ -10,28 +10,11 @@ export default Ember.Component.extend({
   isLoading: false,
 
   columns: [{
-    label: 'Avatar',
-    valuePath: 'avatar',
-    width: '60px',
-    sortable: false,
-    cellComponent: 'user-avatar'
-  }, {
     label: 'First Name',
-    valuePath: 'firstName',
-    width: '150px'
+    valuePath: 'firstName'
   }, {
     label: 'Last Name',
-    valuePath: 'lastName',
-    width: '150px'
-  }, {
-    label: 'Address',
-    valuePath: 'address'
-  }, {
-    label: 'State',
-    valuePath: 'state'
-  }, {
-    label: 'Country',
-    valuePath: 'country'
+    valuePath: 'lastName'
   }],
 
   init() {

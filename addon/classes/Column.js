@@ -99,7 +99,7 @@ export default class Column extends Ember.Object.extend({
    * @property isGroupColumn
    * @type {Boolean}
    */
-  isGroupColumn: computed.notEmpty('subColumns'),
+  isGroupColumn: computed.notEmpty('subColumns').readOnly(),
 
   /**
    * @property isVisibleGroupColumn
@@ -107,7 +107,7 @@ export default class Column extends Ember.Object.extend({
    */
   isVisibleGroupColumn: computed('visibleSubColumns.[]', 'hidden', function() {
     return !isEmpty(this.get('visibleSubColumns')) && !this.get('hidden');
-  }),
+  }).readOnly(),
 
   /**
    * @property visibleSubColumns
@@ -116,7 +116,7 @@ export default class Column extends Ember.Object.extend({
   visibleSubColumns: computed('subColumns.@each.hidden', 'hidden', function() {
     let subColumns = this.get('subColumns');
     return isEmpty(subColumns) || this.get('hidden') ? [] : subColumns.filterBy('hidden', false);
-  })
+  }).readOnly()
 }) {
   /**
    * @class Column

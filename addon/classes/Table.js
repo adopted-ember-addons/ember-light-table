@@ -37,31 +37,31 @@ export default class Table extends Ember.Object.extend({
    * @property expandedRows
    * @type {Ember.Array}
    */
-  expandedRows: computed.filterBy('rows', 'expanded', true),
+  expandedRows: computed.filterBy('rows', 'expanded', true).readOnly(),
 
   /**
    * @property selectedRows
    * @type {Ember.Array}
    */
-  selectedRows: computed.filterBy('rows', 'selected', true),
+  selectedRows: computed.filterBy('rows', 'selected', true).readOnly(),
 
   /**
    * @property sortedColumns
    * @type {Ember.Array}
    */
-  sortedColumns: computed.filterBy('visibleColumns', 'sorted', true),
+  sortedColumns: computed.filterBy('visibleColumns', 'sorted', true).readOnly(),
 
   /**
    * @property sortableColumns
    * @type {Ember.Array}
    */
-  sortableColumns: computed.filterBy('visibleColumns', 'sortable', true),
+  sortableColumns: computed.filterBy('visibleColumns', 'sortable', true).readOnly(),
 
   /**
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: computed.filterBy('iterableColumns', 'hidden', false),
+  visibleColumns: computed.filterBy('iterableColumns', 'hidden', false).readOnly(),
 
   /**
    * @property visibleColumns
@@ -74,7 +74,7 @@ export default class Table extends Ember.Object.extend({
       }
       return arr;
     }, []));
-  }),
+  }).readOnly(),
 
   /**
    * @property visibleSubColumns
@@ -82,7 +82,7 @@ export default class Table extends Ember.Object.extend({
    */
   visibleSubColumns: computed('columns.@each.visibleSubColumns', function() {
     return emberArray([].concat(...this.get('columns').getEach('visibleSubColumns')));
-  }),
+  }).readOnly(),
 
   /**
    * @property iterableColumns
@@ -98,7 +98,7 @@ export default class Table extends Ember.Object.extend({
       }
       return arr;
     }, []));
-  })
+  }).readOnly()
 }) {
   /**
    * @class Table
