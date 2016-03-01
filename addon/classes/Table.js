@@ -33,6 +33,8 @@ export default class Table extends Ember.Object.extend({
    */
   rows: null,
 
+  isEmpty: computed.empty('rows'),
+
   /**
    * @property expandedRows
    * @type {Ember.Array}

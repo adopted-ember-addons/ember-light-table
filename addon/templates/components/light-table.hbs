@@ -1,48 +1,5 @@
 {{yield (hash
   head=(component 'lt-head' table=table tableActions=tableActions)
   body=(component 'lt-body' table=table tableActions=tableActions)
+  foot=(component 'lt-foot' table=table tableActions=tableActions)
 )}}
-
-{{!-- <thead>
-  <tr>
-    {{#each visibleColumnGroups as |column|}}
-      {{lt-column column=column tableActions=tableActions sortIcons=sortIcons click=(action 'onColumnClick' column) doubleClick=(action 'onColumnDoubleClick' column)}}
-    {{/each}}
-  </tr>
-  <tr>
-    {{#each visibleSubColumns as |column|}}
-      {{lt-column column=column rowspan=1 classNames="lt-sub-column" tableActions=tableActions sortIcons=sortIcons click=(action 'onColumnClick' column) doubleClick=(action 'onColumnDoubleClick' column)}}
-    {{/each}}
-  </tr>
-</thead>
-<tbody>
-  {{#each rows as |row|}}
-    {{lt-row columns=visibleColumns tableActions=tableActions row=row canExpand=canExpand canSelect=canSelect click=(action 'onRowClick' row) doubleClick=(action 'onRowDoubleClick' row)}}
-    {{#if row.expanded}}
-      <tr class="lt-row lt-expanded-row">
-        <td colspan={{visibleColumns.length}}>
-          {{component expandedRowComponent tableActions=tableActions row=row}}
-        </td>
-      </tr>
-    {{/if}}
-  {{/each}}
-
-  {{#if isLoading}}
-    <tr class="lt-row lt-is-loading">
-      <td colspan={{visibleColumns.length}}>
-        {{component loadingComponent tableActions=tableActions}}
-      </td>
-    </tr>
-  {{else if hasNoData}}
-    {{#if noDataComponent}}
-      <tr class="lt-row lt-no-data">
-        <td colspan={{visibleColumns.length}}>
-          {{component noDataComponent tableActions=tableActions}}
-        </td>
-      </tr>
-    {{else}}
-      {{noDataText}}
-    {{/if}}
-  {{/if}}
-</tbody>
- --}}

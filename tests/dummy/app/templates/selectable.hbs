@@ -42,14 +42,18 @@
     iconDescending='fa fa-sort-desc'
   }}
 
-  {{#t.body isLoading=isLoading multiSelect=true as |body|}}
-    {{#body.loading}}
-      {{table-loader}}
-    {{/body.loading}}
+  {{#t.body multiSelect=true as |body|}}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
 
-    {{#body.empty}}
-      {{no-data}}
-    {{/body.empty}}
+    {{#if (and (not isLoading) table.isEmpty)}}
+      {{#body.no-data}}
+        {{no-data}}
+      {{/body.no-data}}
+    {{/if}}
   {{/t.body}}
 {{/light-table}}
 {{!-- END-SNIPPET --}}

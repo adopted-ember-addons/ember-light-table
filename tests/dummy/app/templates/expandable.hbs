@@ -32,14 +32,16 @@
     iconDescending='fa fa-sort-desc'
   }}
 
-  {{#t.body isLoading=isLoading canExpand=true multiRowExpansion=false as |body|}}
-    {{#body.expanded as |row|}}
+  {{#t.body canExpand=true multiRowExpansion=false as |body|}}
+    {{#body.expanded-row as |row|}}
       {{expanded-row row=row}}
-    {{/body.expanded}}
+    {{/body.expanded-row}}
 
-    {{#body.loading}}
-      {{table-loader}}
-    {{/body.loading}}
+    {{#if isLoading}}
+     {{#body.loader}}
+       {{table-loader}}
+     {{/body.loader}}
+   {{/if}}
   {{/t.body}}
 {{/light-table}}
 {{!-- END-SNIPPET --}}

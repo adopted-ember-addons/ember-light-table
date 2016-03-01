@@ -3,7 +3,6 @@ import layout from '../templates/components/lt-body';
 import callAction from '../utils/call-action';
 
 const {
-  isEmpty,
   computed
 } = Ember;
 
@@ -13,6 +12,10 @@ export default Ember.Component.extend({
   classNames: ['lt-body'],
   classNameBindings: ['isLoading', 'canSelect', 'multiSelect', 'isSelecting','canExpand'],
 
+  /**
+   * @property table
+   * @type {Table}
+   */
   table: null,
 
   /**
@@ -22,6 +25,11 @@ export default Ember.Component.extend({
    */
   canSelect: true,
 
+  /**
+   * @property canExpand
+   * @type {Boolean}
+   * @default false
+   */
   canExpand: false,
 
   /**
@@ -46,15 +54,11 @@ export default Ember.Component.extend({
   expandOnClick: true,
 
   rows: computed.oneWay('table.rows'),
-  columns: computed.oneWay('table.visibleColumns'),
-  colspan: computed.oneWay('columns.length'),
+  visibleColumns: computed.oneWay('table.visibleColumns'),
+  colspan: computed.oneWay('visibleColumns.length'),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
-
-  hasNoData: computed('table.rows.[]', 'isLoading', function() {
-    return isEmpty(this.get('table.rows')) && !this.get('isLoading');
-  }),
 
   togglExpandedRow(row) {
     let multi = this.get('multiRowExpansion');

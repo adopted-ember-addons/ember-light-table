@@ -1,0 +1,9 @@
+{{#if hasBlock}}
+  {{yield visibleColumns table}}
+{{else}}
+  <tr>
+    {{#each visibleColumns as |column|}}
+      {{lt-column column=column tableActions=tableActions sortIcons=sortIcons click=(action 'onColumnClick' column) doubleClick=(action 'onColumnDoubleClick' column)}}
+    {{/each}}
+  </tr>
+{{/if}}

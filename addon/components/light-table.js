@@ -34,41 +34,6 @@ export default Ember.Component.extend(TableScrollMixin, {
    */
   tableActions: null,
 
-  /**
-   * @property expandedRowComponent
-   * @type {String}
-   */
-  expandedRowComponent: null,
-
-  /**
-   * @property noDataComponent
-   * @type {String}
-   */
-  noDataComponent: null,
-
-  /**
-   * @property loadingComponent
-   * @type {String}
-   */
-  loadingComponent: null,
-
-  /**
-   * @property isLoading
-   * @type {Boolean}
-   * @default false
-   */
-  isLoading: false,
-
-
-
-  rows: computed.oneWay('table.rows'),
-  columns: computed.oneWay('table.columns'),
-
-  canExpand: computed.notEmpty('expandedRowComponent'),
-  hasNoData: computed.empty('rows'),
-
-
-
   actions: {
     onScrolledToBottom() {
       callAction.call(this, 'onScrolledToBottom', ...arguments);

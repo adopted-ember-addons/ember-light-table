@@ -30,10 +30,12 @@
     iconDescending='fa fa-sort-desc'
   }}
 
-  {{#t.body isLoading=isLoading canSelect=false as |body|}}
-    {{#body.loading}}
-      {{table-loader}}
-    {{/body.loading}}
+  {{#t.body canSelect=false as |body|}}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
   {{/t.body}}
 {{/light-table}}
 {{!-- END-SNIPPET --}}
