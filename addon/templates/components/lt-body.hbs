@@ -1,0 +1,15 @@
+{{#each rows as |row|}}
+  {{lt-row columns=columns tableActions=tableActions row=row canExpand=canExpand canSelect=canSelect click=(action 'onRowClick' row) doubleClick=(action 'onRowDoubleClick' row)}}
+
+  {{yield (hash
+    expanded=(component 'lt-spanned-row' classNames='lt-expanded-row' colspan=colspan yield=row visible=row.expanded)
+    loading=(component 'lt-spanned-row' visible=false)
+    empty=(component 'lt-spanned-row' visible=false)
+  )}}
+{{/each}}
+
+{{yield (hash
+  loading=(component 'lt-spanned-row' classNames='lt-is-loading' colspan=colspan visible=isLoading)
+  empty=(component 'lt-spanned-row' classNames='lt-no-data' colspan=colspan visible=hasNoData)
+  expanded=(component 'lt-spanned-row' visible=false)
+)}}

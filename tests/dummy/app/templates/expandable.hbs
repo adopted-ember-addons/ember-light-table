@@ -24,19 +24,25 @@
     </div>
 
     <div class="panel-body table-container">
-      {{!-- BEGIN-SNIPPET expandable-table --}}
-      {{light-table
-        table=table
-        onScrolledToBottom=(action 'onScrolledToBottom')
-        onColumnClick=(action 'onColumnClick')
-        isLoading=isLoading
-        multiRowExpansion=false
-        expandedRowComponent='expanded-row'
-        scrollContainer='.table-container'
-        loadingComponent='table-loader'
-        iconAscending='fa fa-sort-asc'
-        iconDescending='fa fa-sort-desc'}}
-      {{!-- END-SNIPPET --}}
+{{!-- BEGIN-SNIPPET expandable-table --}}
+{{#light-table table=table scrollContainer='.table-container' onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
+  {{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+  }}
+
+  {{#t.body isLoading=isLoading canExpand=true multiRowExpansion=false as |body|}}
+    {{#body.expanded as |row|}}
+      {{expanded-row row=row}}
+    {{/body.expanded}}
+
+    {{#body.loading}}
+      {{table-loader}}
+    {{/body.loading}}
+  {{/t.body}}
+{{/light-table}}
+{{!-- END-SNIPPET --}}
     </div>
   </div>
 </div>

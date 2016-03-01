@@ -1,4 +1,9 @@
-<thead>
+{{yield (hash
+  head=(component 'lt-head' table=table tableActions=tableActions)
+  body=(component 'lt-body' table=table tableActions=tableActions)
+)}}
+
+{{!-- <thead>
   <tr>
     {{#each visibleColumnGroups as |column|}}
       {{lt-column column=column tableActions=tableActions sortIcons=sortIcons click=(action 'onColumnClick' column) doubleClick=(action 'onColumnDoubleClick' column)}}
@@ -40,3 +45,4 @@
     {{/if}}
   {{/if}}
 </tbody>
+ --}}
