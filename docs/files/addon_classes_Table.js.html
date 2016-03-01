@@ -45,7 +45,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.945e2c88</p>
+                <p class="version pull-right">0.0.0.293290bf</p>
               </div>
             </div>
         </div>
@@ -116,6 +116,8 @@ export default class Table extends Ember.Object.extend({
    * @default []
    */
   rows: null,
+
+  isEmpty: computed.empty(&#x27;rows&#x27;),
 
   /**
    * @property expandedRows

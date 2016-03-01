@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components - Ember Light Table</title>
+    <title>addon/mixins/table-column.js - Ember Light Table</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -28,7 +28,7 @@
                    <li  >
                      <a href="../modules/Classes.html">Classes</a>
                    </li>
-                   <li  class="active" >
+                   <li  >
                      <a href="../modules/Components.html">Components</a>
                    </li>
                    <li  >
@@ -77,44 +77,78 @@
                         </form>
                     
 <div class="page-header">
-    <h1>Components</h1>
+    <h1>addon/mixins/table-column.js <small>File</small></h1>
 </div>
 
-<div class="clearfix well well-small">
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import callAction from &#x27;../utils/call-action&#x27;;
 
+const {
+  computed
+} = Ember;
 
-        <div class="foundat">
-            Defined in: <a href="../files/addon_mixins_table-scroll.js.html#l8"><code>addon&#x2F;mixins&#x2F;table-scroll.js:8</code></a>
-        </div>
+export default Ember.Mixin.create({
+  /**
+   * @property sortOnClick
+   * @type {Boolean}
+   * @default true
+   */
+  sortOnClick: true,
 
+  /**
+   * @property multiColumnSort
+   * @type {Boolean}
+   * @default false
+   */
+  multiColumnSort: false,
+
+  /**
+   * @property iconAscending
+   * @type {String}
+   * @default &#x27;&#x27;
+   */
+  iconAscending: &#x27;&#x27;,
+
+  /**
+   * @property iconDescending
+   * @type {String}
+   * @default &#x27;&#x27;
+   */
+  iconDescending: &#x27;&#x27;,
+
+  visibleColumnGroups: computed.oneWay(&#x27;table.visibleColumnGroups&#x27;),
+  visibleSubColumns: computed.oneWay(&#x27;table.visibleSubColumns&#x27;),
+  visibleColumns: computed.oneWay(&#x27;table.visibleColumns&#x27;),
+
+  sortIcons: computed(&#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;, function() {
+    return this.getProperties([&#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;]);
+  }),
+
+  actions: {
+    onColumnClick(column) {
+      if(column.sortable &amp;&amp; this.get(&#x27;sortOnClick&#x27;)) {
+        if(column.sorted) {
+          column.toggleProperty(&#x27;ascending&#x27;);
+        } else {
+          if(!this.get(&#x27;multiColumnSort&#x27;)) {
+            this.get(&#x27;table.sortedColumns&#x27;).setEach(&#x27;sorted&#x27;, false);
+          }
+          column.set(&#x27;sorted&#x27;, true);
+        }
+      }
+      callAction.call(this, &#x27;onColumnClick&#x27;, ...arguments);
+    },
+
+    onColumnDoubleClick(/* column */) {
+      callAction.call(this, &#x27;onColumnDoubleClick&#x27;, ...arguments);
+    },
+  }
+});
+
+    </pre>
 </div>
-
-
-<div class="moduledesc page-section">
-    
-</div>
-
-
-    <div class="yui3-g footer">
-            <div class="yui3-u-1-2">
-                    <p>This module provides the following classes:</p>
-
-                    <ul class="module-classes">
-                        <li class="module-class">
-                            <a href="../classes/Light-Table.html">
-                                Light-Table
-                            </a>
-                        </li>
-                        <li class="module-class">
-                            <a href="../classes/TableScrollMixin.html">
-                                TableScrollMixin
-                            </a>
-                        </li>
-                    </ul>
-            </div>
-
-
-    </div>
                     </div>
                 </div>
             </div>

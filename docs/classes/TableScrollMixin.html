@@ -45,7 +45,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.945e2c88</p>
+                <p class="version pull-right">0.0.0.293290bf</p>
               </div>
             </div>
         </div>
@@ -123,6 +123,10 @@
 
                     <ul class="index-list properties extends">
                             <li class="index-item property">
+                                <a href="#property_canExpand">canExpand</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_canSelect">canSelect</a>
 
                             </li>
@@ -156,6 +160,14 @@
                             </li>
                             <li class="index-item property">
                                 <a href="#property_scrollContainer">scrollContainer</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_sortOnClick">sortOnClick</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_table">table</a>
 
                             </li>
                             <li class="index-item property">
@@ -339,6 +351,31 @@
             <div id="properties" class="page-section">
                 <h2 class="off-left">Properties</h2>
                 <div class="item-list">
+<div id="property_canExpand" class="property item">
+    <h3 class="name"><code>canExpand</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_components_lt-body.js.html#l28"><code>addon&#x2F;components&#x2F;lt-body.js:28</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <p><br><strong>Default:</strong> false</p>
+
+
+</div>
 <div id="property_canSelect" class="property item">
     <h3 class="name"><code>canSelect</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
@@ -350,7 +387,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l18"><code>addon&#x2F;components&#x2F;lt-body.js:18</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l21"><code>addon&#x2F;components&#x2F;lt-body.js:21</code></a>
         </p>
 
 
@@ -375,7 +412,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l41"><code>addon&#x2F;components&#x2F;lt-body.js:41</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l49"><code>addon&#x2F;components&#x2F;lt-body.js:49</code></a>
         </p>
 
 
@@ -400,7 +437,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-head.js.html#l23"><code>addon&#x2F;components&#x2F;lt-head.js:23</code></a>
+        <a href="../files/addon_mixins_table-column.js.html#l23"><code>addon&#x2F;mixins&#x2F;table-column.js:23</code></a>
         </p>
 
 
@@ -425,7 +462,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-head.js.html#l30"><code>addon&#x2F;components&#x2F;lt-head.js:30</code></a>
+        <a href="../files/addon_mixins_table-column.js.html#l30"><code>addon&#x2F;mixins&#x2F;table-column.js:30</code></a>
         </p>
 
 
@@ -450,7 +487,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-head.js.html#l16"><code>addon&#x2F;components&#x2F;lt-head.js:16</code></a>
+        <a href="../files/addon_mixins_table-column.js.html#l16"><code>addon&#x2F;mixins&#x2F;table-column.js:16</code></a>
         </p>
 
 
@@ -475,7 +512,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l34"><code>addon&#x2F;components&#x2F;lt-body.js:34</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l42"><code>addon&#x2F;components&#x2F;lt-body.js:42</code></a>
         </p>
 
 
@@ -500,7 +537,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l27"><code>addon&#x2F;components&#x2F;lt-body.js:27</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l35"><code>addon&#x2F;components&#x2F;lt-body.js:35</code></a>
         </p>
 
 
@@ -561,6 +598,55 @@
     </div>
 
         <p><br><strong>Default:</strong> window</p>
+
+
+</div>
+<div id="property_sortOnClick" class="property item">
+    <h3 class="name"><code>sortOnClick</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_mixins_table-column.js.html#l9"><code>addon&#x2F;mixins&#x2F;table-column.js:9</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <p><br><strong>Default:</strong> true</p>
+
+
+</div>
+<div id="property_table" class="property item">
+    <h3 class="name"><code>table</code></h3>
+    <span class="type"><a href="../classes/Table.html" class="crosslink">Table</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_components_lt-body.js.html#l15"><code>addon&#x2F;components&#x2F;lt-body.js:15</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
 
 
 </div>

@@ -45,7 +45,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.945e2c88</p>
+                <p class="version pull-right">0.0.0.293290bf</p>
               </div>
             </div>
         </div>
@@ -117,41 +117,6 @@ export default Ember.Component.extend(TableScrollMixin, {
    * @type {Object}
    */
   tableActions: null,
-
-  /**
-   * @property expandedRowComponent
-   * @type {String}
-   */
-  expandedRowComponent: null,
-
-  /**
-   * @property noDataComponent
-   * @type {String}
-   */
-  noDataComponent: null,
-
-  /**
-   * @property loadingComponent
-   * @type {String}
-   */
-  loadingComponent: null,
-
-  /**
-   * @property isLoading
-   * @type {Boolean}
-   * @default false
-   */
-  isLoading: false,
-
-
-
-  rows: computed.oneWay(&#x27;table.rows&#x27;),
-  columns: computed.oneWay(&#x27;table.columns&#x27;),
-
-  canExpand: computed.notEmpty(&#x27;expandedRowComponent&#x27;),
-  hasNoData: computed.empty(&#x27;rows&#x27;),
-
-
 
   actions: {
     onScrolledToBottom() {
