@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "0.0.0.b36e4b28"
+        "version": "0.0.0.945e2c88"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -43,6 +43,20 @@
             "classes": {
                 "Light-Table": 1
             },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/lt-body.js": {
+            "name": "addon/components/lt-body.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/lt-head.js": {
+            "name": "addon/components/lt-head.js",
+            "modules": {},
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -190,7 +204,7 @@
             "module": "Components",
             "namespace": "",
             "file": "addon/components/light-table.js",
-            "line": 15,
+            "line": 14,
             "extends": "Ember.Component",
             "uses": [
                 "TableScrollMixin"
@@ -786,7 +800,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 27,
+            "line": 25,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -795,7 +809,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 33,
+            "line": 31,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -804,7 +818,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 39,
+            "line": 37,
             "itemtype": "property",
             "name": "expandedRowComponent",
             "type": "{String}",
@@ -813,7 +827,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 45,
+            "line": 43,
             "itemtype": "property",
             "name": "noDataComponent",
             "type": "{String}",
@@ -822,7 +836,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 51,
+            "line": 49,
             "itemtype": "property",
             "name": "loadingComponent",
             "type": "{String}",
@@ -831,37 +845,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 57,
-            "itemtype": "property",
-            "name": "noDataText",
-            "type": "{String}",
-            "default": "'No data.'",
-            "class": "Light-Table",
-            "module": "Components"
-        },
-        {
-            "file": "addon/components/light-table.js",
-            "line": 64,
-            "itemtype": "property",
-            "name": "canSelect",
-            "type": "{Boolean}",
-            "default": "true",
-            "class": "Light-Table",
-            "module": "Components"
-        },
-        {
-            "file": "addon/components/light-table.js",
-            "line": 71,
-            "itemtype": "property",
-            "name": "multiSelect",
-            "type": "{Boolean}",
-            "default": "true",
-            "class": "Light-Table",
-            "module": "Components"
-        },
-        {
-            "file": "addon/components/light-table.js",
-            "line": 78,
+            "line": 55,
             "itemtype": "property",
             "name": "isLoading",
             "type": "{Boolean}",
@@ -870,53 +854,73 @@
             "module": "Components"
         },
         {
-            "file": "addon/components/light-table.js",
-            "line": 85,
+            "file": "addon/components/lt-body.js",
+            "line": 18,
+            "itemtype": "property",
+            "name": "canSelect",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "TableScrollMixin",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 27,
+            "itemtype": "property",
+            "name": "multiSelect",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "TableScrollMixin",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 34,
             "itemtype": "property",
             "name": "multiRowExpansion",
             "type": "{Boolean}",
             "default": "true",
-            "class": "Light-Table",
+            "class": "TableScrollMixin",
             "module": "Components"
         },
         {
-            "file": "addon/components/light-table.js",
-            "line": 92,
+            "file": "addon/components/lt-body.js",
+            "line": 41,
             "itemtype": "property",
             "name": "expandOnClick",
             "type": "{Boolean}",
             "default": "true",
-            "class": "Light-Table",
+            "class": "TableScrollMixin",
             "module": "Components"
         },
         {
-            "file": "addon/components/light-table.js",
-            "line": 99,
+            "file": "addon/components/lt-head.js",
+            "line": 16,
             "itemtype": "property",
             "name": "multiColumnSort",
             "type": "{Boolean}",
             "default": "false",
-            "class": "Light-Table",
+            "class": "TableScrollMixin",
             "module": "Components"
         },
         {
-            "file": "addon/components/light-table.js",
-            "line": 106,
+            "file": "addon/components/lt-head.js",
+            "line": 23,
             "itemtype": "property",
             "name": "iconAscending",
             "type": "{String}",
             "default": "''",
-            "class": "Light-Table",
+            "class": "TableScrollMixin",
             "module": "Components"
         },
         {
-            "file": "addon/components/light-table.js",
-            "line": 113,
+            "file": "addon/components/lt-head.js",
+            "line": 30,
             "itemtype": "property",
             "name": "iconDescending",
             "type": "{String}",
             "default": "''",
-            "class": "Light-Table",
+            "class": "TableScrollMixin",
             "module": "Components"
         },
         {

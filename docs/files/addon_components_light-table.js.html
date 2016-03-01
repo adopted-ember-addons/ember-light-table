@@ -45,7 +45,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.b36e4b28</p>
+                <p class="version pull-right">0.0.0.945e2c88</p>
               </div>
             </div>
         </div>
@@ -84,13 +84,12 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;../templates/components/light-table&#x27;;
+import callAction from &#x27;../utils/call-action&#x27;;
 import TableScrollMixin from &#x27;../mixins/table-scroll&#x27;;
 
 const {
-  computed,
-  canInvoke
+  computed
 } = Ember;
-
 
 /**
  * @module Components
@@ -106,7 +105,6 @@ export default Ember.Component.extend(TableScrollMixin, {
   layout,
   tagName: &#x27;table&#x27;,
   classNames: [&#x27;ember-light-table&#x27;],
-  classNameBindings: [&#x27;isLoading&#x27;, &#x27;canSelect&#x27;, &#x27;multiSelect&#x27;, &#x27;isSelecting&#x27;,&#x27;canExpand&#x27;],
 
   /**
    * @property table
@@ -139,67 +137,13 @@ export default Ember.Component.extend(TableScrollMixin, {
   loadingComponent: null,
 
   /**
-   * @property noDataText
-   * @type {String}
-   * @default &#x27;No data.&#x27;
-   */
-  noDataText: &#x27;No data.&#x27;,
-
-  /**
-   * @property canSelect
-   * @type {Boolean}
-   * @default true
-   */
-  canSelect: true,
-
-  /**
-   * @property multiSelect
-   * @type {Boolean}
-   * @default true
-   */
-  multiSelect: false,
-
-  /**
    * @property isLoading
    * @type {Boolean}
    * @default false
    */
   isLoading: false,
 
-  /**
-   * @property multiRowExpansion
-   * @type {Boolean}
-   * @default true
-   */
-  multiRowExpansion: true,
 
-  /**
-   * @property expandOnClick
-   * @type {Boolean}
-   * @default true
-   */
-  expandOnClick: true,
-
-  /**
-   * @property multiColumnSort
-   * @type {Boolean}
-   * @default false
-   */
-  multiColumnSort: false,
-
-  /**
-   * @property iconAscending
-   * @type {String}
-   * @default &#x27;&#x27;
-   */
-  iconAscending: &#x27;&#x27;,
-
-  /**
-   * @property iconDescending
-   * @type {String}
-   * @default &#x27;&#x27;
-   */
-  iconDescending: &#x27;&#x27;,
 
   rows: computed.oneWay(&#x27;table.rows&#x27;),
   columns: computed.oneWay(&#x27;table.columns&#x27;),
@@ -207,98 +151,11 @@ export default Ember.Component.extend(TableScrollMixin, {
   canExpand: computed.notEmpty(&#x27;expandedRowComponent&#x27;),
   hasNoData: computed.empty(&#x27;rows&#x27;),
 
-  sortIcons: computed(&#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;, function() {
-    return this.getProperties([&#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;]);
-  }),
 
-  visibleColumns: computed.oneWay(&#x27;table.visibleColumns&#x27;),
-  visibleColumnGroups: computed.oneWay(&#x27;table.visibleColumnGroups&#x27;),
-  visibleSubColumns: computed.oneWay(&#x27;table.visibleSubColumns&#x27;),
-
-  isSelecting: false,
-  _currSelectedIndex: -1,
-  _prevSelectedIndex: -1,
-
-  togglExpandedRow(row) {
-    let multi = this.get(&#x27;multiRowExpansion&#x27;);
-    let shouldExpand = !row.expanded;
-
-    if(multi) {
-      row.toggleProperty(&#x27;expanded&#x27;);
-    } else {
-      this.get(&#x27;table.expandedRows&#x27;).setEach(&#x27;expanded&#x27;, false);
-      row.set(&#x27;expanded&#x27;, shouldExpand);
-    }
-  },
-
-  _callAction(action, ...params) {
-    if(canInvoke(this.attrs, action)) {
-      this.attrs[action](...params);
-    }
-  },
 
   actions: {
-    onColumnClick(column) {
-      if(column.sortable) {
-        if(column.sorted) {
-          column.toggleProperty(&#x27;ascending&#x27;);
-        } else {
-          if(!this.get(&#x27;multiColumnSort&#x27;)) {
-            this.get(&#x27;table.sortedColumns&#x27;).setEach(&#x27;sorted&#x27;, false);
-          }
-          column.set(&#x27;sorted&#x27;, true);
-        }
-      }
-      this._callAction(&#x27;onColumnClick&#x27;, ...arguments);
-    },
-
-    onRowClick(row, e) {
-      let rows = this.get(&#x27;table.rows&#x27;);
-      let multiSelect = this.get(&#x27;multiSelect&#x27;);
-      let canSelect = this.get(&#x27;canSelect&#x27;);
-      let isSelected = row.get(&#x27;selected&#x27;);
-      let currIndex = rows.indexOf(row);
-      let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
-
-      this._currSelectedIndex = currIndex;
-      this._prevSelectedIndex = prevIndex;
-
-      if(canSelect) {
-        this.set(&#x27;isSelecting&#x27;, true);
-        if (e.shiftKey &amp;&amp; multiSelect) {
-          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach(r =&gt; r.set(&#x27;selected&#x27;, !isSelected));
-          this._prevSelectedIndex = currIndex;
-        } else if((e.ctrlKey || e.metaKey) &amp;&amp; multiSelect) {
-          row.toggleProperty(&#x27;selected&#x27;);
-        } else {
-          this.set(&#x27;isSelecting&#x27;, false);
-          this.get(&#x27;table.selectedRows&#x27;).setEach(&#x27;selected&#x27;, false);
-          row.set(&#x27;selected&#x27;, !isSelected);
-
-          if (this.get(&#x27;canExpand&#x27;) &amp;&amp; this.get(&#x27;expandOnClick&#x27;)) {
-            this.togglExpandedRow(row);
-          }
-        }
-        this._prevSelectedIndex = currIndex;
-      } else {
-        if (this.get(&#x27;canExpand&#x27;) &amp;&amp; this.get(&#x27;expandOnClick&#x27;)) {
-          this.togglExpandedRow(row);
-        }
-      }
-
-      this._callAction(&#x27;onRowClick&#x27;, ...arguments);
-   },
-
-    onColumnDoubleClick(/* column */) {
-      this._callAction(&#x27;onColumnDoubleClick&#x27;, ...arguments);
-    },
-
-    onRowDoubleClick(/* row */) {
-      this._callAction(&#x27;onRowDoubleClick&#x27;, ...arguments);
-    },
-
     onScrolledToBottom() {
-      this._callAction(&#x27;onScrolledToBottom&#x27;, ...arguments);
+      callAction.call(this, &#x27;onScrolledToBottom&#x27;, ...arguments);
     }
   }
 });

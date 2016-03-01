@@ -45,7 +45,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.b36e4b28</p>
+                <p class="version pull-right">0.0.0.945e2c88</p>
               </div>
             </div>
         </div>
@@ -183,7 +183,7 @@ export default class Column extends Ember.Object.extend({
    * @property isGroupColumn
    * @type {Boolean}
    */
-  isGroupColumn: computed.notEmpty(&#x27;subColumns&#x27;),
+  isGroupColumn: computed.notEmpty(&#x27;subColumns&#x27;).readOnly(),
 
   /**
    * @property isVisibleGroupColumn
@@ -191,7 +191,7 @@ export default class Column extends Ember.Object.extend({
    */
   isVisibleGroupColumn: computed(&#x27;visibleSubColumns.[]&#x27;, &#x27;hidden&#x27;, function() {
     return !isEmpty(this.get(&#x27;visibleSubColumns&#x27;)) &amp;&amp; !this.get(&#x27;hidden&#x27;);
-  }),
+  }).readOnly(),
 
   /**
    * @property visibleSubColumns
@@ -200,7 +200,7 @@ export default class Column extends Ember.Object.extend({
   visibleSubColumns: computed(&#x27;subColumns.@each.hidden&#x27;, &#x27;hidden&#x27;, function() {
     let subColumns = this.get(&#x27;subColumns&#x27;);
     return isEmpty(subColumns) || this.get(&#x27;hidden&#x27;) ? [] : subColumns.filterBy(&#x27;hidden&#x27;, false);
-  })
+  }).readOnly()
 }) {
   /**
    * @class Column
