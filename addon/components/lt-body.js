@@ -19,6 +19,12 @@ export default Ember.Component.extend({
   table: null,
 
   /**
+   * @property tableActions
+   * @type {Object}
+   */
+  tableActions: null,
+
+  /**
    * @property canSelect
    * @type {Boolean}
    * @default true

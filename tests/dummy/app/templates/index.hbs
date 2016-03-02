@@ -23,7 +23,7 @@
     </div>
     <div class="panel-body table-container">
 {{!-- BEGIN-SNIPPET simple-table --}}
-{{#light-table table=table scrollContainer='.table-container' onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
+{{#light-table table scrollContainer='.table-container' onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
   {{t.head
     onColumnClick=(action 'onColumnClick')
     iconAscending='fa fa-sort-asc'

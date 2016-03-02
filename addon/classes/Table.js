@@ -33,7 +33,11 @@ export default class Table extends Ember.Object.extend({
    */
   rows: null,
 
-  isEmpty: computed.empty('rows'),
+  /**
+   * @property isEmpty
+   * @type {Boolean}
+   */
+  isEmpty: computed.empty('rows').readOnly(),
 
   /**
    * @property expandedRows
@@ -63,7 +67,7 @@ export default class Table extends Ember.Object.extend({
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: computed.filterBy('iterableColumns', 'hidden', false).readOnly(),
+  visibleColumns: computed.filterBy('flattenedColumns', 'hidden', false).readOnly(),
 
   /**
    * @property visibleColumns
@@ -87,10 +91,10 @@ export default class Table extends Ember.Object.extend({
   }).readOnly(),
 
   /**
-   * @property iterableColumns
+   * @property flattenedColumns
    * @type {Ember.Array}
    */
-  iterableColumns: computed('columns.[]', 'columns.@each.subColumns', function() {
+  flattenedColumns: computed('columns.[]', 'columns.@each.subColumns', function() {
     return emberArray(this.get('columns').reduce((arr, c) => {
       let subColumns = c.get('subColumns');
       if (isEmpty(subColumns)) {
