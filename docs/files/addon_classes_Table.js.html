@@ -45,7 +45,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.293290bf</p>
+                <p class="version pull-right">0.0.0.555bdbe5</p>
               </div>
             </div>
         </div>
@@ -117,7 +117,11 @@ export default class Table extends Ember.Object.extend({
    */
   rows: null,
 
-  isEmpty: computed.empty(&#x27;rows&#x27;),
+  /**
+   * @property isEmpty
+   * @type {Boolean}
+   */
+  isEmpty: computed.empty(&#x27;rows&#x27;).readOnly(),
 
   /**
    * @property expandedRows
@@ -147,7 +151,7 @@ export default class Table extends Ember.Object.extend({
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: computed.filterBy(&#x27;iterableColumns&#x27;, &#x27;hidden&#x27;, false).readOnly(),
+  visibleColumns: computed.filterBy(&#x27;flattenedColumns&#x27;, &#x27;hidden&#x27;, false).readOnly(),
 
   /**
    * @property visibleColumns
@@ -171,10 +175,10 @@ export default class Table extends Ember.Object.extend({
   }).readOnly(),
 
   /**
-   * @property iterableColumns
+   * @property flattenedColumns
    * @type {Ember.Array}
    */
-  iterableColumns: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.subColumns&#x27;, function() {
+  flattenedColumns: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.subColumns&#x27;, function() {
     return emberArray(this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
       let subColumns = c.get(&#x27;subColumns&#x27;);
       if (isEmpty(subColumns)) {

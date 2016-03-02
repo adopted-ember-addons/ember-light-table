@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "0.0.0.293290bf"
+        "version": "0.0.0.555bdbe5"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -93,7 +93,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "addon/classes/Table.js",
-            "line": 105
+            "line": 109
         },
         "Components": {
             "name": "Components",
@@ -177,7 +177,7 @@
             "module": "Classes",
             "namespace": "",
             "file": "addon/classes/Table.js",
-            "line": 105,
+            "line": 109,
             "extends": "Ember.Object",
             "is_constructor": 1,
             "params": [
@@ -204,7 +204,7 @@
             "module": "Components",
             "namespace": "",
             "file": "addon/components/light-table.js",
-            "line": 14,
+            "line": 15,
             "extends": "Ember.Component",
             "uses": [
                 "TableScrollMixin"
@@ -420,7 +420,16 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 38,
+            "line": 36,
+            "itemtype": "property",
+            "name": "isEmpty",
+            "type": "{Boolean}",
+            "class": "Table",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Table.js",
+            "line": 42,
             "itemtype": "property",
             "name": "expandedRows",
             "type": "{Ember.Array}",
@@ -429,7 +438,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 44,
+            "line": 48,
             "itemtype": "property",
             "name": "selectedRows",
             "type": "{Ember.Array}",
@@ -438,7 +447,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 50,
+            "line": 54,
             "itemtype": "property",
             "name": "sortedColumns",
             "type": "{Ember.Array}",
@@ -447,7 +456,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 56,
+            "line": 60,
             "itemtype": "property",
             "name": "sortableColumns",
             "type": "{Ember.Array}",
@@ -456,7 +465,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 62,
+            "line": 66,
             "itemtype": "property",
             "name": "visibleColumns",
             "type": "{Ember.Array}",
@@ -465,7 +474,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 68,
+            "line": 72,
             "itemtype": "property",
             "name": "visibleColumns",
             "type": "{Ember.Array}",
@@ -474,7 +483,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 81,
+            "line": 85,
             "itemtype": "property",
             "name": "visibleSubColumns",
             "type": "{Ember.Array}",
@@ -483,16 +492,16 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 89,
+            "line": 93,
             "itemtype": "property",
-            "name": "iterableColumns",
+            "name": "flattenedColumns",
             "type": "{Ember.Array}",
             "class": "Table",
             "module": "Classes"
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 121,
+            "line": 125,
             "description": "Replace all the row's content with content of the argument. If argument is an empty array receiver will be cleared.",
             "itemtype": "method",
             "name": "setRows",
@@ -508,7 +517,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 130,
+            "line": 134,
             "description": "Push the object onto the end of the row array if it is not already present.",
             "itemtype": "method",
             "name": "addRow",
@@ -524,7 +533,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 143,
+            "line": 147,
             "description": "Push the objects onto the end of the row array if it is not already present.",
             "itemtype": "method",
             "name": "addRows",
@@ -540,7 +549,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 152,
+            "line": 156,
             "description": "Push the object onto the end of the row array.",
             "itemtype": "method",
             "name": "pushRow",
@@ -556,7 +565,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 161,
+            "line": 165,
             "description": "Push the object onto the end of the row array.",
             "itemtype": "method",
             "name": "pushRows",
@@ -572,7 +581,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 170,
+            "line": 174,
             "description": "Remove all occurrences of an object in the rows",
             "itemtype": "method",
             "name": "removeRow",
@@ -588,7 +597,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 183,
+            "line": 187,
             "description": "Removes each object in the passed enumerable from the rows.",
             "itemtype": "method",
             "name": "removeRows",
@@ -604,7 +613,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 194,
+            "line": 198,
             "description": "Replace all the column's content with content of the argument. If argument is an empty array receiver will be cleared.",
             "itemtype": "method",
             "name": "setColumns",
@@ -620,7 +629,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 203,
+            "line": 207,
             "description": "Push the object onto the end of the column array if it is not already present.",
             "itemtype": "method",
             "name": "addColumn",
@@ -636,7 +645,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 212,
+            "line": 216,
             "description": "Push the objects onto the end of the column array if it is not already present.",
             "itemtype": "method",
             "name": "addColumns",
@@ -652,7 +661,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 221,
+            "line": 225,
             "description": "Push the object onto the end of the column array.",
             "itemtype": "method",
             "name": "pushColumn",
@@ -668,7 +677,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 230,
+            "line": 234,
             "description": "Push the object onto the end of the column array.",
             "itemtype": "method",
             "name": "pushColumns",
@@ -684,7 +693,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 239,
+            "line": 243,
             "description": "Remove all occurrences of an object in the columns",
             "itemtype": "method",
             "name": "removeColumn",
@@ -700,7 +709,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 248,
+            "line": 252,
             "description": "Removes each object in the passed enumerable from the columns.",
             "itemtype": "method",
             "name": "removeColumns",
@@ -716,7 +725,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 257,
+            "line": 261,
             "description": "Create a Row object with the given data",
             "itemtype": "method",
             "name": "createRow",
@@ -737,7 +746,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 268,
+            "line": 272,
             "description": "Create a collection of Row objects with the given datum",
             "itemtype": "method",
             "name": "createRows",
@@ -758,7 +767,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 279,
+            "line": 283,
             "description": "Create a Column object with the given options",
             "itemtype": "method",
             "name": "createColumn",
@@ -779,7 +788,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 290,
+            "line": 294,
             "description": "Create a collection of Column objects with the given options",
             "itemtype": "method",
             "name": "createColumns",
@@ -800,7 +809,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -809,7 +818,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 31,
+            "line": 32,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -829,6 +838,15 @@
             "file": "addon/components/lt-body.js",
             "line": 21,
             "itemtype": "property",
+            "name": "tableActions",
+            "type": "{Object}",
+            "class": "TableScrollMixin",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 27,
+            "itemtype": "property",
             "name": "canSelect",
             "type": "{Boolean}",
             "default": "true",
@@ -837,7 +855,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 28,
+            "line": 34,
             "itemtype": "property",
             "name": "canExpand",
             "type": "{Boolean}",
@@ -847,7 +865,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 35,
+            "line": 41,
             "itemtype": "property",
             "name": "multiSelect",
             "type": "{Boolean}",
@@ -857,7 +875,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 42,
+            "line": 48,
             "itemtype": "property",
             "name": "multiRowExpansion",
             "type": "{Boolean}",
@@ -867,7 +885,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 49,
+            "line": 55,
             "itemtype": "property",
             "name": "expandOnClick",
             "type": "{Boolean}",

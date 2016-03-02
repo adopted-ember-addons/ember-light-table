@@ -45,7 +45,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.293290bf</p>
+                <p class="version pull-right">0.0.0.555bdbe5</p>
               </div>
             </div>
         </div>
@@ -86,9 +86,10 @@ import Ember from &#x27;ember&#x27;;
 import layout from &#x27;../templates/components/light-table&#x27;;
 import callAction from &#x27;../utils/call-action&#x27;;
 import TableScrollMixin from &#x27;../mixins/table-scroll&#x27;;
+import Table from &#x27;../classes/Table&#x27;;
 
 const {
-  computed
+  assert
 } = Ember;
 
 /**
@@ -101,7 +102,7 @@ const {
  * @uses TableScrollMixin
  */
 
-export default Ember.Component.extend(TableScrollMixin, {
+const LightTable =  Ember.Component.extend(TableScrollMixin, {
   layout,
   tagName: &#x27;table&#x27;,
   classNames: [&#x27;ember-light-table&#x27;],
@@ -118,12 +119,23 @@ export default Ember.Component.extend(TableScrollMixin, {
    */
   tableActions: null,
 
+  didInitAttrs() {
+    this._super(...arguments);
+    assert(&#x60;[ember-light-table] table must be an instance of Table&#x60;, this.get(&#x27;table&#x27;) instanceof Table);
+  },
+
   actions: {
     onScrolledToBottom() {
       callAction.call(this, &#x27;onScrolledToBottom&#x27;, ...arguments);
     }
   }
 });
+
+LightTable.reopenClass({
+  positionalParams: [&#x27;table&#x27;]
+});
+
+export default LightTable;
 
     </pre>
 </div>
