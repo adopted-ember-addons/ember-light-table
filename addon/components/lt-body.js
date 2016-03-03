@@ -6,6 +6,36 @@ const {
   computed
 } = Ember;
 
+/**
+ * @module Components
+ */
+
+/**
+ * ```hbs
+ * {{#light-table table as |t|}}
+ *   {{#t.body multiSelect=true onRowClick=(action 'rowClicked')}}
+ *     {{#body.expanded-row as |row|}}
+ *       Hello <b>{{row.firstName}}</b>
+ *     {{/body.expanded-row}}
+ *
+ *     {{#if isLoading}}
+ *       {{#body.loader}}
+ *         Loading...
+ *       {{/body.loader}}
+ *     {{/if}}
+ *
+ *     {{#if table.isEmpty)}}
+ *       {{#body.no-data}}
+ *         No users found.
+ *       {{/body.no-data}}
+ *     {{/if}}
+ *   {{/t.body}}
+ * {{/light-table}}
+ * ```
+ *
+ * @class Body
+ */
+
 export default Ember.Component.extend({
   layout,
   tagName: 'tbody',
@@ -79,6 +109,12 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    /**
+     * onRowClick action. Handles selection, and row expansion.
+     * @method onRowClick
+     * @param  {Row}   row The row that was clicked
+     * @param  {Event}   event   The click event
+     */
     onRowClick(row, e) {
       let rows = this.get('table.rows');
       let multiSelect = this.get('multiSelect');
@@ -114,6 +150,12 @@ export default Ember.Component.extend({
       callAction.call(this, 'onRowClick', ...arguments);
     },
 
+    /**
+     * onRowDoubleClick action.
+     * @method onRowDoubleClick
+     * @param  {Row}   row The row that was clicked
+     * @param  {Event}   event   The click event
+     */
     onRowDoubleClick( /* row */ ) {
       callAction.call(this, 'onRowDoubleClick', ...arguments);
     }

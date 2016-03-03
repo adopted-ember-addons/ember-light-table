@@ -5,6 +5,11 @@ const {
   computed
 } = Ember;
 
+/**
+ * @class TableColumnMixin
+ * @extends Ember.Mixin
+ */
+
 export default Ember.Mixin.create({
   /**
    * @property sortOnClick
@@ -43,6 +48,12 @@ export default Ember.Mixin.create({
   }),
 
   actions: {
+    /**
+     * onColumnClick action. Handles column sorting.
+     * @method onColumnClick
+     * @param  {Column}   column The column that was clicked
+     * @param  {Event}   event   The click event
+     */
     onColumnClick(column) {
       if(column.sortable && this.get('sortOnClick')) {
         if(column.sorted) {
@@ -57,6 +68,12 @@ export default Ember.Mixin.create({
       callAction.call(this, 'onColumnClick', ...arguments);
     },
 
+    /**
+     * onColumnClick action.
+     * @method onColumnDoubleClick
+     * @param  {Column}   column The column that was clicked
+     * @param  {Event}   event   The click event
+     */
     onColumnDoubleClick(/* column */) {
       callAction.call(this, 'onColumnDoubleClick', ...arguments);
     },

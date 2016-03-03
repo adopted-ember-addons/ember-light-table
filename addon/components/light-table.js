@@ -10,11 +10,19 @@ const {
 
 /**
  * @module Components
+ * @main ligh-table
  */
 
 /**
- * @class Light-Table
- * @extends Ember.Component
+ * ```hbs
+ * {{#light-table table as |t|}}
+ *   {{t.head}}
+ *   {{t.body}}
+ *   {{t.foot}}
+ * {{/light-table}}
+ * ```
+ *
+ * @class Light Table
  * @uses TableScrollMixin
  */
 
@@ -41,6 +49,10 @@ const LightTable =  Ember.Component.extend(TableScrollMixin, {
   },
 
   actions: {
+    /**
+     * Action to be called when user reached the bottom of the scroll container
+     * @method onScrolledToBottom
+     */
     onScrolledToBottom() {
       callAction.call(this, 'onScrolledToBottom', ...arguments);
     }
