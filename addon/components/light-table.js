@@ -35,7 +35,7 @@ const LightTable =  Ember.Component.extend(TableScrollMixin, {
    */
   tableActions: null,
 
-  didInitAttrs() {
+  init() {
     this._super(...arguments);
     assert(`[ember-light-table] table must be an instance of Table`, this.get('table') instanceof Table);
   },
