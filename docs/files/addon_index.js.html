@@ -36,16 +36,20 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Body.html">Body</a></li>
                     <li ><a  href="../classes/Column.html">Column</a></li>
-                    <li ><a  href="../classes/Light-Table.html">Light-Table</a></li>
+                    <li ><a  href="../classes/Foot.html">Foot</a></li>
+                    <li ><a  href="../classes/Head.html">Head</a></li>
+                    <li ><a  href="../classes/Light Table.html">Light Table</a></li>
                     <li ><a  href="../classes/Row.html">Row</a></li>
                     <li ><a  href="../classes/Table.html">Table</a></li>
+                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
                     <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.555bdbe5</p>
+                <p class="version pull-right">0.0.0.cc7907d3</p>
               </div>
             </div>
         </div>
@@ -89,6 +93,122 @@ import Row from &#x27;./classes/Row&#x27;;
 export default Table;
 
 /**
+ * A lightweight contextual component based table addon that follows Ember&#x27;s actions up, data down ideology.
+ *
+ * ## Features
+ *
+ * * Custom component based column headers and cells
+ * * Infinite scroll support
+ * * Select &amp; Multi-select
+ * * Grouped columns
+ * * Expandable rows
+ * * Easy table manipulation
+ * * Easy override to table header and footer
+ * * Contextual component for header, body, and footer, as well as loading, no data, and expanded row
+ *
+ * ## Installation
+ * &#x60;&#x60;&#x60;shell
+ * ember install ember-light-table
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Looking for help?
+ * If it is a bug [please open an issue on GitHub](http://github.com/offirgolan/ember-light-table/issues).
+ *
+ * ## Usage
+ * There are two parts to this addon. The first is the [Table](../classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.
+ *
+ * ### Table Definition
+ * The &#x60;Table&#x60; constructor accepts an array of &#x60;Columns&#x60; or column options and an array of rows.
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * import Table from &#x27;ember-light-table&#x27;;
+ * const table = new Table(columns, rows);
+ * &#x60;&#x60;&#x60;
+ *
+ * Here is a more real-word example
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * // components/my-table.js
+ * import Ember from &#x27;ember&#x27;;
+ * import Table from &#x27;ember-light-table&#x27;;
+ *
+ * const computed = Ember.computed;
+ *
+ * export default Ember.Component.extend({
+ *   model: null,
+ *   table: null,
+ *
+ *   columns: computed(function() {
+ *     return [{
+ *       label: &#x27;Avatar&#x27;,
+ *       valuePath: &#x27;avatar&#x27;,
+ *       width: &#x27;60px&#x27;,
+ *       sortable: false,
+ *       cellComponent: &#x27;user-avatar&#x27;
+ *     }, {
+ *       label: &#x27;First Name&#x27;,
+ *       valuePath: &#x27;firstName&#x27;,
+ *       width: &#x27;150px&#x27;
+ *     }, {
+ *       label: &#x27;Last Name&#x27;,
+ *       valuePath: &#x27;lastName&#x27;,
+ *       width: &#x27;150px&#x27;
+ *     }, {
+ *       label: &#x27;Address&#x27;,
+ *       valuePath: &#x27;address&#x27;
+ *     }, {
+ *       label: &#x27;State&#x27;,
+ *       valuePath: &#x27;state&#x27;
+ *     }, {
+ *       label: &#x27;Country&#x27;,
+ *       valuePath: &#x27;country&#x27;
+ *     }];
+ *   }),
+ *
+ *   init() {
+ *     this._super(...arguments);
+ *     this.set(&#x27;table&#x27;, new Table(this.get(&#x27;columns&#x27;), this.get(&#x27;model&#x27;).toArray()));
+ *   }
+ * });
+ * &#x60;&#x60;&#x60;
+ *
+ * For a list of possible column options, please
+ * [checkout out the docs](../classes/Column.html).
+ *
+ * ### Component Declaration
+ *
+ * Now that we have our &#x60;table&#x60;, we can declare our component in our template.
+ *
+ * &#x60;&#x60;&#x60;hbs
+ * // templates/components/my-table.hbs
+ * {{#light-table table as |t|}}
+ *   {{t.head}}
+ *
+ *   {{#t.body as |body|}}
+ *     {{#body.expanded-row as |row|}}
+ *       Hello &lt;b&gt;{{row.firstName}}&lt;/b&gt;
+ *     {{/body.expanded-row}}
+ *
+ *     {{#if isLoading}}
+ *       {{#body.loader}}
+ *         Loading...
+ *       {{/body.loader}}
+ *     {{/if}}
+ *
+ *     {{#if table.isEmpty)}}
+ *       {{#body.no-data}}
+ *         No users found.
+ *       {{/body.no-data}}
+ *     {{/if}}
+ *   {{/t.body}}
+ *
+ *   {{t.foot}}
+ * {{/light-table}}
+ * &#x60;&#x60;&#x60;
+ *
+ * Please note that each of these contextual components have a wide array of options so it is advised to look
+ * through the documentation.
+ *
  * @module Home
  */
 export { Table, Column, Row };

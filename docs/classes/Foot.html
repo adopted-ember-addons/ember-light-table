@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Foot - Ember Light Table</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div class="row">
+        <div class="sidebar-container">
+            <div id="sidebar">
+              <div class="header">
+                <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+                  <a href="../">Ember Light Table</a>
+                </h1>
+                <form class="navbar-form">
+                    <input type="search" class="search-query" placeholder="Search classes/modules...">
+                </form>
+              </div>
+              <ul class="main-nav">
+                <li class="section">Modules</li>
+                   <li  >
+                     <a href="../modules/Classes.html">Classes</a>
+                   </li>
+                   <li  >
+                     <a href="../modules/Components.html">Components</a>
+                   </li>
+                   <li  >
+                     <a href="../modules/Home.html">Home</a>
+                   </li>
+            
+                <li class="section">Classes</li>
+                    <li ><a  href="../classes/Body.html">Body</a></li>
+                    <li ><a  href="../classes/Column.html">Column</a></li>
+                    <li  class="active"><a  href="../classes/Foot.html">Foot</a></li>
+                    <li ><a  href="../classes/Head.html">Head</a></li>
+                    <li ><a  href="../classes/Light Table.html">Light Table</a></li>
+                    <li ><a  href="../classes/Row.html">Row</a></li>
+                    <li ><a  href="../classes/Table.html">Table</a></li>
+                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
+                    <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
+              </ul>
+            
+              <div class="footer">
+                <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
+                <p class="version pull-right">0.0.0.cc7907d3</p>
+              </div>
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <form id="options-form" class="form-inline pull-right">
+                            Show:
+                            <label for="api-show-inherited" class="checkbox">
+                                <input type="checkbox" id="api-show-inherited" checked>
+                                Inherited
+                            </label>
+                    
+                            <label for="api-show-protected" class="checkbox">
+                                <input type="checkbox" id="api-show-protected">
+                                Protected
+                            </label>
+                    
+                            <label for="api-show-private" class="checkbox">
+                                <input type="checkbox" id="api-show-private">
+                                Private
+                            </label>
+                            <label for="api-show-deprecated" class="checkbox">
+                                <input type="checkbox" id="api-show-deprecated">
+                                Deprecated
+                            </label>
+                    
+                        </form>
+                    
+<div class="page-header">
+    <h1>Foot</h1>
+</div>
+<div class="well well-small">
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                    <li><a href="TableColumnMixin.html">TableColumnMixin</a></li>
+            </ul>
+        </div>
+
+
+            Module: <a href="../modules/Components.html">Components</a>
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/addon_components_lt-foot.js.html#l9"><code>addon&#x2F;components&#x2F;lt-foot.js:9</code></a>
+        </div>
+</div>
+
+
+
+  <div class="yuidoc-class-description">
+  <pre class="code prettyprint"><code class="language-hbs">{{#light-table table as |t|}}
+  {{t.foot onColumnClick=(action 'sortByColumn')}}
+{{/light-table}}
+</code></pre>
+<p>If you want to define your own tfoot, just declare the contextual component in a block.</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#light-table table as |t|}}
+  {{#t.foot onColumnClick=(action 'sortByColumn') as |columns table|}}
+    {{#each groups as |group|}}
+      {{!-- ... --}}
+    {{/each}}
+  {{/t.foot}}
+{{/light-table}}
+</code></pre>
+<p>will be empty</p>
+
+  </div>
+
+<div>
+    <div class="page-section">
+        <div id="index">
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method inherited">
+                                <a href="#method_onColumnClick">onColumnClick</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_onColumnDoubleClick">onColumnDoubleClick</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property inherited">
+                                <a href="#property_iconAscending">iconAscending</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_iconDescending">iconDescending</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_multiColumnSort">multiColumnSort</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_sortOnClick">sortOnClick</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+        </div>
+
+            <div id="methods" class="page-section">
+                <h2 class="off-left">Methods</h2>
+                <div class="item-list">
+<div id="method_onColumnClick" class="method item inherited">
+	<span class="method-signature">
+	<span class="name"><code>onColumnClick</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>column</code>
+				</li>
+				<li class="arg">
+						<code>event</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+	</span>
+
+
+
+
+
+
+
+	<div class="meta">
+				<p>Inherited from
+				<a href="../classes/TableColumnMixin.html#method_onColumnClick">TableColumnMixin</a>:
+		<a href="../files/addon_mixins_table-column.js.html#l51"><code>addon&#x2F;mixins&#x2F;table-column.js:51</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description">onColumnClick action. Handles column sorting.</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">column</code>
+						<span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
+
+
+					<div class="param-description">The column that was clicked</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">event</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" class="crosslink external" target="_blank">Event</a></span>
+
+
+					<div class="param-description">The click event</div>
+
+				</li>
+			</ul>
+		</div>
+
+
+</div>
+<div id="method_onColumnDoubleClick" class="method item inherited">
+	<span class="method-signature">
+	<span class="name"><code>onColumnDoubleClick</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>column</code>
+				</li>
+				<li class="arg">
+						<code>event</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+	</span>
+
+
+
+
+
+
+
+	<div class="meta">
+				<p>Inherited from
+				<a href="../classes/TableColumnMixin.html#method_onColumnDoubleClick">TableColumnMixin</a>:
+		<a href="../files/addon_mixins_table-column.js.html#l71"><code>addon&#x2F;mixins&#x2F;table-column.js:71</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description">onColumnClick action.</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">column</code>
+						<span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
+
+
+					<div class="param-description">The column that was clicked</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">event</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" class="crosslink external" target="_blank">Event</a></span>
+
+
+					<div class="param-description">The click event</div>
+
+				</li>
+			</ul>
+		</div>
+
+
+</div>
+                </div>
+            </div>
+
+            <div id="properties" class="page-section">
+                <h2 class="off-left">Properties</h2>
+                <div class="item-list">
+<div id="property_iconAscending" class="property item inherited">
+    <h3 class="name"><code>iconAscending</code></h3>
+    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/TableColumnMixin.html#property_iconAscending">TableColumnMixin</a>:
+        <a href="../files/addon_mixins_table-column.js.html#l28"><code>addon&#x2F;mixins&#x2F;table-column.js:28</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <p><br><strong>Default:</strong> &#x27;&#x27;</p>
+
+
+</div>
+<div id="property_iconDescending" class="property item inherited">
+    <h3 class="name"><code>iconDescending</code></h3>
+    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/TableColumnMixin.html#property_iconDescending">TableColumnMixin</a>:
+        <a href="../files/addon_mixins_table-column.js.html#l35"><code>addon&#x2F;mixins&#x2F;table-column.js:35</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <p><br><strong>Default:</strong> &#x27;&#x27;</p>
+
+
+</div>
+<div id="property_multiColumnSort" class="property item inherited">
+    <h3 class="name"><code>multiColumnSort</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/TableColumnMixin.html#property_multiColumnSort">TableColumnMixin</a>:
+        <a href="../files/addon_mixins_table-column.js.html#l21"><code>addon&#x2F;mixins&#x2F;table-column.js:21</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <p><br><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_sortOnClick" class="property item inherited">
+    <h3 class="name"><code>sortOnClick</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/TableColumnMixin.html#property_sortOnClick">TableColumnMixin</a>:
+        <a href="../files/addon_mixins_table-column.js.html#l14"><code>addon&#x2F;mixins&#x2F;table-column.js:14</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <p><br><strong>Default:</strong> true</p>
+
+
+</div>
+                </div>
+            </div>
+
+
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../assets/js/yuidoc-bootstrap.js"></script>
+</body>
+</html>

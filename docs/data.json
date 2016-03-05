@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "0.0.0.555bdbe5"
+        "version": "0.0.0.cc7907d3"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -41,7 +41,7 @@
                 "Components": 1
             },
             "classes": {
-                "Light-Table": 1
+                "Light Table": 1
             },
             "fors": {},
             "namespaces": {}
@@ -49,14 +49,36 @@
         "addon/components/lt-body.js": {
             "name": "addon/components/lt-body.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "Body": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/lt-foot.js": {
+            "name": "addon/components/lt-foot.js",
+            "modules": {},
+            "classes": {
+                "Foot": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/lt-head.js": {
+            "name": "addon/components/lt-head.js",
+            "modules": {},
+            "classes": {
+                "Head": 1
+            },
             "fors": {},
             "namespaces": {}
         },
         "addon/mixins/table-column.js": {
             "name": "addon/mixins/table-column.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "TableColumnMixin": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -100,14 +122,20 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "Light-Table": 1,
+                "Light Table": 1,
+                "Body": 1,
+                "Foot": 1,
+                "Head": 1,
+                "TableColumnMixin": 1,
                 "TableScrollMixin": 1
             },
             "fors": {},
             "namespaces": {},
-            "tag": "module",
+            "tag": "main",
             "file": "addon/mixins/table-scroll.js",
-            "line": 8
+            "line": 8,
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../Classes/Head.html), [Body](../Classes/Body.html), and [Foot](../Classes/Foot.html) components\nfor more details on all possible options and actions.",
+            "itemtype": "main"
         },
         "Home": {
             "name": "Home",
@@ -118,7 +146,8 @@
             "namespaces": {},
             "tag": "module",
             "file": "addon/index.js",
-            "line": 7
+            "line": 7,
+            "description": "A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.\n\n## Features\n\n* Custom component based column headers and cells\n* Infinite scroll support\n* Select & Multi-select\n* Grouped columns\n* Expandable rows\n* Easy table manipulation\n* Easy override to table header and footer\n* Contextual component for header, body, and footer, as well as loading, no data, and expanded row\n\n## Installation\n```shell\nember install ember-light-table\n```\n\n## Looking for help?\nIf it is a bug [please open an issue on GitHub](http://github.com/offirgolan/ember-light-table/issues).\n\n## Usage\nThere are two parts to this addon. The first is the [Table](../classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.\n\n### Table Definition\nThe `Table` constructor accepts an array of `Columns` or column options and an array of rows.\n\n```javascript\nimport Table from 'ember-light-table';\nconst table = new Table(columns, rows);\n```\n\nHere is a more real-word example\n\n```javascript\n// components/my-table.js\nimport Ember from 'ember';\nimport Table from 'ember-light-table';\n\nconst computed = Ember.computed;\n\nexport default Ember.Component.extend({\n  model: null,\n  table: null,\n\n  columns: computed(function() {\n    return [{\n      label: 'Avatar',\n      valuePath: 'avatar',\n      width: '60px',\n      sortable: false,\n      cellComponent: 'user-avatar'\n    }, {\n      label: 'First Name',\n      valuePath: 'firstName',\n      width: '150px'\n    }, {\n      label: 'Last Name',\n      valuePath: 'lastName',\n      width: '150px'\n    }, {\n      label: 'Address',\n      valuePath: 'address'\n    }, {\n      label: 'State',\n      valuePath: 'state'\n    }, {\n      label: 'Country',\n      valuePath: 'country'\n    }];\n  }),\n\n  init() {\n    this._super(...arguments);\n    this.set('table', new Table(this.get('columns'), this.get('model').toArray()));\n  }\n});\n```\n\nFor a list of possible column options, please\n[checkout out the docs](../classes/Column.html).\n\n### Component Declaration\n\nNow that we have our `table`, we can declare our component in our template.\n\n```hbs\n// templates/components/my-table.hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n\n  {{#t.body as |body|}}\n    {{#body.expanded-row as |row|}}\n      Hello <b>{{row.firstName}}</b>\n    {{/body.expanded-row}}\n\n    {{#if isLoading}}\n      {{#body.loader}}\n        Loading...\n      {{/body.loader}}\n    {{/if}}\n\n    {{#if table.isEmpty)}}\n      {{#body.no-data}}\n        No users found.\n      {{/body.no-data}}\n    {{/if}}\n  {{/t.body}}\n\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease note that each of these contextual components have a wide array of options so it is advised to look\nthrough the documentation."
         }
     },
     "classes": {
@@ -155,12 +184,12 @@
             "module": "Classes",
             "namespace": "",
             "file": "addon/classes/Row.js",
-            "line": 32,
-            "extends": "Ember.Object",
+            "line": 26,
+            "extends": "Ember.ObjectProxy",
             "is_constructor": 1,
             "params": [
                 {
-                    "name": "data",
+                    "name": "content",
                     "description": "",
                     "type": "Object"
                 }
@@ -193,9 +222,9 @@
                 }
             ]
         },
-        "Light-Table": {
-            "name": "Light-Table",
-            "shortname": "Light-Table",
+        "Light Table": {
+            "name": "Light Table",
+            "shortname": "Light Table",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -204,11 +233,80 @@
             "module": "Components",
             "namespace": "",
             "file": "addon/components/light-table.js",
-            "line": 15,
-            "extends": "Ember.Component",
+            "line": 16,
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../Classes/Head.html), [Body](../Classes/Body.html), and [Foot](../Classes/Foot.html) components\nfor more details on all possible options and actions.",
+            "mainName": "Components",
+            "tag": "main",
+            "itemtype": "main",
+            "_main": true,
             "uses": [
                 "TableScrollMixin"
             ]
+        },
+        "Body": {
+            "name": "Body",
+            "shortname": "Body",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Components",
+            "namespace": "",
+            "file": "addon/components/lt-body.js",
+            "line": 13,
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{#t.body multiSelect=true onRowClick=(action 'rowClicked')}}\n    {{#body.expanded-row as |row|}}\n      Hello <b>{{row.firstName}}</b>\n    {{/body.expanded-row}}\n\n    {{#if isLoading}}\n      {{#body.loader}}\n        Loading...\n      {{/body.loader}}\n    {{/if}}\n\n    {{#if table.isEmpty)}}\n      {{#body.no-data}}\n        No users found.\n      {{/body.no-data}}\n    {{/if}}\n  {{/t.body}}\n{{/light-table}}\n```"
+        },
+        "Foot": {
+            "name": "Foot",
+            "shortname": "Foot",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Components",
+            "namespace": "",
+            "file": "addon/components/lt-foot.js",
+            "line": 9,
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.foot onColumnClick=(action 'sortByColumn')}}\n{{/light-table}}\n```\nIf you want to define your own tfoot, just declare the contextual component in a block.\n\n```hbs\n{{#light-table table as |t|}}\n  {{#t.foot onColumnClick=(action 'sortByColumn') as |columns table|}}\n    {{#each groups as |group|}}\n      {{!-- ... --}}\n    {{/each}}\n  {{/t.foot}}\n{{/light-table}}\n```\n\nwill be empty",
+            "uses": [
+                "TableColumnMixin"
+            ]
+        },
+        "Head": {
+            "name": "Head",
+            "shortname": "Head",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Components",
+            "namespace": "",
+            "file": "addon/components/lt-head.js",
+            "line": 9,
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head onColumnClick=(action 'sortByColumn')}}\n{{/light-table}}\n```\n\nIf you want to define your own thead, just declare the contextual component in a block.\n\n```hbs\n{{#light-table table as |t|}}\n  {{#t.head onColumnClick=(action 'sortByColumn') as |groups subColumn table|}}\n    {{#each groups as |group|}}\n      {{!-- ... --}}\n    {{/each}}\n  {{/t.head}}\n{{/light-table}}\n```\n\nIf you dont have grouped columns, the yielded `groups` will be an array of all visibile columns and `subColumns`\nwill be empty",
+            "uses": [
+                "TableColumnMixin"
+            ]
+        },
+        "TableColumnMixin": {
+            "name": "TableColumnMixin",
+            "shortname": "TableColumnMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "Foot",
+                "Head"
+            ],
+            "module": "Components",
+            "namespace": "",
+            "file": "addon/mixins/table-column.js",
+            "line": 8,
+            "extends": "Ember.Mixin"
         },
         "TableScrollMixin": {
             "name": "TableScrollMixin",
@@ -218,7 +316,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [
-                "Light-Table"
+                "Light Table"
             ],
             "module": "Components",
             "namespace": "",
@@ -373,15 +471,6 @@
             "file": "addon/classes/Row.js",
             "line": 12,
             "itemtype": "property",
-            "name": "data",
-            "type": "{Object}",
-            "class": "Row",
-            "module": "Classes"
-        },
-        {
-            "file": "addon/classes/Row.js",
-            "line": 18,
-            "itemtype": "property",
             "name": "expanded",
             "type": "{Boolean}",
             "default": "false",
@@ -390,7 +479,7 @@
         },
         {
             "file": "addon/classes/Row.js",
-            "line": 25,
+            "line": 19,
             "itemtype": "property",
             "name": "selected",
             "type": "{Boolean}",
@@ -476,7 +565,7 @@
             "file": "addon/classes/Table.js",
             "line": 72,
             "itemtype": "property",
-            "name": "visibleColumns",
+            "name": "visibleColumnGroups",
             "type": "{Ember.Array}",
             "class": "Table",
             "module": "Classes"
@@ -726,13 +815,13 @@
         {
             "file": "addon/classes/Table.js",
             "line": 261,
-            "description": "Create a Row object with the given data",
+            "description": "Create a Row object with the given content",
             "itemtype": "method",
             "name": "createRow",
             "static": 1,
             "params": [
                 {
-                    "name": "data",
+                    "name": "content",
                     "description": "",
                     "type": "Object"
                 }
@@ -747,13 +836,13 @@
         {
             "file": "addon/classes/Table.js",
             "line": 272,
-            "description": "Create a collection of Row objects with the given datum",
+            "description": "Create a collection of Row objects with the given collection",
             "itemtype": "method",
             "name": "createRows",
             "static": 1,
             "params": [
                 {
-                    "name": "datum",
+                    "name": "rows",
                     "description": "",
                     "type": "Array"
                 }
@@ -789,7 +878,7 @@
         {
             "file": "addon/classes/Table.js",
             "line": 294,
-            "description": "Create a collection of Column objects with the given options",
+            "description": "Create a collection of Column objects with the given collection",
             "itemtype": "method",
             "name": "createColumns",
             "static": 1,
@@ -809,128 +898,222 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 26,
+            "line": 38,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
-            "class": "Light-Table",
+            "class": "Light Table",
             "module": "Components"
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 32,
+            "line": 44,
+            "description": "This is used to propate custom user defined actions to custom cell and header components.\nAs an example, lets say I have a table with a column defined with `cellComponent: 'delete-user'`\n\n```hbs\n{{#light-table table tableActions=(hash\n  deleteUser=(action 'deleteUser')\n ) as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nNow in the `delete-user` component, we can access that `deleteUser` action and pass it the\nrow object which will bubble all the way to where you defined that action.\n\n```hbs\n<button {{action tableActions.deleteUser row}}>Delete Me</button>\n```",
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
-            "class": "Light-Table",
+            "class": "Light Table",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/light-table.js",
+            "line": 77,
+            "description": "Action to be called when user reached the bottom of the scroll container",
+            "itemtype": "method",
+            "name": "onScrolledToBottom",
+            "class": "Light Table",
             "module": "Components"
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 15,
+            "line": 45,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
-            "class": "TableScrollMixin",
+            "class": "Body",
             "module": "Components"
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 21,
+            "line": 51,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
-            "class": "TableScrollMixin",
+            "class": "Body",
             "module": "Components"
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 27,
+            "line": 57,
             "itemtype": "property",
             "name": "canSelect",
             "type": "{Boolean}",
             "default": "true",
-            "class": "TableScrollMixin",
+            "class": "Body",
             "module": "Components"
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 34,
+            "line": 64,
             "itemtype": "property",
             "name": "canExpand",
             "type": "{Boolean}",
             "default": "false",
-            "class": "TableScrollMixin",
+            "class": "Body",
             "module": "Components"
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 41,
+            "line": 71,
             "itemtype": "property",
             "name": "multiSelect",
             "type": "{Boolean}",
             "default": "true",
-            "class": "TableScrollMixin",
+            "class": "Body",
             "module": "Components"
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 48,
+            "line": 78,
             "itemtype": "property",
             "name": "multiRowExpansion",
             "type": "{Boolean}",
             "default": "true",
-            "class": "TableScrollMixin",
+            "class": "Body",
             "module": "Components"
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 55,
+            "line": 85,
             "itemtype": "property",
             "name": "expandOnClick",
             "type": "{Boolean}",
             "default": "true",
-            "class": "TableScrollMixin",
+            "class": "Body",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 112,
+            "description": "onRowClick action. Handles selection, and row expansion.",
+            "itemtype": "method",
+            "name": "onRowClick",
+            "params": [
+                {
+                    "name": "row",
+                    "description": "The row that was clicked",
+                    "type": "Row"
+                },
+                {
+                    "name": "event",
+                    "description": "The click event",
+                    "type": "Event"
+                }
+            ],
+            "class": "Body",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 153,
+            "description": "onRowDoubleClick action.",
+            "itemtype": "method",
+            "name": "onRowDoubleClick",
+            "params": [
+                {
+                    "name": "row",
+                    "description": "The row that was clicked",
+                    "type": "Row"
+                },
+                {
+                    "name": "event",
+                    "description": "The click event",
+                    "type": "Event"
+                }
+            ],
+            "class": "Body",
             "module": "Components"
         },
         {
             "file": "addon/mixins/table-column.js",
-            "line": 9,
+            "line": 14,
             "itemtype": "property",
             "name": "sortOnClick",
             "type": "{Boolean}",
             "default": "true",
-            "class": "TableScrollMixin",
+            "class": "TableColumnMixin",
             "module": "Components"
         },
         {
             "file": "addon/mixins/table-column.js",
-            "line": 16,
+            "line": 21,
             "itemtype": "property",
             "name": "multiColumnSort",
             "type": "{Boolean}",
             "default": "false",
-            "class": "TableScrollMixin",
+            "class": "TableColumnMixin",
             "module": "Components"
         },
         {
             "file": "addon/mixins/table-column.js",
-            "line": 23,
+            "line": 28,
             "itemtype": "property",
             "name": "iconAscending",
             "type": "{String}",
             "default": "''",
-            "class": "TableScrollMixin",
+            "class": "TableColumnMixin",
             "module": "Components"
         },
         {
             "file": "addon/mixins/table-column.js",
-            "line": 30,
+            "line": 35,
             "itemtype": "property",
             "name": "iconDescending",
             "type": "{String}",
             "default": "''",
-            "class": "TableScrollMixin",
+            "class": "TableColumnMixin",
+            "module": "Components"
+        },
+        {
+            "file": "addon/mixins/table-column.js",
+            "line": 51,
+            "description": "onColumnClick action. Handles column sorting.",
+            "itemtype": "method",
+            "name": "onColumnClick",
+            "params": [
+                {
+                    "name": "column",
+                    "description": "The column that was clicked",
+                    "type": "Column"
+                },
+                {
+                    "name": "event",
+                    "description": "The click event",
+                    "type": "Event"
+                }
+            ],
+            "class": "TableColumnMixin",
+            "module": "Components"
+        },
+        {
+            "file": "addon/mixins/table-column.js",
+            "line": 71,
+            "description": "onColumnClick action.",
+            "itemtype": "method",
+            "name": "onColumnDoubleClick",
+            "params": [
+                {
+                    "name": "column",
+                    "description": "The column that was clicked",
+                    "type": "Column"
+                },
+                {
+                    "name": "event",
+                    "description": "The click event",
+                    "type": "Event"
+                }
+            ],
+            "class": "TableColumnMixin",
             "module": "Components"
         },
         {

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>TableScrollMixin - Ember Light Table</title>
+    <title>TableColumnMixin - Ember Light Table</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -43,8 +43,8 @@
                     <li ><a  href="../classes/Light Table.html">Light Table</a></li>
                     <li ><a  href="../classes/Row.html">Row</a></li>
                     <li ><a  href="../classes/Table.html">Table</a></li>
-                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
-                    <li  class="active"><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
+                    <li  class="active"><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
+                    <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
@@ -81,7 +81,7 @@
                         </form>
                     
 <div class="page-header">
-    <h1>TableScrollMixin</h1>
+    <h1>TableColumnMixin</h1>
 </div>
 <div class="well well-small">
 
@@ -93,7 +93,7 @@
 
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_mixins_table-scroll.js.html#l8"><code>addon&#x2F;mixins&#x2F;table-scroll.js:8</code></a>
+            Defined in: <a href="../files/addon_mixins_table-column.js.html#l8"><code>addon&#x2F;mixins&#x2F;table-column.js:8</code></a>
         </div>
 </div>
 
@@ -115,6 +115,14 @@
                                 <a href="#method_detect">detect</a>
 
                             </li>
+                            <li class="index-item method">
+                                <a href="#method_onColumnClick">onColumnClick</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_onColumnDoubleClick">onColumnDoubleClick</a>
+
+                            </li>
                             <li class="index-item method private inherited">
                                 <a href="#method_reopen">reopen</a>
 
@@ -127,15 +135,19 @@
 
                     <ul class="index-list properties extends">
                             <li class="index-item property">
-                                <a href="#property_scrollBuffer">scrollBuffer</a>
+                                <a href="#property_iconAscending">iconAscending</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_scrollContainer">scrollContainer</a>
+                                <a href="#property_iconDescending">iconDescending</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_touchMoveContainer">touchMoveContainer</a>
+                                <a href="#property_multiColumnSort">multiColumnSort</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_sortOnClick">sortOnClick</a>
 
                             </li>
                     </ul>
@@ -261,6 +273,130 @@
 		</div>
 
 </div>
+<div id="method_onColumnClick" class="method item">
+	<span class="method-signature">
+	<span class="name"><code>onColumnClick</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>column</code>
+				</li>
+				<li class="arg">
+						<code>event</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+	</span>
+
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/addon_mixins_table-column.js.html#l51"><code>addon&#x2F;mixins&#x2F;table-column.js:51</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>onColumnClick action. Handles column sorting.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">column</code>
+						<span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
+
+
+					<div class="param-description"><p>The column that was clicked</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">event</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" class="crosslink external" target="_blank">Event</a></span>
+
+
+					<div class="param-description"><p>The click event</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+
+</div>
+<div id="method_onColumnDoubleClick" class="method item">
+	<span class="method-signature">
+	<span class="name"><code>onColumnDoubleClick</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>column</code>
+				</li>
+				<li class="arg">
+						<code>event</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+	</span>
+
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/addon_mixins_table-column.js.html#l71"><code>addon&#x2F;mixins&#x2F;table-column.js:71</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>onColumnClick action.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">column</code>
+						<span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
+
+
+					<div class="param-description"><p>The column that was clicked</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">event</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" class="crosslink external" target="_blank">Event</a></span>
+
+
+					<div class="param-description"><p>The click event</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+
+</div>
 <div id="method_reopen" class="method item private inherited">
 	<span class="method-signature">
 	<span class="name"><code>reopen</code></span>
@@ -315,9 +451,9 @@
             <div id="properties" class="page-section">
                 <h2 class="off-left">Properties</h2>
                 <div class="item-list">
-<div id="property_scrollBuffer" class="property item">
-    <h3 class="name"><code>scrollBuffer</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+<div id="property_iconAscending" class="property item">
+    <h3 class="name"><code>iconAscending</code></h3>
+    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
 
 
 
@@ -326,7 +462,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_mixins_table-scroll.js.html#l13"><code>addon&#x2F;mixins&#x2F;table-scroll.js:13</code></a>
+        <a href="../files/addon_mixins_table-column.js.html#l28"><code>addon&#x2F;mixins&#x2F;table-column.js:28</code></a>
         </p>
 
 
@@ -336,13 +472,13 @@
         
     </div>
 
-        <p><br><strong>Default:</strong> 500</p>
+        <p><br><strong>Default:</strong> &#x27;&#x27;</p>
 
 
 </div>
-<div id="property_scrollContainer" class="property item">
-    <h3 class="name"><code>scrollContainer</code></h3>
-    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+<div id="property_iconDescending" class="property item">
+    <h3 class="name"><code>iconDescending</code></h3>
+    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
 
 
 
@@ -351,7 +487,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_mixins_table-scroll.js.html#l20"><code>addon&#x2F;mixins&#x2F;table-scroll.js:20</code></a>
+        <a href="../files/addon_mixins_table-column.js.html#l35"><code>addon&#x2F;mixins&#x2F;table-column.js:35</code></a>
         </p>
 
 
@@ -361,13 +497,13 @@
         
     </div>
 
-        <p><br><strong>Default:</strong> window</p>
+        <p><br><strong>Default:</strong> &#x27;&#x27;</p>
 
 
 </div>
-<div id="property_touchMoveContainer" class="property item">
-    <h3 class="name"><code>touchMoveContainer</code></h3>
-    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+<div id="property_multiColumnSort" class="property item">
+    <h3 class="name"><code>multiColumnSort</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
 
 
@@ -376,7 +512,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_mixins_table-scroll.js.html#l27"><code>addon&#x2F;mixins&#x2F;table-scroll.js:27</code></a>
+        <a href="../files/addon_mixins_table-column.js.html#l21"><code>addon&#x2F;mixins&#x2F;table-column.js:21</code></a>
         </p>
 
 
@@ -386,7 +522,32 @@
         
     </div>
 
-        <p><br><strong>Default:</strong> document</p>
+        <p><br><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_sortOnClick" class="property item">
+    <h3 class="name"><code>sortOnClick</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_mixins_table-column.js.html#l14"><code>addon&#x2F;mixins&#x2F;table-column.js:14</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <p><br><strong>Default:</strong> true</p>
 
 
 </div>

@@ -36,16 +36,20 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Body.html">Body</a></li>
                     <li ><a  href="../classes/Column.html">Column</a></li>
-                    <li ><a  href="../classes/Light-Table.html">Light-Table</a></li>
+                    <li ><a  href="../classes/Foot.html">Foot</a></li>
+                    <li ><a  href="../classes/Head.html">Head</a></li>
+                    <li ><a  href="../classes/Light Table.html">Light Table</a></li>
                     <li ><a  href="../classes/Row.html">Row</a></li>
                     <li  class="active"><a  href="../classes/Table.html">Table</a></li>
+                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
                     <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.555bdbe5</p>
+                <p class="version pull-right">0.0.0.cc7907d3</p>
               </div>
             </div>
         </div>
@@ -394,7 +398,7 @@
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_visibleColumns">visibleColumns</a>
+                                <a href="#property_visibleColumnGroups">visibleColumnGroups</a>
 
                             </li>
                             <li class="index-item property">
@@ -1017,7 +1021,7 @@ generated lazily.</div>
 
 	</div>
 
-	<div class="description"><p>Create a collection of Column objects with the given options</p>
+	<div class="description"><p>Create a collection of Column objects with the given collection</p>
 </div>
 
 		<div class="params">
@@ -1050,7 +1054,7 @@ generated lazily.</div>
 		<div class="args">
 			<span class="paren">(</span><ul class="args-list inline commas">
 				<li class="arg">
-						<code>data</code>
+						<code>content</code>
 				</li>
 			</ul><span class="paren">)</span>
 		</div>
@@ -1076,7 +1080,7 @@ generated lazily.</div>
 
 	</div>
 
-	<div class="description"><p>Create a Row object with the given data</p>
+	<div class="description"><p>Create a Row object with the given content</p>
 </div>
 
 		<div class="params">
@@ -1084,7 +1088,7 @@ generated lazily.</div>
 
 			<ul class="params-list">
 				<li class="param">
-						<code class="param-name">data</code>
+						<code class="param-name">content</code>
 						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
@@ -1109,7 +1113,7 @@ generated lazily.</div>
 		<div class="args">
 			<span class="paren">(</span><ul class="args-list inline commas">
 				<li class="arg">
-						<code>datum</code>
+						<code>rows</code>
 				</li>
 			</ul><span class="paren">)</span>
 		</div>
@@ -1135,7 +1139,7 @@ generated lazily.</div>
 
 	</div>
 
-	<div class="description"><p>Create a collection of Row objects with the given datum</p>
+	<div class="description"><p>Create a collection of Row objects with the given collection</p>
 </div>
 
 		<div class="params">
@@ -1143,7 +1147,7 @@ generated lazily.</div>
 
 			<ul class="params-list">
 				<li class="param">
-						<code class="param-name">datum</code>
+						<code class="param-name">rows</code>
 						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
 
 
@@ -3319,8 +3323,8 @@ the <code>isDestroyed</code> flag is set.
 
 
 </div>
-<div id="property_visibleColumns" class="property item">
-    <h3 class="name"><code>visibleColumns</code></h3>
+<div id="property_visibleColumnGroups" class="property item">
+    <h3 class="name"><code>visibleColumnGroups</code></h3>
     <span class="type"><a href="http://emberjs.com/api/classes/Ember.Array.html" class="crosslink external" target="_blank">Ember.Array</a></span>
 
 

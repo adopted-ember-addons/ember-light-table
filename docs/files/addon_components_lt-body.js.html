@@ -36,16 +36,20 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Body.html">Body</a></li>
                     <li ><a  href="../classes/Column.html">Column</a></li>
-                    <li ><a  href="../classes/Light-Table.html">Light-Table</a></li>
+                    <li ><a  href="../classes/Foot.html">Foot</a></li>
+                    <li ><a  href="../classes/Head.html">Head</a></li>
+                    <li ><a  href="../classes/Light Table.html">Light Table</a></li>
                     <li ><a  href="../classes/Row.html">Row</a></li>
                     <li ><a  href="../classes/Table.html">Table</a></li>
+                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
                     <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.555bdbe5</p>
+                <p class="version pull-right">0.0.0.cc7907d3</p>
               </div>
             </div>
         </div>
@@ -89,6 +93,36 @@ import callAction from &#x27;../utils/call-action&#x27;;
 const {
   computed
 } = Ember;
+
+/**
+ * @module Components
+ */
+
+/**
+ * &#x60;&#x60;&#x60;hbs
+ * {{#light-table table as |t|}}
+ *   {{#t.body multiSelect=true onRowClick=(action &#x27;rowClicked&#x27;)}}
+ *     {{#body.expanded-row as |row|}}
+ *       Hello &lt;b&gt;{{row.firstName}}&lt;/b&gt;
+ *     {{/body.expanded-row}}
+ *
+ *     {{#if isLoading}}
+ *       {{#body.loader}}
+ *         Loading...
+ *       {{/body.loader}}
+ *     {{/if}}
+ *
+ *     {{#if table.isEmpty)}}
+ *       {{#body.no-data}}
+ *         No users found.
+ *       {{/body.no-data}}
+ *     {{/if}}
+ *   {{/t.body}}
+ * {{/light-table}}
+ * &#x60;&#x60;&#x60;
+ *
+ * @class Body
+ */
 
 export default Ember.Component.extend({
   layout,
@@ -163,6 +197,12 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    /**
+     * onRowClick action. Handles selection, and row expansion.
+     * @method onRowClick
+     * @param  {Row}   row The row that was clicked
+     * @param  {Event}   event   The click event
+     */
     onRowClick(row, e) {
       let rows = this.get(&#x27;table.rows&#x27;);
       let multiSelect = this.get(&#x27;multiSelect&#x27;);
@@ -198,6 +238,12 @@ export default Ember.Component.extend({
       callAction.call(this, &#x27;onRowClick&#x27;, ...arguments);
     },
 
+    /**
+     * onRowDoubleClick action.
+     * @method onRowDoubleClick
+     * @param  {Row}   row The row that was clicked
+     * @param  {Event}   event   The click event
+     */
     onRowDoubleClick( /* row */ ) {
       callAction.call(this, &#x27;onRowDoubleClick&#x27;, ...arguments);
     }

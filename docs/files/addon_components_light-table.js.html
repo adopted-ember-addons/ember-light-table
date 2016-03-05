@@ -36,16 +36,20 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Body.html">Body</a></li>
                     <li ><a  href="../classes/Column.html">Column</a></li>
-                    <li ><a  href="../classes/Light-Table.html">Light-Table</a></li>
+                    <li ><a  href="../classes/Foot.html">Foot</a></li>
+                    <li ><a  href="../classes/Head.html">Head</a></li>
+                    <li ><a  href="../classes/Light Table.html">Light Table</a></li>
                     <li ><a  href="../classes/Row.html">Row</a></li>
                     <li ><a  href="../classes/Table.html">Table</a></li>
+                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
                     <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.555bdbe5</p>
+                <p class="version pull-right">0.0.0.cc7907d3</p>
               </div>
             </div>
         </div>
@@ -94,11 +98,23 @@ const {
 
 /**
  * @module Components
+ * @main ligh-table
  */
 
 /**
- * @class Light-Table
- * @extends Ember.Component
+ * &#x60;&#x60;&#x60;hbs
+ * {{#light-table table as |t|}}
+ *   {{t.head}}
+ *   {{t.body}}
+ *   {{t.foot}}
+ * {{/light-table}}
+ * &#x60;&#x60;&#x60;
+ *
+ * Please see the documentation for the [Head](../Classes/Head.html), [Body](../Classes/Body.html), and [Foot](../Classes/Foot.html) components
+ * for more details on all possible options and actions.
+ *
+ * @class Light Table
+ * @main Components
  * @uses TableScrollMixin
  */
 
@@ -114,17 +130,42 @@ const LightTable =  Ember.Component.extend(TableScrollMixin, {
   table: null,
 
   /**
+   * This is used to propate custom user defined actions to custom cell and header components.
+   * As an example, lets say I have a table with a column defined with &#x60;cellComponent: &#x27;delete-user&#x27;&#x60;
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * {{#light-table table tableActions=(hash
+   *   deleteUser=(action &#x27;deleteUser&#x27;)
+   *  ) as |t|}}
+   *   {{t.head}}
+   *   {{t.body}}
+   *   {{t.foot}}
+   * {{/light-table}}
+   * &#x60;&#x60;&#x60;
+   *
+   * Now in the &#x60;delete-user&#x60; component, we can access that &#x60;deleteUser&#x60; action and pass it the
+   * row object which will bubble all the way to where you defined that action.
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * &lt;button {{action tableActions.deleteUser row}}&gt;Delete Me&lt;/button&gt;
+   * &#x60;&#x60;&#x60;
+   *
+   *
    * @property tableActions
    * @type {Object}
    */
   tableActions: null,
 
-  didInitAttrs() {
+  init() {
     this._super(...arguments);
     assert(&#x60;[ember-light-table] table must be an instance of Table&#x60;, this.get(&#x27;table&#x27;) instanceof Table);
   },
 
   actions: {
+    /**
+     * Action to be called when user reached the bottom of the scroll container
+     * @method onScrolledToBottom
+     */
     onScrolledToBottom() {
       callAction.call(this, &#x27;onScrolledToBottom&#x27;, ...arguments);
     }

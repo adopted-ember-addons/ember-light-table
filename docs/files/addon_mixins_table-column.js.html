@@ -36,16 +36,20 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Body.html">Body</a></li>
                     <li ><a  href="../classes/Column.html">Column</a></li>
-                    <li ><a  href="../classes/Light-Table.html">Light-Table</a></li>
+                    <li ><a  href="../classes/Foot.html">Foot</a></li>
+                    <li ><a  href="../classes/Head.html">Head</a></li>
+                    <li ><a  href="../classes/Light Table.html">Light Table</a></li>
                     <li ><a  href="../classes/Row.html">Row</a></li>
                     <li ><a  href="../classes/Table.html">Table</a></li>
+                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
                     <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.555bdbe5</p>
+                <p class="version pull-right">0.0.0.cc7907d3</p>
               </div>
             </div>
         </div>
@@ -89,6 +93,11 @@ const {
   computed
 } = Ember;
 
+/**
+ * @class TableColumnMixin
+ * @extends Ember.Mixin
+ */
+
 export default Ember.Mixin.create({
   /**
    * @property sortOnClick
@@ -127,6 +136,12 @@ export default Ember.Mixin.create({
   }),
 
   actions: {
+    /**
+     * onColumnClick action. Handles column sorting.
+     * @method onColumnClick
+     * @param  {Column}   column The column that was clicked
+     * @param  {Event}   event   The click event
+     */
     onColumnClick(column) {
       if(column.sortable &amp;&amp; this.get(&#x27;sortOnClick&#x27;)) {
         if(column.sorted) {
@@ -141,6 +156,12 @@ export default Ember.Mixin.create({
       callAction.call(this, &#x27;onColumnClick&#x27;, ...arguments);
     },
 
+    /**
+     * onColumnClick action.
+     * @method onColumnDoubleClick
+     * @param  {Column}   column The column that was clicked
+     * @param  {Event}   event   The click event
+     */
     onColumnDoubleClick(/* column */) {
       callAction.call(this, &#x27;onColumnDoubleClick&#x27;, ...arguments);
     },

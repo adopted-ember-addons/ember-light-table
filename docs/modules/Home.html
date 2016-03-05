@@ -36,16 +36,20 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Body.html">Body</a></li>
                     <li ><a  href="../classes/Column.html">Column</a></li>
-                    <li ><a  href="../classes/Light-Table.html">Light-Table</a></li>
+                    <li ><a  href="../classes/Foot.html">Foot</a></li>
+                    <li ><a  href="../classes/Head.html">Head</a></li>
+                    <li ><a  href="../classes/Light Table.html">Light Table</a></li>
                     <li ><a  href="../classes/Row.html">Row</a></li>
                     <li ><a  href="../classes/Table.html">Table</a></li>
+                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
                     <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.555bdbe5</p>
+                <p class="version pull-right">0.0.0.cc7907d3</p>
               </div>
             </div>
         </div>
@@ -91,7 +95,106 @@
 
 
 <div class="moduledesc page-section">
-    
+    <p>A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.</p>
+<h2>Features</h2>
+<ul>
+<li>Custom component based column headers and cells</li>
+<li>Infinite scroll support</li>
+<li>Select &amp; Multi-select</li>
+<li>Grouped columns</li>
+<li>Expandable rows</li>
+<li>Easy table manipulation</li>
+<li>Easy override to table header and footer</li>
+<li>Contextual component for header, body, and footer, as well as loading, no data, and expanded row</li>
+</ul>
+<h2>Installation</h2>
+<pre class="code prettyprint"><code class="language-shell">ember install ember-light-table
+</code></pre>
+<h2>Looking for help?</h2>
+<p>If it is a bug <a href="http://github.com/offirgolan/ember-light-table/issues">please open an issue on GitHub</a>.</p>
+<h2>Usage</h2>
+<p>There are two parts to this addon. The first is the <a href="../classes/Table.html">Table</a> which you create with column definitions and rows, and the second is the component declaration.</p>
+<h3>Table Definition</h3>
+<p>The <code>Table</code> constructor accepts an array of <code>Columns</code> or column options and an array of rows.</p>
+<pre class="code prettyprint"><code class="language-javascript">import Table from 'ember-light-table';
+const table = new Table(columns, rows);
+</code></pre>
+<p>Here is a more real-word example</p>
+<pre class="code prettyprint"><code class="language-javascript">// components/my-table.js
+import Ember from 'ember';
+import Table from 'ember-light-table';
+
+const computed = Ember.computed;
+
+export default Ember.Component.extend({
+  model: null,
+  table: null,
+
+  columns: computed(function() {
+    return [{
+      label: 'Avatar',
+      valuePath: 'avatar',
+      width: '60px',
+      sortable: false,
+      cellComponent: 'user-avatar'
+    }, {
+      label: 'First Name',
+      valuePath: 'firstName',
+      width: '150px'
+    }, {
+      label: 'Last Name',
+      valuePath: 'lastName',
+      width: '150px'
+    }, {
+      label: 'Address',
+      valuePath: 'address'
+    }, {
+      label: 'State',
+      valuePath: 'state'
+    }, {
+      label: 'Country',
+      valuePath: 'country'
+    }];
+  }),
+
+  init() {
+    this._super(...arguments);
+    this.set('table', new Table(this.get('columns'), this.get('model').toArray()));
+  }
+});
+</code></pre>
+<p>For a list of possible column options, please
+<a href="../classes/Column.html">checkout out the docs</a>.</p>
+<h3>Component Declaration</h3>
+<p>Now that we have our <code>table</code>, we can declare our component in our template.</p>
+<pre class="code prettyprint"><code class="language-hbs">// templates/components/my-table.hbs
+{{#light-table table as |t|}}
+  {{t.head}}
+
+  {{#t.body as |body|}}
+    {{#body.expanded-row as |row|}}
+      Hello &lt;b&gt;{{row.firstName}}&lt;/b&gt;
+    {{/body.expanded-row}}
+
+    {{#if isLoading}}
+      {{#body.loader}}
+        Loading...
+      {{/body.loader}}
+    {{/if}}
+
+    {{#if table.isEmpty)}}
+      {{#body.no-data}}
+        No users found.
+      {{/body.no-data}}
+    {{/if}}
+  {{/t.body}}
+
+  {{t.foot}}
+{{/light-table}}
+</code></pre>
+<p>Please note that each of these contextual components have a wide array of options so it is advised to look
+through the documentation.</p>
+
 </div>
 
 

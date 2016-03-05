@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Ember Light Table</title>
+    <title>addon/components/lt-foot.js - Ember Light Table</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
-    <link rel="stylesheet" href="./assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="./assets/css/main.css" id="site_styles">
-    <link rel="stylesheet" href="./assets/css/custom.css">
-    <link rel="stylesheet" href="./assets/vendor/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="./assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -17,7 +17,7 @@
             <div id="sidebar">
               <div class="header">
                 <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-                  <a href="./">Ember Light Table</a>
+                  <a href="../">Ember Light Table</a>
                 </h1>
                 <form class="navbar-form">
                     <input type="search" class="search-query" placeholder="Search classes/modules...">
@@ -26,25 +26,25 @@
               <ul class="main-nav">
                 <li class="section">Modules</li>
                    <li  >
-                     <a href="./modules/Classes.html">Classes</a>
+                     <a href="../modules/Classes.html">Classes</a>
                    </li>
                    <li  >
-                     <a href="./modules/Components.html">Components</a>
+                     <a href="../modules/Components.html">Components</a>
                    </li>
                    <li  >
-                     <a href="./modules/Home.html">Home</a>
+                     <a href="../modules/Home.html">Home</a>
                    </li>
             
                 <li class="section">Classes</li>
-                    <li ><a  href="./classes/Body.html">Body</a></li>
-                    <li ><a  href="./classes/Column.html">Column</a></li>
-                    <li ><a  href="./classes/Foot.html">Foot</a></li>
-                    <li ><a  href="./classes/Head.html">Head</a></li>
-                    <li ><a  href="./classes/Light Table.html">Light Table</a></li>
-                    <li ><a  href="./classes/Row.html">Row</a></li>
-                    <li ><a  href="./classes/Table.html">Table</a></li>
-                    <li ><a  href="./classes/TableColumnMixin.html">TableColumnMixin</a></li>
-                    <li ><a  href="./classes/TableScrollMixin.html">TableScrollMixin</a></li>
+                    <li ><a  href="../classes/Body.html">Body</a></li>
+                    <li ><a  href="../classes/Column.html">Column</a></li>
+                    <li ><a  href="../classes/Foot.html">Foot</a></li>
+                    <li ><a  href="../classes/Head.html">Head</a></li>
+                    <li ><a  href="../classes/Light Table.html">Light Table</a></li>
+                    <li ><a  href="../classes/Row.html">Row</a></li>
+                    <li ><a  href="../classes/Table.html">Table</a></li>
+                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
+                    <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
@@ -80,24 +80,61 @@
                     
                         </form>
                     
-    <div class="apidocs">
-        <div id="docs-main" class="content">
-            <script type="text/javascript">
-              window.location.replace('modules/Home.html');
-            </script>
-        </div>
-    </div>
+<div class="page-header">
+    <h1>addon/components/lt-foot.js <small>File</small></h1>
+</div>
 
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../templates/components/lt-foot&#x27;;
+import TableColumnMixin from &#x27;../mixins/table-column&#x27;;
 
+/**
+ * @module Components
+ */
+
+/**
+ * &#x60;&#x60;&#x60;hbs
+ * {{#light-table table as |t|}}
+ *   {{t.foot onColumnClick=(action &#x27;sortByColumn&#x27;)}}
+ * {{/light-table}}
+ * &#x60;&#x60;&#x60;
+ * If you want to define your own tfoot, just declare the contextual component in a block.
+ *
+ * &#x60;&#x60;&#x60;hbs
+ * {{#light-table table as |t|}}
+ *   {{#t.foot onColumnClick=(action &#x27;sortByColumn&#x27;) as |columns table|}}
+ *     {{#each groups as |group|}}
+ *       {{!-- ... --}}
+ *     {{/each}}
+ *   {{/t.foot}}
+ * {{/light-table}}
+ * &#x60;&#x60;&#x60;
+ *
+ * will be empty
+ * @class Foot
+ * @uses TableColumnMixin
+ */
+
+export default Ember.Component.extend(TableColumnMixin, {
+  layout,
+  tagName: &#x27;tfoot&#x27;,
+  classNames: [&#x27;lt-foot&#x27;],
+  table: null
+});
+
+    </pre>
+</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="./assets/vendor/prettify/prettify-min.js"></script>
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
     <script>prettyPrint();</script>
-    <script src="./assets/vendor/jquery/jquery-1.8.2.min.js"></script>
-    <script src="./assets/vendor/bootstrap/js/bootstrap.js"></script>
-    <script src="./assets/js/yuidoc-bootstrap.js"></script>
+    <script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../assets/js/yuidoc-bootstrap.js"></script>
 </body>
 </html>
