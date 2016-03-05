@@ -24,7 +24,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Components",
             "name": "Components",
-            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../Classes/Head.html), [Body](../Classes/Body.html), and [Foot](../Classes/Foot.html) components\nfor more details on all possible options and actions."
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../classes/Head.html), [Body](../classes/Body.html), and [Foot](../classes/Foot.html) components\nfor more details on all possible options and actions."
         },
         {
             "displayName": "Home",

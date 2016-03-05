@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "0.0.0.cc7907d3"
+        "version": "0.0.0.f4130461"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -134,7 +134,7 @@
             "tag": "main",
             "file": "addon/mixins/table-scroll.js",
             "line": 8,
-            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../Classes/Head.html), [Body](../Classes/Body.html), and [Foot](../Classes/Foot.html) components\nfor more details on all possible options and actions.",
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../classes/Head.html), [Body](../classes/Body.html), and [Foot](../classes/Foot.html) components\nfor more details on all possible options and actions.",
             "itemtype": "main"
         },
         "Home": {
@@ -234,7 +234,7 @@
             "namespace": "",
             "file": "addon/components/light-table.js",
             "line": 16,
-            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../Classes/Head.html), [Body](../Classes/Body.html), and [Foot](../Classes/Foot.html) components\nfor more details on all possible options and actions.",
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../classes/Head.html), [Body](../classes/Body.html), and [Foot](../classes/Foot.html) components\nfor more details on all possible options and actions.",
             "mainName": "Components",
             "tag": "main",
             "itemtype": "main",
