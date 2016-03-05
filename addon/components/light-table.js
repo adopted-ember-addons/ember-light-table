@@ -22,7 +22,11 @@ const {
  * {{/light-table}}
  * ```
  *
+ * Please see the documentation for the [Head](../Classes/Head.html), [Body](../Classes/Body.html), and [Foot](../Classes/Foot.html) components
+ * for more details on all possible options and actions.
+ *
  * @class Light Table
+ * @main Components
  * @uses TableScrollMixin
  */
 
@@ -38,6 +42,27 @@ const LightTable =  Ember.Component.extend(TableScrollMixin, {
   table: null,
 
   /**
+   * This is used to propate custom user defined actions to custom cell and header components.
+   * As an example, lets say I have a table with a column defined with `cellComponent: 'delete-user'`
+   *
+   * ```hbs
+   * {{#light-table table tableActions=(hash
+   *   deleteUser=(action 'deleteUser')
+   *  ) as |t|}}
+   *   {{t.head}}
+   *   {{t.body}}
+   *   {{t.foot}}
+   * {{/light-table}}
+   * ```
+   *
+   * Now in the `delete-user` component, we can access that `deleteUser` action and pass it the
+   * row object which will bubble all the way to where you defined that action.
+   *
+   * ```hbs
+   * <button {{action tableActions.deleteUser row}}>Delete Me</button>
+   * ```
+   *
+   *
    * @property tableActions
    * @type {Object}
    */

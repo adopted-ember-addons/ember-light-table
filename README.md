@@ -13,11 +13,11 @@ A lightweight contextual component based table addon that follows Ember's action
 ## Features 
 
 * Custom component based column headers and cells
-* Infinite scroll
+* Infinite scroll support
 * Select & Multi-select
 * Grouped columns
 * Expandable rows
-* Simple table manipulation
+* Easy table manipulation
 * Easy override to table header and footer
 * Contextual component for header, body, and footer, as well as loading, no data, and expanded row
 

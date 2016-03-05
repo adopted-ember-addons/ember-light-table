@@ -70,7 +70,7 @@ export default class Table extends Ember.Object.extend({
   visibleColumns: computed.filterBy('flattenedColumns', 'hidden', false).readOnly(),
 
   /**
-   * @property visibleColumns
+   * @property visibleColumnGroups
    * @type {Ember.Array}
    */
   visibleColumnGroups: computed('columns.@each.{hidden,isVisibleGroupColumn}', function() {
@@ -139,7 +139,7 @@ export default class Table extends Ember.Object.extend({
   addRow(row) {
     if (row instanceof Row) {
       this.rows.addObject(row);
-    } else if (isNone(this.rows.findBy('data', row))) {
+    } else if (isNone(this.rows.findBy('content', row))) {
       this.pushRow(row);
     }
   }
@@ -180,7 +180,7 @@ export default class Table extends Ember.Object.extend({
     if (row instanceof Row) {
       this.rows.removeObject(row);
     } else {
-      this.rows.removeObject(this.rows.findBy('data', row));
+      this.rows.removeObject(this.rows.findBy('content', row));
     }
   }
 
@@ -259,25 +259,25 @@ export default class Table extends Ember.Object.extend({
   }
 
   /**
-   * Create a Row object with the given data
+   * Create a Row object with the given content
    * @method createRow
    * @static
-   * @param  {Object}  data
+   * @param  {Object}  content
    * @return {Row}
    */
-  static createRow(data) {
-    return new Row(data);
+  static createRow(content) {
+    return new Row(content);
   }
 
   /**
-   * Create a collection of Row objects with the given datum
+   * Create a collection of Row objects with the given collection
    * @method createRows
    * @static
-   * @param  {Array}  datum
+   * @param  {Array}  rows
    * @return {Array}
    */
-  static createRows(datum = []) {
-    return makeArray(datum).map(d => new Row(d));
+  static createRows(rows = []) {
+    return makeArray(rows).map(r => new Row(r));
   }
 
   /**
@@ -292,7 +292,7 @@ export default class Table extends Ember.Object.extend({
   }
 
   /**
-   * Create a collection of Column objects with the given options
+   * Create a collection of Column objects with the given collection
    * @method createColumns
    * @static
    * @param  {Array}  columns

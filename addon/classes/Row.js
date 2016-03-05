@@ -6,15 +6,9 @@ import Ember from 'ember';
 
  /**
   * @class Row
-  * @extends Ember.Object
+  * @extends Ember.ObjectProxy
   */
-export default class Row extends Ember.Object.extend({
-  /**
-   * @property data
-   * @type {Object}
-   */
-  data: null,
-
+export default class Row extends Ember.ObjectProxy.extend({
   /**
    * @property expanded
    * @type {Boolean}
@@ -32,14 +26,14 @@ export default class Row extends Ember.Object.extend({
   /**
    * @class Row
    * @constructor
-   * @param {Object} data
+   * @param {Object} content
    */
-  constructor(data) {
-    if (data instanceof Row) {
-      return data;
+  constructor(content) {
+    if (content instanceof Row) {
+      return content;
     }
 
     super();
-    this.set('data', data);
+    this.set('content', content);
   }
 }

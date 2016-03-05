@@ -25,7 +25,7 @@ export default Ember.Component.extend({
   value: computed('row', 'column', function() {
     let valuePath = this.get('column.valuePath');
     if(valuePath) {
-      return get(this.get('row.data'), valuePath);
+      return get(this.get('row'), valuePath);
     }
   })
 });
