@@ -22,7 +22,7 @@ const {
  * {{/light-table}}
  * ```
  *
- * Please see the documentation for the [Head](../Classes/Head.html), [Body](../Classes/Body.html), and [Foot](../Classes/Foot.html) components
+ * Please see the documentation for the [Head](../classes/Head.html), [Body](../classes/Body.html), and [Foot](../classes/Foot.html) components
  * for more details on all possible options and actions.
  *
  * @class Light Table
