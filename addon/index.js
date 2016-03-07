@@ -2,8 +2,6 @@ import Table from './classes/Table';
 import Column from './classes/Column';
 import Row from './classes/Row';
 
-export default Table;
-
 /**
  * A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.
  *
@@ -123,4 +121,5 @@ export default Table;
  *
  * @module Home
  */
+export default Table;
 export { Table, Column, Row };

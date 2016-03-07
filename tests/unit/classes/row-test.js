@@ -3,8 +3,19 @@ import { module, test } from 'qunit';
 
 module('Unit | Classes | Row');
 
-// Replace this with your real tests.
-test('it works', function(assert) {
-  let subject = new Row();
-  assert.ok(subject);
+test('create row - default options', function(assert) {
+  let row = new Row();
+  assert.ok(row);
+  assert.equal(row.expanded, false);
+  assert.equal(row.selected, false);
+});
+
+test('create row - row instance', function(assert) {
+  let row = new Row({ foo: 'bar' });
+  let row2 = new Row(row);
+  assert.ok(row);
+  assert.ok(row2);
+  assert.equal(row, row2);
+  assert.equal(row.get('foo'), 'bar');
+  assert.equal(row2.get('foo'), 'bar');
 });

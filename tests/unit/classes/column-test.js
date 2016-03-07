@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 
 module('Unit | Classes | Column');
 
-test('create column - no options', function(assert) {
+test('create column - default options', function(assert) {
   let col = new Column();
   assert.ok(col);
   assert.equal(col.hidden, false);
@@ -12,7 +12,11 @@ test('create column - no options', function(assert) {
   assert.equal(col.sorted, false);
   assert.equal(col.sorted, false);
   assert.equal(col.label, '');
-  assert.equal(col.align, 'left');
+  assert.equal(col.subColumns, null);
+  assert.equal(col.headerComponent, null);
+  assert.equal(col.cellComponent, null);
+  assert.equal(col.valuePath, null);
+  assert.equal(col.width, null);
 });
 
 test('create column - column instance', function(assert) {
@@ -25,7 +29,7 @@ test('create column - column instance', function(assert) {
   assert.equal(col2.label, 'Name');
 });
 
-test('computed properties - isGroupColumn', function(assert) {
+test('CP - isGroupColumn', function(assert) {
   let col = new Column();
   assert.ok(col);
   assert.equal(col.subColumns, null);
@@ -36,3 +40,35 @@ test('computed properties - isGroupColumn', function(assert) {
   assert.equal(col.get('isGroupColumn'), true);
 });
 
+test('CP - isVisibleGroupColumn', function(assert) {
+  let col = new Column({
+    subColumns: [{}, {}]
+  });
+  assert.ok(col);
+  assert.equal(col.subColumns.length, 2);
+  assert.equal(col.get('isVisibleGroupColumn'), true);
+
+  col.set('hidden', true);
+  assert.equal(col.get('isVisibleGroupColumn'), false);
+
+  col.set('hidden', false);
+  assert.equal(col.get('isVisibleGroupColumn'), true);
+
+  col.subColumns.setEach('hidden', true);
+  assert.equal(col.get('isVisibleGroupColumn'), false);
+});
+
+test('CP - visibleSubColumns', function(assert) {
+  let col = new Column({
+    subColumns: [{}, {}]
+  });
+  assert.ok(col);
+  assert.equal(col.subColumns.length, 2);
+  assert.equal(col.get('visibleSubColumns.length'), 2);
+
+  col.subColumns[0].set('hidden', true);
+  assert.equal(col.get('visibleSubColumns.length'), 1);
+
+  col.set('hidden', true);
+  assert.equal(col.get('visibleSubColumns.length'), 0);
+});

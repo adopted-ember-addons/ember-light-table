@@ -180,7 +180,7 @@ export default class Table extends Ember.Object.extend({
     if (row instanceof Row) {
       this.rows.removeObject(row);
     } else {
-      this.rows.removeObject(this.rows.findBy('content', row));
+      this.rows.removeObjects(this.rows.filterBy('content', row));
     }
   }
 

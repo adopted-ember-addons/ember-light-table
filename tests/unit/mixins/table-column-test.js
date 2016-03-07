@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import TableColumnMixin from '../../../mixins/table-column';
+import TableColumnMixin from 'ember-light-table/mixins/table-column';
 import { module, test } from 'qunit';
 
 module('Unit | Mixin | table column');
