@@ -34,6 +34,9 @@
                    <li  >
                      <a href="../modules/Home.html">Home</a>
                    </li>
+                   <li  >
+                     <a href="../modules/Mixins.html">Mixins</a>
+                   </li>
             
                 <li class="section">Classes</li>
                     <li ><a  href="../classes/Body.html">Body</a></li>
@@ -43,13 +46,11 @@
                     <li ><a  href="../classes/Light Table.html">Light Table</a></li>
                     <li ><a  href="../classes/Row.html">Row</a></li>
                     <li ><a  href="../classes/Table.html">Table</a></li>
-                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
-                    <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.f4130461</p>
+                <p class="version pull-right">0.0.0.a0587515</p>
               </div>
             </div>
         </div>
@@ -94,13 +95,9 @@ const {
   A: emberArray
 } = Ember;
 
-/**
- * @module Classes
- */
-
  /**
+  * @module Classes
   * @class Column
-  * @extends Ember.Object
   */
 export default class Column extends Ember.Object.extend({
   /**
@@ -186,12 +183,14 @@ export default class Column extends Ember.Object.extend({
   /**
    * @property isGroupColumn
    * @type {Boolean}
+   * @private
    */
   isGroupColumn: computed.notEmpty(&#x27;subColumns&#x27;).readOnly(),
 
   /**
    * @property isVisibleGroupColumn
    * @type {Boolean}
+   * @private
    */
   isVisibleGroupColumn: computed(&#x27;visibleSubColumns.[]&#x27;, &#x27;hidden&#x27;, function() {
     return !isEmpty(this.get(&#x27;visibleSubColumns&#x27;)) &amp;&amp; !this.get(&#x27;hidden&#x27;);
@@ -200,6 +199,7 @@ export default class Column extends Ember.Object.extend({
   /**
    * @property visibleSubColumns
    * @type {Array}
+   * @private
    */
   visibleSubColumns: computed(&#x27;subColumns.@each.hidden&#x27;, &#x27;hidden&#x27;, function() {
     let subColumns = this.get(&#x27;subColumns&#x27;);

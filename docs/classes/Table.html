@@ -34,6 +34,9 @@
                    <li  >
                      <a href="../modules/Home.html">Home</a>
                    </li>
+                   <li  >
+                     <a href="../modules/Mixins.html">Mixins</a>
+                   </li>
             
                 <li class="section">Classes</li>
                     <li ><a  href="../classes/Body.html">Body</a></li>
@@ -43,13 +46,11 @@
                     <li ><a  href="../classes/Light Table.html">Light Table</a></li>
                     <li ><a  href="../classes/Row.html">Row</a></li>
                     <li  class="active"><a  href="../classes/Table.html">Table</a></li>
-                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
-                    <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.f4130461</p>
+                <p class="version pull-right">0.0.0.a0587515</p>
               </div>
             </div>
         </div>
@@ -85,15 +86,12 @@
 </div>
 <div class="well well-small">
 
-        <div class="extends">
-            Extends <a href="http://emberjs.com/api/classes/Ember.Object.html" class="crosslink external" target="_blank">Ember.Object</a>
-        </div>
 
             Module: <a href="../modules/Classes.html">Classes</a>
 
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_classes_Table.js.html#l109"><code>addon&#x2F;classes&#x2F;Table.js:109</code></a>
+            Defined in: <a href="../files/addon_classes_Table.js.html#l105"><code>addon&#x2F;classes&#x2F;Table.js:105</code></a>
         </div>
 </div>
 
@@ -125,7 +123,7 @@
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l109"><code>addon&#x2F;classes&#x2F;Table.js:109</code></a>
+		<a href="../files/addon_classes_Table.js.html#l105"><code>addon&#x2F;classes&#x2F;Table.js:105</code></a>
 		</p>
 
 
@@ -165,19 +163,7 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods extends">
-                            <li class="index-item method private inherited">
-                                <a href="#method__lazyInjections">_lazyInjections</a>
-
-                            </li>
-                            <li class="index-item method private inherited">
-                                <a href="#method__onLookup">_onLookup</a>
-
-                            </li>
-                            <li class="index-item method private inherited">
-                                <a href="#method__scheduledDestroy">_scheduledDestroy</a>
-
-                            </li>
+                    <ul class="index-list methods">
                             <li class="index-item method">
                                 <a href="#method_addColumn">addColumn</a>
 
@@ -186,24 +172,12 @@
                                 <a href="#method_addColumns">addColumns</a>
 
                             </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_addObserver">addObserver</a>
-
-                            </li>
                             <li class="index-item method">
                                 <a href="#method_addRow">addRow</a>
 
                             </li>
                             <li class="index-item method">
                                 <a href="#method_addRows">addRows</a>
-
-                            </li>
-                            <li class="index-item method private inherited">
-                                <a href="#method_beginPropertyChanges">beginPropertyChanges</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_cacheFor">cacheFor</a>
 
                             </li>
                             <li class="index-item method">
@@ -225,54 +199,6 @@
                                 <a href="#method_createRows">createRows</a>
 
                                     <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_decrementProperty">decrementProperty</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_destroy">destroy</a>
-
-                            </li>
-                            <li class="index-item method private inherited">
-                                <a href="#method_endPropertyChanges">endPropertyChanges</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_get">get</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_getProperties">getProperties</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_getWithDefault">getWithDefault</a>
-
-                            </li>
-                            <li class="index-item method private inherited">
-                                <a href="#method_hasObserverFor">hasObserverFor</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_incrementProperty">incrementProperty</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_init">init</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_notifyPropertyChange">notifyPropertyChange</a>
-
-                            </li>
-                            <li class="index-item method private inherited">
-                                <a href="#method_propertyDidChange">propertyDidChange</a>
-
-                            </li>
-                            <li class="index-item method private inherited">
-                                <a href="#method_propertyWillChange">propertyWillChange</a>
-
                             </li>
                             <li class="index-item method">
                                 <a href="#method_pushColumn">pushColumn</a>
@@ -298,10 +224,6 @@
                                 <a href="#method_removeColumns">removeColumns</a>
 
                             </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_removeObserver">removeObserver</a>
-
-                            </li>
                             <li class="index-item method">
                                 <a href="#method_removeRow">removeRow</a>
 
@@ -310,40 +232,12 @@
                                 <a href="#method_removeRows">removeRows</a>
 
                             </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_reopen">reopen</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_reopenClass">reopenClass</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_set">set</a>
-
-                            </li>
                             <li class="index-item method">
                                 <a href="#method_setColumns">setColumns</a>
 
                             </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_setProperties">setProperties</a>
-
-                            </li>
                             <li class="index-item method">
                                 <a href="#method_setRows">setRows</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_toggleProperty">toggleProperty</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_toString">toString</a>
-
-                            </li>
-                            <li class="index-item method public inherited">
-                                <a href="#method_willDestroy">willDestroy</a>
 
                             </li>
                     </ul>
@@ -352,13 +246,9 @@
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties extends">
+                    <ul class="index-list properties">
                             <li class="index-item property">
                                 <a href="#property_columns">columns</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#property_concatenatedProperties">concatenatedProperties</a>
 
                             </li>
                             <li class="index-item property">
@@ -367,14 +257,6 @@
                             </li>
                             <li class="index-item property">
                                 <a href="#property_flattenedColumns">flattenedColumns</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#property_isDestroyed">isDestroyed</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#property_isDestroying">isDestroying</a>
 
                             </li>
                             <li class="index-item property">
@@ -418,106 +300,6 @@
             <div id="methods" class="page-section">
                 <h2 class="off-left">Methods</h2>
                 <div class="item-list">
-<div id="method__lazyInjections" class="method item private inherited">
-	<span class="method-signature">
-	<span class="name"><code>_lazyInjections</code></span>
-
-		<span class="paren">()</span>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag private">private</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.CoreObject.html#method__lazyInjections">Ember.CoreObject</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l829"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:829</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Returns a hash of property names and container names that injected
-properties will lookup on the container lazily.</div>
-
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-					Hash of all lazy injected property keys to container names
-			</div>
-		</div>
-
-</div>
-<div id="method__onLookup" class="method item private inherited">
-	<span class="method-signature">
-	<span class="name"><code>_onLookup</code></span>
-
-		<span class="paren">()</span>
-	</span>
-
-
-
-		<span class="flag private">private</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.CoreObject.html#method__onLookup">Ember.CoreObject</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l820"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:820</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Provides lookup-time type validation for injected properties.</div>
-
-
-
-</div>
-<div id="method__scheduledDestroy" class="method item private inherited">
-	<span class="method-signature">
-	<span class="name"><code>_scheduledDestroy</code></span>
-
-		<span class="paren">()</span>
-	</span>
-
-
-
-		<span class="flag private">private</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.CoreObject.html#method__scheduledDestroy">Ember.CoreObject</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l389"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:389</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Invoked by the run loop to actually destroy the object. This is
-scheduled for execution by the <code>destroy</code> method.</div>
-
-
-
-</div>
 <div id="method_addColumn" class="method item">
 	<span class="method-signature">
 	<span class="name"><code>addColumn</code></span>
@@ -540,7 +322,7 @@ scheduled for execution by the <code>destroy</code> method.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l207"><code>addon&#x2F;classes&#x2F;Table.js:207</code></a>
+		<a href="../files/addon_classes_Table.js.html#l203"><code>addon&#x2F;classes&#x2F;Table.js:203</code></a>
 		</p>
 
 
@@ -588,7 +370,7 @@ scheduled for execution by the <code>destroy</code> method.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l216"><code>addon&#x2F;classes&#x2F;Table.js:216</code></a>
+		<a href="../files/addon_classes_Table.js.html#l212"><code>addon&#x2F;classes&#x2F;Table.js:212</code></a>
 		</p>
 
 
@@ -607,116 +389,6 @@ scheduled for execution by the <code>destroy</code> method.</div>
 						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
 
 
-
-				</li>
-			</ul>
-		</div>
-
-
-</div>
-<div id="method_addObserver" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>addObserver</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>key</code>
-				</li>
-				<li class="arg">
-						<code>target</code>
-				</li>
-				<li class="arg">
-						<code>method</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_addObserver">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l331"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:331</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Adds an observer on a property.
-
-This is the core method used to register an observer for a property.
-
-Once you call this method, any time the key's value is set, your observer
-will be notified. Note that the observers are triggered any time the
-value is set, regardless of whether it has actually changed. Your
-observer should be prepared to handle that.
-
-You can also pass an optional context parameter to this method. The
-context will be passed to your observer method whenever it is triggered.
-Note that if you add the same target/method pair on a key multiple times
-with different context parameters, your observer will only be called once
-with the last context you passed.
-
-### Observer Methods
-
-Observer methods you pass should generally have the following signature if
-you do not pass a <code>context</code> parameter:
-
-<code>&#x60;</code>javascript
-fooDidChange: function(sender, key, value, rev) { };
-<code>&#x60;</code>
-
-The sender is the object that changed. The key is the property that
-changes. The value property is currently reserved and unused. The rev
-is the last property revision of the object when it changed, which you can
-use to detect if the key value has really changed or not.
-
-If you pass a <code>context</code> parameter, the context will be passed before the
-revision like so:
-
-<code>&#x60;</code>javascript
-fooDidChange: function(sender, key, value, context, rev) { };
-<code>&#x60;</code>
-
-Usually you will not need the value, context or revision parameters at
-the end. In this case, it is common to write observer methods that take
-only a sender and key value as parameters or, if you aren't interested in
-any of these values, to write an observer that has no parameters at all.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">key</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The key to observer</div>
-
-				</li>
-				<li class="param">
-						<code class="param-name">target</code>
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-
-					<div class="param-description">The target object to invoke</div>
-
-				</li>
-				<li class="param">
-						<code class="param-name">method</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a>  |  <a href="http://emberjs.com/api/classes/Function.html" class="crosslink external" target="_blank">Function</a></span>
-
-
-					<div class="param-description">The method to invoke.</div>
 
 				</li>
 			</ul>
@@ -746,7 +418,7 @@ any of these values, to write an observer that has no parameters at all.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l134"><code>addon&#x2F;classes&#x2F;Table.js:134</code></a>
+		<a href="../files/addon_classes_Table.js.html#l130"><code>addon&#x2F;classes&#x2F;Table.js:130</code></a>
 		</p>
 
 
@@ -794,7 +466,7 @@ any of these values, to write an observer that has no parameters at all.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l147"><code>addon&#x2F;classes&#x2F;Table.js:147</code></a>
+		<a href="../files/addon_classes_Table.js.html#l143"><code>addon&#x2F;classes&#x2F;Table.js:143</code></a>
 		</p>
 
 
@@ -818,115 +490,6 @@ any of these values, to write an observer that has no parameters at all.</div>
 			</ul>
 		</div>
 
-
-</div>
-<div id="method_beginPropertyChanges" class="method item private inherited">
-	<span class="method-signature">
-	<span class="name"><code>beginPropertyChanges</code></span>
-
-		<span class="paren">()</span>
-		<span class="returns-inline">
-			<span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag private">private</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_beginPropertyChanges">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l229"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:229</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Begins a grouping of property changes.
-
-You can use this method to group property changes so that notifications
-will not be sent until the changes are finished. If you plan to make a
-large number of changes to an object at one time, you should call this
-method at the beginning of the changes to begin deferring change
-notifications. When you are done making changes, call
-<code>endPropertyChanges()</code> to deliver the deferred change notifications and end
-deferring.</div>
-
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>
-			</div>
-		</div>
-
-</div>
-<div id="method_cacheFor" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>cacheFor</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>keyName</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_cacheFor">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l488"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:488</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Returns the cached value of a computed property, if it exists.
-This allows you to inspect the value of a computed property
-without accidentally invoking it if it is intended to be
-generated lazily.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">keyName</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-					The cached value of the computed property, if any
-			</div>
-		</div>
 
 </div>
 <div id="method_createColumn" class="method item">
@@ -955,7 +518,7 @@ generated lazily.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l283"><code>addon&#x2F;classes&#x2F;Table.js:283</code></a>
+		<a href="../files/addon_classes_Table.js.html#l279"><code>addon&#x2F;classes&#x2F;Table.js:279</code></a>
 		</p>
 
 
@@ -1014,7 +577,7 @@ generated lazily.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l294"><code>addon&#x2F;classes&#x2F;Table.js:294</code></a>
+		<a href="../files/addon_classes_Table.js.html#l290"><code>addon&#x2F;classes&#x2F;Table.js:290</code></a>
 		</p>
 
 
@@ -1073,7 +636,7 @@ generated lazily.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l261"><code>addon&#x2F;classes&#x2F;Table.js:261</code></a>
+		<a href="../files/addon_classes_Table.js.html#l257"><code>addon&#x2F;classes&#x2F;Table.js:257</code></a>
 		</p>
 
 
@@ -1132,7 +695,7 @@ generated lazily.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l272"><code>addon&#x2F;classes&#x2F;Table.js:272</code></a>
+		<a href="../files/addon_classes_Table.js.html#l268"><code>addon&#x2F;classes&#x2F;Table.js:268</code></a>
 		</p>
 
 
@@ -1165,804 +728,6 @@ generated lazily.</div>
 		</div>
 
 </div>
-<div id="method_decrementProperty" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>decrementProperty</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>keyName</code>
-				</li>
-				<li class="arg">
-						<code>decrement</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_decrementProperty">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l451"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:451</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Set the value of a property to the current value minus some amount.
-
-<code>&#x60;</code>javascript
-player.decrementProperty('lives');
-orc.decrementProperty('health', 5);
-<code>&#x60;</code></div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">keyName</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The name of the property to decrement</div>
-
-				</li>
-				<li class="param">
-						<code class="param-name">decrement</code>
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-
-
-					<div class="param-description">The amount to decrement by. Defaults to 1</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
-					The new property value
-			</div>
-		</div>
-
-</div>
-<div id="method_destroy" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>destroy</code></span>
-
-		<span class="paren">()</span>
-		<span class="returns-inline">
-			<span class="type"><a href="http://emberjs.com/api/classes/Ember.Object.html" class="crosslink external" target="_blank">Ember.Object</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.CoreObject.html#method_destroy">Ember.CoreObject</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l358"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:358</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Destroys an object by setting the <code>isDestroyed</code> flag and removing its
-metadata, which effectively destroys observers and bindings.
-
-If you try to set a property on a destroyed object, an exception will be
-raised.
-
-Note that destruction is scheduled for the end of the run loop and does not
-happen immediately.  It will set an isDestroying flag immediately.</div>
-
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="http://emberjs.com/api/classes/Ember.Object.html" class="crosslink external" target="_blank">Ember.Object</a></span>:
-					receiver
-			</div>
-		</div>
-
-</div>
-<div id="method_endPropertyChanges" class="method item private inherited">
-	<span class="method-signature">
-	<span class="name"><code>endPropertyChanges</code></span>
-
-		<span class="paren">()</span>
-		<span class="returns-inline">
-			<span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag private">private</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_endPropertyChanges">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l249"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:249</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Ends a grouping of property changes.
-
-You can use this method to group property changes so that notifications
-will not be sent until the changes are finished. If you plan to make a
-large number of changes to an object at one time, you should call
-<code>beginPropertyChanges()</code> at the beginning of the changes to defer change
-notifications. When you are done making changes, call this method to
-deliver the deferred change notifications and end deferring.</div>
-
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>
-			</div>
-		</div>
-
-</div>
-<div id="method_get" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>get</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>keyName</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_get">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l98"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:98</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Retrieves the value of a property from the object.
-
-This method is usually similar to using <code>object[keyName]</code> or <code>object.keyName</code>,
-however it supports both computed properties and the unknownProperty
-handler.
-
-Because <code>get</code> unifies the syntax for accessing all these kinds
-of properties, it can make many refactorings easier, such as replacing a
-simple property with a computed property, or vice versa.
-
-### Computed Properties
-
-Computed properties are methods defined with the <code>property</code> modifier
-declared at the end, such as:
-
-<code>&#x60;</code>javascript
-fullName: function() {
-  return this.get('firstName') + ' ' + this.get('lastName');
-}.property('firstName', 'lastName')
-<code>&#x60;</code>
-
-When you call <code>get</code> on a computed property, the function will be
-called and the return value will be returned instead of the function
-itself.
-
-### Unknown Properties
-
-Likewise, if you try to call <code>get</code> on a property whose value is
-<code>undefined</code>, the <code>unknownProperty()</code> method will be called on the object.
-If this method returns any value other than <code>undefined</code>, it will be returned
-instead. This allows you to implement "virtual" properties that are
-not defined upfront.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">keyName</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The property to retrieve</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-					The property value or undefined.
-			</div>
-		</div>
-
-</div>
-<div id="method_getProperties" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>getProperties</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>list</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_getProperties">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l141"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:141</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">To get the values of multiple properties at once, call <code>getProperties</code>
-with a list of strings or an array:
-
-<code>&#x60;</code>javascript
-record.getProperties('firstName', 'lastName', 'zipCode');
-// { firstName: 'John', lastName: 'Doe', zipCode: '10011' }
-<code>&#x60;</code>
-
-is equivalent to:
-
-<code>&#x60;</code>javascript
-record.getProperties(['firstName', 'lastName', 'zipCode']);
-// { firstName: 'John', lastName: 'Doe', zipCode: '10011' }
-<code>&#x60;</code></div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">list</code>
-						<span class="type">String...  |  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-
-
-					<div class="param-description">of keys to get</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-			</div>
-		</div>
-
-</div>
-<div id="method_getWithDefault" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>getWithDefault</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>keyName</code>
-				</li>
-				<li class="arg">
-						<code>defaultValue</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_getWithDefault">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l413"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:413</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Retrieves the value of a property, or a default value in the case that the
-property returns <code>undefined</code>.
-
-<code>&#x60;</code>javascript
-person.getWithDefault('lastName', 'Doe');
-<code>&#x60;</code></div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">keyName</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The name of the property to retrieve</div>
-
-				</li>
-				<li class="param">
-						<code class="param-name">defaultValue</code>
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-
-					<div class="param-description">The value to return if the property value is undefined</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-					The property value or the defaultValue.
-			</div>
-		</div>
-
-</div>
-<div id="method_hasObserverFor" class="method item private inherited">
-	<span class="method-signature">
-	<span class="name"><code>hasObserverFor</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>key</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag private">private</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_hasObserverFor">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l398"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:398</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Returns <code>true</code> if the object currently has observers registered for a
-particular key. You can use this method to potentially defer performing
-an expensive action until someone begins observing a particular property
-on the object.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">key</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">Key to check</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-			</div>
-		</div>
-
-</div>
-<div id="method_incrementProperty" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>incrementProperty</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>keyName</code>
-				</li>
-				<li class="arg">
-						<code>increment</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_incrementProperty">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l431"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:431</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Set the value of a property to the current value plus some amount.
-
-<code>&#x60;</code>javascript
-person.incrementProperty('age');
-team.incrementProperty('score', 2);
-<code>&#x60;</code></div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">keyName</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The name of the property to increment</div>
-
-				</li>
-				<li class="param">
-						<code class="param-name">increment</code>
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-
-
-					<div class="param-description">The amount to increment by. Defaults to 1</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
-					The new property value
-			</div>
-		</div>
-
-</div>
-<div id="method_init" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>init</code></span>
-
-		<span class="paren">()</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.CoreObject.html#method_init">Ember.CoreObject</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l230"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:230</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">An overridable method called when objects are instantiated. By default,
-does nothing unless it is overridden during class definition.
-
-Example:
-
-<code>&#x60;</code>javascript
-App.Person = Ember.Object.extend({
-  init: function() {
-    alert('Name is ' + this.get('name'));
-  }
-});
-
-var steve = App.Person.create({
-  name: "Steve"
-});
-
-// alerts 'Name is Steve'.
-<code>&#x60;</code>
-
-NOTE: If you do override <code>init</code> for a framework class like <code>Ember.View</code>,
-be sure to call <code>this._super.apply(this, arguments)</code> in your
-<code>init</code> declaration! If you don't, Ember may not have an opportunity to
-do important setup work, and you'll see strange behavior in your
-application.</div>
-
-
-
-</div>
-<div id="method_notifyPropertyChange" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>notifyPropertyChange</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>keyName</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_notifyPropertyChange">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l316"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:316</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Convenience method to call <code>propertyWillChange</code> and <code>propertyDidChange</code> in
-succession.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">keyName</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The property key to be notified about.</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>
-			</div>
-		</div>
-
-</div>
-<div id="method_propertyDidChange" class="method item private inherited">
-	<span class="method-signature">
-	<span class="name"><code>propertyDidChange</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>keyName</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag private">private</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_propertyDidChange">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l292"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:292</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Notify the observer system that a property has just changed.
-
-Sometimes you need to change a value directly or indirectly without
-actually calling <code>get()</code> or <code>set()</code> on it. In this case, you can use this
-method and <code>propertyWillChange()</code> instead. Calling these two methods
-together will notify all observers that the property has potentially
-changed value.
-
-Note that you must always call <code>propertyWillChange</code> and <code>propertyDidChange</code>
-as a pair. If you do not, it may get the property change groups out of
-order and cause notifications to be delivered more often than you would
-like.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">keyName</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The property key that has just changed.</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>
-			</div>
-		</div>
-
-</div>
-<div id="method_propertyWillChange" class="method item private inherited">
-	<span class="method-signature">
-	<span class="name"><code>propertyWillChange</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>keyName</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag private">private</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_propertyWillChange">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l268"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:268</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Notify the observer system that a property is about to change.
-
-Sometimes you need to change a value directly or indirectly without
-actually calling <code>get()</code> or <code>set()</code> on it. In this case, you can use this
-method and <code>propertyDidChange()</code> instead. Calling these two methods
-together will notify all observers that the property has potentially
-changed value.
-
-Note that you must always call <code>propertyWillChange</code> and <code>propertyDidChange</code>
-as a pair. If you do not, it may get the property change groups out of
-order and cause notifications to be delivered more often than you would
-like.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">keyName</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The property key that is about to change.</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>
-			</div>
-		</div>
-
-</div>
 <div id="method_pushColumn" class="method item">
 	<span class="method-signature">
 	<span class="name"><code>pushColumn</code></span>
@@ -1985,7 +750,7 @@ like.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l225"><code>addon&#x2F;classes&#x2F;Table.js:225</code></a>
+		<a href="../files/addon_classes_Table.js.html#l221"><code>addon&#x2F;classes&#x2F;Table.js:221</code></a>
 		</p>
 
 
@@ -2033,7 +798,7 @@ like.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l234"><code>addon&#x2F;classes&#x2F;Table.js:234</code></a>
+		<a href="../files/addon_classes_Table.js.html#l230"><code>addon&#x2F;classes&#x2F;Table.js:230</code></a>
 		</p>
 
 
@@ -2081,7 +846,7 @@ like.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l156"><code>addon&#x2F;classes&#x2F;Table.js:156</code></a>
+		<a href="../files/addon_classes_Table.js.html#l152"><code>addon&#x2F;classes&#x2F;Table.js:152</code></a>
 		</p>
 
 
@@ -2129,7 +894,7 @@ like.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l165"><code>addon&#x2F;classes&#x2F;Table.js:165</code></a>
+		<a href="../files/addon_classes_Table.js.html#l161"><code>addon&#x2F;classes&#x2F;Table.js:161</code></a>
 		</p>
 
 
@@ -2177,7 +942,7 @@ like.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l243"><code>addon&#x2F;classes&#x2F;Table.js:243</code></a>
+		<a href="../files/addon_classes_Table.js.html#l239"><code>addon&#x2F;classes&#x2F;Table.js:239</code></a>
 		</p>
 
 
@@ -2225,7 +990,7 @@ like.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l252"><code>addon&#x2F;classes&#x2F;Table.js:252</code></a>
+		<a href="../files/addon_classes_Table.js.html#l248"><code>addon&#x2F;classes&#x2F;Table.js:248</code></a>
 		</p>
 
 
@@ -2244,79 +1009,6 @@ like.</div>
 						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
 
 
-
-				</li>
-			</ul>
-		</div>
-
-
-</div>
-<div id="method_removeObserver" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>removeObserver</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>key</code>
-				</li>
-				<li class="arg">
-						<code>target</code>
-				</li>
-				<li class="arg">
-						<code>method</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_removeObserver">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l383"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:383</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Remove an observer you have previously registered on this object. Pass
-the same key, target, and method you passed to <code>addObserver()</code> and your
-target will no longer receive notifications.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">key</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The key to observer</div>
-
-				</li>
-				<li class="param">
-						<code class="param-name">target</code>
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-
-					<div class="param-description">The target object to invoke</div>
-
-				</li>
-				<li class="param">
-						<code class="param-name">method</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a>  |  <a href="http://emberjs.com/api/classes/Function.html" class="crosslink external" target="_blank">Function</a></span>
-
-
-					<div class="param-description">The method to invoke.</div>
 
 				</li>
 			</ul>
@@ -2346,7 +1038,7 @@ target will no longer receive notifications.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l174"><code>addon&#x2F;classes&#x2F;Table.js:174</code></a>
+		<a href="../files/addon_classes_Table.js.html#l170"><code>addon&#x2F;classes&#x2F;Table.js:170</code></a>
 		</p>
 
 
@@ -2394,7 +1086,7 @@ target will no longer receive notifications.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l187"><code>addon&#x2F;classes&#x2F;Table.js:187</code></a>
+		<a href="../files/addon_classes_Table.js.html#l183"><code>addon&#x2F;classes&#x2F;Table.js:183</code></a>
 		</p>
 
 
@@ -2420,240 +1112,6 @@ target will no longer receive notifications.</div>
 
 
 </div>
-<div id="method_reopen" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>reopen</code></span>
-
-		<span class="paren">()</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.CoreObject.html#method_reopen">Ember.CoreObject</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l623"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:623</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Augments a constructor's prototype with additional
-properties and functions:
-
-<code>&#x60;</code>javascript
-MyObject = Ember.Object.extend({
-  name: 'an object'
-});
-
-o = MyObject.create();
-o.get('name'); // 'an object'
-
-MyObject.reopen({
-  say: function(msg){
-    console.log(msg);
-  }
-})
-
-o2 = MyObject.create();
-o2.say("hello"); // logs "hello"
-
-o.say("goodbye"); // logs "goodbye"
-<code>&#x60;</code>
-
-To add functions and properties to the constructor itself,
-see <code>reopenClass</code></div>
-
-
-
-</div>
-<div id="method_reopenClass" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>reopenClass</code></span>
-
-		<span class="paren">()</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.CoreObject.html#method_reopenClass">Ember.CoreObject</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l659"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:659</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Augments a constructor's own properties and functions:
-
-<code>&#x60;</code>javascript
-MyObject = Ember.Object.extend({
-  name: 'an object'
-});
-
-MyObject.reopenClass({
-  canBuild: false
-});
-
-MyObject.canBuild; // false
-o = MyObject.create();
-<code>&#x60;</code>
-
-In other words, this creates static properties and functions for the class. These are only available on the class
-and not on any instance of that class.
-
-<code>&#x60;</code>javascript
-App.Person = Ember.Object.extend({
-  name : "",
-  sayHello : function() {
-    alert("Hello. My name is " + this.get('name'));
-  }
-});
-
-App.Person.reopenClass({
-  species : "Homo sapiens",
-  createPerson: function(newPersonsName){
-    return App.Person.create({
-      name:newPersonsName
-    });
-  }
-});
-
-var tom = App.Person.create({
-  name : "Tom Dale"
-});
-var yehuda = App.Person.createPerson("Yehuda Katz");
-
-tom.sayHello(); // "Hello. My name is Tom Dale"
-yehuda.sayHello(); // "Hello. My name is Yehuda Katz"
-alert(App.Person.species); // "Homo sapiens"
-<code>&#x60;</code>
-
-Note that <code>species</code> and <code>createPerson</code> are *not* valid on the <code>tom</code> and <code>yehuda</code>
-variables. They are only valid on <code>App.Person</code>.
-
-To add functions and properties to instances of
-a constructor by extending the constructor's prototype
-see <code>reopen</code></div>
-
-
-
-</div>
-<div id="method_set" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>set</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>keyName</code>
-				</li>
-				<li class="arg">
-						<code>value</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_set">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l166"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:166</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Sets the provided key or path to the value.
-
-This method is generally very similar to calling <code>object[key] = value</code> or
-<code>object.key = value</code>, except that it provides support for computed
-properties, the <code>setUnknownProperty()</code> method and property observers.
-
-### Computed Properties
-
-If you try to set a value on a key that has a computed property handler
-defined (see the <code>get()</code> method for an example), then <code>set()</code> will call
-that method, passing both the value and key instead of simply changing
-the value itself. This is useful for those times when you need to
-implement a property that is composed of one or more member
-properties.
-
-### Unknown Properties
-
-If you try to set a value on a key that is undefined in the target
-object, then the <code>setUnknownProperty()</code> handler will be called instead. This
-gives you an opportunity to implement complex "virtual" properties that
-are not predefined on the object. If <code>setUnknownProperty()</code> returns
-undefined, then <code>set()</code> will simply set the value on the object.
-
-### Property Observers
-
-In addition to changing the property, <code>set()</code> will also register a property
-change with the object. Unless you have placed this call inside of a
-<code>beginPropertyChanges()</code> and <code>endPropertyChanges(),</code> any "local" observers
-(i.e. observer methods declared on the same object), will be called
-immediately. Any "remote" observers (i.e. observer methods declared on
-another object) will be placed in a queue and called at a later time in a
-coalesced manner.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">keyName</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The property to set</div>
-
-				</li>
-				<li class="param">
-						<code class="param-name">value</code>
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-
-					<div class="param-description">The value to set or <code>null</code>.</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-					The passed value
-			</div>
-		</div>
-
-</div>
 <div id="method_setColumns" class="method item">
 	<span class="method-signature">
 	<span class="name"><code>setColumns</code></span>
@@ -2676,7 +1134,7 @@ coalesced manner.</div>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l198"><code>addon&#x2F;classes&#x2F;Table.js:198</code></a>
+		<a href="../files/addon_classes_Table.js.html#l194"><code>addon&#x2F;classes&#x2F;Table.js:194</code></a>
 		</p>
 
 
@@ -2702,72 +1160,6 @@ coalesced manner.</div>
 
 
 </div>
-<div id="method_setProperties" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>setProperties</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>hash</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_setProperties">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l211"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:211</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Sets a list of properties at once. These properties are set inside
-a single <code>beginPropertyChanges</code> and <code>endPropertyChanges</code> batch, so
-observers will be buffered.
-
-<code>&#x60;</code>javascript
-record.setProperties({ firstName: 'Charles', lastName: 'Jolley' });
-<code>&#x60;</code></div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">hash</code>
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-
-					<div class="param-description">the hash of keys and values to set</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-					The passed in hash
-			</div>
-		</div>
-
-</div>
 <div id="method_setRows" class="method item">
 	<span class="method-signature">
 	<span class="name"><code>setRows</code></span>
@@ -2790,7 +1182,7 @@ record.setProperties({ firstName: 'Charles', lastName: 'Jolley' });
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Table.js.html#l125"><code>addon&#x2F;classes&#x2F;Table.js:125</code></a>
+		<a href="../files/addon_classes_Table.js.html#l121"><code>addon&#x2F;classes&#x2F;Table.js:121</code></a>
 		</p>
 
 
@@ -2816,170 +1208,6 @@ record.setProperties({ firstName: 'Charles', lastName: 'Jolley' });
 
 
 </div>
-<div id="method_toggleProperty" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>toggleProperty</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>keyName</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.Observable.html#method_toggleProperty">Ember.Observable</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_mixins_observable.js.html#l471"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;mixins&#x2F;observable.js:471</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Set the value of a boolean property to the opposite of its
-current value.
-
-<code>&#x60;</code>javascript
-starship.toggleProperty('warpDriveEngaged');
-<code>&#x60;</code></div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">keyName</code>
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description">The name of the property to toggle</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
-					The new property value
-			</div>
-		</div>
-
-</div>
-<div id="method_toString" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>toString</code></span>
-
-		<span class="paren">()</span>
-		<span class="returns-inline">
-			<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-		</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.CoreObject.html#method_toString">Ember.CoreObject</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l408"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:408</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Returns a string representation which attempts to provide more information
-than Javascript's <code>toString</code> typically does, in a generic way for all Ember
-objects.
-
-<code>&#x60;</code>javascript
-App.Person = Em.Object.extend()
-person = App.Person.create()
-person.toString() //=> "<App.Person:ember1024>"
-<code>&#x60;</code>
-
-If the object's class is not defined on an Ember namespace, it will
-indicate it is a subclass of the registered superclass:
-
-   <code>&#x60;</code>javascript
-Student = App.Person.extend()
-student = Student.create()
-student.toString() //=> "<(subclass of App.Person):ember1025>"
-<code>&#x60;</code>
-
-If the method <code>toStringExtension</code> is defined, its return value will be
-included in the output.
-
-<code>&#x60;</code>javascript
-App.Teacher = App.Person.extend({
-  toStringExtension: function() {
-    return this.get('fullName');
-  }
-});
-teacher = App.Teacher.create()
-teacher.toString(); //=> "<App.Teacher:ember1026:Tom Dale>"
-<code>&#x60;</code></div>
-
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>:
-					string representation
-			</div>
-		</div>
-
-</div>
-<div id="method_willDestroy" class="method item public inherited">
-	<span class="method-signature">
-	<span class="name"><code>willDestroy</code></span>
-
-		<span class="paren">()</span>
-	</span>
-
-
-
-		<span class="flag public">public</span>
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="http://emberjs.com/api/classes/Ember.CoreObject.html#method_willDestroy">Ember.CoreObject</a>:
-		<a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l381"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:381</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">Override to implement teardown.</div>
-
-
-
-</div>
                 </div>
             </div>
 
@@ -2997,7 +1225,7 @@ teacher.toString(); //=> "<App.Teacher:ember1026:Tom Dale>"
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l22"><code>addon&#x2F;classes&#x2F;Table.js:22</code></a>
+        <a href="../files/addon_classes_Table.js.html#l18"><code>addon&#x2F;classes&#x2F;Table.js:18</code></a>
         </p>
 
 
@@ -3008,91 +1236,6 @@ teacher.toString(); //=> "<App.Teacher:ember1026:Tom Dale>"
     </div>
 
         <p><br><strong>Default:</strong> []</p>
-
-
-</div>
-<div id="property_concatenatedProperties" class="property item public inherited">
-    <h3 class="name"><code>concatenatedProperties</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-
-
-        <span class="flag public">public</span>
-
-
-
-    <div class="meta">
-                <p>Inherited from
-                <a href="http://emberjs.com/api/classes/Ember.CoreObject.html#property_concatenatedProperties">Ember.CoreObject</a>:
-        <a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l265"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:265</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        Defines the properties that will be concatenated from the superclass
-(instead of overridden).
-
-By default, when you extend an Ember class a property defined in
-the subclass overrides a property with the same name that is defined
-in the superclass. However, there are some cases where it is preferable
-to build up a property's value by combining the superclass' property
-value with the subclass' value. An example of this in use within Ember
-is the <code>classNames</code> property of <code>Ember.View</code>.
-
-Here is some sample code showing the difference between a concatenated
-property and a normal one:
-
-<code>&#x60;</code>javascript
-App.BarView = Ember.View.extend({
-  someNonConcatenatedProperty: ['bar'],
-  classNames: ['bar']
-});
-
-App.FooBarView = App.BarView.extend({
-  someNonConcatenatedProperty: ['foo'],
-  classNames: ['foo']
-});
-
-var fooBarView = App.FooBarView.create();
-fooBarView.get('someNonConcatenatedProperty'); // ['foo']
-fooBarView.get('classNames'); // ['ember-view', 'bar', 'foo']
-<code>&#x60;</code>
-
-This behavior extends to object creation as well. Continuing the
-above example:
-
-<code>&#x60;</code>javascript
-var view = App.FooBarView.create({
-  someNonConcatenatedProperty: ['baz'],
-  classNames: ['baz']
-})
-view.get('someNonConcatenatedProperty'); // ['baz']
-view.get('classNames'); // ['ember-view', 'bar', 'foo', 'baz']
-<code>&#x60;</code>
-Adding a single property that is not an array will just add it in the array:
-
-<code>&#x60;</code>javascript
-var view = App.FooBarView.create({
-  classNames: 'baz'
-})
-view.get('classNames'); // ['ember-view', 'bar', 'foo', 'baz']
-<code>&#x60;</code>
-
-Using the <code>concatenatedProperties</code> property, we can tell Ember to mix the
-content of the properties.
-
-In <code>Ember.View</code> the <code>classNameBindings</code> and <code>attributeBindings</code> properties
-are also concatenated, in addition to <code>classNames</code>.
-
-This feature is available for you to use throughout the Ember object model,
-although typical app developers are likely to use it infrequently. Since
-it changes expectations about behavior of properties, you should properly
-document its usage in each individual concatenated property (to not
-mislead your users to think they can override the property in a subclass).
-    </div>
-
-        <p><br><strong>Default:</strong> null</p>
 
 
 </div>
@@ -3107,7 +1250,7 @@ mislead your users to think they can override the property in a subclass).
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l42"><code>addon&#x2F;classes&#x2F;Table.js:42</code></a>
+        <a href="../files/addon_classes_Table.js.html#l38"><code>addon&#x2F;classes&#x2F;Table.js:38</code></a>
         </p>
 
 
@@ -3131,7 +1274,7 @@ mislead your users to think they can override the property in a subclass).
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l93"><code>addon&#x2F;classes&#x2F;Table.js:93</code></a>
+        <a href="../files/addon_classes_Table.js.html#l89"><code>addon&#x2F;classes&#x2F;Table.js:89</code></a>
         </p>
 
 
@@ -3141,64 +1284,6 @@ mislead your users to think they can override the property in a subclass).
         
     </div>
 
-
-
-</div>
-<div id="property_isDestroyed" class="property item public inherited">
-    <h3 class="name"><code>isDestroyed</code></h3>
-    <span class="type">Unknown</span>
-
-
-        <span class="flag public">public</span>
-
-
-
-    <div class="meta">
-                <p>Inherited from
-                <a href="http://emberjs.com/api/classes/Ember.CoreObject.html#property_isDestroyed">Ember.CoreObject</a>:
-        <a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l334"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:334</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        Destroyed object property flag.
-
-if this property is <code>true</code> the observers and bindings were already
-removed by the effect of calling the <code>destroy()</code> method.
-    </div>
-
-        <p><br><strong>Default:</strong> false</p>
-
-
-</div>
-<div id="property_isDestroying" class="property item public inherited">
-    <h3 class="name"><code>isDestroying</code></h3>
-    <span class="type">Unknown</span>
-
-
-        <span class="flag public">public</span>
-
-
-
-    <div class="meta">
-                <p>Inherited from
-                <a href="http://emberjs.com/api/classes/Ember.CoreObject.html#property_isDestroying">Ember.CoreObject</a>:
-        <a href="http://emberjs.com/api/files/packages_ember-runtime_lib_system_core_object.js.html#l346"><code>packages&#x2F;ember-runtime&#x2F;lib&#x2F;system&#x2F;core_object.js:346</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        Destruction scheduled flag. The <code>destroy()</code> method has been called.
-
-The object stays intact until the end of the run loop at which point
-the <code>isDestroyed</code> flag is set.
-    </div>
-
-        <p><br><strong>Default:</strong> false</p>
 
 
 </div>
@@ -3213,7 +1298,7 @@ the <code>isDestroyed</code> flag is set.
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l36"><code>addon&#x2F;classes&#x2F;Table.js:36</code></a>
+        <a href="../files/addon_classes_Table.js.html#l32"><code>addon&#x2F;classes&#x2F;Table.js:32</code></a>
         </p>
 
 
@@ -3237,7 +1322,7 @@ the <code>isDestroyed</code> flag is set.
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l29"><code>addon&#x2F;classes&#x2F;Table.js:29</code></a>
+        <a href="../files/addon_classes_Table.js.html#l25"><code>addon&#x2F;classes&#x2F;Table.js:25</code></a>
         </p>
 
 
@@ -3262,7 +1347,7 @@ the <code>isDestroyed</code> flag is set.
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l48"><code>addon&#x2F;classes&#x2F;Table.js:48</code></a>
+        <a href="../files/addon_classes_Table.js.html#l44"><code>addon&#x2F;classes&#x2F;Table.js:44</code></a>
         </p>
 
 
@@ -3286,7 +1371,7 @@ the <code>isDestroyed</code> flag is set.
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l60"><code>addon&#x2F;classes&#x2F;Table.js:60</code></a>
+        <a href="../files/addon_classes_Table.js.html#l56"><code>addon&#x2F;classes&#x2F;Table.js:56</code></a>
         </p>
 
 
@@ -3310,7 +1395,7 @@ the <code>isDestroyed</code> flag is set.
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l54"><code>addon&#x2F;classes&#x2F;Table.js:54</code></a>
+        <a href="../files/addon_classes_Table.js.html#l50"><code>addon&#x2F;classes&#x2F;Table.js:50</code></a>
         </p>
 
 
@@ -3334,7 +1419,7 @@ the <code>isDestroyed</code> flag is set.
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l72"><code>addon&#x2F;classes&#x2F;Table.js:72</code></a>
+        <a href="../files/addon_classes_Table.js.html#l68"><code>addon&#x2F;classes&#x2F;Table.js:68</code></a>
         </p>
 
 
@@ -3358,7 +1443,7 @@ the <code>isDestroyed</code> flag is set.
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l66"><code>addon&#x2F;classes&#x2F;Table.js:66</code></a>
+        <a href="../files/addon_classes_Table.js.html#l62"><code>addon&#x2F;classes&#x2F;Table.js:62</code></a>
         </p>
 
 
@@ -3382,7 +1467,7 @@ the <code>isDestroyed</code> flag is set.
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Table.js.html#l85"><code>addon&#x2F;classes&#x2F;Table.js:85</code></a>
+        <a href="../files/addon_classes_Table.js.html#l81"><code>addon&#x2F;classes&#x2F;Table.js:81</code></a>
         </p>
 
 

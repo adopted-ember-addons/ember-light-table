@@ -34,6 +34,9 @@
                    <li  >
                      <a href="../modules/Home.html">Home</a>
                    </li>
+                   <li  >
+                     <a href="../modules/Mixins.html">Mixins</a>
+                   </li>
             
                 <li class="section">Classes</li>
                     <li ><a  href="../classes/Body.html">Body</a></li>
@@ -43,13 +46,11 @@
                     <li ><a  href="../classes/Light Table.html">Light Table</a></li>
                     <li ><a  href="../classes/Row.html">Row</a></li>
                     <li ><a  href="../classes/Table.html">Table</a></li>
-                    <li ><a  href="../classes/TableColumnMixin.html">TableColumnMixin</a></li>
-                    <li ><a  href="../classes/TableScrollMixin.html">TableScrollMixin</a></li>
               </ul>
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.f4130461</p>
+                <p class="version pull-right">0.0.0.a0587515</p>
               </div>
             </div>
         </div>
@@ -89,8 +90,6 @@
 import Table from &#x27;./classes/Table&#x27;;
 import Column from &#x27;./classes/Column&#x27;;
 import Row from &#x27;./classes/Row&#x27;;
-
-export default Table;
 
 /**
  * A lightweight contextual component based table addon that follows Ember&#x27;s actions up, data down ideology.
@@ -180,7 +179,6 @@ export default Table;
  * Now that we have our &#x60;table&#x60;, we can declare our component in our template.
  *
  * &#x60;&#x60;&#x60;hbs
- * // templates/components/my-table.hbs
  * {{#light-table table as |t|}}
  *   {{t.head}}
  *
@@ -211,6 +209,7 @@ export default Table;
  *
  * @module Home
  */
+export default Table;
 export { Table, Column, Row };
 
     </pre>

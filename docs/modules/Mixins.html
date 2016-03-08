@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/lt-foot.js - Ember Light Table</title>
+    <title>Mixins - Ember Light Table</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -34,7 +34,7 @@
                    <li  >
                      <a href="../modules/Home.html">Home</a>
                    </li>
-                   <li  >
+                   <li  class="active" >
                      <a href="../modules/Mixins.html">Mixins</a>
                    </li>
             
@@ -82,51 +82,44 @@
                         </form>
                     
 <div class="page-header">
-    <h1>addon/components/lt-foot.js <small>File</small></h1>
+    <h1>Mixins</h1>
 </div>
 
-<div class="file">
-    <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../templates/components/lt-foot&#x27;;
-import TableColumnMixin from &#x27;../mixins/table-column&#x27;;
+<div class="clearfix well well-small">
 
-/**
- * @module Components
- */
 
-/**
- * &#x60;&#x60;&#x60;hbs
- * {{#light-table table as |t|}}
- *   {{t.foot onColumnClick=(action &#x27;sortByColumn&#x27;)}}
- * {{/light-table}}
- * &#x60;&#x60;&#x60;
- * If you want to define your own tfoot, just declare the contextual component in a block.
- *
- * &#x60;&#x60;&#x60;hbs
- * {{#light-table table as |t|}}
- *   {{#t.foot onColumnClick=(action &#x27;sortByColumn&#x27;) as |columns table|}}
- *     {{#each columns as |column|}}
- *       {{!-- ... --}}
- *     {{/each}}
- *   {{/t.foot}}
- * {{/light-table}}
- * &#x60;&#x60;&#x60;
- *
- * will be empty
- * @class Foot
- * @uses TableColumnMixin
- */
+        <div class="foundat">
+            Defined in: <a href="../files/addon_mixins_table-scroll.js.html#l12"><code>addon&#x2F;mixins&#x2F;table-scroll.js:12</code></a>
+        </div>
 
-export default Ember.Component.extend(TableColumnMixin, {
-  layout,
-  tagName: &#x27;tfoot&#x27;,
-  classNames: [&#x27;lt-foot&#x27;],
-  table: null
-});
-
-    </pre>
 </div>
+
+
+<div class="moduledesc page-section">
+    
+</div>
+
+
+    <div class="yui3-g footer">
+            <div class="yui3-u-1-2">
+                    <p>This module provides the following classes:</p>
+
+                    <ul class="module-classes">
+                        <li class="module-class">
+                            <a href="../classes/TableColumnMixin.html">
+                                TableColumnMixin
+                            </a>
+                        </li>
+                        <li class="module-class">
+                            <a href="../classes/TableScrollMixin.html">
+                                TableScrollMixin
+                            </a>
+                        </li>
+                    </ul>
+            </div>
+
+
+    </div>
                     </div>
                 </div>
             </div>
