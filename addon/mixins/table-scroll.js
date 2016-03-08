@@ -6,8 +6,13 @@ const {
 } = Ember;
 
 /**
+ * @module Mixins
+ */
+
+/**
  * @class TableScrollMixin
  * @extends Ember.Mixin
+ * @private
  */
 export default Ember.Mixin.create({
   /**

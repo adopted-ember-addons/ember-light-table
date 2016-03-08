@@ -90,7 +90,6 @@ import Row from './classes/Row';
  * Now that we have our `table`, we can declare our component in our template.
  *
  * ```hbs
- * // templates/components/my-table.hbs
  * {{#light-table table as |t|}}
  *   {{t.head}}
  *

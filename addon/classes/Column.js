@@ -6,13 +6,9 @@ const {
   A: emberArray
 } = Ember;
 
-/**
- * @module Classes
- */
-
  /**
+  * @module Classes
   * @class Column
-  * @extends Ember.Object
   */
 export default class Column extends Ember.Object.extend({
   /**
@@ -98,12 +94,14 @@ export default class Column extends Ember.Object.extend({
   /**
    * @property isGroupColumn
    * @type {Boolean}
+   * @private
    */
   isGroupColumn: computed.notEmpty('subColumns').readOnly(),
 
   /**
    * @property isVisibleGroupColumn
    * @type {Boolean}
+   * @private
    */
   isVisibleGroupColumn: computed('visibleSubColumns.[]', 'hidden', function() {
     return !isEmpty(this.get('visibleSubColumns')) && !this.get('hidden');
@@ -112,6 +110,7 @@ export default class Column extends Ember.Object.extend({
   /**
    * @property visibleSubColumns
    * @type {Array}
+   * @private
    */
   visibleSubColumns: computed('subColumns.@each.hidden', 'hidden', function() {
     let subColumns = this.get('subColumns');

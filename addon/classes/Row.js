@@ -1,12 +1,8 @@
 import Ember from 'ember';
 
-/**
- * @module Classes
- */
-
  /**
+  * @module Classes
   * @class Row
-  * @extends Ember.ObjectProxy
   */
 export default class Row extends Ember.ObjectProxy.extend({
   /**

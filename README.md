@@ -102,7 +102,6 @@ For a list of possible column options, please [checkout out the docs](http://off
 Now that we have our `table`, we can declare our component in our template. 
 
 ```hbs
-// templates/components/my-table.hbs
 {{#light-table table as |t|}}
   {{t.head}}
   

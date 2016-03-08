@@ -6,8 +6,13 @@ const {
 } = Ember;
 
 /**
+ * @module Mixins
+ */
+
+/**
  * @class TableColumnMixin
  * @extends Ember.Mixin
+ * @private
  */
 
 export default Ember.Mixin.create({

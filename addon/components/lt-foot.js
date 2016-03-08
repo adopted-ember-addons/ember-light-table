@@ -17,7 +17,7 @@ import TableColumnMixin from '../mixins/table-column';
  * ```hbs
  * {{#light-table table as |t|}}
  *   {{#t.foot onColumnClick=(action 'sortByColumn') as |columns table|}}
- *     {{#each groups as |group|}}
+ *     {{#each columns as |column|}}
  *       {{!-- ... --}}
  *     {{/each}}
  *   {{/t.foot}}
