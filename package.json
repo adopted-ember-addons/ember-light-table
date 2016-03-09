@@ -2,6 +2,7 @@
   "name": "ember-light-table",
   "version": "0.0.0",
   "description": "Lightweight, component based table for Ember 2.x",
+  "homepage": "https://github.com/offirgolan/ember-light-table",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,7 +12,10 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "git@github.com:offirgolan/ember-light-table.git",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/offirgolan/ember-light-table.git"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -49,13 +53,15 @@
     "yuidoc-ember-theme": "offirgolan/yuidoc-ember-theme"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "table"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.5",
     "ember-cli-htmlbars": "^1.0.2"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "http://offirgolan.github.io/ember-light-table"
   }
 }
