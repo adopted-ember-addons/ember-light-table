@@ -2,7 +2,7 @@
 
 var options = {
   modulePrefix: '',
-  filter: '//.*(ember-light-table|validators)/.*/',
+  filter: '//.*(ember-light-table)/.*/',
   antifilter: '//.*(tests|template).*/',
   loaderExclusions: [],
   enableCoverage: true,
