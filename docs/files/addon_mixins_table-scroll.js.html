@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">0.0.0.a0587515</p>
+                <p class="version pull-right">v0.1.0</p>
               </div>
             </div>
         </div>
@@ -167,9 +167,11 @@ export default Ember.Mixin.create({
   },
 
   isScrolledToBottom() {
-    var element = this.get(&#x27;element&#x27;);
+    let element = this.get(&#x27;element&#x27;);
+    let container = this.get(&#x27;scrollContainer&#x27;);
+    let buffer = this.get(&#x27;scrollBuffer&#x27;);
     if (element) {
-      return element.getBoundingClientRect().bottom &lt;= window.innerHeight + this.get(&#x27;scrollBuffer&#x27;);
+      return $(container).scrollTop() + $(container).innerHeight() + buffer &gt;= $(container)[0].scrollHeight;
     }
   }
 });
