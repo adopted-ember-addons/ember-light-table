@@ -78,9 +78,11 @@ export default Ember.Mixin.create({
   },
 
   isScrolledToBottom() {
-    var element = this.get('element');
+    let element = this.get('element');
+    let container = this.get('scrollContainer');
+    let buffer = this.get('scrollBuffer');
     if (element) {
-      return element.getBoundingClientRect().bottom <= window.innerHeight + this.get('scrollBuffer');
+      return $(container).scrollTop() + $(container).innerHeight() + buffer >= $(container)[0].scrollHeight;
     }
   }
 });

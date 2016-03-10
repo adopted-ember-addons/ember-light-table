@@ -1,37 +1,9 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import startMirage from '../../helpers/setup-mirage-for-integration';
+import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
 import Table from 'ember-light-table';
-
-function createUsers(numUsers = 20) {
-  server.createList('user', numUsers);
-  return server.db.users;
-}
-
-const Columns = [{
-  label: 'Avatar',
-  valuePath: 'avatar',
-  width: '60px',
-  sortable: false,
-  cellComponent: 'user-avatar'
-}, {
-  label: 'First Name',
-  valuePath: 'firstName',
-  width: '150px'
-}, {
-  label: 'Last Name',
-  valuePath: 'lastName',
-  width: '150px'
-}, {
-  label: 'Address',
-  valuePath: 'address'
-}, {
-  label: 'State',
-  valuePath: 'state'
-}, {
-  label: 'Country',
-  valuePath: 'country'
-}];
+import createClickEvent from '../../helpers/create-click-event';
+import Columns from '../../helpers/table-columns';
 
 moduleForComponent('lt-body', 'Integration | Component | lt body', {
   integration: true,
@@ -41,9 +13,6 @@ moduleForComponent('lt-body', 'Integration | Component | lt body', {
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });"
-
   this.render(hbs `{{lt-body}}`);
   assert.equal(this.$().text().trim(), '');
 });
@@ -69,12 +38,36 @@ test('row selection', function(assert) {
   assert.ok(row.hasClass('is-selected'));
 });
 
+test('row selection', function(assert) {
+  this.set('table', new Table(Columns, createUsers(5)));
+
+  this.render(hbs `{{lt-body table=table canSelect=true multiSelect=true}}`);
+
+  let firstRow = this.$('tr:first');
+  let middleRow = this.$('tr:nth-of-type(3)');
+  let lastRow = this.$('tr:last');
+
+  assert.equal(this.$('tbody > tr').length, 5);
+
+  firstRow.click();
+  assert.equal(this.$('tr.is-selected').length, 1);
+
+  lastRow.trigger(createClickEvent({shiftKey: true}));
+  assert.equal(this.$('tr.is-selected').length, 5);
+
+  middleRow.trigger(createClickEvent({ctrlKey: true}));
+  assert.equal(this.$('tr.is-selected').length, 4);
+
+  firstRow.click();
+  assert.equal(this.$('tr.is-selected').length, 0);
+});
+
 test('row expansion', function(assert) {
-  this.set('table', new Table(Columns, createUsers(1)));
+  this.set('table', new Table(Columns, createUsers(2)));
   this.set('canExpand', false);
 
   this.render(hbs `
-    {{#lt-body table=table canExpand=canExpand as |b|}}
+    {{#lt-body table=table canSelect=false canExpand=canExpand multiRowExpansion=false as |b|}}
       {{#b.expanded-row}} Hello {{/b.expanded-row}}
     {{/lt-body}}
   `);
@@ -84,15 +77,55 @@ test('row expansion', function(assert) {
   assert.ok(!row.hasClass('is-expandable'));
   row.click();
   assert.equal(this.$('tr.lt-expanded-row').length, 0);
-  assert.equal(this.$('tbody > tr').length, 1);
+  assert.equal(this.$('tbody > tr').length, 2);
+  assert.equal(this.$('tr.lt-expanded-row').text().trim(), '');
 
   this.set('canExpand', true);
 
   assert.ok(row.hasClass('is-expandable'));
   row.click();
   assert.equal(this.$('tr.lt-expanded-row').length, 1);
-  assert.equal(this.$('tbody > tr').length, 2);
-  assert.equal(this.$('tr.lt-expanded-row').text().trim(), 'Hello');
+  assert.equal(this.$('tbody > tr').length, 3);
+  assert.equal(row.next().text().trim(), 'Hello');
+
+  row = this.$('tr:last');
+  assert.ok(row.hasClass('is-expandable'));
+  row.click();
+  assert.equal(this.$('tr.lt-expanded-row').length, 1);
+  assert.equal(this.$('tbody > tr').length, 3);
+  assert.equal(row.next().text().trim(), 'Hello');
+});
+
+test('row expansion - multiple', function(assert) {
+  this.set('table', new Table(Columns, createUsers(2)));
+  this.render(hbs `
+    {{#lt-body table=table canExpand=true as |b|}}
+      {{#b.expanded-row}} Hello {{/b.expanded-row}}
+    {{/lt-body}}
+  `);
+
+  let rows = this.$('tr');
+  assert.equal(rows.length, 2);
+
+  rows.each((i, r) => {
+    let row = $(r);
+    assert.ok(row.hasClass('is-expandable'));
+    row.click();
+    assert.equal(row.next().text().trim(), 'Hello');
+  });
+
+  assert.equal(this.$('tr.lt-expanded-row').length, 2);
+});
+
+test('row actions', function(assert) {
+  this.set('table', new Table(Columns, createUsers(1)));
+  this.on('onRowClick', row => assert.ok(row));
+  this.on('onRowDoubleClick', row => assert.ok(row));
+  this.render(hbs `{{lt-body table=table onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
+
+  let row = this.$('tr:first');
+  row.click();
+  row.dblclick();
 });
 
 

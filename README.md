@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/offirgolan/ember-light-table.svg)](https://travis-ci.org/offirgolan/ember-light-table)
 [![npm version](https://badge.fury.io/js/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
 [![Code Climate](https://codeclimate.com/github/offirgolan/ember-light-table/badges/gpa.svg)](https://codeclimate.com/github/offirgolan/ember-light-table)
-<!-- [![Test Coverage](https://codeclimate.com/github/offirgolan/ember-light-table/badges/coverage.svg)](https://codeclimate.com/github/offirgolan/ember-light-table/coverage) -->
+[![Test Coverage](https://codeclimate.com/github/offirgolan/ember-light-table/badges/coverage.svg)](https://codeclimate.com/github/offirgolan/ember-light-table/coverage)
 [![Dependency Status](https://david-dm.org/offirgolan/ember-light-table.svg)](https://david-dm.org/offirgolan/ember-light-table)
 [![devDependency Status](https://david-dm.org/offirgolan/ember-light-table/dev-status.svg)](https://david-dm.org/offirgolan/ember-light-table#info=devDependencies)
 
