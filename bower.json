@@ -8,7 +8,8 @@
     "pretender": "~0.10.1",
     "lodash": "~3.7.0",
     "Faker": "~3.0.0",
-    "font-awesome": "~4.5.0"
+    "font-awesome": "~4.5.0",
+    "es5-shim": "^4.0.5"
   },
   "resolutions": {
     "ember": "2.2.0"
