@@ -13,18 +13,6 @@
     user-select: none;
   }
 
-  .align-left {
-    text-align: left;
-  }
-
-  .align-right {
-    text-align: right;
-  }
-
-  .align-center {
-    text-align: center;
-  }
-
   .lt-column {
     border-bottom: 1px solid #DADADA;
     font-weight: 200;
@@ -32,12 +20,7 @@
     padding: 10px;
 
     .lt-sort-icon {
-      float: right;
       width: 15px;
-    }
-
-    &.is-sortable {
-      cursor: pointer;
     }
 
     &.lt-group-column {
@@ -48,10 +31,6 @@
 
   .lt-row {
     height: 50px;
-
-    &.is-expandable, &.is-selectable {
-      cursor: pointer;
-    }
 
     &.is-selected {
       background-color: #DEDEDE !important;
@@ -66,10 +45,6 @@
         border-bottom-width: 0;
       }
     }
-
-    // &:nth-child(odd) {
-    //   background-color: #F5F4F4;
-    // }
 
     &.lt-expanded-row, &.lt-no-data {
       &:hover {
@@ -86,10 +61,6 @@
       border-style: solid;
       font-size: 13px;
       padding: 0 10px;
-
-      // &.is-sorted {
-      //   background-color: #DADADA;
-      // }
     }
   }
 }

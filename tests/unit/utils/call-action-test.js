@@ -12,5 +12,5 @@ test('it works', function(assert) {
       }
     }
   };
-  callAction.call(obj, 'myAction', 'foo');
+  callAction(obj, 'myAction', 'foo');
 });

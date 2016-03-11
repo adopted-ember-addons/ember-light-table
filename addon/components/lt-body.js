@@ -147,7 +147,7 @@ export default Ember.Component.extend({
         }
       }
 
-      callAction.call(this, 'onRowClick', ...arguments);
+      callAction(this, 'onRowClick', ...arguments);
     },
 
     /**
@@ -157,7 +157,7 @@ export default Ember.Component.extend({
      * @param  {Event}   event   The click event
      */
     onRowDoubleClick( /* row */ ) {
-      callAction.call(this, 'onRowDoubleClick', ...arguments);
+      callAction(this, 'onRowDoubleClick', ...arguments);
     }
   }
 });

@@ -79,7 +79,7 @@ const LightTable =  Ember.Component.extend(TableScrollMixin, {
      * @method onScrolledToBottom
      */
     onScrolledToBottom() {
-      callAction.call(this, 'onScrolledToBottom', ...arguments);
+      callAction(this, 'onScrolledToBottom', ...arguments);
     }
   }
 });

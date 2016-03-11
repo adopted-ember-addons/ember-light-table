@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
-export default function(action, ...params) {
-  if (Ember.canInvoke(this.attrs, action)) {
-    this.attrs[action](...params);
+export default function(target, action, ...params) {
+  if (Ember.canInvoke(target.attrs, action)) {
+    target.attrs[action](...params);
   }
 }

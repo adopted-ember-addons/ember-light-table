@@ -1,0 +1,24 @@
+.ember-light-table .align-left {
+  text-align: left;
+}
+
+.ember-light-table .align-right {
+  text-align: right;
+}
+
+.ember-light-table .align-center {
+  text-align: center;
+}
+
+.ember-light-table .lt-column .lt-sort-icon {
+  float: right;
+}
+
+.ember-light-table .lt-column.is-sortable {
+  cursor: pointer;
+}
+
+.ember-light-table .lt-row.is-expandable,
+.ember-light-table .lt-row.is-selectable {
+  cursor: pointer;
+}

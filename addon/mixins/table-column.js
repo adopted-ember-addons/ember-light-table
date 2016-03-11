@@ -70,17 +70,17 @@ export default Ember.Mixin.create({
           column.set('sorted', true);
         }
       }
-      callAction.call(this, 'onColumnClick', ...arguments);
+      callAction(this, 'onColumnClick', ...arguments);
     },
 
     /**
-     * onColumnClick action.
+     * onColumnDoubleClick action.
      * @method onColumnDoubleClick
      * @param  {Column}   column The column that was clicked
      * @param  {Event}   event   The click event
      */
     onColumnDoubleClick(/* column */) {
-      callAction.call(this, 'onColumnDoubleClick', ...arguments);
+      callAction(this, 'onColumnDoubleClick', ...arguments);
     },
   }
 });
