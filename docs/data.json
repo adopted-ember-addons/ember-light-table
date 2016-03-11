@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v0.1.0"
+        "version": "v0.1.1"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -1119,7 +1119,7 @@
         {
             "file": "addon/mixins/table-column.js",
             "line": 76,
-            "description": "onColumnClick action.",
+            "description": "onColumnDoubleClick action.",
             "itemtype": "method",
             "name": "onColumnDoubleClick",
             "params": [

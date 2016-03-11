@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.0</p>
+                <p class="version pull-right">v0.1.1</p>
               </div>
             </div>
         </div>
@@ -236,7 +236,7 @@ export default Ember.Component.extend({
         }
       }
 
-      callAction.call(this, &#x27;onRowClick&#x27;, ...arguments);
+      callAction(this, &#x27;onRowClick&#x27;, ...arguments);
     },
 
     /**
@@ -246,7 +246,7 @@ export default Ember.Component.extend({
      * @param  {Event}   event   The click event
      */
     onRowDoubleClick( /* row */ ) {
-      callAction.call(this, &#x27;onRowDoubleClick&#x27;, ...arguments);
+      callAction(this, &#x27;onRowDoubleClick&#x27;, ...arguments);
     }
   }
 });
