@@ -40,7 +40,7 @@ If it is a bug [please open an issue on GitHub](http://github.com/offirgolan/emb
 ## Usage
 There are two parts to this addon. The first is the [Table](http://offirgolan.github.io/ember-light-table/docs/classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.
 
-### Table Definition
+### Table Declaration
 The `Table` constructor accepts an array of `Columns` or column options and an array of rows. 
 
 ```javascript
