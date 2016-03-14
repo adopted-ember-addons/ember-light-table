@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
   fetchRecords() {
     this.set('isLoading', true);
     this.store.query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then(records => {
-      this.table.addRows(records.toArray());
+      this.table.addRows(records);
       this.set('isLoading', false);
     });
   },

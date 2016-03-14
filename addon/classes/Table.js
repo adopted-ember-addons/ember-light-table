@@ -4,7 +4,6 @@ import Column from './Column';
 
 const {
   computed,
-  makeArray,
   isNone,
   isEmpty,
   A: emberArray
@@ -273,7 +272,7 @@ export default class Table extends Ember.Object.extend({
    * @return {Array}
    */
   static createRows(rows = []) {
-    return makeArray(rows).map(r => new Row(r));
+    return rows.map(r => Table.createRow(r));
   }
 
   /**
@@ -295,6 +294,6 @@ export default class Table extends Ember.Object.extend({
    * @return {Array}
    */
   static createColumns(columns = []) {
-    return makeArray(columns).map(c => new Column(c));
+    return columns.map(c => Table.createColumn(c));
   }
 }

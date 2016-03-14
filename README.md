@@ -90,7 +90,7 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    this.set('table', new Table(this.get('columns'), this.get('model').toArray()));
+    this.set('table', new Table(this.get('columns'), this.get('model')));
   }
 });
 ```
