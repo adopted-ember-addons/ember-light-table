@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.1</p>
+                <p class="version pull-right">v0.1.2</p>
               </div>
             </div>
         </div>
@@ -116,7 +116,7 @@ import Row from &#x27;./classes/Row&#x27;;
  * ## Usage
  * There are two parts to this addon. The first is the [Table](../classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.
  *
- * ### Table Definition
+ * ### Table Declaration
  * The &#x60;Table&#x60; constructor accepts an array of &#x60;Columns&#x60; or column options and an array of rows.
  *
  * &#x60;&#x60;&#x60;javascript
@@ -166,7 +166,7 @@ import Row from &#x27;./classes/Row&#x27;;
  *
  *   init() {
  *     this._super(...arguments);
- *     this.set(&#x27;table&#x27;, new Table(this.get(&#x27;columns&#x27;), this.get(&#x27;model&#x27;).toArray()));
+ *     this.set(&#x27;table&#x27;, new Table(this.get(&#x27;columns&#x27;), this.get(&#x27;model&#x27;)));
  *   }
  * });
  * &#x60;&#x60;&#x60;

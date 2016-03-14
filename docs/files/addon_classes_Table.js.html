@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.1</p>
+                <p class="version pull-right">v0.1.2</p>
               </div>
             </div>
         </div>
@@ -93,7 +93,6 @@ import Column from &#x27;./Column&#x27;;
 
 const {
   computed,
-  makeArray,
   isNone,
   isEmpty,
   A: emberArray
@@ -362,7 +361,7 @@ export default class Table extends Ember.Object.extend({
    * @return {Array}
    */
   static createRows(rows = []) {
-    return makeArray(rows).map(r =&gt; new Row(r));
+    return rows.map(r =&gt; Table.createRow(r));
   }
 
   /**
@@ -384,7 +383,7 @@ export default class Table extends Ember.Object.extend({
    * @return {Array}
    */
   static createColumns(columns = []) {
-    return makeArray(columns).map(c =&gt; new Column(c));
+    return columns.map(c =&gt; Table.createColumn(c));
   }
 }
 

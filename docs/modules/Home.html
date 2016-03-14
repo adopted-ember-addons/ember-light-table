@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.1</p>
+                <p class="version pull-right">v0.1.2</p>
               </div>
             </div>
         </div>
@@ -115,7 +115,7 @@
 <p>If it is a bug <a href="http://github.com/offirgolan/ember-light-table/issues">please open an issue on GitHub</a>.</p>
 <h2>Usage</h2>
 <p>There are two parts to this addon. The first is the <a href="../classes/Table.html">Table</a> which you create with column definitions and rows, and the second is the component declaration.</p>
-<h3>Table Definition</h3>
+<h3>Table Declaration</h3>
 <p>The <code>Table</code> constructor accepts an array of <code>Columns</code> or column options and an array of rows.</p>
 <pre class="code prettyprint"><code class="language-javascript">import Table from 'ember-light-table';
 const table = new Table(columns, rows);
@@ -160,7 +160,7 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    this.set('table', new Table(this.get('columns'), this.get('model').toArray()));
+    this.set('table', new Table(this.get('columns'), this.get('model')));
   }
 });
 </code></pre>

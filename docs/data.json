@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v0.1.1"
+        "version": "v0.1.2"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -117,7 +117,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "addon/classes/Table.js",
-            "line": 105
+            "line": 104
         },
         "Components": {
             "name": "Components",
@@ -161,7 +161,7 @@
             "tag": "module",
             "file": "addon/index.js",
             "line": 5,
-            "description": "A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.\n\n## Features\n\n* Custom component based column headers and cells\n* Infinite scroll support\n* Select & Multi-select\n* Grouped columns\n* Expandable rows\n* Easy table manipulation\n* Easy override to table header and footer\n* Contextual component for header, body, and footer, as well as loading, no data, and expanded row\n\n## Installation\n```shell\nember install ember-light-table\n```\n\n## Looking for help?\nIf it is a bug [please open an issue on GitHub](http://github.com/offirgolan/ember-light-table/issues).\n\n## Usage\nThere are two parts to this addon. The first is the [Table](../classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.\n\n### Table Definition\nThe `Table` constructor accepts an array of `Columns` or column options and an array of rows.\n\n```javascript\nimport Table from 'ember-light-table';\nconst table = new Table(columns, rows);\n```\n\nHere is a more real-word example\n\n```javascript\n// components/my-table.js\nimport Ember from 'ember';\nimport Table from 'ember-light-table';\n\nconst computed = Ember.computed;\n\nexport default Ember.Component.extend({\n  model: null,\n  table: null,\n\n  columns: computed(function() {\n    return [{\n      label: 'Avatar',\n      valuePath: 'avatar',\n      width: '60px',\n      sortable: false,\n      cellComponent: 'user-avatar'\n    }, {\n      label: 'First Name',\n      valuePath: 'firstName',\n      width: '150px'\n    }, {\n      label: 'Last Name',\n      valuePath: 'lastName',\n      width: '150px'\n    }, {\n      label: 'Address',\n      valuePath: 'address'\n    }, {\n      label: 'State',\n      valuePath: 'state'\n    }, {\n      label: 'Country',\n      valuePath: 'country'\n    }];\n  }),\n\n  init() {\n    this._super(...arguments);\n    this.set('table', new Table(this.get('columns'), this.get('model').toArray()));\n  }\n});\n```\n\nFor a list of possible column options, please\n[checkout out the docs](../classes/Column.html).\n\n### Component Declaration\n\nNow that we have our `table`, we can declare our component in our template.\n\n```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n\n  {{#t.body as |body|}}\n    {{#body.expanded-row as |row|}}\n      Hello <b>{{row.firstName}}</b>\n    {{/body.expanded-row}}\n\n    {{#if isLoading}}\n      {{#body.loader}}\n        Loading...\n      {{/body.loader}}\n    {{/if}}\n\n    {{#if table.isEmpty)}}\n      {{#body.no-data}}\n        No users found.\n      {{/body.no-data}}\n    {{/if}}\n  {{/t.body}}\n\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease note that each of these contextual components have a wide array of options so it is advised to look\nthrough the documentation."
+            "description": "A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.\n\n## Features\n\n* Custom component based column headers and cells\n* Infinite scroll support\n* Select & Multi-select\n* Grouped columns\n* Expandable rows\n* Easy table manipulation\n* Easy override to table header and footer\n* Contextual component for header, body, and footer, as well as loading, no data, and expanded row\n\n## Installation\n```shell\nember install ember-light-table\n```\n\n## Looking for help?\nIf it is a bug [please open an issue on GitHub](http://github.com/offirgolan/ember-light-table/issues).\n\n## Usage\nThere are two parts to this addon. The first is the [Table](../classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.\n\n### Table Declaration\nThe `Table` constructor accepts an array of `Columns` or column options and an array of rows.\n\n```javascript\nimport Table from 'ember-light-table';\nconst table = new Table(columns, rows);\n```\n\nHere is a more real-word example\n\n```javascript\n// components/my-table.js\nimport Ember from 'ember';\nimport Table from 'ember-light-table';\n\nconst computed = Ember.computed;\n\nexport default Ember.Component.extend({\n  model: null,\n  table: null,\n\n  columns: computed(function() {\n    return [{\n      label: 'Avatar',\n      valuePath: 'avatar',\n      width: '60px',\n      sortable: false,\n      cellComponent: 'user-avatar'\n    }, {\n      label: 'First Name',\n      valuePath: 'firstName',\n      width: '150px'\n    }, {\n      label: 'Last Name',\n      valuePath: 'lastName',\n      width: '150px'\n    }, {\n      label: 'Address',\n      valuePath: 'address'\n    }, {\n      label: 'State',\n      valuePath: 'state'\n    }, {\n      label: 'Country',\n      valuePath: 'country'\n    }];\n  }),\n\n  init() {\n    this._super(...arguments);\n    this.set('table', new Table(this.get('columns'), this.get('model')));\n  }\n});\n```\n\nFor a list of possible column options, please\n[checkout out the docs](../classes/Column.html).\n\n### Component Declaration\n\nNow that we have our `table`, we can declare our component in our template.\n\n```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n\n  {{#t.body as |body|}}\n    {{#body.expanded-row as |row|}}\n      Hello <b>{{row.firstName}}</b>\n    {{/body.expanded-row}}\n\n    {{#if isLoading}}\n      {{#body.loader}}\n        Loading...\n      {{/body.loader}}\n    {{/if}}\n\n    {{#if table.isEmpty)}}\n      {{#body.no-data}}\n        No users found.\n      {{/body.no-data}}\n    {{/if}}\n  {{/t.body}}\n\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease note that each of these contextual components have a wide array of options so it is advised to look\nthrough the documentation."
         }
     },
     "classes": {
@@ -218,7 +218,7 @@
             "module": "Classes",
             "namespace": "",
             "file": "addon/classes/Table.js",
-            "line": 105,
+            "line": 104,
             "is_constructor": 1,
             "params": [
                 {
@@ -510,7 +510,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 18,
+            "line": 17,
             "itemtype": "property",
             "name": "columns",
             "type": "{Ember.Array}",
@@ -520,7 +520,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 25,
+            "line": 24,
             "itemtype": "property",
             "name": "rows",
             "type": "{Ember.Array}",
@@ -530,7 +530,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 32,
+            "line": 31,
             "itemtype": "property",
             "name": "isEmpty",
             "type": "{Boolean}",
@@ -539,7 +539,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 38,
+            "line": 37,
             "itemtype": "property",
             "name": "expandedRows",
             "type": "{Ember.Array}",
@@ -548,7 +548,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 44,
+            "line": 43,
             "itemtype": "property",
             "name": "selectedRows",
             "type": "{Ember.Array}",
@@ -557,7 +557,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 50,
+            "line": 49,
             "itemtype": "property",
             "name": "sortedColumns",
             "type": "{Ember.Array}",
@@ -566,7 +566,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 56,
+            "line": 55,
             "itemtype": "property",
             "name": "sortableColumns",
             "type": "{Ember.Array}",
@@ -575,7 +575,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 62,
+            "line": 61,
             "itemtype": "property",
             "name": "visibleColumns",
             "type": "{Ember.Array}",
@@ -584,7 +584,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 68,
+            "line": 67,
             "itemtype": "property",
             "name": "visibleColumnGroups",
             "type": "{Ember.Array}",
@@ -593,7 +593,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 81,
+            "line": 80,
             "itemtype": "property",
             "name": "visibleSubColumns",
             "type": "{Ember.Array}",
@@ -602,7 +602,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 89,
+            "line": 88,
             "itemtype": "property",
             "name": "flattenedColumns",
             "type": "{Ember.Array}",
@@ -611,7 +611,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 121,
+            "line": 120,
             "description": "Replace all the row's content with content of the argument. If argument is an empty array receiver will be cleared.",
             "itemtype": "method",
             "name": "setRows",
@@ -627,7 +627,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 130,
+            "line": 129,
             "description": "Push the object onto the end of the row array if it is not already present.",
             "itemtype": "method",
             "name": "addRow",
@@ -643,7 +643,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 143,
+            "line": 142,
             "description": "Push the objects onto the end of the row array if it is not already present.",
             "itemtype": "method",
             "name": "addRows",
@@ -659,7 +659,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 152,
+            "line": 151,
             "description": "Push the object onto the end of the row array.",
             "itemtype": "method",
             "name": "pushRow",
@@ -675,7 +675,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 161,
+            "line": 160,
             "description": "Push the object onto the end of the row array.",
             "itemtype": "method",
             "name": "pushRows",
@@ -691,7 +691,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 170,
+            "line": 169,
             "description": "Remove all occurrences of an object in the rows",
             "itemtype": "method",
             "name": "removeRow",
@@ -707,7 +707,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 183,
+            "line": 182,
             "description": "Removes each object in the passed enumerable from the rows.",
             "itemtype": "method",
             "name": "removeRows",
@@ -723,7 +723,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 194,
+            "line": 193,
             "description": "Replace all the column's content with content of the argument. If argument is an empty array receiver will be cleared.",
             "itemtype": "method",
             "name": "setColumns",
@@ -739,7 +739,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 203,
+            "line": 202,
             "description": "Push the object onto the end of the column array if it is not already present.",
             "itemtype": "method",
             "name": "addColumn",
@@ -755,7 +755,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 212,
+            "line": 211,
             "description": "Push the objects onto the end of the column array if it is not already present.",
             "itemtype": "method",
             "name": "addColumns",
@@ -771,7 +771,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 221,
+            "line": 220,
             "description": "Push the object onto the end of the column array.",
             "itemtype": "method",
             "name": "pushColumn",
@@ -787,7 +787,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 230,
+            "line": 229,
             "description": "Push the object onto the end of the column array.",
             "itemtype": "method",
             "name": "pushColumns",
@@ -803,7 +803,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 239,
+            "line": 238,
             "description": "Remove all occurrences of an object in the columns",
             "itemtype": "method",
             "name": "removeColumn",
@@ -819,7 +819,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 248,
+            "line": 247,
             "description": "Removes each object in the passed enumerable from the columns.",
             "itemtype": "method",
             "name": "removeColumns",
@@ -835,7 +835,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 257,
+            "line": 256,
             "description": "Create a Row object with the given content",
             "itemtype": "method",
             "name": "createRow",
@@ -856,7 +856,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 268,
+            "line": 267,
             "description": "Create a collection of Row objects with the given collection",
             "itemtype": "method",
             "name": "createRows",
@@ -877,7 +877,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 279,
+            "line": 278,
             "description": "Create a Column object with the given options",
             "itemtype": "method",
             "name": "createColumn",
@@ -898,7 +898,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 290,
+            "line": 289,
             "description": "Create a collection of Column objects with the given collection",
             "itemtype": "method",
             "name": "createColumns",
