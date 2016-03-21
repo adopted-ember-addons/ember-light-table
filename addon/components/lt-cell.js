@@ -2,8 +2,8 @@ import Ember from 'ember';
 import layout from '../templates/components/lt-cell';
 
 const {
-  get,
-  computed
+  computed,
+  defineProperty
 } = Ember;
 
 export default Ember.Component.extend({
@@ -22,10 +22,11 @@ export default Ember.Component.extend({
 
   isSorted: computed.oneWay('column.sorted'),
 
-  value: computed('row', 'column', function() {
+  init() {
+    this._super(...arguments);
     let valuePath = this.get('column.valuePath');
     if(valuePath) {
-      return get(this.get('row'), valuePath);
+      defineProperty(this, 'value', computed.readOnly(`row.${valuePath}`));
     }
-  })
+  }
 });
