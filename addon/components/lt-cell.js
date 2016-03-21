@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   layout,
   tagName: 'td',
   classNames: ['lt-cell'],
+  attributeBindings: ['width'],
   classNameBindings: ['align', 'isSorted'],
 
   column: null,
@@ -20,7 +21,9 @@ export default Ember.Component.extend({
     return `align-${this.get('column.align')}`;
   }),
 
-  isSorted: computed.oneWay('column.sorted'),
+  isSorted: computed.readOnly('column.sorted'),
+
+  width: computed.readOnly('column.width'),
 
   init() {
     this._super(...arguments);
