@@ -176,6 +176,21 @@ test('table method - pushRows', function(assert) {
   assert.equal(table.get('rows.lastObject.name'), 'Offir');
 });
 
+test('table method - insertRowAt', function(assert) {
+  let table = new Table();
+
+  assert.ok(table);
+  assert.equal(table.get('rows.length'), 0);
+
+  table.setRows([{}, {}, {}]);
+  assert.equal(table.get('rows.length'), 3);
+
+  table.insertRowAt(1, { name: 'Offir' });
+
+  assert.equal(table.get('rows.length'), 4);
+  assert.equal(table.get('rows.1.name'), 'Offir');
+});
+
 test('table method - removeRow', function(assert) {
   let table = new Table();
   let content = { name: 'Offir' };
@@ -310,6 +325,21 @@ test('table method - pushColumns', function(assert) {
   assert.equal(table.get('columns.length'), 4);
 
   assert.equal(table.get('columns.lastObject.label'), 'Name');
+});
+
+test('table method - insertColumnAt', function(assert) {
+  let table = new Table();
+
+  assert.ok(table);
+  assert.equal(table.get('columns.length'), 0);
+
+  table.setColumns([{}, {}, {}]);
+  assert.equal(table.get('columns.length'), 3);
+
+  table.insertColumnAt(1, { label: 'Offir' });
+
+  assert.equal(table.get('columns.length'), 4);
+  assert.equal(table.get('columns.1.label'), 'Offir');
 });
 
 test('table method - removeColumn', function(assert) {

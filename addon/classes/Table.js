@@ -118,12 +118,13 @@ export default class Table extends Ember.Object.extend({
   // Rows
 
   /**
-   * Replace all the row's content with content of the argument. If argument is an empty array receiver will be cleared.
+   * Replace all the row's content with content of the argument. If argument is an empty array rows will be cleared.
    * @method setRows
    * @param  {Array} rows
+   * @return {Array} rows
    */
   setRows(rows = []) {
-    this.rows.setObjects(Table.createRows(rows));
+    return this.rows.setObjects(Table.createRows(rows));
   }
 
   /**
@@ -152,18 +153,37 @@ export default class Table extends Ember.Object.extend({
    * Push the object onto the end of the row array.
    * @method pushRow
    * @param  {Object} row
+   * @return {Row} pushed row
    */
   pushRow(row) {
-    this.rows.pushObject(Table.createRow(row));
+    let _row = Table.createRow(row);
+    this.rows.pushObject(_row);
+    return _row;
   }
 
   /**
    * Push the object onto the end of the row array.
    * @method pushRows
    * @param  {Array}  rows
+   * @return {Array} pushed rows
    */
   pushRows(rows = []) {
-    this.rows.pushObjects(Table.createRows(rows));
+    let _rows = Table.createRows(rows);
+    this.rows.pushObjects(_rows);
+    return _rows;
+  }
+
+  /**
+   * Insert a row at the specified index.
+   * @method insertRowAt
+   * @param  {Number}  index
+   * @param  {Object}  row
+   * @return {Row} inserted row
+   */
+  insertRowAt(index, row) {
+    let _row = Table.createRow(row);
+    this.rows.insertAt(index, _row);
+    return _row;
   }
 
   /**
@@ -191,9 +211,10 @@ export default class Table extends Ember.Object.extend({
   // Columns
 
   /**
-   * Replace all the column's content with content of the argument. If argument is an empty array receiver will be cleared.
+   * Replace all the column's content with content of the argument. If argument is an empty array columns will be cleared.
    * @method setColumns
    * @param  {Array} columns
+   * @return {Array} columns
    */
   setColumns(columns = []) {
     return this.columns.setObjects(Table.createColumns(columns));
@@ -205,7 +226,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Object} column
    */
   addColumn(column) {
-    return this.columns.addObject(Table.createColumn(column));
+    this.columns.addObject(Table.createColumn(column));
   }
 
   /**
@@ -214,25 +235,44 @@ export default class Table extends Ember.Object.extend({
    * @param  {Array} columns
    */
   addColumns(columns = []) {
-    return this.columns.addObjects(Table.createColumns(columns));
+    this.columns.addObjects(Table.createColumns(columns));
   }
 
   /**
    * Push the object onto the end of the column array.
    * @method pushColumn
    * @param  {Object} column
+   * @return {Column} pushed column
    */
   pushColumn(column) {
-    return this.columns.pushObject(Table.createColumn(column));
+    let _column = Table.createColumn(column);
+    this.columns.pushObject(_column);
+    return _column;
   }
 
   /**
    * Push the object onto the end of the column array.
    * @method pushColumns
    * @param  {Array}  columns
+   * @return {Array} pushed columns
    */
   pushColumns(columns = []) {
-    return this.columns.pushObjects(Table.createColumns(columns));
+    let _columns = Table.createColumns(columns);
+    this.columns.pushObjects(_columns);
+    return _columns;
+  }
+
+  /**
+   * Insert a column at the specified index.
+   * @method insertColumnAt
+   * @param  {Number}  index
+   * @param  {Object}  column
+   * @return {Column} inserted column
+   */
+  insertColumnAt(index, column) {
+    let _column = Table.createColumn(column);
+    this.columns.insertAt(index, _column);
+    return _column;
   }
 
   /**
