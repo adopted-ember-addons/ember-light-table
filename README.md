@@ -116,7 +116,7 @@ Now that we have our `table`, we can declare our component in our template.
       {{/body.loader}}
     {{/if}}
 
-    {{#if table.isEmpty)}}
+    {{#if table.isEmpty}}
       {{#body.no-data}}
         No users found.
       {{/body.no-data}}
