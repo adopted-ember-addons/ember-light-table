@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v0.1.4"
+        "version": "v0.1.5"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -176,7 +176,7 @@
             "module": "Classes",
             "namespace": "",
             "file": "addon/classes/Column.js",
-            "line": 120,
+            "line": 127,
             "is_constructor": 1,
             "params": [
                 {
@@ -458,6 +458,16 @@
         {
             "file": "addon/classes/Column.js",
             "line": 94,
+            "description": "A formatter function used to calculate a cell's value",
+            "itemtype": "property",
+            "name": "formatter",
+            "type": "{Function}",
+            "class": "Column",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 101,
             "itemtype": "property",
             "name": "isGroupColumn",
             "type": "{Boolean}",
@@ -468,7 +478,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 101,
+            "line": 108,
             "itemtype": "property",
             "name": "isVisibleGroupColumn",
             "type": "{Boolean}",
@@ -479,7 +489,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 110,
+            "line": 117,
             "itemtype": "property",
             "name": "visibleSubColumns",
             "type": "{Array}",
