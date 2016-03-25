@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.5
+- Ability to provide a formatter function to column definition that will be used to computed the cell value
+
 ## 0.1.4
 - [#4](https://github.com/offirgolan/ember-light-table/pull/4) Apply width on cell component based on it's columns width [@steffenbrem](https://github.com/steffenbrem)
 - [#5](https://github.com/offirgolan/ember-light-table/issues/5) Add insertRowAt & insertColumnAt to public Table API
