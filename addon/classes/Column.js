@@ -92,11 +92,11 @@ export default class Column extends Ember.Object.extend({
   width: null,
 
   /**
-   * A formatter function used to calculate a cell's value
-   * @property formatter
+   * A format function used to calculate a cell's value
+   * @property format
    * @type {Function}
    */
-  formatter: null,
+  format: null,
 
   /**
    * @property isGroupColumn

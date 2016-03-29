@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.6
+- Rename `formatter` to `format`
+
 ## 0.1.5
 - Ability to provide a formatter function to column definition that will be used to computed the cell value
 

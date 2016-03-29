@@ -38,9 +38,9 @@ export default Ember.Component.extend({
 
   _getValue() {
     const value = this.get('_rawValue');
-    const formatter = this.get('column.formatter');
-    if(formatter && typeof formatter === 'function') {
-      return formatter.call(this, value);
+    const format = this.get('column.format');
+    if(format && typeof format === 'function') {
+      return format.call(this, value);
     }
     return value;
   }

@@ -16,12 +16,12 @@ test('it renders', function(assert) {
 });
 
 
-test('cell with column formatter', function(assert) {
+test('cell with column format', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });"
   this.set('column', new Column({
     valuePath: 'num',
-    formatter(value) {
+    format(value) {
       return value * 2;
     }
   }));
@@ -35,11 +35,11 @@ test('cell with column formatter', function(assert) {
   assert.equal(this.$().text().trim(), '4');
 });
 
-test('cell formatter with no valuePath', function(assert) {
+test('cell format with no valuePath', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });"
   this.set('column', new Column({
-    formatter() {
+    format() {
       return this.get('row.num') * 2;
     }
   }));
