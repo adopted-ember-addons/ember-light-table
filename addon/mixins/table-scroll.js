@@ -2,7 +2,8 @@ import Ember from 'ember';
 
 const {
   $,
-  run
+  run,
+  computed
 } = Ember;
 
 /**
@@ -36,14 +37,25 @@ export default Ember.Mixin.create({
    */
   touchMoveContainer: document,
 
+  /**
+   * @property _shouldSetupScroll
+   * @type {Boolean}
+   * @private
+   */
+  _shouldSetupScroll: computed.notEmpty('attrs.onScrolledToBottom'),
+
   didInsertElement() {
     this._super(...arguments);
-    Ember.run.scheduleOnce('afterRender', this, this._setupScrollEvents);
+    if(this.get('_shouldSetupScroll')) {
+      run.scheduleOnce('afterRender', this, this._setupScrollEvents);
+    }
   },
 
   destroy() {
     this._super(...arguments);
-    this._teardownScrollEvents();
+    if(this.get('_shouldSetupScroll')) {
+      this._teardownScrollEvents();
+    }
   },
 
   _setupScrollEvents() {
@@ -73,7 +85,7 @@ export default Ember.Mixin.create({
 
   _onScroll() {
     if (this.isScrolledToBottom()) {
-      Ember.run(() => this.send('onScrolledToBottom'));
+      run(() => this.send('onScrolledToBottom'));
     }
   },
 
