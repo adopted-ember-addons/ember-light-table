@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v0.1.5"
+        "version": "v0.1.6"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -458,9 +458,9 @@
         {
             "file": "addon/classes/Column.js",
             "line": 94,
-            "description": "A formatter function used to calculate a cell's value",
+            "description": "A format function used to calculate a cell's value",
             "itemtype": "property",
-            "name": "formatter",
+            "name": "format",
             "type": "{Function}",
             "class": "Column",
             "module": "Classes"
