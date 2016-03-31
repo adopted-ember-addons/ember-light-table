@@ -111,7 +111,7 @@ export default Ember.Component.extend({
   actions: {
     /**
      * onRowClick action. Handles selection, and row expansion.
-     * @method onRowClick
+     * @event onRowClick
      * @param  {Row}   row The row that was clicked
      * @param  {Event}   event   The click event
      */
@@ -152,7 +152,7 @@ export default Ember.Component.extend({
 
     /**
      * onRowDoubleClick action.
-     * @method onRowDoubleClick
+     * @event onRowDoubleClick
      * @param  {Row}   row The row that was clicked
      * @param  {Event}   event   The click event
      */

@@ -55,7 +55,8 @@ export default Ember.Mixin.create({
   actions: {
     /**
      * onColumnClick action. Handles column sorting.
-     * @method onColumnClick
+     *
+     * @event onColumnClick
      * @param  {Column}   column The column that was clicked
      * @param  {Event}   event   The click event
      */
@@ -75,7 +76,8 @@ export default Ember.Mixin.create({
 
     /**
      * onColumnDoubleClick action.
-     * @method onColumnDoubleClick
+     *
+     * @event onColumnDoubleClick
      * @param  {Column}   column The column that was clicked
      * @param  {Event}   event   The click event
      */

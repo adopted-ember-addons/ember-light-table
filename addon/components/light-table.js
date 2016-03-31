@@ -76,7 +76,8 @@ const LightTable =  Ember.Component.extend(TableScrollMixin, {
   actions: {
     /**
      * Action to be called when user reached the bottom of the scroll container
-     * @method onScrolledToBottom
+     *
+     * @event onScrolledToBottom
      */
     onScrolledToBottom() {
       callAction(this, 'onScrolledToBottom', ...arguments);
