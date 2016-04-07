@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v0.1.6"
+        "version": "v0.1.7"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -149,7 +149,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "addon/mixins/table-scroll.js",
-            "line": 12
+            "line": 13
         },
         "Home": {
             "name": "Home",
@@ -334,7 +334,7 @@
             "module": "Mixins",
             "namespace": "",
             "file": "addon/mixins/table-scroll.js",
-            "line": 12,
+            "line": 13,
             "extends": "Ember.Mixin",
             "access": "private",
             "tagname": ""
@@ -1024,7 +1024,7 @@
             "file": "addon/components/light-table.js",
             "line": 77,
             "description": "Action to be called when user reached the bottom of the scroll container",
-            "itemtype": "method",
+            "itemtype": "event",
             "name": "onScrolledToBottom",
             "class": "Light Table",
             "module": "Components"
@@ -1101,7 +1101,7 @@
             "file": "addon/components/lt-body.js",
             "line": 112,
             "description": "onRowClick action. Handles selection, and row expansion.",
-            "itemtype": "method",
+            "itemtype": "event",
             "name": "onRowClick",
             "params": [
                 {
@@ -1122,7 +1122,7 @@
             "file": "addon/components/lt-body.js",
             "line": 153,
             "description": "onRowDoubleClick action.",
-            "itemtype": "method",
+            "itemtype": "event",
             "name": "onRowDoubleClick",
             "params": [
                 {
@@ -1183,7 +1183,7 @@
             "file": "addon/mixins/table-column.js",
             "line": 56,
             "description": "onColumnClick action. Handles column sorting.",
-            "itemtype": "method",
+            "itemtype": "event",
             "name": "onColumnClick",
             "params": [
                 {
@@ -1202,9 +1202,9 @@
         },
         {
             "file": "addon/mixins/table-column.js",
-            "line": 76,
+            "line": 77,
             "description": "onColumnDoubleClick action.",
-            "itemtype": "method",
+            "itemtype": "event",
             "name": "onColumnDoubleClick",
             "params": [
                 {
@@ -1223,7 +1223,7 @@
         },
         {
             "file": "addon/mixins/table-scroll.js",
-            "line": 18,
+            "line": 19,
             "itemtype": "property",
             "name": "scrollBuffer",
             "type": "{Number}",
@@ -1233,7 +1233,7 @@
         },
         {
             "file": "addon/mixins/table-scroll.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "property",
             "name": "scrollContainer",
             "type": "{String | Object}",
@@ -1243,11 +1243,22 @@
         },
         {
             "file": "addon/mixins/table-scroll.js",
-            "line": 32,
+            "line": 33,
             "itemtype": "property",
             "name": "touchMoveContainer",
             "type": "{String | Object}",
             "default": "document",
+            "class": "TableScrollMixin",
+            "module": "Mixins"
+        },
+        {
+            "file": "addon/mixins/table-scroll.js",
+            "line": 40,
+            "itemtype": "property",
+            "name": "_shouldSetupScroll",
+            "type": "{Boolean}",
+            "access": "private",
+            "tagname": "",
             "class": "TableScrollMixin",
             "module": "Mixins"
         }

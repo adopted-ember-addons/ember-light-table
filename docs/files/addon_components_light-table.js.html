@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.6</p>
+                <p class="version pull-right">v0.1.7</p>
               </div>
             </div>
         </div>
@@ -165,7 +165,8 @@ const LightTable =  Ember.Component.extend(TableScrollMixin, {
   actions: {
     /**
      * Action to be called when user reached the bottom of the scroll container
-     * @method onScrolledToBottom
+     *
+     * @event onScrolledToBottom
      */
     onScrolledToBottom() {
       callAction(this, &#x27;onScrolledToBottom&#x27;, ...arguments);

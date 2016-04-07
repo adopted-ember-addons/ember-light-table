@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.6</p>
+                <p class="version pull-right">v0.1.7</p>
               </div>
             </div>
         </div>
@@ -118,21 +118,15 @@ for more details on all possible options and actions.</p>
 <div>
     <div class="page-section">
         <div id="index">
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods">
-                            <li class="index-item method">
-                                <a href="#method_onScrolledToBottom">onScrolledToBottom</a>
-
-                            </li>
-                    </ul>
-                </div>
 
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
                     <ul class="index-list properties">
+                            <li class="index-item property private inherited">
+                                <a href="#property__shouldSetupScroll">_shouldSetupScroll</a>
+
+                            </li>
                             <li class="index-item property inherited">
                                 <a href="#property_scrollBuffer">scrollBuffer</a>
 
@@ -157,46 +151,47 @@ for more details on all possible options and actions.</p>
                 </div>
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                            <li class="index-item event">
+                                <a href="#event_onScrolledToBottom">onScrolledToBottom</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
-            <div id="methods" class="page-section">
-                <h2 class="off-left">Methods</h2>
-                <div class="item-list">
-<div id="method_onScrolledToBottom" class="method item">
-	<span class="method-signature">
-	<span class="name"><code>onScrolledToBottom</code></span>
-
-		<span class="paren">()</span>
-	</span>
-
-
-
-
-
-
-
-	<div class="meta">
-				<p>
-				Defined in
-		<a href="../files/addon_components_light-table.js.html#l77"><code>addon&#x2F;components&#x2F;light-table.js:77</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description"><p>Action to be called when user reached the bottom of the scroll container</p>
-</div>
-
-
-
-</div>
-                </div>
-            </div>
 
             <div id="properties" class="page-section">
                 <h2 class="off-left">Properties</h2>
                 <div class="item-list">
+<div id="property__shouldSetupScroll" class="property item private inherited">
+    <h3 class="name"><code>_shouldSetupScroll</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/TableScrollMixin.html#property__shouldSetupScroll">TableScrollMixin</a>:
+        <a href="../files/addon_mixins_table-scroll.js.html#l40"><code>addon&#x2F;mixins&#x2F;table-scroll.js:40</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+</div>
 <div id="property_scrollBuffer" class="property item inherited">
     <h3 class="name"><code>scrollBuffer</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
@@ -208,7 +203,7 @@ for more details on all possible options and actions.</p>
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/TableScrollMixin.html#property_scrollBuffer">TableScrollMixin</a>:
-        <a href="../files/addon_mixins_table-scroll.js.html#l18"><code>addon&#x2F;mixins&#x2F;table-scroll.js:18</code></a>
+        <a href="../files/addon_mixins_table-scroll.js.html#l19"><code>addon&#x2F;mixins&#x2F;table-scroll.js:19</code></a>
         </p>
 
 
@@ -233,7 +228,7 @@ for more details on all possible options and actions.</p>
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/TableScrollMixin.html#property_scrollContainer">TableScrollMixin</a>:
-        <a href="../files/addon_mixins_table-scroll.js.html#l25"><code>addon&#x2F;mixins&#x2F;table-scroll.js:25</code></a>
+        <a href="../files/addon_mixins_table-scroll.js.html#l26"><code>addon&#x2F;mixins&#x2F;table-scroll.js:26</code></a>
         </p>
 
 
@@ -320,7 +315,7 @@ row object which will bubble all the way to where you defined that action.</p>
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/TableScrollMixin.html#property_touchMoveContainer">TableScrollMixin</a>:
-        <a href="../files/addon_mixins_table-scroll.js.html#l32"><code>addon&#x2F;mixins&#x2F;table-scroll.js:32</code></a>
+        <a href="../files/addon_mixins_table-scroll.js.html#l33"><code>addon&#x2F;mixins&#x2F;table-scroll.js:33</code></a>
         </p>
 
 
@@ -338,6 +333,36 @@ row object which will bubble all the way to where you defined that action.</p>
             </div>
 
 
+            <div id="events" class="page-section">
+                <h2 class="off-left">Events</h2>
+                <div class="item-list">
+<div id="event_onScrolledToBottom" class="events item">
+    <h3 class="name"><code>onScrolledToBottom</code></h3>
+    <span class="type"></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_components_light-table.js.html#l77"><code>addon&#x2F;components&#x2F;light-table.js:77</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Action to be called when user reached the bottom of the scroll container</p>
+
+    </div>
+
+
+
+</div>
+                </div>
+            </div>
     </div>
 </div>
                     </div>

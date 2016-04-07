@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.6</p>
+                <p class="version pull-right">v0.1.7</p>
               </div>
             </div>
         </div>
@@ -125,20 +125,6 @@ will be empty</p>
 <div>
     <div class="page-section">
         <div id="index">
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods">
-                            <li class="index-item method inherited">
-                                <a href="#method_onColumnClick">onColumnClick</a>
-
-                            </li>
-                            <li class="index-item method inherited">
-                                <a href="#method_onColumnDoubleClick">onColumnDoubleClick</a>
-
-                            </li>
-                    </ul>
-                </div>
 
                 <div class="index-section properties">
                     <h3>Properties</h3>
@@ -164,131 +150,22 @@ will be empty</p>
                 </div>
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                            <li class="index-item event inherited">
+                                <a href="#event_onColumnClick">onColumnClick</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_onColumnDoubleClick">onColumnDoubleClick</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
-            <div id="methods" class="page-section">
-                <h2 class="off-left">Methods</h2>
-                <div class="item-list">
-<div id="method_onColumnClick" class="method item inherited">
-	<span class="method-signature">
-	<span class="name"><code>onColumnClick</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>column</code>
-				</li>
-				<li class="arg">
-						<code>event</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-	</span>
-
-
-
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="../classes/TableColumnMixin.html#method_onColumnClick">TableColumnMixin</a>:
-		<a href="../files/addon_mixins_table-column.js.html#l56"><code>addon&#x2F;mixins&#x2F;table-column.js:56</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">onColumnClick action. Handles column sorting.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">column</code>
-						<span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
-
-
-					<div class="param-description">The column that was clicked</div>
-
-				</li>
-				<li class="param">
-						<code class="param-name">event</code>
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" class="crosslink external" target="_blank">Event</a></span>
-
-
-					<div class="param-description">The click event</div>
-
-				</li>
-			</ul>
-		</div>
-
-
-</div>
-<div id="method_onColumnDoubleClick" class="method item inherited">
-	<span class="method-signature">
-	<span class="name"><code>onColumnDoubleClick</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>column</code>
-				</li>
-				<li class="arg">
-						<code>event</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-	</span>
-
-
-
-
-
-
-
-	<div class="meta">
-				<p>Inherited from
-				<a href="../classes/TableColumnMixin.html#method_onColumnDoubleClick">TableColumnMixin</a>:
-		<a href="../files/addon_mixins_table-column.js.html#l76"><code>addon&#x2F;mixins&#x2F;table-column.js:76</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description">onColumnDoubleClick action.</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">column</code>
-						<span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
-
-
-					<div class="param-description">The column that was clicked</div>
-
-				</li>
-				<li class="param">
-						<code class="param-name">event</code>
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" class="crosslink external" target="_blank">Event</a></span>
-
-
-					<div class="param-description">The click event</div>
-
-				</li>
-			</ul>
-		</div>
-
-
-</div>
-                </div>
-            </div>
 
             <div id="properties" class="page-section">
                 <h2 class="off-left">Properties</h2>
@@ -397,6 +274,111 @@ will be empty</p>
             </div>
 
 
+            <div id="events" class="page-section">
+                <h2 class="off-left">Events</h2>
+                <div class="item-list">
+<div id="event_onColumnClick" class="events item inherited">
+    <h3 class="name"><code>onColumnClick</code></h3>
+    <span class="type"></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/TableColumnMixin.html#event_onColumnClick">TableColumnMixin</a>:
+        <a href="../files/addon_mixins_table-column.js.html#l56"><code>addon&#x2F;mixins&#x2F;table-column.js:56</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        onColumnClick action. Handles column sorting.
+    </div>
+
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">column</code>
+                        <span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
+
+
+                    <div class="param-description">
+                        The column that was clicked
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">event</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" class="crosslink external" target="_blank">Event</a></span>
+
+
+                    <div class="param-description">
+                        The click event
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+</div>
+<div id="event_onColumnDoubleClick" class="events item inherited">
+    <h3 class="name"><code>onColumnDoubleClick</code></h3>
+    <span class="type"></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/TableColumnMixin.html#event_onColumnDoubleClick">TableColumnMixin</a>:
+        <a href="../files/addon_mixins_table-column.js.html#l77"><code>addon&#x2F;mixins&#x2F;table-column.js:77</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        onColumnDoubleClick action.
+    </div>
+
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">column</code>
+                        <span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
+
+
+                    <div class="param-description">
+                        The column that was clicked
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">event</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" class="crosslink external" target="_blank">Event</a></span>
+
+
+                    <div class="param-description">
+                        The click event
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+</div>
+                </div>
+            </div>
     </div>
 </div>
                     </div>

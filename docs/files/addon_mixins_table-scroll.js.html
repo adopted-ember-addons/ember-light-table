@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.6</p>
+                <p class="version pull-right">v0.1.7</p>
               </div>
             </div>
         </div>
@@ -91,7 +91,8 @@ import Ember from &#x27;ember&#x27;;
 
 const {
   $,
-  run
+  run,
+  computed
 } = Ember;
 
 /**
@@ -125,14 +126,25 @@ export default Ember.Mixin.create({
    */
   touchMoveContainer: document,
 
+  /**
+   * @property _shouldSetupScroll
+   * @type {Boolean}
+   * @private
+   */
+  _shouldSetupScroll: computed.notEmpty(&#x27;attrs.onScrolledToBottom&#x27;),
+
   didInsertElement() {
     this._super(...arguments);
-    Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this._setupScrollEvents);
+    if(this.get(&#x27;_shouldSetupScroll&#x27;)) {
+      run.scheduleOnce(&#x27;afterRender&#x27;, this, this._setupScrollEvents);
+    }
   },
 
   destroy() {
     this._super(...arguments);
-    this._teardownScrollEvents();
+    if(this.get(&#x27;_shouldSetupScroll&#x27;)) {
+      this._teardownScrollEvents();
+    }
   },
 
   _setupScrollEvents() {
@@ -162,7 +174,7 @@ export default Ember.Mixin.create({
 
   _onScroll() {
     if (this.isScrolledToBottom()) {
-      Ember.run(() =&gt; this.send(&#x27;onScrolledToBottom&#x27;));
+      run(() =&gt; this.send(&#x27;onScrolledToBottom&#x27;));
     }
   },
 
