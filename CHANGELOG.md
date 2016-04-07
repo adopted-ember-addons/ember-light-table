@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.7
+- Setup scroll event binding only if action is present
+- Add is-expanded css class to row
+
 ## 0.1.6
 - Rename `formatter` to `format`
 
