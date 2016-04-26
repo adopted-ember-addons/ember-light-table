@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.7</p>
+                <p class="version pull-right">0.1.7.6d72a551</p>
               </div>
             </div>
         </div>
@@ -134,6 +134,7 @@ export default Ember.Component.extend({
   /**
    * @property table
    * @type {Table}
+   * @private
    */
   table: null,
 
@@ -144,6 +145,10 @@ export default Ember.Component.extend({
   tableActions: null,
 
   /**
+   * Allows a user to select a row on click. All this will do is apply the necessary
+   * CSS classes and add the row to &#x60;table.selectedRows&#x60;. If &#x60;multiSelect&#x60; is disabled
+   * only one row will be selected at a time.
+   * 
    * @property canSelect
    * @type {Boolean}
    * @default true
@@ -151,6 +156,15 @@ export default Ember.Component.extend({
   canSelect: true,
 
   /**
+   * Allows for expanding row. This will create a new row under the row that was
+   * clicked with the template provided by &#x60;body.expanded-row&#x60;.
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * {{#body.expanded-row as |row|}}
+   * 	This is the content of the expanded row for {{row.firstName}}
+   * {{/body.expanded-row}}
+   * &#x60;&#x60;&#x60;
+   *
    * @property canExpand
    * @type {Boolean}
    * @default false
@@ -158,13 +172,18 @@ export default Ember.Component.extend({
   canExpand: false,
 
   /**
+   * Allows a user to select multiple rows with the &#x60;ctrl&#x60;, &#x60;cmd&#x60;, and &#x60;shift&#x60; keys.
+   * These rows can be easily accessed via &#x60;table.get(&#x27;selectedRows&#x27;)&#x60;
+   *
    * @property multiSelect
    * @type {Boolean}
-   * @default true
+   * @default false
    */
   multiSelect: false,
 
   /**
+   * Allows multiple rows to be expanded at once
+   *
    * @property multiRowExpansion
    * @type {Boolean}
    * @default true
@@ -172,6 +191,8 @@ export default Ember.Component.extend({
   multiRowExpansion: true,
 
   /**
+   * Expand a row on click
+   *
    * @property expandOnClick
    * @type {Boolean}
    * @default true

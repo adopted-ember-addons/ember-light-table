@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.7</p>
+                <p class="version pull-right">0.1.7.6d72a551</p>
               </div>
             </div>
         </div>
@@ -149,7 +149,7 @@
                                 <a href="#property_multiSelect">multiSelect</a>
 
                             </li>
-                            <li class="index-item property">
+                            <li class="index-item property private">
                                 <a href="#property_table">table</a>
 
                             </li>
@@ -192,14 +192,20 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l64"><code>addon&#x2F;components&#x2F;lt-body.js:64</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l69"><code>addon&#x2F;components&#x2F;lt-body.js:69</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        
+        <p>Allows for expanding row. This will create a new row under the row that was
+clicked with the template provided by <code>body.expanded-row</code>.</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#body.expanded-row as |row|}}
+    This is the content of the expanded row for {{row.firstName}}
+{{/body.expanded-row}}
+</code></pre>
+
     </div>
 
         <p><br><strong>Default:</strong> false</p>
@@ -217,14 +223,17 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l57"><code>addon&#x2F;components&#x2F;lt-body.js:57</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l58"><code>addon&#x2F;components&#x2F;lt-body.js:58</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        
+        <p>Allows a user to select a row on click. All this will do is apply the necessary
+CSS classes and add the row to <code>table.selectedRows</code>. If <code>multiSelect</code> is disabled
+only one row will be selected at a time.</p>
+
     </div>
 
         <p><br><strong>Default:</strong> true</p>
@@ -242,14 +251,15 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l85"><code>addon&#x2F;components&#x2F;lt-body.js:85</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l104"><code>addon&#x2F;components&#x2F;lt-body.js:104</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        
+        <p>Expand a row on click</p>
+
     </div>
 
         <p><br><strong>Default:</strong> true</p>
@@ -267,14 +277,15 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l78"><code>addon&#x2F;components&#x2F;lt-body.js:78</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l95"><code>addon&#x2F;components&#x2F;lt-body.js:95</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        
+        <p>Allows multiple rows to be expanded at once</p>
+
     </div>
 
         <p><br><strong>Default:</strong> true</p>
@@ -292,25 +303,28 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l71"><code>addon&#x2F;components&#x2F;lt-body.js:71</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l85"><code>addon&#x2F;components&#x2F;lt-body.js:85</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        
+        <p>Allows a user to select multiple rows with the <code>ctrl</code>, <code>cmd</code>, and <code>shift</code> keys.
+These rows can be easily accessed via <code>table.get('selectedRows')</code></p>
+
     </div>
 
-        <p><br><strong>Default:</strong> true</p>
+        <p><br><strong>Default:</strong> false</p>
 
 
 </div>
-<div id="property_table" class="property item">
+<div id="property_table" class="property item private">
     <h3 class="name"><code>table</code></h3>
     <span class="type"><a href="../classes/Table.html" class="crosslink">Table</a></span>
 
 
+        <span class="flag private">private</span>
 
 
 
@@ -341,7 +355,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l51"><code>addon&#x2F;components&#x2F;lt-body.js:51</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l52"><code>addon&#x2F;components&#x2F;lt-body.js:52</code></a>
         </p>
 
 
@@ -372,7 +386,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l112"><code>addon&#x2F;components&#x2F;lt-body.js:112</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l133"><code>addon&#x2F;components&#x2F;lt-body.js:133</code></a>
         </p>
 
 
@@ -425,7 +439,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l153"><code>addon&#x2F;components&#x2F;lt-body.js:153</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l174"><code>addon&#x2F;components&#x2F;lt-body.js:174</code></a>
         </p>
 
 

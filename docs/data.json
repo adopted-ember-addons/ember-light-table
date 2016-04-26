@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v0.1.7"
+        "version": "0.1.7.6d72a551"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -1035,12 +1035,14 @@
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
+            "access": "private",
+            "tagname": "",
             "class": "Body",
             "module": "Components"
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 51,
+            "line": 52,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -1049,7 +1051,8 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 57,
+            "line": 58,
+            "description": "Allows a user to select a row on click. All this will do is apply the necessary\nCSS classes and add the row to `table.selectedRows`. If `multiSelect` is disabled\nonly one row will be selected at a time.",
             "itemtype": "property",
             "name": "canSelect",
             "type": "{Boolean}",
@@ -1059,7 +1062,8 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 64,
+            "line": 69,
+            "description": "Allows for expanding row. This will create a new row under the row that was\nclicked with the template provided by `body.expanded-row`.\n\n```hbs\n{{#body.expanded-row as |row|}}\n\tThis is the content of the expanded row for {{row.firstName}}\n{{/body.expanded-row}}\n```",
             "itemtype": "property",
             "name": "canExpand",
             "type": "{Boolean}",
@@ -1069,17 +1073,19 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 71,
+            "line": 85,
+            "description": "Allows a user to select multiple rows with the `ctrl`, `cmd`, and `shift` keys.\nThese rows can be easily accessed via `table.get('selectedRows')`",
             "itemtype": "property",
             "name": "multiSelect",
             "type": "{Boolean}",
-            "default": "true",
+            "default": "false",
             "class": "Body",
             "module": "Components"
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 78,
+            "line": 95,
+            "description": "Allows multiple rows to be expanded at once",
             "itemtype": "property",
             "name": "multiRowExpansion",
             "type": "{Boolean}",
@@ -1089,7 +1095,8 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 85,
+            "line": 104,
+            "description": "Expand a row on click",
             "itemtype": "property",
             "name": "expandOnClick",
             "type": "{Boolean}",
@@ -1099,7 +1106,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 112,
+            "line": 133,
             "description": "onRowClick action. Handles selection, and row expansion.",
             "itemtype": "event",
             "name": "onRowClick",
@@ -1120,7 +1127,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 153,
+            "line": 174,
             "description": "onRowDoubleClick action.",
             "itemtype": "event",
             "name": "onRowDoubleClick",
