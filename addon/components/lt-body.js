@@ -45,6 +45,7 @@ export default Ember.Component.extend({
   /**
    * @property table
    * @type {Table}
+   * @private
    */
   table: null,
 
@@ -55,6 +56,10 @@ export default Ember.Component.extend({
   tableActions: null,
 
   /**
+   * Allows a user to select a row on click. All this will do is apply the necessary
+   * CSS classes and add the row to `table.selectedRows`. If `multiSelect` is disabled
+   * only one row will be selected at a time.
+   * 
    * @property canSelect
    * @type {Boolean}
    * @default true
@@ -62,6 +67,15 @@ export default Ember.Component.extend({
   canSelect: true,
 
   /**
+   * Allows for expanding row. This will create a new row under the row that was
+   * clicked with the template provided by `body.expanded-row`.
+   *
+   * ```hbs
+   * {{#body.expanded-row as |row|}}
+   * 	This is the content of the expanded row for {{row.firstName}}
+   * {{/body.expanded-row}}
+   * ```
+   *
    * @property canExpand
    * @type {Boolean}
    * @default false
@@ -69,13 +83,18 @@ export default Ember.Component.extend({
   canExpand: false,
 
   /**
+   * Allows a user to select multiple rows with the `ctrl`, `cmd`, and `shift` keys.
+   * These rows can be easily accessed via `table.get('selectedRows')`
+   *
    * @property multiSelect
    * @type {Boolean}
-   * @default true
+   * @default false
    */
   multiSelect: false,
 
   /**
+   * Allows multiple rows to be expanded at once
+   *
    * @property multiRowExpansion
    * @type {Boolean}
    * @default true
@@ -83,6 +102,8 @@ export default Ember.Component.extend({
   multiRowExpansion: true,
 
   /**
+   * Expand a row on click
+   *
    * @property expandOnClick
    * @type {Boolean}
    * @default true
