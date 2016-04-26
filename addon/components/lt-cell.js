@@ -2,9 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/lt-cell';
 
 const {
-  isEmpty,
-  computed,
-  defineProperty
+  computed
 } = Ember;
 
 export default Ember.Component.extend({
@@ -18,6 +16,8 @@ export default Ember.Component.extend({
   row: null,
   tableActions: null,
 
+  rawValue: null,
+
   align: computed('column.align', function() {
     return `align-${this.get('column.align')}`;
   }).readOnly(),
@@ -26,22 +26,12 @@ export default Ember.Component.extend({
 
   width: computed.readOnly('column.width'),
 
-  init() {
-    this._super(...arguments);
-    const valuePath = this.get('column.valuePath');
-
-    if(!isEmpty(valuePath)) {
-      defineProperty(this, '_rawValue', computed.readOnly(`row.${valuePath}`));
-    }
-    defineProperty(this, 'value', computed('_rawValue', this._getValue).readOnly());
-  },
-
-  _getValue() {
-    const value = this.get('_rawValue');
+  value: computed('rawValue', function() {
+    const rawValue = this.get('rawValue');
     const format = this.get('column.format');
     if(format && typeof format === 'function') {
-      return format.call(this, value);
+      return format.call(this, rawValue);
     }
-    return value;
-  }
+    return rawValue;
+  }).readOnly()
 });
