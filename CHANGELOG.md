@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.8
+- [#14](https://github.com/offirgolan/ember-light-table/pull/14) Table cell performance to decrease render time by almost half
+
 ## 0.1.7
 - Setup scroll event binding only if action is present
 - Add is-expanded css class to row
