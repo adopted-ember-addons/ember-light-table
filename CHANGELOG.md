@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.9
+- Remove tag-less cell component since it was restricting a bunch of Ember.Component features such as class name bindings, events, etc.
+
 ## 0.1.8
 - [#14](https://github.com/offirgolan/ember-light-table/pull/14) Table cell performance to decrease render time by almost half
 
