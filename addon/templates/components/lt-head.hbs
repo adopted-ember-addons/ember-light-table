@@ -1,18 +1,20 @@
-<table>
-  <thead>
-    {{#if hasBlock}}
-      {{yield visibleColumnGroups visibleSubColumns table}}
-    {{else}}
-      <tr>
-        {{#each visibleColumnGroups as |column|}}
-          {{lt-column column=column tableActions=tableActions sortIcons=sortIcons click=(action 'onColumnClick' column) doubleClick=(action 'onColumnDoubleClick' column)}}
-        {{/each}}
-      </tr>
-      <tr>
-        {{#each visibleSubColumns as |column|}}
-          {{lt-column column=column rowspan=1 classNames="lt-sub-column" tableActions=tableActions sortIcons=sortIcons click=(action 'onColumnClick' column) doubleClick=(action 'onColumnDoubleClick' column)}}
-        {{/each}}
-      </tr>
-    {{/if}}
-  </thead>
-</table>
+{{#ember-wormhole to=(concat tableId '_body_head') renderInPlace=fixed}}
+  <table>
+    <thead>
+      {{#if hasBlock}}
+        {{yield visibleColumnGroups visibleSubColumns table}}
+      {{else}}
+        <tr>
+          {{#each visibleColumnGroups as |column|}}
+            {{lt-column column=column tableActions=tableActions sortIcons=sortIcons click=(action 'onColumnClick' column) doubleClick=(action 'onColumnDoubleClick' column)}}
+          {{/each}}
+        </tr>
+        <tr>
+          {{#each visibleSubColumns as |column|}}
+            {{lt-column column=column rowspan=1 classNames="lt-sub-column" tableActions=tableActions sortIcons=sortIcons click=(action 'onColumnClick' column) doubleClick=(action 'onColumnDoubleClick' column)}}
+          {{/each}}
+        </tr>
+      {{/if}}
+    </thead>
+  </table>
+{{/ember-wormhole}}

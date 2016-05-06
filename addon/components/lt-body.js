@@ -110,20 +110,21 @@ export default Ember.Component.extend({
   expandOnClick: true,
 
   /**
-   * When set, table header and footer will become fixed
+   * Table body height. This needs to be specified for fixed
+   * footer and header
    *
    * @property height
-   * @type {Number}
+   * @type {String}
+   * @default inherit
    */
-  height: null,
+  height: 'inherit',
 
   rows: computed.oneWay('table.rows'),
   visibleColumns: computed.oneWay('table.visibleColumns'),
   colspan: computed.oneWay('visibleColumns.length'),
 
   style: computed(function() {
-    const height = this.get('height');
-    return Ember.String.htmlSafe(height ? `height:${height}px;` : '');
+    return Ember.String.htmlSafe(`height:${this.get('height')};`);
   }),
 
   _currSelectedIndex: -1,

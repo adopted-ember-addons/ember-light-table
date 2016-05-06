@@ -17,6 +17,13 @@ const {
 
 export default Ember.Mixin.create({
   /**
+   * @property fixed
+   * @type {Boolean}
+   * @default false
+   */
+  fixed: false,
+
+  /**
    * @property sortOnClick
    * @type {Boolean}
    * @default true
