@@ -37,3 +37,42 @@ test('scrolled to bottom', function(assert) {
     scrollTop: $(this.scrollContainer).prop('scrollHeight')
   }, 0);
 });
+
+
+test('fixed header', function(assert) {
+  assert.expect(2);
+  this.set('table', new Table(Columns, createUsers(5)));
+  this.set('fixed', true);
+
+  this.render(hbs`
+    {{#light-table table id='lightTable' as |t|}}
+      {{t.head fixed=fixed}}
+      {{t.body}}
+    {{/light-table}}
+  `);
+
+  assert.equal(this.$('.lt-body #lightTable_body_head thead').length, 0);
+
+  this.set('fixed', false);
+
+  assert.equal(this.$('.lt-body #lightTable_body_head thead').length, 1);
+});
+
+test('fixed footer', function(assert) {
+  assert.expect(2);
+  this.set('table', new Table(Columns, createUsers(5)));
+  this.set('fixed', true);
+
+  this.render(hbs`
+    {{#light-table table id='lightTable' as |t|}}
+      {{t.body}}
+      {{t.foot fixed=fixed}}
+    {{/light-table}}
+  `);
+
+  assert.equal(this.$('.lt-body #lightTable_body_foot tfoot').length, 0);
+
+  this.set('fixed', false);
+
+  assert.equal(this.$('.lt-body #lightTable_body_foot tfoot').length, 1);
+});

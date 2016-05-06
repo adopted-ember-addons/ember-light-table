@@ -10,7 +10,7 @@ const {
  */
 
 /**
- * @class TableColumnMixin
+ * @class TableHeaderMixin
  * @extends Ember.Mixin
  * @private
  */
@@ -56,6 +56,8 @@ export default Ember.Mixin.create({
    * @type {String}
    */
   tableId: null,
+
+  renderInPlace: computed.oneWay('fixed'),
 
   visibleColumnGroups: computed.oneWay('table.visibleColumnGroups'),
   visibleSubColumns: computed.oneWay('table.visibleSubColumns'),

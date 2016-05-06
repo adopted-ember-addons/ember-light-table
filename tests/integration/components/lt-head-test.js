@@ -10,7 +10,7 @@ moduleForComponent('lt-head', 'Integration | Component | lt head', {
 test('render columns', function(assert) {
   this.set('table', new Table(Columns));
 
-  this.render(hbs`{{lt-head table=table}}`);
+  this.render(hbs`{{lt-head table=table renderInPlace=true}}`);
 
   assert.equal(this.$('tr > th').length, 6);
 });
@@ -18,7 +18,7 @@ test('render columns', function(assert) {
 test('render grouped columns', function(assert) {
   this.set('table', new Table(GroupedColumns));
 
-  this.render(hbs`{{lt-head table=table}}`);
+  this.render(hbs`{{lt-head table=table renderInPlace=true}}`);
 
   assert.equal(this.$('tr:first > th').attr('colspan'), 3);
   assert.ok(this.$('tr:first > th').hasClass('lt-group-column'));
@@ -35,7 +35,7 @@ test('click - non-sortable column', function(assert) {
     assert.equal(column.label, 'Avatar');
   });
 
-  this.render(hbs`{{lt-head table=table onColumnClick=(action 'onColumnClick')}}`);
+  this.render(hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action 'onColumnClick')}}`);
 
   assert.equal(this.$('tr > th').length, 6);
   this.$('tr > th:first').click();
@@ -52,7 +52,7 @@ test('click - sortable column', function(assert) {
     assert.equal(column.ascending, asc);
   });
 
-  this.render(hbs`{{lt-head table=table onColumnClick=(action 'onColumnClick')}}`);
+  this.render(hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action 'onColumnClick')}}`);
 
   assert.equal(this.$('tr > th').length, 6);
   this.$('tr > th:last').click();
@@ -68,7 +68,7 @@ test('double click', function(assert) {
     assert.equal(column.label, 'Avatar');
   });
 
-  this.render(hbs`{{lt-head table=table onColumnDoubleClick=(action 'onColumnDoubleClick')}}`);
+  this.render(hbs`{{lt-head table=table renderInPlace=true onColumnDoubleClick=(action 'onColumnDoubleClick')}}`);
 
   assert.equal(this.$('tr > th').length, 6);
   this.$('tr > th:last').click();
