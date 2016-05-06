@@ -51,6 +51,12 @@ export default Ember.Mixin.create({
    */
   iconDescending: '',
 
+  /**
+   * ID of main table component. Used to generate divs for ember-wormhole
+   * @type {String}
+   */
+  tableId: null,
+
   visibleColumnGroups: computed.oneWay('table.visibleColumnGroups'),
   visibleSubColumns: computed.oneWay('table.visibleSubColumns'),
   visibleColumns: computed.oneWay('table.visibleColumns'),

@@ -119,6 +119,12 @@ export default Ember.Component.extend({
    */
   height: 'inherit',
 
+  /**
+   * ID of main table component. Used to generate divs for ember-wormhole
+   * @type {String}
+   */
+  tableId: null,
+
   rows: computed.oneWay('table.rows'),
   visibleColumns: computed.oneWay('table.visibleColumns'),
   colspan: computed.oneWay('visibleColumns.length'),
