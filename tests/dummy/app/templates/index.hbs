@@ -23,20 +23,32 @@
     </div>
     <div class="panel-body table-container">
 {{!-- BEGIN-SNIPPET simple-table --}}
-{{#light-table table scrollContainer='.table-container' onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
+{{#light-table table scrollContainer='.lt-body-wrapper' onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
   {{t.head
     onColumnClick=(action 'onColumnClick')
     iconAscending='fa fa-sort-asc'
     iconDescending='fa fa-sort-desc'
   }}
 
-  {{#t.body canSelect=false as |body|}}
+  {{#t.body canSelect=false height=400 as |body|}}
     {{#if isLoading}}
       {{#body.loader}}
         {{table-loader}}
       {{/body.loader}}
     {{/if}}
+
+    {{body.footer
+      onColumnClick=(action 'onColumnClick')
+      iconAscending='fa fa-sort-asc'
+      iconDescending='fa fa-sort-desc'
+    }}
   {{/t.body}}
+
+  {{t.foot
+    onColumnClick=(action 'onColumnClick')
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+  }}
 {{/light-table}}
 {{!-- END-SNIPPET --}}
     </div>

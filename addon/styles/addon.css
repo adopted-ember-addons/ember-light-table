@@ -1,3 +1,20 @@
+.ember-light-table {
+  height: auto;
+  overflow: auto;
+}
+
+.ember-light-table table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.ember-light-table .lt-body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: inherit;
+}
+
 .ember-light-table .align-left {
   text-align: left;
 }

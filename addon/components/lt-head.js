@@ -34,7 +34,6 @@ import TableColumnMixin from '../mixins/table-column';
 
 export default Ember.Component.extend(TableColumnMixin, {
   layout,
-  tagName: 'thead',
   classNames: ['lt-head'],
   table: null
 });

@@ -31,7 +31,6 @@ import TableColumnMixin from '../mixins/table-column';
 
 export default Ember.Component.extend(TableColumnMixin, {
   layout,
-  tagName: 'tfoot',
   classNames: ['lt-foot'],
   table: null
 });

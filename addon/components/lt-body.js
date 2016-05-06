@@ -38,10 +38,9 @@ const {
 
 export default Ember.Component.extend({
   layout,
-  tagName: 'tbody',
   classNames: ['lt-body'],
   classNameBindings: ['isLoading', 'canSelect', 'multiSelect', 'isSelecting','canExpand'],
-
+  attributeBindings: ['style'],
   /**
    * @property table
    * @type {Table}
@@ -59,7 +58,7 @@ export default Ember.Component.extend({
    * Allows a user to select a row on click. All this will do is apply the necessary
    * CSS classes and add the row to `table.selectedRows`. If `multiSelect` is disabled
    * only one row will be selected at a time.
-   * 
+   *
    * @property canSelect
    * @type {Boolean}
    * @default true
@@ -110,9 +109,22 @@ export default Ember.Component.extend({
    */
   expandOnClick: true,
 
+  /**
+   * When set, table header and footer will become fixed
+   *
+   * @property height
+   * @type {Number}
+   */
+  height: null,
+
   rows: computed.oneWay('table.rows'),
   visibleColumns: computed.oneWay('table.visibleColumns'),
   colspan: computed.oneWay('visibleColumns.length'),
+
+  style: computed(function() {
+    const height = this.get('height');
+    return Ember.String.htmlSafe(height ? `height:${height}px;` : '');
+  }),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
