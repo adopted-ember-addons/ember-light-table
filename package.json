@@ -50,6 +50,7 @@
     "ember-resolver": "^2.0.3",
     "ember-truth-helpers": "1.2.0",
     "ember-try": "0.2.0",
+    "ember-wormhole": "0.3.5",
     "loader.js": "^4.0.1",
     "yuidoc-ember-theme": "offirgolan/yuidoc-ember-theme"
   },

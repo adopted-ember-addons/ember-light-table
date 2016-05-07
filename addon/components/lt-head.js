@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/lt-head';
-import TableColumnMixin from '../mixins/table-column';
+import TableHeaderMixin from '../mixins/table-header';
 
 /**
  * @module Components
@@ -17,7 +17,7 @@ import TableColumnMixin from '../mixins/table-column';
  *
  * ```hbs
  * {{#light-table table as |t|}}
- *   {{#t.head onColumnClick=(action 'sortByColumn') as |groups subColumn table|}}
+ *   {{#t.head onColumnClick=(action 'sortByColumn') as |groups subColumns table|}}
  *     {{#each groups as |group|}}
  *       {{!-- ... --}}
  *     {{/each}}
@@ -32,9 +32,8 @@ import TableColumnMixin from '../mixins/table-column';
  * @uses TableColumnMixin
  */
 
-export default Ember.Component.extend(TableColumnMixin, {
+export default Ember.Component.extend(TableHeaderMixin, {
   layout,
-  tagName: 'thead',
   classNames: ['lt-head'],
   table: null
 });

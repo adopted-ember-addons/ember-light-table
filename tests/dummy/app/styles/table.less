@@ -13,8 +13,15 @@
     user-select: none;
   }
 
-  .lt-column {
+  tfoot .lt-column {
+    border-top: 1px solid #DADADA;
+  }
+
+  thead .lt-column {
     border-bottom: 1px solid #DADADA;
+  }
+
+  .lt-column {
     font-weight: 200;
     font-size: 12px;
     padding: 10px;
@@ -57,7 +64,8 @@
 
     td {
       border-color: #DADADA;
-      border-width: 1px 0;
+      border-width: 0;
+      border-bottom-width: 1px;
       border-style: solid;
       font-size: 13px;
       padding: 0 10px;

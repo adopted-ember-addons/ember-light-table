@@ -32,7 +32,6 @@ const {
 
 const LightTable =  Ember.Component.extend(TableScrollMixin, {
   layout,
-  tagName: 'table',
   classNames: ['ember-light-table'],
 
   /**

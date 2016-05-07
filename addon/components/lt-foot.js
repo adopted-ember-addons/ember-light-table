@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/lt-foot';
-import TableColumnMixin from '../mixins/table-column';
+import TableHeaderMixin from '../mixins/table-header';
 
 /**
  * @module Components
@@ -29,9 +29,8 @@ import TableColumnMixin from '../mixins/table-column';
  * @uses TableColumnMixin
  */
 
-export default Ember.Component.extend(TableColumnMixin, {
+export default Ember.Component.extend(TableHeaderMixin, {
   layout,
-  tagName: 'tfoot',
   classNames: ['lt-foot'],
   table: null
 });

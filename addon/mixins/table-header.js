@@ -10,12 +10,19 @@ const {
  */
 
 /**
- * @class TableColumnMixin
+ * @class TableHeaderMixin
  * @extends Ember.Mixin
  * @private
  */
 
 export default Ember.Mixin.create({
+  /**
+   * @property fixed
+   * @type {Boolean}
+   * @default false
+   */
+  fixed: false,
+
   /**
    * @property sortOnClick
    * @type {Boolean}
@@ -44,6 +51,13 @@ export default Ember.Mixin.create({
    */
   iconDescending: '',
 
+  /**
+   * ID of main table component. Used to generate divs for ember-wormhole
+   * @type {String}
+   */
+  tableId: null,
+
+  renderInPlace: computed.oneWay('fixed'),
   visibleColumnGroups: computed.oneWay('table.visibleColumnGroups'),
   visibleSubColumns: computed.oneWay('table.visibleSubColumns'),
   visibleColumns: computed.oneWay('table.visibleColumns'),
