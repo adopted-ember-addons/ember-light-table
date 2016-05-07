@@ -31,20 +31,13 @@
     fixed=true
   }}
 
-  {{#t.body canSelect=false height='425px' as |body|}}
+  {{#t.body canSelect=false height='55vh' as |body|}}
     {{#if isLoading}}
       {{#body.loader}}
         {{table-loader}}
       {{/body.loader}}
     {{/if}}
   {{/t.body}}
-
-  {{t.foot
-    onColumnClick=(action 'onColumnClick')
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
-    fixed=true
-  }}
 {{/light-table}}
 {{!-- END-SNIPPET --}}
     </div>

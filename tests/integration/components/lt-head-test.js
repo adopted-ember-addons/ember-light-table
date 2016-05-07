@@ -20,9 +20,9 @@ test('render grouped columns', function(assert) {
 
   this.render(hbs`{{lt-head table=table renderInPlace=true}}`);
 
-  assert.equal(this.$('tr:first > th').attr('colspan'), 3);
-  assert.ok(this.$('tr:first > th').hasClass('lt-group-column'));
-  assert.equal(this.$('tr').length, 2);
+  assert.equal(this.$('tr:nth-child(2) > th').attr('colspan'), 3);
+  assert.ok(this.$('tr:nth-child(2) > th').hasClass('lt-group-column'));
+  assert.equal(this.$('tr').length, 3);
   assert.equal(this.$('tr > th').length, 8);
 });
 

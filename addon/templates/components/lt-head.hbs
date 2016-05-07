@@ -4,6 +4,18 @@
       {{#if hasBlock}}
         {{yield visibleColumnGroups visibleSubColumns table}}
       {{else}}
+
+        {{!- There is an issue where if there are more than 1 row and the first has a colspan,
+           the td's fail to hold their width. Creating a scaffolding will setup the table columns correctly
+        --}}
+        {{#if visibleSubColumns.length}}
+          <tr>
+            {{#each visibleSubColumns as |column|}}
+              <td width={{column.width}} class="lt-scaffolding"></td>
+            {{/each}}
+          </tr>
+        {{/if}}
+
         <tr>
           {{#each visibleColumnGroups as |column|}}
             {{lt-column column=column tableActions=tableActions sortIcons=sortIcons click=(action 'onColumnClick' column) doubleClick=(action 'onColumnDoubleClick' column)}}
