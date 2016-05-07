@@ -8,7 +8,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Light Table",
         "Row",
         "Table",
-        "TableColumnMixin",
+        "TableHeaderMixin",
         "TableScrollMixin"
     ],
     "modules": [

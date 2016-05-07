@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v0.1.9"
+        "version": "v1.0.0-beta.0"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -73,13 +73,13 @@
             "fors": {},
             "namespaces": {}
         },
-        "addon/mixins/table-column.js": {
-            "name": "addon/mixins/table-column.js",
+        "addon/mixins/table-header.js": {
+            "name": "addon/mixins/table-header.js",
             "modules": {
                 "Mixins": 1
             },
             "classes": {
-                "TableColumnMixin": 1
+                "TableHeaderMixin": 1
             },
             "fors": {},
             "namespaces": {}
@@ -142,7 +142,7 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "TableColumnMixin": 1,
+                "TableHeaderMixin": 1,
                 "TableScrollMixin": 1
             },
             "fors": {},
@@ -297,25 +297,22 @@
             "namespace": "",
             "file": "addon/components/lt-head.js",
             "line": 9,
-            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head onColumnClick=(action 'sortByColumn')}}\n{{/light-table}}\n```\n\nIf you want to define your own thead, just declare the contextual component in a block.\n\n```hbs\n{{#light-table table as |t|}}\n  {{#t.head onColumnClick=(action 'sortByColumn') as |groups subColumn table|}}\n    {{#each groups as |group|}}\n      {{!-- ... --}}\n    {{/each}}\n  {{/t.head}}\n{{/light-table}}\n```\n\nIf you dont have grouped columns, the yielded `groups` will be an array of all visibile columns and `subColumns`\nwill be empty",
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head onColumnClick=(action 'sortByColumn')}}\n{{/light-table}}\n```\n\nIf you want to define your own thead, just declare the contextual component in a block.\n\n```hbs\n{{#light-table table as |t|}}\n  {{#t.head onColumnClick=(action 'sortByColumn') as |groups subColumns table|}}\n    {{#each groups as |group|}}\n      {{!-- ... --}}\n    {{/each}}\n  {{/t.head}}\n{{/light-table}}\n```\n\nIf you dont have grouped columns, the yielded `groups` will be an array of all visibile columns and `subColumns`\nwill be empty",
             "uses": [
                 "TableColumnMixin"
             ]
         },
-        "TableColumnMixin": {
-            "name": "TableColumnMixin",
-            "shortname": "TableColumnMixin",
+        "TableHeaderMixin": {
+            "name": "TableHeaderMixin",
+            "shortname": "TableHeaderMixin",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
-            "extension_for": [
-                "Foot",
-                "Head"
-            ],
+            "extension_for": [],
             "module": "Mixins",
             "namespace": "",
-            "file": "addon/mixins/table-column.js",
+            "file": "addon/mixins/table-header.js",
             "line": 12,
             "extends": "Ember.Mixin",
             "access": "private",
@@ -1003,7 +1000,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 38,
+            "line": 37,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -1012,7 +1009,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 44,
+            "line": 43,
             "description": "This is used to propate custom user defined actions to custom cell and header components.\nAs an example, lets say I have a table with a column defined with `cellComponent: 'delete-user'`\n\n```hbs\n{{#light-table table tableActions=(hash\n  deleteUser=(action 'deleteUser')\n ) as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nNow in the `delete-user` component, we can access that `deleteUser` action and pass it the\nrow object which will bubble all the way to where you defined that action.\n\n```hbs\n<button {{action tableActions.deleteUser row}}>Delete Me</button>\n```",
             "itemtype": "property",
             "name": "tableActions",
@@ -1022,7 +1019,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 77,
+            "line": 76,
             "description": "Action to be called when user reached the bottom of the scroll container",
             "itemtype": "event",
             "name": "onScrolledToBottom",
@@ -1031,7 +1028,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 45,
+            "line": 44,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -1042,7 +1039,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 52,
+            "line": 51,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -1051,7 +1048,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 58,
+            "line": 57,
             "description": "Allows a user to select a row on click. All this will do is apply the necessary\nCSS classes and add the row to `table.selectedRows`. If `multiSelect` is disabled\nonly one row will be selected at a time.",
             "itemtype": "property",
             "name": "canSelect",
@@ -1062,7 +1059,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 69,
+            "line": 68,
             "description": "Allows for expanding row. This will create a new row under the row that was\nclicked with the template provided by `body.expanded-row`.\n\n```hbs\n{{#body.expanded-row as |row|}}\n\tThis is the content of the expanded row for {{row.firstName}}\n{{/body.expanded-row}}\n```",
             "itemtype": "property",
             "name": "canExpand",
@@ -1073,7 +1070,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 85,
+            "line": 84,
             "description": "Allows a user to select multiple rows with the `ctrl`, `cmd`, and `shift` keys.\nThese rows can be easily accessed via `table.get('selectedRows')`",
             "itemtype": "property",
             "name": "multiSelect",
@@ -1084,7 +1081,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 95,
+            "line": 94,
             "description": "Allows multiple rows to be expanded at once",
             "itemtype": "property",
             "name": "multiRowExpansion",
@@ -1095,7 +1092,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 104,
+            "line": 103,
             "description": "Expand a row on click",
             "itemtype": "property",
             "name": "expandOnClick",
@@ -1106,7 +1103,26 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 133,
+            "line": 112,
+            "description": "Table body height. This needs to be specified for fixed\nfooter and header",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{String}",
+            "default": "inherit",
+            "class": "Body",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 122,
+            "description": "ID of main table component. Used to generate divs for ember-wormhole",
+            "type": "{String}",
+            "class": "Body",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 152,
             "description": "onRowClick action. Handles selection, and row expansion.",
             "itemtype": "event",
             "name": "onRowClick",
@@ -1127,7 +1143,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 174,
+            "line": 193,
             "description": "onRowDoubleClick action.",
             "itemtype": "event",
             "name": "onRowDoubleClick",
@@ -1147,48 +1163,66 @@
             "module": "Components"
         },
         {
-            "file": "addon/mixins/table-column.js",
+            "file": "addon/mixins/table-header.js",
             "line": 19,
+            "itemtype": "property",
+            "name": "fixed",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "TableHeaderMixin",
+            "module": "Mixins"
+        },
+        {
+            "file": "addon/mixins/table-header.js",
+            "line": 26,
             "itemtype": "property",
             "name": "sortOnClick",
             "type": "{Boolean}",
             "default": "true",
-            "class": "TableColumnMixin",
+            "class": "TableHeaderMixin",
             "module": "Mixins"
         },
         {
-            "file": "addon/mixins/table-column.js",
-            "line": 26,
+            "file": "addon/mixins/table-header.js",
+            "line": 33,
             "itemtype": "property",
             "name": "multiColumnSort",
             "type": "{Boolean}",
             "default": "false",
-            "class": "TableColumnMixin",
+            "class": "TableHeaderMixin",
             "module": "Mixins"
         },
         {
-            "file": "addon/mixins/table-column.js",
-            "line": 33,
+            "file": "addon/mixins/table-header.js",
+            "line": 40,
             "itemtype": "property",
             "name": "iconAscending",
             "type": "{String}",
             "default": "''",
-            "class": "TableColumnMixin",
+            "class": "TableHeaderMixin",
             "module": "Mixins"
         },
         {
-            "file": "addon/mixins/table-column.js",
-            "line": 40,
+            "file": "addon/mixins/table-header.js",
+            "line": 47,
             "itemtype": "property",
             "name": "iconDescending",
             "type": "{String}",
             "default": "''",
-            "class": "TableColumnMixin",
+            "class": "TableHeaderMixin",
             "module": "Mixins"
         },
         {
-            "file": "addon/mixins/table-column.js",
-            "line": 56,
+            "file": "addon/mixins/table-header.js",
+            "line": 54,
+            "description": "ID of main table component. Used to generate divs for ember-wormhole",
+            "type": "{String}",
+            "class": "TableHeaderMixin",
+            "module": "Mixins"
+        },
+        {
+            "file": "addon/mixins/table-header.js",
+            "line": 70,
             "description": "onColumnClick action. Handles column sorting.",
             "itemtype": "event",
             "name": "onColumnClick",
@@ -1204,12 +1238,12 @@
                     "type": "Event"
                 }
             ],
-            "class": "TableColumnMixin",
+            "class": "TableHeaderMixin",
             "module": "Mixins"
         },
         {
-            "file": "addon/mixins/table-column.js",
-            "line": 77,
+            "file": "addon/mixins/table-header.js",
+            "line": 91,
             "description": "onColumnDoubleClick action.",
             "itemtype": "event",
             "name": "onColumnDoubleClick",
@@ -1225,7 +1259,7 @@
                     "type": "Event"
                 }
             ],
-            "class": "TableColumnMixin",
+            "class": "TableHeaderMixin",
             "module": "Mixins"
         },
         {
@@ -1270,5 +1304,14 @@
             "module": "Mixins"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "Missing item type\nID of main table component. Used to generate divs for ember-wormhole",
+            "line": " addon/components/lt-body.js:122"
+        },
+        {
+            "message": "Missing item type\nID of main table component. Used to generate divs for ember-wormhole",
+            "line": " addon/mixins/table-header.js:54"
+        }
+    ]
 }

@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.9</p>
+                <p class="version pull-right">v1.0.0-beta.0</p>
               </div>
             </div>
         </div>
@@ -127,10 +127,9 @@ const {
 
 export default Ember.Component.extend({
   layout,
-  tagName: &#x27;tbody&#x27;,
   classNames: [&#x27;lt-body&#x27;],
   classNameBindings: [&#x27;isLoading&#x27;, &#x27;canSelect&#x27;, &#x27;multiSelect&#x27;, &#x27;isSelecting&#x27;,&#x27;canExpand&#x27;],
-
+  attributeBindings: [&#x27;style&#x27;],
   /**
    * @property table
    * @type {Table}
@@ -148,7 +147,7 @@ export default Ember.Component.extend({
    * Allows a user to select a row on click. All this will do is apply the necessary
    * CSS classes and add the row to &#x60;table.selectedRows&#x60;. If &#x60;multiSelect&#x60; is disabled
    * only one row will be selected at a time.
-   * 
+   *
    * @property canSelect
    * @type {Boolean}
    * @default true
@@ -199,9 +198,29 @@ export default Ember.Component.extend({
    */
   expandOnClick: true,
 
+  /**
+   * Table body height. This needs to be specified for fixed
+   * footer and header
+   *
+   * @property height
+   * @type {String}
+   * @default inherit
+   */
+  height: &#x27;inherit&#x27;,
+
+  /**
+   * ID of main table component. Used to generate divs for ember-wormhole
+   * @type {String}
+   */
+  tableId: null,
+
   rows: computed.oneWay(&#x27;table.rows&#x27;),
   visibleColumns: computed.oneWay(&#x27;table.visibleColumns&#x27;),
   colspan: computed.oneWay(&#x27;visibleColumns.length&#x27;),
+
+  style: computed(function() {
+    return Ember.String.htmlSafe(&#x60;height:${this.get(&#x27;height&#x27;)};&#x60;);
+  }),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,

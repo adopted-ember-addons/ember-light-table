@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v0.1.9</p>
+                <p class="version pull-right">v1.0.0-beta.0</p>
               </div>
             </div>
         </div>
@@ -89,7 +89,7 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;../templates/components/lt-foot&#x27;;
-import TableColumnMixin from &#x27;../mixins/table-column&#x27;;
+import TableHeaderMixin from &#x27;../mixins/table-header&#x27;;
 
 /**
  * @module Components
@@ -118,9 +118,8 @@ import TableColumnMixin from &#x27;../mixins/table-column&#x27;;
  * @uses TableColumnMixin
  */
 
-export default Ember.Component.extend(TableColumnMixin, {
+export default Ember.Component.extend(TableHeaderMixin, {
   layout,
-  tagName: &#x27;tfoot&#x27;,
   classNames: [&#x27;lt-foot&#x27;],
   table: null
 });
