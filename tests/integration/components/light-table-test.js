@@ -51,11 +51,11 @@ test('fixed header', function(assert) {
     {{/light-table}}
   `);
 
-  assert.equal(this.$('.lt-body #lightTable_body_head thead').length, 0);
+  assert.equal(this.$('#lightTable_inline_head thead').length, 0);
 
   this.set('fixed', false);
 
-  assert.equal(this.$('.lt-body #lightTable_body_head thead').length, 1);
+  assert.equal(this.$('#lightTable_inline_head thead').length, 1);
 });
 
 test('fixed footer', function(assert) {
@@ -70,9 +70,9 @@ test('fixed footer', function(assert) {
     {{/light-table}}
   `);
 
-  assert.equal(this.$('.lt-body #lightTable_body_foot tfoot').length, 0);
+  assert.equal(this.$('#lightTable_inline_foot tfoot').length, 0);
 
   this.set('fixed', false);
 
-  assert.equal(this.$('.lt-body #lightTable_body_foot tfoot').length, 1);
+  assert.equal(this.$('#lightTable_inline_foot tfoot').length, 1);
 });

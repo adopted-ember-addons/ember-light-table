@@ -3,6 +3,7 @@ import Ember from 'ember';
 const {
   $,
   run,
+  isNone,
   computed
 } = Ember;
 
@@ -47,14 +48,39 @@ export default Ember.Mixin.create({
   didInsertElement() {
     this._super(...arguments);
     if(this.get('_shouldSetupScroll')) {
-      run.scheduleOnce('afterRender', this, this._setupScrollEvents);
+      this._setupContainerTimer = run.scheduleOnce('render', this, this._setupScrollContainer);
+      this._setupEventsTimer = run.scheduleOnce('afterRender', this, this._setupScrollEvents);
     }
   },
 
-  destroy() {
+  willDestroyElement() {
     this._super(...arguments);
     if(this.get('_shouldSetupScroll')) {
+      run.cancel(this._setupContainerTimer);
+      run.cancel(this._setupEventsTimer);
       this._teardownScrollEvents();
+    }
+  },
+
+  _setupScrollContainer() {
+    const fixedHeader = this.$('.lt-head-wrap thead.lt-head');
+    const fixedFooter = this.$('.lt-foot-wrap tfoot.lt-foot');
+
+    /**
+     * If there is a fixed header and footer, that means that the scroll container
+     * must be the lt-body-wrap with the fixed height and overflow:auto.
+     */
+    if(fixedHeader.length > 0 || fixedFooter.length > 0) {
+      const container = `#${this.get('elementId')} .lt-body-wrap`;
+
+      // Only apply if custom container not specified
+      if(isNone(this.get('attrs.scrollContainer'))) {
+        this.set('scrollContainer', container);
+      }
+
+      if(isNone(this.get('attrs.touchMoveContainer'))) {
+        this.set('touchMoveContainer', container);
+      }
     }
   },
 
@@ -75,12 +101,15 @@ export default Ember.Mixin.create({
       $(touchMoveContainer).off('touchmove.light-table');
     }
 
-    run.cancel(this.get('_touchmoveTimer'));
-    run.cancel(this.get('_scrollTimer'));
+    run.cancel(this.get('_touchmoveTimer_throttle'));
+    run.cancel(this.get('_touchmoveTimer_debounce'));
+    run.cancel(this.get('_scrollTimer_throttle'));
+    run.cancel(this.get('_scrollTimer_debounce'));
   },
 
   _scrollHandler(timer) {
-    this.set(timer, run.throttle(this, this._onScroll, 100));
+    this.set(`${timer}_throttle`, run.throttle(this, this._onScroll, 100));
+    this.set(`${timer}_debounce`, run.throttle(this, this._onScroll, 100));
   },
 
   _onScroll() {

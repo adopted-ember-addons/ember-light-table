@@ -38,8 +38,8 @@ const {
 
 export default Ember.Component.extend({
   layout,
-  classNames: ['lt-body'],
-  classNameBindings: ['isLoading', 'canSelect', 'multiSelect', 'isSelecting','canExpand'],
+  classNames: ['lt-body-wrap'],
+  classNameBindings: ['canSelect', 'multiSelect', 'canExpand'],
   attributeBindings: ['style'],
   /**
    * @property table

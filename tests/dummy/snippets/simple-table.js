@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import Table from 'ember-light-table';
 
+const { isEmpty } = Ember;
+
 export default Ember.Component.extend({
   page: 1,
   limit: 20,
@@ -8,6 +10,7 @@ export default Ember.Component.extend({
   sort: null,
   table: null,
   isLoading: false,
+  canLoadMore: true,
 
   columns: [{
     label: 'Avatar',
@@ -44,13 +47,16 @@ export default Ember.Component.extend({
     this.get('store').query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then(records => {
       this.table.addRows(records);
       this.set('isLoading', false);
+      this.set('canLoadMore', !isEmpty(records));
     });
   },
 
   actions: {
     onScrolledToBottom() {
-      this.incrementProperty('page');
-      this.fetchRecords();
+      if(this.get('canLoadMore')) {
+        this.incrementProperty('page');
+        this.fetchRecords();
+      }
     },
 
     onColumnClick(column) {

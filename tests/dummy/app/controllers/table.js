@@ -1,6 +1,10 @@
 import Ember from 'ember';
 import Table from 'ember-light-table';
 
+const {
+  isEmpty
+} = Ember;
+
 export default Ember.Controller.extend({
   columns: null,
   table: null,
@@ -9,6 +13,7 @@ export default Ember.Controller.extend({
   limit: 20,
   dir: 'asc',
   isLoading: false,
+  canLoadMore: true,
 
   init() {
     this._super(...arguments);
@@ -20,13 +25,16 @@ export default Ember.Controller.extend({
     this.store.query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then(records => {
       this.table.addRows(records);
       this.set('isLoading', false);
+      this.set('canLoadMore', !isEmpty(records));
     });
   },
 
   actions: {
     onScrolledToBottom() {
-      this.incrementProperty('page');
-      this.fetchRecords();
+      if(this.get('canLoadMore')) {
+        this.incrementProperty('page');
+        this.fetchRecords();
+      }
     },
 
     onColumnClick(column) {
