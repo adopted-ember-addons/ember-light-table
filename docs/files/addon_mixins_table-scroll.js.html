@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.0</p>
+                <p class="version pull-right">v1.0.0-beta.1</p>
               </div>
             </div>
         </div>
@@ -92,6 +92,7 @@ import Ember from &#x27;ember&#x27;;
 const {
   $,
   run,
+  isNone,
   computed
 } = Ember;
 
@@ -136,14 +137,39 @@ export default Ember.Mixin.create({
   didInsertElement() {
     this._super(...arguments);
     if(this.get(&#x27;_shouldSetupScroll&#x27;)) {
-      run.scheduleOnce(&#x27;afterRender&#x27;, this, this._setupScrollEvents);
+      this._setupContainerTimer = run.scheduleOnce(&#x27;render&#x27;, this, this._setupScrollContainer);
+      this._setupEventsTimer = run.scheduleOnce(&#x27;afterRender&#x27;, this, this._setupScrollEvents);
     }
   },
 
-  destroy() {
+  willDestroyElement() {
     this._super(...arguments);
     if(this.get(&#x27;_shouldSetupScroll&#x27;)) {
+      run.cancel(this._setupContainerTimer);
+      run.cancel(this._setupEventsTimer);
       this._teardownScrollEvents();
+    }
+  },
+
+  _setupScrollContainer() {
+    const fixedHeader = this.$(&#x27;.lt-head-wrap thead.lt-head&#x27;);
+    const fixedFooter = this.$(&#x27;.lt-foot-wrap tfoot.lt-foot&#x27;);
+
+    /**
+     * If there is a fixed header and footer, that means that the scroll container
+     * must be the lt-body-wrap with the fixed height and overflow:auto.
+     */
+    if(fixedHeader.length &gt; 0 || fixedFooter.length &gt; 0) {
+      const container = &#x60;#${this.get(&#x27;elementId&#x27;)} .lt-body-wrap&#x60;;
+
+      // Only apply if custom container not specified
+      if(isNone(this.get(&#x27;attrs.scrollContainer&#x27;))) {
+        this.set(&#x27;scrollContainer&#x27;, container);
+      }
+
+      if(isNone(this.get(&#x27;attrs.touchMoveContainer&#x27;))) {
+        this.set(&#x27;touchMoveContainer&#x27;, container);
+      }
     }
   },
 
@@ -164,12 +190,15 @@ export default Ember.Mixin.create({
       $(touchMoveContainer).off(&#x27;touchmove.light-table&#x27;);
     }
 
-    run.cancel(this.get(&#x27;_touchmoveTimer&#x27;));
-    run.cancel(this.get(&#x27;_scrollTimer&#x27;));
+    run.cancel(this.get(&#x27;_touchmoveTimer_throttle&#x27;));
+    run.cancel(this.get(&#x27;_touchmoveTimer_debounce&#x27;));
+    run.cancel(this.get(&#x27;_scrollTimer_throttle&#x27;));
+    run.cancel(this.get(&#x27;_scrollTimer_debounce&#x27;));
   },
 
   _scrollHandler(timer) {
-    this.set(timer, run.throttle(this, this._onScroll, 100));
+    this.set(&#x60;${timer}_throttle&#x60;, run.throttle(this, this._onScroll, 100));
+    this.set(&#x60;${timer}_debounce&#x60;, run.throttle(this, this._onScroll, 100));
   },
 
   _onScroll() {

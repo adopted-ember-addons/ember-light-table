@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.0.0-beta.0"
+        "version": "v1.0.0-beta.1"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -149,7 +149,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "addon/mixins/table-scroll.js",
-            "line": 13
+            "line": 14
         },
         "Home": {
             "name": "Home",
@@ -331,7 +331,7 @@
             "module": "Mixins",
             "namespace": "",
             "file": "addon/mixins/table-scroll.js",
-            "line": 13,
+            "line": 14,
             "extends": "Ember.Mixin",
             "access": "private",
             "tagname": ""
@@ -1264,7 +1264,7 @@
         },
         {
             "file": "addon/mixins/table-scroll.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "scrollBuffer",
             "type": "{Number}",
@@ -1274,7 +1274,7 @@
         },
         {
             "file": "addon/mixins/table-scroll.js",
-            "line": 26,
+            "line": 27,
             "itemtype": "property",
             "name": "scrollContainer",
             "type": "{String | Object}",
@@ -1284,7 +1284,7 @@
         },
         {
             "file": "addon/mixins/table-scroll.js",
-            "line": 33,
+            "line": 34,
             "itemtype": "property",
             "name": "touchMoveContainer",
             "type": "{String | Object}",
@@ -1294,12 +1294,19 @@
         },
         {
             "file": "addon/mixins/table-scroll.js",
-            "line": 40,
+            "line": 41,
             "itemtype": "property",
             "name": "_shouldSetupScroll",
             "type": "{Boolean}",
             "access": "private",
             "tagname": "",
+            "class": "TableScrollMixin",
+            "module": "Mixins"
+        },
+        {
+            "file": "addon/mixins/table-scroll.js",
+            "line": 69,
+            "description": "If there is a fixed header and footer, that means that the scroll container\nmust be the lt-body-wrap with the fixed height and overflow:auto.",
             "class": "TableScrollMixin",
             "module": "Mixins"
         }
@@ -1312,6 +1319,10 @@
         {
             "message": "Missing item type\nID of main table component. Used to generate divs for ember-wormhole",
             "line": " addon/mixins/table-header.js:54"
+        },
+        {
+            "message": "Missing item type\nIf there is a fixed header and footer, that means that the scroll container\nmust be the lt-body-wrap with the fixed height and overflow:auto.",
+            "line": " addon/mixins/table-scroll.js:69"
         }
     ]
 }
