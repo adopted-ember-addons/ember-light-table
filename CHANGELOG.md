@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.0-beta.0
+- [#19](https://github.com/offirgolan/ember-light-table/pull/19) Fixed header and footer support as well as some table layout restructuring.
+
 ## 0.1.9
 - Remove tag-less cell component since it was restricting a bunch of Ember.Component features such as class name bindings, events, etc.
 
@@ -22,7 +25,7 @@
 - Return pushed/inserted rows & columns from public APIs
 
 ## 0.1.3
-- Fixed an issue where cell value was not bounc
+- Fixed an issue where cell value was not bound
 
 ## 0.1.2
 - Ability to push rows using ArrayProxy instances

@@ -1,6 +1,6 @@
-{{#ember-wormhole to=(concat tableId '_body_foot') renderInPlace=renderInPlace}}
+{{#ember-wormhole to=(concat tableId '_inline_foot') renderInPlace=renderInPlace}}
   <table>
-    <tfoot>
+    <tfoot class="lt-foot">
       {{#if hasBlock}}
         {{yield visibleColumns table}}
       {{else}}

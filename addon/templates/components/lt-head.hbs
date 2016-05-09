@@ -1,6 +1,6 @@
-{{#ember-wormhole to=(concat tableId '_body_head') renderInPlace=renderInPlace}}
+{{#ember-wormhole to=(concat tableId '_inline_head') renderInPlace=renderInPlace}}
   <table>
-    <thead>
+    <thead class="lt-head">
       {{#if hasBlock}}
         {{yield visibleColumnGroups visibleSubColumns table}}
       {{else}}

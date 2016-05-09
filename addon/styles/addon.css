@@ -19,7 +19,7 @@
   visibility: hidden;
 }
 
-.ember-light-table .lt-body {
+.ember-light-table .lt-body-wrap {
   overflow-y: auto;
   overflow-x: hidden;
   height: inherit;

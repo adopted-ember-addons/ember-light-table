@@ -34,6 +34,6 @@ import TableHeaderMixin from '../mixins/table-header';
 
 export default Ember.Component.extend(TableHeaderMixin, {
   layout,
-  classNames: ['lt-head'],
+  classNames: ['lt-head-wrap'],
   table: null
 });

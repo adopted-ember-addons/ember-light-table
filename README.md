@@ -8,18 +8,19 @@
 [![Dependency Status](https://david-dm.org/offirgolan/ember-light-table.svg)](https://david-dm.org/offirgolan/ember-light-table)
 [![devDependency Status](https://david-dm.org/offirgolan/ember-light-table/dev-status.svg)](https://david-dm.org/offirgolan/ember-light-table#info=devDependencies)
 
-A lightweight contextual component based table addon that follows Ember's actions up, data down ideology. 
+A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.
 
-## Features 
+## Features
 
-* Custom component based column headers and cells
-* Infinite scroll support
-* Select & Multi-select
-* Grouped columns
-* Expandable rows
-* Easy table manipulation
-* Easy override to table header and footer
-* Contextual component for header, body, and footer, as well as loading, no data, and expanded row
+- Custom component based column headers and cells
+- Infinite scroll support
+- Select & Multi-select
+- Fixed header and footer
+- Grouped columns
+- Expandable rows
+- Easy table manipulation
+- Easy override to table header and footer
+- Contextual component for header, body, and footer, as well as loading, no data, and expanded row
 
 ## Installation
 ```shell
@@ -41,7 +42,7 @@ If it is a bug [please open an issue on GitHub](http://github.com/offirgolan/emb
 There are two parts to this addon. The first is the [Table](http://offirgolan.github.io/ember-light-table/docs/classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.
 
 ### Table Declaration
-The `Table` constructor accepts an array of `Columns` or column options and an array of rows. 
+The `Table` constructor accepts an array of `Columns` or column options and an array of rows.
 
 ```javascript
 import Table from 'ember-light-table';
@@ -99,17 +100,17 @@ For a list of possible column options, please [checkout out the docs](http://off
 
 ### Component Declaration
 
-Now that we have our `table`, we can declare our component in our template. 
+Now that we have our `table`, we can declare our component in our template.
 
 ```hbs
 {{#light-table table as |t|}}
   {{t.head}}
-  
+
   {{#t.body as |body|}}
     {{#body.expanded-row as |row|}}
       Hello <b>{{row.firstName}}</b>
     {{/body.expanded-row}}
-    
+
     {{#if isLoading}}
       {{#body.loader}}
         Loading...

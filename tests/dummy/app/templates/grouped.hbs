@@ -23,9 +23,9 @@
       </div>
     </div>
 
-    <div class="panel-body table-container">
+    <div class="panel-body table-container fixed-header">
 {{!-- BEGIN-SNIPPET grouped-table --}}
-{{#light-table table scrollContainer='.lt-body' onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
+{{#light-table table onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
   {{t.head
     onColumnClick=(action 'onColumnClick')
     iconAscending='fa fa-sort-asc'
@@ -33,7 +33,7 @@
     fixed=true
   }}
 
-  {{#t.body canSelect=false height='55vh' as |body|}}
+  {{#t.body canSelect=false height='58vh' as |body|}}
     {{#if isLoading}}
       {{#body.loader}}
         {{table-loader}}
