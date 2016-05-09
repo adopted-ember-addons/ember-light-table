@@ -1,7 +1,10 @@
 # Change Log
 
+## 1.0.0-beta.1
+- [#17](https://github.com/offirgolan/ember-light-table/pull/17) Fixes to table scroll, layout restructuring fixes, and auto set scroll/touch move container if there is a fixed header or footer
+
 ## 1.0.0-beta.0
-- [#19](https://github.com/offirgolan/ember-light-table/pull/19) Fixed header and footer support as well as some table layout restructuring.
+- [#16](https://github.com/offirgolan/ember-light-table/pull/16) Fixed header and footer support as well as some table layout restructuring.
 
 ## 0.1.9
 - Remove tag-less cell component since it was restricting a bunch of Ember.Component features such as class name bindings, events, etc.
