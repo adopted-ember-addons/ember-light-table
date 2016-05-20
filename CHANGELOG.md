@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.0-beta.2
+- Remove ember-wormhole from blueprint by just using it as a dependency
+
 ## 1.0.0-beta.1
 - [#17](https://github.com/offirgolan/ember-light-table/pull/17) Fixes to table scroll, layout restructuring fixes, and auto set scroll/touch move container if there is a fixed header or footer
 
