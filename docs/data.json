@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.0.0-beta.2"
+        "version": "v1.0.0-beta.3"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -176,7 +176,7 @@
             "module": "Classes",
             "namespace": "",
             "file": "addon/classes/Column.js",
-            "line": 127,
+            "line": 143,
             "is_constructor": 1,
             "params": [
                 {
@@ -197,7 +197,7 @@
             "module": "Classes",
             "namespace": "",
             "file": "addon/classes/Row.js",
-            "line": 22,
+            "line": 37,
             "is_constructor": 1,
             "params": [
                 {
@@ -455,6 +455,26 @@
         {
             "file": "addon/classes/Column.js",
             "line": 94,
+            "description": "Class names to be applied to header and footer cells of this column",
+            "itemtype": "property",
+            "name": "classNames",
+            "type": "{String | Array}",
+            "class": "Column",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 102,
+            "description": "Class names to be applied to all cells of this column",
+            "itemtype": "property",
+            "name": "cellClassNames",
+            "type": "{String | Array}",
+            "class": "Column",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 110,
             "description": "A format function used to calculate a cell's value",
             "itemtype": "property",
             "name": "format",
@@ -464,7 +484,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 101,
+            "line": 117,
             "itemtype": "property",
             "name": "isGroupColumn",
             "type": "{Boolean}",
@@ -475,7 +495,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 108,
+            "line": 124,
             "itemtype": "property",
             "name": "isVisibleGroupColumn",
             "type": "{Boolean}",
@@ -486,7 +506,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 117,
+            "line": 133,
             "itemtype": "property",
             "name": "visibleSubColumns",
             "type": "{Array}",
@@ -499,7 +519,7 @@
             "file": "addon/classes/Row.js",
             "line": 8,
             "itemtype": "property",
-            "name": "expanded",
+            "name": "hidden",
             "type": "{Boolean}",
             "default": "false",
             "class": "Row",
@@ -509,9 +529,29 @@
             "file": "addon/classes/Row.js",
             "line": 15,
             "itemtype": "property",
+            "name": "expanded",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Row",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Row.js",
+            "line": 22,
+            "itemtype": "property",
             "name": "selected",
             "type": "{Boolean}",
             "default": "false",
+            "class": "Row",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Row.js",
+            "line": 29,
+            "description": "Class names to be applied to this row",
+            "itemtype": "property",
+            "name": "classNames",
+            "type": "{String | Array}",
             "class": "Row",
             "module": "Classes"
         },

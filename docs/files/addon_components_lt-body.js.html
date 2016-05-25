@@ -50,7 +50,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.2</p>
+                <p class="version pull-right">v1.0.0-beta.3</p>
               </div>
             </div>
         </div>
@@ -214,9 +214,9 @@ export default Ember.Component.extend({
    */
   tableId: null,
 
-  rows: computed.oneWay(&#x27;table.rows&#x27;),
-  visibleColumns: computed.oneWay(&#x27;table.visibleColumns&#x27;),
-  colspan: computed.oneWay(&#x27;visibleColumns.length&#x27;),
+  rows: computed.filterBy(&#x27;table.rows&#x27;, &#x27;hidden&#x27;, false),
+  visibleColumns: computed.readOnly(&#x27;table.visibleColumns&#x27;),
+  colspan: computed.readOnly(&#x27;visibleColumns.length&#x27;),
 
   style: computed(function() {
     return Ember.String.htmlSafe(&#x60;height:${this.get(&#x27;height&#x27;)};&#x60;);
