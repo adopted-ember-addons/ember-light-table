@@ -92,6 +92,22 @@ export default class Column extends Ember.Object.extend({
   width: null,
 
   /**
+   * Class names to be applied to header and footer cells of this column
+   *
+   * @property classNames
+   * @type {String | Array}
+   */
+  classNames: null,
+
+  /**
+   * Class names to be applied to all cells of this column
+   *
+   * @property cellClassNames
+   * @type {String | Array}
+   */
+  cellClassNames: null,
+
+  /**
    * A format function used to calculate a cell's value
    * @property format
    * @type {Function}
