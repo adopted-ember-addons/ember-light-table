@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   tagName: 'td',
   classNames: ['lt-cell'],
   attributeBindings: ['width'],
-  classNameBindings: ['align', 'isSorted'],
+  classNameBindings: ['align', 'isSorted', 'column.cellClassNames'],
 
   column: null,
   row: null,
