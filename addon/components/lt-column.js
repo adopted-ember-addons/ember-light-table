@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   tagName: 'th',
   classNames: ['lt-column'],
   attributeBindings: ['width', 'colspan', 'rowspan'],
-  classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isSortable', 'isSorted'],
+  classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isSortable', 'isSorted', 'column.classNames'],
 
   column: null,
   tableActions: null,

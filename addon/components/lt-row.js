@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   layout,
   tagName: 'tr',
   classNames: ['lt-row'],
-  classNameBindings: ['isSelected', 'isExpanded', 'canExpand:is-expandable', 'canSelect:is-selectable'],
+  classNameBindings: ['isSelected', 'isExpanded', 'canExpand:is-expandable', 'canSelect:is-selectable', 'row.classNames'],
   attributeBindings: ['colspan'],
 
   columns: null,
