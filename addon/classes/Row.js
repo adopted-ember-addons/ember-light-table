@@ -38,6 +38,7 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @class Row
    * @constructor
    * @param {Object} content
+   * @param {Object} options
    */
   constructor(content, options = {}) {
     if (content instanceof Row) {
