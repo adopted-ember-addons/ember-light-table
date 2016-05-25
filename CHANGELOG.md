@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.0-beta.3
+- [#25](https://github.com/offirgolan/ember-light-table/pull/25) Add support for custom row, column, and cell class names. Also add the ability to hide/show rows via `hidden` property
+
 ## 1.0.0-beta.2
 - Remove ember-wormhole from blueprint by just using it as a dependency
 
