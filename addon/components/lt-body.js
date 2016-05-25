@@ -125,9 +125,9 @@ export default Ember.Component.extend({
    */
   tableId: null,
 
-  rows: computed.oneWay('table.rows'),
-  visibleColumns: computed.oneWay('table.visibleColumns'),
-  colspan: computed.oneWay('visibleColumns.length'),
+  rows: computed.filterBy('table.rows', 'hidden', false),
+  visibleColumns: computed.readOnly('table.visibleColumns'),
+  colspan: computed.readOnly('visibleColumns.length'),
 
   style: computed(function() {
     return Ember.String.htmlSafe(`height:${this.get('height')};`);

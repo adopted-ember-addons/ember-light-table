@@ -6,6 +6,13 @@ import Ember from 'ember';
   */
 export default class Row extends Ember.ObjectProxy.extend({
   /**
+   * @property hidden
+   * @type {Boolean}
+   * @default false
+   */
+  hidden: false,
+
+  /**
    * @property expanded
    * @type {Boolean}
    * @default false

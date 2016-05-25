@@ -1,9 +1,14 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
 import Table from 'ember-light-table';
 import createClickEvent from '../../helpers/create-click-event';
 import Columns from '../../helpers/table-columns';
+
+const {
+  run
+} = Ember;
 
 moduleForComponent('lt-body', 'Integration | Component | lt body', {
   integration: true,
@@ -118,6 +123,8 @@ test('row expansion - multiple', function(assert) {
 });
 
 test('row actions', function(assert) {
+  assert.expect(2);
+
   this.set('table', new Table(Columns, createUsers(1)));
   this.on('onRowClick', row => assert.ok(row));
   this.on('onRowDoubleClick', row => assert.ok(row));
@@ -128,4 +135,23 @@ test('row actions', function(assert) {
   row.dblclick();
 });
 
+test('hidden rows', function(assert) {
+  this.set('table', new Table(Columns, createUsers(5)));
 
+  this.render(hbs `{{lt-body table=table}}`);
+
+  assert.equal(this.$('tbody > tr').length, 5);
+
+  run(() => {
+    this.get('table.rows').objectAt(0).set('hidden', true);
+    this.get('table.rows').objectAt(1).set('hidden', true);
+  });
+
+  assert.equal(this.$('tbody > tr').length, 3);
+
+  run(() => {
+    this.get('table.rows').objectAt(0).set('hidden', false);
+  });
+
+  assert.equal(this.$('tbody > tr').length, 4);
+});
