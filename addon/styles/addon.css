@@ -19,11 +19,17 @@
   visibility: hidden;
 }
 
-.ember-light-table .lt-body-wrap {
+.ember-light-table .lt-head-wrap,
+.ember-light-table .lt-body-wrap,
+.ember-light-table .lt-foot-wrap {
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.ember-light-table .lt-body-wrap {
   height: inherit;
 }
+
 
 .ember-light-table .align-left {
   text-align: left;
