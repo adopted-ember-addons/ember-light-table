@@ -1,3 +1,5 @@
+import _ from 'lodash/lodash';
+
 export default function() {
 
   // These comments are here to help you get started. Feel free to delete them.
@@ -17,9 +19,9 @@ export default function() {
   this.namespace = 'api';    // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
-  this.get('/users', function(db, request) {
+  this.get('/users', function(schema, request) {
     var { page, limit, sort, dir } = request.queryParams;
-    var users = db.users;
+    var users = schema.users.all().models;
 
     page = page || 1;
     limit = limit || 20;
