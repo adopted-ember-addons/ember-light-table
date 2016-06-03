@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/lt-column';
+import layout from '../../../templates/components/light-table/columns/base';
 
 const {
   isEmpty,

@@ -3,12 +3,12 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { Row, Column} from 'ember-light-table';
 
-moduleForComponent('lt-cell', 'Integration | Component | lt cell', {
+moduleForComponent('light-table/cells/base', 'Integration | Component | Cells | base', {
   integration: true
 });
 
 test('it renders', function(assert) {
-  this.render(hbs`{{lt-cell}}`);
+  this.render(hbs`{{light-table/cells/base}}`);
 
   assert.equal(this.$().text().trim(), '');
 });
@@ -24,7 +24,7 @@ test('cell with column format', function(assert) {
 
   this.set('row', new Row());
 
-  this.render(hbs`{{lt-cell column=column rawValue=2 row=row}}`);
+  this.render(hbs`{{light-table/cells/base column=column rawValue=2 row=row}}`);
 
   assert.equal(this.$().text().trim(), '4');
 });
@@ -40,7 +40,7 @@ test('cell format with no valuePath', function(assert) {
     num: 2
   }));
 
-  this.render(hbs`{{lt-cell column=column row=row}}`);
+  this.render(hbs`{{light-table/cells/base column=column row=row}}`);
 
   assert.equal(this.$().text().trim(), '4');
 });
@@ -62,7 +62,7 @@ test('cell with nested valuePath', function(assert) {
     }
   }));
 
-  this.render(hbs`{{lt-cell column=column rawValue=(get row column.valuePath) row=row}}`);
+  this.render(hbs`{{light-table/cells/base column=column rawValue=(get row column.valuePath) row=row}}`);
 
   assert.equal(this.$().text().trim(), '4');
 

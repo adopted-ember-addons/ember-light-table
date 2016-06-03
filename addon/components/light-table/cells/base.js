@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/lt-cell';
+import layout from '../../../templates/components/light-table/cells/base';
 
 const {
   computed

@@ -1,3 +1,7 @@
 {{#each columns as |column|}}
-  {{lt-cell column=column row=row rawValue=(get row column.valuePath) tableActions=tableActions}}
+  {{component (concat 'light-table/cells/' column.cellType)
+    column=column
+    row=row
+    rawValue=(get row column.valuePath)
+    tableActions=tableActions}}
 {{/each}}

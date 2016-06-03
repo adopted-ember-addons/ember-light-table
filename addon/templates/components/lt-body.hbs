@@ -3,7 +3,14 @@
 <table>
   <tbody class="lt-body">
     {{#each rows as |row|}}
-      {{lt-row columns=visibleColumns tableActions=tableActions row=row canExpand=canExpand canSelect=canSelect click=(action 'onRowClick' row) doubleClick=(action 'onRowDoubleClick' row)}}
+      {{lt-row
+        columns=visibleColumns
+        tableActions=tableActions
+        row=row
+        canExpand=canExpand
+        canSelect=canSelect
+        click=(action 'onRowClick' row)
+        doubleClick=(action 'onRowDoubleClick' row)}}
 
       {{yield (hash
         expanded-row=(component 'lt-spanned-row' classes='lt-expanded-row' colspan=colspan yield=row visible=row.expanded)
