@@ -90,7 +90,9 @@ export default class Column extends Ember.Object.extend({
   headerComponent: null,
 
   /**
-   * Component name for the column cells
+   * Component name for the column cells. This component is automatically passed row,
+   * column, and value variables, and you can specify a valuePath to set what property
+   * the value is set to.
    * @property cellComponent
    * @type {String}
    * @optional
