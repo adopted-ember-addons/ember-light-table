@@ -1,5 +1,6 @@
 <div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
 
+{{#lt-scrollable}}
 <table>
   <tbody class="lt-body">
     {{#each rows as |row|}}
@@ -19,5 +20,6 @@
     ) rows}}
   </tbody>
 </table>
+{{/lt-scrollable}}
 
 <div id={{concat tableId '_inline_foot'}} class="lt-inline lt-foot"></div>
