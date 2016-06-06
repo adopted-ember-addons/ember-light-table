@@ -40,7 +40,6 @@ export default Ember.Component.extend({
   layout,
   classNames: ['lt-body-wrap'],
   classNameBindings: ['canSelect', 'multiSelect', 'canExpand'],
-  attributeBindings: ['style'],
   /**
    * @property table
    * @type {Table}
@@ -110,16 +109,6 @@ export default Ember.Component.extend({
   expandOnClick: true,
 
   /**
-   * Table body height. This needs to be specified for fixed
-   * footer and header
-   *
-   * @property height
-   * @type {String}
-   * @default inherit
-   */
-  height: 'inherit',
-
-  /**
    * ID of main table component. Used to generate divs for ember-wormhole
    * @type {String}
    */
@@ -128,10 +117,6 @@ export default Ember.Component.extend({
   rows: computed.filterBy('table.rows', 'hidden', false),
   visibleColumns: computed.readOnly('table.visibleColumns'),
   colspan: computed.readOnly('visibleColumns.length'),
-
-  style: computed(function() {
-    return Ember.String.htmlSafe(`height:${this.get('height')};`);
-  }),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
