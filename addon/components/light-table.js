@@ -84,18 +84,8 @@ const LightTable =  Ember.Component.extend({
   init() {
     this._super(...arguments);
     assert(`[ember-light-table] table must be an instance of Table`, this.get('table') instanceof Table);
-  },
-
-  actions: {
-    /**
-     * Action to be called when user reached the bottom of the scroll container
-     *
-     * @event onScrolledToBottom
-     */
-    onScrolledToBottom() {
-      callAction(this, 'onScrolledToBottom', ...arguments);
-    }
   }
+  
 });
 
 LightTable.reopenClass({

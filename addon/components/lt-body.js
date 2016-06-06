@@ -93,11 +93,11 @@ export default Ember.Component.extend({
   /**
    * Hide scrollbar when not scrolling
    *
-   * @property autoHide
+   * @property autoHideScrollbar
    * @type {Boolean}
    * @default true
    */
-  autoHide: true,
+  autoHideScrollbar: true,
 
   /**
    * Allows multiple rows to be expanded at once
@@ -202,9 +202,9 @@ export default Ember.Component.extend({
     },
     
     /**
-     * onScrollEnd action.
+     * onScrolledToBottom action - sent when use scrolls to the bottom
      * 
-     * @event onScrollEnd
+     * @event onScrolledToBottom
      */
     onScrolledToBottom() {
       callAction(this, 'onScrolledToBottom');

@@ -25,14 +25,18 @@
 
     <div class="panel-body table-container">
 {{!-- BEGIN-SNIPPET expandable-table --}}
-{{#light-table table height="70vh" scrollContainer='.table-container' as |t|}}
+{{#light-table table height="70vh" as |t|}}
   {{t.head
     onColumnClick=(action 'onColumnClick')
     iconAscending='fa fa-sort-asc'
     iconDescending='fa fa-sort-desc'
   }}
 
-  {{#t.body canExpand=true multiRowExpansion=false as |body|}}
+  {{#t.body 
+    canExpand=true 
+    multiRowExpansion=false 
+    scrollContainer='.table-container'
+  as |body|}}
     {{#body.expanded-row as |row|}}
       {{expanded-row row=row}}
     {{/body.expanded-row}}
