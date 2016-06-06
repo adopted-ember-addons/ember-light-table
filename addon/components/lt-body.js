@@ -91,6 +91,15 @@ export default Ember.Component.extend({
   multiSelect: false,
 
   /**
+   * Hide scrollbar when not scrolling
+   *
+   * @property autoHide
+   * @type {Boolean}
+   * @default true
+   */
+  autoHide: true,
+
+  /**
    * Allows multiple rows to be expanded at once
    *
    * @property multiRowExpansion
@@ -113,6 +122,13 @@ export default Ember.Component.extend({
    * @type {String}
    */
   tableId: null,
+  
+  /**
+   * @property scrollBuffer
+   * @type {Number}
+   * @default 500
+   */
+  scrollBuffer: 500,
 
   rows: computed.filterBy('table.rows', 'hidden', false),
   visibleColumns: computed.readOnly('table.visibleColumns'),
@@ -183,6 +199,15 @@ export default Ember.Component.extend({
      */
     onRowDoubleClick( /* row */ ) {
       callAction(this, 'onRowDoubleClick', ...arguments);
+    },
+    
+    /**
+     * onScrollEnd action.
+     * 
+     * @event onScrollEnd
+     */
+    onScrolledToBottom() {
+      callAction(this, 'onScrolledToBottom');
     }
   }
 });

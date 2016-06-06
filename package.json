@@ -59,7 +59,7 @@
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.3",
     "ember-wormhole": "0.3.6",
-    "ember-scrollable": "taras/ember-scrollable#e29782d1e246c768e7b97733deaba3b78332021d"
+    "ember-scrollable": "taras/ember-scrollable#b86d20ce05d7d58bf537a8e5807ef392ebf80e02"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",

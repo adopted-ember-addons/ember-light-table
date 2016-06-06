@@ -1,6 +1,10 @@
 <div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
 
-{{#lt-scrollable}}
+{{#lt-scrollable 
+  autoHide=autoHide
+  scrollEnd="onScrolledToBottom"
+  scrollBuffer=scrollBuffer
+}}
 <table>
   <tbody class="lt-body">
     {{#each rows as |row|}}

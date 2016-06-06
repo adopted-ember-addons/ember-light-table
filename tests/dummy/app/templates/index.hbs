@@ -24,6 +24,7 @@
     <div class="panel-body table-container fixed-header">
 {{!-- BEGIN-SNIPPET simple-table --}}
 {{#light-table table height='64vh' onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
+
   {{t.head
     onColumnClick=(action 'onColumnClick')
     iconAscending='fa fa-sort-asc'
@@ -38,6 +39,7 @@
       {{/body.loader}}
     {{/if}}
   {{/t.body}}
+  
 {{/light-table}}
 {{!-- END-SNIPPET --}}
     </div>
