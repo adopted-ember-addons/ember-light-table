@@ -24,7 +24,7 @@ test('cell with column format', function(assert) {
 
   this.set('row', new Row());
 
-  this.render(hbs`{{light-table/cells/base column=column rawValue=2 row=row}}`);
+  this.render(hbs`{{light-table/cells/base column row rawValue=2}}`);
 
   assert.equal(this.$().text().trim(), '4');
 });
@@ -40,7 +40,7 @@ test('cell format with no valuePath', function(assert) {
     num: 2
   }));
 
-  this.render(hbs`{{light-table/cells/base column=column row=row}}`);
+  this.render(hbs`{{light-table/cells/base column row}}`);
 
   assert.equal(this.$().text().trim(), '4');
 });
@@ -62,7 +62,7 @@ test('cell with nested valuePath', function(assert) {
     }
   }));
 
-  this.render(hbs`{{light-table/cells/base column=column rawValue=(get row column.valuePath) row=row}}`);
+  this.render(hbs`{{light-table/cells/base column row rawValue=(get row column.valuePath)}}`);
 
   assert.equal(this.$().text().trim(), '4');
 

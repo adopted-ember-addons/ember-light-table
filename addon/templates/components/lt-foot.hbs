@@ -6,8 +6,7 @@
       {{else}}
         <tr>
           {{#each visibleColumns as |column|}}
-            {{component (concat 'light-table/columns/' column.type)
-              column=column
+            {{component (concat 'light-table/columns/' column.type) column
               tableActions=tableActions
               sortIcons=sortIcons
               click=(action 'onColumnClick' column)

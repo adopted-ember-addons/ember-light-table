@@ -1,1 +1,1 @@
-export { default } from 'ember-light-table/components/light-table/columns/base';
+export { default } from 'ember-light-table/components/columns/base';

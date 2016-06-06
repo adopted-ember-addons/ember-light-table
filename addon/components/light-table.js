@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import layout from '../templates/components/light-table';
-import callAction from '../utils/call-action';
-import TableScrollMixin from '../mixins/table-scroll';
-import Table from '../classes/Table';
+import layout from 'ember-light-table/templates/components/light-table';
+import callAction from 'ember-light-table/utils/call-action';
+import TableScrollMixin from 'ember-light-table/mixins/table-scroll';
+import Table from 'ember-light-table/classes/Table';
 
 const {
   assert
@@ -22,7 +22,7 @@ const {
  * {{/light-table}}
  * ```
  *
- * Please see the documentation for the [Head](../classes/Head.html), [Body](../classes/Body.html), and [Foot](../classes/Foot.html) components
+ * Please see the documentation for the [Head](ember-light-table/classes/Head.html), [Body](ember-light-table/classes/Body.html), and [Foot](ember-light-table/classes/Foot.html) components
  * for more details on all possible options and actions.
  *
  * @class Light Table

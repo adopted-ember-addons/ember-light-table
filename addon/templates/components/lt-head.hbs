@@ -18,9 +18,8 @@
 
         <tr>
           {{#each visibleColumnGroups as |column|}}
-            {{component (concat 'light-table/columns/' column.type)
-              column=column
-              tableActions=tableActions 
+            {{component (concat 'light-table/columns/' column.type) column
+              tableActions=tableActions
               sortIcons=sortIcons
               click=(action 'onColumnClick' column)
               doubleClick=(action 'onColumnDoubleClick' column)}}
@@ -28,8 +27,7 @@
         </tr>
         <tr>
           {{#each visibleSubColumns as |column|}}
-            {{component (concat 'light-table/columns/' column.type)
-              column=column
+            {{component (concat 'light-table/columns/' column.type) column
               rowspan=1
               classNames="lt-sub-column"
               tableActions=tableActions

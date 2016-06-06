@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import callAction from '../utils/call-action';
+import callAction from 'ember-light-table/utils/call-action';
 
 const {
   computed

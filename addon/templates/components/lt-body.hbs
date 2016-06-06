@@ -3,10 +3,8 @@
 <table>
   <tbody class="lt-body">
     {{#each rows as |row|}}
-      {{lt-row
-        columns=visibleColumns
+      {{lt-row row visibleColumns
         tableActions=tableActions
-        row=row
         canExpand=canExpand
         canSelect=canSelect
         click=(action 'onRowClick' row)
