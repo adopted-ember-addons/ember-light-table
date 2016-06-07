@@ -1,7 +1,6 @@
 import Ember from 'ember';
-import layout from '../templates/components/light-table';
-import callAction from '../utils/call-action';
-import Table from '../classes/Table';
+import layout from 'ember-light-table/templates/components/light-table';
+import Table from 'ember-light-table/classes/Table';
 
 const {
   computed,
@@ -85,7 +84,7 @@ const LightTable =  Ember.Component.extend({
     this._super(...arguments);
     assert(`[ember-light-table] table must be an instance of Table`, this.get('table') instanceof Table);
   }
-  
+
 });
 
 LightTable.reopenClass({

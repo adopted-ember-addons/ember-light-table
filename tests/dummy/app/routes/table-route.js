@@ -7,5 +7,11 @@ export default Ember.Route.extend({
 
   setupController(controller, model) {
     controller.get('table').setRows(model.toArray());
+  },
+
+  resetController: function(controller, isExiting) {
+    if (isExiting) {
+      controller.set('page', 1);
+    }
   }
 });

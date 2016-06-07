@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import layout from '../templates/components/lt-body';
-import callAction from '../utils/call-action';
+import layout from 'ember-light-table/templates/components/lt-body';
+import callAction from 'ember-light-table/utils/call-action';
 
 const {
   computed
@@ -40,6 +40,7 @@ export default Ember.Component.extend({
   layout,
   classNames: ['lt-body-wrap'],
   classNameBindings: ['canSelect', 'multiSelect', 'canExpand'],
+
   /**
    * @property table
    * @type {Table}
@@ -118,11 +119,22 @@ export default Ember.Component.extend({
   expandOnClick: true,
 
   /**
+   * If true, the body block will yield columns and rows, allowing you
+   * to define your own table body
+   *
+   * @property overwrite
+   * @type {Boolean}
+   * @default false
+   */
+  overwrite: false,
+
+  /**
    * ID of main table component. Used to generate divs for ember-wormhole
+   *
    * @type {String}
    */
   tableId: null,
-  
+
   /**
    * @property scrollBuffer
    * @type {Number}
@@ -130,9 +142,9 @@ export default Ember.Component.extend({
    */
   scrollBuffer: 500,
 
-  rows: computed.filterBy('table.rows', 'hidden', false),
-  visibleColumns: computed.readOnly('table.visibleColumns'),
-  colspan: computed.readOnly('visibleColumns.length'),
+  rows: computed.readOnly('table.visibleRows'),
+  columns: computed.readOnly('table.visibleColumns'),
+  colspan: computed.readOnly('columns.length'),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
@@ -200,10 +212,10 @@ export default Ember.Component.extend({
     onRowDoubleClick( /* row */ ) {
       callAction(this, 'onRowDoubleClick', ...arguments);
     },
-    
+
     /**
-     * onScrolledToBottom action - sent when use scrolls to the bottom
-     * 
+     * onScrolledToBottom action - sent when user scrolls to the bottom
+     *
      * @event onScrolledToBottom
      */
     onScrolledToBottom() {
