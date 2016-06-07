@@ -119,7 +119,18 @@ export default Ember.Component.extend({
   expandOnClick: true,
 
   /**
+   * If true, the body block will yield columns and rows, allowing you
+   * to define your own table body
+   *
+   * @property overwrite
+   * @type {Boolean}
+   * @default false
+   */
+  overwrite: false,
+
+  /**
    * ID of main table component. Used to generate divs for ember-wormhole
+   *
    * @type {String}
    */
   tableId: null,
@@ -131,9 +142,9 @@ export default Ember.Component.extend({
    */
   scrollBuffer: 500,
 
-  rows: computed.filterBy('table.rows', 'hidden', false),
-  visibleColumns: computed.readOnly('table.visibleColumns'),
-  colspan: computed.readOnly('visibleColumns.length'),
+  rows: computed.readOnly('table.visibleRows'),
+  columns: computed.readOnly('table.visibleColumns'),
+  colspan: computed.readOnly('columns.length'),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,

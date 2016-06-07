@@ -2,22 +2,22 @@
   <table>
     <thead class="lt-head">
       {{#if hasBlock}}
-        {{yield visibleColumnGroups visibleSubColumns table}}
+        {{yield columnGroups subColumns table}}
       {{else}}
 
         {{!- There is an issue where if there are more than 1 row and the first has a colspan,
            the td's fail to hold their width. Creating a scaffolding will setup the table columns correctly
         --}}
-        {{#if visibleSubColumns.length}}
+        {{#if subColumns.length}}
           <tr>
-            {{#each visibleSubColumns as |column|}}
+            {{#each subColumns as |column|}}
               <td width={{column.width}} class="lt-scaffolding"></td>
             {{/each}}
           </tr>
         {{/if}}
 
         <tr>
-          {{#each visibleColumnGroups as |column|}}
+          {{#each columnGroups as |column|}}
             {{component (concat 'light-table/columns/' column.type) column
               tableActions=tableActions
               sortIcons=sortIcons
@@ -26,7 +26,7 @@
           {{/each}}
         </tr>
         <tr>
-          {{#each visibleSubColumns as |column|}}
+          {{#each subColumns as |column|}}
             {{component (concat 'light-table/columns/' column.type) column
               rowspan=1
               classNames="lt-sub-column"

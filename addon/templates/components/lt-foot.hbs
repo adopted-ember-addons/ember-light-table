@@ -2,10 +2,10 @@
   <table>
     <tfoot class="lt-foot">
       {{#if hasBlock}}
-        {{yield visibleColumns table}}
+        {{yield columns table}}
       {{else}}
         <tr>
-          {{#each visibleColumns as |column|}}
+          {{#each columns as |column|}}
             {{component (concat 'light-table/columns/' column.type) column
               tableActions=tableActions
               sortIcons=sortIcons
