@@ -13,7 +13,7 @@ test('create column - default options', function(assert) {
   assert.equal(col.sorted, false);
   assert.equal(col.label, '');
   assert.equal(col.subColumns, null);
-  assert.equal(col.headerComponent, null);
+  assert.equal(col.component, null);
   assert.equal(col.cellComponent, null);
   assert.equal(col.valuePath, null);
   assert.equal(col.width, null);

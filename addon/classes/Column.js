@@ -82,12 +82,12 @@ export default class Column extends Ember.Object.extend({
   cellType: 'base',
 
   /**
-   * Component name for the column header
-   * @property headerComponent
+   * Component name for the column
+   * @property component
    * @type {String}
    * @optional
    */
-  headerComponent: null,
+  component: null,
 
   /**
    * Component name for the column cells. This component is automatically passed row,
