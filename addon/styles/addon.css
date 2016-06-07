@@ -1,6 +1,9 @@
 .ember-light-table {
   height: auto;
-  overflow: auto;
+  overflow: hidden;
+  
+  display: flex;
+  flex-direction: column;
 }
 
 .ember-light-table table {
@@ -26,10 +29,20 @@
   overflow-x: hidden;
 }
 
-.ember-light-table .lt-body-wrap {
-  height: inherit;
+.ember-light-table .lt-head-wrap,
+.ember-light-table .lt-foot-wrap {
+  flex: 1 0 auto;
 }
 
+.ember-light-table .lt-body-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.ember-light-table .lt-scrollable {
+  width: 100%;
+  height: 100%;
+}
 
 .ember-light-table .align-left {
   text-align: left;

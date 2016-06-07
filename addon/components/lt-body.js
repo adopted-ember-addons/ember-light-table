@@ -40,7 +40,7 @@ export default Ember.Component.extend({
   layout,
   classNames: ['lt-body-wrap'],
   classNameBindings: ['canSelect', 'multiSelect', 'canExpand'],
-  attributeBindings: ['style'],
+
   /**
    * @property table
    * @type {Table}
@@ -92,6 +92,15 @@ export default Ember.Component.extend({
   multiSelect: false,
 
   /**
+   * Hide scrollbar when not scrolling
+   *
+   * @property autoHideScrollbar
+   * @type {Boolean}
+   * @default true
+   */
+  autoHideScrollbar: true,
+
+  /**
    * Allows multiple rows to be expanded at once
    *
    * @property multiRowExpansion
@@ -110,28 +119,21 @@ export default Ember.Component.extend({
   expandOnClick: true,
 
   /**
-   * Table body height. This needs to be specified for fixed
-   * footer and header
-   *
-   * @property height
-   * @type {String}
-   * @default inherit
-   */
-  height: 'inherit',
-
-  /**
    * ID of main table component. Used to generate divs for ember-wormhole
    * @type {String}
    */
   tableId: null,
 
+  /**
+   * @property scrollBuffer
+   * @type {Number}
+   * @default 500
+   */
+  scrollBuffer: 500,
+
   rows: computed.filterBy('table.rows', 'hidden', false),
   visibleColumns: computed.readOnly('table.visibleColumns'),
   colspan: computed.readOnly('visibleColumns.length'),
-
-  style: computed(function() {
-    return Ember.String.htmlSafe(`height:${this.get('height')};`);
-  }),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
@@ -198,6 +200,15 @@ export default Ember.Component.extend({
      */
     onRowDoubleClick( /* row */ ) {
       callAction(this, 'onRowDoubleClick', ...arguments);
+    },
+
+    /**
+     * onScrolledToBottom action - sent when user scrolls to the bottom
+     *
+     * @event onScrolledToBottom
+     */
+    onScrolledToBottom() {
+      callAction(this, 'onScrolledToBottom');
     }
   }
 });
