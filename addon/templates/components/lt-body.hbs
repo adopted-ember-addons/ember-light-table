@@ -1,8 +1,15 @@
 <div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
 
+{{#lt-scrollable 
+  autoHide=autoHideScrollbar
+  scrollEnd="onScrolledToBottom"
+  scrollBuffer=scrollBuffer
+  as |scrollbar|
+}}
 <table>
   <tbody class="lt-body">
-    {{#each rows as |row|}}
+    {{! scrollbar.update action when rows changes and evaluates to rows !}}
+    {{#each (compute scrollbar.update rows) as |row|}}
       {{lt-row columns=visibleColumns tableActions=tableActions row=row canExpand=canExpand canSelect=canSelect click=(action 'onRowClick' row) doubleClick=(action 'onRowDoubleClick' row)}}
 
       {{yield (hash
@@ -19,5 +26,6 @@
     ) rows}}
   </tbody>
 </table>
+{{/lt-scrollable}}
 
 <div id={{concat tableId '_inline_foot'}} class="lt-inline lt-foot"></div>
