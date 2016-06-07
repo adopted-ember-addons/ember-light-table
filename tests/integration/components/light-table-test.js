@@ -23,18 +23,20 @@ test('scrolled to bottom', function(assert) {
   assert.expect(2);
   this.set('table', new Table(Columns, createUsers(50)));
   this.on('onScrolledToBottom', () => assert.ok(true));
-  this.set('scrollContainer', '#ember-testing-container');
 
   this.render(hbs`
-    {{#light-table table scrollContainer=scrollContainer onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
+    {{#light-table table height='40vh' as |t|}}
       {{t.head}}
-      {{t.body}}
+      {{t.body onScrolledToBottom=(action 'onScrolledToBottom')}}
     {{/light-table}}
   `);
 
   assert.equal(this.$('tbody > tr').length, 50);
-  $(this.scrollContainer).animate({
-    scrollTop: $(this.scrollContainer).prop('scrollHeight')
+
+  let scrollContainer = '.tse-scroll-content';
+
+  this.$(scrollContainer).animate({
+    scrollTop: this.$(scrollContainer).prop('scrollHeight')
   }, 0);
 });
 
