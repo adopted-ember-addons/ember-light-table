@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import layout from '../templates/components/light-table';
 import callAction from '../utils/call-action';
-import TableScrollMixin from '../mixins/table-scroll';
 import Table from '../classes/Table';
 
 const {
+  computed,
   assert
 } = Ember;
 
@@ -30,9 +30,10 @@ const {
  * @uses TableScrollMixin
  */
 
-const LightTable =  Ember.Component.extend(TableScrollMixin, {
+const LightTable =  Ember.Component.extend({
   layout,
   classNames: ['ember-light-table'],
+  attributeBindings: ['style'],
 
   /**
    * @property table
@@ -67,21 +68,24 @@ const LightTable =  Ember.Component.extend(TableScrollMixin, {
    */
   tableActions: null,
 
+  /**
+   * Table height.
+   *
+   * @property height
+   * @type {String}
+   * @default inherit
+   */
+  height: 'inherit',
+
+  style: computed('height', function() {
+    return Ember.String.htmlSafe(`height:${this.get('height')};`);
+  }),
+
   init() {
     this._super(...arguments);
     assert(`[ember-light-table] table must be an instance of Table`, this.get('table') instanceof Table);
-  },
-
-  actions: {
-    /**
-     * Action to be called when user reached the bottom of the scroll container
-     *
-     * @event onScrolledToBottom
-     */
-    onScrolledToBottom() {
-      callAction(this, 'onScrolledToBottom', ...arguments);
-    }
   }
+  
 });
 
 LightTable.reopenClass({

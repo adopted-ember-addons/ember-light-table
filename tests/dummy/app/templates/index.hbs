@@ -23,7 +23,8 @@
     </div>
     <div class="panel-body table-container fixed-header">
 {{!-- BEGIN-SNIPPET simple-table --}}
-{{#light-table table onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
+{{#light-table table height='64vh' as |t|}}
+
   {{t.head
     onColumnClick=(action 'onColumnClick')
     iconAscending='fa fa-sort-asc'
@@ -31,13 +32,18 @@
     fixed=true
   }}
 
-  {{#t.body canSelect=false height='64vh' as |body|}}
+  {{#t.body 
+    canSelect=false 
+    onScrolledToBottom=(action 'onScrolledToBottom')
+    as |body|
+  }}
     {{#if isLoading}}
       {{#body.loader}}
         {{table-loader}}
       {{/body.loader}}
     {{/if}}
   {{/t.body}}
+  
 {{/light-table}}
 {{!-- END-SNIPPET --}}
     </div>
