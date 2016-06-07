@@ -88,3 +88,22 @@ test('fixed footer', function(assert) {
 
   assert.equal(this.$('#lightTable_inline_foot tfoot').length, 1);
 });
+
+test('table assumes height of container', function(assert){
+
+  assert.expect(1);
+  this.set('table', new Table(Columns, createUsers(1)));
+  this.set('fixed', true);
+
+  this.render(hbs`
+    <div style="height: 500px">
+      {{#light-table table id='lightTable' as |t|}}
+        {{t.body}}
+        {{t.foot fixed=fixed}}
+      {{/light-table}}
+    </div>
+  `);
+
+  assert.equal(this.$('#lightTable').height(), 500, 'table is 500px height');
+
+});
