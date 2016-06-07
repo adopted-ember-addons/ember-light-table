@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import callAction from '../utils/call-action';
+import callAction from 'ember-light-table/utils/call-action';
 
 const {
   computed
@@ -58,9 +58,9 @@ export default Ember.Mixin.create({
   tableId: null,
 
   renderInPlace: computed.oneWay('fixed'),
-  visibleColumnGroups: computed.oneWay('table.visibleColumnGroups'),
-  visibleSubColumns: computed.oneWay('table.visibleSubColumns'),
-  visibleColumns: computed.oneWay('table.visibleColumns'),
+  columnGroups: computed.oneWay('table.visibleColumnGroups'),
+  subColumns: computed.oneWay('table.visibleSubColumns'),
+  columns: computed.oneWay('table.visibleColumns'),
 
   sortIcons: computed('iconAscending', 'iconDescending', function() {
     return this.getProperties(['iconAscending', 'iconDescending']);

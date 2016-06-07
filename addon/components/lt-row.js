@@ -1,11 +1,11 @@
 import Ember from 'ember';
-import layout from '../templates/components/lt-row';
+import layout from 'ember-light-table/templates/components/lt-row';
 
 const {
   computed
 } = Ember;
 
-export default Ember.Component.extend({
+const Row = Ember.Component.extend({
   layout,
   tagName: 'tr',
   classNames: ['lt-row'],
@@ -22,3 +22,9 @@ export default Ember.Component.extend({
   isSelected: computed.readOnly('row.selected'),
   isExpanded: computed.readOnly('row.expanded')
 });
+
+Row.reopenClass({
+  positionalParams: ['row', 'columns']
+});
+
+export default Row;
