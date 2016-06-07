@@ -20,9 +20,11 @@ test('it renders', function(assert) {
 });
 
 test('scrolled to bottom', function(assert) {
-  assert.expect(2);
+  assert.expect(5);
   this.set('table', new Table(Columns, createUsers(50)));
-  this.on('onScrolledToBottom', () => assert.ok(true));
+
+  let onScrolledToBottomCalled; 
+  this.on('onScrolledToBottom', () => { onScrolledToBottomCalled = true; });
 
   this.render(hbs`
     {{#light-table table height='40vh' as |t|}}
@@ -31,13 +33,19 @@ test('scrolled to bottom', function(assert) {
     {{/light-table}}
   `);
 
-  assert.equal(this.$('tbody > tr').length, 50);
+  assert.equal(this.$('tbody > tr').length, 50, '50 rows are rendered');
 
   let scrollContainer = '.tse-scroll-content';
+  let scrollHeight = this.$(scrollContainer).prop('scrollHeight');
+
+  assert.ok(this.$(scrollContainer).length > 0, 'scroll container was rendered');
+  assert.equal(scrollHeight, 2500, 'scroll height is 2500');
 
   this.$(scrollContainer).animate({
-    scrollTop: this.$(scrollContainer).prop('scrollHeight')
+    scrollTop: scrollHeight
   }, 0);
+
+  assert.ok(onScrolledToBottomCalled, 'onScrolledToBottomCalled was called');
 });
 
 
