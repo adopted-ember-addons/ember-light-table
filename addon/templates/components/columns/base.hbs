@@ -1,5 +1,5 @@
 {{#if column.component}}
-  {{component column.component tableActions=tableActions sortIcons=sortIcons column=column}}
+  {{component column.component column=column table=table tableActions=tableActions sortIcons=sortIcons}}
 {{else}}
   {{column.label}}
   {{#if column.sorted}}
