@@ -17,6 +17,13 @@ const {
 
 export default Ember.Mixin.create({
   /**
+   * @property table
+   * @type {Table}
+   * @private
+   */
+  table: null,
+  
+  /**
    * @property fixed
    * @type {Boolean}
    * @default false

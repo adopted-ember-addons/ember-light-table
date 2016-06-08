@@ -2,7 +2,7 @@
   <table>
     <thead class="lt-head">
       {{#if hasBlock}}
-        {{yield columnGroups subColumns table}}
+        {{yield columnGroups subColumns}}
       {{else}}
 
         {{!- There is an issue where if there are more than 1 row and the first has a colspan,
@@ -19,6 +19,7 @@
         <tr>
           {{#each columnGroups as |column|}}
             {{component (concat 'light-table/columns/' column.type) column
+              table=table
               tableActions=tableActions
               sortIcons=sortIcons
               click=(action 'onColumnClick' column)
@@ -28,6 +29,7 @@
         <tr>
           {{#each subColumns as |column|}}
             {{component (concat 'light-table/columns/' column.type) column
+              table=table
               rowspan=1
               classNames="lt-sub-column"
               tableActions=tableActions
