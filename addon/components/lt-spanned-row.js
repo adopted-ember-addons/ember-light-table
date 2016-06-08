@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/lt-spanned-row';
+import layout from 'ember-light-table/templates/components/lt-spanned-row';
 
 export default Ember.Component.extend({
   layout,

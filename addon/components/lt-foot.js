@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import layout from '../templates/components/lt-foot';
-import TableHeaderMixin from '../mixins/table-header';
+import layout from 'ember-light-table/templates/components/lt-foot';
+import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 
 /**
  * @module Components
