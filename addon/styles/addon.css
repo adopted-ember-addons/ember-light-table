@@ -31,10 +31,11 @@
 
 .ember-light-table .lt-head-wrap,
 .ember-light-table .lt-foot-wrap {
-  flex: 1 0 auto;
+  flex: 0 0 auto;
 }
 
 .ember-light-table .lt-body-wrap {
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
 }
