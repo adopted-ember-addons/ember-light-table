@@ -24,7 +24,7 @@ const {
  *       {{/body.loader}}
  *     {{/if}}
  *
- *     {{#if table.isEmpty)}}
+ *     {{#if table.isEmpty}}
  *       {{#body.no-data}}
  *         No users found.
  *       {{/body.no-data}}
