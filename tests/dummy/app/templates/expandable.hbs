@@ -32,9 +32,10 @@
     iconDescending='fa fa-sort-desc'
   }}
 
-  {{#t.body 
-    canExpand=true 
+  {{#t.body
+    canExpand=true
     multiRowExpansion=false
+    onScrolledToBottom=(action 'onScrolledToBottom')
   as |body|}}
     {{#body.expanded-row as |row|}}
       {{expanded-row row=row}}
