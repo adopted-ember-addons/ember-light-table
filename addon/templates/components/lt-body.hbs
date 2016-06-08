@@ -9,7 +9,7 @@
   <table>
     <tbody class="lt-body">
       {{#if overwrite}}
-        {{yield columns rows table}}
+        {{yield columns rows}}
       {{else}}
         {{! scrollbar.update action when rows changes and evaluates to rows !}}
         {{#each (compute scrollbar.update rows) as |row|}}
