@@ -53,16 +53,28 @@ export default class Table extends Ember.Object.extend({
   visibleRows: computed.filterBy('rows', 'hidden', false).readOnly(),
 
   /**
+   * @property sortableColumns
+   * @type {Ember.Array}
+   */
+  sortableColumns: computed.filterBy('visibleColumns', 'sortable', true).readOnly(),
+
+  /**
    * @property sortedColumns
    * @type {Ember.Array}
    */
   sortedColumns: computed.filterBy('visibleColumns', 'sorted', true).readOnly(),
 
   /**
-   * @property sortableColumns
+   * @property hideableColumns
    * @type {Ember.Array}
    */
-  sortableColumns: computed.filterBy('visibleColumns', 'sortable', true).readOnly(),
+  hideableColumns: computed.filterBy('flattenedColumns', 'hideable', true).readOnly(),
+
+  /**
+   * @property hiddenColumns
+   * @type {Ember.Array}
+   */
+  hiddenColumns: computed.filterBy('flattenedColumns', 'hidden', true).readOnly(),
 
   /**
    * @property visibleColumns
