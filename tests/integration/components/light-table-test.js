@@ -107,7 +107,7 @@ test('table assumes height of container', function(assert){
 
 });
 
-// TODO: figure out why this test doesn't work properly in Phantomjs
+//TODO: figure out why this test doesn't work properly in Phantomjs
 // test('table body should consume all available space when not enough content to fill it', function(assert){
 //   assert.expect(3);
 
@@ -127,7 +127,7 @@ test('table assumes height of container', function(assert){
 //   `);
 
 //   assert.equal(this.$('.lt-head-wrap').height(), 42, 'header is 42px tall');
-//   assert.equal(this.$('.lt-body-wrap').height(), 416, 'body is 418px tall');
-//   assert.equal(this.$('.lt-foot-wrap').height(), 42, 'header is 42px tall');
+//   assert.equal(this.$('.lt-body-wrap').height(), 438, 'body is 438px tall');
+//   assert.equal(this.$('.lt-foot-wrap').height(), 20, 'header is 20px tall');
 
 // });
