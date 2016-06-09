@@ -1,5 +1,23 @@
 # Change Log
 
+## 1.0.0-beta.5
+
+### Upgrade Notes
+
+- [#30](https://github.com/offirgolan/ember-light-table/pull/30) Support custom cell and column types
+- [#38](https://github.com/offirgolan/ember-light-table/pull/38) Add table reference to custom column components
+- [#40](https://github.com/offirgolan/ember-light-table/pull/40) Use native Ember trackpad scroll emulator via ember-scrollable - [@taras](https://github.com/taras)
+- [#42](https://github.com/offirgolan/ember-light-table/pull/42) Add hideable option to columns
+
+__BREAKING CHANGES__
+
+1. `headerComponent` in column definition has been renamed to `component`
+2. `onScrolledToBottom` action has been moved from `{{light-table}}` to `{{t.body}}` component
+3. `height` has been moved from `{{t.body}}` to `{{light-table}}` component
+
+## 1.0.0-beta.4
+- [#23](https://github.com/offirgolan/ember-light-table/issues/23) Fix x-overflow issue when columns pass screen width
+
 ## 1.0.0-beta.3
 - [#25](https://github.com/offirgolan/ember-light-table/pull/25) Add support for custom row, column, and cell class names. Also add the ability to hide/show rows via `hidden` property
 
