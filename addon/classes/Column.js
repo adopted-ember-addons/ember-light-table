@@ -12,6 +12,13 @@ const {
   */
 export default class Column extends Ember.Object.extend({
   /**
+   * @property hideable
+   * @type {Boolean}
+   * @default true
+   */
+  hideable: true,
+
+  /**
    * @property hidden
    * @type {Boolean}
    * @default false
