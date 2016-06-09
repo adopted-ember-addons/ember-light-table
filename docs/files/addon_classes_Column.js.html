@@ -26,7 +26,13 @@
               <ul class="main-nav">
                 <li class="section">Modules</li>
                    <li  >
+                     <a href="../modules/Cell Types.html">Cell Types</a>
+                   </li>
+                   <li  >
                      <a href="../modules/Classes.html">Classes</a>
+                   </li>
+                   <li  >
+                     <a href="../modules/Column Types.html">Column Types</a>
                    </li>
                    <li  >
                      <a href="../modules/Components.html">Components</a>
@@ -39,6 +45,8 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Base Cell.html">Base Cell</a></li>
+                    <li ><a  href="../classes/Base Column.html">Base Column</a></li>
                     <li ><a  href="../classes/Body.html">Body</a></li>
                     <li ><a  href="../classes/Column.html">Column</a></li>
                     <li ><a  href="../classes/Foot.html">Foot</a></li>
@@ -50,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.4</p>
+                <p class="version pull-right">v1.0.0-beta.5</p>
               </div>
             </div>
         </div>
@@ -100,6 +108,13 @@ const {
   * @class Column
   */
 export default class Column extends Ember.Object.extend({
+  /**
+   * @property hideable
+   * @type {Boolean}
+   * @default true
+   */
+  hideable: true,
+
   /**
    * @property hidden
    * @type {Boolean}
@@ -153,15 +168,35 @@ export default class Column extends Ember.Object.extend({
   subColumns: null,
 
   /**
-   * Component name for the column header
-   * @property headerComponent
+   * Type of column component
+   *
+   * @property type
+   * @type {String}
+   * @default &#x27;base&#x27;
+   */
+  type: &#x27;base&#x27;,
+
+  /**
+   * Type of cell component
+   *
+   * @property cellType
+   * @type {String}
+   * @default &#x27;base&#x27;
+   */
+  cellType: &#x27;base&#x27;,
+
+  /**
+   * Component name for the column
+   * @property component
    * @type {String}
    * @optional
    */
-  headerComponent: null,
+  component: null,
 
   /**
-   * Component name for the column cells
+   * Component name for the column cells. This component is automatically passed row,
+   * column, and value variables, and you can specify a valuePath to set what property
+   * the value is set to.
    * @property cellComponent
    * @type {String}
    * @optional

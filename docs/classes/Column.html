@@ -26,7 +26,13 @@
               <ul class="main-nav">
                 <li class="section">Modules</li>
                    <li  >
+                     <a href="../modules/Cell Types.html">Cell Types</a>
+                   </li>
+                   <li  >
                      <a href="../modules/Classes.html">Classes</a>
+                   </li>
+                   <li  >
+                     <a href="../modules/Column Types.html">Column Types</a>
                    </li>
                    <li  >
                      <a href="../modules/Components.html">Components</a>
@@ -39,6 +45,8 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Base Cell.html">Base Cell</a></li>
+                    <li ><a  href="../classes/Base Column.html">Base Column</a></li>
                     <li ><a  href="../classes/Body.html">Body</a></li>
                     <li  class="active"><a  href="../classes/Column.html">Column</a></li>
                     <li ><a  href="../classes/Foot.html">Foot</a></li>
@@ -50,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.4</p>
+                <p class="version pull-right">v1.0.0-beta.5</p>
               </div>
             </div>
         </div>
@@ -91,7 +99,7 @@
 
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_classes_Column.js.html#l143"><code>addon&#x2F;classes&#x2F;Column.js:143</code></a>
+            Defined in: <a href="../files/addon_classes_Column.js.html#l170"><code>addon&#x2F;classes&#x2F;Column.js:170</code></a>
         </div>
 </div>
 
@@ -120,7 +128,7 @@
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Column.js.html#l143"><code>addon&#x2F;classes&#x2F;Column.js:143</code></a>
+		<a href="../files/addon_classes_Column.js.html#l170"><code>addon&#x2F;classes&#x2F;Column.js:170</code></a>
 		</p>
 
 
@@ -172,7 +180,15 @@
 
                             </li>
                             <li class="index-item property">
+                                <a href="#property_cellType">cellType</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_classNames">classNames</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_component">component</a>
 
                             </li>
                             <li class="index-item property">
@@ -180,11 +196,11 @@
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_headerComponent">headerComponent</a>
+                                <a href="#property_hidden">hidden</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_hidden">hidden</a>
+                                <a href="#property_hideable">hideable</a>
 
                             </li>
                             <li class="index-item property private">
@@ -209,6 +225,10 @@
                             </li>
                             <li class="index-item property">
                                 <a href="#property_subColumns">subColumns</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_type">type</a>
 
                             </li>
                             <li class="index-item property">
@@ -244,7 +264,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l50"><code>addon&#x2F;classes&#x2F;Column.js:50</code></a>
+        <a href="../files/addon_classes_Column.js.html#l57"><code>addon&#x2F;classes&#x2F;Column.js:57</code></a>
         </p>
 
 
@@ -270,7 +290,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l21"><code>addon&#x2F;classes&#x2F;Column.js:21</code></a>
+        <a href="../files/addon_classes_Column.js.html#l28"><code>addon&#x2F;classes&#x2F;Column.js:28</code></a>
         </p>
 
 
@@ -295,7 +315,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l102"><code>addon&#x2F;classes&#x2F;Column.js:102</code></a>
+        <a href="../files/addon_classes_Column.js.html#l129"><code>addon&#x2F;classes&#x2F;Column.js:129</code></a>
         </p>
 
 
@@ -320,17 +340,45 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l74"><code>addon&#x2F;classes&#x2F;Column.js:74</code></a>
+        <a href="../files/addon_classes_Column.js.html#l99"><code>addon&#x2F;classes&#x2F;Column.js:99</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        <p>Component name for the column cells</p>
+        <p>Component name for the column cells. This component is automatically passed row,
+column, and value variables, and you can specify a valuePath to set what property
+the value is set to.</p>
 
     </div>
 
+
+
+</div>
+<div id="property_cellType" class="property item">
+    <h3 class="name"><code>cellType</code></h3>
+    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_classes_Column.js.html#l82"><code>addon&#x2F;classes&#x2F;Column.js:82</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Type of cell component</p>
+
+    </div>
+
+        <p><br><strong>Default:</strong> &#x27;base&#x27;</p>
 
 
 </div>
@@ -345,7 +393,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l94"><code>addon&#x2F;classes&#x2F;Column.js:94</code></a>
+        <a href="../files/addon_classes_Column.js.html#l121"><code>addon&#x2F;classes&#x2F;Column.js:121</code></a>
         </p>
 
 
@@ -353,6 +401,31 @@
 
     <div class="description">
         <p>Class names to be applied to header and footer cells of this column</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_component" class="property item">
+    <h3 class="name"><code>component</code></h3>
+    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_classes_Column.js.html#l91"><code>addon&#x2F;classes&#x2F;Column.js:91</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Component name for the column</p>
 
     </div>
 
@@ -370,7 +443,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l110"><code>addon&#x2F;classes&#x2F;Column.js:110</code></a>
+        <a href="../files/addon_classes_Column.js.html#l137"><code>addon&#x2F;classes&#x2F;Column.js:137</code></a>
         </p>
 
 
@@ -384,9 +457,9 @@
 
 
 </div>
-<div id="property_headerComponent" class="property item">
-    <h3 class="name"><code>headerComponent</code></h3>
-    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
+<div id="property_hidden" class="property item">
+    <h3 class="name"><code>hidden</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
 
 
@@ -395,22 +468,22 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l66"><code>addon&#x2F;classes&#x2F;Column.js:66</code></a>
+        <a href="../files/addon_classes_Column.js.html#l21"><code>addon&#x2F;classes&#x2F;Column.js:21</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        <p>Component name for the column header</p>
-
+        
     </div>
 
+        <p><br><strong>Default:</strong> false</p>
 
 
 </div>
-<div id="property_hidden" class="property item">
-    <h3 class="name"><code>hidden</code></h3>
+<div id="property_hideable" class="property item">
+    <h3 class="name"><code>hideable</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
 
@@ -430,7 +503,7 @@
         
     </div>
 
-        <p><br><strong>Default:</strong> false</p>
+        <p><br><strong>Default:</strong> true</p>
 
 
 </div>
@@ -446,7 +519,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l117"><code>addon&#x2F;classes&#x2F;Column.js:117</code></a>
+        <a href="../files/addon_classes_Column.js.html#l144"><code>addon&#x2F;classes&#x2F;Column.js:144</code></a>
         </p>
 
 
@@ -471,7 +544,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l124"><code>addon&#x2F;classes&#x2F;Column.js:124</code></a>
+        <a href="../files/addon_classes_Column.js.html#l151"><code>addon&#x2F;classes&#x2F;Column.js:151</code></a>
         </p>
 
 
@@ -495,7 +568,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l42"><code>addon&#x2F;classes&#x2F;Column.js:42</code></a>
+        <a href="../files/addon_classes_Column.js.html#l49"><code>addon&#x2F;classes&#x2F;Column.js:49</code></a>
         </p>
 
 
@@ -521,7 +594,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l28"><code>addon&#x2F;classes&#x2F;Column.js:28</code></a>
+        <a href="../files/addon_classes_Column.js.html#l35"><code>addon&#x2F;classes&#x2F;Column.js:35</code></a>
         </p>
 
 
@@ -546,7 +619,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l35"><code>addon&#x2F;classes&#x2F;Column.js:35</code></a>
+        <a href="../files/addon_classes_Column.js.html#l42"><code>addon&#x2F;classes&#x2F;Column.js:42</code></a>
         </p>
 
 
@@ -571,7 +644,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l58"><code>addon&#x2F;classes&#x2F;Column.js:58</code></a>
+        <a href="../files/addon_classes_Column.js.html#l65"><code>addon&#x2F;classes&#x2F;Column.js:65</code></a>
         </p>
 
 
@@ -582,6 +655,32 @@
 
     </div>
 
+
+
+</div>
+<div id="property_type" class="property item">
+    <h3 class="name"><code>type</code></h3>
+    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_classes_Column.js.html#l73"><code>addon&#x2F;classes&#x2F;Column.js:73</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Type of column component</p>
+
+    </div>
+
+        <p><br><strong>Default:</strong> &#x27;base&#x27;</p>
 
 
 </div>
@@ -596,7 +695,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l82"><code>addon&#x2F;classes&#x2F;Column.js:82</code></a>
+        <a href="../files/addon_classes_Column.js.html#l109"><code>addon&#x2F;classes&#x2F;Column.js:109</code></a>
         </p>
 
 
@@ -621,7 +720,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l133"><code>addon&#x2F;classes&#x2F;Column.js:133</code></a>
+        <a href="../files/addon_classes_Column.js.html#l160"><code>addon&#x2F;classes&#x2F;Column.js:160</code></a>
         </p>
 
 
@@ -645,7 +744,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l88"><code>addon&#x2F;classes&#x2F;Column.js:88</code></a>
+        <a href="../files/addon_classes_Column.js.html#l115"><code>addon&#x2F;classes&#x2F;Column.js:115</code></a>
         </p>
 
 

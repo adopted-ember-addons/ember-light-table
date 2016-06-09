@@ -26,7 +26,13 @@
               <ul class="main-nav">
                 <li class="section">Modules</li>
                    <li  >
+                     <a href="../modules/Cell Types.html">Cell Types</a>
+                   </li>
+                   <li  >
                      <a href="../modules/Classes.html">Classes</a>
+                   </li>
+                   <li  >
+                     <a href="../modules/Column Types.html">Column Types</a>
                    </li>
                    <li  >
                      <a href="../modules/Components.html">Components</a>
@@ -39,6 +45,8 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Base Cell.html">Base Cell</a></li>
+                    <li ><a  href="../classes/Base Column.html">Base Column</a></li>
                     <li ><a  href="../classes/Body.html">Body</a></li>
                     <li ><a  href="../classes/Column.html">Column</a></li>
                     <li ><a  href="../classes/Foot.html">Foot</a></li>
@@ -50,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.4</p>
+                <p class="version pull-right">v1.0.0-beta.5</p>
               </div>
             </div>
         </div>
@@ -88,8 +96,8 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../templates/components/lt-body&#x27;;
-import callAction from &#x27;../utils/call-action&#x27;;
+import layout from &#x27;ember-light-table/templates/components/lt-body&#x27;;
+import callAction from &#x27;ember-light-table/utils/call-action&#x27;;
 
 const {
   computed
@@ -113,7 +121,7 @@ const {
  *       {{/body.loader}}
  *     {{/if}}
  *
- *     {{#if table.isEmpty)}}
+ *     {{#if table.isEmpty}}
  *       {{#body.no-data}}
  *         No users found.
  *       {{/body.no-data}}
@@ -129,7 +137,7 @@ export default Ember.Component.extend({
   layout,
   classNames: [&#x27;lt-body-wrap&#x27;],
   classNameBindings: [&#x27;canSelect&#x27;, &#x27;multiSelect&#x27;, &#x27;canExpand&#x27;],
-  attributeBindings: [&#x27;style&#x27;],
+
   /**
    * @property table
    * @type {Table}
@@ -181,6 +189,15 @@ export default Ember.Component.extend({
   multiSelect: false,
 
   /**
+   * Hide scrollbar when not scrolling
+   *
+   * @property autoHideScrollbar
+   * @type {Boolean}
+   * @default true
+   */
+  autoHideScrollbar: true,
+
+  /**
    * Allows multiple rows to be expanded at once
    *
    * @property multiRowExpansion
@@ -199,28 +216,32 @@ export default Ember.Component.extend({
   expandOnClick: true,
 
   /**
-   * Table body height. This needs to be specified for fixed
-   * footer and header
+   * If true, the body block will yield columns and rows, allowing you
+   * to define your own table body
    *
-   * @property height
-   * @type {String}
-   * @default inherit
+   * @property overwrite
+   * @type {Boolean}
+   * @default false
    */
-  height: &#x27;inherit&#x27;,
+  overwrite: false,
 
   /**
    * ID of main table component. Used to generate divs for ember-wormhole
+   *
    * @type {String}
    */
   tableId: null,
 
-  rows: computed.filterBy(&#x27;table.rows&#x27;, &#x27;hidden&#x27;, false),
-  visibleColumns: computed.readOnly(&#x27;table.visibleColumns&#x27;),
-  colspan: computed.readOnly(&#x27;visibleColumns.length&#x27;),
+  /**
+   * @property scrollBuffer
+   * @type {Number}
+   * @default 500
+   */
+  scrollBuffer: 500,
 
-  style: computed(function() {
-    return Ember.String.htmlSafe(&#x60;height:${this.get(&#x27;height&#x27;)};&#x60;);
-  }),
+  rows: computed.readOnly(&#x27;table.visibleRows&#x27;),
+  columns: computed.readOnly(&#x27;table.visibleColumns&#x27;),
+  colspan: computed.readOnly(&#x27;columns.length&#x27;),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
@@ -287,6 +308,15 @@ export default Ember.Component.extend({
      */
     onRowDoubleClick( /* row */ ) {
       callAction(this, &#x27;onRowDoubleClick&#x27;, ...arguments);
+    },
+
+    /**
+     * onScrolledToBottom action - sent when user scrolls to the bottom
+     *
+     * @event onScrolledToBottom
+     */
+    onScrolledToBottom() {
+      callAction(this, &#x27;onScrolledToBottom&#x27;);
     }
   }
 });

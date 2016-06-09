@@ -26,7 +26,13 @@
               <ul class="main-nav">
                 <li class="section">Modules</li>
                    <li  >
+                     <a href="../modules/Cell Types.html">Cell Types</a>
+                   </li>
+                   <li  >
                      <a href="../modules/Classes.html">Classes</a>
+                   </li>
+                   <li  >
+                     <a href="../modules/Column Types.html">Column Types</a>
                    </li>
                    <li  >
                      <a href="../modules/Components.html">Components</a>
@@ -39,6 +45,8 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Base Cell.html">Base Cell</a></li>
+                    <li ><a  href="../classes/Base Column.html">Base Column</a></li>
                     <li ><a  href="../classes/Body.html">Body</a></li>
                     <li ><a  href="../classes/Column.html">Column</a></li>
                     <li ><a  href="../classes/Foot.html">Foot</a></li>
@@ -50,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.4</p>
+                <p class="version pull-right">v1.0.0-beta.5</p>
               </div>
             </div>
         </div>
@@ -88,12 +96,11 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../templates/components/light-table&#x27;;
-import callAction from &#x27;../utils/call-action&#x27;;
-import TableScrollMixin from &#x27;../mixins/table-scroll&#x27;;
-import Table from &#x27;../classes/Table&#x27;;
+import layout from &#x27;ember-light-table/templates/components/light-table&#x27;;
+import Table from &#x27;ember-light-table/classes/Table&#x27;;
 
 const {
+  computed,
   assert
 } = Ember;
 
@@ -119,9 +126,10 @@ const {
  * @uses TableScrollMixin
  */
 
-const LightTable =  Ember.Component.extend(TableScrollMixin, {
+const LightTable =  Ember.Component.extend({
   layout,
   classNames: [&#x27;ember-light-table&#x27;],
+  attributeBindings: [&#x27;style&#x27;],
 
   /**
    * @property table
@@ -156,21 +164,24 @@ const LightTable =  Ember.Component.extend(TableScrollMixin, {
    */
   tableActions: null,
 
+  /**
+   * Table height.
+   *
+   * @property height
+   * @type {String}
+   * @default inherit
+   */
+  height: &#x27;inherit&#x27;,
+
+  style: computed(&#x27;height&#x27;, function() {
+    return Ember.String.htmlSafe(&#x60;height:${this.get(&#x27;height&#x27;)};&#x60;);
+  }),
+
   init() {
     this._super(...arguments);
     assert(&#x60;[ember-light-table] table must be an instance of Table&#x60;, this.get(&#x27;table&#x27;) instanceof Table);
-  },
-
-  actions: {
-    /**
-     * Action to be called when user reached the bottom of the scroll container
-     *
-     * @event onScrolledToBottom
-     */
-    onScrolledToBottom() {
-      callAction(this, &#x27;onScrolledToBottom&#x27;, ...arguments);
-    }
   }
+
 });
 
 LightTable.reopenClass({

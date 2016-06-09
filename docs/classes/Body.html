@@ -26,7 +26,13 @@
               <ul class="main-nav">
                 <li class="section">Modules</li>
                    <li  >
+                     <a href="../modules/Cell Types.html">Cell Types</a>
+                   </li>
+                   <li  >
                      <a href="../modules/Classes.html">Classes</a>
+                   </li>
+                   <li  >
+                     <a href="../modules/Column Types.html">Column Types</a>
                    </li>
                    <li  >
                      <a href="../modules/Components.html">Components</a>
@@ -39,6 +45,8 @@
                    </li>
             
                 <li class="section">Classes</li>
+                    <li ><a  href="../classes/Base Cell.html">Base Cell</a></li>
+                    <li ><a  href="../classes/Base Column.html">Base Column</a></li>
                     <li  class="active"><a  href="../classes/Body.html">Body</a></li>
                     <li ><a  href="../classes/Column.html">Column</a></li>
                     <li ><a  href="../classes/Foot.html">Foot</a></li>
@@ -50,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.4</p>
+                <p class="version pull-right">v1.0.0-beta.5</p>
               </div>
             </div>
         </div>
@@ -110,7 +118,7 @@
       {{/body.loader}}
     {{/if}}
 
-    {{#if table.isEmpty)}}
+    {{#if table.isEmpty}}
       {{#body.no-data}}
         No users found.
       {{/body.no-data}}
@@ -130,6 +138,10 @@
 
                     <ul class="index-list properties">
                             <li class="index-item property">
+                                <a href="#property_autoHideScrollbar">autoHideScrollbar</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_canExpand">canExpand</a>
 
                             </li>
@@ -142,15 +154,19 @@
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_height">height</a>
-
-                            </li>
-                            <li class="index-item property">
                                 <a href="#property_multiRowExpansion">multiRowExpansion</a>
 
                             </li>
                             <li class="index-item property">
                                 <a href="#property_multiSelect">multiSelect</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_overwrite">overwrite</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_scrollBuffer">scrollBuffer</a>
 
                             </li>
                             <li class="index-item property private">
@@ -177,6 +193,10 @@
                                 <a href="#event_onRowDoubleClick">onRowDoubleClick</a>
 
                             </li>
+                            <li class="index-item event">
+                                <a href="#event_onScrolledToBottom">onScrolledToBottom</a>
+
+                            </li>
                     </ul>
                 </div>
         </div>
@@ -185,6 +205,32 @@
             <div id="properties" class="page-section">
                 <h2 class="off-left">Properties</h2>
                 <div class="item-list">
+<div id="property_autoHideScrollbar" class="property item">
+    <h3 class="name"><code>autoHideScrollbar</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_components_lt-body.js.html#l94"><code>addon&#x2F;components&#x2F;lt-body.js:94</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Hide scrollbar when not scrolling</p>
+
+    </div>
+
+        <p><br><strong>Default:</strong> true</p>
+
+
+</div>
 <div id="property_canExpand" class="property item">
     <h3 class="name"><code>canExpand</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
@@ -255,7 +301,7 @@ only one row will be selected at a time.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l103"><code>addon&#x2F;components&#x2F;lt-body.js:103</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l112"><code>addon&#x2F;components&#x2F;lt-body.js:112</code></a>
         </p>
 
 
@@ -270,33 +316,6 @@ only one row will be selected at a time.</p>
 
 
 </div>
-<div id="property_height" class="property item">
-    <h3 class="name"><code>height</code></h3>
-    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/addon_components_lt-body.js.html#l112"><code>addon&#x2F;components&#x2F;lt-body.js:112</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Table body height. This needs to be specified for fixed
-footer and header</p>
-
-    </div>
-
-        <p><br><strong>Default:</strong> inherit</p>
-
-
-</div>
 <div id="property_multiRowExpansion" class="property item">
     <h3 class="name"><code>multiRowExpansion</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
@@ -308,7 +327,7 @@ footer and header</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l94"><code>addon&#x2F;components&#x2F;lt-body.js:94</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l103"><code>addon&#x2F;components&#x2F;lt-body.js:103</code></a>
         </p>
 
 
@@ -347,6 +366,58 @@ These rows can be easily accessed via <code>table.get('selectedRows')</code></p>
     </div>
 
         <p><br><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_overwrite" class="property item">
+    <h3 class="name"><code>overwrite</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_components_lt-body.js.html#l121"><code>addon&#x2F;components&#x2F;lt-body.js:121</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>If true, the body block will yield columns and rows, allowing you
+to define your own table body</p>
+
+    </div>
+
+        <p><br><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_scrollBuffer" class="property item">
+    <h3 class="name"><code>scrollBuffer</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_components_lt-body.js.html#l138"><code>addon&#x2F;components&#x2F;lt-body.js:138</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <p><br><strong>Default:</strong> 500</p>
 
 
 </div>
@@ -417,7 +488,7 @@ These rows can be easily accessed via <code>table.get('selectedRows')</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l152"><code>addon&#x2F;components&#x2F;lt-body.js:152</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l165"><code>addon&#x2F;components&#x2F;lt-body.js:165</code></a>
         </p>
 
 
@@ -470,7 +541,7 @@ These rows can be easily accessed via <code>table.get('selectedRows')</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_components_lt-body.js.html#l193"><code>addon&#x2F;components&#x2F;lt-body.js:193</code></a>
+        <a href="../files/addon_components_lt-body.js.html#l206"><code>addon&#x2F;components&#x2F;lt-body.js:206</code></a>
         </p>
 
 
@@ -509,6 +580,31 @@ These rows can be easily accessed via <code>table.get('selectedRows')</code></p>
                 </li>
             </ul>
         </div>
+
+
+</div>
+<div id="event_onScrolledToBottom" class="events item">
+    <h3 class="name"><code>onScrolledToBottom</code></h3>
+    <span class="type"></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_components_lt-body.js.html#l216"><code>addon&#x2F;components&#x2F;lt-body.js:216</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>onScrolledToBottom action - sent when user scrolls to the bottom</p>
+
+    </div>
+
 
 
 </div>

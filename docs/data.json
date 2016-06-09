@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.0.0-beta.4"
+        "version": "v1.0.0-beta.5"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -31,6 +31,28 @@
             "modules": {},
             "classes": {
                 "Table": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/cells/base.js": {
+            "name": "addon/components/cells/base.js",
+            "modules": {
+                "Cell Types": 1
+            },
+            "classes": {
+                "Base Cell": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/columns/base.js": {
+            "name": "addon/components/columns/base.js",
+            "modules": {
+                "Column Types": 1
+            },
+            "classes": {
+                "Base Column": 1
             },
             "fors": {},
             "namespaces": {}
@@ -84,15 +106,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "addon/mixins/table-scroll.js": {
-            "name": "addon/mixins/table-scroll.js",
-            "modules": {},
-            "classes": {
-                "TableScrollMixin": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "addon/index.js": {
             "name": "addon/index.js",
             "modules": {
@@ -117,7 +130,33 @@
             "namespaces": {},
             "tag": "module",
             "file": "addon/classes/Table.js",
-            "line": 104
+            "line": 122
+        },
+        "Cell Types": {
+            "name": "Cell Types",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Base Cell": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "addon/components/cells/base.js",
+            "line": 8
+        },
+        "Column Types": {
+            "name": "Column Types",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Base Column": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "addon/components/columns/base.js",
+            "line": 9
         },
         "Components": {
             "name": "Components",
@@ -142,14 +181,13 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "TableHeaderMixin": 1,
-                "TableScrollMixin": 1
+                "TableHeaderMixin": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "addon/mixins/table-scroll.js",
-            "line": 14
+            "file": "addon/mixins/table-header.js",
+            "line": 12
         },
         "Home": {
             "name": "Home",
@@ -161,7 +199,7 @@
             "tag": "module",
             "file": "addon/index.js",
             "line": 5,
-            "description": "A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.\n\n## Features\n\n* Custom component based column headers and cells\n* Infinite scroll support\n* Select & Multi-select\n* Grouped columns\n* Expandable rows\n* Easy table manipulation\n* Easy override to table header and footer\n* Contextual component for header, body, and footer, as well as loading, no data, and expanded row\n\n## Installation\n```shell\nember install ember-light-table\n```\n\n## Looking for help?\nIf it is a bug [please open an issue on GitHub](http://github.com/offirgolan/ember-light-table/issues).\n\n## Usage\nThere are two parts to this addon. The first is the [Table](../classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.\n\n### Table Declaration\nThe `Table` constructor accepts an array of `Columns` or column options and an array of rows.\n\n```javascript\nimport Table from 'ember-light-table';\nconst table = new Table(columns, rows);\n```\n\nHere is a more real-word example\n\n```javascript\n// components/my-table.js\nimport Ember from 'ember';\nimport Table from 'ember-light-table';\n\nconst computed = Ember.computed;\n\nexport default Ember.Component.extend({\n  model: null,\n  table: null,\n\n  columns: computed(function() {\n    return [{\n      label: 'Avatar',\n      valuePath: 'avatar',\n      width: '60px',\n      sortable: false,\n      cellComponent: 'user-avatar'\n    }, {\n      label: 'First Name',\n      valuePath: 'firstName',\n      width: '150px'\n    }, {\n      label: 'Last Name',\n      valuePath: 'lastName',\n      width: '150px'\n    }, {\n      label: 'Address',\n      valuePath: 'address'\n    }, {\n      label: 'State',\n      valuePath: 'state'\n    }, {\n      label: 'Country',\n      valuePath: 'country'\n    }];\n  }),\n\n  init() {\n    this._super(...arguments);\n    this.set('table', new Table(this.get('columns'), this.get('model')));\n  }\n});\n```\n\nFor a list of possible column options, please\n[checkout out the docs](../classes/Column.html).\n\n### Component Declaration\n\nNow that we have our `table`, we can declare our component in our template.\n\n```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n\n  {{#t.body as |body|}}\n    {{#body.expanded-row as |row|}}\n      Hello <b>{{row.firstName}}</b>\n    {{/body.expanded-row}}\n\n    {{#if isLoading}}\n      {{#body.loader}}\n        Loading...\n      {{/body.loader}}\n    {{/if}}\n\n    {{#if table.isEmpty)}}\n      {{#body.no-data}}\n        No users found.\n      {{/body.no-data}}\n    {{/if}}\n  {{/t.body}}\n\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease note that each of these contextual components have a wide array of options so it is advised to look\nthrough the documentation."
+            "description": "A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.\n\n## Features\n\n* Custom component based column headers and cells\n* Infinite scroll support\n* Select & Multi-select\n* Grouped columns\n* Expandable rows\n* Easy table manipulation\n* Easy override to table header and footer\n* Contextual component for header, body, and footer, as well as loading, no data, and expanded row\n\n## Installation\n```shell\nember install ember-light-table\n```\n\n## Looking for help?\nIf it is a bug [please open an issue on GitHub](http://github.com/offirgolan/ember-light-table/issues).\n\n## Usage\nThere are two parts to this addon. The first is the [Table](../classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.\n\n### Table Declaration\nThe `Table` constructor accepts an array of `Columns` or column options and an array of rows.\n\n```javascript\nimport Table from 'ember-light-table';\nconst table = new Table(columns, rows);\n```\n\nHere is a more real-word example\n\n```javascript\n// components/my-table.js\nimport Ember from 'ember';\nimport Table from 'ember-light-table';\n\nconst computed = Ember.computed;\n\nexport default Ember.Component.extend({\n  model: null,\n  table: null,\n\n  columns: computed(function() {\n    return [{\n      label: 'Avatar',\n      valuePath: 'avatar',\n      width: '60px',\n      sortable: false,\n      cellComponent: 'user-avatar'\n    }, {\n      label: 'First Name',\n      valuePath: 'firstName',\n      width: '150px'\n    }, {\n      label: 'Last Name',\n      valuePath: 'lastName',\n      width: '150px'\n    }, {\n      label: 'Address',\n      valuePath: 'address'\n    }, {\n      label: 'State',\n      valuePath: 'state'\n    }, {\n      label: 'Country',\n      valuePath: 'country'\n    }];\n  }),\n\n  init() {\n    this._super(...arguments);\n    this.set('table', new Table(this.get('columns'), this.get('model')));\n  }\n});\n```\n\nFor a list of possible column options, please\n[checkout out the docs](../classes/Column.html).\n\n### Component Declaration\n\nNow that we have our `table`, we can declare our component in our template.\n\n```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n\n  {{#t.body as |body|}}\n    {{#body.expanded-row as |row|}}\n      Hello <b>{{row.firstName}}</b>\n    {{/body.expanded-row}}\n\n    {{#if isLoading}}\n      {{#body.loader}}\n        Loading...\n      {{/body.loader}}\n    {{/if}}\n\n    {{#if table.isEmpty}}\n      {{#body.no-data}}\n        No users found.\n      {{/body.no-data}}\n    {{/if}}\n  {{/t.body}}\n\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease note that each of these contextual components have a wide array of options so it is advised to look\nthrough the documentation."
         }
     },
     "classes": {
@@ -176,7 +214,7 @@
             "module": "Classes",
             "namespace": "",
             "file": "addon/classes/Column.js",
-            "line": 143,
+            "line": 170,
             "is_constructor": 1,
             "params": [
                 {
@@ -223,7 +261,7 @@
             "module": "Classes",
             "namespace": "",
             "file": "addon/classes/Table.js",
-            "line": 104,
+            "line": 122,
             "is_constructor": 1,
             "params": [
                 {
@@ -238,6 +276,32 @@
                 }
             ]
         },
+        "Base Cell": {
+            "name": "Base Cell",
+            "shortname": "Base Cell",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Cell Types",
+            "namespace": "",
+            "file": "addon/components/cells/base.js",
+            "line": 8
+        },
+        "Base Column": {
+            "name": "Base Column",
+            "shortname": "Base Column",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Column Types",
+            "namespace": "",
+            "file": "addon/components/columns/base.js",
+            "line": 9
+        },
         "Light Table": {
             "name": "Light Table",
             "shortname": "Light Table",
@@ -249,7 +313,7 @@
             "module": "Components",
             "namespace": "",
             "file": "addon/components/light-table.js",
-            "line": 16,
+            "line": 15,
             "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../classes/Head.html), [Body](../classes/Body.html), and [Foot](../classes/Foot.html) components\nfor more details on all possible options and actions.",
             "mainName": "Components",
             "tag": "main",
@@ -271,7 +335,7 @@
             "namespace": "",
             "file": "addon/components/lt-body.js",
             "line": 13,
-            "description": "```hbs\n{{#light-table table as |t|}}\n  {{#t.body multiSelect=true onRowClick=(action 'rowClicked')}}\n    {{#body.expanded-row as |row|}}\n      Hello <b>{{row.firstName}}</b>\n    {{/body.expanded-row}}\n\n    {{#if isLoading}}\n      {{#body.loader}}\n        Loading...\n      {{/body.loader}}\n    {{/if}}\n\n    {{#if table.isEmpty)}}\n      {{#body.no-data}}\n        No users found.\n      {{/body.no-data}}\n    {{/if}}\n  {{/t.body}}\n{{/light-table}}\n```"
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{#t.body multiSelect=true onRowClick=(action 'rowClicked')}}\n    {{#body.expanded-row as |row|}}\n      Hello <b>{{row.firstName}}</b>\n    {{/body.expanded-row}}\n\n    {{#if isLoading}}\n      {{#body.loader}}\n        Loading...\n      {{/body.loader}}\n    {{/if}}\n\n    {{#if table.isEmpty}}\n      {{#body.no-data}}\n        No users found.\n      {{/body.no-data}}\n    {{/if}}\n  {{/t.body}}\n{{/light-table}}\n```"
         },
         "Foot": {
             "name": "Foot",
@@ -322,24 +386,6 @@
             "extends": "Ember.Mixin",
             "access": "private",
             "tagname": ""
-        },
-        "TableScrollMixin": {
-            "name": "TableScrollMixin",
-            "shortname": "TableScrollMixin",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [
-                "Light Table"
-            ],
-            "module": "Mixins",
-            "namespace": "",
-            "file": "addon/mixins/table-scroll.js",
-            "line": 14,
-            "extends": "Ember.Mixin",
-            "access": "private",
-            "tagname": ""
         }
     },
     "elements": {},
@@ -347,6 +393,16 @@
         {
             "file": "addon/classes/Column.js",
             "line": 14,
+            "itemtype": "property",
+            "name": "hideable",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Column",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 21,
             "itemtype": "property",
             "name": "hidden",
             "type": "{Boolean}",
@@ -356,7 +412,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 21,
+            "line": 28,
             "itemtype": "property",
             "name": "ascending",
             "type": "{Boolean}",
@@ -366,7 +422,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 28,
+            "line": 35,
             "itemtype": "property",
             "name": "sortable",
             "type": "{Boolean}",
@@ -376,7 +432,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 35,
+            "line": 42,
             "itemtype": "property",
             "name": "sorted",
             "type": "{Boolean}",
@@ -386,7 +442,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 42,
+            "line": 49,
             "description": "Column header label",
             "itemtype": "property",
             "name": "label",
@@ -397,7 +453,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 50,
+            "line": 57,
             "description": "Text alignment. Possible values are ['left', 'right', 'center']",
             "itemtype": "property",
             "name": "align",
@@ -408,7 +464,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 58,
+            "line": 65,
             "description": "An array of sub columns to be grouped together",
             "itemtype": "property",
             "name": "subColumns",
@@ -419,10 +475,32 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 66,
-            "description": "Component name for the column header",
+            "line": 73,
+            "description": "Type of column component",
             "itemtype": "property",
-            "name": "headerComponent",
+            "name": "type",
+            "type": "{String}",
+            "default": "'base'",
+            "class": "Column",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 82,
+            "description": "Type of cell component",
+            "itemtype": "property",
+            "name": "cellType",
+            "type": "{String}",
+            "default": "'base'",
+            "class": "Column",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 91,
+            "description": "Component name for the column",
+            "itemtype": "property",
+            "name": "component",
             "type": "{String}",
             "optional": 1,
             "class": "Column",
@@ -430,8 +508,8 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 74,
-            "description": "Component name for the column cells",
+            "line": 99,
+            "description": "Component name for the column cells. This component is automatically passed row,\ncolumn, and value variables, and you can specify a valuePath to set what property\nthe value is set to.",
             "itemtype": "property",
             "name": "cellComponent",
             "type": "{String}",
@@ -441,7 +519,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 82,
+            "line": 109,
             "itemtype": "property",
             "name": "valuePath",
             "type": "{String}",
@@ -450,7 +528,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 88,
+            "line": 115,
             "itemtype": "property",
             "name": "width",
             "type": "{String}",
@@ -459,7 +537,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 94,
+            "line": 121,
             "description": "Class names to be applied to header and footer cells of this column",
             "itemtype": "property",
             "name": "classNames",
@@ -469,7 +547,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 102,
+            "line": 129,
             "description": "Class names to be applied to all cells of this column",
             "itemtype": "property",
             "name": "cellClassNames",
@@ -479,7 +557,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 110,
+            "line": 137,
             "description": "A format function used to calculate a cell's value",
             "itemtype": "property",
             "name": "format",
@@ -489,7 +567,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 117,
+            "line": 144,
             "itemtype": "property",
             "name": "isGroupColumn",
             "type": "{Boolean}",
@@ -500,7 +578,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 124,
+            "line": 151,
             "itemtype": "property",
             "name": "isVisibleGroupColumn",
             "type": "{Boolean}",
@@ -511,7 +589,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 133,
+            "line": 160,
             "itemtype": "property",
             "name": "visibleSubColumns",
             "type": "{Array}",
@@ -611,7 +689,7 @@
             "file": "addon/classes/Table.js",
             "line": 49,
             "itemtype": "property",
-            "name": "sortedColumns",
+            "name": "visibleRows",
             "type": "{Ember.Array}",
             "class": "Table",
             "module": "Classes"
@@ -629,7 +707,7 @@
             "file": "addon/classes/Table.js",
             "line": 61,
             "itemtype": "property",
-            "name": "visibleColumns",
+            "name": "sortedColumns",
             "type": "{Ember.Array}",
             "class": "Table",
             "module": "Classes"
@@ -638,6 +716,33 @@
             "file": "addon/classes/Table.js",
             "line": 67,
             "itemtype": "property",
+            "name": "hideableColumns",
+            "type": "{Ember.Array}",
+            "class": "Table",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Table.js",
+            "line": 73,
+            "itemtype": "property",
+            "name": "hiddenColumns",
+            "type": "{Ember.Array}",
+            "class": "Table",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Table.js",
+            "line": 79,
+            "itemtype": "property",
+            "name": "visibleColumns",
+            "type": "{Ember.Array}",
+            "class": "Table",
+            "module": "Classes"
+        },
+        {
+            "file": "addon/classes/Table.js",
+            "line": 85,
+            "itemtype": "property",
             "name": "visibleColumnGroups",
             "type": "{Ember.Array}",
             "class": "Table",
@@ -645,7 +750,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 80,
+            "line": 98,
             "itemtype": "property",
             "name": "visibleSubColumns",
             "type": "{Ember.Array}",
@@ -654,7 +759,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 88,
+            "line": 106,
             "itemtype": "property",
             "name": "flattenedColumns",
             "type": "{Ember.Array}",
@@ -663,7 +768,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 120,
+            "line": 138,
             "description": "Replace all the row's content with content of the argument. If argument is an empty array rows will be cleared.",
             "itemtype": "method",
             "name": "setRows",
@@ -683,7 +788,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 130,
+            "line": 148,
             "description": "Push the object onto the end of the row array if it is not already present.",
             "itemtype": "method",
             "name": "addRow",
@@ -699,7 +804,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 143,
+            "line": 161,
             "description": "Push the objects onto the end of the row array if it is not already present.",
             "itemtype": "method",
             "name": "addRows",
@@ -715,7 +820,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 152,
+            "line": 170,
             "description": "Push the object onto the end of the row array.",
             "itemtype": "method",
             "name": "pushRow",
@@ -735,7 +840,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 164,
+            "line": 182,
             "description": "Push the object onto the end of the row array.",
             "itemtype": "method",
             "name": "pushRows",
@@ -755,7 +860,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 176,
+            "line": 194,
             "description": "Insert a row at the specified index.",
             "itemtype": "method",
             "name": "insertRowAt",
@@ -780,7 +885,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 189,
+            "line": 207,
             "description": "Remove all occurrences of an object in the rows",
             "itemtype": "method",
             "name": "removeRow",
@@ -796,7 +901,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 202,
+            "line": 220,
             "description": "Removes each object in the passed enumerable from the rows.",
             "itemtype": "method",
             "name": "removeRows",
@@ -812,7 +917,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 213,
+            "line": 231,
             "description": "Replace all the column's content with content of the argument. If argument is an empty array columns will be cleared.",
             "itemtype": "method",
             "name": "setColumns",
@@ -832,7 +937,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 223,
+            "line": 241,
             "description": "Push the object onto the end of the column array if it is not already present.",
             "itemtype": "method",
             "name": "addColumn",
@@ -848,7 +953,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 232,
+            "line": 250,
             "description": "Push the objects onto the end of the column array if it is not already present.",
             "itemtype": "method",
             "name": "addColumns",
@@ -864,7 +969,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 241,
+            "line": 259,
             "description": "Push the object onto the end of the column array.",
             "itemtype": "method",
             "name": "pushColumn",
@@ -884,7 +989,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 253,
+            "line": 271,
             "description": "Push the object onto the end of the column array.",
             "itemtype": "method",
             "name": "pushColumns",
@@ -904,7 +1009,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 265,
+            "line": 283,
             "description": "Insert a column at the specified index.",
             "itemtype": "method",
             "name": "insertColumnAt",
@@ -929,7 +1034,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 278,
+            "line": 296,
             "description": "Remove all occurrences of an object in the columns",
             "itemtype": "method",
             "name": "removeColumn",
@@ -945,7 +1050,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 287,
+            "line": 305,
             "description": "Removes each object in the passed enumerable from the columns.",
             "itemtype": "method",
             "name": "removeColumns",
@@ -961,7 +1066,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 296,
+            "line": 314,
             "description": "Create a Row object with the given content",
             "itemtype": "method",
             "name": "createRow",
@@ -982,7 +1087,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 307,
+            "line": 325,
             "description": "Create a collection of Row objects with the given collection",
             "itemtype": "method",
             "name": "createRows",
@@ -1003,7 +1108,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 318,
+            "line": 336,
             "description": "Create a Column object with the given options",
             "itemtype": "method",
             "name": "createColumn",
@@ -1024,7 +1129,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 329,
+            "line": 347,
             "description": "Create a collection of Column objects with the given collection",
             "itemtype": "method",
             "name": "createColumns",
@@ -1042,6 +1147,96 @@
             },
             "class": "Table",
             "module": "Classes"
+        },
+        {
+            "file": "addon/components/cells/base.js",
+            "line": 26,
+            "itemtype": "property",
+            "name": "column",
+            "type": "{Column}",
+            "class": "Base Cell",
+            "module": "Cell Types"
+        },
+        {
+            "file": "addon/components/cells/base.js",
+            "line": 32,
+            "itemtype": "property",
+            "name": "row",
+            "type": "{Row}",
+            "class": "Base Cell",
+            "module": "Cell Types"
+        },
+        {
+            "file": "addon/components/cells/base.js",
+            "line": 38,
+            "itemtype": "property",
+            "name": "tableActions",
+            "type": "{Object}",
+            "class": "Base Cell",
+            "module": "Cell Types"
+        },
+        {
+            "file": "addon/components/cells/base.js",
+            "line": 44,
+            "itemtype": "property",
+            "name": "rawValue",
+            "type": "{Mixed}",
+            "class": "Base Cell",
+            "module": "Cell Types"
+        },
+        {
+            "file": "addon/components/cells/base.js",
+            "line": 50,
+            "itemtype": "property",
+            "name": "value",
+            "type": "{Mixed}",
+            "class": "Base Cell",
+            "module": "Cell Types"
+        },
+        {
+            "file": "addon/components/columns/base.js",
+            "line": 30,
+            "itemtype": "property",
+            "name": "column",
+            "type": "{Column}",
+            "class": "Base Column",
+            "module": "Column Types"
+        },
+        {
+            "file": "addon/components/columns/base.js",
+            "line": 36,
+            "itemtype": "property",
+            "name": "tableActions",
+            "type": "{Object}",
+            "class": "Base Column",
+            "module": "Column Types"
+        },
+        {
+            "file": "addon/components/columns/base.js",
+            "line": 42,
+            "itemtype": "property",
+            "name": "sortIcons",
+            "type": "{Object}",
+            "class": "Base Column",
+            "module": "Column Types"
+        },
+        {
+            "file": "addon/components/columns/base.js",
+            "line": 48,
+            "itemtype": "property",
+            "name": "colspan",
+            "type": "{Number}",
+            "class": "Base Column",
+            "module": "Column Types"
+        },
+        {
+            "file": "addon/components/columns/base.js",
+            "line": 57,
+            "itemtype": "property",
+            "name": "rowspan",
+            "type": "{Number}",
+            "class": "Base Column",
+            "module": "Column Types"
         },
         {
             "file": "addon/components/light-table.js",
@@ -1064,10 +1259,12 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 76,
-            "description": "Action to be called when user reached the bottom of the scroll container",
-            "itemtype": "event",
-            "name": "onScrolledToBottom",
+            "line": 70,
+            "description": "Table height.",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{String}",
+            "default": "inherit",
             "class": "Light Table",
             "module": "Components"
         },
@@ -1127,6 +1324,17 @@
         {
             "file": "addon/components/lt-body.js",
             "line": 94,
+            "description": "Hide scrollbar when not scrolling",
+            "itemtype": "property",
+            "name": "autoHideScrollbar",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Body",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 103,
             "description": "Allows multiple rows to be expanded at once",
             "itemtype": "property",
             "name": "multiRowExpansion",
@@ -1137,7 +1345,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 103,
+            "line": 112,
             "description": "Expand a row on click",
             "itemtype": "property",
             "name": "expandOnClick",
@@ -1148,18 +1356,18 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 112,
-            "description": "Table body height. This needs to be specified for fixed\nfooter and header",
+            "line": 121,
+            "description": "If true, the body block will yield columns and rows, allowing you\nto define your own table body",
             "itemtype": "property",
-            "name": "height",
-            "type": "{String}",
-            "default": "inherit",
+            "name": "overwrite",
+            "type": "{Boolean}",
+            "default": "false",
             "class": "Body",
             "module": "Components"
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 122,
+            "line": 131,
             "description": "ID of main table component. Used to generate divs for ember-wormhole",
             "type": "{String}",
             "class": "Body",
@@ -1167,7 +1375,17 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 152,
+            "line": 138,
+            "itemtype": "property",
+            "name": "scrollBuffer",
+            "type": "{Number}",
+            "default": "500",
+            "class": "Body",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 165,
             "description": "onRowClick action. Handles selection, and row expansion.",
             "itemtype": "event",
             "name": "onRowClick",
@@ -1188,7 +1406,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 193,
+            "line": 206,
             "description": "onRowDoubleClick action.",
             "itemtype": "event",
             "name": "onRowDoubleClick",
@@ -1208,8 +1426,28 @@
             "module": "Components"
         },
         {
+            "file": "addon/components/lt-body.js",
+            "line": 216,
+            "description": "onScrolledToBottom action - sent when user scrolls to the bottom",
+            "itemtype": "event",
+            "name": "onScrolledToBottom",
+            "class": "Body",
+            "module": "Components"
+        },
+        {
             "file": "addon/mixins/table-header.js",
             "line": 19,
+            "itemtype": "property",
+            "name": "table",
+            "type": "{Table}",
+            "access": "private",
+            "tagname": "",
+            "class": "TableHeaderMixin",
+            "module": "Mixins"
+        },
+        {
+            "file": "addon/mixins/table-header.js",
+            "line": 26,
             "itemtype": "property",
             "name": "fixed",
             "type": "{Boolean}",
@@ -1219,7 +1457,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 26,
+            "line": 33,
             "itemtype": "property",
             "name": "sortOnClick",
             "type": "{Boolean}",
@@ -1229,7 +1467,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 33,
+            "line": 40,
             "itemtype": "property",
             "name": "multiColumnSort",
             "type": "{Boolean}",
@@ -1239,7 +1477,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 40,
+            "line": 47,
             "itemtype": "property",
             "name": "iconAscending",
             "type": "{String}",
@@ -1249,7 +1487,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 47,
+            "line": 54,
             "itemtype": "property",
             "name": "iconDescending",
             "type": "{String}",
@@ -1259,7 +1497,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 54,
+            "line": 61,
             "description": "ID of main table component. Used to generate divs for ember-wormhole",
             "type": "{String}",
             "class": "TableHeaderMixin",
@@ -1267,7 +1505,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 70,
+            "line": 77,
             "description": "onColumnClick action. Handles column sorting.",
             "itemtype": "event",
             "name": "onColumnClick",
@@ -1288,7 +1526,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 91,
+            "line": 98,
             "description": "onColumnDoubleClick action.",
             "itemtype": "event",
             "name": "onColumnDoubleClick",
@@ -1306,68 +1544,16 @@
             ],
             "class": "TableHeaderMixin",
             "module": "Mixins"
-        },
-        {
-            "file": "addon/mixins/table-scroll.js",
-            "line": 20,
-            "itemtype": "property",
-            "name": "scrollBuffer",
-            "type": "{Number}",
-            "default": "500",
-            "class": "TableScrollMixin",
-            "module": "Mixins"
-        },
-        {
-            "file": "addon/mixins/table-scroll.js",
-            "line": 27,
-            "itemtype": "property",
-            "name": "scrollContainer",
-            "type": "{String | Object}",
-            "default": "window",
-            "class": "TableScrollMixin",
-            "module": "Mixins"
-        },
-        {
-            "file": "addon/mixins/table-scroll.js",
-            "line": 34,
-            "itemtype": "property",
-            "name": "touchMoveContainer",
-            "type": "{String | Object}",
-            "default": "document",
-            "class": "TableScrollMixin",
-            "module": "Mixins"
-        },
-        {
-            "file": "addon/mixins/table-scroll.js",
-            "line": 41,
-            "itemtype": "property",
-            "name": "_shouldSetupScroll",
-            "type": "{Boolean}",
-            "access": "private",
-            "tagname": "",
-            "class": "TableScrollMixin",
-            "module": "Mixins"
-        },
-        {
-            "file": "addon/mixins/table-scroll.js",
-            "line": 69,
-            "description": "If there is a fixed header and footer, that means that the scroll container\nmust be the lt-body-wrap with the fixed height and overflow:auto.",
-            "class": "TableScrollMixin",
-            "module": "Mixins"
         }
     ],
     "warnings": [
         {
             "message": "Missing item type\nID of main table component. Used to generate divs for ember-wormhole",
-            "line": " addon/components/lt-body.js:122"
+            "line": " addon/components/lt-body.js:131"
         },
         {
             "message": "Missing item type\nID of main table component. Used to generate divs for ember-wormhole",
-            "line": " addon/mixins/table-header.js:54"
-        },
-        {
-            "message": "Missing item type\nIf there is a fixed header and footer, that means that the scroll container\nmust be the lt-body-wrap with the fixed height and overflow:auto.",
-            "line": " addon/mixins/table-scroll.js:69"
+            "line": " addon/mixins/table-header.js:61"
         }
     ]
 }
