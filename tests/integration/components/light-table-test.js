@@ -19,14 +19,14 @@ test('it renders', function(assert) {
   assert.equal(this.$().text().trim(), '');
 });
 
-// TODO: Figure out why this test fails in Phantomjs
+// TODO: Figure out why tests is failing in Phantom.js
 // test('scrolled to bottom', function(assert) {
 //   assert.expect(4);
 //   let done = assert.async();
 
 //   this.set('table', new Table(Columns, createUsers(50)));
 
-//   this.on('onScrolledToBottom', () => { assert.ok(true); });
+//   this.on('onScrolledToBottom', () => { assert.ok(true); done(); });
 
 //   this.render(hbs`
 //     {{#light-table table height='40vh' as |t|}}
@@ -47,7 +47,6 @@ test('it renders', function(assert) {
 //     scrollTop: scrollHeight
 //   }, 0);
 
-//   Ember.run.later(done, 1500);
 // });
 
 

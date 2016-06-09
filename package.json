@@ -49,8 +49,7 @@
     "ember-truth-helpers": "1.2.0",
     "ember-try": "0.2.2",
     "loader.js": "^4.0.1",
-    "yuidoc-ember-theme": "offirgolan/yuidoc-ember-theme",
-    "ember-scrollable": "taras/ember-scrollable#d57694c5f63cc2aa1cec9931f28dd6499efa2a13"
+    "yuidoc-ember-theme": "offirgolan/yuidoc-ember-theme"
   },
   "keywords": [
     "ember-addon",
@@ -60,10 +59,8 @@
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.3",
     "ember-wormhole": "0.4.0",
-    "ember-composable-helpers": "0.26.1"
-  },
-  "peerDependencies": {
-    "ember-scrollable": "taras/ember-scrollable#d57694c5f63cc2aa1cec9931f28dd6499efa2a13"
+    "ember-composable-helpers": "0.26.1",
+    "ember-scrollable": "alphasights/ember-scrollable#0.2.3"    
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
