@@ -1,7 +1,7 @@
 .ember-light-table {
   height: auto;
   overflow: hidden;
-  
+
   display: flex;
   flex-direction: column;
 }
@@ -37,13 +37,11 @@
 .ember-light-table .lt-body-wrap {
   display: flex;
   flex-direction: column;
-
   flex: 1 0 auto;
 }
 
 .ember-light-table .lt-scrollable {
   width: 100%;
-
   flex: 1 0 auto;
 }
 

@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('grouped');
   this.route('expandable');
   this.route('selectable');
+  this.route('full');
 });
 
 export default Router;

@@ -1,0 +1,26 @@
+<div class="full-container" style="background-color: white;">
+  <div class="table-container">
+    {{#light-table table as |t|}}
+
+      {{t.head
+        onColumnClick=(action 'onColumnClick')
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'
+        fixed=true
+      }}
+
+      {{#t.body
+        canSelect=false
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        as |body|
+      }}
+        {{#if isLoading}}
+          {{#body.loader}}
+            {{table-loader}}
+          {{/body.loader}}
+        {{/if}}
+      {{/t.body}}
+
+    {{/light-table}}
+  </div>
+</div>
