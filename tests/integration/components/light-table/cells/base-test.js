@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
-import hbs from 'htmlbars-inline-precompile';
+import { renderCell } from '../../../../helpers/ember-light-table';
 import { Row, Column} from 'ember-light-table';
 
 moduleForComponent('light-table/cells/base', 'Integration | Component | Cells | base', {
@@ -8,7 +8,7 @@ moduleForComponent('light-table/cells/base', 'Integration | Component | Cells | 
 });
 
 test('it renders', function(assert) {
-  this.render(hbs`{{light-table/cells/base}}`);
+  renderCell(this, 'base');
 
   assert.equal(this.$().text().trim(), '');
 });
@@ -22,9 +22,11 @@ test('cell with column format', function(assert) {
     }
   }));
 
-  this.set('row', new Row());
+  this.set('row', new Row({
+    num: 2
+  }));
 
-  this.render(hbs`{{light-table/cells/base column row rawValue=2}}`);
+  renderCell(this, 'base');
 
   assert.equal(this.$().text().trim(), '4');
 });
@@ -40,7 +42,7 @@ test('cell format with no valuePath', function(assert) {
     num: 2
   }));
 
-  this.render(hbs`{{light-table/cells/base column row}}`);
+  renderCell(this, 'base');
 
   assert.equal(this.$().text().trim(), '4');
 });
@@ -62,7 +64,7 @@ test('cell with nested valuePath', function(assert) {
     }
   }));
 
-  this.render(hbs`{{light-table/cells/base column row rawValue=(get row column.valuePath)}}`);
+  renderCell(this, 'base');
 
   assert.equal(this.$().text().trim(), '4');
 

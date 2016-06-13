@@ -18,24 +18,28 @@
 
         <tr>
           {{#each columnGroups as |column|}}
-            {{component (concat 'light-table/columns/' column.type) column
+            {{#component (concat 'light-table/columns/' column.type) column
               table=table
               tableActions=tableActions
               sortIcons=sortIcons
               click=(action 'onColumnClick' column)
-              doubleClick=(action 'onColumnDoubleClick' column)}}
+              doubleClick=(action 'onColumnDoubleClick' column) as |_context|}}
+              {{partial 'light-table/-partials/base-column'}}
+            {{/component}}
           {{/each}}
         </tr>
         <tr>
           {{#each subColumns as |column|}}
-            {{component (concat 'light-table/columns/' column.type) column
+            {{#component (concat 'light-table/columns/' column.type) column
               table=table
               rowspan=1
               classNames="lt-sub-column"
               tableActions=tableActions
               sortIcons=sortIcons
               click=(action 'onColumnClick' column)
-              doubleClick=(action 'onColumnDoubleClick' column)}}
+              doubleClick=(action 'onColumnDoubleClick' column) as |_context|}}
+              {{partial 'light-table/-partials/base-column'}}
+            {{/component}}
           {{/each}}
         </tr>
       {{/if}}
