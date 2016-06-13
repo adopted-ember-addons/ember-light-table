@@ -44,7 +44,7 @@
     "ember-data": "^2.5.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
-    "ember-lodash": "0.0.7",
+    "ember-lodash": "0.0.9",
     "ember-resolver": "^2.0.3",
     "ember-truth-helpers": "1.2.0",
     "ember-try": "0.2.2",
