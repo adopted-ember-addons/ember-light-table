@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.5</p>
+                <p class="version pull-right">v1.0.0-beta.6</p>
               </div>
             </div>
         </div>
@@ -169,9 +169,9 @@ const LightTable =  Ember.Component.extend({
    *
    * @property height
    * @type {String}
-   * @default inherit
+   * @default auto
    */
-  height: &#x27;inherit&#x27;,
+  height: &#x27;auto&#x27;,
 
   style: computed(&#x27;height&#x27;, function() {
     return Ember.String.htmlSafe(&#x60;height:${this.get(&#x27;height&#x27;)};&#x60;);
