@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import Base from 'ember-light-table/components/columns/base';
-import layout from 'ember-light-table/templates/components/columns/base';
 
 const {
   computed
@@ -11,25 +10,15 @@ const {
  * @class Draggable Column
  */
 const draggable = Base.extend({
-  layout,
-  attributeBindings: ['width', 'colspan', 'rowspan', 'draggable'],
-  classNameBindings: [
-    'align',
-    'isGroupColumn:lt-group-column',
-    'isHideable',
-    'isSortable',
-    'isSorted',
-    'column.classNames',
-    'droptargetClass',
-    'dragClass'
-  ],
+  attributeBindings: ['draggable','droptarget'],
+  classNameBindings: ['isDragging:dragged-over'],
 
   draggable: true,
-  dragClass: null,
+  isDragging: false,
 
   drop(event) {
     event.preventDefault();
-    this.set('dragClass', null);
+    this.set('isDragging', false);
     let draggedName = event.dataTransfer.getData('text/plain');
     let staticName = this.get('column.valuePath');
     if (draggedName !== staticName) {
@@ -54,18 +43,14 @@ const draggable = Base.extend({
     }
   },
 
-  droptargetClass: computed(function () {
-    return 'droptarget';
-  }),
-
   dragLeave(event) {
     event.preventDefault();
-    this.set('dragClass', null);
+    this.set('isDragging', false);
   },
 
   dragOver(event) {
     event.preventDefault();
-    this.set('dragClass', 'dragged-over');
+    this.set('isDragging', true);
   },
 
   dragStart(event) {
