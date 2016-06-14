@@ -61,7 +61,7 @@
     "ember-cli-htmlbars": "^1.0.3",
     "ember-wormhole": "0.4.0",
     "ember-composable-helpers": "0.26.2",
-    "ember-scrollable": "alphasights/ember-scrollable#0.2.4"
+    "ember-scrollable": "0.2.5"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
