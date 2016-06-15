@@ -1,6 +1,6 @@
 {
   "name": "ember-light-table",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "Lightweight, component based table for Ember 2.x",
   "homepage": "https://github.com/offirgolan/ember-light-table",
   "directories": {
@@ -61,7 +61,7 @@
     "ember-cli-htmlbars": "^1.0.3",
     "ember-wormhole": "0.4.0",
     "ember-composable-helpers": "0.26.2",
-    "ember-scrollable": "alphasights/ember-scrollable#0.2.4"
+    "ember-scrollable": "0.2.5"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
