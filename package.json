@@ -29,7 +29,7 @@
     "ember-cli-blanket": "0.9.4",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-es5-shim": "0.3.0",
-    "ember-cli-font-awesome": "1.5.0",
+    "ember-cli-font-awesome": "1.5.1",
     "ember-cli-github-pages": "^0.1.0",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",
