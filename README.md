@@ -3,6 +3,7 @@
 [![Ember Version](https://embadge.io/v1/badge.svg?start=2.3.0)](https://embadge.io/v1/badge.svg?start=2.3.0)
 [![Build Status](https://travis-ci.org/offirgolan/ember-light-table.svg)](https://travis-ci.org/offirgolan/ember-light-table)
 [![npm version](https://badge.fury.io/js/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-light-table.svg)](https://emberobserver.com/addons/ember-light-table)
 [![Code Climate](https://codeclimate.com/github/offirgolan/ember-light-table/badges/gpa.svg)](https://codeclimate.com/github/offirgolan/ember-light-table)
 [![Test Coverage](https://codeclimate.com/github/offirgolan/ember-light-table/badges/coverage.svg)](https://codeclimate.com/github/offirgolan/ember-light-table/coverage)
 [![Dependency Status](https://david-dm.org/offirgolan/ember-light-table.svg)](https://david-dm.org/offirgolan/ember-light-table)
