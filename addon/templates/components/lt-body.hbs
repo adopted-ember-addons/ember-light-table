@@ -1,11 +1,11 @@
-<div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
-
 {{#lt-scrollable
   autoHide=autoHideScrollbar
   onScrolledToBottom="onScrolledToBottom"
   scrollBuffer=scrollBuffer
   as |scrollbar|
 }}
+  <div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
+
   <table>
     <tbody class="lt-body">
       {{#if overwrite}}
@@ -35,6 +35,6 @@
       {{/if}}
     </tbody>
   </table>
-{{/lt-scrollable}}
 
-<div id={{concat tableId '_inline_foot'}} class="lt-inline lt-foot"></div>
+  <div id={{concat tableId '_inline_foot'}} class="lt-inline lt-foot"></div>
+{{/lt-scrollable}}
