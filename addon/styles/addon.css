@@ -30,7 +30,7 @@
 
 .ember-light-table .lt-head-wrap,
 .ember-light-table .lt-foot-wrap {
-  flex: 0 0 auto;
+  flex: 0 1 auto;
 }
 
 .ember-light-table .lt-body-wrap {
