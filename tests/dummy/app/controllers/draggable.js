@@ -7,33 +7,47 @@ const {
 
 export default TableController.extend({
   columns: computed(function() {
-    return [{
-      label: 'Avatar',
-      valuePath: 'avatar',
-      width: '60px',
+       return [{
+      label: 'User Details',
       sortable: false,
-      cellComponent: 'user-avatar'
+      align: 'center',
+      type: 'draggable',
+      subColumns: [{
+        label: 'Avatar',
+        valuePath: 'avatar',
+        width: '60px',
+        sortable: false,
+        cellComponent: 'user-avatar',
+        type: 'draggable'
+      }, {
+        label: 'First',
+        valuePath: 'firstName',
+        width: '150px',
+        type: 'draggable'        
+      }, {
+        label: 'Last',
+        valuePath: 'lastName',
+        width: '150px',
+        type: 'draggable'
+      }]
     }, {
-      label: 'First Name',
-      valuePath: 'firstName',
-      width: '150px',
-      type: 'draggable'
-    }, {
-      label: 'Last Name',
-      valuePath: 'lastName',
-      width: '150px'
-    }, {
-      label: 'Address',
-      valuePath: 'address',
-      type: 'draggable'
-    }, {
-      label: 'State',
-      valuePath: 'state',
-      type: 'draggable'
-    }, {
-      label: 'Country',
-      valuePath: 'country',
-      type: 'draggable'
+      label: 'Contact Information',
+      sortable: false,
+      align: 'center',
+      type: 'draggable',
+      subColumns: [{
+        label: 'Address',
+        valuePath: 'address',
+        type: 'draggable'
+      }, {
+        label: 'State',
+        valuePath: 'state',
+        type: 'draggable'
+      }, {
+        label: 'Country',
+        valuePath: 'country',
+        type: 'draggable'
+      }]
     }];
   })
 });
