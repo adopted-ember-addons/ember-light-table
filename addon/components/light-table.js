@@ -72,9 +72,9 @@ const LightTable =  Ember.Component.extend({
    *
    * @property height
    * @type {String}
-   * @default inherit
+   * @default auto
    */
-  height: 'inherit',
+  height: 'auto',
 
   style: computed('height', function() {
     return Ember.String.htmlSafe(`height:${this.get('height')};`);
