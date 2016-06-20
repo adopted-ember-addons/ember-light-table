@@ -3,7 +3,8 @@ language: node_js
 node_js:
   - "0.12"
 
-sudo: false
+sudo: required
+dist: trusty
 
 cache:
   directories:
@@ -12,6 +13,11 @@ cache:
 addons:
   code_climate:
     repo_token: 88c79d4795cce3095bb0145b329f0a2b2748f3ec4cdf11d7949363a086206560
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
 
 env:
   - EMBER_TRY_SCENARIO=ember-2.3
@@ -27,7 +33,8 @@ matrix:
     - env: EMBER_TRY_SCENARIO=ember-canary
 
 before_install:
-  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
   - "npm config set spin false"
   - "npm install -g npm@^3"
   - "npm install -g codeclimate-test-reporter"
