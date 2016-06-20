@@ -1,0 +1,12 @@
+{{#if _context.column.component}}
+  {{component _context.column.component
+    column=_context.column
+    table=_context.table
+    tableActions=_context.tableActions
+    sortIcons=_context.sortIcons}}
+{{else}}
+  {{_context.column.label}}
+  {{#if _context.column.sorted}}
+    <span class="lt-sort-icon {{if _context.column.ascending _context.sortIcons.iconAscending _context.sortIcons.iconDescending}}"></span>
+  {{/if}}
+{{/if}}

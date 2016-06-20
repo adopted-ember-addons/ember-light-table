@@ -1,0 +1,9 @@
+{{#if _context.column.cellComponent}}
+  {{component _context.column.cellComponent
+    tableActions=_context.tableActions
+    column=_context.column
+    row=_context.row
+    value=_context.value}}
+{{else}}
+  {{_context.value}}
+{{/if}}
