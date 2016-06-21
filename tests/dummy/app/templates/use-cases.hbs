@@ -1,0 +1,84 @@
+<div>
+  <h1>Use Case 1</h1>
+  <p>
+    Steps to re-create
+
+    <ul>
+      <li>Click the 'Toggle Snippet' button (Look at the screwed up columns)</li>
+      <li>Resize window</li>
+      <li>Click button again</li>
+      <li>Resize window (half the table is now missing)</li>
+    </ul>
+  </p>
+  <button type="button" name="button" {{action (toggle "showSnippet" this)}}>Toggle Snippet</button>
+  <br>
+</div>
+{{!-- BEGIN-SNIPPET use-case-1 --}}
+<div class="use-case-1">
+  <div class="uc-table">
+    {{#light-table table height="400px" as |t|}}
+
+      {{t.head
+        onColumnClick=(action 'onColumnClick')
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'
+        fixed=true
+      }}
+
+      {{#t.body
+        canSelect=false
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        as |body|
+      }}
+        {{#if isLoading}}
+          {{#body.loader}}
+            {{table-loader}}
+          {{/body.loader}}
+        {{/if}}
+      {{/t.body}}
+
+    {{/light-table}}
+  </div>
+  {{#if showSnippet}}
+    <div class="uc-snippet">
+      {{code-snippet name="use-case-1.hbs"}}
+    </div>
+  {{/if}}
+</div>
+{{!-- END-SNIPPET --}}
+
+<div>
+  <h1>Use Case 2</h1>
+  <p>
+    A table in a 'display:block' div container with no height specified displays no tbody.
+    <br>
+    Use case: I just want to show a simple table in my app to which will fill up the screen just like any other display:block based table.
+  </p>
+  <br>
+</div>
+<div class="use-case-2">
+  <div class="uc-table">
+    {{#light-table table as |t|}}
+
+      {{t.head
+        onColumnClick=(action 'onColumnClick')
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'
+        fixed=true
+      }}
+
+      {{#t.body
+        canSelect=false
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        as |body|
+      }}
+        {{#if isLoading}}
+          {{#body.loader}}
+            {{table-loader}}
+          {{/body.loader}}
+        {{/if}}
+      {{/t.body}}
+
+    {{/light-table}}
+  </div>
+</div>
