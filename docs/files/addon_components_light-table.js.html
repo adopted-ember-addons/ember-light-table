@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.6</p>
+                <p class="version pull-right">v1.0.0-beta.7</p>
               </div>
             </div>
         </div>
@@ -128,7 +128,7 @@ const {
 
 const LightTable =  Ember.Component.extend({
   layout,
-  classNames: [&#x27;ember-light-table&#x27;],
+  classNameBindings: [&#x27;:ember-light-table&#x27;, &#x27;virtualScrollbar&#x27;],
   attributeBindings: [&#x27;style&#x27;],
 
   /**
@@ -169,12 +169,24 @@ const LightTable =  Ember.Component.extend({
    *
    * @property height
    * @type {String}
-   * @default auto
+   * @default null
    */
-  height: &#x27;auto&#x27;,
+  height: null,
+
+  /**
+   * Use ember-scrollable Trackpad Scroll Emulator for body
+   *
+   * @property virtualScrollbar
+   * @type {Boolean}
+   * @default false
+   */
+  virtualScrollbar: false,
 
   style: computed(&#x27;height&#x27;, function() {
-    return Ember.String.htmlSafe(&#x60;height:${this.get(&#x27;height&#x27;)};&#x60;);
+    let height = this.get(&#x27;height&#x27;);
+    if (height) {
+      return Ember.String.htmlSafe(&#x60;height:${this.get(&#x27;height&#x27;)};&#x60;);
+    }
   }),
 
   init() {

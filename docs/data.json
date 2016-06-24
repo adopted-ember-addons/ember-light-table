@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.0.0-beta.6"
+        "version": "v1.0.0-beta.7"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -1264,7 +1264,18 @@
             "itemtype": "property",
             "name": "height",
             "type": "{String}",
-            "default": "auto",
+            "default": "null",
+            "class": "Light Table",
+            "module": "Components"
+        },
+        {
+            "file": "addon/components/light-table.js",
+            "line": 79,
+            "description": "Use ember-scrollable Trackpad Scroll Emulator for body",
+            "itemtype": "property",
+            "name": "virtualScrollbar",
+            "type": "{Boolean}",
+            "default": "false",
             "class": "Light Table",
             "module": "Components"
         },
