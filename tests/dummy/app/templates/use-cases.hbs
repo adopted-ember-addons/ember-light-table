@@ -16,7 +16,7 @@
 {{!-- BEGIN-SNIPPET use-case-1 --}}
 <div class="use-case-1">
   <div class="uc-table">
-    {{#light-table table height="400px" as |t|}}
+    {{#light-table table virtualScrollbar=true height="400px" as |t|}}
 
       {{t.head
         onColumnClick=(action 'onColumnClick')

@@ -1,8 +1,9 @@
 {{#lt-scrollable
+  tagName=''
+  virtualScrollbar=virtualScrollbar
   autoHide=autoHideScrollbar
-  onScrolledToBottom="onScrolledToBottom"
+  onScrolledToBottom=(action "onScrolledToBottom")
   scrollBuffer=scrollBuffer
-  as |scrollbar|
 }}
   <div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
 
@@ -12,7 +13,7 @@
         {{yield columns rows}}
       {{else}}
         {{! scrollbar.update action when rows changes and evaluates to rows !}}
-        {{#each (compute scrollbar.update rows) as |row|}}
+        {{#each rows as |row|}}
           {{lt-row row columns
             tableActions=tableActions
             canExpand=canExpand

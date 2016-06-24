@@ -1,5 +1,6 @@
-import EmberScrollableComponent from 'ember-scrollable/components/ember-scrollable';
+import Ember from 'ember';
+import layout from '../templates/components/lt-scrollable';
 
-export default EmberScrollableComponent.extend({
-  classNames: ['lt-scrollable']
+export default Ember.Component.extend({
+  layout
 });
