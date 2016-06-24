@@ -31,7 +31,7 @@ const {
 
 const LightTable =  Ember.Component.extend({
   layout,
-  classNames: ['ember-light-table'],
+  classNameBindings: [':ember-light-table', 'virtualScrollbar'],
   attributeBindings: ['style'],
 
   /**
@@ -72,12 +72,24 @@ const LightTable =  Ember.Component.extend({
    *
    * @property height
    * @type {String}
-   * @default auto
+   * @default null
    */
-  height: 'auto',
+  height: null,
+
+  /**
+   * Use ember-scrollable Trackpad Scroll Emulator for body
+   *
+   * @property virtualScrollbar
+   * @type {Boolean}
+   * @default false
+   */
+  virtualScrollbar: false,
 
   style: computed('height', function() {
-    return Ember.String.htmlSafe(`height:${this.get('height')};`);
+    let height = this.get('height');
+    if (height) {
+      return Ember.String.htmlSafe(`height:${this.get('height')};`);
+    }
   }),
 
   init() {
