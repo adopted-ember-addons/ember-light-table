@@ -3,8 +3,9 @@ import layout from 'ember-light-table/templates/components/light-table';
 import Table from 'ember-light-table/classes/Table';
 
 const {
-  computed,
-  assert
+  assert,
+  isEmpty,
+  computed
 } = Ember;
 
 /**
@@ -77,13 +78,19 @@ const LightTable =  Ember.Component.extend({
   height: null,
 
   /**
-   * Use ember-scrollable Trackpad Scroll Emulator for body
+   * Table component shared options
    *
-   * @property virtualScrollbar
-   * @type {Boolean}
-   * @default false
+   * @property sharedOptions
+   * @type {Object}
+   * @private
    */
-  virtualScrollbar: false,
+  sharedOptions: computed(function() {
+    return {
+      height: this.get('height'),
+      fixedHeader: false,
+      fixedFooter: false
+    };
+  }).readOnly(),
 
   style: computed('height', function() {
     let height = this.get('height');
@@ -94,9 +101,8 @@ const LightTable =  Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    assert(`[ember-light-table] table must be an instance of Table`, this.get('table') instanceof Table);
+    assert('[ember-light-table] table must be an instance of Table', this.get('table') instanceof Table);
   }
-
 });
 
 LightTable.reopenClass({

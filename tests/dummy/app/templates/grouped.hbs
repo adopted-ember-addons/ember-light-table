@@ -25,7 +25,7 @@
 
     <div class="panel-body table-container fixed-header">
 {{!-- BEGIN-SNIPPET grouped-table --}}
-{{#light-table table height='65vh' virtualScrollbar=true as |t|}}
+{{#light-table table height='65vh' as |t|}}
   {{t.head
     onColumnClick=(action 'onColumnClick')
     iconAscending='fa fa-sort-asc'

@@ -3,6 +3,7 @@ import layout from 'ember-light-table/templates/components/lt-body';
 import callAction from 'ember-light-table/utils/call-action';
 
 const {
+  run,
   computed
 } = Ember;
 
@@ -39,7 +40,7 @@ const {
 export default Ember.Component.extend({
   layout,
   classNames: ['lt-body-wrap'],
-  classNameBindings: ['canSelect', 'multiSelect', 'canExpand'],
+  classNameBindings: ['canSelect', 'multiSelect', 'canExpand', 'virtualScrollbar'],
 
   /**
    * @property table
@@ -47,6 +48,13 @@ export default Ember.Component.extend({
    * @private
    */
   table: null,
+
+  /**
+   * @property sharedOptions
+   * @type {Object}
+   * @private
+   */
+  sharedOptions: null,
 
   /**
    * @property tableActions
@@ -142,12 +150,28 @@ export default Ember.Component.extend({
    */
   scrollBuffer: 500,
 
+  /**
+   * @property virtualScrollbar
+   * @type {Boolean}
+   */
+  virtualScrollbar: false,
+
   rows: computed.readOnly('table.visibleRows'),
   columns: computed.readOnly('table.visibleColumns'),
   colspan: computed.readOnly('columns.length'),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
+
+  didInsertElement() {
+    this._super(...arguments);
+    this._virtualScrollbarTimer = run.scheduleOnce('render', this, this._setVirtualScrollbar);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    run.cancel(this._virtualScrollbarTimer);
+  },
 
   togglExpandedRow(row) {
     let multi = this.get('multiRowExpansion');
@@ -159,6 +183,11 @@ export default Ember.Component.extend({
       this.get('table.expandedRows').setEach('expanded', false);
       row.set('expanded', shouldExpand);
     }
+  },
+
+  _setVirtualScrollbar() {
+    const sharedOptions = this.get('sharedOptions');
+    this.set('virtualScrollbar', sharedOptions.fixedHeader || sharedOptions.fixedFooter);
   },
 
   actions: {

@@ -22,7 +22,20 @@ export default Ember.Mixin.create({
    * @private
    */
   table: null,
-  
+
+  /**
+   * @property sharedOptions
+   * @type {Object}
+   * @private
+   */
+  sharedOptions: null,
+
+  /**
+   * @property tableActions
+   * @type {Object}
+   */
+  tableActions: null,
+
   /**
    * @property fixed
    * @type {Boolean}
@@ -64,14 +77,14 @@ export default Ember.Mixin.create({
    */
   tableId: null,
 
-  renderInPlace: computed.oneWay('fixed'),
-  columnGroups: computed.oneWay('table.visibleColumnGroups'),
-  subColumns: computed.oneWay('table.visibleSubColumns'),
-  columns: computed.oneWay('table.visibleColumns'),
+  renderInPlace: computed.readOnly('fixed'),
+  columnGroups: computed.readOnly('table.visibleColumnGroups'),
+  subColumns: computed.readOnly('table.visibleSubColumns'),
+  columns: computed.readOnly('table.visibleColumns'),
 
   sortIcons: computed('iconAscending', 'iconDescending', function() {
     return this.getProperties(['iconAscending', 'iconDescending']);
-  }),
+  }).readOnly(),
 
   actions: {
     /**
