@@ -1,5 +1,5 @@
 .ember-light-table {
-  height: auto;
+  height: inherit;
   overflow: hidden;
   display: flex;
   flex-direction: column;

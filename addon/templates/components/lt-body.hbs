@@ -12,7 +12,6 @@
       {{#if overwrite}}
         {{yield columns rows}}
       {{else}}
-        {{! scrollbar.update action when rows changes and evaluates to rows !}}
         {{#each rows as |row|}}
           {{lt-row row columns
             tableActions=tableActions

@@ -35,15 +35,15 @@
 
     <div class="panel-body table-container">
 {{!-- BEGIN-SNIPPET selectable-table --}}
-{{#light-table table height="70vh" virtualScrollbar=true as |t|}}
+{{#light-table table height='65vh' virtualScrollbar=true as |t|}}
   {{t.head
     onColumnClick=(action 'onColumnClick')
     iconAscending='fa fa-sort-asc'
     iconDescending='fa fa-sort-desc'
   }}
 
-  {{#t.body 
-    multiSelect=true 
+  {{#t.body
+    multiSelect=true
     onScrolledToBottom=(action 'onScrolledToBottom')
     as |body|
   }}
