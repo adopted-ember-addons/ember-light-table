@@ -77,7 +77,7 @@ export default Ember.Mixin.create({
    */
   tableId: null,
 
-  renderInPlace: computed.readOnly('fixed'),
+  renderInPlace: computed.oneWay('fixed'),
   columnGroups: computed.readOnly('table.visibleColumnGroups'),
   subColumns: computed.readOnly('table.visibleSubColumns'),
   columns: computed.readOnly('table.visibleColumns'),

@@ -4,7 +4,6 @@ import Table from 'ember-light-table/classes/Table';
 
 const {
   assert,
-  isEmpty,
   computed
 } = Ember;
 

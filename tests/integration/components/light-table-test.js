@@ -55,7 +55,7 @@ test('fixed header', function(assert) {
   this.set('fixed', true);
 
   this.render(hbs`
-    {{#light-table table id='lightTable' as |t|}}
+    {{#light-table table height='500px' id='lightTable' as |t|}}
       {{t.head fixed=fixed}}
       {{t.body}}
     {{/light-table}}
@@ -74,7 +74,7 @@ test('fixed footer', function(assert) {
   this.set('fixed', true);
 
   this.render(hbs`
-    {{#light-table table id='lightTable' as |t|}}
+    {{#light-table table height='500px' id='lightTable' as |t|}}
       {{t.body}}
       {{t.foot fixed=fixed}}
     {{/light-table}}

@@ -3,7 +3,6 @@ import layout from 'ember-light-table/templates/components/lt-body';
 import callAction from 'ember-light-table/utils/call-action';
 
 const {
-  run,
   computed
 } = Ember;
 
