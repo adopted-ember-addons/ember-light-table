@@ -1,6 +1,7 @@
 {{#ember-wormhole to=(concat tableId '_inline_head') renderInPlace=renderInPlace}}
   <table>
-    <thead class="lt-head">
+
+  {{#sortable-group direction="x" tagName="thead" onChange="update" class="lt-head" as |group|}}
       {{#if hasBlock}}
         {{yield columnGroups subColumns}}
       {{else}}
@@ -18,12 +19,16 @@
 
         <tr>
           {{#each columnGroups as |column|}}
-            {{component (concat 'light-table/columns/' column.type) column
-              table=table
-              tableActions=tableActions
-              sortIcons=sortIcons
-              click=(action 'onColumnClick' column)
-              doubleClick=(action 'onColumnDoubleClick' column)}}
+            {{#lt-sortable-header  column=column group=group handle=".handle"}}
+                <span class="handle" data-item="{{column}}">
+              {{component (concat 'light-table/columns/' column.type) column
+                table=table
+                tableActions=tableActions
+                sortIcons=sortIcons
+                click=(action 'onColumnClick' column)
+                doubleClick=(action 'onColumnDoubleClick' column)}}
+                </span>
+            {{/lt-sortable-header}}
           {{/each}}
         </tr>
         <tr>
@@ -39,6 +44,6 @@
           {{/each}}
         </tr>
       {{/if}}
-    </thead>
+    {{/sortable-group}}
   </table>
 {{/ember-wormhole}}

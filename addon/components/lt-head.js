@@ -35,5 +35,10 @@ import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 export default Ember.Component.extend(TableHeaderMixin, {
   layout,
   classNames: ['lt-head-wrap'],
-  table: null
+  table: null,
+  actions:{
+    update(group, column){
+      this.get('table').set('columns',group);
+    }
+  }
 });
