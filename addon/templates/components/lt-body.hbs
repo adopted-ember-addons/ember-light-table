@@ -1,6 +1,6 @@
 {{#lt-scrollable
   tagName=''
-  virtualScrollbar=virtualScrollbar
+  virtualScrollbar=(or sharedOptions.fixedHeader sharedOptions.fixedFooter)
   autoHide=autoHideScrollbar
 }}
   <div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
