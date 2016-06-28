@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.7</p>
+                <p class="version pull-right">v1.0.0-beta.8</p>
               </div>
             </div>
         </div>
@@ -100,8 +100,8 @@ import layout from &#x27;ember-light-table/templates/components/light-table&#x27
 import Table from &#x27;ember-light-table/classes/Table&#x27;;
 
 const {
-  computed,
-  assert
+  assert,
+  computed
 } = Ember;
 
 /**
@@ -174,13 +174,19 @@ const LightTable =  Ember.Component.extend({
   height: null,
 
   /**
-   * Use ember-scrollable Trackpad Scroll Emulator for body
+   * Table component shared options
    *
-   * @property virtualScrollbar
-   * @type {Boolean}
-   * @default false
+   * @property sharedOptions
+   * @type {Object}
+   * @private
    */
-  virtualScrollbar: false,
+  sharedOptions: computed(function() {
+    return {
+      height: this.get(&#x27;height&#x27;),
+      fixedHeader: false,
+      fixedFooter: false
+    };
+  }).readOnly(),
 
   style: computed(&#x27;height&#x27;, function() {
     let height = this.get(&#x27;height&#x27;);
@@ -191,9 +197,8 @@ const LightTable =  Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    assert(&#x60;[ember-light-table] table must be an instance of Table&#x60;, this.get(&#x27;table&#x27;) instanceof Table);
+    assert(&#x27;[ember-light-table] table must be an instance of Table&#x27;, this.get(&#x27;table&#x27;) instanceof Table);
   }
-
 });
 
 LightTable.reopenClass({

@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.7</p>
+                <p class="version pull-right">v1.0.0-beta.8</p>
               </div>
             </div>
         </div>
@@ -119,7 +119,20 @@ export default Ember.Mixin.create({
    * @private
    */
   table: null,
-  
+
+  /**
+   * @property sharedOptions
+   * @type {Object}
+   * @private
+   */
+  sharedOptions: null,
+
+  /**
+   * @property tableActions
+   * @type {Object}
+   */
+  tableActions: null,
+
   /**
    * @property fixed
    * @type {Boolean}
@@ -162,13 +175,13 @@ export default Ember.Mixin.create({
   tableId: null,
 
   renderInPlace: computed.oneWay(&#x27;fixed&#x27;),
-  columnGroups: computed.oneWay(&#x27;table.visibleColumnGroups&#x27;),
-  subColumns: computed.oneWay(&#x27;table.visibleSubColumns&#x27;),
-  columns: computed.oneWay(&#x27;table.visibleColumns&#x27;),
+  columnGroups: computed.readOnly(&#x27;table.visibleColumnGroups&#x27;),
+  subColumns: computed.readOnly(&#x27;table.visibleSubColumns&#x27;),
+  columns: computed.readOnly(&#x27;table.visibleColumns&#x27;),
 
   sortIcons: computed(&#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;, function() {
     return this.getProperties([&#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;]);
-  }),
+  }).readOnly(),
 
   actions: {
     /**

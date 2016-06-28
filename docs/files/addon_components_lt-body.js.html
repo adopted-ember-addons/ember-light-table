@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.7</p>
+                <p class="version pull-right">v1.0.0-beta.8</p>
               </div>
             </div>
         </div>
@@ -144,6 +144,13 @@ export default Ember.Component.extend({
    * @private
    */
   table: null,
+
+  /**
+   * @property sharedOptions
+   * @type {Object}
+   * @private
+   */
+  sharedOptions: null,
 
   /**
    * @property tableActions

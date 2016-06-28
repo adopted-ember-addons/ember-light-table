@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.7</p>
+                <p class="version pull-right">v1.0.0-beta.8</p>
               </div>
             </div>
         </div>
@@ -99,6 +99,12 @@ import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-light-table/templates/components/lt-head&#x27;;
 import TableHeaderMixin from &#x27;ember-light-table/mixins/table-header&#x27;;
 
+const {
+  set,
+  assert,
+  isEmpty
+} = Ember;
+
 /**
  * @module Components
  */
@@ -132,7 +138,19 @@ import TableHeaderMixin from &#x27;ember-light-table/mixins/table-header&#x27;;
 export default Ember.Component.extend(TableHeaderMixin, {
   layout,
   classNames: [&#x27;lt-head-wrap&#x27;],
-  table: null
+  table: null,
+  sharedOptions: null,
+
+  init() {
+    this._super(...arguments);
+
+    const sharedOptions = this.get(&#x27;sharedOptions&#x27;) || {};
+    const fixed = this.get(&#x27;fixed&#x27;);
+
+    assert(&#x27;[ember-light-table] The height property is required for fixed header&#x27;, !fixed || fixed &amp;&amp; !isEmpty(sharedOptions.height));
+
+    set(sharedOptions, &#x27;fixedHeader&#x27;, fixed);
+  }
 });
 
     </pre>
