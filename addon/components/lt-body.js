@@ -49,6 +49,13 @@ export default Ember.Component.extend({
   table: null,
 
   /**
+   * @property sharedOptions
+   * @type {Object}
+   * @private
+   */
+  sharedOptions: null,
+
+  /**
    * @property tableActions
    * @type {Object}
    */

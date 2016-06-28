@@ -1,6 +1,6 @@
 .ember-light-table {
   height: inherit;
-  overflow: hidden;
+  overflow: auto;
   display: flex;
   flex-direction: column;
 }
@@ -22,7 +22,6 @@
 }
 
 .ember-light-table .lt-head-wrap,
-.ember-light-table .lt-body-wrap,
 .ember-light-table .lt-foot-wrap {
   overflow-y: auto;
   overflow-x: hidden;

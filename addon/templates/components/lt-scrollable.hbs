@@ -5,9 +5,7 @@
     as |scrollbar|
   }}
     {{yield}}
-    {{lt-infinity onScrolledToBottom=onScrolledToBottom scrollBuffer=scrollBuffer}}
   {{/ember-scrollable}}
 {{else}}
   {{yield}}
-  {{lt-infinity onScrolledToBottom=onScrolledToBottom scrollBuffer=scrollBuffer}}
 {{/if}}

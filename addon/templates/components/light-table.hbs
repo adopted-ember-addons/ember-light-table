@@ -1,5 +1,5 @@
 {{yield (hash
-  head=(component 'lt-head' tableId=elementId table=table tableActions=tableActions)
-  body=(component 'lt-body' tableId=elementId table=table tableActions=tableActions virtualScrollbar=virtualScrollbar)
-  foot=(component 'lt-foot' tableId=elementId table=table tableActions=tableActions)
+  head=(component 'lt-head' tableId=elementId table=table tableActions=tableActions sharedOptions=sharedOptions)
+  body=(component 'lt-body' tableId=elementId table=table tableActions=tableActions sharedOptions=sharedOptions)
+  foot=(component 'lt-foot' tableId=elementId table=table tableActions=tableActions sharedOptions=sharedOptions)
 )}}
