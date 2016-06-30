@@ -35,14 +35,19 @@
 
     <div class="panel-body table-container">
 {{!-- BEGIN-SNIPPET selectable-table --}}
-{{#light-table table scrollContainer='.table-container' onScrolledToBottom=(action 'onScrolledToBottom') as |t|}}
+{{#light-table table height='65vh' as |t|}}
   {{t.head
     onColumnClick=(action 'onColumnClick')
     iconAscending='fa fa-sort-asc'
     iconDescending='fa fa-sort-desc'
+    fixed=true
   }}
 
-  {{#t.body multiSelect=true as |body|}}
+  {{#t.body
+    multiSelect=true
+    onScrolledToBottom=(action 'onScrolledToBottom')
+    as |body|
+  }}
     {{#if isLoading}}
       {{#body.loader}}
         {{table-loader}}

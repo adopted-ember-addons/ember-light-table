@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import Row from './Row';
-import Column from './Column';
+import Row from 'ember-light-table/classes/Row';
+import Column from 'ember-light-table/classes/Column';
 
 const {
   computed,
@@ -47,16 +47,34 @@ export default class Table extends Ember.Object.extend({
   selectedRows: computed.filterBy('rows', 'selected', true).readOnly(),
 
   /**
-   * @property sortedColumns
+   * @property visibleRows
    * @type {Ember.Array}
    */
-  sortedColumns: computed.filterBy('visibleColumns', 'sorted', true).readOnly(),
+  visibleRows: computed.filterBy('rows', 'hidden', false).readOnly(),
 
   /**
    * @property sortableColumns
    * @type {Ember.Array}
    */
   sortableColumns: computed.filterBy('visibleColumns', 'sortable', true).readOnly(),
+
+  /**
+   * @property sortedColumns
+   * @type {Ember.Array}
+   */
+  sortedColumns: computed.filterBy('visibleColumns', 'sorted', true).readOnly(),
+
+  /**
+   * @property hideableColumns
+   * @type {Ember.Array}
+   */
+  hideableColumns: computed.filterBy('flattenedColumns', 'hideable', true).readOnly(),
+
+  /**
+   * @property hiddenColumns
+   * @type {Ember.Array}
+   */
+  hiddenColumns: computed.filterBy('flattenedColumns', 'hidden', true).readOnly(),
 
   /**
    * @property visibleColumns

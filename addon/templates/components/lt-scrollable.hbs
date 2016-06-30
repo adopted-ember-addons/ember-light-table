@@ -1,0 +1,11 @@
+{{#if virtualScrollbar}}
+  {{#ember-scrollable
+    classNames='lt-scrollable'
+    autoHide=autoHide
+    as |scrollbar|
+  }}
+    {{yield}}
+  {{/ember-scrollable}}
+{{else}}
+  {{yield}}
+{{/if}}

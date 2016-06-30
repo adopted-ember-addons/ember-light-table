@@ -1,6 +1,8 @@
 .ember-light-table {
-  height: auto;
+  height: inherit;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .ember-light-table table {
@@ -20,16 +22,26 @@
 }
 
 .ember-light-table .lt-head-wrap,
-.ember-light-table .lt-body-wrap,
 .ember-light-table .lt-foot-wrap {
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-.ember-light-table .lt-body-wrap {
-  height: inherit;
+.ember-light-table .lt-head-wrap,
+.ember-light-table .lt-foot-wrap {
+  flex: 0 1 auto;
 }
 
+.ember-light-table .lt-body-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+.ember-light-table .lt-scrollable {
+  width: 100%;
+  flex: 1 0 auto;
+}
 
 .ember-light-table .align-left {
   text-align: left;

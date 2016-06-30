@@ -1,11 +1,10 @@
 import Ember from 'ember';
-import layout from '../templates/components/light-table';
-import callAction from '../utils/call-action';
-import TableScrollMixin from '../mixins/table-scroll';
-import Table from '../classes/Table';
+import layout from 'ember-light-table/templates/components/light-table';
+import Table from 'ember-light-table/classes/Table';
 
 const {
-  assert
+  assert,
+  computed
 } = Ember;
 
 /**
@@ -30,9 +29,10 @@ const {
  * @uses TableScrollMixin
  */
 
-const LightTable =  Ember.Component.extend(TableScrollMixin, {
+const LightTable =  Ember.Component.extend({
   layout,
-  classNames: ['ember-light-table'],
+  classNameBindings: [':ember-light-table', 'virtualScrollbar'],
+  attributeBindings: ['style'],
 
   /**
    * @property table
@@ -67,20 +67,40 @@ const LightTable =  Ember.Component.extend(TableScrollMixin, {
    */
   tableActions: null,
 
+  /**
+   * Table height.
+   *
+   * @property height
+   * @type {String}
+   * @default null
+   */
+  height: null,
+
+  /**
+   * Table component shared options
+   *
+   * @property sharedOptions
+   * @type {Object}
+   * @private
+   */
+  sharedOptions: computed(function() {
+    return {
+      height: this.get('height'),
+      fixedHeader: false,
+      fixedFooter: false
+    };
+  }).readOnly(),
+
+  style: computed('height', function() {
+    let height = this.get('height');
+    if (height) {
+      return Ember.String.htmlSafe(`height:${this.get('height')};`);
+    }
+  }),
+
   init() {
     this._super(...arguments);
-    assert(`[ember-light-table] table must be an instance of Table`, this.get('table') instanceof Table);
-  },
-
-  actions: {
-    /**
-     * Action to be called when user reached the bottom of the scroll container
-     *
-     * @event onScrolledToBottom
-     */
-    onScrolledToBottom() {
-      callAction(this, 'onScrolledToBottom', ...arguments);
-    }
+    assert('[ember-light-table] table must be an instance of Table', this.get('table') instanceof Table);
   }
 });
 

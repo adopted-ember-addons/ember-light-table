@@ -12,6 +12,13 @@ const {
   */
 export default class Column extends Ember.Object.extend({
   /**
+   * @property hideable
+   * @type {Boolean}
+   * @default true
+   */
+  hideable: true,
+
+  /**
    * @property hidden
    * @type {Boolean}
    * @default false
@@ -64,12 +71,30 @@ export default class Column extends Ember.Object.extend({
   subColumns: null,
 
   /**
-   * Component name for the column header
-   * @property headerComponent
+   * Type of column component
+   *
+   * @property type
+   * @type {String}
+   * @default 'base'
+   */
+  type: 'base',
+
+  /**
+   * Type of cell component
+   *
+   * @property cellType
+   * @type {String}
+   * @default 'base'
+   */
+  cellType: 'base',
+
+  /**
+   * Component name for the column
+   * @property component
    * @type {String}
    * @optional
    */
-  headerComponent: null,
+  component: null,
 
   /**
    * Component name for the column cells. This component is automatically passed row,

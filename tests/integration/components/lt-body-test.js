@@ -155,3 +155,15 @@ test('hidden rows', function(assert) {
 
   assert.equal(this.$('tbody > tr').length, 4);
 });
+
+test('overwrite', function(assert) {
+  this.set('table', new Table(Columns, createUsers(5)));
+
+  this.render(hbs `
+    {{#lt-body table=table overwrite=true as |columns rows|}}
+      {{columns.length}}, {{rows.length}}
+    {{/lt-body}}
+  `);
+
+  assert.equal(this.$().text().trim(), '6, 5');
+});

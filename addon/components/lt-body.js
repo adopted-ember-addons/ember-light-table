@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import layout from '../templates/components/lt-body';
-import callAction from '../utils/call-action';
+import layout from 'ember-light-table/templates/components/lt-body';
+import callAction from 'ember-light-table/utils/call-action';
 
 const {
   computed
@@ -24,7 +24,7 @@ const {
  *       {{/body.loader}}
  *     {{/if}}
  *
- *     {{#if table.isEmpty)}}
+ *     {{#if table.isEmpty}}
  *       {{#body.no-data}}
  *         No users found.
  *       {{/body.no-data}}
@@ -40,13 +40,20 @@ export default Ember.Component.extend({
   layout,
   classNames: ['lt-body-wrap'],
   classNameBindings: ['canSelect', 'multiSelect', 'canExpand'],
-  attributeBindings: ['style'],
+
   /**
    * @property table
    * @type {Table}
    * @private
    */
   table: null,
+
+  /**
+   * @property sharedOptions
+   * @type {Object}
+   * @private
+   */
+  sharedOptions: null,
 
   /**
    * @property tableActions
@@ -92,6 +99,15 @@ export default Ember.Component.extend({
   multiSelect: false,
 
   /**
+   * Hide scrollbar when not scrolling
+   *
+   * @property autoHideScrollbar
+   * @type {Boolean}
+   * @default true
+   */
+  autoHideScrollbar: true,
+
+  /**
    * Allows multiple rows to be expanded at once
    *
    * @property multiRowExpansion
@@ -110,28 +126,32 @@ export default Ember.Component.extend({
   expandOnClick: true,
 
   /**
-   * Table body height. This needs to be specified for fixed
-   * footer and header
+   * If true, the body block will yield columns and rows, allowing you
+   * to define your own table body
    *
-   * @property height
-   * @type {String}
-   * @default inherit
+   * @property overwrite
+   * @type {Boolean}
+   * @default false
    */
-  height: 'inherit',
+  overwrite: false,
 
   /**
    * ID of main table component. Used to generate divs for ember-wormhole
+   *
    * @type {String}
    */
   tableId: null,
 
-  rows: computed.filterBy('table.rows', 'hidden', false),
-  visibleColumns: computed.readOnly('table.visibleColumns'),
-  colspan: computed.readOnly('visibleColumns.length'),
+  /**
+   * @property scrollBuffer
+   * @type {Number}
+   * @default 500
+   */
+  scrollBuffer: 500,
 
-  style: computed(function() {
-    return Ember.String.htmlSafe(`height:${this.get('height')};`);
-  }),
+  rows: computed.readOnly('table.visibleRows'),
+  columns: computed.readOnly('table.visibleColumns'),
+  colspan: computed.readOnly('columns.length'),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
@@ -198,6 +218,15 @@ export default Ember.Component.extend({
      */
     onRowDoubleClick( /* row */ ) {
       callAction(this, 'onRowDoubleClick', ...arguments);
+    },
+
+    /**
+     * onScrolledToBottom action - sent when user scrolls to the bottom
+     *
+     * @event onScrolledToBottom
+     */
+    onScrolledToBottom() {
+      callAction(this, 'onScrolledToBottom');
     }
   }
 });

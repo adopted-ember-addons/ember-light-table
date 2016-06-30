@@ -1,6 +1,12 @@
 import Ember from 'ember';
-import layout from '../templates/components/lt-head';
-import TableHeaderMixin from '../mixins/table-header';
+import layout from 'ember-light-table/templates/components/lt-head';
+import TableHeaderMixin from 'ember-light-table/mixins/table-header';
+
+const {
+  set,
+  assert,
+  isEmpty
+} = Ember;
 
 /**
  * @module Components
@@ -35,5 +41,17 @@ import TableHeaderMixin from '../mixins/table-header';
 export default Ember.Component.extend(TableHeaderMixin, {
   layout,
   classNames: ['lt-head-wrap'],
-  table: null
+  table: null,
+  sharedOptions: null,
+
+  init() {
+    this._super(...arguments);
+
+    const sharedOptions = this.get('sharedOptions') || {};
+    const fixed = this.get('fixed');
+
+    assert('[ember-light-table] The height property is required for fixed header', !fixed || fixed && !isEmpty(sharedOptions.height));
+
+    set(sharedOptions, 'fixedHeader', fixed);
+  }
 });
