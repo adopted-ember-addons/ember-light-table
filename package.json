@@ -63,7 +63,7 @@
     "ember-wormhole": "0.4.0",
     "ember-composable-helpers": "0.26.2",
     "ember-scrollable": "0.3.0",
-    "ember-element-resize-detector": "0.1.1"
+    "ember-element-resize-detector": "0.1.2"
   },
   "peerDependencies": {
     "ember-element-resize-detector": "0.1.1"
