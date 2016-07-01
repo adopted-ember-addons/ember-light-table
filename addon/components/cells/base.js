@@ -2,6 +2,7 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/cells/base';
 
 const {
+  Component,
   computed
 } = Ember;
 
@@ -9,7 +10,7 @@ const {
  * @module Cell Types
  * @class Base Cell
  */
-const Cell = Ember.Component.extend({
+const Cell = Component.extend({
   layout,
   tagName: 'td',
   classNames: ['lt-cell'],

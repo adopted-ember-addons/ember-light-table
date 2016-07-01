@@ -3,9 +3,10 @@ import layout from 'ember-light-table/templates/components/lt-foot';
 import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 
 const {
-  set,
   assert,
-  isEmpty
+  Component,
+  isEmpty,
+  set
 } = Ember;
 
 /**
@@ -35,7 +36,7 @@ const {
  * @uses TableColumnMixin
  */
 
-export default Ember.Component.extend(TableHeaderMixin, {
+export default Component.extend(TableHeaderMixin, {
   layout,
   classNames: ['lt-foot-wrap'],
   table: null,

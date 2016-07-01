@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/lt-spanned-row';
 
-export default Ember.Component.extend({
+const { Component } = Ember;
+
+export default Component.extend({
   layout,
   colspan: 1,
   tagName: '',

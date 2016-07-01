@@ -4,7 +4,9 @@ import Table from 'ember-light-table/classes/Table';
 
 const {
   assert,
-  computed
+  Component,
+  computed,
+  String:{htmlSafe}
 } = Ember;
 
 /**
@@ -29,7 +31,7 @@ const {
  * @uses TableScrollMixin
  */
 
-const LightTable =  Ember.Component.extend({
+const LightTable = Component.extend({
   layout,
   classNameBindings: [':ember-light-table', 'virtualScrollbar'],
   attributeBindings: ['style'],
@@ -83,7 +85,7 @@ const LightTable =  Ember.Component.extend({
    * @type {Object}
    * @private
    */
-  sharedOptions: computed(function() {
+  sharedOptions: computed(function () {
     return {
       height: this.get('height'),
       fixedHeader: false,
@@ -91,10 +93,10 @@ const LightTable =  Ember.Component.extend({
     };
   }).readOnly(),
 
-  style: computed('height', function() {
+  style: computed('height', function () {
     let height = this.get('height');
     if (height) {
-      return Ember.String.htmlSafe(`height:${this.get('height')};`);
+      return htmlSafe(`height:${this.get('height')};`);
     }
   }),
 

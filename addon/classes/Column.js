@@ -73,6 +73,17 @@ export default class Column extends Ember.Object.extend({
   /**
    * Type of column component
    *
+   * You can create your own column types by running the blueprint:
+   * `ember g column-type my-column-type`
+   *
+   * This will generate a component for you which represents the `<th>`
+   * element for the column. If you want to apply custom actions to the `th`,
+   * or do some custom styling of the `th` with classNameBindings, all of that is
+   * available to you in this component.
+   *
+   * You can then specify the custom type you created as a string here, to use it.
+   *
+   *
    * @property type
    * @type {String}
    * @default 'base'
@@ -81,6 +92,16 @@ export default class Column extends Ember.Object.extend({
 
   /**
    * Type of cell component
+   *
+   * You can create your own cell types by running the blueprint:
+   * `ember g cell-type my-cell-type`
+   *
+   * This will generate a component for you which represents the `<td>`
+   * cells in the column. If you want to apply custom actions to the `td`,
+   * or do some custom styling of the `td` with classNameBindings, all of that is
+   * available to you in this component.
+   *
+   * You can then specify the custom type you created as a string here, to use it.
    *
    * @property cellType
    * @type {String}
