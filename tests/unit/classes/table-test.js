@@ -76,8 +76,9 @@ test('table method - setRows', function(assert) {
   assert.ok(table);
   assert.equal(table.get('rows.length'), 0);
 
-  table.setRows([{}, {}]);
+  table.setRows([{}, {}], { selected: true });
   assert.equal(table.get('rows.length'), 2);
+  assert.ok(table.get('rows').isEvery('selected', true));
 
   table.setRows();
   assert.equal(table.get('rows.length'), 0);
@@ -91,8 +92,9 @@ test('table method - addRow', function(assert) {
   assert.ok(table);
   assert.equal(table.get('rows.length'), 0);
 
-  table.addRow({});
+  table.addRow({}, { selected: true });
   assert.equal(table.get('rows.length'), 1);
+  assert.ok(table.get('rows.firstObject.selected'));
 
   table.addRow(row);
   assert.equal(table.get('rows.length'), 2);
@@ -114,8 +116,9 @@ test('table method - addRows', function(assert) {
   assert.ok(table);
   assert.equal(table.get('rows.length'), 0);
 
-  table.addRows([{}, {}]);
+  table.addRows([{}, {}], { selected: true });
   assert.equal(table.get('rows.length'), 2);
+  assert.ok(table.get('rows').isEvery('selected', true));
 
   table.addRows([row]);
   assert.equal(table.get('rows.length'), 3);
@@ -138,8 +141,9 @@ test('table method - pushRow', function(assert) {
   assert.ok(table);
   assert.equal(table.get('rows.length'), 0);
 
-  table.addRow({});
+  table.addRow({}, { selected: true });
   assert.equal(table.get('rows.length'), 1);
+  assert.ok(table.get('rows.firstObject.selected'));
 
   table.pushRow(row);
   assert.equal(table.get('rows.length'), 2);
@@ -161,8 +165,9 @@ test('table method - pushRows', function(assert) {
   assert.ok(table);
   assert.equal(table.get('rows.length'), 0);
 
-  table.pushRows([{}, {}]);
+  table.pushRows([{}, {}], { selected: true });
   assert.equal(table.get('rows.length'), 2);
+  assert.ok(table.get('rows').isEvery('selected', true));
 
   table.pushRows([row]);
   assert.equal(table.get('rows.length'), 3);
@@ -185,10 +190,11 @@ test('table method - insertRowAt', function(assert) {
   table.setRows([{}, {}, {}]);
   assert.equal(table.get('rows.length'), 3);
 
-  table.insertRowAt(1, { name: 'Offir' });
+  table.insertRowAt(1, { name: 'Offir' }, { selected: true });
 
   assert.equal(table.get('rows.length'), 4);
   assert.equal(table.get('rows.1.name'), 'Offir');
+  assert.ok(table.get('rows.1.selected'));
 });
 
 test('table method - removeRow', function(assert) {
@@ -378,15 +384,17 @@ test('table method - removeColumns', function(assert) {
 });
 
 test('static table method - createRow', function(assert) {
-  let row = Table.createRow({ name: 'Offir'});
+  let row = Table.createRow({ name: 'Offir'}, { selected: true });
   assert.ok(row instanceof Row);
   assert.equal(row.get('name'), 'Offir');
+  assert.ok(row.get('selected'));
 });
 
 test('static table method - createRows', function(assert) {
-  let rows = Table.createRows([{}, {}]);
+  let rows = Table.createRows([{}, {}], { selected: true });
   assert.equal(rows.length, 2);
   assert.ok(rows[0] instanceof Row);
+  assert.ok(rows[1].get('selected'));
 });
 
 test('static table method - createColumn', function(assert) {
