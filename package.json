@@ -66,7 +66,7 @@
     "ember-element-resize-detector": "0.1.1"
   },
   "peerDependencies": {
-    "ember-element-resize-detector": "0.1.1"
+    "ember-element-resize-detector": "0.1.4"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
