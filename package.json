@@ -62,7 +62,7 @@
     "ember-in-viewport": "2.0.7",
     "ember-wormhole": "0.4.0",
     "ember-composable-helpers": "0.26.2",
-    "ember-scrollable": "0.3.0",
+    "ember-scrollable": "0.3.2",
     "ember-element-resize-detector": "0.1.1"
   },
   "peerDependencies": {
