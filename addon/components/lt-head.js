@@ -2,11 +2,7 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/lt-head';
 import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 
-const {
-  set,
-  assert,
-  isEmpty
-} = Ember;
+const {assert, Component, isEmpty, set} = Ember;
 
 /**
  * @module Components
@@ -38,7 +34,7 @@ const {
  * @uses TableColumnMixin
  */
 
-export default Ember.Component.extend(TableHeaderMixin, {
+export default Component.extend(TableHeaderMixin, {
   layout,
   classNames: ['lt-head-wrap'],
   table: null,

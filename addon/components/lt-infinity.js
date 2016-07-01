@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import layout from '../templates/components/lt-infinity';
 import InViewportMixin from 'ember-in-viewport';
+const {Component} = Ember;
 
-export default Ember.Component.extend(InViewportMixin, {
+export default Component.extend(InViewportMixin, {
   classNames: ['lt-infinity'],
   classNameBindings: ['viewportEntered:in-viewport'],
   layout,

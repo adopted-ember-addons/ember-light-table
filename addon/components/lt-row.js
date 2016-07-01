@@ -1,11 +1,9 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/lt-row';
 
-const {
-  computed
-} = Ember;
+const {Component, computed} = Ember;
 
-const Row = Ember.Component.extend({
+const Row = Component.extend({
   layout,
   tagName: 'tr',
   classNames: ['lt-row'],

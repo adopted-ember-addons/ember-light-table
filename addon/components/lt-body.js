@@ -2,9 +2,7 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/lt-body';
 import callAction from 'ember-light-table/utils/call-action';
 
-const {
-  computed
-} = Ember;
+const {Component, computed} = Ember;
 
 /**
  * @module Components
@@ -36,7 +34,7 @@ const {
  * @class Body
  */
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNames: ['lt-body-wrap'],
   classNameBindings: ['canSelect', 'multiSelect', 'canExpand'],

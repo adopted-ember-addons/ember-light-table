@@ -1,16 +1,13 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/columns/base';
 
-const {
-  isEmpty,
-  computed
-} = Ember;
+const {Component, computed, isEmpty} = Ember;
 
 /**
  * @module Column Types
  * @class Base Column
  */
-const Column = Ember.Component.extend({
+const Column = Component.extend({
   layout,
   tagName: 'th',
   classNames: ['lt-column'],
