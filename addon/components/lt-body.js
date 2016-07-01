@@ -2,7 +2,10 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/lt-body';
 import callAction from 'ember-light-table/utils/call-action';
 
-const {Component, computed} = Ember;
+const {
+  Component,
+  computed
+} = Ember;
 
 /**
  * @module Components
@@ -76,7 +79,7 @@ export default Component.extend({
    *
    * ```hbs
    * {{#body.expanded-row as |row|}}
-   * 	This is the content of the expanded row for {{row.firstName}}
+   *  This is the content of the expanded row for {{row.firstName}}
    * {{/body.expanded-row}}
    * ```
    *
@@ -158,7 +161,7 @@ export default Component.extend({
     let multi = this.get('multiRowExpansion');
     let shouldExpand = !row.expanded;
 
-    if(multi) {
+    if (multi) {
       row.toggleProperty('expanded');
     } else {
       this.get('table.expandedRows').setEach('expanded', false);
@@ -214,7 +217,7 @@ export default Component.extend({
      * @param  {Row}   row The row that was clicked
      * @param  {Event}   event   The click event
      */
-    onRowDoubleClick( /* row */ ) {
+    onRowDoubleClick(/* row */) {
       callAction(this, 'onRowDoubleClick', ...arguments);
     },
 

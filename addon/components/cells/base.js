@@ -1,7 +1,10 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/cells/base';
 
-const {Component, computed} = Ember;
+const {
+  Component,
+  computed
+} = Ember;
 
 /**
  * @module Cell Types

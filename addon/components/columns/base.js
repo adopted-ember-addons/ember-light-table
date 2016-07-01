@@ -1,7 +1,11 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/columns/base';
 
-const {Component, computed, isEmpty} = Ember;
+const {
+  Component,
+  computed,
+  isEmpty
+} = Ember;
 
 /**
  * @module Column Types
@@ -20,7 +24,7 @@ const Column = Component.extend({
   isSorted: computed.readOnly('column.sorted'),
   isHideable: computed.readOnly('column.hideable'),
 
-  align: computed('column.align', function() {
+  align: computed('column.align', function () {
     return `align-${this.get('column.align')}`;
   }).readOnly(),
 
@@ -46,7 +50,7 @@ const Column = Component.extend({
    * @property colspan
    * @type {Number}
    */
-  colspan: computed('column', 'column.visibleSubColumns.[]', function() {
+  colspan: computed('column', 'column.visibleSubColumns.[]', function () {
     let subColumns = this.get('column.visibleSubColumns');
     return !isEmpty(subColumns) ? subColumns.length : 1;
   }),
@@ -55,7 +59,7 @@ const Column = Component.extend({
    * @property rowspan
    * @type {Number}
    */
-  rowspan: computed('column.visibleSubColumns.[]', function() {
+  rowspan: computed('column.visibleSubColumns.[]', function () {
     let subColumns = this.get('column.visibleSubColumns');
     return !isEmpty(subColumns) ? 1 : 2;
   })

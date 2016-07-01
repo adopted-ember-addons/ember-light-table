@@ -2,7 +2,12 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/lt-head';
 import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 
-const {assert, Component, isEmpty, set} = Ember;
+const {
+  assert,
+  Component,
+  isEmpty,
+  set
+} = Ember;
 
 /**
  * @module Components

@@ -2,7 +2,12 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/light-table';
 import Table from 'ember-light-table/classes/Table';
 
-const {assert, Component, computed, String:{htmlSafe}} = Ember;
+const {
+  assert,
+  Component,
+  computed,
+  String:{htmlSafe}
+} = Ember;
 
 /**
  * @module Components
