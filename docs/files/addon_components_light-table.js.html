@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.8</p>
+                <p class="version pull-right">v1.0.0</p>
               </div>
             </div>
         </div>
@@ -101,7 +101,9 @@ import Table from &#x27;ember-light-table/classes/Table&#x27;;
 
 const {
   assert,
-  computed
+  Component,
+  computed,
+  String:{htmlSafe}
 } = Ember;
 
 /**
@@ -126,7 +128,7 @@ const {
  * @uses TableScrollMixin
  */
 
-const LightTable =  Ember.Component.extend({
+const LightTable = Component.extend({
   layout,
   classNameBindings: [&#x27;:ember-light-table&#x27;, &#x27;virtualScrollbar&#x27;],
   attributeBindings: [&#x27;style&#x27;],
@@ -180,7 +182,7 @@ const LightTable =  Ember.Component.extend({
    * @type {Object}
    * @private
    */
-  sharedOptions: computed(function() {
+  sharedOptions: computed(function () {
     return {
       height: this.get(&#x27;height&#x27;),
       fixedHeader: false,
@@ -188,10 +190,10 @@ const LightTable =  Ember.Component.extend({
     };
   }).readOnly(),
 
-  style: computed(&#x27;height&#x27;, function() {
+  style: computed(&#x27;height&#x27;, function () {
     let height = this.get(&#x27;height&#x27;);
     if (height) {
-      return Ember.String.htmlSafe(&#x60;height:${this.get(&#x27;height&#x27;)};&#x60;);
+      return htmlSafe(&#x60;height:${this.get(&#x27;height&#x27;)};&#x60;);
     }
   }),
 

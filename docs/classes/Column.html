@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.8</p>
+                <p class="version pull-right">v1.0.0</p>
               </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
 
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_classes_Column.js.html#l170"><code>addon&#x2F;classes&#x2F;Column.js:170</code></a>
+            Defined in: <a href="../files/addon_classes_Column.js.html#l191"><code>addon&#x2F;classes&#x2F;Column.js:191</code></a>
         </div>
 </div>
 
@@ -128,7 +128,7 @@
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Column.js.html#l170"><code>addon&#x2F;classes&#x2F;Column.js:170</code></a>
+		<a href="../files/addon_classes_Column.js.html#l191"><code>addon&#x2F;classes&#x2F;Column.js:191</code></a>
 		</p>
 
 
@@ -315,7 +315,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l129"><code>addon&#x2F;classes&#x2F;Column.js:129</code></a>
+        <a href="../files/addon_classes_Column.js.html#l150"><code>addon&#x2F;classes&#x2F;Column.js:150</code></a>
         </p>
 
 
@@ -340,7 +340,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l99"><code>addon&#x2F;classes&#x2F;Column.js:99</code></a>
+        <a href="../files/addon_classes_Column.js.html#l120"><code>addon&#x2F;classes&#x2F;Column.js:120</code></a>
         </p>
 
 
@@ -367,7 +367,7 @@ the value is set to.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l82"><code>addon&#x2F;classes&#x2F;Column.js:82</code></a>
+        <a href="../files/addon_classes_Column.js.html#l93"><code>addon&#x2F;classes&#x2F;Column.js:93</code></a>
         </p>
 
 
@@ -375,6 +375,13 @@ the value is set to.</p>
 
     <div class="description">
         <p>Type of cell component</p>
+<p>You can create your own cell types by running the blueprint:
+<code>ember g cell-type my-cell-type</code></p>
+<p>This will generate a component for you which represents the <code>&lt;td&gt;</code>
+cells in the column. If you want to apply custom actions to the <code>td</code>,
+or do some custom styling of the <code>td</code> with classNameBindings, all of that is
+available to you in this component.</p>
+<p>You can then specify the custom type you created as a string here, to use it.</p>
 
     </div>
 
@@ -393,7 +400,7 @@ the value is set to.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l121"><code>addon&#x2F;classes&#x2F;Column.js:121</code></a>
+        <a href="../files/addon_classes_Column.js.html#l142"><code>addon&#x2F;classes&#x2F;Column.js:142</code></a>
         </p>
 
 
@@ -418,7 +425,7 @@ the value is set to.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l91"><code>addon&#x2F;classes&#x2F;Column.js:91</code></a>
+        <a href="../files/addon_classes_Column.js.html#l112"><code>addon&#x2F;classes&#x2F;Column.js:112</code></a>
         </p>
 
 
@@ -443,7 +450,7 @@ the value is set to.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l137"><code>addon&#x2F;classes&#x2F;Column.js:137</code></a>
+        <a href="../files/addon_classes_Column.js.html#l158"><code>addon&#x2F;classes&#x2F;Column.js:158</code></a>
         </p>
 
 
@@ -519,7 +526,7 @@ the value is set to.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l144"><code>addon&#x2F;classes&#x2F;Column.js:144</code></a>
+        <a href="../files/addon_classes_Column.js.html#l165"><code>addon&#x2F;classes&#x2F;Column.js:165</code></a>
         </p>
 
 
@@ -544,7 +551,7 @@ the value is set to.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l151"><code>addon&#x2F;classes&#x2F;Column.js:151</code></a>
+        <a href="../files/addon_classes_Column.js.html#l172"><code>addon&#x2F;classes&#x2F;Column.js:172</code></a>
         </p>
 
 
@@ -677,6 +684,13 @@ the value is set to.</p>
 
     <div class="description">
         <p>Type of column component</p>
+<p>You can create your own column types by running the blueprint:
+<code>ember g column-type my-column-type</code></p>
+<p>This will generate a component for you which represents the <code>&lt;th&gt;</code>
+element for the column. If you want to apply custom actions to the <code>th</code>,
+or do some custom styling of the <code>th</code> with classNameBindings, all of that is
+available to you in this component.</p>
+<p>You can then specify the custom type you created as a string here, to use it.</p>
 
     </div>
 
@@ -695,7 +709,7 @@ the value is set to.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l109"><code>addon&#x2F;classes&#x2F;Column.js:109</code></a>
+        <a href="../files/addon_classes_Column.js.html#l130"><code>addon&#x2F;classes&#x2F;Column.js:130</code></a>
         </p>
 
 
@@ -720,7 +734,7 @@ the value is set to.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l160"><code>addon&#x2F;classes&#x2F;Column.js:160</code></a>
+        <a href="../files/addon_classes_Column.js.html#l181"><code>addon&#x2F;classes&#x2F;Column.js:181</code></a>
         </p>
 
 
@@ -744,7 +758,7 @@ the value is set to.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/addon_classes_Column.js.html#l115"><code>addon&#x2F;classes&#x2F;Column.js:115</code></a>
+        <a href="../files/addon_classes_Column.js.html#l136"><code>addon&#x2F;classes&#x2F;Column.js:136</code></a>
         </p>
 
 

@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.8</p>
+                <p class="version pull-right">v1.0.0</p>
               </div>
             </div>
         </div>
@@ -99,15 +99,16 @@ import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-light-table/templates/components/columns/base&#x27;;
 
 const {
-  isEmpty,
-  computed
+  Component,
+  computed,
+  isEmpty
 } = Ember;
 
 /**
  * @module Column Types
  * @class Base Column
  */
-const Column = Ember.Component.extend({
+const Column = Component.extend({
   layout,
   tagName: &#x27;th&#x27;,
   classNames: [&#x27;lt-column&#x27;],
@@ -120,7 +121,7 @@ const Column = Ember.Component.extend({
   isSorted: computed.readOnly(&#x27;column.sorted&#x27;),
   isHideable: computed.readOnly(&#x27;column.hideable&#x27;),
 
-  align: computed(&#x27;column.align&#x27;, function() {
+  align: computed(&#x27;column.align&#x27;, function () {
     return &#x60;align-${this.get(&#x27;column.align&#x27;)}&#x60;;
   }).readOnly(),
 
@@ -146,7 +147,7 @@ const Column = Ember.Component.extend({
    * @property colspan
    * @type {Number}
    */
-  colspan: computed(&#x27;column&#x27;, &#x27;column.visibleSubColumns.[]&#x27;, function() {
+  colspan: computed(&#x27;column&#x27;, &#x27;column.visibleSubColumns.[]&#x27;, function () {
     let subColumns = this.get(&#x27;column.visibleSubColumns&#x27;);
     return !isEmpty(subColumns) ? subColumns.length : 1;
   }),
@@ -155,7 +156,7 @@ const Column = Ember.Component.extend({
    * @property rowspan
    * @type {Number}
    */
-  rowspan: computed(&#x27;column.visibleSubColumns.[]&#x27;, function() {
+  rowspan: computed(&#x27;column.visibleSubColumns.[]&#x27;, function () {
     let subColumns = this.get(&#x27;column.visibleSubColumns&#x27;);
     return !isEmpty(subColumns) ? 1 : 2;
   })

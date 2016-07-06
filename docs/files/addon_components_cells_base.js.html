@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.8</p>
+                <p class="version pull-right">v1.0.0</p>
               </div>
             </div>
         </div>
@@ -99,6 +99,7 @@ import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-light-table/templates/components/cells/base&#x27;;
 
 const {
+  Component,
   computed
 } = Ember;
 
@@ -106,7 +107,7 @@ const {
  * @module Cell Types
  * @class Base Cell
  */
-const Cell = Ember.Component.extend({
+const Cell = Component.extend({
   layout,
   tagName: &#x27;td&#x27;,
   classNames: [&#x27;lt-cell&#x27;],

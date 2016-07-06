@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.8</p>
+                <p class="version pull-right">v1.0.0</p>
               </div>
             </div>
         </div>
@@ -100,9 +100,10 @@ import layout from &#x27;ember-light-table/templates/components/lt-head&#x27;;
 import TableHeaderMixin from &#x27;ember-light-table/mixins/table-header&#x27;;
 
 const {
-  set,
   assert,
-  isEmpty
+  Component,
+  isEmpty,
+  set
 } = Ember;
 
 /**
@@ -135,7 +136,7 @@ const {
  * @uses TableColumnMixin
  */
 
-export default Ember.Component.extend(TableHeaderMixin, {
+export default Component.extend(TableHeaderMixin, {
   layout,
   classNames: [&#x27;lt-head-wrap&#x27;],
   table: null,

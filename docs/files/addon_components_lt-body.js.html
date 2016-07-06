@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.8</p>
+                <p class="version pull-right">v1.0.0</p>
               </div>
             </div>
         </div>
@@ -100,6 +100,7 @@ import layout from &#x27;ember-light-table/templates/components/lt-body&#x27;;
 import callAction from &#x27;ember-light-table/utils/call-action&#x27;;
 
 const {
+  Component,
   computed
 } = Ember;
 
@@ -133,7 +134,7 @@ const {
  * @class Body
  */
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNames: [&#x27;lt-body-wrap&#x27;],
   classNameBindings: [&#x27;canSelect&#x27;, &#x27;multiSelect&#x27;, &#x27;canExpand&#x27;],
@@ -175,7 +176,7 @@ export default Ember.Component.extend({
    *
    * &#x60;&#x60;&#x60;hbs
    * {{#body.expanded-row as |row|}}
-   * 	This is the content of the expanded row for {{row.firstName}}
+   *  This is the content of the expanded row for {{row.firstName}}
    * {{/body.expanded-row}}
    * &#x60;&#x60;&#x60;
    *
@@ -257,7 +258,7 @@ export default Ember.Component.extend({
     let multi = this.get(&#x27;multiRowExpansion&#x27;);
     let shouldExpand = !row.expanded;
 
-    if(multi) {
+    if (multi) {
       row.toggleProperty(&#x27;expanded&#x27;);
     } else {
       this.get(&#x27;table.expandedRows&#x27;).setEach(&#x27;expanded&#x27;, false);
@@ -313,7 +314,7 @@ export default Ember.Component.extend({
      * @param  {Row}   row The row that was clicked
      * @param  {Event}   event   The click event
      */
-    onRowDoubleClick( /* row */ ) {
+    onRowDoubleClick(/* row */) {
       callAction(this, &#x27;onRowDoubleClick&#x27;, ...arguments);
     },
 

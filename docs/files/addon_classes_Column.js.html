@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0-beta.8</p>
+                <p class="version pull-right">v1.0.0</p>
               </div>
             </div>
         </div>
@@ -170,6 +170,17 @@ export default class Column extends Ember.Object.extend({
   /**
    * Type of column component
    *
+   * You can create your own column types by running the blueprint:
+   * &#x60;ember g column-type my-column-type&#x60;
+   *
+   * This will generate a component for you which represents the &#x60;&lt;th&gt;&#x60;
+   * element for the column. If you want to apply custom actions to the &#x60;th&#x60;,
+   * or do some custom styling of the &#x60;th&#x60; with classNameBindings, all of that is
+   * available to you in this component.
+   *
+   * You can then specify the custom type you created as a string here, to use it.
+   *
+   *
    * @property type
    * @type {String}
    * @default &#x27;base&#x27;
@@ -178,6 +189,16 @@ export default class Column extends Ember.Object.extend({
 
   /**
    * Type of cell component
+   *
+   * You can create your own cell types by running the blueprint:
+   * &#x60;ember g cell-type my-cell-type&#x60;
+   *
+   * This will generate a component for you which represents the &#x60;&lt;td&gt;&#x60;
+   * cells in the column. If you want to apply custom actions to the &#x60;td&#x60;,
+   * or do some custom styling of the &#x60;td&#x60; with classNameBindings, all of that is
+   * available to you in this component.
+   *
+   * You can then specify the custom type you created as a string here, to use it.
    *
    * @property cellType
    * @type {String}
