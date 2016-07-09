@@ -117,6 +117,6 @@ export default Ember.Mixin.create({
      */
     onColumnDoubleClick(/* column */) {
       callAction(this, 'onColumnDoubleClick', ...arguments);
-    },
+    }
   }
 });

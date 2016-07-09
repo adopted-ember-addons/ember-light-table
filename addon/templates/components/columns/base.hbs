@@ -1,3 +1,5 @@
+{{resize-detector (concat "#" elementId) on-resize=(action 'onResize')}}
+
 {{#if column.component}}
   {{component column.component column=column table=table tableActions=tableActions sortIcons=sortIcons}}
 {{else}}

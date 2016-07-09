@@ -63,6 +63,11 @@
   cursor: pointer;
 }
 
+.ember-light-table .lt-column.is-resizable {
+  overflow: auto;
+  resize: horizontal;
+}
+
 .ember-light-table .lt-row.is-expandable,
 .ember-light-table .lt-row.is-selectable {
   cursor: pointer;
