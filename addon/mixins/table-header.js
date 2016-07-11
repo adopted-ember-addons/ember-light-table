@@ -117,6 +117,17 @@ export default Ember.Mixin.create({
      */
     onColumnDoubleClick(/* column */) {
       callAction(this, 'onColumnDoubleClick', ...arguments);
+    },
+
+    /**
+     * onColumnResized action.
+     *
+     * @method onColumnResized
+     * @param  {Column}   column The column that was resized
+     * @param  {String}   width  The final width of the column
+     */
+    onColumnResized(/* column, width */) {
+      callAction(this, 'onColumnResized', ...arguments);
     }
   }
 });

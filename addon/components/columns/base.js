@@ -66,11 +66,8 @@ const Column = Component.extend({
   }),
 
   actions: {
-    onResize({ width }, element) {
-      console.log(this.get('column.width'));
-      // if(`${width}px` !== this.get('column.width')) {
-      //   this.get('column').set('width', `${width}px`);
-      // }
+    columnResized(width) {
+      this.sendAction('columnResized', this.get('column'), width);
     }
   }
 });

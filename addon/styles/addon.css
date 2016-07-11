@@ -38,6 +38,10 @@
   flex: 1 0 auto;
 }
 
+.ember-light-table .lt-column {
+  position: relative;
+}
+
 .ember-light-table .lt-scrollable {
   width: 100%;
   flex: 1 0 auto;
@@ -63,9 +67,14 @@
   cursor: pointer;
 }
 
-.ember-light-table .lt-column.is-resizable {
-  overflow: auto;
-  resize: horizontal;
+.ember-light-table .lt-column .lt-column-resize {
+  width: 5px;
+  cursor: col-resize;
+  height: 100%;
+  background: transparent;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .ember-light-table .lt-row.is-expandable,

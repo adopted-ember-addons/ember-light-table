@@ -23,7 +23,8 @@
               tableActions=tableActions
               sortIcons=sortIcons
               click=(action 'onColumnClick' column)
-              doubleClick=(action 'onColumnDoubleClick' column)}}
+              doubleClick=(action 'onColumnDoubleClick' column)
+              columnResized=(action 'onColumnResized')}}
           {{/each}}
         </tr>
         <tr>
@@ -35,7 +36,8 @@
               tableActions=tableActions
               sortIcons=sortIcons
               click=(action 'onColumnClick' column)
-              doubleClick=(action 'onColumnDoubleClick' column)}}
+              doubleClick=(action 'onColumnDoubleClick' column)
+              columnResized=(action 'onColumnResized')}}
           {{/each}}
         </tr>
       {{/if}}
