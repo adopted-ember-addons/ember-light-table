@@ -23,7 +23,7 @@ export default Ember.Controller.extend({
   fetchRecords() {
     this.set('isLoading', true);
     this.store.query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then(records => {
-      this.table.addRows(records);
+      this.get('table').addRows(records);
       this.set('isLoading', false);
       this.set('canLoadMore', !isEmpty(records));
     });
@@ -44,7 +44,7 @@ export default Ember.Controller.extend({
           sort: column.get('valuePath'),
           page: 1
         });
-        this.table.setRows([]);
+        this.get('table').setRows([]);
         this.fetchRecords();
       }
     }
