@@ -241,7 +241,7 @@ export default class Table extends Ember.Object.extend({
    * @return {Array} columns
    */
   setColumns(columns = []) {
-    return this.columns.setObjects(Table.createColumns(columns));
+    return this.get('columns').setObjects(Table.createColumns(columns));
   }
 
   /**
@@ -250,7 +250,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Object} column
    */
   addColumn(column) {
-    this.columns.addObject(Table.createColumn(column));
+    this.get('columns').addObject(Table.createColumn(column));
   }
 
   /**
@@ -259,7 +259,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Array} columns
    */
   addColumns(columns = []) {
-    this.columns.addObjects(Table.createColumns(columns));
+    this.get('columns').addObjects(Table.createColumns(columns));
   }
 
   /**
@@ -270,7 +270,7 @@ export default class Table extends Ember.Object.extend({
    */
   pushColumn(column) {
     let _column = Table.createColumn(column);
-    this.columns.pushObject(_column);
+    this.get('columns').pushObject(_column);
     return _column;
   }
 
@@ -282,7 +282,7 @@ export default class Table extends Ember.Object.extend({
    */
   pushColumns(columns = []) {
     let _columns = Table.createColumns(columns);
-    this.columns.pushObjects(_columns);
+    this.get('columns').pushObjects(_columns);
     return _columns;
   }
 
@@ -295,7 +295,7 @@ export default class Table extends Ember.Object.extend({
    */
   insertColumnAt(index, column) {
     let _column = Table.createColumn(column);
-    this.columns.insertAt(index, _column);
+    this.get('columns').insertAt(index, _column);
     return _column;
   }
 
@@ -305,7 +305,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Object}  column
    */
   removeColumn(column) {
-    return this.columns.removeObject(column);
+    return this.get('columns').removeObject(column);
   }
 
   /**
@@ -314,7 +314,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Array}    columns
    */
   removeColumns(columns = []) {
-    return this.columns.removeObjects(columns);
+    return this.get('columns').removeObjects(columns);
   }
 
   /**
