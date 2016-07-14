@@ -58,7 +58,7 @@
             
               <div class="footer">
                 <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.0</p>
+                <p class="version pull-right">v1.0.1</p>
               </div>
             </div>
         </div>
@@ -338,7 +338,7 @@ export default class Table extends Ember.Object.extend({
    * @return {Array} columns
    */
   setColumns(columns = []) {
-    return this.columns.setObjects(Table.createColumns(columns));
+    return this.get(&#x27;columns&#x27;).setObjects(Table.createColumns(columns));
   }
 
   /**
@@ -347,7 +347,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Object} column
    */
   addColumn(column) {
-    this.columns.addObject(Table.createColumn(column));
+    this.get(&#x27;columns&#x27;).addObject(Table.createColumn(column));
   }
 
   /**
@@ -356,7 +356,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Array} columns
    */
   addColumns(columns = []) {
-    this.columns.addObjects(Table.createColumns(columns));
+    this.get(&#x27;columns&#x27;).addObjects(Table.createColumns(columns));
   }
 
   /**
@@ -367,7 +367,7 @@ export default class Table extends Ember.Object.extend({
    */
   pushColumn(column) {
     let _column = Table.createColumn(column);
-    this.columns.pushObject(_column);
+    this.get(&#x27;columns&#x27;).pushObject(_column);
     return _column;
   }
 
@@ -379,7 +379,7 @@ export default class Table extends Ember.Object.extend({
    */
   pushColumns(columns = []) {
     let _columns = Table.createColumns(columns);
-    this.columns.pushObjects(_columns);
+    this.get(&#x27;columns&#x27;).pushObjects(_columns);
     return _columns;
   }
 
@@ -392,7 +392,7 @@ export default class Table extends Ember.Object.extend({
    */
   insertColumnAt(index, column) {
     let _column = Table.createColumn(column);
-    this.columns.insertAt(index, _column);
+    this.get(&#x27;columns&#x27;).insertAt(index, _column);
     return _column;
   }
 
@@ -402,7 +402,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Object}  column
    */
   removeColumn(column) {
-    return this.columns.removeObject(column);
+    return this.get(&#x27;columns&#x27;).removeObject(column);
   }
 
   /**
@@ -411,7 +411,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Array}    columns
    */
   removeColumns(columns = []) {
-    return this.columns.removeObjects(columns);
+    return this.get(&#x27;columns&#x27;).removeObjects(columns);
   }
 
   /**
