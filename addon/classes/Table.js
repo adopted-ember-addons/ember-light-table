@@ -143,7 +143,7 @@ export default class Table extends Ember.Object.extend({
    * @return {Array} rows
    */
   setRows(rows = [], options = {}) {
-    return this.rows.setObjects(Table.createRows(rows, options));
+    return this.get('rows').setObjects(Table.createRows(rows, options));
   }
 
   /**
@@ -154,8 +154,8 @@ export default class Table extends Ember.Object.extend({
    */
   addRow(row, options = {}) {
     if (row instanceof Row) {
-      this.rows.addObject(row);
-    } else if (isNone(this.rows.findBy('content', row))) {
+      this.get('rows').addObject(row);
+    } else if (isNone(this.get('rows').findBy('content', row))) {
       this.pushRow(row, options);
     }
   }
@@ -179,7 +179,7 @@ export default class Table extends Ember.Object.extend({
    */
   pushRow(row, options = {}) {
     let _row = Table.createRow(row, options);
-    this.rows.pushObject(_row);
+    this.get('rows').pushObject(_row);
     return _row;
   }
 
@@ -192,7 +192,7 @@ export default class Table extends Ember.Object.extend({
    */
   pushRows(rows = [], options = {}) {
     let _rows = Table.createRows(rows, options);
-    this.rows.pushObjects(_rows);
+    this.get('rows').pushObjects(_rows);
     return _rows;
   }
 
@@ -206,7 +206,7 @@ export default class Table extends Ember.Object.extend({
    */
   insertRowAt(index, row, options = {}) {
     let _row = Table.createRow(row, options);
-    this.rows.insertAt(index, _row);
+    this.get('rows').insertAt(index, _row);
     return _row;
   }
 
@@ -217,9 +217,9 @@ export default class Table extends Ember.Object.extend({
    */
   removeRow(row) {
     if (row instanceof Row) {
-      this.rows.removeObject(row);
+      this.get('rows').removeObject(row);
     } else {
-      this.rows.removeObjects(this.rows.filterBy('content', row));
+      this.get('rows').removeObjects(this.get('rows').filterBy('content', row));
     }
   }
 
