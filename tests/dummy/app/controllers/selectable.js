@@ -36,15 +36,15 @@ export default TableController.extend({
 
   actions: {
     selectAll() {
-      this.table.rows.setEach('selected', true);
+      this.get('table.rows').setEach('selected', true);
     },
 
     deselectAll() {
-      this.table.get('selectedRows').setEach('selected', false);
+      this.get('table.selectedRows').setEach('selected', false);
     },
 
     deleteAll() {
-      this.table.removeRows(this.table.get('selectedRows'));
+      this.get('table').removeRows(this.get('table.selectedRows'));
     }
   }
 });

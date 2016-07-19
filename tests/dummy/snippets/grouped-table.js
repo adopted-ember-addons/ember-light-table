@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Table from 'ember-light-table';
 
-const { isEmpty } = Ember;
+const { isEmpty, computed } = Ember;
 
 export default Ember.Component.extend({
   page: 1,
@@ -12,50 +12,52 @@ export default Ember.Component.extend({
   isLoading: false,
   canLoadMore: true,
 
-  columns: [{
-    label: 'User Details',
-    sortable: false,
-    align: 'center',
-    subColumns: [{
-      label: 'Avatar',
-      valuePath: 'avatar',
-      width: '60px',
+  columns: computed(function() {
+    return [{
+      label: 'User Details',
       sortable: false,
-      cellComponent: 'user-avatar'
+      align: 'center',
+      subColumns: [{
+        label: 'Avatar',
+        valuePath: 'avatar',
+        width: '60px',
+        sortable: false,
+        cellComponent: 'user-avatar'
+      }, {
+        label: 'First',
+        valuePath: 'firstName',
+        width: '150px'
+      }, {
+        label: 'Last',
+        valuePath: 'lastName',
+        width: '150px'
+      }]
     }, {
-      label: 'First',
-      valuePath: 'firstName',
-      width: '150px'
-    }, {
-      label: 'Last',
-      valuePath: 'lastName',
-      width: '150px'
-    }]
-  }, {
-    label: 'Contact Information',
-    sortable: false,
-    align: 'center',
-    subColumns: [{
-      label: 'Address',
-      valuePath: 'address'
-    }, {
-      label: 'State',
-      valuePath: 'state'
-    }, {
-      label: 'Country',
-      valuePath: 'country'
-    }]
-  }],
+      label: 'Contact Information',
+      sortable: false,
+      align: 'center',
+      subColumns: [{
+        label: 'Address',
+        valuePath: 'address'
+      }, {
+        label: 'State',
+        valuePath: 'state'
+      }, {
+        label: 'Country',
+        valuePath: 'country'
+      }]
+    }];
+  }),
 
   init() {
     this._super(...arguments);
-    this.set('table', new Table(this.columns));
+    this.set('table', new Table(this.get('columns')));
   },
 
   fetchRecords() {
     this.set('isLoading', true);
     this.get('store').query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then(records => {
-      this.table.addRows(records);
+      this.get('table').addRows(records);
       this.set('isLoading', false);
       this.set('canLoadMore', !isEmpty(records));
     });
@@ -76,7 +78,7 @@ export default Ember.Component.extend({
           sort: column.get('valuePath'),
           page: 1
         });
-        this.table.setRows([]);
+        this.get('table').setRows([]);
         this.fetchRecords();
       }
     }
