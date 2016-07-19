@@ -61,6 +61,7 @@
 
 .ember-light-table .lt-column.is-sortable {
   cursor: pointer;
+  user-select: none;
 }
 
 .ember-light-table .lt-row.is-expandable,
