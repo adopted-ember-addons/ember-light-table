@@ -16,20 +16,25 @@ export default TableController.extend({
     }, {
       label: 'First Name',
       valuePath: 'firstName',
+      resizable: true,
       width: '150px'
     }, {
       label: 'Last Name',
       valuePath: 'lastName',
+      resizable: true,
       width: '150px'
     }, {
       label: 'Address',
-      valuePath: 'address'
+      valuePath: 'address',
+      resizable: true
     }, {
       label: 'State',
-      valuePath: 'state'
+      valuePath: 'state',
+      resizable: true
     }, {
       label: 'Country',
-      valuePath: 'country'
+      valuePath: 'country',
+      resizable: true
     }];
   })
 });
