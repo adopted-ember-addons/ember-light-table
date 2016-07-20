@@ -11,6 +11,7 @@ export default TableController.extend({
       label: 'User Details',
       sortable: false,
       align: 'center',
+
       subColumns: [{
         label: 'Avatar',
         valuePath: 'avatar',

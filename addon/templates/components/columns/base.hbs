@@ -6,3 +6,7 @@
     <span class="lt-sort-icon {{if column.ascending sortIcons.iconAscending sortIcons.iconDescending}}"></span>
   {{/if}}
 {{/if}}
+
+{{#if isResizable}}
+  {{lt-column-resize column=column columnResized=(action 'columnResized')}}
+{{/if}}

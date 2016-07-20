@@ -16,13 +16,14 @@ const Column = Component.extend({
   tagName: 'th',
   classNames: ['lt-column'],
   attributeBindings: ['width', 'colspan', 'rowspan'],
-  classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isHideable', 'isSortable', 'isSorted', 'column.classNames'],
+  classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isHideable', 'isSortable', 'isSorted', 'isResizable', 'column.classNames'],
 
   width: computed.readOnly('column.width'),
   isGroupColumn: computed.readOnly('column.isGroupColumn'),
   isSortable: computed.readOnly('column.sortable'),
   isSorted: computed.readOnly('column.sorted'),
   isHideable: computed.readOnly('column.hideable'),
+  isResizable: computed.readOnly('column.resizable'),
 
   align: computed('column.align', function () {
     return `align-${this.get('column.align')}`;
@@ -62,7 +63,13 @@ const Column = Component.extend({
   rowspan: computed('column.visibleSubColumns.[]', function () {
     let subColumns = this.get('column.visibleSubColumns');
     return !isEmpty(subColumns) ? 1 : 2;
-  })
+  }),
+
+  actions: {
+    columnResized(width) {
+      this.sendAction('columnResized', this.get('column'), width);
+    }
+  }
 });
 
 Column.reopenClass({
