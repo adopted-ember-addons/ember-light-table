@@ -5,5 +5,5 @@ export default Ember.Component.extend({
   layout,
   tagName: '',
   column: null,
-  sortGroup: null
+  group: null
 });
