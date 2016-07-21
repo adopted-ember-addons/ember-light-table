@@ -1,0 +1,7 @@
+{{#if column.draggable}}
+  {{#sortable-item model=column group=sortGroup}}
+    {{yield}}
+  {{/sortable-item}}
+{{else}}
+  {{yield}}
+{{/if}}

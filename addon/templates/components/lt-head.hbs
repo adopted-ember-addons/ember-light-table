@@ -17,27 +17,36 @@
         {{/if}}
 
         <tr>
-          {{#each columnGroups as |column|}}
-            {{component (concat 'light-table/columns/' column.type) column
-              table=table
-              tableActions=tableActions
-              sortIcons=sortIcons
-              click=(action 'onColumnClick' column)
-              doubleClick=(action 'onColumnDoubleClick' column)
-              columnResized=(action 'onColumnResized')}}
-          {{/each}}
+          {{#sortable-group direction="x" tagName="" onChange="reorderColumns" as |group|}}
+            {{#each columnGroups as |column|}}
+              {{component (concat 'light-table/columns/' column.type) column
+                table=table
+                tableActions=tableActions
+                sortGroup=group
+                sortIcons=sortIcons
+                click=(action 'onColumnClick' column)
+                doubleClick=(action 'onColumnDoubleClick' column)
+                columnResized=(action 'onColumnResized')}}
+            {{/each}}
+         {{/sortable-group}}
         </tr>
+
         <tr>
-          {{#each subColumns as |column|}}
-            {{component (concat 'light-table/columns/' column.type) column
-              table=table
-              rowspan=1
-              classNames="lt-sub-column"
-              tableActions=tableActions
-              sortIcons=sortIcons
-              click=(action 'onColumnClick' column)
-              doubleClick=(action 'onColumnDoubleClick' column)
-              columnResized=(action 'onColumnResized')}}
+          {{#each columnGroups as |colGroup|}}
+            {{#sortable-group direction="x" tagName="" onChange="reorderSubColumns" as |group|}}
+              {{#each colGroup.visibleSubColumns as |column|}}
+                {{component (concat 'light-table/columns/' column.type) column
+                  table=table
+                  rowspan=1
+                  classNames="lt-sub-column"
+                  tableActions=tableActions
+                  sortGroup=group
+                  sortIcons=sortIcons
+                  click=(action 'onColumnClick' column)
+                  doubleClick=(action 'onColumnDoubleClick' column)
+                  columnResized=(action 'onColumnResized')}}
+              {{/each}}
+            {{/sortable-group}}
           {{/each}}
         </tr>
       {{/if}}

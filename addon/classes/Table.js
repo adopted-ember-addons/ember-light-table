@@ -107,7 +107,7 @@ export default class Table extends Ember.Object.extend({
    * @property flattenedColumns
    * @type {Ember.Array}
    */
-  flattenedColumns: computed('columns.[]', 'columns.@each.subColumns', function() {
+  flattenedColumns: computed('columns.[]', 'columns.@each.subColumns', 'visibleSubColumns.[]', function() {
     return emberArray(this.get('columns').reduce((arr, c) => {
       let subColumns = c.get('subColumns');
       if (isEmpty(subColumns)) {
