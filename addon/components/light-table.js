@@ -33,7 +33,7 @@ const {
 
 const LightTable = Component.extend({
   layout,
-  classNameBindings: [':ember-light-table', 'virtualScrollbar'],
+  classNameBindings: [':ember-light-table'],
   attributeBindings: ['style'],
 
   /**
@@ -77,6 +77,15 @@ const LightTable = Component.extend({
    * @default null
    */
   height: null,
+
+  /**
+   * Class names that will be added to all <table> tags
+   *
+   * @property tableClassNames
+   * @type {String}
+   * @default ''
+   */
+  tableClassNames: '',
 
   /**
    * Table component shared options
