@@ -1,5 +1,5 @@
 {{#ember-wormhole to=(concat tableId '_inline_foot') renderInPlace=renderInPlace}}
-  <table>
+  <table class={{tableClassNames}}>
     <tfoot class="lt-foot">
       {{#if hasBlock}}
         {{yield columns}}

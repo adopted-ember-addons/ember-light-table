@@ -1,5 +1,5 @@
 {{#ember-wormhole to=(concat tableId '_inline_head') renderInPlace=renderInPlace}}
-  <table>
+  <table class={{tableClassNames}}>
     <thead class="lt-head">
       {{#if hasBlock}}
         {{yield columnGroups subColumns}}
