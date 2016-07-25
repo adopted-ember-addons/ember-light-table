@@ -9,6 +9,14 @@ export default Component.extend(InViewportMixin, {
   classNameBindings: ['viewportEntered:in-viewport'],
   layout,
 
+  rows: null,
+  scrollBuffer: null,
+
+  init() {
+    this._super(...arguments);
+    this.addObserver('rows.[]', this, this.didEnterViewport);
+  },
+
   didInsertElement() {
     this._super(...arguments);
     this.setProperties({
@@ -24,5 +32,11 @@ export default Component.extend(InViewportMixin, {
 
   didEnterViewport() {
     this.sendAction('onScrolledToBottom');
+  },
+
+  didExitViewport() {
+    if(this.hasObserverFor('rows.[]')) {
+      this.removeObserver('rows.[]', this, this.didEnterViewport);
+    }
   }
 });
