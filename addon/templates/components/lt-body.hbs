@@ -5,7 +5,7 @@
 }}
   <div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
 
-  <table>
+  <table class={{tableClassNames}}>
     <tbody class="lt-body">
       {{#if overwrite}}
         {{yield columns rows}}
