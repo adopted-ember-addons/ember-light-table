@@ -14,6 +14,13 @@ export default Component.extend(InViewportMixin, {
 
   init() {
     this._super(...arguments);
+
+    /*
+      When the table doesnt have enough rows to push this component
+      out of the viewport, it will only call didEnterViewport once. 
+      This sets up an observer that will add more rows and then be destroyed
+      once this component comes out of view.
+     */
     this.addObserver('rows.[]', this, this.didEnterViewport);
   },
 
