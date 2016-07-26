@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/lt-column-resize';
+import layout from '../templates/components/lt-column-resizer';
 
 const {
   $
@@ -7,7 +7,7 @@ const {
 
 export default Ember.Component.extend({
   layout,
-  classNameBindings: [':lt-column-resize', 'isResizing'],
+  classNameBindings: [':lt-column-resizer', 'isResizing'],
   column: null,
   isResizing: false,
 

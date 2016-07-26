@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/lt-infinity';
 import InViewportMixin from 'ember-in-viewport';
 
-const { Component } = Ember;
+const { Component, run } = Ember;
 
 export default Component.extend(InViewportMixin, {
   classNames: ['lt-infinity'],
@@ -17,11 +17,11 @@ export default Component.extend(InViewportMixin, {
 
     /*
       When the table doesnt have enough rows to push this component
-      out of the viewport, it will only call didEnterViewport once. 
+      out of the viewport, it will only call didEnterViewport once.
       This sets up an observer that will add more rows and then be destroyed
       once this component comes out of view.
      */
-    this.addObserver('rows.[]', this, this.didEnterViewport);
+    this.addObserver('rows.[]', this, this._scheduleDidEnterViewport);
   },
 
   didInsertElement() {
@@ -37,13 +37,22 @@ export default Component.extend(InViewportMixin, {
     });
   },
 
+  willDestroyElement() {
+    this._super(...arguments);
+    run.cancel(this._viewportScheduler);
+  },
+
   didEnterViewport() {
     this.sendAction('onScrolledToBottom');
   },
 
   didExitViewport() {
     if(this.hasObserverFor('rows.[]')) {
-      this.removeObserver('rows.[]', this, this.didEnterViewport);
+      this.removeObserver('rows.[]', this, this._scheduleDidEnterViewport);
     }
+  },
+
+  _scheduleDidEnterViewport() {
+    this._viewportScheduler = run.scheduleOnce('afterRender', this, this.didEnterViewport);
   }
 });
