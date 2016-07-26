@@ -35,7 +35,7 @@
   </table>
 
   {{#if onScrolledToBottom}}
-    {{lt-infinity onScrolledToBottom=onScrolledToBottom scrollBuffer=scrollBuffer}}
+    {{lt-infinity rows=rows onScrolledToBottom=onScrolledToBottom scrollBuffer=scrollBuffer}}
   {{/if}}
 
   <div id={{concat tableId '_inline_foot'}} class="lt-inline lt-foot"></div>
