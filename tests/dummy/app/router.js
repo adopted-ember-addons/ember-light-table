@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('expandable');
   this.route('selectable');
   this.route('resizable');
+  this.route('draggable');
 });
 
 export default Router;

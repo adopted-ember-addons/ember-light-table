@@ -47,6 +47,13 @@ export default class Column extends Ember.Object.extend({
   resizable: false,
 
   /**
+   * @property draggable
+   * @type {Boolean}
+   * @default false
+   */
+  draggable: false,
+
+  /**
    * @property sorted
    * @type {Boolean}
    * @default false

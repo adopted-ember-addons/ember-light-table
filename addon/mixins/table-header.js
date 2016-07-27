@@ -2,6 +2,7 @@ import Ember from 'ember';
 import callAction from 'ember-light-table/utils/call-action';
 
 const {
+  isArray,
   computed
 } = Ember;
 
@@ -128,6 +129,18 @@ export default Ember.Mixin.create({
      */
     onColumnResized(/* column, width */) {
       callAction(this, 'onColumnResized', ...arguments);
+    },
+
+    reorderColumns(group) {
+      console.log('reorderColumns', arguments);
+      this.get('table').setColumns(group);
+    },
+
+    reorderSubColumns(group, column) {
+      console.log('reorderSubColumns', arguments);
+
+      const parentColumn = this.get('table.columns').find(c => isArray(c.get('subColumns')) && c.get('subColumns').indexOf(column) !== -1 );
+      parentColumn.get('subColumns').setObjects(group);
     }
   }
 });

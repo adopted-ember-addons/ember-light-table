@@ -63,9 +63,25 @@
   float: right;
 }
 
+.ember-light-table .lt-column.is-draggable,
 .ember-light-table .lt-column.is-sortable {
   cursor: pointer;
   user-select: none;
+}
+
+.ember-light-table .lt-column.is-draggable .sortable-item {
+  transition: all .125s;
+}
+
+.ember-light-table .lt-column.is-draggable .sortable-item.is-dragging {
+  transition-duration: 0s;
+  background: red;
+  z-index: 10;
+}
+
+.ember-light-table .lt-column.is-draggable .sortable-item.is-dropping {
+  background: #f66;
+  z-index: 10;
 }
 
 .ember-light-table .lt-column .lt-column-resize {
