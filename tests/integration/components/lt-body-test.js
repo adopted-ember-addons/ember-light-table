@@ -12,13 +12,15 @@ const {
 
 moduleForComponent('lt-body', 'Integration | Component | lt body', {
   integration: true,
-  setup: function() {
+  beforeEach() {
+    this.set('sharedOptions', { fixedHeader: false, fixedFooter: false });
+
     startMirage(this.container);
   }
 });
 
 test('it renders', function(assert) {
-  this.render(hbs `{{lt-body}}`);
+  this.render(hbs `{{lt-body sharedOptions=sharedOptions}}`);
   assert.equal(this.$().text().trim(), '');
 });
 
@@ -26,7 +28,7 @@ test('row selection', function(assert) {
   this.set('table', new Table(Columns, createUsers(1)));
   this.set('canSelect', false);
 
-  this.render(hbs `{{lt-body table=table canSelect=canSelect}}`);
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}`);
 
   let row = this.$('tr:first');
 
@@ -46,7 +48,7 @@ test('row selection', function(assert) {
 test('row selection', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
-  this.render(hbs `{{lt-body table=table canSelect=true multiSelect=true}}`);
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true}}`);
 
   let firstRow = this.$('tr:first');
   let middleRow = this.$('tr:nth-of-type(3)');
@@ -72,7 +74,7 @@ test('row expansion', function(assert) {
   this.set('canExpand', false);
 
   this.render(hbs `
-    {{#lt-body table=table canSelect=false canExpand=canExpand multiRowExpansion=false as |b|}}
+    {{#lt-body table=table sharedOptions=sharedOptions canSelect=false canExpand=canExpand multiRowExpansion=false as |b|}}
       {{#b.expanded-row}} Hello {{/b.expanded-row}}
     {{/lt-body}}
   `);
@@ -104,7 +106,7 @@ test('row expansion', function(assert) {
 test('row expansion - multiple', function(assert) {
   this.set('table', new Table(Columns, createUsers(2)));
   this.render(hbs `
-    {{#lt-body table=table canExpand=true as |b|}}
+    {{#lt-body table=table sharedOptions=sharedOptions canExpand=true as |b|}}
       {{#b.expanded-row}} Hello {{/b.expanded-row}}
     {{/lt-body}}
   `);
@@ -128,7 +130,7 @@ test('row actions', function(assert) {
   this.set('table', new Table(Columns, createUsers(1)));
   this.on('onRowClick', row => assert.ok(row));
   this.on('onRowDoubleClick', row => assert.ok(row));
-  this.render(hbs `{{lt-body table=table onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
 
   let row = this.$('tr:first');
   row.click();
@@ -138,7 +140,7 @@ test('row actions', function(assert) {
 test('hidden rows', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
-  this.render(hbs `{{lt-body table=table}}`);
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions}}`);
 
   assert.equal(this.$('tbody > tr').length, 5);
 
@@ -160,7 +162,7 @@ test('overwrite', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
   this.render(hbs `
-    {{#lt-body table=table overwrite=true as |columns rows|}}
+    {{#lt-body table=table sharedOptions=sharedOptions overwrite=true as |columns rows|}}
       {{columns.length}}, {{rows.length}}
     {{/lt-body}}
   `);

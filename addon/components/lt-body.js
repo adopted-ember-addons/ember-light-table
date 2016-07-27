@@ -4,7 +4,8 @@ import callAction from 'ember-light-table/utils/call-action';
 
 const {
   Component,
-  computed
+  computed,
+  run
 } = Ember;
 
 /**
@@ -139,7 +140,9 @@ export default Component.extend({
   /**
    * ID of main table component. Used to generate divs for ember-wormhole
    *
+   * @property tableId
    * @type {String}
+   * @private
    */
   tableId: null,
 
@@ -150,12 +153,36 @@ export default Component.extend({
    */
   scrollBuffer: 500,
 
+  /**
+   * @property useVirtualScrollbar
+   * @type {Boolean}
+   * @default false
+   * @private
+   */
+  useVirtualScrollbar: false,
+
   rows: computed.readOnly('table.visibleRows'),
   columns: computed.readOnly('table.visibleColumns'),
   colspan: computed.readOnly('columns.length'),
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
+
+  init() {
+    this._super(...arguments);
+
+    /*
+      We can only set `useVirtualScrollbar` once all contextual components have
+      been initialized since fixedHeader and fixedFooter are set on t.head and t.foot
+      initialization.
+     */
+    run.once(this, this._setupVirtualScrollbar);
+  },
+
+  _setupVirtualScrollbar() {
+    const { fixedHeader, fixedFooter } = this.get('sharedOptions');
+    this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
+  },
 
   togglExpandedRow(row) {
     let multi = this.get('multiRowExpansion');
