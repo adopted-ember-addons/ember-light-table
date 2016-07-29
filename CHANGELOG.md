@@ -1,6 +1,18 @@
 Changelog
 =========
 
+## v1.1.0
+
+### Pull Requests
+
+- [#115](https://github.com/offirgolan/ember-light-table/pull/115)  [FEATURE] Style Table Element  *by [Offir Golan](https://github.com/offirgolan)*
+- [#117](https://github.com/offirgolan/ember-light-table/pull/117)  [BUGFIX] onScrolledToBottom doesnt get re-triggered when there arent enough rows in the table  *by [Offir Golan](https://github.com/offirgolan)*
+- [#122](https://github.com/offirgolan/ember-light-table/pull/122)  [BUGFIX] Remove deprecations  *by [Offir Golan](https://github.com/offirgolan)*
+
+#### Commits
+
+- [8b80d645](https://github.com/offirgolan/ember-light-table/commit/8b80d645c59efbb37d2b92e9e839ec2bbcd29ae2) **make text unselectable if column is sortable** *by [Ben Limmer](https://github.com/blimmer)*
+
 ## v1.0.1
 
 - [#101](https://github.com/offirgolan/ember-light-table/pull/101) Always use Ember object `get` by [@blimmer](https://github.com/blimmer)
