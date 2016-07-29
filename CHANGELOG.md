@@ -5,6 +5,7 @@ Changelog
 
 ### Pull Requests
 
+- [#98](https://github.com/offirgolan/ember-light-table/pull/98)  [FEATURE] Resizable Columns  *by [Offir Golan](https://github.com/offirgolan)*
 - [#115](https://github.com/offirgolan/ember-light-table/pull/115)  [FEATURE] Style Table Element  *by [Offir Golan](https://github.com/offirgolan)*
 - [#117](https://github.com/offirgolan/ember-light-table/pull/117)  [BUGFIX] onScrolledToBottom doesnt get re-triggered when there arent enough rows in the table  *by [Offir Golan](https://github.com/offirgolan)*
 - [#122](https://github.com/offirgolan/ember-light-table/pull/122)  [BUGFIX] Remove deprecations  *by [Offir Golan](https://github.com/offirgolan)*
