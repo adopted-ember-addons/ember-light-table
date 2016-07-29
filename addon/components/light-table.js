@@ -10,7 +10,7 @@ const {
 } = Ember;
 
 /**
- * @module Components
+ * @module Light Table
  * @main ligh-table
  */
 
@@ -26,9 +26,8 @@ const {
  * Please see the documentation for the [Head](../classes/Head.html), [Body](../classes/Body.html), and [Foot](../classes/Foot.html) components
  * for more details on all possible options and actions.
  *
- * @class Light Table
+ * @class light-table
  * @main Components
- * @uses TableScrollMixin
  */
 
 const LightTable = Component.extend({

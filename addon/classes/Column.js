@@ -7,7 +7,7 @@ const {
 } = Ember;
 
  /**
-  * @module Classes
+  * @module Table
   * @class Column
   */
 export default class Column extends Ember.Object.extend({

@@ -8,9 +8,15 @@ const {
 } = Ember;
 
 /**
+ * @module Light Table
+ * @submodule Column Types
+ */
+
+/**
  * @module Column Types
  * @class Base Column
  */
+
 const Column = Component.extend({
   layout,
   tagName: 'th',

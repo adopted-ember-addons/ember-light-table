@@ -9,7 +9,7 @@ const {
 } = Ember;
 
 /**
- * @module Components
+ * @module Light Table
  */
 
 /**
@@ -35,7 +35,7 @@ const {
  * {{/light-table}}
  * ```
  *
- * @class Body
+ * @class t.body
  */
 
 export default Component.extend({

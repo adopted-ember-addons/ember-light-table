@@ -9,8 +9,13 @@ const {
   A: emberArray
 } = Ember;
 
+/**
+ * @module Table
+ * @private
+ */
+
  /**
-  * @module Classes
+  * @module Table
   * @class Table
   */
 export default class Table extends Ember.Object.extend({

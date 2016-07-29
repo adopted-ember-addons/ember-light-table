@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
  /**
-  * @module Classes
+  * @module Table
   * @class Row
   */
 export default class Row extends Ember.ObjectProxy.extend({
