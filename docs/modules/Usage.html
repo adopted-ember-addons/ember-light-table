@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Base Column - Ember Light Table</title>
+    <title>Usage - Ember Light Table</title>
     <meta name="description" content="Lightweight, component based table for Ember 2.x">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -136,227 +136,114 @@
 
 
 <div class="page-header">
-    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> Base Column Class
-            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L15" target="_blank">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </a>
+    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> Usage Module
+              <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/index.js#L5" target="_blank">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
     </h1>
 </div>
-
 
 <div class="content-meta">
 
 
-            Module: <a href="../modules/Column Types.html">Column Types</a>
-
-
         <div class="foundat">
-            Defined In: <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L15">addon/components/columns/base.js:15</a>
+            Defined in: <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/index.js#L5">addon/index.js:5</a>
         </div>
+
 </div>
 
 
+<div class="moduledesc page-section">
+    <h2>Installation</h2>
+<pre class="code prettyprint"><code class="language-shell">ember install ember-light-table
+</code></pre>
+<h2>Looking for help?</h2>
+<p>If it is a bug <a href="http://github.com/offirgolan/ember-light-table/issues">please open an issue on GitHub</a>.</p>
+<h2>Usage</h2>
+<p>There are two parts to this addon. The first is the <a href="../classes/Table.html">Table</a> which you create with column definitions and rows, and the second is the component declaration.</p>
+<h3>Table Declaration</h3>
+<p>The <code>Table</code> constructor accepts an array of <code>Columns</code> or column options and an array of rows.</p>
+<pre class="code prettyprint"><code class="language-javascript">import Table from 'ember-light-table';
+const table = new Table(columns, rows);
+</code></pre>
+<p>Here is a more real-word example</p>
+<pre class="code prettyprint"><code class="language-javascript">// components/my-table.js
+import Ember from 'ember';
+import Table from 'ember-light-table';
 
+const computed = Ember.computed;
 
-<div>
-    <div class="page-section">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
+export default Ember.Component.extend({
+  model: null,
+  table: null,
 
-            <li role="presentation"><a href="#tab_properties" aria-controls="tab_properties" role="tab" data-toggle="tab">Properties</a></li>
+  columns: computed(function() {
+    return [{
+      label: 'Avatar',
+      valuePath: 'avatar',
+      width: '60px',
+      sortable: false,
+      cellComponent: 'user-avatar'
+    }, {
+      label: 'First Name',
+      valuePath: 'firstName',
+      width: '150px'
+    }, {
+      label: 'Last Name',
+      valuePath: 'lastName',
+      width: '150px'
+    }, {
+      label: 'Address',
+      valuePath: 'address'
+    }, {
+      label: 'State',
+      valuePath: 'state'
+    }, {
+      label: 'Country',
+      valuePath: 'country'
+    }];
+  }),
 
+  init() {
+    this._super(...arguments);
+    this.set('table', new Table(this.get('columns'), this.get('model')));
+  }
+});
+</code></pre>
+<p>For a list of possible column options, please
+<a href="../classes/Column.html">checkout out the docs</a>.</p>
+<h3>Component Declaration</h3>
+<p>Now that we have our <code>table</code>, we can declare our component in our template.</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#light-table table as |t|}}
+  {{t.head}}
 
-        </ul>
+  {{#t.body as |body|}}
+    {{#body.expanded-row as |row|}}
+      Hello &lt;b&gt;{{row.firstName}}&lt;/b&gt;
+    {{/body.expanded-row}}
 
-        <!-- Tab panes -->
-        <div class="tab-content">
+    {{#if isLoading}}
+      {{#body.loader}}
+        Loading...
+      {{/body.loader}}
+    {{/if}}
 
-              <form id="options-form" class="form-inline">
-                  Show:
-                  <label for="api-show-inherited" class="checkbox">
-                      <input type="checkbox" id="api-show-inherited" checked>
-                      Inherited
-                  </label>
-          
-                  <label for="api-show-protected" class="checkbox">
-                      <input type="checkbox" id="api-show-protected">
-                      Protected
-                  </label>
-          
-                  <label for="api-show-private" class="checkbox">
-                      <input type="checkbox" id="api-show-private">
-                      Private
-                  </label>
-                  <label for="api-show-deprecated" class="checkbox">
-                      <input type="checkbox" id="api-show-deprecated">
-                      Deprecated
-                  </label>
-          
-              </form>
+    {{#if table.isEmpty}}
+      {{#body.no-data}}
+        No users found.
+      {{/body.no-data}}
+    {{/if}}
+  {{/t.body}}
 
-          <div id="tab_index" role="tabpanel" class="tab-pane active" >
+  {{t.foot}}
+{{/light-table}}
+</code></pre>
+<p>Please note that each of these contextual components have a wide array of options so it is advised to look
+through the documentation.</p>
 
-                  <div class="index-section properties">
-                      <h3>Properties</h3>
-
-                      <ul class="index-list properties">
-                              <li class="index-item property">
-                                  <a href="#property_colspan">colspan</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_column">column</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_rowspan">rowspan</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_sortIcons">sortIcons</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_tableActions">tableActions</a>
-
-                              </li>
-                      </ul>
-                  </div>
-
-
-          </div>
-
-
-              <div id="tab_properties" role="tabpanel" class="tab-pane">
-                  <div class="item-list">
-  <div id="property_colspan" class="property item">
-      <h3 class="name">colspan</h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L56">addon/components/columns/base.js:56</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_column" class="property item">
-      <h3 class="name">column</h3>
-      <span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L38">addon/components/columns/base.js:38</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_rowspan" class="property item">
-      <h3 class="name">rowspan</h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L65">addon/components/columns/base.js:65</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_sortIcons" class="property item">
-      <h3 class="name">sortIcons</h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L50">addon/components/columns/base.js:50</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_tableActions" class="property item">
-      <h3 class="name">tableActions</h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L44">addon/components/columns/base.js:44</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-                  </div>
-              </div>
-
-
-      </div>
-    </div>
 </div>
+
+
                         </div>
                     </div>
                 </div>

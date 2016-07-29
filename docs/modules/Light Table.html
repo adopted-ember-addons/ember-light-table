@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Base Column - Ember Light Table</title>
+    <title>Light Table - Ember Light Table</title>
     <meta name="description" content="Lightweight, component based table for Ember 2.x">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -136,227 +136,74 @@
 
 
 <div class="page-header">
-    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> Base Column Class
-            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L15" target="_blank">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </a>
+    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> Light Table Module
+              <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/mixins/table-header.js#L12" target="_blank">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
     </h1>
 </div>
-
 
 <div class="content-meta">
 
 
-            Module: <a href="../modules/Column Types.html">Column Types</a>
-
-
         <div class="foundat">
-            Defined In: <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L15">addon/components/columns/base.js:15</a>
+            Defined in: <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/mixins/table-header.js#L12">addon/mixins/table-header.js:12</a>
         </div>
+
 </div>
 
 
+<div class="moduledesc page-section">
+    
+</div>
 
 
-<div>
-    <div class="page-section">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
+    <div class="yui3-g footer">
+            <div class="yui3-u-1-2">
+                    <h3>Classes</h3>
 
-            <li role="presentation"><a href="#tab_properties" aria-controls="tab_properties" role="tab" data-toggle="tab">Properties</a></li>
+                    <ul class="module-classes">
+                        <li class="module-class">
+                            <a href="../classes/light-table.html">
+                                light-table
+                            </a>
+                        </li>
+                        <li class="module-class">
+                            <a href="../classes/t.body.html">
+                                t.body
+                            </a>
+                        </li>
+                        <li class="module-class">
+                            <a href="../classes/t.foot.html">
+                                t.foot
+                            </a>
+                        </li>
+                        <li class="module-class">
+                            <a href="../classes/t.head.html">
+                                t.head
+                            </a>
+                        </li>
+                    </ul>
+            </div>
 
+            <div class="yui3-u-1-2">
+                    <h3>Submodules</h3>
 
-        </ul>
+                    <ul class="module-submodules">
+                        <li class="module-submodule">
+                            <a href="../modules/Cell Types.html">
+                                Cell Types
+                            </a>
+                        </li>
+                        <li class="module-submodule">
+                            <a href="../modules/Column Types.html">
+                                Column Types
+                            </a>
+                        </li>
+                    </ul>
+            </div>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-
-              <form id="options-form" class="form-inline">
-                  Show:
-                  <label for="api-show-inherited" class="checkbox">
-                      <input type="checkbox" id="api-show-inherited" checked>
-                      Inherited
-                  </label>
-          
-                  <label for="api-show-protected" class="checkbox">
-                      <input type="checkbox" id="api-show-protected">
-                      Protected
-                  </label>
-          
-                  <label for="api-show-private" class="checkbox">
-                      <input type="checkbox" id="api-show-private">
-                      Private
-                  </label>
-                  <label for="api-show-deprecated" class="checkbox">
-                      <input type="checkbox" id="api-show-deprecated">
-                      Deprecated
-                  </label>
-          
-              </form>
-
-          <div id="tab_index" role="tabpanel" class="tab-pane active" >
-
-                  <div class="index-section properties">
-                      <h3>Properties</h3>
-
-                      <ul class="index-list properties">
-                              <li class="index-item property">
-                                  <a href="#property_colspan">colspan</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_column">column</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_rowspan">rowspan</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_sortIcons">sortIcons</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_tableActions">tableActions</a>
-
-                              </li>
-                      </ul>
-                  </div>
-
-
-          </div>
-
-
-              <div id="tab_properties" role="tabpanel" class="tab-pane">
-                  <div class="item-list">
-  <div id="property_colspan" class="property item">
-      <h3 class="name">colspan</h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L56">addon/components/columns/base.js:56</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_column" class="property item">
-      <h3 class="name">column</h3>
-      <span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L38">addon/components/columns/base.js:38</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_rowspan" class="property item">
-      <h3 class="name">rowspan</h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L65">addon/components/columns/base.js:65</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_sortIcons" class="property item">
-      <h3 class="name">sortIcons</h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L50">addon/components/columns/base.js:50</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_tableActions" class="property item">
-      <h3 class="name">tableActions</h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/components/columns/base.js#L44">addon/components/columns/base.js:44</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-                  </div>
-              </div>
-
-
-      </div>
     </div>
-</div>
                         </div>
                     </div>
                 </div>

@@ -3,103 +3,155 @@
 <head>
     <meta charset="utf-8">
     <title>Row - Ember Light Table</title>
+    <meta name="description" content="Lightweight, component based table for Ember 2.x">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="stylesheet" href="../assets/css/custom.css">
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/css/theme.css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700' rel='stylesheet' type='text/css'>
+    
 </head>
 <body>
-    <div class="row">
-        <div class="sidebar-container">
-            <div id="sidebar">
-              <div class="header">
-                <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-                  <a href="../">Ember Light Table</a>
-                </h1>
-                <form class="navbar-form">
-                    <input type="search" class="search-query" placeholder="Search classes/modules...">
-                </form>
-              </div>
-              <ul class="main-nav">
-                <li class="section">Modules</li>
-                   <li  >
-                     <a href="../modules/Cell Types.html">Cell Types</a>
-                   </li>
-                   <li  >
-                     <a href="../modules/Classes.html">Classes</a>
-                   </li>
-                   <li  >
-                     <a href="../modules/Column Types.html">Column Types</a>
-                   </li>
-                   <li  >
-                     <a href="../modules/Components.html">Components</a>
-                   </li>
-                   <li  >
-                     <a href="../modules/Home.html">Home</a>
-                   </li>
-                   <li  >
-                     <a href="../modules/Mixins.html">Mixins</a>
-                   </li>
-            
-                <li class="section">Classes</li>
-                    <li ><a  href="../classes/Base Cell.html">Base Cell</a></li>
-                    <li ><a  href="../classes/Base Column.html">Base Column</a></li>
-                    <li ><a  href="../classes/Body.html">Body</a></li>
-                    <li ><a  href="../classes/Column.html">Column</a></li>
-                    <li ><a  href="../classes/Foot.html">Foot</a></li>
-                    <li ><a  href="../classes/Head.html">Head</a></li>
-                    <li ><a  href="../classes/Light Table.html">Light Table</a></li>
-                    <li  class="active"><a  href="../classes/Row.html">Row</a></li>
-                    <li ><a  href="../classes/Table.html">Table</a></li>
-              </ul>
-            
-              <div class="footer">
-                <a href="https://github.com/offirgolan/ember-light-table" class="github">GitHub</a>
-                <p class="version pull-right">v1.0.1</p>
-              </div>
-            </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">
+            <img src="../assets/img/ember-logo.png" alt="">
+            <span>Light Table</span>
+          </a>
         </div>
-        <div class="content-container">
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <form id="options-form" class="form-inline pull-right">
-                            Show:
-                            <label for="api-show-inherited" class="checkbox">
-                                <input type="checkbox" id="api-show-inherited" checked>
-                                Inherited
-                            </label>
-                    
-                            <label for="api-show-protected" class="checkbox">
-                                <input type="checkbox" id="api-show-protected">
-                                Protected
-                            </label>
-                    
-                            <label for="api-show-private" class="checkbox">
-                                <input type="checkbox" id="api-show-private">
-                                Private
-                            </label>
-                            <label for="api-show-deprecated" class="checkbox">
-                                <input type="checkbox" id="api-show-deprecated">
-                                Deprecated
-                            </label>
-                    
-                        </form>
-                    
+
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/offirgolan/ember-light-table" class="fa fa-github github"></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="main-wrapper" class="row">
+        <div id="content-wrapper">
+            <ol class="panel-group" id="sidebar" role="tablist" aria-multiselectable="true">
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-search-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-search" aria-expanded="true" aria-controls="collapseOne">
+                        Search
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-search" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-search-heading">
+                        <div class="panel-body">
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                    <li class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="sidebar-version-heading">
+                            <h4 class="panel-title">
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.1.0" target="_blank">
+                                  Tag: v1.1.0
+                                </a>
+                            </h4>
+                        </div>
+                    </li>
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-modules-heading">
+                        <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" href="#sidebar-modules" aria-expanded="true" aria-controls="collapseOne">
+                      Modules
+                    </a>
+                  </h4>
+                    </div>
+                    <div id="sidebar-modules" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-modules-heading">
+                        <div class="panel-body">
+                                <ol>
+                                        <li>
+                                            <a href="../modules/Light Table.html">Light Table</a>
+                                                    <li class="sub"><a href="../modules/Cell Types.html">Cell Types</a></li>
+                                                    <li class="sub"><a href="../modules/Column Types.html">Column Types</a></li>
+                                        </li>
+                                        <li>
+                                            <a href="../modules/Table.html">Table</a>
+                                        </li>
+                                        <li>
+                                            <a href="../modules/Usage.html">Usage</a>
+                                        </li>
+                                </ol>
+                        </div>
+                    </div>
+                </li>
+            
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-classes-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-classes" aria-expanded="true" aria-controls="collapseOne">
+                        Classes
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-classes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-classes-heading">
+                        <div class="panel-body">
+                            <ol>
+                                    <li>
+                                        <a href="../classes/Base Cell.html">Base Cell</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Base Column.html">Base Column</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Column.html">Column</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/light-table.html">light-table</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Row.html">Row</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/t.body.html">t.body</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/t.foot.html">t.foot</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/t.head.html">t.head</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Table.html">Table</a>
+                                    </li>
+                            </ol>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <div class="content-container">
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+
+
 <div class="page-header">
-    <h1>Row</h1>
+    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> Row Class
+            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/classes/Row.js#L37" target="_blank">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </a>
+    </h1>
 </div>
-<div class="well well-small">
 
 
-            Module: <a href="../modules/Classes.html">Classes</a>
+<div class="content-meta">
+
+
+            Module: <a href="../modules/Table.html">Table</a>
 
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_classes_Row.js.html#l37"><code>addon&#x2F;classes&#x2F;Row.js:37</code></a>
+            Defined In: <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/classes/Row.js#L37">addon/classes/Row.js:37</a>
         </div>
 </div>
 
@@ -108,7 +160,7 @@
         <h2>Constructor</h2>
 <div id="method_Row" class="method item">
 	<span class="method-signature">
-	<span class="name"><code>Row</code></span>
+	<span class="name">Row</span>
 
 		<div class="args">
 			<span class="paren">(</span><ul class="args-list inline commas">
@@ -131,7 +183,7 @@
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/addon_classes_Row.js.html#l37"><code>addon&#x2F;classes&#x2F;Row.js:37</code></a>
+		<a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/classes/Row.js#L37">addon/classes/Row.js:37</a>
 		</p>
 
 
@@ -167,144 +219,180 @@
 
 <div>
     <div class="page-section">
-        <div id="index">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
 
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                            <li class="index-item property">
-                                <a href="#property_classNames">classNames</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_expanded">expanded</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_hidden">hidden</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_selected">selected</a>
-
-                            </li>
-                    </ul>
-                </div>
+            <li role="presentation"><a href="#tab_properties" aria-controls="tab_properties" role="tab" data-toggle="tab">Properties</a></li>
 
 
-        </div>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+              <form id="options-form" class="form-inline">
+                  Show:
+                  <label for="api-show-inherited" class="checkbox">
+                      <input type="checkbox" id="api-show-inherited" checked>
+                      Inherited
+                  </label>
+          
+                  <label for="api-show-protected" class="checkbox">
+                      <input type="checkbox" id="api-show-protected">
+                      Protected
+                  </label>
+          
+                  <label for="api-show-private" class="checkbox">
+                      <input type="checkbox" id="api-show-private">
+                      Private
+                  </label>
+                  <label for="api-show-deprecated" class="checkbox">
+                      <input type="checkbox" id="api-show-deprecated">
+                      Deprecated
+                  </label>
+          
+              </form>
+
+          <div id="tab_index" role="tabpanel" class="tab-pane active" >
+
+                  <div class="index-section properties">
+                      <h3>Properties</h3>
+
+                      <ul class="index-list properties">
+                              <li class="index-item property">
+                                  <a href="#property_classNames">classNames</a>
+
+                              </li>
+                              <li class="index-item property">
+                                  <a href="#property_expanded">expanded</a>
+
+                              </li>
+                              <li class="index-item property">
+                                  <a href="#property_hidden">hidden</a>
+
+                              </li>
+                              <li class="index-item property">
+                                  <a href="#property_selected">selected</a>
+
+                              </li>
+                      </ul>
+                  </div>
 
 
-            <div id="properties" class="page-section">
-                <h2 class="off-left">Properties</h2>
-                <div class="item-list">
-<div id="property_classNames" class="property item">
-    <h3 class="name"><code>classNames</code></h3>
-    <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+          </div>
 
 
+              <div id="tab_properties" role="tabpanel" class="tab-pane">
+                  <div class="item-list">
+  <div id="property_classNames" class="property item">
+      <h3 class="name">classNames</h3>
+      <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/classes/Row.js#L29">addon/classes/Row.js:29</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          <p>Class names to be applied to this row</p>
+  
+      </div>
+  
+  
+  
+  </div>
+  <div id="property_expanded" class="property item">
+      <h3 class="name">expanded</h3>
+      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/classes/Row.js#L15">addon/classes/Row.js:15</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          
+      </div>
+  
+          <p><br><strong>Default:</strong> false</p>
+  
+  
+  </div>
+  <div id="property_hidden" class="property item">
+      <h3 class="name">hidden</h3>
+      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/classes/Row.js#L8">addon/classes/Row.js:8</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          
+      </div>
+  
+          <p><br><strong>Default:</strong> false</p>
+  
+  
+  </div>
+  <div id="property_selected" class="property item">
+      <h3 class="name">selected</h3>
+      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.1.0/addon/classes/Row.js#L22">addon/classes/Row.js:22</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          
+      </div>
+  
+          <p><br><strong>Default:</strong> false</p>
+  
+  
+  </div>
+                  </div>
+              </div>
 
 
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/addon_classes_Row.js.html#l29"><code>addon&#x2F;classes&#x2F;Row.js:29</code></a>
-        </p>
-
-
+      </div>
     </div>
-
-    <div class="description">
-        <p>Class names to be applied to this row</p>
-
-    </div>
-
-
-
 </div>
-<div id="property_expanded" class="property item">
-    <h3 class="name"><code>expanded</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/addon_classes_Row.js.html#l15"><code>addon&#x2F;classes&#x2F;Row.js:15</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-        <p><br><strong>Default:</strong> false</p>
-
-
-</div>
-<div id="property_hidden" class="property item">
-    <h3 class="name"><code>hidden</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/addon_classes_Row.js.html#l8"><code>addon&#x2F;classes&#x2F;Row.js:8</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-        <p><br><strong>Default:</strong> false</p>
-
-
-</div>
-<div id="property_selected" class="property item">
-    <h3 class="name"><code>selected</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/addon_classes_Row.js.html#l22"><code>addon&#x2F;classes&#x2F;Row.js:22</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-        <p><br><strong>Default:</strong> false</p>
-
-
-</div>
-                </div>
-            </div>
-
-
-    </div>
-</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -312,7 +400,8 @@
     </div>
     <script src="../assets/vendor/prettify/prettify-min.js"></script>
     <script>prettyPrint();</script>
-    <script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/jquery-ui/jquery-ui.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
     <script src="../assets/js/yuidoc-bootstrap.js"></script>
 </body>
