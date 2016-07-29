@@ -7,9 +7,15 @@ const {
 } = Ember;
 
 /**
+ * @module Light Table
+ * @submodule Cell Types
+ */
+
+/**
  * @module Cell Types
  * @class Base Cell
  */
+
 const Cell = Component.extend({
   layout,
   tagName: 'td',

@@ -10,7 +10,7 @@ const {
 } = Ember;
 
 /**
- * @module Components
+ * @module Light Table
  */
 
 /**
@@ -35,8 +35,8 @@ const {
  * If you dont have grouped columns, the yielded `groups` will be an array of all visibile columns and `subColumns`
  * will be empty
  *
- * @class Head
- * @uses TableColumnMixin
+ * @class t.head
+ * @uses TableHeaderMixin
  */
 
 export default Component.extend(TableHeaderMixin, {

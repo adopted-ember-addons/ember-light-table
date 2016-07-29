@@ -10,7 +10,7 @@ const {
 } = Ember;
 
 /**
- * @module Components
+ * @module Light Table
  */
 
 /**
@@ -32,8 +32,9 @@ const {
  * ```
  *
  * will be empty
- * @class Foot
- * @uses TableColumnMixin
+ *
+ * @class t.foot
+ * @uses TableHeaderMixin
  */
 
 export default Component.extend(TableHeaderMixin, {

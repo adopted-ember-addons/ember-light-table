@@ -6,7 +6,7 @@ const {
 } = Ember;
 
 /**
- * @module Mixins
+ * @module Light Table
  */
 
 /**
