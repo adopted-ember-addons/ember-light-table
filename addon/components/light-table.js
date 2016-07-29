@@ -6,7 +6,8 @@ const {
   assert,
   Component,
   computed,
-  String:{htmlSafe}
+  String:{htmlSafe},
+  run: {debounce}
 } = Ember;
 
 /**
@@ -99,6 +100,111 @@ const LightTable = Component.extend({
       return htmlSafe(`height:${this.get('height')};`);
     }
   }),
+
+  didInsertElement() {
+    // TODO: didReceiveAttrs or observer in case fixed columns changes?
+    if (this.get('table.fixedColumns.length')) {
+      this._setColumnWidths();
+      this._setupScrollListeners();
+      this._setupResize();
+    }
+  },
+
+  /**
+   * Sets the width and position of fixed and standard columns.
+   * @private
+   */
+  _setColumnWidths() {
+    let [wrapperDiv] = this.$();
+    let fixedColumnWidth = this.get('table.fixedColumnWidth');
+    let [clientRects] = wrapperDiv.getClientRects();
+
+    this.$('.standard-columns').css({
+      width: clientRects.width - fixedColumnWidth,
+      'margin-left': fixedColumnWidth
+    });
+
+    this.$('.fixed-columns').css({
+      width: fixedColumnWidth
+    });
+  },
+
+  /**
+   * Handles setting up necessary scroll listeners.
+   * @private
+   */
+  _setupScrollListeners() {
+    this._setupStandardColumnScrollListener();
+    this._setupWheelListener();
+  },
+
+  /**
+   * Sets up a scroll listener on the standard columns, which keeps
+   * the position of the fixed columns as well as the header in sync.
+   * @private
+   */
+  _setupStandardColumnScrollListener() {
+    let standardHeaderWrapper = this.$('.lt-head-wrap .standard-columns');
+    let fixedBodyWrapper = this.$('.lt-body-wrap .fixed-columns');
+    let standardBodyWrapper = this.$('.lt-body-wrap .standard-columns');
+    let [scrollElement] = standardBodyWrapper;
+
+    this._scrollListener = (e) => {
+      fixedBodyWrapper.scrollTop(e.target.scrollTop);
+      standardHeaderWrapper.scrollLeft(e.target.scrollLeft);
+    };
+
+    scrollElement.addEventListener('scroll', this._scrollListener, true);
+  },
+
+  /**
+   * Sets up a wheel listener on the fixed columns in order to force scrolling
+   * of the standard columns. Without this, using a wheel or trackpad over the
+   * fixed columns would not scroll anything.
+   *
+   * Note: we must use jquery bind to add the listener so that the event delta
+   * is passsed properly.
+   * @private
+   */
+  _setupWheelListener() {
+    let standardBodyWrapper = this.$('.lt-body-wrap .standard-columns');
+    let fixedBodyWrapper = this.$('.lt-body-wrap .fixed-columns');
+
+    this._wheelListener = (e) => {
+     let newScrollTop = standardBodyWrapper.scrollTop() + e.originalEvent.deltaY;
+     standardBodyWrapper.scrollTop(newScrollTop);
+
+     // firefox needs this or we cant scroll fixed columns
+     event.preventDefault();
+    }
+
+    // must use bind here to pass delta params correctly
+    fixedBodyWrapper.bind('mousewheel', this._wheelListener);
+  },
+
+  /**
+   * Sets up a resize listener that recalculates the width of the standard columns.
+   * @private
+   */
+  _setupResize() {
+    this._resizeHandler = () => {
+      debounce(this, this._setColumnWidths, 20);
+    };
+
+    window.addEventListener('resize', this._resizeHandler, true);
+  },
+
+  willDestroyElement() {
+    let [scrollElement] = this.$('.lt-body-wrapper .standard-columns');
+
+    scrollElement.removeEventListener('scroll', this._scrollListener, true);
+    window.removeEventListener('resize', this._resizeHandler, true);
+    fixedBodyWrapper.unbind('mousewheel', this._wheelListener);
+
+    this._resizeHandler = null;
+    this._scrollListener = null;
+    this._wheelListener = null;
+  },
 
   init() {
     this._super(...arguments);

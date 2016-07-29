@@ -81,6 +81,8 @@ export default Ember.Mixin.create({
   columnGroups: computed.readOnly('table.visibleColumnGroups'),
   subColumns: computed.readOnly('table.visibleSubColumns'),
   columns: computed.readOnly('table.visibleColumns'),
+  fixedColumns: computed.readOnly('table.fixedColumns'),
+  standardColumns: computed.readOnly('table.standardColumns'),
 
   sortIcons: computed('iconAscending', 'iconDescending', function() {
     return this.getProperties(['iconAscending', 'iconDescending']);

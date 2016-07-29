@@ -4,7 +4,8 @@ import callAction from 'ember-light-table/utils/call-action';
 
 const {
   Component,
-  computed
+  computed,
+  run: { debounce }
 } = Ember;
 
 /**
@@ -151,8 +152,25 @@ export default Component.extend({
   scrollBuffer: 500,
 
   rows: computed.readOnly('table.visibleRows'),
-  columns: computed.readOnly('table.visibleColumns'),
-  colspan: computed.readOnly('columns.length'),
+  fixedColumns: computed.readOnly('table.fixedColumns'),
+  standardColumns: computed.readOnly('table.standardColumns'),
+
+  shouldUseVirtualScrollbar: computed('sharedOptions.{fixedHeader,fixedFooter}', 'fixedColumns.length', function() {
+    let { fixedHeader, fixedFooter } = this.get('sharedOptions');
+    let numberOfFixedColumns = this.get('fixedColumns.length');
+
+    return numberOfFixedColumns === 0 && fixedHeader || fixedFooter;
+  }),
+
+  didInsertElement() {
+    let shouldUseVirtualScrollbar = this.get('shouldUseVirtualScrollbar');
+
+    if (!shouldUseVirtualScrollbar) {
+      let height = this.$().height();
+
+      this.$('.lt-column-wrapper').height(height);
+    }
+  },
 
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,

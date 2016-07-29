@@ -45,6 +45,22 @@ export default Component.extend(TableHeaderMixin, {
   table: null,
   sharedOptions: null,
 
+  didInsertElement() {
+    this._setHeaderHeight();
+  },
+
+  // TODO: both fixed and not
+  _setHeaderHeight() {
+    let [div] = this.$('.lt-column-wrapper.standard-columns .lt-head');
+    let [clientRects] = div.getClientRects();
+    let {height} = clientRects;
+
+    this.$().css({
+      height,
+      'flex-basis': height
+    });
+  },
+
   init() {
     this._super(...arguments);
 

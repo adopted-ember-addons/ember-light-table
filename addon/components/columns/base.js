@@ -16,7 +16,7 @@ const Column = Component.extend({
   tagName: 'th',
   classNames: ['lt-column'],
   attributeBindings: ['width', 'colspan', 'rowspan'],
-  classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isHideable', 'isSortable', 'isSorted', 'isResizable', 'column.classNames'],
+  classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isHideable', 'isSortable', 'isSorted', 'isResizable', 'isFixed', 'column.classNames'],
 
   width: computed.readOnly('column.width'),
   isGroupColumn: computed.readOnly('column.isGroupColumn'),
@@ -24,6 +24,7 @@ const Column = Component.extend({
   isSorted: computed.readOnly('column.sorted'),
   isHideable: computed.readOnly('column.hideable'),
   isResizable: computed.readOnly('column.resizable'),
+  isFixed: computed.readOnly('column.fixed'),
 
   align: computed('column.align', function () {
     return `align-${this.get('column.align')}`;

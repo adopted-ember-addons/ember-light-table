@@ -117,7 +117,27 @@ export default class Table extends Ember.Object.extend({
       }
       return arr;
     }, []));
-  }).readOnly()
+  }).readOnly(),
+
+  fixedColumns: computed.filterBy('visibleColumns', 'fixed', true),
+  standardColumns: computed.filterBy('visibleColumns', 'fixed', false),
+
+  fixedColumnWidth: computed('fixedColumns.[]', function() {
+    let fixedColumns = this.get('fixedColumns');
+
+    return fixedColumns.reduce((prev, column) => {
+      if (typeof column.width === 'undefined') {
+        return 0;
+      }
+
+      // column definitions use strings with px, so strip it out
+      let width = parseInt(column.width.replace(/px/, ''));
+
+      return prev + width;
+    }, 0);
+  }),
+
+  //
 }) {
   /**
    * @class Table

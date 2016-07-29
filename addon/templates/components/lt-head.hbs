@@ -1,35 +1,36 @@
 {{#ember-wormhole to=(concat tableId '_inline_head') renderInPlace=renderInPlace}}
-  <table>
-    <thead class="lt-head">
-      {{#if hasBlock}}
-        {{yield columnGroups subColumns}}
-      {{else}}
+  <div class="fixed-columns lt-column-wrapper">
+    <table>
+      <thead class="lt-head">
+        {{#if hasBlock}}
+          {{yield columnGroups subColumns}}
+        {{else}}
 
         {{!- There is an issue where if there are more than 1 row and the first has a colspan,
-           the td's fail to hold their width. Creating a scaffolding will setup the table columns correctly
+        the td's fail to hold their width. Creating a scaffolding will setup the table columns correctly
         --}}
         {{#if subColumns.length}}
           <tr>
             {{#each subColumns as |column|}}
-              <td width={{column.width}} class="lt-scaffolding"></td>
+            <td width={{column.width}} class="lt-scaffolding"></td>
             {{/each}}
           </tr>
         {{/if}}
 
-        <tr>
-          {{#each columnGroups as |column|}}
-            {{component (concat 'light-table/columns/' column.type) column
+          <tr>
+            {{#each fixedColumns as |column|}}
+              {{component (concat 'light-table/columns/' column.type) column
               table=table
               tableActions=tableActions
               sortIcons=sortIcons
               click=(action 'onColumnClick' column)
               doubleClick=(action 'onColumnDoubleClick' column)
               columnResized=(action 'onColumnResized')}}
-          {{/each}}
-        </tr>
-        <tr>
-          {{#each subColumns as |column|}}
-            {{component (concat 'light-table/columns/' column.type) column
+            {{/each}}
+          </tr>
+          <tr>
+            {{#each subColumns as |column|}}
+              {{component (concat 'light-table/columns/' column.type) column
               table=table
               rowspan=1
               classNames="lt-sub-column"
@@ -38,9 +39,58 @@
               click=(action 'onColumnClick' column)
               doubleClick=(action 'onColumnDoubleClick' column)
               columnResized=(action 'onColumnResized')}}
-          {{/each}}
-        </tr>
-      {{/if}}
-    </thead>
-  </table>
+            {{/each}}
+          </tr>
+
+        {{/if}}
+      </thead>
+    </table>
+  </div>
+
+  <div class="standard-columns lt-column-wrapper">
+    <table>
+      <thead class="lt-head">
+        {{#if hasBlock}}
+          {{yield columnGroups subColumns}}
+        {{else}}
+
+        {{!- There is an issue where if there are more than 1 row and the first has a colspan,
+        the td's fail to hold their width. Creating a scaffolding will setup the table columns correctly
+        --}}
+        {{#if subColumns.length}}
+          <tr>
+            {{#each subColumns as |column|}}
+            <td width={{column.width}} class="lt-scaffolding"></td>
+            {{/each}}
+          </tr>
+        {{/if}}
+
+          <tr>
+            {{#each standardColumns as |column|}}
+              {{component (concat 'light-table/columns/' column.type) column
+              table=table
+              tableActions=tableActions
+              sortIcons=sortIcons
+              click=(action 'onColumnClick' column)
+              doubleClick=(action 'onColumnDoubleClick' column)
+              columnResized=(action 'onColumnResized')}}
+            {{/each}}
+          </tr>
+          <tr>
+            {{#each subColumns as |column|}}
+              {{component (concat 'light-table/columns/' column.type) column
+              table=table
+              rowspan=1
+              classNames="lt-sub-column"
+              tableActions=tableActions
+              sortIcons=sortIcons
+              click=(action 'onColumnClick' column)
+              doubleClick=(action 'onColumnDoubleClick' column)
+              columnResized=(action 'onColumnResized')}}
+            {{/each}}
+          </tr>
+        {{/if}}
+      </thead>
+    </table>
+  </div>
 {{/ember-wormhole}}

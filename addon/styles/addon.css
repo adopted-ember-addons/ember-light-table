@@ -38,6 +38,24 @@
   flex: 1 0 auto;
 }
 
+.ember-light-table .lt-column-wrapper {
+  position: absolute;
+}
+
+.ember-light-table .lt-column-wrapper.fixed-columns {
+  overflow: hidden;
+  z-index: 2;
+}
+
+.ember-light-table .lt-column-wrapper.standard-columns {
+  overflow-x: auto;
+  z-index: 1;
+}
+
+.ember-light-table .lt-head-wrap .standard-columns {
+  overflow: hidden;
+}
+
 .ember-light-table .lt-column {
   position: relative;
 }

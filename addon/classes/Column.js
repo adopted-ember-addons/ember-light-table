@@ -26,6 +26,13 @@ export default class Column extends Ember.Object.extend({
   hidden: false,
 
   /**
+   * @property fixed
+   * @type {Boolean}
+   * @default false
+   */
+  fixed: false,
+
+  /**
    * @property ascending
    * @type {Boolean}
    * @default true
