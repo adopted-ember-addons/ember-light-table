@@ -39,7 +39,7 @@ export default Component.extend(InViewportMixin, {
 
   willDestroyElement() {
     this._super(...arguments);
-    run.cancel(this._viewportScheduler);
+    this._cancelTimers();
   },
 
   didEnterViewport() {
@@ -48,11 +48,25 @@ export default Component.extend(InViewportMixin, {
 
   didExitViewport() {
     if(this.hasObserverFor('rows.[]')) {
+      this._cancelTimers();
       this.removeObserver('rows.[]', this, this._scheduleDidEnterViewport);
     }
   },
 
   _scheduleDidEnterViewport() {
-    this._viewportScheduler = run.scheduleOnce('afterRender', this, this.didEnterViewport);
+    this._schedulerTimer = run.scheduleOnce('afterRender', this, this._debounceDidEnterViewport);
+  },
+
+  _debounceDidEnterViewport() {
+    /*
+      This debounce is needed when there is not enough delay when calling onScrolledToBottom.
+      Without this debounce, all rows will be rendered causing immense performance problems
+     */
+    this._debounceTimer = run.debounce(this, this.didEnterViewport, 100);
+  },
+
+  _cancelTimers() {
+    run.cancel(this._schedulerTimer);
+    run.cancel(this._debounceTimer);
   }
 });
