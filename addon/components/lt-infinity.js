@@ -31,7 +31,7 @@ export default Component.extend(InViewportMixin, {
   },
 
   didEnterViewport() {
-    this._throttleScrolledToBottom();
+    this._debounceScrolledToBottom();
   },
 
   didExitViewport() {
@@ -48,19 +48,19 @@ export default Component.extend(InViewportMixin, {
   }),
 
   _scheduleScrolledToBottom() {
-    this._schedulerTimer = run.scheduleOnce('afterRender', this, this._throttleScrolledToBottom);
+    this._schedulerTimer = run.scheduleOnce('afterRender', this, this._debounceScrolledToBottom);
   },
 
-  _throttleScrolledToBottom(spacing = 100) {
+  _debounceScrolledToBottom(delay = 100) {
     /*
-      This throttle is needed when there is not enough spancing between onScrolledToBottom calls.
-      Without this throttle, all rows will be rendered causing immense performance problems
+      This debounce is needed when there is not enough delay between onScrolledToBottom calls.
+      Without this debounce, all rows will be rendered causing immense performance problems
      */
-    this._throttleTimer = run.throttle(this, this.sendAction, 'onScrolledToBottom', spacing);
+    this._debounceTimer = run.debounce(this, this.sendAction, 'onScrolledToBottom', delay);
   },
 
   _cancelTimers() {
     run.cancel(this._schedulerTimer);
-    run.cancel(this._throttleTimer);
+    run.cancel(this._debounceTimer);
   }
 });
