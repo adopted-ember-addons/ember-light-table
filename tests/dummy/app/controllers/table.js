@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   table: null,
   sort: null,
   page: 1,
-  limit: 20,
+  limit: 10,
   dir: 'asc',
   isLoading: false,
   canLoadMore: true,
