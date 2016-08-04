@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/lt-infinity';
 import InViewportMixin from 'ember-in-viewport';
 
-const { Component, run } = Ember;
+const { Component, observer, run } = Ember;
 
 export default Component.extend(InViewportMixin, {
   classNames: ['lt-infinity'],
@@ -11,18 +11,6 @@ export default Component.extend(InViewportMixin, {
 
   rows: null,
   scrollBuffer: null,
-
-  init() {
-    this._super(...arguments);
-
-    /*
-      When the table doesnt have enough rows to push this component
-      out of the viewport, it will only call didEnterViewport once.
-      This sets up an observer that will add more rows and then be destroyed
-      once this component comes out of view.
-     */
-    this.addObserver('rows.[]', this, this._scheduleDidEnterViewport);
-  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -43,26 +31,32 @@ export default Component.extend(InViewportMixin, {
   },
 
   didEnterViewport() {
-    this.sendAction('onScrolledToBottom');
+    this._debounceScrolledToBottom();
   },
 
   didExitViewport() {
-    if(this.hasObserverFor('rows.[]')) {
-      this._cancelTimers();
-      this.removeObserver('rows.[]', this, this._scheduleDidEnterViewport);
+    this._cancelTimers();
+  },
+
+  scheduleScrolledToBottom: observer('rows.[]', 'viewportEntered', function() {
+    if(this.get('viewportEntered')) {
+      /*
+        Continue scheduling onScrolledToBottom until no longer in viewport
+       */
+      this._scheduleScrolledToBottom();
     }
+  }),
+
+  _scheduleScrolledToBottom() {
+    this._schedulerTimer = run.scheduleOnce('afterRender', this, this._debounceScrolledToBottom);
   },
 
-  _scheduleDidEnterViewport() {
-    this._schedulerTimer = run.scheduleOnce('afterRender', this, this._debounceDidEnterViewport);
-  },
-
-  _debounceDidEnterViewport() {
+  _debounceScrolledToBottom(delay = 100) {
     /*
-      This debounce is needed when there is not enough delay when calling onScrolledToBottom.
+      This debounce is needed when there is not enough delay between onScrolledToBottom calls.
       Without this debounce, all rows will be rendered causing immense performance problems
      */
-    this._debounceTimer = run.debounce(this, this.didEnterViewport, 100);
+    this._debounceTimer = run.debounce(this, this.sendAction, 'onScrolledToBottom', delay);
   },
 
   _cancelTimers() {
