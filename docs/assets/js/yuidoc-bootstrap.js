@@ -65,6 +65,19 @@ $(function() {
         });
     }
 
+    function setupHeaderAnchors() {
+        var slugger = new GithubSlugger();
+
+        $('h1, h2, h3, h4, h5, h6', '.module-description, .class-description').each(function() {
+            var $element = $(this);
+            var id = slugger.slug($element.text());
+
+            $element.attr('id', id);
+            $element.addClass('anchorable-toc');
+            $element.prepend('<a class="fa fa-link toc-anchor" href="#' + id + '"></a>');
+        });
+    }
+
     function setOptionDisplayState(box) {
         var cssName = $.trim(box.parent('label').text()).toLowerCase();
         if(box.is(':checked')){
@@ -248,10 +261,12 @@ $(function() {
     //  Immediate function calls
     // ************************************************************************* //
 
+    setupHeaderAnchors();
     setUpOptionsCheckboxes();
     setupActiveSidebarLink();
     setUpWidgets();
     setUpHashChange();
+
     if (window.location.hash) {
         moveToWindowHash();
     }
