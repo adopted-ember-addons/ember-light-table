@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.1.1
+
+### Pull Requests
+
+- [#133](https://github.com/offirgolan/ember-light-table/pull/133)  [BUGFIX] onScrolledToBottom doesnt get re-triggered after removing table rows  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.1.0
 
 ### Pull Requests
