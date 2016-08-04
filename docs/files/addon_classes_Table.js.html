@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/classes/Table.js - Ember Light Table</title>
+    <meta name="description" content="Lightweight, component based table for Ember 2.x">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700' rel='stylesheet' type='text/css'>
+    
+</head>
+<body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">
+            <img src="../assets/img/ember-logo.png" alt="">
+            <span>Light Table</span>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/offirgolan/ember-light-table" class="fa fa-github github"></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="main-wrapper" class="row">
+        <div id="content-wrapper">
+            <ol class="panel-group" id="sidebar" role="tablist" aria-multiselectable="true">
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-search-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-search" aria-expanded="true" aria-controls="collapseOne">
+                        Search
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-search" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-search-heading">
+                        <div class="panel-body">
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                    <li class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="sidebar-version-heading">
+                            <h4 class="panel-title">
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.1.1" target="_blank">
+                                  Tag: v1.1.1
+                                </a>
+                            </h4>
+                        </div>
+                    </li>
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-modules-heading">
+                        <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" href="#sidebar-modules" aria-expanded="true" aria-controls="collapseOne">
+                      Modules
+                    </a>
+                  </h4>
+                    </div>
+                    <div id="sidebar-modules" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-modules-heading">
+                        <div class="panel-body">
+                                <ol>
+                                        <li>
+                                            <a href="../modules/Light Table.html">Light Table</a>
+                                                    <li class="sub"><a href="../modules/Cell Types.html">Cell Types</a></li>
+                                                    <li class="sub"><a href="../modules/Column Types.html">Column Types</a></li>
+                                        </li>
+                                        <li>
+                                            <a href="../modules/Table.html">Table</a>
+                                        </li>
+                                        <li>
+                                            <a href="../modules/Usage.html">Usage</a>
+                                        </li>
+                                </ol>
+                        </div>
+                    </div>
+                </li>
+            
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-classes-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-classes" aria-expanded="true" aria-controls="collapseOne">
+                        Classes
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-classes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-classes-heading">
+                        <div class="panel-body">
+                            <ol>
+                                    <li>
+                                        <a href="../classes/Base Cell.html">Base Cell</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Base Column.html">Base Column</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Column.html">Column</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/light-table.html">light-table</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Row.html">Row</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/t.body.html">t.body</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/t.foot.html">t.foot</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/t.head.html">t.head</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Table.html">Table</a>
+                                    </li>
+                            </ol>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <div class="content-container">
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+<div class="page-header">
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i> addon/classes/Table.js File</h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import Row from &#x27;ember-light-table/classes/Row&#x27;;
+import Column from &#x27;ember-light-table/classes/Column&#x27;;
+
+const {
+  computed,
+  isNone,
+  isEmpty,
+  A: emberArray
+} = Ember;
+
+/**
+ * @module Table
+ * @private
+ */
+
+ /**
+  * @module Table
+  * @class Table
+  */
+export default class Table extends Ember.Object.extend({
+  /**
+   * @property columns
+   * @type {Ember.Array}
+   * @default []
+   */
+  columns: null,
+
+  /**
+   * @property rows
+   * @type {Ember.Array}
+   * @default []
+   */
+  rows: null,
+
+  /**
+   * @property isEmpty
+   * @type {Boolean}
+   */
+  isEmpty: computed.empty(&#x27;rows&#x27;).readOnly(),
+
+  /**
+   * @property expandedRows
+   * @type {Ember.Array}
+   */
+  expandedRows: computed.filterBy(&#x27;rows&#x27;, &#x27;expanded&#x27;, true).readOnly(),
+
+  /**
+   * @property selectedRows
+   * @type {Ember.Array}
+   */
+  selectedRows: computed.filterBy(&#x27;rows&#x27;, &#x27;selected&#x27;, true).readOnly(),
+
+  /**
+   * @property visibleRows
+   * @type {Ember.Array}
+   */
+  visibleRows: computed.filterBy(&#x27;rows&#x27;, &#x27;hidden&#x27;, false).readOnly(),
+
+  /**
+   * @property sortableColumns
+   * @type {Ember.Array}
+   */
+  sortableColumns: computed.filterBy(&#x27;visibleColumns&#x27;, &#x27;sortable&#x27;, true).readOnly(),
+
+  /**
+   * @property sortedColumns
+   * @type {Ember.Array}
+   */
+  sortedColumns: computed.filterBy(&#x27;visibleColumns&#x27;, &#x27;sorted&#x27;, true).readOnly(),
+
+  /**
+   * @property hideableColumns
+   * @type {Ember.Array}
+   */
+  hideableColumns: computed.filterBy(&#x27;flattenedColumns&#x27;, &#x27;hideable&#x27;, true).readOnly(),
+
+  /**
+   * @property hiddenColumns
+   * @type {Ember.Array}
+   */
+  hiddenColumns: computed.filterBy(&#x27;flattenedColumns&#x27;, &#x27;hidden&#x27;, true).readOnly(),
+
+  /**
+   * @property visibleColumns
+   * @type {Ember.Array}
+   */
+  visibleColumns: computed.filterBy(&#x27;flattenedColumns&#x27;, &#x27;hidden&#x27;, false).readOnly(),
+
+  /**
+   * @property visibleColumnGroups
+   * @type {Ember.Array}
+   */
+  visibleColumnGroups: computed(&#x27;columns.@each.{hidden,isVisibleGroupColumn}&#x27;, function() {
+    return emberArray(this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
+      if (c.get(&#x27;isVisibleGroupColumn&#x27;) || (!c.get(&#x27;isGroupColumn&#x27;) &amp;&amp; !c.get(&#x27;hidden&#x27;))) {
+        arr.push(c);
+      }
+      return arr;
+    }, []));
+  }).readOnly(),
+
+  /**
+   * @property visibleSubColumns
+   * @type {Ember.Array}
+   */
+  visibleSubColumns: computed(&#x27;columns.@each.visibleSubColumns&#x27;, function() {
+    return emberArray([].concat(...this.get(&#x27;columns&#x27;).getEach(&#x27;visibleSubColumns&#x27;)));
+  }).readOnly(),
+
+  /**
+   * @property flattenedColumns
+   * @type {Ember.Array}
+   */
+  flattenedColumns: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.subColumns&#x27;, function() {
+    return emberArray(this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
+      let subColumns = c.get(&#x27;subColumns&#x27;);
+      if (isEmpty(subColumns)) {
+        arr.push(c);
+      } else {
+        subColumns.forEach(sc =&gt; arr.push(sc));
+      }
+      return arr;
+    }, []));
+  }).readOnly()
+}) {
+  /**
+   * @class Table
+   * @constructor
+   * @param  {Array} columns
+   * @param  {Array} rows
+   */
+  constructor(columns = [], rows = []) {
+    super();
+    this.setProperties({
+      rows: emberArray(Table.createRows(rows)),
+      columns: emberArray(Table.createColumns(columns)),
+    });
+  }
+
+  // Rows
+
+  /**
+   * Replace all the row&#x27;s content with content of the argument. If argument is an empty array rows will be cleared.
+   * @method setRows
+   * @param  {Array} rows
+   * @param  {Object} options
+   * @return {Array} rows
+   */
+  setRows(rows = [], options = {}) {
+    return this.get(&#x27;rows&#x27;).setObjects(Table.createRows(rows, options));
+  }
+
+  /**
+   * Push the object onto the end of the row array if it is not already present.
+   * @method addRow
+   * @param  {Object} row
+   * @param  {Object} options
+   */
+  addRow(row, options = {}) {
+    if (row instanceof Row) {
+      this.get(&#x27;rows&#x27;).addObject(row);
+    } else if (isNone(this.get(&#x27;rows&#x27;).findBy(&#x27;content&#x27;, row))) {
+      this.pushRow(row, options);
+    }
+  }
+
+  /**
+   * Push the objects onto the end of the row array if it is not already present.
+   * @method addRows
+   * @param  {Array} rows
+   * @param  {Object} options
+   */
+  addRows(rows = [], options = {}) {
+    rows.forEach(r =&gt; this.addRow(r, options));
+  }
+
+  /**
+   * Push the object onto the end of the row array.
+   * @method pushRow
+   * @param  {Object} row
+   * @param  {Object} options
+   * @return {Row} pushed row
+   */
+  pushRow(row, options = {}) {
+    let _row = Table.createRow(row, options);
+    this.get(&#x27;rows&#x27;).pushObject(_row);
+    return _row;
+  }
+
+  /**
+   * Push the object onto the end of the row array.
+   * @method pushRows
+   * @param  {Array}  rows
+   * @param  {Object} options
+   * @return {Array} pushed rows
+   */
+  pushRows(rows = [], options = {}) {
+    let _rows = Table.createRows(rows, options);
+    this.get(&#x27;rows&#x27;).pushObjects(_rows);
+    return _rows;
+  }
+
+  /**
+   * Insert a row at the specified index.
+   * @method insertRowAt
+   * @param  {Number}  index
+   * @param  {Object}  row
+   * @param  {Object} options
+   * @return {Row} inserted row
+   */
+  insertRowAt(index, row, options = {}) {
+    let _row = Table.createRow(row, options);
+    this.get(&#x27;rows&#x27;).insertAt(index, _row);
+    return _row;
+  }
+
+  /**
+   * Remove all occurrences of an object in the rows
+   * @method removeRow
+   * @param  {Object}  row
+   */
+  removeRow(row) {
+    if (row instanceof Row) {
+      this.get(&#x27;rows&#x27;).removeObject(row);
+    } else {
+      this.get(&#x27;rows&#x27;).removeObjects(this.get(&#x27;rows&#x27;).filterBy(&#x27;content&#x27;, row));
+    }
+  }
+
+  /**
+   * Removes each object in the passed enumerable from the rows.
+   * @method removeRows
+   * @param  {Array}    rows
+   */
+  removeRows(rows = []) {
+    rows.forEach(r =&gt; this.removeRow(r));
+  }
+
+  // Columns
+
+  /**
+   * Replace all the column&#x27;s content with content of the argument. If argument is an empty array columns will be cleared.
+   * @method setColumns
+   * @param  {Array} columns
+   * @return {Array} columns
+   */
+  setColumns(columns = []) {
+    return this.get(&#x27;columns&#x27;).setObjects(Table.createColumns(columns));
+  }
+
+  /**
+   * Push the object onto the end of the column array if it is not already present.
+   * @method addColumn
+   * @param  {Object} column
+   */
+  addColumn(column) {
+    this.get(&#x27;columns&#x27;).addObject(Table.createColumn(column));
+  }
+
+  /**
+   * Push the objects onto the end of the column array if it is not already present.
+   * @method addColumns
+   * @param  {Array} columns
+   */
+  addColumns(columns = []) {
+    this.get(&#x27;columns&#x27;).addObjects(Table.createColumns(columns));
+  }
+
+  /**
+   * Push the object onto the end of the column array.
+   * @method pushColumn
+   * @param  {Object} column
+   * @return {Column} pushed column
+   */
+  pushColumn(column) {
+    let _column = Table.createColumn(column);
+    this.get(&#x27;columns&#x27;).pushObject(_column);
+    return _column;
+  }
+
+  /**
+   * Push the object onto the end of the column array.
+   * @method pushColumns
+   * @param  {Array}  columns
+   * @return {Array} pushed columns
+   */
+  pushColumns(columns = []) {
+    let _columns = Table.createColumns(columns);
+    this.get(&#x27;columns&#x27;).pushObjects(_columns);
+    return _columns;
+  }
+
+  /**
+   * Insert a column at the specified index.
+   * @method insertColumnAt
+   * @param  {Number}  index
+   * @param  {Object}  column
+   * @return {Column} inserted column
+   */
+  insertColumnAt(index, column) {
+    let _column = Table.createColumn(column);
+    this.get(&#x27;columns&#x27;).insertAt(index, _column);
+    return _column;
+  }
+
+  /**
+   * Remove all occurrences of an object in the columns
+   * @method removeColumn
+   * @param  {Object}  column
+   */
+  removeColumn(column) {
+    return this.get(&#x27;columns&#x27;).removeObject(column);
+  }
+
+  /**
+   * Removes each object in the passed enumerable from the columns.
+   * @method removeColumns
+   * @param  {Array}    columns
+   */
+  removeColumns(columns = []) {
+    return this.get(&#x27;columns&#x27;).removeObjects(columns);
+  }
+
+  /**
+   * Create a Row object with the given content
+   * @method createRow
+   * @static
+   * @param  {Object}  content
+   * @param  {Object}  options
+   * @return {Row}
+   */
+  static createRow(content, options = {}) {
+    return new Row(content, options);
+  }
+
+  /**
+   * Create a collection of Row objects with the given collection
+   * @method createRows
+   * @static
+   * @param  {Array}  rows
+   * @param  {Object} options
+   * @return {Array}
+   */
+  static createRows(rows = [], options = {}) {
+    return rows.map(r =&gt; Table.createRow(r, options));
+  }
+
+  /**
+   * Create a Column object with the given options
+   * @method createColumn
+   * @static
+   * @param  {Object}  column
+   * @return {Column}
+   */
+  static createColumn(column) {
+    return new Column(column);
+  }
+
+  /**
+   * Create a collection of Column objects with the given collection
+   * @method createColumns
+   * @static
+   * @param  {Array}  columns
+   * @return {Array}
+   */
+  static createColumns(columns = []) {
+    return columns.map(c =&gt; Table.createColumn(c));
+  }
+}
+
+    </pre>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../assets/vendor/github-slugger/slugger.js"></script>
+    <script src="../assets/js/yuidoc-bootstrap.js"></script>
+</body>
+</html>
