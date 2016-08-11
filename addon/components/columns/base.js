@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/columns/base';
+import SortableItem from 'ember-sortable/mixins/sortable-item';
 
 const {
   Component,
@@ -11,7 +12,7 @@ const {
  * @module Column Types
  * @class Base Column
  */
-const Column = Component.extend({
+const Column = Component.extend(SortableItem, {
   layout,
   tagName: 'th',
   classNames: ['lt-column'],
@@ -25,6 +26,9 @@ const Column = Component.extend({
   isHideable: computed.readOnly('column.hideable'),
   isResizable: computed.readOnly('column.resizable'),
   isDraggable: computed.readOnly('column.draggable'),
+
+  group: computed.readOnly('draggableGroup'),
+  model: computed.readOnly('column'),
 
   align: computed('column.align', function () {
     return `align-${this.get('column.align')}`;

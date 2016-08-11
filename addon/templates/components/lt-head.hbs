@@ -17,7 +17,7 @@
         {{/if}}
 
         <tr>
-          {{#sortable-group direction="x" tagName="" onChange="reorderColumns" as |group|}}
+          {{#lt-sortable-group direction="x" tagName="" onChange="reorderColumns" as |group|}}
             {{#each columnGroups as |column|}}
               {{component (concat 'light-table/columns/' column.type) column
                 table=table
@@ -28,12 +28,12 @@
                 doubleClick=(action 'onColumnDoubleClick' column)
                 columnResized=(action 'onColumnResized')}}
             {{/each}}
-         {{/sortable-group}}
+         {{/lt-sortable-group}}
         </tr>
 
         <tr>
           {{#each columnGroups as |colGroup|}}
-            {{#sortable-group direction="x" tagName="" onChange="reorderSubColumns" as |group|}}
+            {{#lt-sortable-group direction="x" tagName="" onChange="reorderSubColumns" as |group|}}
               {{#each colGroup.visibleSubColumns as |column|}}
                 {{component (concat 'light-table/columns/' column.type) column
                   table=table
@@ -46,7 +46,7 @@
                   doubleClick=(action 'onColumnDoubleClick' column)
                   columnResized=(action 'onColumnResized')}}
               {{/each}}
-            {{/sortable-group}}
+            {{/lt-sortable-group}}
           {{/each}}
         </tr>
       {{/if}}
