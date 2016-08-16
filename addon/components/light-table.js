@@ -11,7 +11,7 @@ const {
 
 /**
  * @module Light Table
- * @main ligh-table
+ * @main light-table
  */
 
 /**
@@ -23,7 +23,7 @@ const {
  * {{/light-table}}
  * ```
  *
- * Please see the documentation for the [Head](../classes/Head.html), [Body](../classes/Body.html), and [Foot](../classes/Foot.html) components
+ * Please see the documentation for the [Head](../classes/t.head.html), [Body](../classes/t.body.html), and [Foot](../classes/t.foot.html) components
  * for more details on all possible options and actions.
  *
  * @class light-table
