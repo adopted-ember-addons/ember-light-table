@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.1.1"
+        "version": "v1.2.0"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -166,7 +166,7 @@
             "module": "Light Table",
             "namespace": "",
             "file": "addon/components/cells/base.js",
-            "line": 14,
+            "line": 15,
             "tag": "module"
         },
         "Column Types": {
@@ -182,7 +182,7 @@
             "module": "Light Table",
             "namespace": "",
             "file": "addon/components/columns/base.js",
-            "line": 15,
+            "line": 16,
             "tag": "module"
         },
         "Usage": {
@@ -283,7 +283,7 @@
             "module": "Cell Types",
             "namespace": "",
             "file": "addon/components/cells/base.js",
-            "line": 14
+            "line": 15
         },
         "Base Column": {
             "name": "Base Column",
@@ -296,7 +296,7 @@
             "module": "Column Types",
             "namespace": "",
             "file": "addon/components/columns/base.js",
-            "line": 15
+            "line": 16
         },
         "light-table": {
             "name": "light-table",
@@ -310,7 +310,7 @@
             "namespace": "",
             "file": "addon/components/light-table.js",
             "line": 17,
-            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../classes/Head.html), [Body](../classes/Body.html), and [Foot](../classes/Foot.html) components\nfor more details on all possible options and actions.",
+            "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../classes/t.head.html), [Body](../classes/t.body.html), and [Foot](../classes/t.foot.html) components\nfor more details on all possible options and actions.",
             "mainName": "Components",
             "tag": "main",
             "itemtype": "main",
@@ -1196,7 +1196,16 @@
         },
         {
             "file": "addon/components/cells/base.js",
-            "line": 33,
+            "line": 37,
+            "itemtype": "property",
+            "name": "table",
+            "type": "{Table}",
+            "class": "Base Cell",
+            "module": "Cell Types"
+        },
+        {
+            "file": "addon/components/cells/base.js",
+            "line": 43,
             "itemtype": "property",
             "name": "column",
             "type": "{Column}",
@@ -1205,7 +1214,7 @@
         },
         {
             "file": "addon/components/cells/base.js",
-            "line": 39,
+            "line": 49,
             "itemtype": "property",
             "name": "row",
             "type": "{Row}",
@@ -1214,7 +1223,7 @@
         },
         {
             "file": "addon/components/cells/base.js",
-            "line": 45,
+            "line": 55,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -1223,7 +1232,7 @@
         },
         {
             "file": "addon/components/cells/base.js",
-            "line": 51,
+            "line": 61,
             "itemtype": "property",
             "name": "rawValue",
             "type": "{Mixed}",
@@ -1232,7 +1241,7 @@
         },
         {
             "file": "addon/components/cells/base.js",
-            "line": 57,
+            "line": 67,
             "itemtype": "property",
             "name": "value",
             "type": "{Mixed}",
@@ -1241,7 +1250,16 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 38,
+            "line": 42,
+            "itemtype": "property",
+            "name": "table",
+            "type": "{Table}",
+            "class": "Base Column",
+            "module": "Column Types"
+        },
+        {
+            "file": "addon/components/columns/base.js",
+            "line": 48,
             "itemtype": "property",
             "name": "column",
             "type": "{Column}",
@@ -1250,7 +1268,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 44,
+            "line": 54,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -1259,7 +1277,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 50,
+            "line": 60,
             "itemtype": "property",
             "name": "sortIcons",
             "type": "{Object}",
@@ -1268,7 +1286,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 56,
+            "line": 66,
             "itemtype": "property",
             "name": "colspan",
             "type": "{Number}",
@@ -1277,7 +1295,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 65,
+            "line": 75,
             "itemtype": "property",
             "name": "rowspan",
             "type": "{Number}",
@@ -1404,6 +1422,17 @@
         {
             "file": "addon/components/lt-body.js",
             "line": 103,
+            "description": "When multiSelect is true, this property determines whether or not `ctrl`\n(or `cmd`) is required to select additional rows, one by one. When false,\nsimply clicking on subsequent rows will select or deselect them.\n\n`shift` to select many consecutive rows is unaffected by this property.",
+            "itemtype": "property",
+            "name": "multiSelectRequiresKeyboard",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "t.body",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 116,
             "description": "Hide scrollbar when not scrolling",
             "itemtype": "property",
             "name": "autoHideScrollbar",
@@ -1414,7 +1443,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 112,
+            "line": 125,
             "description": "Allows multiple rows to be expanded at once",
             "itemtype": "property",
             "name": "multiRowExpansion",
@@ -1425,7 +1454,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 121,
+            "line": 134,
             "description": "Expand a row on click",
             "itemtype": "property",
             "name": "expandOnClick",
@@ -1436,7 +1465,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 130,
+            "line": 143,
             "description": "If true, the body block will yield columns and rows, allowing you\nto define your own table body",
             "itemtype": "property",
             "name": "overwrite",
@@ -1447,7 +1476,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 140,
+            "line": 153,
             "description": "ID of main table component. Used to generate divs for ember-wormhole",
             "itemtype": "property",
             "name": "tableId",
@@ -1459,7 +1488,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 149,
+            "line": 162,
             "itemtype": "property",
             "name": "scrollBuffer",
             "type": "{Number}",
@@ -1469,7 +1498,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 156,
+            "line": 169,
             "itemtype": "property",
             "name": "useVirtualScrollbar",
             "type": "{Boolean}",
@@ -1481,7 +1510,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 200,
+            "line": 213,
             "description": "onRowClick action. Handles selection, and row expansion.",
             "itemtype": "event",
             "name": "onRowClick",
@@ -1502,7 +1531,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 241,
+            "line": 255,
             "description": "onRowDoubleClick action.",
             "itemtype": "event",
             "name": "onRowDoubleClick",
@@ -1523,7 +1552,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 251,
+            "line": 265,
             "description": "onScrolledToBottom action - sent when user scrolls to the bottom",
             "itemtype": "event",
             "name": "onScrolledToBottom",

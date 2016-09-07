@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.1.1" target="_blank">
-                                  Tag: v1.1.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.2.0" target="_blank">
+                                  Tag: v1.2.0
                                 </a>
                             </h4>
                         </div>
@@ -141,6 +141,7 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-light-table/templates/components/cells/base&#x27;;
+import cssStyleify from &#x27;ember-light-table/utils/css-styleify&#x27;;
 
 const {
   Component,
@@ -161,15 +162,24 @@ const Cell = Component.extend({
   layout,
   tagName: &#x27;td&#x27;,
   classNames: [&#x27;lt-cell&#x27;],
-  attributeBindings: [&#x27;width&#x27;],
+  attributeBindings: [&#x27;style&#x27;],
   classNameBindings: [&#x27;align&#x27;, &#x27;isSorted&#x27;, &#x27;column.cellClassNames&#x27;],
 
-  width: computed.readOnly(&#x27;column.width&#x27;),
   isSorted: computed.readOnly(&#x27;column.sorted&#x27;),
+
+  style: computed(&#x27;column.width&#x27;, function() {
+    return cssStyleify(this.get(&#x27;column&#x27;).getProperties([&#x27;width&#x27;]));
+  }),
 
   align: computed(&#x27;column.align&#x27;, function() {
     return &#x60;align-${this.get(&#x27;column.align&#x27;)}&#x60;;
   }).readOnly(),
+
+  /**
+   * @property table
+   * @type {Table}
+   */
+  table: null,
 
   /**
    * @property column
@@ -206,7 +216,7 @@ const Cell = Component.extend({
       return format.call(this, rawValue);
     }
     return rawValue;
-  }).readOnly()
+  })
 });
 
 Cell.reopenClass({

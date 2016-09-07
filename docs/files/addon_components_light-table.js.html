@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.1.1" target="_blank">
-                                  Tag: v1.1.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.2.0" target="_blank">
+                                  Tag: v1.2.0
                                 </a>
                             </h4>
                         </div>
@@ -142,17 +142,17 @@
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-light-table/templates/components/light-table&#x27;;
 import Table from &#x27;ember-light-table/classes/Table&#x27;;
+import cssStyleify from &#x27;ember-light-table/utils/css-styleify&#x27;;
 
 const {
   assert,
   Component,
-  computed,
-  String:{htmlSafe}
+  computed
 } = Ember;
 
 /**
  * @module Light Table
- * @main ligh-table
+ * @main light-table
  */
 
 /**
@@ -164,7 +164,7 @@ const {
  * {{/light-table}}
  * &#x60;&#x60;&#x60;
  *
- * Please see the documentation for the [Head](../classes/Head.html), [Body](../classes/Body.html), and [Foot](../classes/Foot.html) components
+ * Please see the documentation for the [Head](../classes/t.head.html), [Body](../classes/t.body.html), and [Foot](../classes/t.foot.html) components
  * for more details on all possible options and actions.
  *
  * @class light-table
@@ -243,10 +243,7 @@ const LightTable = Component.extend({
   }).readOnly(),
 
   style: computed(&#x27;height&#x27;, function () {
-    let height = this.get(&#x27;height&#x27;);
-    if (height) {
-      return htmlSafe(&#x60;height:${this.get(&#x27;height&#x27;)};&#x60;);
-    }
+    return cssStyleify(this.getProperties([&#x27;height&#x27;]));
   }),
 
   init() {

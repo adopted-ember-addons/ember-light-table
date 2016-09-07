@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.1.1" target="_blank">
-                                  Tag: v1.1.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.2.0" target="_blank">
+                                  Tag: v1.2.0
                                 </a>
                             </h4>
                         </div>
@@ -242,6 +242,19 @@ export default Component.extend({
   multiSelect: false,
 
   /**
+   * When multiSelect is true, this property determines whether or not &#x60;ctrl&#x60;
+   * (or &#x60;cmd&#x60;) is required to select additional rows, one by one. When false,
+   * simply clicking on subsequent rows will select or deselect them.
+   *
+   * &#x60;shift&#x60; to select many consecutive rows is unaffected by this property.
+   *
+   * @property multiSelectRequiresKeyboard
+   * @type {Boolean}
+   * @default true
+   */
+  multiSelectRequiresKeyboard: true,
+
+  /**
    * Hide scrollbar when not scrolling
    *
    * @property autoHideScrollbar
@@ -347,6 +360,7 @@ export default Component.extend({
     onRowClick(row, e) {
       let rows = this.get(&#x27;table.rows&#x27;);
       let multiSelect = this.get(&#x27;multiSelect&#x27;);
+      let multiSelectRequiresKeyboard = this.get(&#x27;multiSelectRequiresKeyboard&#x27;);
       let canSelect = this.get(&#x27;canSelect&#x27;);
       let isSelected = row.get(&#x27;selected&#x27;);
       let currIndex = rows.indexOf(row);
@@ -359,7 +373,7 @@ export default Component.extend({
         if (e.shiftKey &amp;&amp; multiSelect) {
           rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach(r =&gt; r.set(&#x27;selected&#x27;, !isSelected));
           this._prevSelectedIndex = currIndex;
-        } else if ((e.ctrlKey || e.metaKey) &amp;&amp; multiSelect) {
+        } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) &amp;&amp; multiSelect) {
           row.toggleProperty(&#x27;selected&#x27;);
         } else {
           this.get(&#x27;table.selectedRows&#x27;).setEach(&#x27;selected&#x27;, false);
