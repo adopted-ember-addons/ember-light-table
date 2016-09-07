@@ -5,6 +5,7 @@ Changelog
 
 ### Pull Requests
 
+- [#160](https://github.com/offirgolan/ember-light-table/pull/160)  [FEATURE] `multiSelectRequiresKeyboard` option for toggling row selection without ctrl/cmd  *by [Jeremy Bargar](https://github.com/bargar)*
 - [#163](https://github.com/offirgolan/ember-light-table/pull/163)  [BUGFIX] Autoprefix addon.css (until PostCSS is up and running) + install ember-cli-autoprefixer to prefix demo page CSS  *by [Offir Golan](https://github.com/offirgolan)*
 - [#163](https://github.com/offirgolan/ember-light-table/pull/163)  [BUGFIX] Pass table instance + rawValue to custom cell component  *by [Offir Golan](https://github.com/offirgolan)*
 - [#163](https://github.com/offirgolan/ember-light-table/pull/163)  [BUGFIX] Use style instead of deprecated width attribute  *by [Offir Golan](https://github.com/offirgolan)*
