@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/columns/base';
+import cssStyleify from 'ember-light-table/utils/css-styleify';
 
 const {
   Component,
@@ -21,19 +22,28 @@ const Column = Component.extend({
   layout,
   tagName: 'th',
   classNames: ['lt-column'],
-  attributeBindings: ['width', 'colspan', 'rowspan'],
+  attributeBindings: ['style', 'colspan', 'rowspan'],
   classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isHideable', 'isSortable', 'isSorted', 'isResizable', 'column.classNames'],
 
-  width: computed.readOnly('column.width'),
   isGroupColumn: computed.readOnly('column.isGroupColumn'),
   isSortable: computed.readOnly('column.sortable'),
   isSorted: computed.readOnly('column.sorted'),
   isHideable: computed.readOnly('column.hideable'),
   isResizable: computed.readOnly('column.resizable'),
 
+  style: computed('column.width', function() {
+    return cssStyleify(this.get('column').getProperties(['width']));
+  }),
+
   align: computed('column.align', function () {
     return `align-${this.get('column.align')}`;
   }).readOnly(),
+
+  /**
+   * @property table
+   * @type {Table}
+   */
+  table: null,
 
   /**
    * @property column

@@ -9,8 +9,8 @@ export default Ember.Component.extend({
   layout,
   classNameBindings: [':lt-column-resizer', 'isResizing'],
   column: null,
-  isResizing: false,
 
+  isResizing: false,
   startWidth: null,
   startX: null,
 
@@ -31,8 +31,16 @@ export default Ember.Component.extend({
     $(document).off('mouseup', this.__mouseUp);
   },
 
+  click(e) {
+    /*
+      Prevent click events from propagating (i.e. onColumnClick)
+     */
+    e.preventDefault();
+    e.stopPropagation();
+  },
+
   mouseDown(e) {
-    const $column = $(this.get('element')).parent('th');
+    const $column = this._getColumn();
 
     e.preventDefault();
     e.stopPropagation();
@@ -49,7 +57,10 @@ export default Ember.Component.extend({
       e.preventDefault();
       e.stopPropagation();
 
+      const $column = this._getColumn();
+
       this.set('isResizing', false);
+      this.set('column.width', `${$column.width()}px`);
       this.sendAction('columnResized', this.get('column.width'));
     }
   },
@@ -59,10 +70,15 @@ export default Ember.Component.extend({
       e.preventDefault();
       e.stopPropagation();
 
+      const $column = this._getColumn();
       const { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
       const width = startWidth + (e.pageX - startX);
 
-      this.set('column.width', `${width}px`);
+      $column.width(`${width}px`);
     }
+  },
+
+  _getColumn() {
+    return $(this.get('element')).parent('th');
   }
 });
