@@ -24,7 +24,7 @@ test('it renders', function(assert) {
   assert.equal(this.$().text().trim(), '');
 });
 
-test('row selection', function(assert) {
+test('row selection - enable or disable', function(assert) {
   this.set('table', new Table(Columns, createUsers(1)));
   this.set('canSelect', false);
 
@@ -45,7 +45,7 @@ test('row selection', function(assert) {
   assert.ok(row.hasClass('is-selected'));
 });
 
-test('row selection', function(assert) {
+test('row selection - ctrl-click to modify selection', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true}}`);
@@ -57,16 +57,40 @@ test('row selection', function(assert) {
   assert.equal(this.$('tbody > tr').length, 5);
 
   firstRow.click();
-  assert.equal(this.$('tr.is-selected').length, 1);
+  assert.equal(this.$('tr.is-selected').length, 1, 'clicking a row selects it');
 
   lastRow.trigger(createClickEvent({shiftKey: true}));
-  assert.equal(this.$('tr.is-selected').length, 5);
+  assert.equal(this.$('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
 
   middleRow.trigger(createClickEvent({ctrlKey: true}));
-  assert.equal(this.$('tr.is-selected').length, 4);
+  assert.equal(this.$('tr.is-selected').length, 4, 'ctrl-clicking a selected row deselects it');
 
   firstRow.click();
-  assert.equal(this.$('tr.is-selected').length, 0);
+  assert.equal(this.$('tr.is-selected').length, 0, 'clicking a selected row deselects all rows');
+});
+
+test('row selection - click to modify selection', function(assert) {
+  this.set('table', new Table(Columns, createUsers(5)));
+
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false}}`);
+
+  let firstRow = this.$('tr:first');
+  let middleRow = this.$('tr:nth-of-type(3)');
+  let lastRow = this.$('tr:last');
+
+  assert.equal(this.$('tbody > tr').length, 5);
+
+  firstRow.click();
+  assert.equal(this.$('tr.is-selected').length, 1, 'clicking a row selects it');
+
+  lastRow.trigger(createClickEvent({shiftKey: true}));
+  assert.equal(this.$('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
+
+  middleRow.click();
+  assert.equal(this.$('tr.is-selected').length, 4, 'clicking a selected row deselects it without affecting other selected rows');
+
+  middleRow.click();
+  assert.equal(this.$('tr.is-selected').length, 5, 'clicking a deselected row selects it without affecting other selected rows');
 });
 
 test('row expansion', function(assert) {
