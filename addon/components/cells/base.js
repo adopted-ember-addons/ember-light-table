@@ -75,7 +75,7 @@ const Cell = Component.extend({
       return format.call(this, rawValue);
     }
     return rawValue;
-  }).readOnly()
+  })
 });
 
 Cell.reopenClass({
