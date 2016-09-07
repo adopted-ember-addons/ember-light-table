@@ -1,14 +1,15 @@
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { Row, Column} from 'ember-light-table';
+import { Row, Column } from 'ember-light-table';
 
 moduleForComponent('light-table/cells/base', 'Integration | Component | Cells | base', {
   integration: true
 });
 
 test('it renders', function(assert) {
-  this.render(hbs`{{light-table/cells/base}}`);
+  this.set('column', new Column());
+  this.render(hbs`{{light-table/cells/base column=column}}`);
 
   assert.equal(this.$().text().trim(), '');
 });
