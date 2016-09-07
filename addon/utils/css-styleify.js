@@ -12,7 +12,7 @@ export default function cssStyleify(hash = {}) {
     let value = hash[key];
 
     if(isPresent(value)) {
-      styles.push(`${dasherize(key)}: ${hash[key]}`);
+      styles.push(`${dasherize(key)}: ${value}`);
     }
   });
 
