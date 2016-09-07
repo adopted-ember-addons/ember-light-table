@@ -1,6 +1,16 @@
 Changelog
 =========
 
+## v1.2.0
+
+### Pull Requests
+
+- [#163](https://github.com/offirgolan/ember-light-table/pull/163)  [BUGFIX] Autoprefix addon.css (until PostCSS is up and running) + install ember-cli-autoprefixer to prefix demo page CSS  *by [Offir Golan](https://github.com/offirgolan)*
+- [#163](https://github.com/offirgolan/ember-light-table/pull/163)  [BUGFIX] Pass table instance + rawValue to custom cell component  *by [Offir Golan](https://github.com/offirgolan)*
+- [#163](https://github.com/offirgolan/ember-light-table/pull/163)  [BUGFIX] Use style instead of deprecated width attribute  *by [Offir Golan](https://github.com/offirgolan)*
+- [#163](https://github.com/offirgolan/ember-light-table/pull/163)  [BUGFIX] Remove readOnly from value in base cell so it can be modified  *by [Offir Golan](https://github.com/offirgolan)*
+- [#163](https://github.com/offirgolan/ember-light-table/pull/163)  [BUGFIX] Column resizer now applies width to table rows on `mouseUp` instead of on `mouseMove`  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.1.1
 
 ### Pull Requests
