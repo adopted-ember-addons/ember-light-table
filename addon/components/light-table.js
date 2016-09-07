@@ -1,12 +1,12 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/light-table';
 import Table from 'ember-light-table/classes/Table';
+import cssStyleify from 'ember-light-table/utils/css-styleify';
 
 const {
   assert,
   Component,
-  computed,
-  String:{htmlSafe}
+  computed
 } = Ember;
 
 /**
@@ -102,10 +102,7 @@ const LightTable = Component.extend({
   }).readOnly(),
 
   style: computed('height', function () {
-    let height = this.get('height');
-    if (height) {
-      return htmlSafe(`height:${this.get('height')};`);
-    }
+    return cssStyleify(this.getProperties(['height']));
   }),
 
   init() {

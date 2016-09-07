@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/cells/base';
+import cssStyleify from 'ember-light-table/utils/css-styleify';
 
 const {
   Component,
@@ -20,15 +21,24 @@ const Cell = Component.extend({
   layout,
   tagName: 'td',
   classNames: ['lt-cell'],
-  attributeBindings: ['width'],
+  attributeBindings: ['style'],
   classNameBindings: ['align', 'isSorted', 'column.cellClassNames'],
 
-  width: computed.readOnly('column.width'),
   isSorted: computed.readOnly('column.sorted'),
+
+  style: computed('column.width', function() {
+    return cssStyleify(this.get('column').getProperties(['width']));
+  }),
 
   align: computed('column.align', function() {
     return `align-${this.get('column.align')}`;
   }).readOnly(),
+
+  /**
+   * @property table
+   * @type {Table}
+   */
+  table: null,
 
   /**
    * @property column
@@ -65,7 +75,7 @@ const Cell = Component.extend({
       return format.call(this, rawValue);
     }
     return rawValue;
-  }).readOnly()
+  })
 });
 
 Cell.reopenClass({
