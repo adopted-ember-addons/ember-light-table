@@ -55,7 +55,7 @@ test('CP - visibleSubColumns', function(assert) {
   assert.equal(table.get('visibleSubColumns.length'), 2);
 });
 
-test('CP - flattenedColumns', function(assert) {
+test('CP - allColumns', function(assert) {
   let table = new Table();
   let col = new Column();
   let group = new Column({
@@ -66,7 +66,7 @@ test('CP - flattenedColumns', function(assert) {
   });
 
   table.setColumns([col, group, group2]);
-  assert.equal(table.get('flattenedColumns.length'), 5);
+  assert.equal(table.get('allColumns.length'), 5);
 });
 
 
