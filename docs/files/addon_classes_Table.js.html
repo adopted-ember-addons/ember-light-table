@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.2.0" target="_blank">
-                                  Tag: v1.2.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.3.0" target="_blank">
+                                  Tag: v1.3.0
                                 </a>
                             </h4>
                         </div>
@@ -214,19 +214,19 @@ export default class Table extends Ember.Object.extend({
    * @property hideableColumns
    * @type {Ember.Array}
    */
-  hideableColumns: computed.filterBy(&#x27;flattenedColumns&#x27;, &#x27;hideable&#x27;, true).readOnly(),
+  hideableColumns: computed.filterBy(&#x27;allColumns&#x27;, &#x27;hideable&#x27;, true).readOnly(),
 
   /**
    * @property hiddenColumns
    * @type {Ember.Array}
    */
-  hiddenColumns: computed.filterBy(&#x27;flattenedColumns&#x27;, &#x27;hidden&#x27;, true).readOnly(),
+  hiddenColumns: computed.filterBy(&#x27;allColumns&#x27;, &#x27;hidden&#x27;, true).readOnly(),
 
   /**
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: computed.filterBy(&#x27;flattenedColumns&#x27;, &#x27;hidden&#x27;, false).readOnly(),
+  visibleColumns: computed.filterBy(&#x27;allColumns&#x27;, &#x27;hidden&#x27;, false).readOnly(),
 
   /**
    * @property visibleColumnGroups
@@ -250,10 +250,10 @@ export default class Table extends Ember.Object.extend({
   }).readOnly(),
 
   /**
-   * @property flattenedColumns
+   * @property allColumns
    * @type {Ember.Array}
    */
-  flattenedColumns: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.subColumns&#x27;, function() {
+  allColumns: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.subColumns&#x27;, function() {
     return emberArray(this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
       let subColumns = c.get(&#x27;subColumns&#x27;);
       if (isEmpty(subColumns)) {

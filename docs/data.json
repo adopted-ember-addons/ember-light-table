@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.2.0"
+        "version": "v1.3.0"
     },
     "files": {
         "addon/classes/Column.js": {
@@ -767,7 +767,7 @@
             "file": "addon/classes/Table.js",
             "line": 111,
             "itemtype": "property",
-            "name": "flattenedColumns",
+            "name": "allColumns",
             "type": "{Ember.Array}",
             "class": "Table",
             "module": "Table"
