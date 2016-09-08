@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.3.0
+
+### Pull Requests
+
+- [#164](https://github.com/offirgolan/ember-light-table/pull/164)  [FEATURE] Rename flattenedColumns to allColumns  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.2.0
 
 ### Pull Requests
