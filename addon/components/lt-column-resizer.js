@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   layout,
   classNameBindings: [':lt-column-resizer', 'isResizing'],
   column: null,
+  resizeOnDrag: false,
 
   isResizing: false,
   startWidth: null,
@@ -70,11 +71,16 @@ export default Ember.Component.extend({
       e.preventDefault();
       e.stopPropagation();
 
+      const resizeOnDrag = this.get('resizeOnDrag');
       const $column = this._getColumn();
       const { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
       const width = startWidth + (e.pageX - startX);
 
-      $column.width(`${width}px`);
+      if(resizeOnDrag) {
+        this.set('column.width', `${width}px`);
+      } else {
+        $column.width(`${width}px`);
+      }
     }
   },
 

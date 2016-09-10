@@ -58,6 +58,15 @@ export default Ember.Mixin.create({
   multiColumnSort: false,
 
   /**
+   * Resize all cells in the column instead of just the header / footer
+   *
+   * @property resizeOnDrag
+   * @type {Boolean}
+   * @default false
+   */
+  resizeOnDrag: false,
+
+  /**
    * @property iconAscending
    * @type {String}
    * @default ''
