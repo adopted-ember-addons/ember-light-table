@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.3.1
+
+### Pull Requests
+
+- [#166](https://github.com/offirgolan/ember-light-table/pull/166)  [FEATURE] Introduce `resizeOnDrag` for column resizing  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.3.0
 
 ### Pull Requests
