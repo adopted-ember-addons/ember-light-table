@@ -60,6 +60,7 @@
   "dependencies": {
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.11",
+    "ember-get-config": "0.1.7",
     "ember-in-viewport": "2.1.0",
     "ember-scrollable": "0.3.2",
     "ember-truth-helpers": "1.2.0",

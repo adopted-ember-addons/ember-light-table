@@ -1,5 +1,10 @@
+import Ember from 'ember';
 import { Table, Column, Row } from 'ember-light-table';
 import { module, test } from 'qunit';
+
+const {
+  A: emberArray
+} = Ember;
 
 module('Unit | Classes | Table');
 
@@ -407,4 +412,64 @@ test('static table method - createColumns', function(assert) {
   let cols = Table.createColumns([{}, {}]);
   assert.equal(cols.length, 2);
   assert.ok(cols[0] instanceof Column);
+});
+
+test('table modifications with sync enabled - simple', function(assert) {
+  let rows = emberArray([]);
+  let table = new Table([], rows, { enableSync: true });
+
+  table.addRow({ firstName: 'Offir' });
+
+  assert.equal(table.get('rows.length'), 1);
+  assert.equal(table.get('rows.length'), rows.get('length'));
+
+  rows.pushObject({ firstName: 'Taras' });
+
+  assert.equal(rows.get('length'), 2);
+  assert.equal(table.get('rows.length'), rows.get('length'));
+
+  assert.deepEqual(table.get('rows').getEach('firstName'), rows.getEach('firstName'));
+
+  table.get('rows').clear();
+
+  assert.equal(table.get('rows.length'), 0);
+  assert.equal(table.get('rows.length'), rows.get('length'));
+});
+
+test('table modifications with sync enabled - stress', function(assert) {
+  let rows = emberArray([]);
+  let table = new Table([], rows, { enableSync: true });
+
+  for(let i = 0; i < 100; i++) {
+    table.addRow({ position: i });
+  }
+
+  assert.equal(table.get('rows.length'), rows.get('length'));
+  assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+
+  for(let i = 100; i < 200; i++) {
+    rows.pushObject({ position: i });
+  }
+
+  assert.equal(table.get('rows.length'), rows.get('length'));
+  assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+
+  table.removeRowAt(5);
+  table.removeRowAt(10);
+  table.removeRowAt(125);
+
+  assert.equal(table.get('rows.length'), rows.get('length'));
+  assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+
+  rows.removeAt(10);
+  rows.removeAt(20);
+  rows.removeAt(150);
+
+  assert.equal(table.get('rows.length'), rows.get('length'));
+  assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+
+  table.get('rows').clear();
+
+  assert.equal(table.get('rows.length'), 0);
+  assert.equal(table.get('rows.length'), rows.get('length'));
 });

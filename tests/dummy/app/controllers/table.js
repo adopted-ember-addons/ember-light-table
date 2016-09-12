@@ -2,28 +2,33 @@ import Ember from 'ember';
 import Table from 'ember-light-table';
 
 const {
-  isEmpty
+  isEmpty,
+  computed
 } = Ember;
 
 export default Ember.Controller.extend({
   columns: null,
-  table: null,
   sort: null,
   page: 1,
   limit: 10,
   dir: 'asc',
   isLoading: false,
   canLoadMore: true,
+  model: null,
 
   init() {
     this._super(...arguments);
-    this.set('table', new Table(this.get('columns')));
   },
+
+  table: computed('model', function() {
+    return new Table(this.get('columns'), this.get('model'), { enableSync: true });
+  }),
 
   fetchRecords() {
     this.set('isLoading', true);
     this.store.query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then(records => {
-      this.get('table').addRows(records);
+      // this.get('table').addRows(records);
+      this.get('model').pushObjects(records.toArray());
       this.set('isLoading', false);
       this.set('canLoadMore', !isEmpty(records));
     });
@@ -44,7 +49,7 @@ export default Ember.Controller.extend({
           sort: column.get('valuePath'),
           page: 1
         });
-        this.get('table').setRows([]);
+        this.get('model').setObjects([]);
         this.fetchRecords();
       }
     }
