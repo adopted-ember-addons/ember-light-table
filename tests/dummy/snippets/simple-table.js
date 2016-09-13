@@ -39,10 +39,9 @@ export default Ember.Component.extend({
     }];
   }),
 
-  init() {
-    this._super(...arguments);
-    this.set('table', new Table(this.get('columns')));
-  },
+  table: computed('columns', function(){
+    return new Table(this.get('columns'));
+  }),
 
   fetchRecords() {
     this.set('isLoading', true);
