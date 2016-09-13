@@ -36,10 +36,10 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - npm config set spin false
-  - npm install -g bower
-  - bower --version
   - npm install -g npm@^3
+  - npm install -g bower
   - npm install -g codeclimate-test-reporter
+  - bower --version
 
 install:
   - npm install
