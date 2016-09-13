@@ -159,6 +159,16 @@ export default class Table extends Ember.Object.extend({
     this.setProperties({ columns: _columns, rows: _rows });
   }
 
+  destroy() {
+    this._super(...arguments);
+
+    let rows = this.get('rows');
+    
+    if(rows instanceof RowSyncArrayProxy) {
+      rows.destroy();
+    }
+  }
+
   // Rows
 
   /**
