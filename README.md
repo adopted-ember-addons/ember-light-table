@@ -61,7 +61,7 @@ const computed = Ember.computed;
 
 export default Ember.Component.extend({
   model: null,
-  table: null,
+  _table: null,
 
   columns: computed(function() {
     return [{
@@ -90,10 +90,19 @@ export default Ember.Component.extend({
     }];
   }),
 
+  table: computed('model.[]', function() {
+    /*
+      Set the table rows when our model changes
+     */
+    this.get('_table').setRows(this.get('model'));
+
+    return this.get('_table');
+  }),
+
   init() {
     this._super(...arguments);
-    this.set('table', new Table(this.get('columns'), this.get('model')));
-  }
+    this.set('_table', new Table(this.get('columns')));
+  },
 });
 ```
 
