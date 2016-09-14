@@ -131,7 +131,7 @@ export default Ember.Mixin.create({
     /**
      * onColumnResized action.
      *
-     * @method onColumnResized
+     * @event onColumnResized
      * @param  {Column}   column The column that was resized
      * @param  {String}   width  The final width of the column
      */
