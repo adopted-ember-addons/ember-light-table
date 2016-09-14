@@ -102,10 +102,11 @@ import Row from './classes/Row';
  */
 
  /**
-  * Now that we have our `table`, we can declare our component in our template.
+  * The `light-table` component exposes 3 contextual component (head, body, and foot).
   *
   * ```hbs
   * {{#light-table table as |t|}}
+  *
   *   {{t.head}}
   *
   *   {{#t.body as |body|}}
@@ -127,11 +128,12 @@ import Row from './classes/Row';
   *   {{/t.body}}
   *
   *   {{t.foot}}
+  *
   * {{/light-table}}
   * ```
   *
-  * Please note that each of these contextual components have a wide array of options so it is advised to look
-  * through the documentation.
+  * Each of these contextual components have a wide array of options so it is advised to look
+  * through their documentation.
   *
   * @module Usage
   * @submodule Component Declaration
