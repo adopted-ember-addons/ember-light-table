@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   limit: 20,
   dir: 'asc',
   sort: null,
-  table: null,
+  model: null,
   isLoading: false,
   canLoadMore: true,
 
@@ -22,15 +22,14 @@ export default Ember.Component.extend({
     }];
   }),
 
-  init() {
-    this._super(...arguments);
-    this.set('table', new Table(this.get('columns')));
-  },
+  table: computed('model', function() {
+    return new Table(this.get('columns'), this.get('model'), { enableSync: true });
+  }),
 
   fetchRecords() {
     this.set('isLoading', true);
-    this.get('store').query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then(records => {
-      this.get('table').addRows(records);
+    this.store.query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then(records => {
+      this.get('model').pushObjects(records.toArray());
       this.set('isLoading', false);
       this.set('canLoadMore', !isEmpty(records));
     });
@@ -51,7 +50,7 @@ export default Ember.Component.extend({
           sort: column.get('valuePath'),
           page: 1
         });
-        this.get('table').setRows([]);
+        this.get('model').clear();
         this.fetchRecords();
       }
     }

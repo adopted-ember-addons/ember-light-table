@@ -143,7 +143,8 @@ export default class Table extends Ember.Object.extend({
    * @param  {Array} columns
    * @param  {Array} rows
    * @param  {Object} options
-   *
+   *    - enableSync ( _Boolean_ ): If true, creates a two way sync between the table's rows
+   *                                and the passed rows collection
    */
   constructor(columns = [], rows = [], options = {}) {
     super();
@@ -163,7 +164,7 @@ export default class Table extends Ember.Object.extend({
     this._super(...arguments);
 
     let rows = this.get('rows');
-    
+
     if(rows instanceof RowSyncArrayProxy) {
       rows.destroy();
     }
