@@ -131,3 +131,23 @@ test('fixed footer', function(assert) {
 //   assert.equal(this.$('.lt-foot-wrap').height(), 20, 'header is 20px tall');
 
 // });
+
+test('renders with table helper', function(assert){
+
+  this.set('columns', Columns);
+  this.set('data', createUsers(5));
+
+  this.render(hbs`
+    {{#light-table (table columns data) as |t|}}
+      {{t.head}}
+      {{t.body}}
+    {{/light-table}}
+  `);
+
+  assert.equal(this.$('.lt-row').length, 5, 'five rows of data');  
+
+  this.set('data', createUsers(15));
+
+  assert.equal(this.$('.lt-row').length, 20, 'twenty rows of data');
+
+});
