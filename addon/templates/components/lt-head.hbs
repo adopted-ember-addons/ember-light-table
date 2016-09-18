@@ -11,7 +11,7 @@
         {{#if subColumns.length}}
           <tr>
             {{#each subColumns as |column|}}
-              <td style={{if column.width (concat 'width: ' column.width)}} class="lt-scaffolding"></td>
+              <td width={{column.width}} class="lt-scaffolding"></td>
             {{/each}}
           </tr>
         {{/if}}
