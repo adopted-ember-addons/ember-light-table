@@ -1,7 +1,7 @@
 {{#with (hash
-    row=(or components.row (component 'lt-row'))
-    spanned-row=(or components.spanned-row (component 'lt-spanned-row'))
-    infinity=(or components.infinity (component 'lt-infinity'))
+    row=(or rowComponent (component 'lt-row'))
+    spanned-row=(or spannedRowComponent (component 'lt-spanned-row'))
+    infinity=(or infinityComponent (component 'lt-infinity'))
   ) as |lt|
 }}
   {{#lt-scrollable

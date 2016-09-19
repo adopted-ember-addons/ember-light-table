@@ -144,11 +144,7 @@ test('accepts components that are used in the body', function(assert) {
 
   this.render(hbs`
     {{#light-table table as |t|}}
-      {{t.body 
-        components=(hash 
-          row=(component "custom-row" classNames="custom-row")
-        )
-      }}
+      {{t.body rowComponent=(component "custom-row" classNames="custom-row")}}
     {{/light-table}}
   `);
 
@@ -171,9 +167,7 @@ test('passed in components can have computed properties', function(assert) {
   this.render(hbs`
     {{#light-table table as |t|}}
       {{t.body 
-        components=(hash 
-          row=(component "custom-row" classNames="custom-row" current=current)
-        )
+        rowComponent=(component "custom-row" classNames="custom-row" current=current)
       }}
     {{/light-table}}
   `);
