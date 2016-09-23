@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.3.1" target="_blank">
-                                  Tag: v1.3.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.0" target="_blank">
+                                  Tag: v1.4.0
                                 </a>
                             </h4>
                         </div>
@@ -80,6 +80,8 @@
                                         </li>
                                         <li>
                                             <a href="../modules/Usage.html">Usage</a>
+                                                    <li class="sub"><a href="../modules/Table Declaration.html">Table Declaration</a></li>
+                                                    <li class="sub"><a href="../modules/Component Declaration.html">Component Declaration</a></li>
                                         </li>
                                 </ol>
                         </div>
@@ -142,13 +144,26 @@
 import Ember from &#x27;ember&#x27;;
 import Row from &#x27;ember-light-table/classes/Row&#x27;;
 import Column from &#x27;ember-light-table/classes/Column&#x27;;
+import SyncArrayProxy from &#x27;ember-light-table/-private/sync-array-proxy&#x27;;
+import { mergeOptionsWithGlobals } from &#x27;ember-light-table/-private/global-options&#x27;;
 
 const {
+  get,
   computed,
   isNone,
   isEmpty,
   A: emberArray
 } = Ember;
+
+const RowSyncArrayProxy = SyncArrayProxy.extend({
+  serializeContentObjects(objects) {
+    return Table.createRows(objects);
+  },
+
+  serializeSyncArrayObjects(objects) {
+    return objects.map(o =&gt; get(o, &#x27;content&#x27;));
+  }
+});
 
 /**
  * @module Table
@@ -270,13 +285,32 @@ export default class Table extends Ember.Object.extend({
    * @constructor
    * @param  {Array} columns
    * @param  {Array} rows
+   * @param  {Object} options
+   *    - enableSync ( _Boolean_ ): If true, creates a two way sync between the table&#x27;s rows
+   *                                and the passed rows collection
    */
-  constructor(columns = [], rows = []) {
+  constructor(columns = [], rows = [], options = {}) {
     super();
-    this.setProperties({
-      rows: emberArray(Table.createRows(rows)),
-      columns: emberArray(Table.createColumns(columns)),
-    });
+
+    let _columns = emberArray(Table.createColumns(columns));
+    let _rows = emberArray(Table.createRows(rows));
+    let _options = mergeOptionsWithGlobals(options);
+
+    if(_options.enableSync) {
+      _rows = RowSyncArrayProxy.create({ syncArray: rows, content: _rows });
+    }
+
+    this.setProperties({ columns: _columns, rows: _rows });
+  }
+
+  destroy() {
+    this._super(...arguments);
+
+    let rows = this.get(&#x27;rows&#x27;);
+
+    if(rows instanceof RowSyncArrayProxy) {
+      rows.destroy();
+    }
   }
 
   // Rows
@@ -378,6 +412,16 @@ export default class Table extends Ember.Object.extend({
     rows.forEach(r =&gt; this.removeRow(r));
   }
 
+
+  /**
+   * Remove a row at the specified index
+   * @method removeRowAt
+   * @param  {Number}  index
+   */
+  removeRowAt(index) {
+    this.get(&#x27;rows&#x27;).removeAt(index);
+  }
+
   // Columns
 
   /**
@@ -461,6 +505,15 @@ export default class Table extends Ember.Object.extend({
    */
   removeColumns(columns = []) {
     return this.get(&#x27;columns&#x27;).removeObjects(columns);
+  }
+
+  /**
+   * Remove a column at the specified index
+   * @method removeColumnAt
+   * @param  {Number}  index
+   */
+  removeColumnAt(index) {
+    this.get(&#x27;columns&#x27;).removeAt(index);
   }
 
   /**

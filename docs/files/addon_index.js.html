@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.3.1" target="_blank">
-                                  Tag: v1.3.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.0" target="_blank">
+                                  Tag: v1.4.0
                                 </a>
                             </h4>
                         </div>
@@ -80,6 +80,8 @@
                                         </li>
                                         <li>
                                             <a href="../modules/Usage.html">Usage</a>
+                                                    <li class="sub"><a href="../modules/Table Declaration.html">Table Declaration</a></li>
+                                                    <li class="sub"><a href="../modules/Component Declaration.html">Component Declaration</a></li>
                                         </li>
                                 </ol>
                         </div>
@@ -155,12 +157,20 @@ import Row from &#x27;./classes/Row&#x27;;
  * ## Usage
  * There are two parts to this addon. The first is the [Table](../classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.
  *
- * ### Table Declaration
- * The &#x60;Table&#x60; constructor accepts an array of &#x60;Columns&#x60; or column options and an array of rows.
+ * @module Usage
+ */
+
+/**
+ * ## Creating a Table Instance
+ *
+ * The first step is to create a table instance that will be used by the component to render
+ * the actual table structure. This same table instance can be used add, remove, and modify
+ * rows and columns. See the [table class documentation](../classes/Table.html) for more details.
  *
  * &#x60;&#x60;&#x60;javascript
  * import Table from &#x27;ember-light-table&#x27;;
- * const table = new Table(columns, rows);
+ *
+ * const table = new Table(columns, rows, options);
  * &#x60;&#x60;&#x60;
  *
  * Here is a more real-word example
@@ -170,11 +180,10 @@ import Row from &#x27;./classes/Row&#x27;;
  * import Ember from &#x27;ember&#x27;;
  * import Table from &#x27;ember-light-table&#x27;;
  *
- * const computed = Ember.computed;
+ * const { computed } = Ember;
  *
  * export default Ember.Component.extend({
  *   model: null,
- *   table: null,
  *
  *   columns: computed(function() {
  *     return [{
@@ -191,63 +200,87 @@ import Row from &#x27;./classes/Row&#x27;;
  *       label: &#x27;Last Name&#x27;,
  *       valuePath: &#x27;lastName&#x27;,
  *       width: &#x27;150px&#x27;
- *     }, {
- *       label: &#x27;Address&#x27;,
- *       valuePath: &#x27;address&#x27;
- *     }, {
- *       label: &#x27;State&#x27;,
- *       valuePath: &#x27;state&#x27;
- *     }, {
- *       label: &#x27;Country&#x27;,
- *       valuePath: &#x27;country&#x27;
  *     }];
  *   }),
  *
- *   init() {
- *     this._super(...arguments);
- *     this.set(&#x27;table&#x27;, new Table(this.get(&#x27;columns&#x27;), this.get(&#x27;model&#x27;)));
- *   }
+ *   table: computed(&#x27;model&#x27;, function() {
+ *    return new Table(this.get(&#x27;columns&#x27;), this.get(&#x27;model&#x27;));
+ *   })
  * });
  * &#x60;&#x60;&#x60;
  *
- * For a list of possible column options, please
- * [checkout out the docs](../classes/Column.html).
+ * ## Implicit Row Creation
  *
- * ### Component Declaration
+ * To enable synchronization between the table&#x27;s rows and a model, the &#x60;enableSync&#x60; flag
+ * must be set to __true__.
  *
- * Now that we have our &#x60;table&#x60;, we can declare our component in our template.
+ * &#x60;&#x60;&#x60;javascript
+ * import Table from &#x27;ember-light-table&#x27;;
  *
- * &#x60;&#x60;&#x60;hbs
- * {{#light-table table as |t|}}
- *   {{t.head}}
- *
- *   {{#t.body as |body|}}
- *     {{#body.expanded-row as |row|}}
- *       Hello &lt;b&gt;{{row.firstName}}&lt;/b&gt;
- *     {{/body.expanded-row}}
- *
- *     {{#if isLoading}}
- *       {{#body.loader}}
- *         Loading...
- *       {{/body.loader}}
- *     {{/if}}
- *
- *     {{#if table.isEmpty}}
- *       {{#body.no-data}}
- *         No users found.
- *       {{/body.no-data}}
- *     {{/if}}
- *   {{/t.body}}
- *
- *   {{t.foot}}
- * {{/light-table}}
+ * const table = new Table(columns, model, { enableSync: true });
  * &#x60;&#x60;&#x60;
  *
- * Please note that each of these contextual components have a wide array of options so it is advised to look
- * through the documentation.
+ * The &#x60;enableSync&#x60; options creates a __two way__ sync. This means that any manipulation
+ * that occurs on the model will also take place on the table&#x27;s rows collection and vice versa.
+ *
+ * To default &#x60;enableSync&#x60; to always be true, you can add the following in your __config/environment.js__
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * module.exports = function(environment) {
+ *   var ENV = {
+ *    // ...
+ *     &#x27;ember-light-table&#x27;: {
+ *       enableSync: true
+ *     }
+ *   };
+ *
+ *   // ...
+ *
+ *   return ENV;
+ * };
+ * &#x60;&#x60;&#x60;
  *
  * @module Usage
+ * @submodule Table Declaration
  */
+
+ /**
+  * The &#x60;light-table&#x60; component exposes 3 contextual component (head, body, and foot).
+  *
+  * &#x60;&#x60;&#x60;hbs
+  * {{#light-table table as |t|}}
+  *
+  *   {{t.head}}
+  *
+  *   {{#t.body as |body|}}
+  *     {{#body.expanded-row as |row|}}
+  *       Hello &lt;b&gt;{{row.firstName}}&lt;/b&gt;
+  *     {{/body.expanded-row}}
+  *
+  *     {{#if isLoading}}
+  *       {{#body.loader}}
+  *         Loading...
+  *       {{/body.loader}}
+  *     {{/if}}
+  *
+  *     {{#if table.isEmpty}}
+  *       {{#body.no-data}}
+  *         No users found.
+  *       {{/body.no-data}}
+  *     {{/if}}
+  *   {{/t.body}}
+  *
+  *   {{t.foot}}
+  *
+  * {{/light-table}}
+  * &#x60;&#x60;&#x60;
+  *
+  * Each of these contextual components have a wide array of options so it is advised to look
+  * through their documentation.
+  *
+  * @module Usage
+  * @submodule Component Declaration
+  */
 export default Table;
 export { Table, Column, Row };
 

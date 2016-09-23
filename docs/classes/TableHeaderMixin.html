@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.3.1" target="_blank">
-                                  Tag: v1.3.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.0" target="_blank">
+                                  Tag: v1.4.0
                                 </a>
                             </h4>
                         </div>
@@ -80,6 +80,8 @@
                                         </li>
                                         <li>
                                             <a href="../modules/Usage.html">Usage</a>
+                                                    <li class="sub"><a href="../modules/Table Declaration.html">Table Declaration</a></li>
+                                                    <li class="sub"><a href="../modules/Component Declaration.html">Component Declaration</a></li>
                                         </li>
                                 </ol>
                         </div>
@@ -137,7 +139,7 @@
 
 <div class="page-header">
     <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> TableHeaderMixin Class
-            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L12" target="_blank">
+            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L12" target="_blank">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
     </h1>
@@ -155,7 +157,7 @@
 
 
         <div class="foundat">
-            Defined In: <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L12">addon/mixins/table-header.js:12</a>
+            Defined In: <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L12">addon/mixins/table-header.js:12</a>
         </div>
 </div>
 
@@ -212,10 +214,6 @@
                               </li>
                               <li class="index-item method private inherited">
                                   <a href="#method_detect">detect</a>
-
-                              </li>
-                              <li class="index-item method">
-                                  <a href="#method_onColumnResized">onColumnResized</a>
 
                               </li>
                               <li class="index-item method private inherited">
@@ -281,6 +279,10 @@
                                   <a href="#event_onColumnDoubleClick">onColumnDoubleClick</a>
 
                               </li>
+                              <li class="index-item event">
+                                  <a href="#event_onColumnResized">onColumnResized</a>
+
+                              </li>
                       </ul>
                   </div>
           </div>
@@ -316,7 +318,7 @@
   	<div class="meta">
   				<p>Inherited from
   				<a href="http://emberjs.com/api/classes/Ember.Mixin.html#method_apply">Ember.Mixin</a>:
-  		<a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/packages/ember-metal/lib/mixin.js#L632">packages/ember-metal/lib/mixin.js:632</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/packages/ember-metal/lib/mixin.js#L632">packages/ember-metal/lib/mixin.js:632</a>
   		</p>
   
   
@@ -376,7 +378,7 @@
   	<div class="meta">
   				<p>Inherited from
   				<a href="http://emberjs.com/api/classes/Ember.Mixin.html#method_detect">Ember.Mixin</a>:
-  		<a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/packages/ember-metal/lib/mixin.js#L661">packages/ember-metal/lib/mixin.js:661</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/packages/ember-metal/lib/mixin.js#L661">packages/ember-metal/lib/mixin.js:661</a>
   		</p>
   
   
@@ -407,71 +409,6 @@
   		</div>
   
   </div>
-  <div id="method_onColumnResized" class="method item">
-  	<span class="method-signature">
-  	<span class="name anchorable-toc">
-  		<a class="fa fa-link toc-anchor" href="#method_onColumnResized"></a>
-  		onColumnResized
-  	</span>
-  
-  		<div class="args">
-  			<span class="paren">(</span><ul class="args-list inline commas">
-  				<li class="arg">
-  						<code>column</code>
-  				</li>
-  				<li class="arg">
-  						<code>width</code>
-  				</li>
-  			</ul><span class="paren">)</span>
-  		</div>
-  	</span>
-  
-  
-  
-  
-  
-  
-  
-  	<div class="meta">
-  				<p>
-  				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L131">addon/mixins/table-header.js:131</a>
-  		</p>
-  
-  
-  
-  	</div>
-  
-  	<div class="description"><p>onColumnResized action.</p>
-  </div>
-  
-  		<div class="params">
-  			<h4>Parameters:</h4>
-  
-  			<ul class="params-list">
-  				<li class="param">
-  						<code class="param-name">column</code>
-  						<span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
-  
-  
-  					<div class="param-description"><p>The column that was resized</p>
-  </div>
-  
-  				</li>
-  				<li class="param">
-  						<code class="param-name">width</code>
-  						<span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-  
-  
-  					<div class="param-description"><p>The final width of the column</p>
-  </div>
-  
-  				</li>
-  			</ul>
-  		</div>
-  
-  
-  </div>
   <div id="method_reopen" class="method item private inherited">
   	<span class="method-signature">
   	<span class="name anchorable-toc">
@@ -498,7 +435,7 @@
   	<div class="meta">
   				<p>Inherited from
   				<a href="http://emberjs.com/api/classes/Ember.Mixin.html#method_reopen">Ember.Mixin</a>:
-  		<a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/packages/ember-metal/lib/mixin.js#L596">packages/ember-metal/lib/mixin.js:596</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/packages/ember-metal/lib/mixin.js#L596">packages/ember-metal/lib/mixin.js:596</a>
   		</p>
   
   
@@ -542,7 +479,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L39">addon/mixins/table-header.js:39</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L39">addon/mixins/table-header.js:39</a>
           </p>
   
   
@@ -570,7 +507,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L69">addon/mixins/table-header.js:69</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L69">addon/mixins/table-header.js:69</a>
           </p>
   
   
@@ -598,7 +535,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L76">addon/mixins/table-header.js:76</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L76">addon/mixins/table-header.js:76</a>
           </p>
   
   
@@ -626,7 +563,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L53">addon/mixins/table-header.js:53</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L53">addon/mixins/table-header.js:53</a>
           </p>
   
   
@@ -654,7 +591,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L60">addon/mixins/table-header.js:60</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L60">addon/mixins/table-header.js:60</a>
           </p>
   
   
@@ -684,7 +621,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L26">addon/mixins/table-header.js:26</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L26">addon/mixins/table-header.js:26</a>
           </p>
   
   
@@ -711,7 +648,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L46">addon/mixins/table-header.js:46</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L46">addon/mixins/table-header.js:46</a>
           </p>
   
   
@@ -740,7 +677,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L19">addon/mixins/table-header.js:19</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L19">addon/mixins/table-header.js:19</a>
           </p>
   
   
@@ -767,7 +704,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L33">addon/mixins/table-header.js:33</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L33">addon/mixins/table-header.js:33</a>
           </p>
   
   
@@ -800,7 +737,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L99">addon/mixins/table-header.js:99</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L99">addon/mixins/table-header.js:99</a>
           </p>
   
   
@@ -856,7 +793,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.3.1/addon/mixins/table-header.js#L120">addon/mixins/table-header.js:120</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L120">addon/mixins/table-header.js:120</a>
           </p>
   
   
@@ -889,6 +826,62 @@
   
                       <div class="param-description">
                           <p>The click event</p>
+  
+                      </div>
+  
+                  </li>
+              </ul>
+          </div>
+  
+  
+  </div>
+  <div id="event_onColumnResized" class="events item">
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#event_onColumnResized"></a>
+          onColumnResized
+      </h3>
+      <span class="type"></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.0/addon/mixins/table-header.js#L131">addon/mixins/table-header.js:131</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          <p>onColumnResized action.</p>
+  
+      </div>
+  
+          <div class="params">
+              <h4>Event Payload:</h4>
+  
+              <ul class="params-list">
+                  <li class="param">
+                          <code class="param-name">column</code>
+                          <span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
+  
+  
+                      <div class="param-description">
+                          <p>The column that was resized</p>
+  
+                      </div>
+  
+                  </li>
+                  <li class="param">
+                          <code class="param-name">width</code>
+                          <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
+  
+  
+                      <div class="param-description">
+                          <p>The final width of the column</p>
   
                       </div>
   

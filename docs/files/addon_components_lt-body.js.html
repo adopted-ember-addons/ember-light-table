@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.3.1" target="_blank">
-                                  Tag: v1.3.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.0" target="_blank">
+                                  Tag: v1.4.0
                                 </a>
                             </h4>
                         </div>
@@ -80,6 +80,8 @@
                                         </li>
                                         <li>
                                             <a href="../modules/Usage.html">Usage</a>
+                                                    <li class="sub"><a href="../modules/Table Declaration.html">Table Declaration</a></li>
+                                                    <li class="sub"><a href="../modules/Component Declaration.html">Component Declaration</a></li>
                                         </li>
                                 </ol>
                         </div>
@@ -314,6 +316,48 @@ export default Component.extend({
    * @private
    */
   useVirtualScrollbar: false,
+
+  /**
+   * Allows to customize the component used to render rows
+   * 
+   * &#x60;&#x60;&#x60;hbs
+   * {{#light-table table as |t|}}
+   *    {{t.body rowComponent=(component &#x27;my-row&#x27;)}}
+   * {{/light-table}}
+   * &#x60;&#x60;&#x60;
+   * @property rowComponent
+   * @type {Ember.Component}
+   * @default null
+   */
+  rowComponent: null,
+
+  /**
+   * Allows to customize the component used to render spanned rows
+   * 
+   * &#x60;&#x60;&#x60;hbs
+   * {{#light-table table as |t|}}
+   *    {{t.body spannedRowComponent=(component &#x27;my-spanned-row&#x27;)}}
+   * {{/light-table}}
+   * &#x60;&#x60;&#x60;
+   * @property rowComponent
+   * @type {Ember.Component}
+   * @default null
+   */
+  spannedRowComponent: null,
+
+  /**
+   * Allows to customize the component used to render infinite loader
+   * 
+   * &#x60;&#x60;&#x60;hbs
+   * {{#light-table table as |t|}}
+   *    {{t.body infinityComponent=(component &#x27;my-infinity&#x27;)}}
+   * {{/light-table}}
+   * &#x60;&#x60;&#x60;
+   * @property rowComponent
+   * @type {Ember.Component}
+   * @default null
+   */
+  infinityComponent: null,
 
   rows: computed.readOnly(&#x27;table.visibleRows&#x27;),
   columns: computed.readOnly(&#x27;table.visibleColumns&#x27;),
