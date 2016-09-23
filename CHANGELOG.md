@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## v1.4.0
+
+### Pull Requests
+
+- [#167](https://github.com/offirgolan/ember-light-table/pull/167)  [FEATURE] Two-way sync between rows and model  *by [Offir Golan](https://github.com/offirgolan)*
+- [#177](https://github.com/offirgolan/ember-light-table/pull/177)  [FEATURE] Customizable components  *by [Taras Mankovski](https://github.com/taras)*
+- [#183](https://github.com/offirgolan/ember-light-table/pull/183)  [BUGFIX] Add footer scaffolding and move width into style attr  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.3.1
 
 ### Pull Requests
