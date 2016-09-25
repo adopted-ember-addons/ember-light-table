@@ -4,11 +4,7 @@ export default function() {
 
   // These comments are here to help you get started. Feel free to delete them.
 
-  this.pretender.post.call(
-    this.pretender,
-    '/write-blanket-coverage',
-    this.pretender.passthrough
-  );
+  this.passthrough('/write-coverage');
 
   /*
     Config (with defaults).
