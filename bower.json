@@ -10,7 +10,8 @@
     "jquery": "2.2.4"
   },
   "resolutions": {
-    "ember": "2.3.1"
+    "ember": "2.3.1",
+    "jquery": "2.2.4"
   },
   "devDependencies": {
     "ember-qunit-notifications": "0.1.0"

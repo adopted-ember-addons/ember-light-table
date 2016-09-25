@@ -174,6 +174,48 @@ export default Component.extend({
    */
   useVirtualScrollbar: false,
 
+  /**
+   * Allows to customize the component used to render rows
+   * 
+   * ```hbs
+   * {{#light-table table as |t|}}
+   *    {{t.body rowComponent=(component 'my-row')}}
+   * {{/light-table}}
+   * ```
+   * @property rowComponent
+   * @type {Ember.Component}
+   * @default null
+   */
+  rowComponent: null,
+
+  /**
+   * Allows to customize the component used to render spanned rows
+   * 
+   * ```hbs
+   * {{#light-table table as |t|}}
+   *    {{t.body spannedRowComponent=(component 'my-spanned-row')}}
+   * {{/light-table}}
+   * ```
+   * @property rowComponent
+   * @type {Ember.Component}
+   * @default null
+   */
+  spannedRowComponent: null,
+
+  /**
+   * Allows to customize the component used to render infinite loader
+   * 
+   * ```hbs
+   * {{#light-table table as |t|}}
+   *    {{t.body infinityComponent=(component 'my-infinity')}}
+   * {{/light-table}}
+   * ```
+   * @property rowComponent
+   * @type {Ember.Component}
+   * @default null
+   */
+  infinityComponent: null,
+
   rows: computed.readOnly('table.visibleRows'),
   columns: computed.readOnly('table.visibleColumns'),
   colspan: computed.readOnly('columns.length'),
