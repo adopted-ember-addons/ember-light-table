@@ -20,6 +20,7 @@ addons:
       - google-chrome-stable
 
 env:
+  - EMBER_TRY_SCENARIO=default COVERAGE=true
   - EMBER_TRY_SCENARIO=ember-2.3
   - EMBER_TRY_SCENARIO=ember-2.4
   - EMBER_TRY_SCENARIO=ember-release
@@ -49,4 +50,4 @@ script:
   - ember try:one $EMBER_TRY_SCENARIO --- ember test
 
 after_script:
-  - codeclimate-test-reporter < lcov.dat
+  - codeclimate-test-reporter < coverage/lcov.info
