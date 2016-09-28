@@ -239,7 +239,7 @@ export default Component.extend({
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
   },
 
-  togglExpandedRow(row) {
+  toggleExpandedRow(row) {
     let multi = this.get('multiRowExpansion');
     let shouldExpand = !row.expanded;
 
@@ -281,13 +281,13 @@ export default Component.extend({
           row.set('selected', !isSelected);
 
           if (this.get('canExpand') && this.get('expandOnClick')) {
-            this.togglExpandedRow(row);
+            this.toggleExpandedRow(row);
           }
         }
         this._prevSelectedIndex = currIndex;
       } else {
         if (this.get('canExpand') && this.get('expandOnClick')) {
-          this.togglExpandedRow(row);
+          this.toggleExpandedRow(row);
         }
       }
 
