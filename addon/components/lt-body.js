@@ -176,7 +176,7 @@ export default Component.extend({
 
   /**
    * Allows to customize the component used to render rows
-   * 
+   *
    * ```hbs
    * {{#light-table table as |t|}}
    *    {{t.body rowComponent=(component 'my-row')}}
@@ -204,7 +204,7 @@ export default Component.extend({
 
   /**
    * Allows to customize the component used to render infinite loader
-   * 
+   *
    * ```hbs
    * {{#light-table table as |t|}}
    *    {{t.body infinityComponent=(component 'my-infinity')}}
@@ -241,7 +241,7 @@ export default Component.extend({
 
   toggleExpandedRow(row) {
     let multi = this.get('multiRowExpansion');
-    let shouldExpand = !row.expanded;
+    let shouldExpand = !row.get('expanded');
 
     if (multi) {
       row.toggleProperty('expanded');

@@ -93,6 +93,18 @@ test('row selection - click to modify selection', function(assert) {
   assert.equal(this.$('tr.is-selected').length, 5, 'clicking a deselected row selects it without affecting other selected rows');
 });
 
+test('row selection - preselected rows', function(assert) {
+  let users = createUsers(1);
+  users[0].selected = true;
+  this.set('table', new Table(Columns, users));
+  this.set('canSelect', true);
+
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}`);
+
+  let row = this.$('tr:first');
+  assert.ok(row.hasClass('is-selected'));
+});
+
 test('row expansion', function(assert) {
   this.set('table', new Table(Columns, createUsers(2)));
   this.set('canExpand', false);
@@ -148,6 +160,23 @@ test('row expansion - multiple', function(assert) {
   assert.equal(this.$('tr.lt-expanded-row').length, 2);
 });
 
+test('row expansion - pre-expanded rows', function(assert) {
+  let users = createUsers(1);
+  users[0].expanded = true;
+  this.set('table', new Table(Columns, users));
+  this.render(hbs `
+    {{#lt-body table=table sharedOptions=sharedOptions canExpand=true as |b|}}
+      {{#b.expanded-row}} Hello {{/b.expanded-row}}
+    {{/lt-body}}
+  `);
+
+  let row = this.$('tr:first');
+  assert.equal(this.$('tr.lt-expanded-row').length, 1);
+
+  row.click();
+  assert.equal(this.$('tr.lt-expanded-row').length, 0);
+});
+
 test('row actions', function(assert) {
   assert.expect(2);
 
@@ -180,6 +209,22 @@ test('hidden rows', function(assert) {
   });
 
   assert.equal(this.$('tbody > tr').length, 4);
+});
+
+test('pre-hidden rows', function(assert) {
+  let users = createUsers(1);
+  users[0].hidden = true;
+  this.set('table', new Table(Columns, users));
+
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions}}`);
+
+  assert.equal(this.$('tbody > tr').length, 0);
+
+  run(() => {
+    this.get('table.rows').objectAt(0).set('hidden', false);
+  });
+
+  assert.equal(this.$('tbody > tr').length, 1);
 });
 
 test('overwrite', function(assert) {

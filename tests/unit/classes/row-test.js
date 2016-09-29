@@ -6,8 +6,8 @@ module('Unit | Classes | Row');
 test('create row - default options', function(assert) {
   let row = new Row();
   assert.ok(row);
-  assert.equal(row.expanded, false);
-  assert.equal(row.selected, false);
+  assert.equal(row.get('expanded'), false);
+  assert.equal(row.get('selected'), false);
 });
 
 test('create row - row instance', function(assert) {
