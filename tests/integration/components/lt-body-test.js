@@ -149,12 +149,18 @@ test('row expansion - multiple', function(assert) {
 });
 
 test('row actions', function(assert) {
-  assert.expect(2);
+  assert.expect(3);
 
   this.set('table', new Table(Columns, createUsers(1)));
-  this.on('onRowClick', row => assert.ok(row));
+  this.set('canSelect', true);
+
+  this.on('onRowClick', (row, e, affectedSelections)  => {
+      assert.ok(row);
+      assert.equal(affectedSelections.length, 1);
+  });
+
   this.on('onRowDoubleClick', row => assert.ok(row));
-  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
 
   let row = this.$('tr:first');
   row.click();
