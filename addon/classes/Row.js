@@ -1,10 +1,11 @@
 import Ember from 'ember';
+import globalOptions from 'ember-light-table/-private/global-options';
 
  /**
   * @module Table
   * @class Row
   */
-export default class Row extends Ember.ObjectProxy.extend({
+class Row extends Ember.ObjectProxy.extend({
   /**
    * @property hidden
    * @type {Boolean}
@@ -59,3 +60,13 @@ export default class Row extends Ember.ObjectProxy.extend({
     }
   }
 }
+
+if (!globalOptions.proxyRowOptions) {
+  Row.reopen({
+    hidden: false,
+    expanded: false,
+    selected: false
+  });
+}
+
+export default Row;
