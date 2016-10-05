@@ -30,6 +30,7 @@ const RowSyncArrayProxy = SyncArrayProxy.extend({
  /**
   * @module Table
   * @class Table
+  * @namespace LightTable
   */
 export default class Table extends Ember.Object.extend({
   /**

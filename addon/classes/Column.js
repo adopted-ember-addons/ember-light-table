@@ -8,6 +8,7 @@ const {
 
  /**
   * @module Table
+  * @namespace LightTable
   * @class Column
   */
 export default class Column extends Ember.Object.extend({
