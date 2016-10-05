@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.4.1
+
+### Pull Requests
+
+- [#204](https://github.com/offirgolan/ember-light-table/pull/204)  Update ember-scrollable  *by [Taras Mankovski](https://github.com/taras)*
+
 ## v1.4.0
 
 ### Pull Requests
