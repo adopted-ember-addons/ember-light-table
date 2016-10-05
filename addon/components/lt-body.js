@@ -306,7 +306,7 @@ export default Component.extend({
         }
       }
 
-      callAction(this, 'onRowClick', row, e, affectedSelections);
+      callAction(this, 'onRowClick', ...arguments, affectedSelections);
     },
 
     /**
