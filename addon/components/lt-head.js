@@ -24,7 +24,7 @@ const {
  *
  * ```hbs
  * {{#light-table table as |t|}}
- *   {{#t.head onColumnClick=(action 'sortByColumn') as |groups subColumns table|}}
+ *   {{#t.head onColumnClick=(action 'sortByColumn') as |groups subColumns|}}
  *     {{#each groups as |group|}}
  *       {{!-- ... --}}
  *     {{/each}}
