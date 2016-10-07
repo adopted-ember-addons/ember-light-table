@@ -37,7 +37,7 @@
     "ember-cli-jshint": "^2.0.1",
     "ember-cli-less": "1.5.3",
     "ember-cli-mirage": "0.2.2",
-    "ember-cli-qunit": "^2.1.0",
+    "ember-cli-qunit": "^3.0.2",
     "ember-cli-release": "1.0.0-beta.2",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-test-loader": "^1.1.0",
@@ -68,7 +68,7 @@
     "ember-in-viewport": "2.1.0",
     "ember-scrollable": "~0.3.3",
     "ember-truth-helpers": "1.2.0",
-    "ember-wormhole": "0.4.0"
+    "ember-wormhole": "^0.4.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
