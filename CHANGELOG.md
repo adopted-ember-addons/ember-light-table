@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.4.2
+
+### Pull Requests
+
+- [#211](https://github.com/offirgolan/ember-light-table/pull/211)  Upgrade dependencies to support Ember 2.9.0  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.4.1
 
 ### Pull Requests
