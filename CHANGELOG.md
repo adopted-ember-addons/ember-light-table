@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.4.3
+
+### Pull Requests
+
+- [#214](https://github.com/offirgolan/ember-light-table/pull/214)  [BUGFIX] enableSync sorting duplicates records  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.4.2
 
 ### Pull Requests
