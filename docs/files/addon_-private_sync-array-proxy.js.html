@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.2" target="_blank">
-                                  Tag: v1.4.2
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.3" target="_blank">
+                                  Tag: v1.4.3
                                 </a>
                             </h4>
                         </div>
@@ -148,6 +148,8 @@ const {
   isArray
 } = Ember;
 
+const EMPTY_ARRAY = [];
+
 export default Ember.ArrayProxy.extend({
   /**
    * The model that will be synchronized to the content of this proxy
@@ -208,16 +210,17 @@ export default Ember.ArrayProxy.extend({
 
   syncArrayDidChange(syncArray, start, removeCount, addCount) {
     let content = this.get(&#x27;content&#x27;);
+    let objectsToAdd = EMPTY_ARRAY;
 
     if(!this.get(&#x27;syncEnabled&#x27;)) {
       return;
     }
 
     if(addCount &gt; 0) {
-      content.replace(start, 0, this.serializeContentObjects(syncArray.slice(start, start + addCount)));
-    } else if(removeCount &gt; 0) {
-      content.replace(start, removeCount, []);
+      objectsToAdd = this.serializeContentObjects(syncArray.slice(start, start + addCount));
     }
+
+    content.replace(start, removeCount, objectsToAdd);
   },
 
   replaceContent(start, removeCount, objectsToAdd) {

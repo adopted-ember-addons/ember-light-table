@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.4.2"
+        "version": "v1.4.3"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
@@ -433,7 +433,7 @@
     "classitems": [
         {
             "file": "addon/-private/sync-array-proxy.js",
-            "line": 9,
+            "line": 11,
             "description": "The model that will be synchronized to the content of this proxy",
             "itemtype": "property",
             "name": "syncArray",
@@ -442,7 +442,7 @@
         },
         {
             "file": "addon/-private/sync-array-proxy.js",
-            "line": 16,
+            "line": 18,
             "itemtype": "property",
             "name": "syncEnabled",
             "type": "{Boolean}",
@@ -450,7 +450,7 @@
         },
         {
             "file": "addon/-private/sync-array-proxy.js",
-            "line": 44,
+            "line": 46,
             "description": "Serialize objects before they are inserted into the content array",
             "itemtype": "method",
             "name": "serializeContentObjects",
@@ -469,7 +469,7 @@
         },
         {
             "file": "addon/-private/sync-array-proxy.js",
-            "line": 54,
+            "line": 56,
             "description": "Serialize objects before they are inserted into the sync array",
             "itemtype": "method",
             "name": "serializeSyncArrayObjects",
