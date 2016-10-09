@@ -473,3 +473,30 @@ test('table modifications with sync enabled - stress', function(assert) {
   assert.equal(table.get('rows.length'), 0);
   assert.equal(table.get('rows.length'), rows.get('length'));
 });
+
+test('table modifications with sync enabled - sort', function(assert) {
+  let rows = emberArray([]);
+  let table = new Table([], rows, { enableSync: true });
+  let length = 5;
+
+  for(let i = 0; i < length; i++) {
+    rows.pushObject({ position: i });
+  }
+
+  assert.equal(table.get('rows.length'), rows.get('length'));
+  assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+
+  rows.sort((a, b) => {
+    return a.position > b.position ? -1 : 1;
+  });
+
+  rows.arrayContentDidChange(0, length, length);
+
+  assert.equal(table.get('rows.length'), rows.get('length'));
+  assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+
+  rows.reverseObjects();
+
+  assert.equal(table.get('rows.length'), rows.get('length'));
+  assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+});
