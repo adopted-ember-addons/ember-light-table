@@ -149,22 +149,39 @@ test('row expansion - multiple', function(assert) {
 });
 
 test('row actions', function(assert) {
-  assert.expect(3);
+  assert.expect(2);
 
   this.set('table', new Table(Columns, createUsers(1)));
-  this.set('canSelect', true);
-
-  this.on('onRowClick', (row, e, affectedSelections)  => {
-      assert.ok(row);
-      assert.equal(affectedSelections.length, 1);
-  });
+  this.on('onRowClick', row => assert.ok(row));
 
   this.on('onRowDoubleClick', row => assert.ok(row));
-  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
 
   let row = this.$('tr:first');
   row.click();
   row.dblclick();
+});
+
+test('row actions - other affected rows', function(assert) {
+  assert.expect(3);
+
+  this.set('table', new Table(Columns, createUsers(2)));
+  this.set('canSelect', true);
+  this.set('canExpand', true);
+  this.set('multiRowExpansion', false);
+  this.set('table.rows.firstObject.selected', true);
+  this.set('table.rows.firstObject.expanded', true);
+
+  this.on('onRowClick', (row, e, otherAffectedRows)  => {
+      assert.ok(row);
+      assert.equal(otherAffectedRows.selected.length, 1);
+      assert.equal(otherAffectedRows.expanded.length, 1);
+  });
+
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect canExpand=canExpand multiRowExpansion=multiRowExpansion onRowClick=(action 'onRowClick')}}`);
+
+  let row = this.$('tr:last');
+  row.click();
 });
 
 test('hidden rows', function(assert) {
