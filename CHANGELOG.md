@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.4.4
+
+### Pull Requests
+
+- [#220](https://github.com/offirgolan/ember-light-table/pull/220)  [BUGFIX] CPs using filterBy should also be dependent on the array size  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.4.3
 
 ### Pull Requests
