@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.3" target="_blank">
-                                  Tag: v1.4.3
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
+                                  Tag: v1.4.4
                                 </a>
                             </h4>
                         </div>
@@ -155,6 +155,12 @@ const {
   A: emberArray
 } = Ember;
 
+function filterBy(dependentKey, propertyKey, value) {
+  return computed(&#x60;${dependentKey}.[]&#x60;, &#x60;${dependentKey}.@each.${propertyKey}&#x60;, function() {
+    return emberArray(this.get(dependentKey).filterBy(propertyKey, value));
+  });
+}
+
 const RowSyncArrayProxy = SyncArrayProxy.extend({
   serializeContentObjects(objects) {
     return Table.createRows(objects);
@@ -199,55 +205,55 @@ export default class Table extends Ember.Object.extend({
    * @property expandedRows
    * @type {Ember.Array}
    */
-  expandedRows: computed.filterBy(&#x27;rows&#x27;, &#x27;expanded&#x27;, true).readOnly(),
+  expandedRows: filterBy(&#x27;rows&#x27;, &#x27;expanded&#x27;, true).readOnly(),
 
   /**
    * @property selectedRows
    * @type {Ember.Array}
    */
-  selectedRows: computed.filterBy(&#x27;rows&#x27;, &#x27;selected&#x27;, true).readOnly(),
+  selectedRows: filterBy(&#x27;rows&#x27;, &#x27;selected&#x27;, true).readOnly(),
 
   /**
    * @property visibleRows
    * @type {Ember.Array}
    */
-  visibleRows: computed.filterBy(&#x27;rows&#x27;, &#x27;hidden&#x27;, false).readOnly(),
+  visibleRows: filterBy(&#x27;rows&#x27;, &#x27;hidden&#x27;, false).readOnly(),
 
   /**
    * @property sortableColumns
    * @type {Ember.Array}
    */
-  sortableColumns: computed.filterBy(&#x27;visibleColumns&#x27;, &#x27;sortable&#x27;, true).readOnly(),
+  sortableColumns: filterBy(&#x27;visibleColumns&#x27;, &#x27;sortable&#x27;, true).readOnly(),
 
   /**
    * @property sortedColumns
    * @type {Ember.Array}
    */
-  sortedColumns: computed.filterBy(&#x27;visibleColumns&#x27;, &#x27;sorted&#x27;, true).readOnly(),
+  sortedColumns: filterBy(&#x27;visibleColumns&#x27;, &#x27;sorted&#x27;, true).readOnly(),
 
   /**
    * @property hideableColumns
    * @type {Ember.Array}
    */
-  hideableColumns: computed.filterBy(&#x27;allColumns&#x27;, &#x27;hideable&#x27;, true).readOnly(),
+  hideableColumns: filterBy(&#x27;allColumns&#x27;, &#x27;hideable&#x27;, true).readOnly(),
 
   /**
    * @property hiddenColumns
    * @type {Ember.Array}
    */
-  hiddenColumns: computed.filterBy(&#x27;allColumns&#x27;, &#x27;hidden&#x27;, true).readOnly(),
+  hiddenColumns: filterBy(&#x27;allColumns&#x27;, &#x27;hidden&#x27;, true).readOnly(),
 
   /**
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: computed.filterBy(&#x27;allColumns&#x27;, &#x27;hidden&#x27;, false).readOnly(),
+  visibleColumns: filterBy(&#x27;allColumns&#x27;, &#x27;hidden&#x27;, false).readOnly(),
 
   /**
    * @property visibleColumnGroups
    * @type {Ember.Array}
    */
-  visibleColumnGroups: computed(&#x27;columns.@each.{hidden,isVisibleGroupColumn}&#x27;, function() {
+  visibleColumnGroups: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.{hidden,isVisibleGroupColumn}&#x27;, function() {
     return emberArray(this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
       if (c.get(&#x27;isVisibleGroupColumn&#x27;) || (!c.get(&#x27;isGroupColumn&#x27;) &amp;&amp; !c.get(&#x27;hidden&#x27;))) {
         arr.push(c);
@@ -260,7 +266,7 @@ export default class Table extends Ember.Object.extend({
    * @property visibleSubColumns
    * @type {Ember.Array}
    */
-  visibleSubColumns: computed(&#x27;columns.@each.visibleSubColumns&#x27;, function() {
+  visibleSubColumns: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.visibleSubColumns&#x27;, function() {
     return emberArray([].concat(...this.get(&#x27;columns&#x27;).getEach(&#x27;visibleSubColumns&#x27;)));
   }).readOnly(),
 

@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.4.3"
+        "version": "v1.4.4"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
@@ -137,7 +137,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "addon/classes/Table.js",
-            "line": 140,
+            "line": 146,
             "access": "private",
             "tagname": ""
         },
@@ -297,7 +297,7 @@
             "module": "Table",
             "namespace": "",
             "file": "addon/classes/Table.js",
-            "line": 140,
+            "line": 146,
             "is_constructor": 1,
             "params": [
                 {
@@ -746,7 +746,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 35,
+            "line": 41,
             "itemtype": "property",
             "name": "columns",
             "type": "{Ember.Array}",
@@ -756,7 +756,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 42,
+            "line": 48,
             "itemtype": "property",
             "name": "rows",
             "type": "{Ember.Array}",
@@ -766,7 +766,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 49,
+            "line": 55,
             "itemtype": "property",
             "name": "isEmpty",
             "type": "{Boolean}",
@@ -775,7 +775,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 55,
+            "line": 61,
             "itemtype": "property",
             "name": "expandedRows",
             "type": "{Ember.Array}",
@@ -784,7 +784,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 61,
+            "line": 67,
             "itemtype": "property",
             "name": "selectedRows",
             "type": "{Ember.Array}",
@@ -793,7 +793,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 67,
+            "line": 73,
             "itemtype": "property",
             "name": "visibleRows",
             "type": "{Ember.Array}",
@@ -802,7 +802,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 73,
+            "line": 79,
             "itemtype": "property",
             "name": "sortableColumns",
             "type": "{Ember.Array}",
@@ -811,7 +811,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 79,
+            "line": 85,
             "itemtype": "property",
             "name": "sortedColumns",
             "type": "{Ember.Array}",
@@ -820,7 +820,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 85,
+            "line": 91,
             "itemtype": "property",
             "name": "hideableColumns",
             "type": "{Ember.Array}",
@@ -829,7 +829,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 91,
+            "line": 97,
             "itemtype": "property",
             "name": "hiddenColumns",
             "type": "{Ember.Array}",
@@ -838,7 +838,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 97,
+            "line": 103,
             "itemtype": "property",
             "name": "visibleColumns",
             "type": "{Ember.Array}",
@@ -847,7 +847,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 103,
+            "line": 109,
             "itemtype": "property",
             "name": "visibleColumnGroups",
             "type": "{Ember.Array}",
@@ -856,7 +856,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 116,
+            "line": 122,
             "itemtype": "property",
             "name": "visibleSubColumns",
             "type": "{Ember.Array}",
@@ -865,7 +865,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 124,
+            "line": 130,
             "itemtype": "property",
             "name": "allColumns",
             "type": "{Ember.Array}",
@@ -874,7 +874,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 175,
+            "line": 181,
             "description": "Replace all the row's content with content of the argument. If argument is an empty array rows will be cleared.",
             "itemtype": "method",
             "name": "setRows",
@@ -899,7 +899,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 186,
+            "line": 192,
             "description": "Push the object onto the end of the row array if it is not already present.",
             "itemtype": "method",
             "name": "addRow",
@@ -920,7 +920,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 200,
+            "line": 206,
             "description": "Push the objects onto the end of the row array if it is not already present.",
             "itemtype": "method",
             "name": "addRows",
@@ -941,7 +941,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 210,
+            "line": 216,
             "description": "Push the object onto the end of the row array.",
             "itemtype": "method",
             "name": "pushRow",
@@ -966,7 +966,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 223,
+            "line": 229,
             "description": "Push the object onto the end of the row array.",
             "itemtype": "method",
             "name": "pushRows",
@@ -991,7 +991,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 236,
+            "line": 242,
             "description": "Insert a row at the specified index.",
             "itemtype": "method",
             "name": "insertRowAt",
@@ -1021,7 +1021,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 250,
+            "line": 256,
             "description": "Remove all occurrences of an object in the rows",
             "itemtype": "method",
             "name": "removeRow",
@@ -1037,7 +1037,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 263,
+            "line": 269,
             "description": "Removes each object in the passed enumerable from the rows.",
             "itemtype": "method",
             "name": "removeRows",
@@ -1053,7 +1053,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 273,
+            "line": 279,
             "description": "Remove a row at the specified index",
             "itemtype": "method",
             "name": "removeRowAt",
@@ -1069,7 +1069,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 284,
+            "line": 290,
             "description": "Replace all the column's content with content of the argument. If argument is an empty array columns will be cleared.",
             "itemtype": "method",
             "name": "setColumns",
@@ -1089,7 +1089,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 294,
+            "line": 300,
             "description": "Push the object onto the end of the column array if it is not already present.",
             "itemtype": "method",
             "name": "addColumn",
@@ -1105,7 +1105,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 303,
+            "line": 309,
             "description": "Push the objects onto the end of the column array if it is not already present.",
             "itemtype": "method",
             "name": "addColumns",
@@ -1121,7 +1121,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 312,
+            "line": 318,
             "description": "Push the object onto the end of the column array.",
             "itemtype": "method",
             "name": "pushColumn",
@@ -1141,7 +1141,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 324,
+            "line": 330,
             "description": "Push the object onto the end of the column array.",
             "itemtype": "method",
             "name": "pushColumns",
@@ -1161,7 +1161,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 336,
+            "line": 342,
             "description": "Insert a column at the specified index.",
             "itemtype": "method",
             "name": "insertColumnAt",
@@ -1186,7 +1186,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 349,
+            "line": 355,
             "description": "Remove all occurrences of an object in the columns",
             "itemtype": "method",
             "name": "removeColumn",
@@ -1202,7 +1202,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 358,
+            "line": 364,
             "description": "Removes each object in the passed enumerable from the columns.",
             "itemtype": "method",
             "name": "removeColumns",
@@ -1218,7 +1218,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 367,
+            "line": 373,
             "description": "Remove a column at the specified index",
             "itemtype": "method",
             "name": "removeColumnAt",
@@ -1234,7 +1234,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 376,
+            "line": 382,
             "description": "Create a Row object with the given content",
             "itemtype": "method",
             "name": "createRow",
@@ -1260,7 +1260,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 388,
+            "line": 394,
             "description": "Create a collection of Row objects with the given collection",
             "itemtype": "method",
             "name": "createRows",
@@ -1286,7 +1286,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 400,
+            "line": 406,
             "description": "Create a Column object with the given options",
             "itemtype": "method",
             "name": "createColumn",
@@ -1307,7 +1307,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 411,
+            "line": 417,
             "description": "Create a collection of Column objects with the given collection",
             "itemtype": "method",
             "name": "createColumns",
