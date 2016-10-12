@@ -6,7 +6,9 @@ import cssStyleify from 'ember-light-table/utils/css-styleify';
 const {
   assert,
   Component,
-  computed
+  computed,
+  isEmpty,
+  isNone
 } = Ember;
 
 /**
@@ -101,8 +103,55 @@ const LightTable = Component.extend({
     };
   }).readOnly(),
 
-  style: computed('height', function () {
-    return cssStyleify(this.getProperties(['height']));
+  visibleColumns: computed.readOnly('table.visibleColumns'),
+
+  /**
+   * Calculates the total width of the visible columns via their `width`
+   * propert.
+   *
+   * Returns 0 for the following conditions
+   *  - All widths are not set
+   *  - Widths are not the same unit
+   *  - Unit cannot be determined
+   *
+   * @property totalWidth
+   * @type {Number}
+   * @private
+   */
+  totalWidth: computed('visibleColumns.[]', 'visibleColumns.@each.width', function() {
+    let visibleColumns = this.get('visibleColumns');
+    let widths = visibleColumns.getEach('width');
+    let unit = (widths[0] || '').match(/\D+$/);
+
+    if(isEmpty(unit)) {
+      return 0;
+    }
+
+    unit = unit[0];
+
+    // 1. Check if all widths are present
+    // 2. Check if all widths are the same unit
+    for(let i = 0; i < widths.length; i++) {
+      let width = widths[i];
+
+      if(isNone(width) || width.indexOf(unit) === -1) {
+        return 0;
+      }
+    }
+
+    return widths.reduce((t, w) => t += parseInt(w, 10), 0) + unit;
+  }),
+
+  style: computed('totalWidth', 'height', function () {
+    let totalWidth = this.get('totalWidth');
+    let style = this.getProperties(['height']);
+
+    if(totalWidth) {
+      style.width = totalWidth;
+      style.overflowX = 'auto';
+    }
+
+    return cssStyleify(style);
   }),
 
   init() {
