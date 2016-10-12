@@ -1,6 +1,6 @@
 {
   "name": "ember-light-table",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Lightweight, component based table for Ember 2.x",
   "homepage": "https://github.com/offirgolan/ember-light-table",
   "directories": {
@@ -28,7 +28,7 @@
     "ember-cli-app-version": "^2.0.0",
     "ember-cli-autoprefixer": "0.6.0",
     "ember-cli-changelog": "0.3.4",
-    "ember-cli-code-coverage": "0.3.3",
+    "ember-cli-code-coverage": "0.3.4",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-es5-shim": "0.3.0",
     "ember-cli-github-pages": "^0.1.0",
@@ -46,7 +46,7 @@
     "ember-code-snippet": "1.8.0",
     "ember-data": "^2.8.0",
     "ember-disable-prototype-extensions": "^1.1.0",
-    "ember-export-application-global": "^1.0.5",
+    "ember-export-application-global": "^1.1.1",
     "ember-font-awesome": "2.2.0",
     "ember-load-initializers": "^0.5.1",
     "ember-lodash": "0.0.10",
