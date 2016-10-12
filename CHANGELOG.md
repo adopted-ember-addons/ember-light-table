@@ -1,6 +1,24 @@
 Changelog
 =========
 
+## v1.4.3
+
+### Pull Requests
+
+- [#214](https://github.com/offirgolan/ember-light-table/pull/214)  [BUGFIX] enableSync sorting duplicates records  *by [Offir Golan](https://github.com/offirgolan)*
+
+## v1.4.2
+
+### Pull Requests
+
+- [#211](https://github.com/offirgolan/ember-light-table/pull/211)  Upgrade dependencies to support Ember 2.9.0  *by [Offir Golan](https://github.com/offirgolan)*
+
+## v1.4.1
+
+### Pull Requests
+
+- [#204](https://github.com/offirgolan/ember-light-table/pull/204)  Update ember-scrollable  *by [Taras Mankovski](https://github.com/taras)*
+
 ## v1.4.0
 
 ### Pull Requests

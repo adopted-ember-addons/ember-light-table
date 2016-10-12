@@ -5,6 +5,8 @@ const {
   isArray
 } = Ember;
 
+const EMPTY_ARRAY = [];
+
 export default Ember.ArrayProxy.extend({
   /**
    * The model that will be synchronized to the content of this proxy
@@ -65,16 +67,17 @@ export default Ember.ArrayProxy.extend({
 
   syncArrayDidChange(syncArray, start, removeCount, addCount) {
     let content = this.get('content');
+    let objectsToAdd = EMPTY_ARRAY;
 
     if(!this.get('syncEnabled')) {
       return;
     }
 
     if(addCount > 0) {
-      content.replace(start, 0, this.serializeContentObjects(syncArray.slice(start, start + addCount)));
-    } else if(removeCount > 0) {
-      content.replace(start, removeCount, []);
+      objectsToAdd = this.serializeContentObjects(syncArray.slice(start, start + addCount));
     }
+
+    content.replace(start, removeCount, objectsToAdd);
   },
 
   replaceContent(start, removeCount, objectsToAdd) {

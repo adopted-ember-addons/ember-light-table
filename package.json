@@ -1,6 +1,6 @@
 {
   "name": "ember-light-table",
-  "version": "1.4.0",
+  "version": "1.4.3",
   "description": "Lightweight, component based table for Ember 2.x",
   "homepage": "https://github.com/offirgolan/ember-light-table",
   "directories": {
@@ -23,12 +23,12 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.6",
-    "ember-ajax": "2.5.1",
+    "ember-ajax": "2.5.2",
     "ember-cli": "^2.8.0",
     "ember-cli-app-version": "^2.0.0",
     "ember-cli-autoprefixer": "0.6.0",
     "ember-cli-changelog": "0.3.4",
-    "ember-cli-code-coverage": "0.3.2",
+    "ember-cli-code-coverage": "0.3.3",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-es5-shim": "0.3.0",
     "ember-cli-github-pages": "^0.1.0",
@@ -37,7 +37,7 @@
     "ember-cli-jshint": "^2.0.1",
     "ember-cli-less": "1.5.3",
     "ember-cli-mirage": "0.2.2",
-    "ember-cli-qunit": "^2.1.0",
+    "ember-cli-qunit": "^3.0.2",
     "ember-cli-release": "1.0.0-beta.2",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-test-loader": "^1.1.0",
@@ -64,11 +64,11 @@
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.11",
     "ember-composable-helpers": "^1.1.2",
-    "ember-get-config": "0.1.9",
+    "ember-get-config": "0.1.11",
     "ember-in-viewport": "2.1.0",
-    "ember-scrollable": "0.3.2",
+    "ember-scrollable": "~0.3.3",
     "ember-truth-helpers": "1.2.0",
-    "ember-wormhole": "0.4.0"
+    "ember-wormhole": "^0.4.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
