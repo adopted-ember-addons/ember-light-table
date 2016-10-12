@@ -190,7 +190,7 @@ export default class Column extends Ember.Object.extend({
    * @type {Array}
    * @private
    */
-  visibleSubColumns: computed('subColumns.@each.hidden', 'hidden', function() {
+  visibleSubColumns: computed('subColumns.[]', 'subColumns.@each.hidden', 'hidden', function() {
     let subColumns = this.get('subColumns');
     return isEmpty(subColumns) || this.get('hidden') ? [] : subColumns.filterBy('hidden', false);
   }).readOnly()
