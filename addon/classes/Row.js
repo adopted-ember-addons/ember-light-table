@@ -2,6 +2,7 @@ import Ember from 'ember';
 
  /**
   * @module Table
+  * @namespace LightTable
   * @class Row
   */
 export default class Row extends Ember.ObjectProxy.extend({
