@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/lt-body';
 import callAction from 'ember-light-table/utils/call-action';
+import Row from 'ember-light-table/classes/Row';
 
 const {
   Component,
@@ -175,6 +176,30 @@ export default Component.extend({
   useVirtualScrollbar: false,
 
   /**
+   * Set this property to scroll to a specific px offset.
+   * @property scrollTo
+   * @type {Number}
+   * @default null
+   */
+  scrollTo: null,
+
+  /**
+   * Set this property to a `Row` to scroll that `Row` into view.
+   * @property showRow
+   * @type {Row}
+   * @default null
+   */
+  showRow: null,
+
+  /**
+   * @property targetScrollOffset
+   * @type {Number}
+   * @default null
+   * @private
+   */
+  targetScrollOffset: null,
+
+  /**
    * Allows to customize the component used to render rows
    *
    * ```hbs
@@ -223,6 +248,9 @@ export default Component.extend({
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
 
+  _scrollTo: null,
+  _showRow: null,
+
   init() {
     this._super(...arguments);
 
@@ -238,6 +266,30 @@ export default Component.extend({
     let { fixedHeader, fixedFooter } = this.get('sharedOptions');
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
   },
+
+  didReceiveAttrs() {
+    const scrollTo = this.get('scrollTo');
+    const _scrollTo = this.get('_scrollTo');
+    const showRow = this.get('showRow');
+    const _showRow = this.get('_showRow');
+
+    this.set('_scrollTo', scrollTo);
+    this.set('_showRow', showRow);
+
+    if (scrollTo !== _scrollTo) {
+      this.set('targetScrollOffset', scrollTo);
+    } else if (showRow !== _showRow) {
+      this.scrollToRow(showRow);
+    }
+  },
+
+scrollToRow(row) {
+  if (row instanceof Row) {
+    this.set('targetScrollOffset', row.get('scrollOffset'));
+  } else {
+    this.set('targetScrollOffset', null);
+  }
+},
 
   toggleExpandedRow(row) {
     let multi = this.get('multiRowExpansion');
@@ -302,6 +354,17 @@ export default Component.extend({
      */
     onRowDoubleClick(/* row */) {
       callAction(this, 'onRowDoubleClick', ...arguments);
+    },
+
+    /**
+     * onScroll action - sent when user scrolls
+     *
+     * @event onScroll
+     * @param {Number} scrollOffset The scroll offset in px
+     * @param {Event} event The scroll event
+     */
+    onScroll(/* scrollOffset, event */) {
+      callAction(this, 'onScroll', ...arguments);
     },
 
     /**

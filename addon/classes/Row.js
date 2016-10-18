@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
-/**
- * @module Table
- * @class Row
- */
+const { computed, isBlank } = Ember;
+
+ /**
+  * @module Table
+  * @class Row
+  */
 export default class Row extends Ember.ObjectProxy.extend({
   /**
    * @property hidden
@@ -32,7 +34,30 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @property classNames
    * @type {String | Array}
    */
-  classNames: null
+  classNames: null,
+
+  /**
+   * @property rowComponent
+   * @type {Ember.Component}
+   * @private
+   */
+  rowComponent: null,
+
+  /**
+   * @property scrollOffset
+   * @type {Number}
+   * @private
+   * @readOnly
+   */
+  scrollOffset: computed(function() {
+    const element = this.get('rowComponent.element');
+
+    if (isBlank(element)) {
+      return null;
+    }
+
+    return element.offsetTop;
+  }).readOnly().volatile()
 }) {
   /**
    * @class Row
