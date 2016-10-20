@@ -12,12 +12,6 @@ const {
   A: emberArray
 } = Ember;
 
-function filterBy(dependentKey, propertyKey, value) {
-  return computed(`${dependentKey}.[]`, `${dependentKey}.@each.${propertyKey}`, function() {
-    return emberArray(this.get(dependentKey).filterBy(propertyKey, value));
-  });
-}
-
 const RowSyncArrayProxy = SyncArrayProxy.extend({
   serializeContentObjects(objects) {
     return Table.createRows(objects);
@@ -62,49 +56,49 @@ export default class Table extends Ember.Object.extend({
    * @property expandedRows
    * @type {Ember.Array}
    */
-  expandedRows: filterBy('rows', 'expanded', true).readOnly(),
+  expandedRows: computed.filterBy('rows', 'expanded', true).readOnly(),
 
   /**
    * @property selectedRows
    * @type {Ember.Array}
    */
-  selectedRows: filterBy('rows', 'selected', true).readOnly(),
+  selectedRows: computed.filterBy('rows', 'selected', true).readOnly(),
 
   /**
    * @property visibleRows
    * @type {Ember.Array}
    */
-  visibleRows: filterBy('rows', 'hidden', false).readOnly(),
+  visibleRows: computed.filterBy('rows', 'hidden', false).readOnly(),
 
   /**
    * @property sortableColumns
    * @type {Ember.Array}
    */
-  sortableColumns: filterBy('visibleColumns', 'sortable', true).readOnly(),
+  sortableColumns: computed.filterBy('visibleColumns', 'sortable', true).readOnly(),
 
   /**
    * @property sortedColumns
    * @type {Ember.Array}
    */
-  sortedColumns: filterBy('visibleColumns', 'sorted', true).readOnly(),
+  sortedColumns: computed.filterBy('visibleColumns', 'sorted', true).readOnly(),
 
   /**
    * @property hideableColumns
    * @type {Ember.Array}
    */
-  hideableColumns: filterBy('allColumns', 'hideable', true).readOnly(),
+  hideableColumns: computed.filterBy('allColumns', 'hideable', true).readOnly(),
 
   /**
    * @property hiddenColumns
    * @type {Ember.Array}
    */
-  hiddenColumns: filterBy('allColumns', 'hidden', true).readOnly(),
+  hiddenColumns: computed.filterBy('allColumns', 'hidden', true).readOnly(),
 
   /**
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: filterBy('allColumns', 'hidden', false).readOnly(),
+  visibleColumns: computed.filterBy('allColumns', 'hidden', false).readOnly(),
 
   /**
    * @property visibleColumnGroups
