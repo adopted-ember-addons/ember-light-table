@@ -10,14 +10,14 @@ import Ember from 'ember';
 
 moduleForComponent('light-table', 'Integration | Component | light table', {
   integration: true,
-  setup: function() {
+  setup() {
     startMirage(this.container);
   }
 });
 
 test('it renders', function(assert) {
   this.set('table', new Table());
-  this.render(hbs`{{light-table table}}`);
+  this.render(hbs `{{light-table table}}`);
 
   assert.equal(this.$().text().trim(), '');
 });
@@ -29,9 +29,12 @@ skip('scrolled to bottom', function(assert) {
 
   this.set('table', new Table(Columns, createUsers(50)));
 
-  this.on('onScrolledToBottom', () => { assert.ok(true); done(); });
+  this.on('onScrolledToBottom', () => {
+    assert.ok(true);
+    done();
+  });
 
-  this.render(hbs`
+  this.render(hbs `
     {{#light-table table height='40vh' as |t|}}
       {{t.head}}
       {{t.body onScrolledToBottom=(action 'onScrolledToBottom')}}
@@ -52,13 +55,12 @@ skip('scrolled to bottom', function(assert) {
 
 });
 
-
 test('fixed header', function(assert) {
   assert.expect(2);
   this.set('table', new Table(Columns, createUsers(5)));
   this.set('fixed', true);
 
-  this.render(hbs`
+  this.render(hbs `
     {{#light-table table height='500px' id='lightTable' as |t|}}
       {{t.head fixed=fixed}}
       {{t.body}}
@@ -77,7 +79,7 @@ test('fixed footer', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
   this.set('fixed', true);
 
-  this.render(hbs`
+  this.render(hbs `
     {{#light-table table height='500px' id='lightTable' as |t|}}
       {{t.body}}
       {{t.foot fixed=fixed}}
@@ -92,13 +94,13 @@ test('fixed footer', function(assert) {
 });
 
 // TODO: Passes in Chrome but not in Phantom
-skip('table assumes height of container', function(assert){
+skip('table assumes height of container', function(assert) {
 
   assert.expect(1);
   this.set('table', new Table(Columns, createUsers(5)));
   this.set('fixed', true);
 
-  this.render(hbs`
+  this.render(hbs `
     <div style="height: 500px">
       {{#light-table table id='lightTable' as |t|}}
         {{t.body}}
@@ -111,14 +113,14 @@ skip('table assumes height of container', function(assert){
 
 });
 
-//TODO: figure out why this test doesn't work properly in Phantomjs
-skip('table body should consume all available space when not enough content to fill it', function(assert){
+// TODO: figure out why this test doesn't work properly in Phantomjs
+skip('table body should consume all available space when not enough content to fill it', function(assert) {
   assert.expect(3);
 
   this.set('table', new Table(Columns, createUsers(1)));
   this.set('fixed', true);
 
-  this.render(hbs`
+  this.render(hbs `
     <div style="height: 500px">
       {{#light-table table id='lightTable' as |t|}}
         {{t.head fixed=true}}
@@ -142,7 +144,7 @@ test('accepts components that are used in the body', function(assert) {
 
   this.set('table', new Table(Columns, createUsers(1)));
 
-  this.render(hbs`
+  this.render(hbs `
     {{#light-table table as |t|}}
       {{t.body rowComponent=(component "custom-row" classNames="custom-row")}}
     {{/light-table}}
@@ -156,7 +158,7 @@ test('passed in components can have computed properties', function(assert) {
   register(this, 'component:custom-row', RowComponent.extend({
     classNameBindings: ['isActive'],
     current: null,
-    isActive: Ember.computed('row.content', 'current', function(){
+    isActive: Ember.computed('row.content', 'current', function() {
       return this.get('row.content') === this.get('current');
     })
   }));
@@ -164,9 +166,9 @@ test('passed in components can have computed properties', function(assert) {
   let users = createUsers(3);
   this.set('table', new Table(Columns, users));
 
-  this.render(hbs`
+  this.render(hbs `
     {{#light-table table as |t|}}
-      {{t.body 
+      {{t.body
         rowComponent=(component "custom-row" classNames="custom-row" current=current)
       }}
     {{/light-table}}
@@ -176,12 +178,12 @@ test('passed in components can have computed properties', function(assert) {
   assert.equal(this.$('.custom-row.is-active').length, 0, 'none of the items are active');
 
   this.set('current', users[0]);
-  
+
   assert.ok(this.$('.custom-row:eq(0)').hasClass('is-active'), 'first custom row is active');
 
   this.set('current', users[2]);
 
-  assert.ok(this.$('.custom-row:eq(2)').hasClass('is-active'), 'third custom row is active');  
+  assert.ok(this.$('.custom-row:eq(2)').hasClass('is-active'), 'third custom row is active');
 
   this.set('current', null);
 

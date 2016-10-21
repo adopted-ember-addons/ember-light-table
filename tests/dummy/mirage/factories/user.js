@@ -5,7 +5,7 @@
 */
 import Mirage, { faker } from 'ember-cli-mirage';
 
-faker.locale = "en_US";
+faker.locale = 'en_US';
 
 export default Mirage.Factory.extend({
   firstName: faker.name.firstName,

@@ -74,7 +74,6 @@ test('CP - allColumns', function(assert) {
   assert.equal(table.get('allColumns.length'), 5);
 });
 
-
 test('table method - setRows', function(assert) {
   let table = new Table();
 
@@ -136,7 +135,6 @@ test('table method - addRows', function(assert) {
 
   assert.equal(table.get('rows.lastObject.name'), 'Offir');
 });
-
 
 test('table method - pushRow', function(assert) {
   let table = new Table();
@@ -295,7 +293,6 @@ test('table method - addColumns', function(assert) {
   assert.equal(table.get('columns.lastObject.label'), 'Name');
 });
 
-
 test('table method - pushColumn', function(assert) {
   let table = new Table();
   let content = { label: 'Name' };
@@ -389,7 +386,7 @@ test('table method - removeColumns', function(assert) {
 });
 
 test('static table method - createRow', function(assert) {
-  let row = Table.createRow({ name: 'Offir'}, { selected: true });
+  let row = Table.createRow({ name: 'Offir' }, { selected: true });
   assert.ok(row instanceof Row);
   assert.equal(row.get('name'), 'Offir');
   assert.ok(row.get('selected'));
@@ -403,7 +400,7 @@ test('static table method - createRows', function(assert) {
 });
 
 test('static table method - createColumn', function(assert) {
-  let col = Table.createColumn({ label: 'Name'});
+  let col = Table.createColumn({ label: 'Name' });
   assert.ok(col instanceof Column);
   assert.equal(col.get('label'), 'Name');
 });
@@ -440,14 +437,14 @@ test('table modifications with sync enabled - stress', function(assert) {
   let rows = emberArray([]);
   let table = new Table([], rows, { enableSync: true });
 
-  for(let i = 0; i < 100; i++) {
+  for (let i = 0; i < 100; i++) {
     table.addRow({ position: i });
   }
 
   assert.equal(table.get('rows.length'), rows.get('length'));
   assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
 
-  for(let i = 100; i < 200; i++) {
+  for (let i = 100; i < 200; i++) {
     rows.pushObject({ position: i });
   }
 
@@ -479,7 +476,7 @@ test('table modifications with sync enabled - sort', function(assert) {
   let table = new Table([], rows, { enableSync: true });
   let length = 5;
 
-  for(let i = 0; i < length; i++) {
+  for (let i = 0; i < length; i++) {
     rows.pushObject({ position: i });
   }
 

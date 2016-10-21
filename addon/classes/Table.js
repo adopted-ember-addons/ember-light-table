@@ -18,7 +18,7 @@ const RowSyncArrayProxy = SyncArrayProxy.extend({
   },
 
   serializeSyncArrayObjects(objects) {
-    return objects.map(o => get(o, 'content'));
+    return objects.map((o) => get(o, 'content'));
   }
 });
 
@@ -27,10 +27,10 @@ const RowSyncArrayProxy = SyncArrayProxy.extend({
  * @private
  */
 
- /**
-  * @module Table
-  * @class Table
-  */
+/**
+ * @module Table
+ * @class Table
+ */
 export default class Table extends Ember.Object.extend({
   /**
    * @property columns
@@ -131,7 +131,7 @@ export default class Table extends Ember.Object.extend({
       if (isEmpty(subColumns)) {
         arr.push(c);
       } else {
-        subColumns.forEach(sc => arr.push(sc));
+        subColumns.forEach((sc) => arr.push(sc));
       }
       return arr;
     }, []));
@@ -153,11 +153,17 @@ export default class Table extends Ember.Object.extend({
     let _rows = emberArray(Table.createRows(rows));
     let _options = mergeOptionsWithGlobals(options);
 
-    if(_options.enableSync) {
-      _rows = RowSyncArrayProxy.create({ syncArray: rows, content: _rows });
+    if (_options.enableSync) {
+      _rows = RowSyncArrayProxy.create({
+        syncArray: rows,
+        content: _rows
+      });
     }
 
-    this.setProperties({ columns: _columns, rows: _rows });
+    this.setProperties({
+      columns: _columns,
+      rows: _rows
+    });
   }
 
   destroy() {
@@ -165,7 +171,7 @@ export default class Table extends Ember.Object.extend({
 
     let rows = this.get('rows');
 
-    if(rows instanceof RowSyncArrayProxy) {
+    if (rows instanceof RowSyncArrayProxy) {
       rows.destroy();
     }
   }
@@ -204,7 +210,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Object} options
    */
   addRows(rows = [], options = {}) {
-    rows.forEach(r => this.addRow(r, options));
+    rows.forEach((r) => this.addRow(r, options));
   }
 
   /**
@@ -266,9 +272,8 @@ export default class Table extends Ember.Object.extend({
    * @param  {Array}    rows
    */
   removeRows(rows = []) {
-    rows.forEach(r => this.removeRow(r));
+    rows.forEach((r) => this.removeRow(r));
   }
-
 
   /**
    * Remove a row at the specified index
@@ -394,7 +399,7 @@ export default class Table extends Ember.Object.extend({
    * @return {Array}
    */
   static createRows(rows = [], options = {}) {
-    return rows.map(r => Table.createRow(r, options));
+    return rows.map((r) => Table.createRow(r, options));
   }
 
   /**
@@ -416,6 +421,6 @@ export default class Table extends Ember.Object.extend({
    * @return {Array}
    */
   static createColumns(columns = []) {
-    return columns.map(c => Table.createColumn(c));
+    return columns.map((c) => Table.createColumn(c));
   }
 }

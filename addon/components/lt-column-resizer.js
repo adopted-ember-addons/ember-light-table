@@ -41,7 +41,7 @@ export default Ember.Component.extend({
   },
 
   mouseDown(e) {
-    const $column = this._getColumn();
+    let $column = this._getColumn();
 
     e.preventDefault();
     e.stopPropagation();
@@ -54,11 +54,11 @@ export default Ember.Component.extend({
   },
 
   _mouseUp(e) {
-    if(this.get('isResizing')) {
+    if (this.get('isResizing')) {
       e.preventDefault();
       e.stopPropagation();
 
-      const $column = this._getColumn();
+      let $column = this._getColumn();
 
       this.set('isResizing', false);
       this.set('column.width', `${$column.width()}px`);
@@ -67,16 +67,16 @@ export default Ember.Component.extend({
   },
 
   _mouseMove(e) {
-    if(this.get('isResizing')) {
+    if (this.get('isResizing')) {
       e.preventDefault();
       e.stopPropagation();
 
-      const resizeOnDrag = this.get('resizeOnDrag');
-      const $column = this._getColumn();
-      const { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
-      const width = startWidth + (e.pageX - startX);
+      let resizeOnDrag = this.get('resizeOnDrag');
+      let $column = this._getColumn();
+      let { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
+      let width = startWidth + (e.pageX - startX);
 
-      if(resizeOnDrag) {
+      if (resizeOnDrag) {
         this.set('column.width', `${width}px`);
       } else {
         $column.width(`${width}px`);

@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
- /**
-  * @module Table
-  * @class Row
-  */
+/**
+ * @module Table
+ * @class Row
+ */
 export default class Row extends Ember.ObjectProxy.extend({
   /**
    * @property hidden
@@ -32,7 +32,7 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @property classNames
    * @type {String | Array}
    */
-  classNames: null,
+  classNames: null
 }) {
   /**
    * @class Row

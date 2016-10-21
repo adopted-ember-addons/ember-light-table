@@ -93,7 +93,7 @@ const LightTable = Component.extend({
    * @type {Object}
    * @private
    */
-  sharedOptions: computed(function () {
+  sharedOptions: computed(function() {
     return {
       height: this.get('height'),
       fixedHeader: false,
@@ -101,7 +101,7 @@ const LightTable = Component.extend({
     };
   }).readOnly(),
 
-  style: computed('height', function () {
+  style: computed('height', function() {
     return cssStyleify(this.getProperties(['height']));
   }),
 
