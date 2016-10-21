@@ -122,6 +122,7 @@ const LightTable = Component.extend({
     let visibleColumns = this.get('visibleColumns');
     let widths = visibleColumns.getEach('width');
     let unit = (widths[0] || '').match(/\D+$/);
+    let totalWidth = 0;
 
     if (isEmpty(unit)) {
       return 0;
@@ -129,17 +130,21 @@ const LightTable = Component.extend({
 
     unit = unit[0];
 
-    // 1. Check if all widths are present
-    // 2. Check if all widths are the same unit
+    /*
+      1. Check if all widths are present
+      2. Check if all widths are the same unit
+     */
     for (let i = 0; i < widths.length; i++) {
       let width = widths[i];
 
       if (isNone(width) || width.indexOf(unit) === -1) {
         return 0;
       }
+
+      totalWidth += parseInt(width, 10);
     }
 
-    return widths.reduce((t, w) => t += parseInt(w, 10), 0) + unit;
+    return `${totalWidth}${unit}`;
   }),
 
   style: computed('totalWidth', 'height', function() {
