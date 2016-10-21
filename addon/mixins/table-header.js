@@ -104,11 +104,11 @@ export default Ember.Mixin.create({
      * @param  {Event}   event   The click event
      */
     onColumnClick(column) {
-      if(column.sortable && this.get('sortOnClick')) {
-        if(column.sorted) {
+      if (column.sortable && this.get('sortOnClick')) {
+        if (column.sorted) {
           column.toggleProperty('ascending');
         } else {
-          if(!this.get('multiColumnSort')) {
+          if (!this.get('multiColumnSort')) {
             this.get('table.sortedColumns').setEach('sorted', false);
           }
           column.set('sorted', true);

@@ -101,42 +101,42 @@ import Row from './classes/Row';
  * @submodule Table Declaration
  */
 
- /**
-  * The `light-table` component exposes 3 contextual component (head, body, and foot).
-  *
-  * ```hbs
-  * {{#light-table table as |t|}}
-  *
-  *   {{t.head}}
-  *
-  *   {{#t.body as |body|}}
-  *     {{#body.expanded-row as |row|}}
-  *       Hello <b>{{row.firstName}}</b>
-  *     {{/body.expanded-row}}
-  *
-  *     {{#if isLoading}}
-  *       {{#body.loader}}
-  *         Loading...
-  *       {{/body.loader}}
-  *     {{/if}}
-  *
-  *     {{#if table.isEmpty}}
-  *       {{#body.no-data}}
-  *         No users found.
-  *       {{/body.no-data}}
-  *     {{/if}}
-  *   {{/t.body}}
-  *
-  *   {{t.foot}}
-  *
-  * {{/light-table}}
-  * ```
-  *
-  * Each of these contextual components have a wide array of options so it is advised to look
-  * through their documentation.
-  *
-  * @module Usage
-  * @submodule Component Declaration
-  */
+/**
+ * The `light-table` component exposes 3 contextual component (head, body, and foot).
+ *
+ * ```hbs
+ * {{#light-table table as |t|}}
+ *
+ *   {{t.head}}
+ *
+ *   {{#t.body as |body|}}
+ *     {{#body.expanded-row as |row|}}
+ *       Hello <b>{{row.firstName}}</b>
+ *     {{/body.expanded-row}}
+ *
+ *     {{#if isLoading}}
+ *       {{#body.loader}}
+ *         Loading...
+ *       {{/body.loader}}
+ *     {{/if}}
+ *
+ *     {{#if table.isEmpty}}
+ *       {{#body.no-data}}
+ *         No users found.
+ *       {{/body.no-data}}
+ *     {{/if}}
+ *   {{/t.body}}
+ *
+ *   {{t.foot}}
+ *
+ * {{/light-table}}
+ * ```
+ *
+ * Each of these contextual components have a wide array of options so it is advised to look
+ * through their documentation.
+ *
+ * @module Usage
+ * @submodule Component Declaration
+ */
 export default Table;
 export { Table, Column, Row };

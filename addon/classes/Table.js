@@ -12,19 +12,13 @@ const {
   A: emberArray
 } = Ember;
 
-function filterBy(dependentKey, propertyKey, value) {
-  return computed(`${dependentKey}.[]`, `${dependentKey}.@each.${propertyKey}`, function() {
-    return emberArray(this.get(dependentKey).filterBy(propertyKey, value));
-  });
-}
-
 const RowSyncArrayProxy = SyncArrayProxy.extend({
   serializeContentObjects(objects) {
     return Table.createRows(objects);
   },
 
   serializeSyncArrayObjects(objects) {
-    return objects.map(o => get(o, 'content'));
+    return objects.map((o) => get(o, 'content'));
   }
 });
 
@@ -33,10 +27,10 @@ const RowSyncArrayProxy = SyncArrayProxy.extend({
  * @private
  */
 
- /**
-  * @module Table
-  * @class Table
-  */
+/**
+ * @module Table
+ * @class Table
+ */
 export default class Table extends Ember.Object.extend({
   /**
    * @property columns
@@ -62,49 +56,49 @@ export default class Table extends Ember.Object.extend({
    * @property expandedRows
    * @type {Ember.Array}
    */
-  expandedRows: filterBy('rows', 'expanded', true).readOnly(),
+  expandedRows: computed.filterBy('rows', 'expanded', true).readOnly(),
 
   /**
    * @property selectedRows
    * @type {Ember.Array}
    */
-  selectedRows: filterBy('rows', 'selected', true).readOnly(),
+  selectedRows: computed.filterBy('rows', 'selected', true).readOnly(),
 
   /**
    * @property visibleRows
    * @type {Ember.Array}
    */
-  visibleRows: filterBy('rows', 'hidden', false).readOnly(),
+  visibleRows: computed.filterBy('rows', 'hidden', false).readOnly(),
 
   /**
    * @property sortableColumns
    * @type {Ember.Array}
    */
-  sortableColumns: filterBy('visibleColumns', 'sortable', true).readOnly(),
+  sortableColumns: computed.filterBy('visibleColumns', 'sortable', true).readOnly(),
 
   /**
    * @property sortedColumns
    * @type {Ember.Array}
    */
-  sortedColumns: filterBy('visibleColumns', 'sorted', true).readOnly(),
+  sortedColumns: computed.filterBy('visibleColumns', 'sorted', true).readOnly(),
 
   /**
    * @property hideableColumns
    * @type {Ember.Array}
    */
-  hideableColumns: filterBy('allColumns', 'hideable', true).readOnly(),
+  hideableColumns: computed.filterBy('allColumns', 'hideable', true).readOnly(),
 
   /**
    * @property hiddenColumns
    * @type {Ember.Array}
    */
-  hiddenColumns: filterBy('allColumns', 'hidden', true).readOnly(),
+  hiddenColumns: computed.filterBy('allColumns', 'hidden', true).readOnly(),
 
   /**
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: filterBy('allColumns', 'hidden', false).readOnly(),
+  visibleColumns: computed.filterBy('allColumns', 'hidden', false).readOnly(),
 
   /**
    * @property visibleColumnGroups
@@ -137,7 +131,7 @@ export default class Table extends Ember.Object.extend({
       if (isEmpty(subColumns)) {
         arr.push(c);
       } else {
-        subColumns.forEach(sc => arr.push(sc));
+        subColumns.forEach((sc) => arr.push(sc));
       }
       return arr;
     }, []));
@@ -159,11 +153,17 @@ export default class Table extends Ember.Object.extend({
     let _rows = emberArray(Table.createRows(rows));
     let _options = mergeOptionsWithGlobals(options);
 
-    if(_options.enableSync) {
-      _rows = RowSyncArrayProxy.create({ syncArray: rows, content: _rows });
+    if (_options.enableSync) {
+      _rows = RowSyncArrayProxy.create({
+        syncArray: rows,
+        content: _rows
+      });
     }
 
-    this.setProperties({ columns: _columns, rows: _rows });
+    this.setProperties({
+      columns: _columns,
+      rows: _rows
+    });
   }
 
   destroy() {
@@ -171,7 +171,7 @@ export default class Table extends Ember.Object.extend({
 
     let rows = this.get('rows');
 
-    if(rows instanceof RowSyncArrayProxy) {
+    if (rows instanceof RowSyncArrayProxy) {
       rows.destroy();
     }
   }
@@ -210,7 +210,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Object} options
    */
   addRows(rows = [], options = {}) {
-    rows.forEach(r => this.addRow(r, options));
+    rows.forEach((r) => this.addRow(r, options));
   }
 
   /**
@@ -272,9 +272,8 @@ export default class Table extends Ember.Object.extend({
    * @param  {Array}    rows
    */
   removeRows(rows = []) {
-    rows.forEach(r => this.removeRow(r));
+    rows.forEach((r) => this.removeRow(r));
   }
-
 
   /**
    * Remove a row at the specified index
@@ -400,7 +399,7 @@ export default class Table extends Ember.Object.extend({
    * @return {Array}
    */
   static createRows(rows = [], options = {}) {
-    return rows.map(r => Table.createRow(r, options));
+    return rows.map((r) => Table.createRow(r, options));
   }
 
   /**
@@ -422,6 +421,6 @@ export default class Table extends Ember.Object.extend({
    * @return {Array}
    */
   static createColumns(columns = []) {
-    return columns.map(c => Table.createColumn(c));
+    return columns.map((c) => Table.createColumn(c));
   }
 }

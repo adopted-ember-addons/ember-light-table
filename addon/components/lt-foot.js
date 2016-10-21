@@ -46,8 +46,8 @@ export default Component.extend(TableHeaderMixin, {
   init() {
     this._super(...arguments);
 
-    const sharedOptions = this.get('sharedOptions') || {};
-    const fixed = this.get('fixed');
+    let sharedOptions = this.get('sharedOptions') || {};
+    let fixed = this.get('fixed');
 
     assert('[ember-light-table] The height property is required for fixed footer', !fixed || fixed && !isEmpty(sharedOptions.height));
 

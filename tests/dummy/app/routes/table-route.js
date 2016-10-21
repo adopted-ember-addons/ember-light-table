@@ -9,7 +9,7 @@ export default Ember.Route.extend({
     controller.set('model', model.toArray());
   },
 
-  resetController: function(controller, isExiting) {
+  resetController(controller, isExiting) {
     if (isExiting) {
       controller.set('page', 1);
     }

@@ -176,7 +176,7 @@ export default Component.extend({
 
   /**
    * Allows to customize the component used to render rows
-   * 
+   *
    * ```hbs
    * {{#light-table table as |t|}}
    *    {{t.body rowComponent=(component 'my-row')}}
@@ -190,7 +190,7 @@ export default Component.extend({
 
   /**
    * Allows to customize the component used to render spanned rows
-   * 
+   *
    * ```hbs
    * {{#light-table table as |t|}}
    *    {{t.body spannedRowComponent=(component 'my-spanned-row')}}
@@ -204,7 +204,7 @@ export default Component.extend({
 
   /**
    * Allows to customize the component used to render infinite loader
-   * 
+   *
    * ```hbs
    * {{#light-table table as |t|}}
    *    {{t.body infinityComponent=(component 'my-infinity')}}
@@ -235,7 +235,7 @@ export default Component.extend({
   },
 
   _setupVirtualScrollbar() {
-    const { fixedHeader, fixedFooter } = this.get('sharedOptions');
+    let { fixedHeader, fixedFooter } = this.get('sharedOptions');
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
   },
 
@@ -272,7 +272,7 @@ export default Component.extend({
 
       if (canSelect) {
         if (e.shiftKey && multiSelect) {
-          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach(r => r.set('selected', !isSelected));
+          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach((r) => r.set('selected', !isSelected));
           this._prevSelectedIndex = currIndex;
         } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) && multiSelect) {
           row.toggleProperty('selected');

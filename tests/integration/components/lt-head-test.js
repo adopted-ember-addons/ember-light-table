@@ -26,10 +26,9 @@ test('render grouped columns', function(assert) {
   assert.equal(this.$('tr > th').length, 8);
 });
 
-
 test('click - non-sortable column', function(assert) {
   this.set('table', new Table(Columns));
-  this.on('onColumnClick', column => {
+  this.on('onColumnClick', (column) => {
     assert.ok(column);
     assert.ok(!column.sortable);
     assert.equal(column.label, 'Avatar');
@@ -44,7 +43,7 @@ test('click - non-sortable column', function(assert) {
 test('click - sortable column', function(assert) {
   this.set('table', new Table(Columns));
   let asc = true;
-  this.on('onColumnClick', column => {
+  this.on('onColumnClick', (column) => {
     assert.ok(column);
     assert.ok(column.sortable);
     assert.ok(column.sorted);
@@ -62,7 +61,7 @@ test('click - sortable column', function(assert) {
 
 test('double click', function(assert) {
   this.set('table', new Table(Columns));
-  this.on('onColumnDoubleClick', column => {
+  this.on('onColumnDoubleClick', (column) => {
     assert.ok(column);
     assert.ok(!column.sortable);
     assert.equal(column.label, 'Avatar');

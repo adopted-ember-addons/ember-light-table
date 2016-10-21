@@ -6,10 +6,10 @@ const {
   A: emberArray
 } = Ember;
 
- /**
-  * @module Table
-  * @class Column
-  */
+/**
+ * @module Table
+ * @class Column
+ */
 export default class Column extends Ember.Object.extend({
   /**
    * @property hideable
@@ -201,15 +201,15 @@ export default class Column extends Ember.Object.extend({
    * @param {Object} options
    */
   constructor(options = {}) {
-    if(options instanceof Column) {
+    if (options instanceof Column) {
       return options;
     }
 
     super();
     this.setProperties(options);
 
-    if(!isEmpty(options.subColumns)) {
-      this.set('subColumns', emberArray(options.subColumns.map(sc => new Column(sc))));
+    if (!isEmpty(options.subColumns)) {
+      this.set('subColumns', emberArray(options.subColumns.map((sc) => new Column(sc))));
     }
   }
 }
