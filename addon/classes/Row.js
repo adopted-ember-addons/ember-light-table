@@ -1,30 +1,28 @@
 import Ember from 'ember';
+import globalOptions from 'ember-light-table/-private/global-options';
 
  /**
   * @module Table
   * @class Row
   */
-export default class Row extends Ember.ObjectProxy.extend({
+class Row extends Ember.ObjectProxy.extend({
   /**
    * @property hidden
    * @type {Boolean}
-   * @default false
+   * @default undefined
    */
-  hidden: false,
 
   /**
    * @property expanded
    * @type {Boolean}
-   * @default false
+   * @default undefined
    */
-  expanded: false,
 
   /**
    * @property selected
    * @type {Boolean}
-   * @default false
+   * @default undefined
    */
-  selected: false,
 
   /**
    * Class names to be applied to this row
@@ -40,13 +38,35 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @param {Object} content
    * @param {Object} options
    */
-  constructor(content, options = {}) {
+  constructor(content = {}, options = {}) {
     if (content instanceof Row) {
       return content;
     }
 
     super();
-    this.setProperties(options);
     this.set('content', content);
+    this.setProperties(options);
+
+    if (Ember.isNone(this.get('hidden'))) {
+      this.set('hidden', false);
+    }
+
+    if (Ember.isNone(this.get('expanded'))) {
+      this.set('expanded', false);
+    }
+
+    if (Ember.isNone(this.get('selected'))) {
+      this.set('selected', false);
+    }
   }
 }
+
+if (!globalOptions.proxyRowOptions) {
+  Row.reopen({
+    hidden: false,
+    expanded: false,
+    selected: false
+  });
+}
+
+export default Row;
