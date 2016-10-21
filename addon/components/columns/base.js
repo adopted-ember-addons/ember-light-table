@@ -37,7 +37,13 @@ const Column = Component.extend({
 
   align: computed('column.align', function () {
     return `align-${this.get('column.align')}`;
-  }).readOnly(),
+  }),
+
+  /**
+   * @property label
+   * @type {String}
+   */
+  label: computed.oneWay('column.label'),
 
   /**
    * @property table
