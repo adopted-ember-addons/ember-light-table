@@ -176,7 +176,7 @@ export default Component.extend({
 
   /**
    * Allows to customize the component used to render rows
-   * 
+   *
    * ```hbs
    * {{#light-table table as |t|}}
    *    {{t.body rowComponent=(component 'my-row')}}
@@ -190,7 +190,7 @@ export default Component.extend({
 
   /**
    * Allows to customize the component used to render spanned rows
-   * 
+   *
    * ```hbs
    * {{#light-table table as |t|}}
    *    {{t.body spannedRowComponent=(component 'my-spanned-row')}}
@@ -204,7 +204,7 @@ export default Component.extend({
 
   /**
    * Allows to customize the component used to render infinite loader
-   * 
+   *
    * ```hbs
    * {{#light-table table as |t|}}
    *    {{t.body infinityComponent=(component 'my-infinity')}}
@@ -242,13 +242,17 @@ export default Component.extend({
   toggleExpandedRow(row) {
     let multi = this.get('multiRowExpansion');
     let shouldExpand = !row.expanded;
+    let otherAffectedRows = Ember.A();
 
     if (multi) {
       row.toggleProperty('expanded');
     } else {
+      otherAffectedRows.pushObjects(this.get('table.expandedRows'));
       this.get('table.expandedRows').setEach('expanded', false);
       row.set('expanded', shouldExpand);
     }
+
+    return otherAffectedRows;
   },
 
   actions: {
@@ -257,6 +261,7 @@ export default Component.extend({
      * @event onRowClick
      * @param  {Row}   row The row that was clicked
      * @param  {Event}   event   The click event
+     * @param  {Array}   affectedSelections   The rows whose selection state has been changed
      */
     onRowClick(row, e) {
       let rows = this.get('table.rows');
@@ -266,32 +271,46 @@ export default Component.extend({
       let isSelected = row.get('selected');
       let currIndex = rows.indexOf(row);
       let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
+      let otherAffectedRows = {
+          selected: Ember.A(),
+          expanded: Ember.A()
+      };
 
       this._currSelectedIndex = currIndex;
       this._prevSelectedIndex = prevIndex;
 
       if (canSelect) {
         if (e.shiftKey && multiSelect) {
-          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach(r => r.set('selected', !isSelected));
+          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach(r => {
+            if (!r.get('selected')) {
+                otherAffectedRows.selected.pushObject(r);
+            }
+
+            r.set('selected', !isSelected);
+          });
           this._prevSelectedIndex = currIndex;
         } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) && multiSelect) {
           row.toggleProperty('selected');
         } else {
+          otherAffectedRows.selected.pushObjects(this.get('table.selectedRows'));
           this.get('table.selectedRows').setEach('selected', false);
           row.set('selected', !isSelected);
 
           if (this.get('canExpand') && this.get('expandOnClick')) {
-            this.toggleExpandedRow(row);
+            otherAffectedRows.expanded = this.toggleExpandedRow(row);
           }
         }
         this._prevSelectedIndex = currIndex;
       } else {
         if (this.get('canExpand') && this.get('expandOnClick')) {
-          this.toggleExpandedRow(row);
+          otherAffectedRows.expanded = this.toggleExpandedRow(row);
         }
       }
 
-      callAction(this, 'onRowClick', ...arguments);
+      otherAffectedRows.selected = otherAffectedRows.selected.uniq().without(row);
+      otherAffectedRows.expanded = otherAffectedRows.expanded.uniq().without(row);
+
+      callAction(this, 'onRowClick', ...arguments, otherAffectedRows);
     },
 
     /**
