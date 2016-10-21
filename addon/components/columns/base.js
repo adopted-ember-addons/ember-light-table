@@ -35,9 +35,15 @@ const Column = Component.extend({
     return cssStyleify(this.get('column').getProperties(['width']));
   }),
 
-  align: computed('column.align', function () {
+  align: computed('column.align', function() {
     return `align-${this.get('column.align')}`;
-  }).readOnly(),
+  }),
+
+  /**
+   * @property label
+   * @type {String}
+   */
+  label: computed.oneWay('column.label'),
 
   /**
    * @property table
@@ -67,7 +73,7 @@ const Column = Component.extend({
    * @property colspan
    * @type {Number}
    */
-  colspan: computed('column', 'column.visibleSubColumns.[]', function () {
+  colspan: computed('column', 'column.visibleSubColumns.[]', function() {
     let subColumns = this.get('column.visibleSubColumns');
     return !isEmpty(subColumns) ? subColumns.length : 1;
   }),
@@ -76,7 +82,7 @@ const Column = Component.extend({
    * @property rowspan
    * @type {Number}
    */
-  rowspan: computed('column.visibleSubColumns.[]', function () {
+  rowspan: computed('column.visibleSubColumns.[]', function() {
     let subColumns = this.get('column.visibleSubColumns');
     return !isEmpty(subColumns) ? 1 : 2;
   }),

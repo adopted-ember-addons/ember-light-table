@@ -13,7 +13,10 @@ const {
 moduleForComponent('lt-body', 'Integration | Component | lt body', {
   integration: true,
   beforeEach() {
-    this.set('sharedOptions', { fixedHeader: false, fixedFooter: false });
+    this.set('sharedOptions', {
+      fixedHeader: false,
+      fixedFooter: false
+    });
 
     startMirage(this.container);
   }
@@ -59,10 +62,14 @@ test('row selection - ctrl-click to modify selection', function(assert) {
   firstRow.click();
   assert.equal(this.$('tr.is-selected').length, 1, 'clicking a row selects it');
 
-  lastRow.trigger(createClickEvent({shiftKey: true}));
+  lastRow.trigger(createClickEvent({
+    shiftKey: true
+  }));
   assert.equal(this.$('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
 
-  middleRow.trigger(createClickEvent({ctrlKey: true}));
+  middleRow.trigger(createClickEvent({
+    ctrlKey: true
+  }));
   assert.equal(this.$('tr.is-selected').length, 4, 'ctrl-clicking a selected row deselects it');
 
   firstRow.click();
@@ -83,7 +90,9 @@ test('row selection - click to modify selection', function(assert) {
   firstRow.click();
   assert.equal(this.$('tr.is-selected').length, 1, 'clicking a row selects it');
 
-  lastRow.trigger(createClickEvent({shiftKey: true}));
+  lastRow.trigger(createClickEvent({
+    shiftKey: true
+  }));
   assert.equal(this.$('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
 
   middleRow.click();
@@ -152,8 +161,8 @@ test('row actions', function(assert) {
   assert.expect(2);
 
   this.set('table', new Table(Columns, createUsers(1)));
-  this.on('onRowClick', row => assert.ok(row));
-  this.on('onRowDoubleClick', row => assert.ok(row));
+  this.on('onRowClick', (row) => assert.ok(row));
+  this.on('onRowDoubleClick', (row) => assert.ok(row));
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
 
   let row = this.$('tr:first');

@@ -12,25 +12,25 @@ export default function() {
     Note: these only affect routes defined *after* them!
   */
   // this.urlPrefix = '';    // make this `http://localhost:8080`, for example, if your API is on a different server
-  this.namespace = 'api';    // make this `api`, for example, if your API is namespaced
+  this.namespace = 'api'; // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
   this.get('/users', function(schema, request) {
-    var { page, limit, sort, dir } = request.queryParams;
-    var users = schema.users.all().models;
+    let { page, limit, sort, dir } = request.queryParams;
+    let users = schema.users.all().models;
 
     page = page || 1;
     limit = limit || 20;
     dir = dir || 'asc';
 
-    if(sort) {
+    if (sort) {
       users = _.sortBy(users, sort);
-      if(dir !== 'asc') {
+      if (dir !== 'asc') {
         users = users.reverse();
       }
     }
 
-    var offset = (page - 1) * limit;
+    let offset = (page - 1) * limit;
     users = _.take(_.drop(users, offset), limit);
 
     return {
@@ -90,7 +90,7 @@ export default function() {
 
     // Example: return a single object with related models
     this.get('/contacts/:id', function(db, request) {
-      var contactId = +request.params.id;
+      let contactId = +request.params.id;
 
       return {
         contact: db.contacts.find(contactId),

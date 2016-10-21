@@ -95,7 +95,7 @@ const LightTable = Component.extend({
    * @type {Object}
    * @private
    */
-  sharedOptions: computed(function () {
+  sharedOptions: computed(function() {
     return {
       height: this.get('height'),
       fixedHeader: false,
@@ -123,7 +123,7 @@ const LightTable = Component.extend({
     let widths = visibleColumns.getEach('width');
     let unit = (widths[0] || '').match(/\D+$/);
 
-    if(isEmpty(unit)) {
+    if (isEmpty(unit)) {
       return 0;
     }
 
@@ -131,10 +131,10 @@ const LightTable = Component.extend({
 
     // 1. Check if all widths are present
     // 2. Check if all widths are the same unit
-    for(let i = 0; i < widths.length; i++) {
+    for (let i = 0; i < widths.length; i++) {
       let width = widths[i];
 
-      if(isNone(width) || width.indexOf(unit) === -1) {
+      if (isNone(width) || width.indexOf(unit) === -1) {
         return 0;
       }
     }
@@ -142,11 +142,11 @@ const LightTable = Component.extend({
     return widths.reduce((t, w) => t += parseInt(w, 10), 0) + unit;
   }),
 
-  style: computed('totalWidth', 'height', function () {
+  style: computed('totalWidth', 'height', function() {
     let totalWidth = this.get('totalWidth');
     let style = this.getProperties(['height']);
 
-    if(totalWidth) {
+    if (totalWidth) {
       style.width = totalWidth;
       style.overflowX = 'auto';
     }

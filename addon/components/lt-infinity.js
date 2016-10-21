@@ -2,7 +2,11 @@ import Ember from 'ember';
 import layout from '../templates/components/lt-infinity';
 import InViewportMixin from 'ember-in-viewport';
 
-const { Component, observer, run } = Ember;
+const {
+  Component,
+  observer,
+  run
+} = Ember;
 
 export default Component.extend(InViewportMixin, {
   classNames: ['lt-infinity'],
@@ -21,10 +25,10 @@ export default Component.extend(InViewportMixin, {
     this.setProperties({
       viewportSpy: true,
       viewportTolerance: {
-        bottom : scrollBuffer,
-        top    : 0,
-        left   : width / 2,
-        right  : width / 2
+        bottom: scrollBuffer,
+        top: 0,
+        left: width / 2,
+        right: width / 2
       }
     });
   },
@@ -43,7 +47,7 @@ export default Component.extend(InViewportMixin, {
   },
 
   scheduleScrolledToBottom: observer('rows.[]', 'viewportEntered', function() {
-    if(this.get('viewportEntered')) {
+    if (this.get('viewportEntered')) {
       /*
         Continue scheduling onScrolledToBottom until no longer in viewport
        */

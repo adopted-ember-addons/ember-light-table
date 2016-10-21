@@ -14,7 +14,6 @@ test('it renders', function(assert) {
   assert.equal(this.$().text().trim(), '');
 });
 
-
 test('cell with column format', function(assert) {
   this.set('column', new Column({
     valuePath: 'num',
@@ -45,7 +44,6 @@ test('cell format with no valuePath', function(assert) {
 
   assert.equal(this.$().text().trim(), '4');
 });
-
 
 test('cell with nested valuePath', function(assert) {
   this.set('column', new Column({

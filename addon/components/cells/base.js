@@ -69,9 +69,10 @@ const Cell = Component.extend({
    * @type {Mixed}
    */
   value: computed('rawValue', function() {
-    const rawValue = this.get('rawValue');
-    const format = this.get('column.format');
-    if(format && typeof format === 'function') {
+    let rawValue = this.get('rawValue');
+    let format = this.get('column.format');
+
+    if (format && typeof format === 'function') {
       return format.call(this, rawValue);
     }
     return rawValue;

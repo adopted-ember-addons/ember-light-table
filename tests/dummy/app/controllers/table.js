@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
 
   fetchRecords() {
     this.set('isLoading', true);
-    this.store.query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then(records => {
+    this.store.query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then((records) => {
       this.get('model').pushObjects(records.toArray());
       this.set('isLoading', false);
       this.set('canLoadMore', !isEmpty(records));
@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
 
   actions: {
     onScrolledToBottom() {
-      if(this.get('canLoadMore')) {
+      if (this.get('canLoadMore')) {
         this.incrementProperty('page');
         this.fetchRecords();
       }
