@@ -6,8 +6,20 @@ import cssStyleify from 'ember-light-table/utils/css-styleify';
 const {
   assert,
   Component,
-  computed
+  computed,
+  inject,
+  observer,
+  on,
+  isNone,
+  run,
+  A: emberArray
 } = Ember;
+
+function intersections(array1, array2) {
+  return array1.filter(function(n) {
+    return array2.indexOf(n) > -1;
+  });
+}
 
 /**
  * @module Light Table
@@ -34,6 +46,8 @@ const LightTable = Component.extend({
   layout,
   classNameBindings: [':ember-light-table'],
   attributeBindings: ['style'],
+
+  media: inject.service(),
 
   /**
    * @property table
@@ -86,6 +100,10 @@ const LightTable = Component.extend({
    */
   tableClassNames: '',
 
+  responsive: false,
+
+  breakpoints: null,
+
   /**
    * Table component shared options
    *
@@ -108,6 +126,54 @@ const LightTable = Component.extend({
   init() {
     this._super(...arguments);
     assert('[ember-light-table] table must be an instance of Table', this.get('table') instanceof Table);
+  },
+
+  onMediaTypeChange: on('init', observer('media.matches.[]', 'table.allColumns.[]', 'table.allColumns.@each.breakpoint', 'breakpoints', function() {
+    let responsive = this.get('responsive');
+    let mediaMatches = this.get('media.matches');
+    let breakpoints = this.get('breakpoints');
+    let table = this.get('table');
+    let numColumns = 0;
+
+    if (!responsive) {
+      return;
+    }
+
+    if (!isNone(breakpoints)) {
+      Object.keys(breakpoints).forEach((b) => {
+        if (mediaMatches.indexOf(b) > -1) {
+          numColumns = Math.max(numColumns, breakpoints[b]);
+        }
+      });
+
+      this._displayColumns(numColumns);
+    } else {
+      table.get('allColumns').filterBy('hideable', true).forEach((c) => {
+        let breakpoints = c.get('breakpoints');
+
+        if (isNone(breakpoints) || intersections(mediaMatches, breakpoints).length > 0) {
+          c.set('hidden', false);
+        } else {
+          c.set('hidden', true);
+        }
+      });
+    }
+
+    run.next(this, 'sendAction', 'onBreakpointChange', mediaMatches);
+  })),
+
+  _displayColumns(numColumns) {
+    let table = this.get('table');
+    let hiddenColumns = table.get('hiddenColumns');
+    let visibleColumns = emberArray(table.get('visibleColumns').filterBy('hideable', true));
+
+    if (!numColumns) {
+      hiddenColumns.setEach('hidden', false);
+    } else if (visibleColumns.length > numColumns) {
+      emberArray(visibleColumns.slice(numColumns, visibleColumns.length)).setEach('hidden', true);
+    } else if (visibleColumns.length < numColumns) {
+      emberArray(hiddenColumns.slice(0, numColumns - visibleColumns.length)).setEach('hidden', false);
+    }
   }
 });
 
