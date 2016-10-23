@@ -15,9 +15,9 @@ MediaService.reopen({
   _forceSetBreakpoint(breakpoint) {
     let found = false;
 
-    const props = {};
+    let props = {};
     this.get('_breakpointArr').forEach(function(bp) {
-      const val = bp === breakpoint;
+      let val = bp === breakpoint;
       if (val) {
         found = true;
       }
@@ -45,12 +45,12 @@ MediaService.reopen({
 
 export default Ember.Test.registerAsyncHelper('setBreakpoint', function(app, breakpoint) {
   // this should use getOwner once that's supported
-  const mediaService = app.__deprecatedInstance__.lookup('service:media');
+  let mediaService = app.__deprecatedInstance__.lookup('service:media');
   mediaService._forceSetBreakpoint(breakpoint);
 });
 
 export function setBreakpointForIntegrationTest(container, breakpoint) {
-  const mediaService = getOwner(container).lookup('service:media');
+  let mediaService = getOwner(container).lookup('service:media');
   mediaService._forceSetBreakpoint(breakpoint);
   container.set('media', mediaService);
 

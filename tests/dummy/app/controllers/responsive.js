@@ -8,6 +8,11 @@ const {
 export default TableController.extend({
   columns: computed(function() {
     return [{
+      width: '40px',
+      sortable: false,
+      cellComponent: 'row-toggle',
+      breakpoints: ['xs', 'sm', 'md']
+    }, {
       label: 'Avatar',
       valuePath: 'avatar',
       width: '60px',
@@ -16,13 +21,12 @@ export default TableController.extend({
     }, {
       label: 'First Name',
       valuePath: 'firstName',
-      width: '150px',
-      breakpoints: ['xs', 'sm', 'md', 'lg']
+      width: '150px'
     }, {
       label: 'Last Name',
       valuePath: 'lastName',
       width: '150px',
-      breakpoints: ['xs', 'sm', 'md', 'lg']
+      breakpoints: ['sm', 'md', 'lg']
     }, {
       label: 'Address',
       valuePath: 'address',
@@ -36,5 +40,13 @@ export default TableController.extend({
       valuePath: 'country',
       breakpoints: ['lg']
     }];
-  })
+  }),
+
+  actions: {
+    onBreakpointChange(matches) {
+      if (matches.indexOf('lg') > -1) {
+        this.get('table.expandedRows').setEach('expanded', false);
+      }
+    }
+  }
 });

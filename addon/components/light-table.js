@@ -2,6 +2,7 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/light-table';
 import Table from 'ember-light-table/classes/Table';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
+import callAction from 'ember-light-table/utils/call-action';
 
 const {
   assert,
@@ -11,12 +12,13 @@ const {
   observer,
   on,
   isNone,
+  isEmpty,
   run,
   A: emberArray
 } = Ember;
 
 function intersections(array1, array2) {
-  return array1.filter(function(n) {
+  return array1.filter((n) => {
     return array2.indexOf(n) > -1;
   });
 }
@@ -100,8 +102,41 @@ const LightTable = Component.extend({
    */
   tableClassNames: '',
 
+  /**
+   * Enable responsive behavior
+   *
+   * @property responsive
+   * @type {Boolean}
+   * @default false
+   */
   responsive: false,
 
+  /**
+   * A hash to determine the number of columns to show per given breakpoint.
+   * If this is specified, it will override any column specific breakpoints.
+   *
+   * If we have the following breakpoints defined in `app/breakpoints.js`:
+   *
+   * - mobile
+   * - tablet
+   * - desktop
+   *
+   * The following hash can be passed in:
+   *
+   * ```js
+   * {
+   *  mobile: 2,
+   *  tablet: 4
+   * }
+   * ```
+   *
+   * If there is no rule specified for a given breakpoint (i.e. `desktop`),
+   * all columns will be shown.
+   *
+   * @property breakpoints
+   * @type {Object}
+   * @default null
+   */
   breakpoints: null,
 
   /**
@@ -128,9 +163,14 @@ const LightTable = Component.extend({
     assert('[ember-light-table] table must be an instance of Table', this.get('table') instanceof Table);
   },
 
-  onMediaTypeChange: on('init', observer('media.matches.[]', 'table.allColumns.[]', 'table.allColumns.@each.breakpoint', 'breakpoints', function() {
+  destroy() {
+    this._super(...arguments);
+    run.cancel(this._breakpointChangeTimer);
+  },
+
+  onMediaChange: on('init', observer('media.matches.[]', 'table.allColumns.[]', function() {
     let responsive = this.get('responsive');
-    let mediaMatches = this.get('media.matches');
+    let matches = this.get('media.matches');
     let breakpoints = this.get('breakpoints');
     let table = this.get('table');
     let numColumns = 0;
@@ -141,38 +181,49 @@ const LightTable = Component.extend({
 
     if (!isNone(breakpoints)) {
       Object.keys(breakpoints).forEach((b) => {
-        if (mediaMatches.indexOf(b) > -1) {
+        if (matches.indexOf(b) > -1) {
           numColumns = Math.max(numColumns, breakpoints[b]);
         }
       });
 
       this._displayColumns(numColumns);
     } else {
-      table.get('allColumns').filterBy('hideable', true).forEach((c) => {
+      table.get('allColumns').forEach((c) => {
         let breakpoints = c.get('breakpoints');
 
-        if (isNone(breakpoints) || intersections(mediaMatches, breakpoints).length > 0) {
-          c.set('hidden', false);
+        if (isEmpty(breakpoints) || intersections(matches, breakpoints).length > 0) {
+          c.set('responsiveHidden', false);
         } else {
-          c.set('hidden', true);
+          c.set('responsiveHidden', true);
         }
       });
     }
 
-    run.next(this, 'sendAction', 'onBreakpointChange', mediaMatches);
+    this._breakpointChangeTimer = run.next(this, 'send', 'onBreakpointChange', matches);
   })),
 
   _displayColumns(numColumns) {
     let table = this.get('table');
-    let hiddenColumns = table.get('hiddenColumns');
-    let visibleColumns = emberArray(table.get('visibleColumns').filterBy('hideable', true));
+    let hiddenColumns = table.get('responsiveHiddenColumns');
+    let visibleColumns = table.get('visibleColumns');
 
     if (!numColumns) {
-      hiddenColumns.setEach('hidden', false);
+      hiddenColumns.setEach('responsiveHidden', false);
     } else if (visibleColumns.length > numColumns) {
-      emberArray(visibleColumns.slice(numColumns, visibleColumns.length)).setEach('hidden', true);
+      emberArray(visibleColumns.slice(numColumns, visibleColumns.length)).setEach('responsiveHidden', true);
     } else if (visibleColumns.length < numColumns) {
-      emberArray(hiddenColumns.slice(0, numColumns - visibleColumns.length)).setEach('hidden', false);
+      emberArray(hiddenColumns.slice(0, numColumns - visibleColumns.length)).setEach('responsiveHidden', false);
+    }
+  },
+
+  actions: {
+    /**
+     * onBreakpointChange action.
+     * @event onBreakpointChange
+     * @param  {Array} matches list of matching breakpoints
+     */
+    onBreakpointChange(/* matches */) {
+      callAction(this, 'onBreakpointChange', ...arguments);
     }
   }
 });
