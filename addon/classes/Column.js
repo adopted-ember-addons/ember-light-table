@@ -94,7 +94,7 @@ export default class Column extends Ember.Object.extend({
    * - tablet
    * - desktop
    *
-   * And we want to show this column only for tablet and dekstop media, the following
+   * And we want to show this column only for tablet and desktop media, the following
    * array should be specified: `['tablet', 'desktop']`.
    *
    * If this property is `null`, `undefined`, or `[]`, then this column will always
