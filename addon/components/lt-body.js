@@ -293,10 +293,10 @@ export default Component.extend({
   didUpdateAttrs({ newAttrs, oldAttrs }) {
     this._super(...arguments);
 
-    const newScrollTo = get(newAttrs, 'scrollTo.value');
-    const oldScrollTo = get(oldAttrs, 'scrollTo.value');
-    const newScrollToRow = get(newAttrs, 'scrollToRow.value');
-    const oldScrollToRow = get(oldAttrs, 'scrollToRow.value');
+    let newScrollTo = get(newAttrs, 'scrollTo.value');
+    let oldScrollTo = get(oldAttrs, 'scrollTo.value');
+    let newScrollToRow = get(newAttrs, 'scrollToRow.value');
+    let oldScrollToRow = get(oldAttrs, 'scrollToRow.value');
 
     let targetScrollOffset = 0;
     let hasReachedTargetScrollOffset = true;
@@ -308,7 +308,7 @@ export default Component.extend({
       }
     } else if (oldScrollToRow !== newScrollToRow) {
       if (newScrollToRow instanceof Row) {
-        const rowElement = document.getElementById(newScrollToRow.get('rowId'));
+        let rowElement = document.getElementById(newScrollToRow.get('rowId'));
         if (rowElement instanceof Element) {
           targetScrollOffset = rowElement.offsetTop;
         }
@@ -325,8 +325,8 @@ export default Component.extend({
 
   checkTargetScrollOffset() {
     if (!this.get('hasReachedTargetScrollOffset') && !this.get('isDestroyed')) {
-      const targetScrollOffset = this.get('targetScrollOffset');
-      const currentScrollOffset = this.get('currentScrollOffset');
+      let targetScrollOffset = this.get('targetScrollOffset');
+      let currentScrollOffset = this.get('currentScrollOffset');
 
       if (targetScrollOffset > currentScrollOffset) {
         this.set('targetScrollOffset', null);
@@ -415,7 +415,7 @@ export default Component.extend({
      * @param {Event} event The scroll event
      */
     onScroll(scrollOffset /* , event */) {
-      this.set('currentScrollOffset', scrollOffset)
+      this.set('currentScrollOffset', scrollOffset);
       callAction(this, 'onScroll', ...arguments);
     },
 
