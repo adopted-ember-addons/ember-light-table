@@ -7,7 +7,8 @@ const {
   Component,
   computed,
   run,
-  observer
+  observer,
+  get
 } = Ember;
 
 /**
@@ -194,11 +195,11 @@ export default Component.extend({
    * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
    * using fixed headers / footers.
    *
-   * @property showRow
+   * @property scrollToRow
    * @type {Row}
    * @default null
    */
-  showRow: null,
+  scrollToRow: null,
 
   /**
    * @property targetScrollOffset
@@ -273,9 +274,6 @@ export default Component.extend({
   _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
 
-  _scrollTo: null,
-  _showRow: null,
-
   init() {
     this._super(...arguments);
 
@@ -292,22 +290,33 @@ export default Component.extend({
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
   },
 
-  didReceiveAttrs() {
-    const scrollTo = this.get('scrollTo');
-    const _scrollTo = this.get('_scrollTo');
-    const showRow = this.get('showRow');
-    const _showRow = this.get('_showRow');
+  didUpdateAttrs({ newAttrs, oldAttrs }) {
+    this._super(...arguments);
 
-    this.set('_scrollTo', scrollTo);
-    this.set('_showRow', showRow);
+    const newScrollTo = get(newAttrs, 'scrollTo.value');
+    const oldScrollTo = get(oldAttrs, 'scrollTo.value');
+    const newScrollToRow = get(newAttrs, 'scrollToRow.value');
+    const oldScrollToRow = get(oldAttrs, 'scrollToRow.value');
 
-    if (scrollTo !== _scrollTo) {
-      this.set('targetScrollOffset', scrollTo);
-      this.set('hasReachedTargetScrollOffset', false);
-      run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
-    } else if (showRow !== _showRow) {
-      this.scrollToRow(showRow);
+    let targetScrollOffset = 0;
+    let hasReachedTargetScrollOffset = true;
+
+    if (oldScrollTo !== newScrollTo) {
+      targetScrollOffset = newScrollTo;
+      if (newScrollTo > 0) {
+        hasReachedTargetScrollOffset = false;
+      }
+    } else if (oldScrollToRow !== newScrollToRow) {
+      if (newScrollToRow instanceof Row) {
+        const rowElement = document.getElementById(newScrollToRow.get('rowId'));
+        if (rowElement instanceof Element) {
+          targetScrollOffset = rowElement.offsetTop;
+        }
+      }
     }
+
+    this.set('targetScrollOffset', targetScrollOffset);
+    this.set('hasReachedTargetScrollOffset', hasReachedTargetScrollOffset);
   },
 
   rowObserver: observer('rows.[]', function() {
@@ -315,7 +324,7 @@ export default Component.extend({
   }),
 
   checkTargetScrollOffset() {
-    if (!this.get('hasReachedTargetScrollOffset')) {
+    if (!this.get('hasReachedTargetScrollOffset') && !this.get('isDestroyed')) {
       const targetScrollOffset = this.get('targetScrollOffset');
       const currentScrollOffset = this.get('currentScrollOffset');
 
@@ -328,19 +337,6 @@ export default Component.extend({
         this.set('hasReachedTargetScrollOffset', true);
       }
     }
-  },
-
-  scrollToRow(row) {
-    let targetScrollOffset = null;
-
-    if (row instanceof Row) {
-      const rowElement = document.getElementById(row.get('elementId'));
-      if (rowElement instanceof Element) {
-        targetScrollOffset = rowElement.offsetTop;
-      }
-    }
-
-    this.set('targetScrollOffset', targetScrollOffset);
   },
 
   toggleExpandedRow(row) {
