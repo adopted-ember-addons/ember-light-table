@@ -8,7 +8,8 @@ const {
   computed,
   run,
   observer,
-  get
+  get,
+  isPresent
 } = Ember;
 
 /**
@@ -298,25 +299,49 @@ export default Component.extend({
     let newScrollToRow = get(newAttrs, 'scrollToRow.value');
     let oldScrollToRow = get(oldAttrs, 'scrollToRow.value');
 
-    let targetScrollOffset = 0;
-    let hasReachedTargetScrollOffset = true;
-
     if (oldScrollTo !== newScrollTo) {
-      targetScrollOffset = newScrollTo;
-      if (newScrollTo > 0) {
-        hasReachedTargetScrollOffset = false;
-      }
+      this._scrollTo(newScrollTo);
     } else if (oldScrollToRow !== newScrollToRow) {
-      if (newScrollToRow instanceof Row) {
-        let rowElement = document.getElementById(newScrollToRow.get('rowId'));
-        if (rowElement instanceof Element) {
-          targetScrollOffset = rowElement.offsetTop;
-        }
+      this._scrollToRow(newScrollToRow);
+    }
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    let scrollTo = this.get('scrollTo');
+    let scrollToRow = this.get('scrollToRow');
+
+    if (isPresent(scrollTo)) {
+      this._scrollTo(scrollTo);
+    } else if (isPresent(scrollToRow)) {
+      this._scrollToRow(scrollToRow);
+    }
+  },
+
+  _scrollTo(offset) {
+    let targetScrollOffset = Number.parseInt(offset, 10);
+
+    if (Number.isNaN(targetScrollOffset)) {
+      targetScrollOffset = null;
+    }
+
+    this.set('targetScrollOffset', targetScrollOffset);
+    this.set('hasReachedTargetScrollOffset', targetScrollOffset <= 0);
+  },
+
+  _scrollToRow(row) {
+    let targetScrollOffset = null;
+
+    if (row instanceof Row) {
+      let rowElement = document.getElementById(row.get('rowId'));
+      if (rowElement instanceof Element) {
+        targetScrollOffset = rowElement.offsetTop;
       }
     }
 
     this.set('targetScrollOffset', targetScrollOffset);
-    this.set('hasReachedTargetScrollOffset', hasReachedTargetScrollOffset);
+    this.set('hasReachedTargetScrollOffset', true);
   },
 
   destroy() {
