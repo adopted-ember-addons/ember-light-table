@@ -177,6 +177,10 @@ export default Component.extend({
 
   /**
    * Set this property to scroll to a specific px offset.
+   *
+   * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
+   * using fixed headers / footers.
+   *
    * @property scrollTo
    * @type {Number}
    * @default null
@@ -185,6 +189,10 @@ export default Component.extend({
 
   /**
    * Set this property to a `Row` to scroll that `Row` into view.
+   *
+   * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
+   * using fixed headers / footers.
+   *
    * @property showRow
    * @type {Row}
    * @default null
@@ -363,6 +371,9 @@ export default Component.extend({
 
     /**
      * onScroll action - sent when user scrolls
+     *
+     * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
+     * using fixed headers / footers.
      *
      * @event onScroll
      * @param {Number} scrollOffset The scroll offset in px
