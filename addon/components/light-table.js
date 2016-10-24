@@ -160,7 +160,15 @@ const LightTable = Component.extend({
 
   init() {
     this._super(...arguments);
-    assert('[ember-light-table] table must be an instance of Table', this.get('table') instanceof Table);
+
+    let table = this.get('table');
+    let media = this.get('media');
+
+    assert('[ember-light-table] table must be an instance of Table', table instanceof Table);
+
+    if (isNone(media)) {
+      this.set('responsive', false);
+    }
   },
 
   destroy() {
