@@ -13,7 +13,6 @@ const {
   on,
   isNone,
   isEmpty,
-  run,
   A: emberArray
 } = Ember;
 
@@ -171,11 +170,6 @@ const LightTable = Component.extend({
     }
   },
 
-  destroy() {
-    this._super(...arguments);
-    run.cancel(this._breakpointChangeTimer);
-  },
-
   onMediaChange: on('init', observer('media.matches.[]', 'table.allColumns.[]', function() {
     let responsive = this.get('responsive');
     let matches = this.get('media.matches');
@@ -198,16 +192,12 @@ const LightTable = Component.extend({
     } else {
       table.get('allColumns').forEach((c) => {
         let breakpoints = c.get('breakpoints');
-
-        if (isEmpty(breakpoints) || intersections(matches, breakpoints).length > 0) {
-          c.set('responsiveHidden', false);
-        } else {
-          c.set('responsiveHidden', true);
-        }
+        let isMatch = isEmpty(breakpoints) || intersections(matches, breakpoints).length > 0;
+        c.set('responsiveHidden', !isMatch);
       });
     }
 
-    this._breakpointChangeTimer = run.next(this, 'send', 'onBreakpointChange', matches);
+    this.send('onBreakpointChange', matches);
   })),
 
   _displayColumns(numColumns) {
