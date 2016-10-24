@@ -6,7 +6,8 @@ import Row from 'ember-light-table/classes/Row';
 const {
   Component,
   computed,
-  run
+  run,
+  observer
 } = Ember;
 
 /**
@@ -208,6 +209,22 @@ export default Component.extend({
   targetScrollOffset: null,
 
   /**
+   * @property currentScrollOffset
+   * @type {Number}
+   * @default null
+   * @private
+   */
+  currentScrollOffset: true,
+
+  /**
+   * @property hasReachedTargetScrollOffset
+   * @type {Boolean}
+   * @default true
+   * @private
+   */
+  hasReachedTargetScrollOffset: true,
+
+  /**
    * Allows to customize the component used to render rows
    *
    * ```hbs
@@ -286,8 +303,30 @@ export default Component.extend({
 
     if (scrollTo !== _scrollTo) {
       this.set('targetScrollOffset', scrollTo);
+      this.set('hasReachedTargetScrollOffset', false);
+      run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
     } else if (showRow !== _showRow) {
       this.scrollToRow(showRow);
+    }
+  },
+
+  rowObserver: observer('rows.[]', function() {
+    run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
+  }),
+
+  checkTargetScrollOffset() {
+    if (!this.get('hasReachedTargetScrollOffset')) {
+      const targetScrollOffset = this.get('targetScrollOffset');
+      const currentScrollOffset = this.get('currentScrollOffset');
+
+      if (targetScrollOffset > currentScrollOffset) {
+        this.set('targetScrollOffset', null);
+        run.schedule('render', null, () => {
+          this.set('targetScrollOffset', targetScrollOffset);
+        });
+      } else {
+        this.set('hasReachedTargetScrollOffset', true);
+      }
     }
   },
 
@@ -379,7 +418,8 @@ export default Component.extend({
      * @param {Number} scrollOffset The scroll offset in px
      * @param {Event} event The scroll event
      */
-    onScroll(/* scrollOffset, event */) {
+    onScroll(scrollOffset /* , event */) {
+      this.set('currentScrollOffset', scrollOffset)
       callAction(this, 'onScroll', ...arguments);
     },
 
