@@ -7,9 +7,7 @@ const {
   Component,
   computed,
   run,
-  observer,
-  get,
-  isPresent
+  observer
 } = Ember;
 
 /**
@@ -189,6 +187,7 @@ export default Component.extend({
    * @default null
    */
   scrollTo: null,
+  _scrollTo: null,
 
   /**
    * Set this property to a `Row` to scroll that `Row` into view.
@@ -201,6 +200,7 @@ export default Component.extend({
    * @default null
    */
   scrollToRow: null,
+  _scrollToRow: null,
 
   /**
    * @property targetScrollOffset
@@ -291,57 +291,39 @@ export default Component.extend({
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
   },
 
-  didUpdateAttrs({ newAttrs, oldAttrs }) {
-    this._super(...arguments);
-
-    let newScrollTo = get(newAttrs, 'scrollTo.value');
-    let oldScrollTo = get(oldAttrs, 'scrollTo.value');
-    let newScrollToRow = get(newAttrs, 'scrollToRow.value');
-    let oldScrollToRow = get(oldAttrs, 'scrollToRow.value');
-
-    if (oldScrollTo !== newScrollTo) {
-      this._scrollTo(newScrollTo);
-    } else if (oldScrollToRow !== newScrollToRow) {
-      this._scrollToRow(newScrollToRow);
-    }
-  },
-
-  didInsertElement() {
+  didReceiveAttrs() {
     this._super(...arguments);
 
     let scrollTo = this.get('scrollTo');
+    let _scrollTo = this.get('_scrollTo');
+    this.set('_scrollTo', scrollTo);
+
     let scrollToRow = this.get('scrollToRow');
+    let _scrollToRow = this.get('_scrollToRow');
+    this.set('_scrollToRow', scrollToRow);
 
-    if (isPresent(scrollTo)) {
-      this._scrollTo(scrollTo);
-    } else if (isPresent(scrollToRow)) {
-      this._scrollToRow(scrollToRow);
-    }
-  },
+    if (scrollTo !== _scrollTo) {
+      let targetScrollOffset = Number.parseInt(scrollTo, 10);
 
-  _scrollTo(offset) {
-    let targetScrollOffset = Number.parseInt(offset, 10);
-
-    if (Number.isNaN(targetScrollOffset)) {
-      targetScrollOffset = null;
-    }
-
-    this.set('targetScrollOffset', targetScrollOffset);
-    this.set('hasReachedTargetScrollOffset', targetScrollOffset <= 0);
-  },
-
-  _scrollToRow(row) {
-    let targetScrollOffset = null;
-
-    if (row instanceof Row) {
-      let rowElement = document.getElementById(row.get('rowId'));
-      if (rowElement instanceof Element) {
-        targetScrollOffset = rowElement.offsetTop;
+      if (Number.isNaN(targetScrollOffset)) {
+        targetScrollOffset = null;
       }
-    }
 
-    this.set('targetScrollOffset', targetScrollOffset);
-    this.set('hasReachedTargetScrollOffset', true);
+      this.set('targetScrollOffset', targetScrollOffset);
+      this.set('hasReachedTargetScrollOffset', targetScrollOffset <= 0);
+    } else if (scrollToRow !== _scrollToRow) {
+      let targetScrollOffset = null;
+
+      if (scrollToRow instanceof Row) {
+        let rowElement = document.getElementById(scrollToRow.get('rowId'));
+        if (rowElement instanceof Element) {
+          targetScrollOffset = rowElement.offsetTop;
+        }
+      }
+
+      this.set('targetScrollOffset', targetScrollOffset);
+      this.set('hasReachedTargetScrollOffset', true);
+    }
   },
 
   destroy() {
