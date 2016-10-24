@@ -322,6 +322,7 @@ export default Component.extend({
   destroy() {
     this._super(...arguments);
     run.cancel(this._checkTargetOffsetTimer);
+    run.cancel(this._setTargetOffsetTimer);
   },
 
   rowObserver: observer('rows.[]', function() {
@@ -335,7 +336,7 @@ export default Component.extend({
 
       if (targetScrollOffset > currentScrollOffset) {
         this.set('targetScrollOffset', null);
-        run.schedule('render', null, () => {
+        this._setTargetOffsetTimer = run.schedule('render', null, () => {
           this.set('targetScrollOffset', targetScrollOffset);
         });
       } else {
