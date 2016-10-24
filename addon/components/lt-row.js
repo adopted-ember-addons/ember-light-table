@@ -3,8 +3,7 @@ import layout from 'ember-light-table/templates/components/lt-row';
 
 const {
   Component,
-  computed,
-  isPresent
+  computed
 } = Ember;
 
 const Row = Component.extend({
@@ -22,16 +21,7 @@ const Row = Component.extend({
   colpan: 1,
 
   isSelected: computed.readOnly('row.selected'),
-  isExpanded: computed.readOnly('row.expanded'),
-
-  didInsertElement() {
-    this._super(...arguments);
-
-    const row = this.get('row');
-    if (isPresent(row)) {
-      row.set('rowComponent', this);
-    }
-  }
+  isExpanded: computed.readOnly('row.expanded')
 });
 
 Row.reopenClass({

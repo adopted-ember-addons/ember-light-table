@@ -283,13 +283,18 @@ export default Component.extend({
     }
   },
 
-scrollToRow(row) {
-  if (row instanceof Row) {
-    this.set('targetScrollOffset', row.get('scrollOffset'));
-  } else {
-    this.set('targetScrollOffset', null);
-  }
-},
+  scrollToRow(row) {
+    let targetScrollOffset = null;
+
+    if (row instanceof Row) {
+      const rowElement = document.getElementById(row.get('elementId'));
+      if (rowElement instanceof Element) {
+        targetScrollOffset = rowElement.offsetTop;
+      }
+    }
+
+    this.set('targetScrollOffset', targetScrollOffset);
+  },
 
   toggleExpandedRow(row) {
     let multi = this.get('multiRowExpansion');

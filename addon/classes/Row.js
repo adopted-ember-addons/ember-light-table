@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { computed, isBlank } = Ember;
+const { computed, guidFor } = Ember;
 
  /**
   * @module Table
@@ -37,27 +37,15 @@ export default class Row extends Ember.ObjectProxy.extend({
   classNames: null,
 
   /**
-   * @property rowComponent
-   * @type {Ember.Component}
-   * @private
-   */
-  rowComponent: null,
-
-  /**
-   * @property scrollOffset
-   * @type {Number}
-   * @private
+   * Element ID for the corresponding `{{lt-row}}`.
+   *
+   * @property elementId
+   * @type {String}
    * @readOnly
    */
-  scrollOffset: computed(function() {
-    const element = this.get('rowComponent.element');
-
-    if (isBlank(element)) {
-      return null;
-    }
-
-    return element.offsetTop;
-  }).readOnly().volatile()
+  elementId: computed(function() {
+    return `lt-row-${guidFor(this)}`;
+  }).readOnly()
 }) {
   /**
    * @class Row
