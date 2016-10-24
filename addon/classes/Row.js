@@ -39,12 +39,14 @@ export default class Row extends Ember.ObjectProxy.extend({
   /**
    * Element ID for the corresponding `{{lt-row}}`.
    *
-   * @property elementId
+   * Note: named `rowId` in order to not shadow the `content.id` property.
+   *
+   * @property rowId
    * @type {String}
    * @readOnly
    */
-  elementId: computed(function() {
-    return `lt-row-${guidFor(this)}`;
+  rowId: computed(function() {
+    return guidFor(this);
   }).readOnly()
 }) {
   /**
