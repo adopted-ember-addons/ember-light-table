@@ -181,6 +181,8 @@ const LightTable = Component.extend({
       return;
     }
 
+    this.send('onBeforeResponsiveChange', matches);
+
     if (!isNone(breakpoints)) {
       Object.keys(breakpoints).forEach((b) => {
         if (matches.indexOf(b) > -1) {
@@ -197,7 +199,7 @@ const LightTable = Component.extend({
       });
     }
 
-    this.send('onBreakpointChange', matches);
+    this.send('onAfterResponsiveChange', matches);
   })),
 
   _displayColumns(numColumns) {
@@ -216,12 +218,25 @@ const LightTable = Component.extend({
 
   actions: {
     /**
-     * onBreakpointChange action.
-     * @event onBreakpointChange
+     * onBeforeResponsiveChange action.
+     * Called before any column visibility is altered.
+     *
+     * @event onBeforeResponsiveChange
      * @param  {Array} matches list of matching breakpoints
      */
-    onBreakpointChange(/* matches */) {
-      callAction(this, 'onBreakpointChange', ...arguments);
+    onBeforeResponsiveChange(/* matches */) {
+      callAction(this, 'onBeforeResponsiveChange', ...arguments);
+    },
+
+    /**
+     * onAfterResponsiveChange action.
+     * Called after all column visibility has been altered.
+     *
+     * @event onAfterResponsiveChange
+     * @param  {Array} matches list of matching breakpoints
+     */
+    onAfterResponsiveChange(/* matches */) {
+      callAction(this, 'onAfterResponsiveChange', ...arguments);
     }
   }
 });

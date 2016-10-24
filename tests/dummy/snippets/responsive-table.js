@@ -63,7 +63,7 @@ export default Ember.Component.extend({
 
   actions: {
     onScrolledToBottom() {
-      if(this.get('canLoadMore')) {
+      if (this.get('canLoadMore')) {
         this.incrementProperty('page');
         this.fetchRecords();
       }
@@ -81,7 +81,7 @@ export default Ember.Component.extend({
       }
     },
 
-    onBreakpointChange(matches) {
+    onAfterResponsiveChange(matches) {
       if (matches.indexOf('lg') > -1) {
         this.get('table.expandedRows').setEach('expanded', false);
       }

@@ -43,7 +43,7 @@ export default TableController.extend({
   }),
 
   actions: {
-    onBreakpointChange(matches) {
+    onAfterResponsiveChange(matches) {
       if (matches.indexOf('lg') > -1) {
         this.get('table.expandedRows').setEach('expanded', false);
       }
