@@ -204,18 +204,18 @@ export default Component.extend({
   /**
    * @property targetScrollOffset
    * @type {Number}
-   * @default null
+   * @default 0
    * @private
    */
-  targetScrollOffset: null,
+  targetScrollOffset: 0,
 
   /**
    * @property currentScrollOffset
    * @type {Number}
-   * @default null
+   * @default 0
    * @private
    */
-  currentScrollOffset: true,
+  currentScrollOffset: 0,
 
   /**
    * @property hasReachedTargetScrollOffset
