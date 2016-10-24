@@ -319,12 +319,17 @@ export default Component.extend({
     this.set('hasReachedTargetScrollOffset', hasReachedTargetScrollOffset);
   },
 
+  destroy() {
+    this._super(...arguments);
+    run.cancel(this._checkTargetOffsetTimer);
+  },
+
   rowObserver: observer('rows.[]', function() {
-    run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
+    this._checkTargetOffsetTimer = run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
   }),
 
   checkTargetScrollOffset() {
-    if (!this.get('hasReachedTargetScrollOffset') && !this.get('isDestroyed')) {
+    if (!this.get('hasReachedTargetScrollOffset')) {
       let targetScrollOffset = this.get('targetScrollOffset');
       let currentScrollOffset = this.get('currentScrollOffset');
 
