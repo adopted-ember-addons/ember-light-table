@@ -95,18 +95,24 @@ export default class Table extends Ember.Object.extend({
   hiddenColumns: computed.filterBy('allColumns', 'hidden', true).readOnly(),
 
   /**
+   * @property responsiveHiddenColumns
+   * @type {Ember.Array}
+   */
+  responsiveHiddenColumns: computed.filterBy('allColumns', 'responsiveHidden', true).readOnly(),
+
+  /**
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: computed.filterBy('allColumns', 'hidden', false).readOnly(),
+  visibleColumns: computed.filterBy('allColumns', 'isHidden', false).readOnly(),
 
   /**
    * @property visibleColumnGroups
    * @type {Ember.Array}
    */
-  visibleColumnGroups: computed('columns.[]', 'columns.@each.{hidden,isVisibleGroupColumn}', function() {
+  visibleColumnGroups: computed('columns.[]', 'columns.@each.{isHidden,isVisibleGroupColumn}', function() {
     return emberArray(this.get('columns').reduce((arr, c) => {
-      if (c.get('isVisibleGroupColumn') || (!c.get('isGroupColumn') && !c.get('hidden'))) {
+      if (c.get('isVisibleGroupColumn') || (!c.get('isGroupColumn') && !c.get('isHidden'))) {
         arr.push(c);
       }
       return arr;

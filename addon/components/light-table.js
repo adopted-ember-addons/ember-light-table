@@ -2,12 +2,25 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/light-table';
 import Table from 'ember-light-table/classes/Table';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
+import callAction from 'ember-light-table/utils/call-action';
 
 const {
   assert,
   Component,
-  computed
+  computed,
+  inject,
+  observer,
+  on,
+  isNone,
+  isEmpty,
+  A: emberArray
 } = Ember;
+
+function intersections(array1, array2) {
+  return array1.filter((n) => {
+    return array2.indexOf(n) > -1;
+  });
+}
 
 /**
  * @module Light Table
@@ -34,6 +47,8 @@ const LightTable = Component.extend({
   layout,
   classNameBindings: [':ember-light-table'],
   attributeBindings: ['style'],
+
+  media: inject.service(),
 
   /**
    * @property table
@@ -87,6 +102,43 @@ const LightTable = Component.extend({
   tableClassNames: '',
 
   /**
+   * Enable responsive behavior
+   *
+   * @property responsive
+   * @type {Boolean}
+   * @default false
+   */
+  responsive: false,
+
+  /**
+   * A hash to determine the number of columns to show per given breakpoint.
+   * If this is specified, it will override any column specific breakpoints.
+   *
+   * If we have the following breakpoints defined in `app/breakpoints.js`:
+   *
+   * - mobile
+   * - tablet
+   * - desktop
+   *
+   * The following hash can be passed in:
+   *
+   * ```js
+   * {
+   *  mobile: 2,
+   *  tablet: 4
+   * }
+   * ```
+   *
+   * If there is no rule specified for a given breakpoint (i.e. `desktop`),
+   * all columns will be shown.
+   *
+   * @property breakpoints
+   * @type {Object}
+   * @default null
+   */
+  breakpoints: null,
+
+  /**
    * Table component shared options
    *
    * @property sharedOptions
@@ -107,7 +159,85 @@ const LightTable = Component.extend({
 
   init() {
     this._super(...arguments);
-    assert('[ember-light-table] table must be an instance of Table', this.get('table') instanceof Table);
+
+    let table = this.get('table');
+    let media = this.get('media');
+
+    assert('[ember-light-table] table must be an instance of Table', table instanceof Table);
+
+    if (isNone(media)) {
+      this.set('responsive', false);
+    }
+  },
+
+  onMediaChange: on('init', observer('media.matches.[]', 'table.allColumns.[]', function() {
+    let responsive = this.get('responsive');
+    let matches = this.get('media.matches');
+    let breakpoints = this.get('breakpoints');
+    let table = this.get('table');
+    let numColumns = 0;
+
+    if (!responsive) {
+      return;
+    }
+
+    this.send('onBeforeResponsiveChange', matches);
+
+    if (!isNone(breakpoints)) {
+      Object.keys(breakpoints).forEach((b) => {
+        if (matches.indexOf(b) > -1) {
+          numColumns = Math.max(numColumns, breakpoints[b]);
+        }
+      });
+
+      this._displayColumns(numColumns);
+    } else {
+      table.get('allColumns').forEach((c) => {
+        let breakpoints = c.get('breakpoints');
+        let isMatch = isEmpty(breakpoints) || intersections(matches, breakpoints).length > 0;
+        c.set('responsiveHidden', !isMatch);
+      });
+    }
+
+    this.send('onAfterResponsiveChange', matches);
+  })),
+
+  _displayColumns(numColumns) {
+    let table = this.get('table');
+    let hiddenColumns = table.get('responsiveHiddenColumns');
+    let visibleColumns = table.get('visibleColumns');
+
+    if (!numColumns) {
+      hiddenColumns.setEach('responsiveHidden', false);
+    } else if (visibleColumns.length > numColumns) {
+      emberArray(visibleColumns.slice(numColumns, visibleColumns.length)).setEach('responsiveHidden', true);
+    } else if (visibleColumns.length < numColumns) {
+      emberArray(hiddenColumns.slice(0, numColumns - visibleColumns.length)).setEach('responsiveHidden', false);
+    }
+  },
+
+  actions: {
+    /**
+     * onBeforeResponsiveChange action.
+     * Called before any column visibility is altered.
+     *
+     * @event onBeforeResponsiveChange
+     * @param  {Array} matches list of matching breakpoints
+     */
+    onBeforeResponsiveChange(/* matches */) {
+      callAction(this, 'onBeforeResponsiveChange', ...arguments);
+    },
+
+    /**
+     * onAfterResponsiveChange action.
+     * Called after all column visibility has been altered.
+     *
+     * @event onAfterResponsiveChange
+     * @param  {Array} matches list of matching breakpoints
+     */
+    onAfterResponsiveChange(/* matches */) {
+      callAction(this, 'onAfterResponsiveChange', ...arguments);
+    }
   }
 });
 

@@ -1,0 +1,10 @@
+{{!-- BEGIN-SNIPPET responsive-expanded-row --}}
+<div class="row">
+  <dl class="dl-horizontal">
+    {{#each table.responsiveHiddenColumns as |column|}}
+        <dt>{{column.label}}:</dt>
+        <dd>{{get row column.valuePath}}</dd>
+    {{/each}}
+  </dl>
+</div>
+{{!-- END-SNIPPET --}}

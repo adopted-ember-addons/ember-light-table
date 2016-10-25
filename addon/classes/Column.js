@@ -26,6 +26,14 @@ export default class Column extends Ember.Object.extend({
   hidden: false,
 
   /**
+   * If true, this column has been hidden due to the responsive behavior
+   * @property responsiveHidden
+   * @type {Boolean}
+   * @default false
+   */
+  responsiveHidden: false,
+
+  /**
    * @property ascending
    * @type {Boolean}
    * @default true
@@ -76,6 +84,27 @@ export default class Column extends Ember.Object.extend({
    * @optional
    */
   subColumns: null,
+
+  /**
+   * An array of media breakpoints that determine when this column will be shown
+   *
+   * If we have the following breakpoints defined in `app/breakpoints.js`:
+   *
+   * - mobile
+   * - tablet
+   * - desktop
+   *
+   * And we want to show this column only for tablet and desktop media, the following
+   * array should be specified: `['tablet', 'desktop']`.
+   *
+   * If this property is `null`, `undefined`, or `[]`, then this column will always
+   * be shown, regardless of the current media type.
+   *
+   * @property breakpoints
+   * @type {Array}
+   * @optional
+   */
+  breakpoints: null,
 
   /**
    * Type of column component
@@ -163,11 +192,20 @@ export default class Column extends Ember.Object.extend({
   cellClassNames: null,
 
   /**
-   * A format function used to calculate a cell's value
+   * A format function used to calculate a cell's value. This method will be passed
+   * the raw value if `valuePath` is specified.
+   *
    * @property format
    * @type {Function}
    */
   format: null,
+
+  /**
+   * True if `hidden` or `responsiveHidden` is true.
+   * @property isHidden
+   * @type {Boolean}
+   */
+  isHidden: computed.or('hidden', 'responsiveHidden').readOnly(),
 
   /**
    * @property isGroupColumn
@@ -181,8 +219,8 @@ export default class Column extends Ember.Object.extend({
    * @type {Boolean}
    * @private
    */
-  isVisibleGroupColumn: computed('visibleSubColumns.[]', 'hidden', function() {
-    return !isEmpty(this.get('visibleSubColumns')) && !this.get('hidden');
+  isVisibleGroupColumn: computed('visibleSubColumns.[]', 'isHidden', function() {
+    return !isEmpty(this.get('visibleSubColumns')) && !this.get('isHidden');
   }).readOnly(),
 
   /**
@@ -190,9 +228,9 @@ export default class Column extends Ember.Object.extend({
    * @type {Array}
    * @private
    */
-  visibleSubColumns: computed('subColumns.[]', 'subColumns.@each.hidden', 'hidden', function() {
+  visibleSubColumns: computed('subColumns.[]', 'subColumns.@each.isHidden', 'isHidden', function() {
     let subColumns = this.get('subColumns');
-    return isEmpty(subColumns) || this.get('hidden') ? [] : subColumns.filterBy('hidden', false);
+    return isEmpty(subColumns) || this.get('isHidden') ? [] : subColumns.filterBy('isHidden', false);
   }).readOnly()
 }) {
   /**

@@ -1,5 +1,6 @@
 {
   "predef": [
+    "setBreakpoint",
     "server",
     "document",
     "window",
