@@ -33,7 +33,7 @@ export default TableController.extend({
     }];
   }),
 
-  currentScrollOffset: null,
-  targetScrollOffset: null,
-  targetRow: null
+  currentScrollOffset: 0,
+  scrollTo: 0,
+  scrollToRow: null
 });

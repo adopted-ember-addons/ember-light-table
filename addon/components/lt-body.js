@@ -286,44 +286,9 @@ export default Component.extend({
     run.once(this, this._setupVirtualScrollbar);
   },
 
-  _setupVirtualScrollbar() {
-    let { fixedHeader, fixedFooter } = this.get('sharedOptions');
-    this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
-  },
-
   didReceiveAttrs() {
     this._super(...arguments);
-
-    let scrollTo = this.get('scrollTo');
-    let _scrollTo = this.get('_scrollTo');
-    this.set('_scrollTo', scrollTo);
-
-    let scrollToRow = this.get('scrollToRow');
-    let _scrollToRow = this.get('_scrollToRow');
-    this.set('_scrollToRow', scrollToRow);
-
-    if (scrollTo !== _scrollTo) {
-      let targetScrollOffset = Number.parseInt(scrollTo, 10);
-
-      if (Number.isNaN(targetScrollOffset)) {
-        targetScrollOffset = null;
-      }
-
-      this.set('targetScrollOffset', targetScrollOffset);
-      this.set('hasReachedTargetScrollOffset', targetScrollOffset <= 0);
-    } else if (scrollToRow !== _scrollToRow) {
-      let targetScrollOffset = null;
-
-      if (scrollToRow instanceof Row) {
-        let rowElement = document.getElementById(scrollToRow.get('rowId'));
-        if (rowElement instanceof Element) {
-          targetScrollOffset = rowElement.offsetTop;
-        }
-      }
-
-      this.set('targetScrollOffset', targetScrollOffset);
-      this.set('hasReachedTargetScrollOffset', true);
-    }
+    this.setupScrollOffset();
   },
 
   destroy() {
@@ -332,9 +297,47 @@ export default Component.extend({
     run.cancel(this._setTargetOffsetTimer);
   },
 
-  rowObserver: observer('rows.[]', function() {
+  _setupVirtualScrollbar() {
+    let { fixedHeader, fixedFooter } = this.get('sharedOptions');
+    this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
+  },
+
+  onRowsChange: observer('rows.[]', function() {
     this._checkTargetOffsetTimer = run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
   }),
+
+  setupScrollOffset() {
+    let {
+      scrollTo,
+      _scrollTo,
+      scrollToRow,
+      _scrollToRow
+    } = this.getProperties(['scrollTo', '_scrollTo', 'scrollToRow', '_scrollToRow']);
+    let targetScrollOffset = null;
+
+    this.setProperties({ _scrollTo: scrollTo, _scrollToRow: scrollToRow });
+
+    if (scrollTo !== _scrollTo) {
+      targetScrollOffset = Number.parseInt(scrollTo, 10);
+
+      if (Number.isNaN(targetScrollOffset)) {
+        targetScrollOffset = null;
+      }
+
+      this.setProperties({
+        targetScrollOffset,
+        hasReachedTargetScrollOffset: targetScrollOffset <= 0
+      });
+    } else if (scrollToRow !== _scrollToRow && scrollToRow instanceof Row) {
+      let rowElement = document.getElementById(scrollToRow.get('rowId'));
+
+      if (rowElement instanceof Element) {
+        targetScrollOffset = rowElement.offsetTop;
+      }
+
+      this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
+    }
+  },
 
   checkTargetScrollOffset() {
     if (!this.get('hasReachedTargetScrollOffset')) {

@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="table-1">
       <a role="button" data-toggle="collapse" data-parent="#accordion" href="#code-snippet" aria-expanded="true" aria-controls="code-snippet">
-        <h4 class="panel-title">Scrolling <span class="code-icon fa fa-code pull-right"></span></h4>
+        <h4 class="panel-title">Scrolling Example <span class="code-icon fa fa-code pull-right"></span></h4>
       </a>
     </div>
     <div id="code-snippet" class="panel-collapse collapse" role="tabpanel" aria-labelledby="table-1">
@@ -10,14 +10,12 @@
        <ul class="nav nav-tabs" role="tablist">
          <li role="presentation" class="active"><a href="#component" aria-controls="component" role="tab" data-toggle="tab">component.js</a></li>
          <li role="presentation"><a href="#template" aria-controls="template" role="tab" data-toggle="tab">template.hbs</a></li>
-         <li role="presentation"><a href="#scroll-controller" aria-controls="scroll-controller" role="tab" data-toggle="tab">scroll-controller.hbs</a></li>
          <li role="presentation"><a href="#user-avatar" aria-controls="user-avatar" role="tab" data-toggle="tab">user-avatar.hbs</a></li>
          <li role="presentation"><a href="#table-loader" aria-controls="table-loader" role="tab" data-toggle="tab">table-loader.hbs</a></li>
        </ul>
        <div class="tab-content">
          <div role="tabpanel" class="tab-pane fade in active" id="component">{{code-snippet name="scrolling.js"}}</div>
          <div role="tabpanel" class="tab-pane fade" id="template">{{code-snippet name="scrolling.hbs"}}</div>
-         <div role="tabpanel" class="tab-pane fade" id="scroll-controller">{{code-snippet name="scroll-controller.hbs"}}</div>
          <div role="tabpanel" class="tab-pane fade" id="user-avatar">{{code-snippet name="user-avatar.hbs"}}</div>
          <div role="tabpanel" class="tab-pane fade" id="table-loader">{{code-snippet name="table-loader.hbs"}}</div>
        </div>
@@ -25,15 +23,6 @@
     </div>
     <div class="panel-body table-container">
 {{!-- BEGIN-SNIPPET scrolling --}}
-
-{{scroll-controller
-  rows=table.rows
-  fields=(array "firstName" "lastName")
-  currentScrollOffset=currentScrollOffset
-  updateTargetScrollOffset=(action (mut targetScrollOffset))
-  updateTargetRow=(action (mut targetRow))
-}}
-
 {{#light-table table height='65vh' as |t|}}
 
   {{t.head
@@ -45,8 +34,8 @@
 
   {{#t.body
     canSelect=false
-    scrollTo=targetScrollOffset
-    scrollToRow=targetRow
+    scrollTo=scrollTo
+    scrollToRow=scrollToRow
     onScroll=(action (mut currentScrollOffset))
     onScrolledToBottom=(action 'onScrolledToBottom')
     as |body|
@@ -57,6 +46,54 @@
       {{/body.loader}}
     {{/if}}
   {{/t.body}}
+
+  {{#t.foot fixed=true as |columns|}}
+    <tr>
+      <td colspan={{columns.length}}>
+        <form class="form-inline" onsubmit="return false;">
+          <div class="form-group">
+            <label>
+              Current Scroll Position:
+            </label>
+            <span class="form-control-static">
+              {{if (eq currentScrollOffset null) 'N/A' (concat currentScrollOffset 'px')}}
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="scrollTo">
+              Scroll To:
+            </label>
+            {{one-way-input
+              update=(action (mut scrollTo))
+              value=scrollTo
+              class="form-control"
+              name="scrollTo"
+              type="number"
+              min=0
+              step=10
+            }}
+          </div>
+
+          <div class="form-group">
+            <label for="scrollToRow">
+              Scroll To Row:
+            </label>
+            {{#one-way-select selectedValue
+              options=table.visibleRows
+              value=scrollToRow
+              update=(action (mut scrollToRow))
+              class="form-control"
+              name="scrollToRow"
+              as |row|
+            }}
+              {{row.id}} - {{row.firstName}} {{row.lastName}}
+            {{/one-way-select}}
+          </div>
+        </form>
+      </td>
+    </tr>
+  {{/t.foot}}
 
 {{/light-table}}
 {{!-- END-SNIPPET --}}

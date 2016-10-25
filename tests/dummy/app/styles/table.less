@@ -19,6 +19,11 @@
 
   thead .lt-column {
     border-bottom: 1px solid #DADADA;
+
+    .lt-column-resizer {
+      border-right: 1px dashed #ccc;
+      border-left: 1px dashed #ccc;
+    }
   }
 
   .lt-column {
@@ -70,5 +75,18 @@
       font-size: 13px;
       padding: 0 10px;
     }
+  }
+}
+
+tfoot {
+  tr > td {
+    border-top: 1px solid #DADADA;
+    padding: 10px 10px 0 10px;
+    font-size: 13px;
+  }
+
+  form {
+    display: flex;
+    justify-content: space-between;
   }
 }
