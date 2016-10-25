@@ -50,6 +50,7 @@
     "ember-font-awesome": "2.2.0",
     "ember-load-initializers": "^0.5.1",
     "ember-lodash": "0.0.10",
+    "ember-one-way-controls": "1.1.1",
     "ember-owner-test-utils": "0.1.1",
     "ember-resolver": "^2.0.3",
     "ember-responsive": "2.0.0",

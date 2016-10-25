@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('selectable');
   this.route('resizable');
   this.route('responsive');
+  this.route('scrolling');
 });
 
 export default Router;

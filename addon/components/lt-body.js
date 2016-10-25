@@ -1,11 +1,13 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/lt-body';
 import callAction from 'ember-light-table/utils/call-action';
+import Row from 'ember-light-table/classes/Row';
 
 const {
   Component,
   computed,
-  run
+  run,
+  observer
 } = Ember;
 
 /**
@@ -175,6 +177,56 @@ export default Component.extend({
   useVirtualScrollbar: false,
 
   /**
+   * Set this property to scroll to a specific px offset.
+   *
+   * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
+   * using fixed headers / footers.
+   *
+   * @property scrollTo
+   * @type {Number}
+   * @default null
+   */
+  scrollTo: null,
+  _scrollTo: null,
+
+  /**
+   * Set this property to a `Row` to scroll that `Row` into view.
+   *
+   * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
+   * using fixed headers / footers.
+   *
+   * @property scrollToRow
+   * @type {Row}
+   * @default null
+   */
+  scrollToRow: null,
+  _scrollToRow: null,
+
+  /**
+   * @property targetScrollOffset
+   * @type {Number}
+   * @default 0
+   * @private
+   */
+  targetScrollOffset: 0,
+
+  /**
+   * @property currentScrollOffset
+   * @type {Number}
+   * @default 0
+   * @private
+   */
+  currentScrollOffset: 0,
+
+  /**
+   * @property hasReachedTargetScrollOffset
+   * @type {Boolean}
+   * @default true
+   * @private
+   */
+  hasReachedTargetScrollOffset: true,
+
+  /**
    * Allows to customize the component used to render rows
    *
    * ```hbs
@@ -237,6 +289,67 @@ export default Component.extend({
   _setupVirtualScrollbar() {
     let { fixedHeader, fixedFooter } = this.get('sharedOptions');
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
+  },
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    let scrollTo = this.get('scrollTo');
+    let _scrollTo = this.get('_scrollTo');
+    this.set('_scrollTo', scrollTo);
+
+    let scrollToRow = this.get('scrollToRow');
+    let _scrollToRow = this.get('_scrollToRow');
+    this.set('_scrollToRow', scrollToRow);
+
+    if (scrollTo !== _scrollTo) {
+      let targetScrollOffset = Number.parseInt(scrollTo, 10);
+
+      if (Number.isNaN(targetScrollOffset)) {
+        targetScrollOffset = null;
+      }
+
+      this.set('targetScrollOffset', targetScrollOffset);
+      this.set('hasReachedTargetScrollOffset', targetScrollOffset <= 0);
+    } else if (scrollToRow !== _scrollToRow) {
+      let targetScrollOffset = null;
+
+      if (scrollToRow instanceof Row) {
+        let rowElement = document.getElementById(scrollToRow.get('rowId'));
+        if (rowElement instanceof Element) {
+          targetScrollOffset = rowElement.offsetTop;
+        }
+      }
+
+      this.set('targetScrollOffset', targetScrollOffset);
+      this.set('hasReachedTargetScrollOffset', true);
+    }
+  },
+
+  destroy() {
+    this._super(...arguments);
+    run.cancel(this._checkTargetOffsetTimer);
+    run.cancel(this._setTargetOffsetTimer);
+  },
+
+  rowObserver: observer('rows.[]', function() {
+    this._checkTargetOffsetTimer = run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
+  }),
+
+  checkTargetScrollOffset() {
+    if (!this.get('hasReachedTargetScrollOffset')) {
+      let targetScrollOffset = this.get('targetScrollOffset');
+      let currentScrollOffset = this.get('currentScrollOffset');
+
+      if (targetScrollOffset > currentScrollOffset) {
+        this.set('targetScrollOffset', null);
+        this._setTargetOffsetTimer = run.schedule('render', null, () => {
+          this.set('targetScrollOffset', targetScrollOffset);
+        });
+      } else {
+        this.set('hasReachedTargetScrollOffset', true);
+      }
+    }
   },
 
   toggleExpandedRow(row) {
@@ -302,6 +415,21 @@ export default Component.extend({
      */
     onRowDoubleClick(/* row */) {
       callAction(this, 'onRowDoubleClick', ...arguments);
+    },
+
+    /**
+     * onScroll action - sent when user scrolls
+     *
+     * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
+     * using fixed headers / footers.
+     *
+     * @event onScroll
+     * @param {Number} scrollOffset The scroll offset in px
+     * @param {Event} event The scroll event
+     */
+    onScroll(scrollOffset /* , event */) {
+      this.set('currentScrollOffset', scrollOffset);
+      callAction(this, 'onScroll', ...arguments);
     },
 
     /**

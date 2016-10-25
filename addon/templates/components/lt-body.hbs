@@ -8,6 +8,8 @@
     tagName=''
     virtualScrollbar=useVirtualScrollbar
     autoHide=autoHideScrollbar
+    scrollTo=targetScrollOffset
+    onScroll=(action 'onScroll')
   }}
     <div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
 
@@ -18,6 +20,7 @@
         {{else}}
           {{#each rows as |row|}}
             {{lt.row row columns
+              elementId=row.rowId
               table=table
               tableActions=tableActions
               canExpand=canExpand
