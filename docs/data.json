@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.4.4"
+        "version": "v1.5.0"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
@@ -250,7 +250,7 @@
             "module": "Table",
             "namespace": "",
             "file": "addon/classes/Column.js",
-            "line": 198,
+            "line": 236,
             "is_constructor": 1,
             "params": [
                 {
@@ -271,7 +271,7 @@
             "module": "Table",
             "namespace": "",
             "file": "addon/classes/Row.js",
-            "line": 37,
+            "line": 52,
             "is_constructor": 1,
             "params": [
                 {
@@ -354,7 +354,7 @@
             "module": "Light Table",
             "namespace": "",
             "file": "addon/components/light-table.js",
-            "line": 17,
+            "line": 30,
             "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../classes/t.head.html), [Body](../classes/t.body.html), and [Foot](../classes/t.foot.html) components\nfor more details on all possible options and actions.",
             "mainName": "Components",
             "tag": "main",
@@ -372,7 +372,7 @@
             "module": "Light Table",
             "namespace": "",
             "file": "addon/components/lt-body.js",
-            "line": 15,
+            "line": 17,
             "description": "```hbs\n{{#light-table table as |t|}}\n  {{#t.body multiSelect=true onRowClick=(action 'rowClicked')}}\n    {{#body.expanded-row as |row|}}\n      Hello <b>{{row.firstName}}</b>\n    {{/body.expanded-row}}\n\n    {{#if isLoading}}\n      {{#body.loader}}\n        Loading...\n      {{/body.loader}}\n    {{/if}}\n\n    {{#if table.isEmpty}}\n      {{#body.no-data}}\n        No users found.\n      {{/body.no-data}}\n    {{/if}}\n  {{/t.body}}\n{{/light-table}}\n```"
         },
         "t.foot": {
@@ -450,7 +450,7 @@
         },
         {
             "file": "addon/-private/sync-array-proxy.js",
-            "line": 46,
+            "line": 49,
             "description": "Serialize objects before they are inserted into the content array",
             "itemtype": "method",
             "name": "serializeContentObjects",
@@ -469,7 +469,7 @@
         },
         {
             "file": "addon/-private/sync-array-proxy.js",
-            "line": 56,
+            "line": 59,
             "description": "Serialize objects before they are inserted into the sync array",
             "itemtype": "method",
             "name": "serializeSyncArrayObjects",
@@ -509,6 +509,17 @@
         {
             "file": "addon/classes/Column.js",
             "line": 28,
+            "description": "If true, this column has been hidden due to the responsive behavior",
+            "itemtype": "property",
+            "name": "responsiveHidden",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Column",
+            "module": "Table"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 36,
             "itemtype": "property",
             "name": "ascending",
             "type": "{Boolean}",
@@ -518,7 +529,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 35,
+            "line": 43,
             "itemtype": "property",
             "name": "sortable",
             "type": "{Boolean}",
@@ -528,7 +539,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 42,
+            "line": 50,
             "itemtype": "property",
             "name": "resizable",
             "type": "{Boolean}",
@@ -538,7 +549,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 49,
+            "line": 57,
             "itemtype": "property",
             "name": "sorted",
             "type": "{Boolean}",
@@ -548,7 +559,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 56,
+            "line": 64,
             "description": "Column header label",
             "itemtype": "property",
             "name": "label",
@@ -559,7 +570,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 64,
+            "line": 72,
             "description": "Text alignment. Possible values are ['left', 'right', 'center']",
             "itemtype": "property",
             "name": "align",
@@ -570,7 +581,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 72,
+            "line": 80,
             "description": "An array of sub columns to be grouped together",
             "itemtype": "property",
             "name": "subColumns",
@@ -581,7 +592,18 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 80,
+            "line": 88,
+            "description": "An array of media breakpoints that determine when this column will be shown\n\nIf we have the following breakpoints defined in `app/breakpoints.js`:\n\n- mobile\n- tablet\n- desktop\n\nAnd we want to show this column only for tablet and desktop media, the following\narray should be specified: `['tablet', 'desktop']`.\n\nIf this property is `null`, `undefined`, or `[]`, then this column will always\nbe shown, regardless of the current media type.",
+            "itemtype": "property",
+            "name": "breakpoints",
+            "type": "{Array}",
+            "optional": 1,
+            "class": "Column",
+            "module": "Table"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 109,
             "description": "Type of column component\n\nYou can create your own column types by running the blueprint:\n`ember g column-type my-column-type`\n\nThis will generate a component for you which represents the `<th>`\nelement for the column. If you want to apply custom actions to the `th`,\nor do some custom styling of the `th` with classNameBindings, all of that is\navailable to you in this component.\n\nYou can then specify the custom type you created as a string here, to use it.",
             "itemtype": "property",
             "name": "type",
@@ -592,7 +614,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 100,
+            "line": 129,
             "description": "Type of cell component\n\nYou can create your own cell types by running the blueprint:\n`ember g cell-type my-cell-type`\n\nThis will generate a component for you which represents the `<td>`\ncells in the column. If you want to apply custom actions to the `td`,\nor do some custom styling of the `td` with classNameBindings, all of that is\navailable to you in this component.\n\nYou can then specify the custom type you created as a string here, to use it.",
             "itemtype": "property",
             "name": "cellType",
@@ -603,7 +625,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 119,
+            "line": 148,
             "description": "Component name for the column",
             "itemtype": "property",
             "name": "component",
@@ -614,7 +636,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 127,
+            "line": 156,
             "description": "Component name for the column cells. This component is automatically passed row,\ncolumn, and value variables, and you can specify a valuePath to set what property\nthe value is set to.",
             "itemtype": "property",
             "name": "cellComponent",
@@ -625,7 +647,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 137,
+            "line": 166,
             "itemtype": "property",
             "name": "valuePath",
             "type": "{String}",
@@ -634,7 +656,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 143,
+            "line": 172,
             "itemtype": "property",
             "name": "width",
             "type": "{String}",
@@ -643,7 +665,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 149,
+            "line": 178,
             "description": "Class names to be applied to header and footer cells of this column",
             "itemtype": "property",
             "name": "classNames",
@@ -653,7 +675,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 157,
+            "line": 186,
             "description": "Class names to be applied to all cells of this column",
             "itemtype": "property",
             "name": "cellClassNames",
@@ -663,8 +685,8 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 165,
-            "description": "A format function used to calculate a cell's value",
+            "line": 194,
+            "description": "A format function used to calculate a cell's value. This method will be passed\nthe raw value if `valuePath` is specified.",
             "itemtype": "property",
             "name": "format",
             "type": "{Function}",
@@ -673,7 +695,17 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 172,
+            "line": 203,
+            "description": "True if `hidden` or `responsiveHidden` is true.",
+            "itemtype": "property",
+            "name": "isHidden",
+            "type": "{Boolean}",
+            "class": "Column",
+            "module": "Table"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 210,
             "itemtype": "property",
             "name": "isGroupColumn",
             "type": "{Boolean}",
@@ -684,7 +716,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 179,
+            "line": 217,
             "itemtype": "property",
             "name": "isVisibleGroupColumn",
             "type": "{Boolean}",
@@ -695,7 +727,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 188,
+            "line": 226,
             "itemtype": "property",
             "name": "visibleSubColumns",
             "type": "{Array}",
@@ -706,7 +738,7 @@
         },
         {
             "file": "addon/classes/Row.js",
-            "line": 8,
+            "line": 10,
             "itemtype": "property",
             "name": "hidden",
             "type": "{Boolean}",
@@ -716,7 +748,7 @@
         },
         {
             "file": "addon/classes/Row.js",
-            "line": 15,
+            "line": 17,
             "itemtype": "property",
             "name": "expanded",
             "type": "{Boolean}",
@@ -726,7 +758,7 @@
         },
         {
             "file": "addon/classes/Row.js",
-            "line": 22,
+            "line": 24,
             "itemtype": "property",
             "name": "selected",
             "type": "{Boolean}",
@@ -736,7 +768,7 @@
         },
         {
             "file": "addon/classes/Row.js",
-            "line": 29,
+            "line": 31,
             "description": "Class names to be applied to this row",
             "itemtype": "property",
             "name": "classNames",
@@ -745,8 +777,19 @@
             "module": "Table"
         },
         {
+            "file": "addon/classes/Row.js",
+            "line": 39,
+            "description": "Element ID for the corresponding `{{lt-row}}`.\n\nNote: named `rowId` in order to not shadow the `content.id` property.",
+            "itemtype": "property",
+            "name": "rowId",
+            "type": "{String}",
+            "readonly": "",
+            "class": "Row",
+            "module": "Table"
+        },
+        {
             "file": "addon/classes/Table.js",
-            "line": 41,
+            "line": 35,
             "itemtype": "property",
             "name": "columns",
             "type": "{Ember.Array}",
@@ -756,7 +799,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 48,
+            "line": 42,
             "itemtype": "property",
             "name": "rows",
             "type": "{Ember.Array}",
@@ -766,7 +809,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 55,
+            "line": 49,
             "itemtype": "property",
             "name": "isEmpty",
             "type": "{Boolean}",
@@ -775,7 +818,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 61,
+            "line": 55,
             "itemtype": "property",
             "name": "expandedRows",
             "type": "{Ember.Array}",
@@ -784,7 +827,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 67,
+            "line": 61,
             "itemtype": "property",
             "name": "selectedRows",
             "type": "{Ember.Array}",
@@ -793,7 +836,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 73,
+            "line": 67,
             "itemtype": "property",
             "name": "visibleRows",
             "type": "{Ember.Array}",
@@ -802,7 +845,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 79,
+            "line": 73,
             "itemtype": "property",
             "name": "sortableColumns",
             "type": "{Ember.Array}",
@@ -811,7 +854,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 85,
+            "line": 79,
             "itemtype": "property",
             "name": "sortedColumns",
             "type": "{Ember.Array}",
@@ -820,7 +863,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 91,
+            "line": 85,
             "itemtype": "property",
             "name": "hideableColumns",
             "type": "{Ember.Array}",
@@ -829,9 +872,18 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 97,
+            "line": 91,
             "itemtype": "property",
             "name": "hiddenColumns",
+            "type": "{Ember.Array}",
+            "class": "Table",
+            "module": "Table"
+        },
+        {
+            "file": "addon/classes/Table.js",
+            "line": 97,
+            "itemtype": "property",
+            "name": "responsiveHiddenColumns",
             "type": "{Ember.Array}",
             "class": "Table",
             "module": "Table"
@@ -874,7 +926,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 181,
+            "line": 187,
             "description": "Replace all the row's content with content of the argument. If argument is an empty array rows will be cleared.",
             "itemtype": "method",
             "name": "setRows",
@@ -899,7 +951,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 192,
+            "line": 198,
             "description": "Push the object onto the end of the row array if it is not already present.",
             "itemtype": "method",
             "name": "addRow",
@@ -920,7 +972,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 206,
+            "line": 212,
             "description": "Push the objects onto the end of the row array if it is not already present.",
             "itemtype": "method",
             "name": "addRows",
@@ -941,7 +993,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 216,
+            "line": 222,
             "description": "Push the object onto the end of the row array.",
             "itemtype": "method",
             "name": "pushRow",
@@ -966,7 +1018,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 229,
+            "line": 235,
             "description": "Push the object onto the end of the row array.",
             "itemtype": "method",
             "name": "pushRows",
@@ -991,7 +1043,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 242,
+            "line": 248,
             "description": "Insert a row at the specified index.",
             "itemtype": "method",
             "name": "insertRowAt",
@@ -1021,7 +1073,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 256,
+            "line": 262,
             "description": "Remove all occurrences of an object in the rows",
             "itemtype": "method",
             "name": "removeRow",
@@ -1037,7 +1089,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 269,
+            "line": 275,
             "description": "Removes each object in the passed enumerable from the rows.",
             "itemtype": "method",
             "name": "removeRows",
@@ -1053,7 +1105,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 279,
+            "line": 284,
             "description": "Remove a row at the specified index",
             "itemtype": "method",
             "name": "removeRowAt",
@@ -1069,7 +1121,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 290,
+            "line": 295,
             "description": "Replace all the column's content with content of the argument. If argument is an empty array columns will be cleared.",
             "itemtype": "method",
             "name": "setColumns",
@@ -1089,7 +1141,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 300,
+            "line": 305,
             "description": "Push the object onto the end of the column array if it is not already present.",
             "itemtype": "method",
             "name": "addColumn",
@@ -1105,7 +1157,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 309,
+            "line": 314,
             "description": "Push the objects onto the end of the column array if it is not already present.",
             "itemtype": "method",
             "name": "addColumns",
@@ -1121,7 +1173,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 318,
+            "line": 323,
             "description": "Push the object onto the end of the column array.",
             "itemtype": "method",
             "name": "pushColumn",
@@ -1141,7 +1193,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 330,
+            "line": 335,
             "description": "Push the object onto the end of the column array.",
             "itemtype": "method",
             "name": "pushColumns",
@@ -1161,7 +1213,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 342,
+            "line": 347,
             "description": "Insert a column at the specified index.",
             "itemtype": "method",
             "name": "insertColumnAt",
@@ -1186,7 +1238,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 355,
+            "line": 360,
             "description": "Remove all occurrences of an object in the columns",
             "itemtype": "method",
             "name": "removeColumn",
@@ -1202,7 +1254,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 364,
+            "line": 369,
             "description": "Removes each object in the passed enumerable from the columns.",
             "itemtype": "method",
             "name": "removeColumns",
@@ -1218,7 +1270,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 373,
+            "line": 378,
             "description": "Remove a column at the specified index",
             "itemtype": "method",
             "name": "removeColumnAt",
@@ -1234,7 +1286,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 382,
+            "line": 387,
             "description": "Create a Row object with the given content",
             "itemtype": "method",
             "name": "createRow",
@@ -1260,7 +1312,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 394,
+            "line": 399,
             "description": "Create a collection of Row objects with the given collection",
             "itemtype": "method",
             "name": "createRows",
@@ -1286,7 +1338,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 406,
+            "line": 411,
             "description": "Create a Column object with the given options",
             "itemtype": "method",
             "name": "createColumn",
@@ -1307,7 +1359,7 @@
         },
         {
             "file": "addon/classes/Table.js",
-            "line": 417,
+            "line": 422,
             "description": "Create a collection of Column objects with the given collection",
             "itemtype": "method",
             "name": "createColumns",
@@ -1384,6 +1436,15 @@
             "file": "addon/components/columns/base.js",
             "line": 42,
             "itemtype": "property",
+            "name": "label",
+            "type": "{String}",
+            "class": "Base Column",
+            "module": "Column Types"
+        },
+        {
+            "file": "addon/components/columns/base.js",
+            "line": 48,
+            "itemtype": "property",
             "name": "table",
             "type": "{Table}",
             "class": "Base Column",
@@ -1391,7 +1452,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 48,
+            "line": 54,
             "itemtype": "property",
             "name": "column",
             "type": "{Column}",
@@ -1400,7 +1461,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 54,
+            "line": 60,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -1409,7 +1470,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 60,
+            "line": 66,
             "itemtype": "property",
             "name": "sortIcons",
             "type": "{Object}",
@@ -1418,7 +1479,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 66,
+            "line": 72,
             "itemtype": "property",
             "name": "colspan",
             "type": "{Number}",
@@ -1427,7 +1488,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 75,
+            "line": 81,
             "itemtype": "property",
             "name": "rowspan",
             "type": "{Number}",
@@ -1436,7 +1497,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 38,
+            "line": 53,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -1445,7 +1506,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 44,
+            "line": 59,
             "description": "This is used to propate custom user defined actions to custom cell and header components.\nAs an example, lets say I have a table with a column defined with `cellComponent: 'delete-user'`\n\n```hbs\n{{#light-table table tableActions=(hash\n  deleteUser=(action 'deleteUser')\n ) as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nNow in the `delete-user` component, we can access that `deleteUser` action and pass it the\nrow object which will bubble all the way to where you defined that action.\n\n```hbs\n<button {{action tableActions.deleteUser row}}>Delete Me</button>\n```",
             "itemtype": "property",
             "name": "tableActions",
@@ -1455,7 +1516,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 71,
+            "line": 86,
             "description": "Table height.",
             "itemtype": "property",
             "name": "height",
@@ -1466,7 +1527,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 80,
+            "line": 95,
             "description": "Class names that will be added to all <table> tags",
             "itemtype": "property",
             "name": "tableClassNames",
@@ -1477,7 +1538,29 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 89,
+            "line": 104,
+            "description": "Enable responsive behavior",
+            "itemtype": "property",
+            "name": "responsive",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "light-table",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/light-table.js",
+            "line": 113,
+            "description": "A hash to determine the number of columns to show per given breakpoint.\nIf this is specified, it will override any column specific breakpoints.\n\nIf we have the following breakpoints defined in `app/breakpoints.js`:\n\n- mobile\n- tablet\n- desktop\n\nThe following hash can be passed in:\n\n```js\n{\n mobile: 2,\n tablet: 4\n}\n```\n\nIf there is no rule specified for a given breakpoint (i.e. `desktop`),\nall columns will be shown.",
+            "itemtype": "property",
+            "name": "breakpoints",
+            "type": "{Object}",
+            "default": "null",
+            "class": "light-table",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/light-table.js",
+            "line": 141,
             "description": "Table component shared options",
             "itemtype": "property",
             "name": "sharedOptions",
@@ -1488,8 +1571,40 @@
             "module": "Light Table"
         },
         {
+            "file": "addon/components/light-table.js",
+            "line": 220,
+            "description": "onBeforeResponsiveChange action.\nCalled before any column visibility is altered.",
+            "itemtype": "event",
+            "name": "onBeforeResponsiveChange",
+            "params": [
+                {
+                    "name": "matches",
+                    "description": "list of matching breakpoints",
+                    "type": "Array"
+                }
+            ],
+            "class": "light-table",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/light-table.js",
+            "line": 231,
+            "description": "onAfterResponsiveChange action.\nCalled after all column visibility has been altered.",
+            "itemtype": "event",
+            "name": "onAfterResponsiveChange",
+            "params": [
+                {
+                    "name": "matches",
+                    "description": "list of matching breakpoints",
+                    "type": "Array"
+                }
+            ],
+            "class": "light-table",
+            "module": "Light Table"
+        },
+        {
             "file": "addon/components/lt-body.js",
-            "line": 46,
+            "line": 48,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -1500,7 +1615,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 53,
+            "line": 55,
             "itemtype": "property",
             "name": "sharedOptions",
             "type": "{Object}",
@@ -1511,7 +1626,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 60,
+            "line": 62,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -1520,7 +1635,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 66,
+            "line": 68,
             "description": "Allows a user to select a row on click. All this will do is apply the necessary\nCSS classes and add the row to `table.selectedRows`. If `multiSelect` is disabled\nonly one row will be selected at a time.",
             "itemtype": "property",
             "name": "canSelect",
@@ -1531,7 +1646,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 77,
+            "line": 79,
             "description": "Allows for expanding row. This will create a new row under the row that was\nclicked with the template provided by `body.expanded-row`.\n\n```hbs\n{{#body.expanded-row as |row|}}\n This is the content of the expanded row for {{row.firstName}}\n{{/body.expanded-row}}\n```",
             "itemtype": "property",
             "name": "canExpand",
@@ -1542,7 +1657,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 93,
+            "line": 95,
             "description": "Allows a user to select multiple rows with the `ctrl`, `cmd`, and `shift` keys.\nThese rows can be easily accessed via `table.get('selectedRows')`",
             "itemtype": "property",
             "name": "multiSelect",
@@ -1553,7 +1668,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 103,
+            "line": 105,
             "description": "When multiSelect is true, this property determines whether or not `ctrl`\n(or `cmd`) is required to select additional rows, one by one. When false,\nsimply clicking on subsequent rows will select or deselect them.\n\n`shift` to select many consecutive rows is unaffected by this property.",
             "itemtype": "property",
             "name": "multiSelectRequiresKeyboard",
@@ -1564,7 +1679,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 116,
+            "line": 118,
             "description": "Hide scrollbar when not scrolling",
             "itemtype": "property",
             "name": "autoHideScrollbar",
@@ -1575,7 +1690,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 125,
+            "line": 127,
             "description": "Allows multiple rows to be expanded at once",
             "itemtype": "property",
             "name": "multiRowExpansion",
@@ -1586,7 +1701,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 134,
+            "line": 136,
             "description": "Expand a row on click",
             "itemtype": "property",
             "name": "expandOnClick",
@@ -1597,7 +1712,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 143,
+            "line": 145,
             "description": "If true, the body block will yield columns and rows, allowing you\nto define your own table body",
             "itemtype": "property",
             "name": "overwrite",
@@ -1608,7 +1723,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 153,
+            "line": 155,
             "description": "ID of main table component. Used to generate divs for ember-wormhole",
             "itemtype": "property",
             "name": "tableId",
@@ -1620,7 +1735,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 162,
+            "line": 164,
             "itemtype": "property",
             "name": "scrollBuffer",
             "type": "{Number}",
@@ -1630,7 +1745,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 169,
+            "line": 171,
             "itemtype": "property",
             "name": "useVirtualScrollbar",
             "type": "{Boolean}",
@@ -1642,7 +1757,65 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 177,
+            "line": 179,
+            "description": "Set this property to scroll to a specific px offset.\n\nThis only works when `useVirtualScrollbar` is `true`, i.e. when you are\nusing fixed headers / footers.",
+            "itemtype": "property",
+            "name": "scrollTo",
+            "type": "{Number}",
+            "default": "null",
+            "class": "t.body",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 192,
+            "description": "Set this property to a `Row` to scroll that `Row` into view.\n\nThis only works when `useVirtualScrollbar` is `true`, i.e. when you are\nusing fixed headers / footers.",
+            "itemtype": "property",
+            "name": "scrollToRow",
+            "type": "{Row}",
+            "default": "null",
+            "class": "t.body",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 205,
+            "itemtype": "property",
+            "name": "targetScrollOffset",
+            "type": "{Number}",
+            "default": "0",
+            "access": "private",
+            "tagname": "",
+            "class": "t.body",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 213,
+            "itemtype": "property",
+            "name": "currentScrollOffset",
+            "type": "{Number}",
+            "default": "0",
+            "access": "private",
+            "tagname": "",
+            "class": "t.body",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 221,
+            "itemtype": "property",
+            "name": "hasReachedTargetScrollOffset",
+            "type": "{Boolean}",
+            "default": "true",
+            "access": "private",
+            "tagname": "",
+            "class": "t.body",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 229,
             "description": "Allows to customize the component used to render rows\n\n```hbs\n{{#light-table table as |t|}}\n   {{t.body rowComponent=(component 'my-row')}}\n{{/light-table}}\n```",
             "itemtype": "property",
             "name": "rowComponent",
@@ -1653,7 +1826,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 191,
+            "line": 243,
             "description": "Allows to customize the component used to render spanned rows\n\n```hbs\n{{#light-table table as |t|}}\n   {{t.body spannedRowComponent=(component 'my-spanned-row')}}\n{{/light-table}}\n```",
             "itemtype": "property",
             "name": "spannedRowComponent",
@@ -1664,7 +1837,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 205,
+            "line": 257,
             "description": "Allows to customize the component used to render infinite loader\n\n```hbs\n{{#light-table table as |t|}}\n   {{t.body infinityComponent=(component 'my-infinity')}}\n{{/light-table}}\n```",
             "itemtype": "property",
             "name": "infinityComponent",
@@ -1675,7 +1848,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 255,
+            "line": 371,
             "description": "onRowClick action. Handles selection, and row expansion.",
             "itemtype": "event",
             "name": "onRowClick",
@@ -1696,7 +1869,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 297,
+            "line": 413,
             "description": "onRowDoubleClick action.",
             "itemtype": "event",
             "name": "onRowDoubleClick",
@@ -1717,7 +1890,28 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 307,
+            "line": 423,
+            "description": "onScroll action - sent when user scrolls\n\nThis only works when `useVirtualScrollbar` is `true`, i.e. when you are\nusing fixed headers / footers.",
+            "itemtype": "event",
+            "name": "onScroll",
+            "params": [
+                {
+                    "name": "scrollOffset",
+                    "description": "The scroll offset in px",
+                    "type": "Number"
+                },
+                {
+                    "name": "event",
+                    "description": "The scroll event",
+                    "type": "Event"
+                }
+            ],
+            "class": "t.body",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 438,
             "description": "onScrolledToBottom action - sent when user scrolls to the bottom",
             "itemtype": "event",
             "name": "onScrolledToBottom",

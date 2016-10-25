@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -139,7 +139,7 @@
 
 <div class="page-header">
     <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> light-table Class
-            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/tree/v1.4.4/addon/components/light-table.js#L17" target="_blank">
+            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L30" target="_blank">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
     </h1>
@@ -153,7 +153,7 @@
 
 
         <div class="foundat">
-            Defined In: <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.4/addon/components/light-table.js#L17">addon/components/light-table.js:17</a>
+            Defined In: <a href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L30">addon/components/light-table.js:30</a>
         </div>
 </div>
 
@@ -180,6 +180,7 @@ for more details on all possible options and actions.</p>
             <li role="presentation"><a href="#tab_properties" aria-controls="tab_properties" role="tab" data-toggle="tab">Properties</a></li>
 
 
+            <li role="presentation"><a href="#tab_events" aria-controls="tab_events" role="tab" data-toggle="tab">Events</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -215,7 +216,15 @@ for more details on all possible options and actions.</p>
 
                       <ul class="index-list properties">
                               <li class="index-item property">
+                                  <a href="#property_breakpoints">breakpoints</a>
+
+                              </li>
+                              <li class="index-item property">
                                   <a href="#property_height">height</a>
+
+                              </li>
+                              <li class="index-item property">
+                                  <a href="#property_responsive">responsive</a>
 
                               </li>
                               <li class="index-item property private">
@@ -238,11 +247,69 @@ for more details on all possible options and actions.</p>
                   </div>
 
 
+                  <div class="index-section events">
+                      <h3>Events</h3>
+
+                      <ul class="index-list events">
+                              <li class="index-item event">
+                                  <a href="#event_onAfterResponsiveChange">onAfterResponsiveChange</a>
+
+                              </li>
+                              <li class="index-item event">
+                                  <a href="#event_onBeforeResponsiveChange">onBeforeResponsiveChange</a>
+
+                              </li>
+                      </ul>
+                  </div>
           </div>
 
 
               <div id="tab_properties" role="tabpanel" class="tab-pane">
                   <div class="item-list">
+  <div id="property_breakpoints" class="property item">
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#property_breakpoints"></a>
+          breakpoints
+      </h3>
+      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L113">addon/components/light-table.js:113</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          <p>A hash to determine the number of columns to show per given breakpoint.
+  If this is specified, it will override any column specific breakpoints.</p>
+  <p>If we have the following breakpoints defined in <code>app/breakpoints.js</code>:</p>
+  <ul>
+  <li>mobile</li>
+  <li>tablet</li>
+  <li>desktop</li>
+  </ul>
+  <p>The following hash can be passed in:</p>
+  <pre class="code prettyprint"><code class="language-js">{
+   mobile: 2,
+   tablet: 4
+  }
+  </code></pre>
+  <p>If there is no rule specified for a given breakpoint (i.e. <code>desktop</code>),
+  all columns will be shown.</p>
+  
+      </div>
+  
+          <p><br><strong>Default:</strong> null</p>
+  
+  
+  </div>
   <div id="property_height" class="property item">
       <h3 class="name anchorable-toc">
           <a class="fa fa-link toc-anchor" href="#property_height"></a>
@@ -257,7 +324,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.4/addon/components/light-table.js#L71">addon/components/light-table.js:71</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L86">addon/components/light-table.js:86</a>
           </p>
   
   
@@ -269,6 +336,35 @@ for more details on all possible options and actions.</p>
       </div>
   
           <p><br><strong>Default:</strong> null</p>
+  
+  
+  </div>
+  <div id="property_responsive" class="property item">
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#property_responsive"></a>
+          responsive
+      </h3>
+      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L104">addon/components/light-table.js:104</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          <p>Enable responsive behavior</p>
+  
+      </div>
+  
+          <p><br><strong>Default:</strong> false</p>
   
   
   </div>
@@ -287,7 +383,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.4/addon/components/light-table.js#L89">addon/components/light-table.js:89</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L141">addon/components/light-table.js:141</a>
           </p>
   
   
@@ -315,7 +411,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.4/addon/components/light-table.js#L38">addon/components/light-table.js:38</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L53">addon/components/light-table.js:53</a>
           </p>
   
   
@@ -342,7 +438,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.4/addon/components/light-table.js#L44">addon/components/light-table.js:44</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L59">addon/components/light-table.js:59</a>
           </p>
   
   
@@ -383,7 +479,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.4.4/addon/components/light-table.js#L80">addon/components/light-table.js:80</a>
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L95">addon/components/light-table.js:95</a>
           </p>
   
   
@@ -402,6 +498,102 @@ for more details on all possible options and actions.</p>
               </div>
 
 
+              <div id="tab_events" role="tabpanel" class="tab-pane">
+                  <div class="item-list">
+  <div id="event_onAfterResponsiveChange" class="events item">
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#event_onAfterResponsiveChange"></a>
+          onAfterResponsiveChange
+      </h3>
+      <span class="type"></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L231">addon/components/light-table.js:231</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          <p>onAfterResponsiveChange action.
+  Called after all column visibility has been altered.</p>
+  
+      </div>
+  
+          <div class="params">
+              <h4>Event Payload:</h4>
+  
+              <ul class="params-list">
+                  <li class="param">
+                          <code class="param-name">matches</code>
+                          <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+  
+  
+                      <div class="param-description">
+                          <p>list of matching breakpoints</p>
+  
+                      </div>
+  
+                  </li>
+              </ul>
+          </div>
+  
+  
+  </div>
+  <div id="event_onBeforeResponsiveChange" class="events item">
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#event_onBeforeResponsiveChange"></a>
+          onBeforeResponsiveChange
+      </h3>
+      <span class="type"></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/tree/v1.5.0/addon/components/light-table.js#L220">addon/components/light-table.js:220</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          <p>onBeforeResponsiveChange action.
+  Called before any column visibility is altered.</p>
+  
+      </div>
+  
+          <div class="params">
+              <h4>Event Payload:</h4>
+  
+              <ul class="params-list">
+                  <li class="param">
+                          <code class="param-name">matches</code>
+                          <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+  
+  
+                      <div class="param-description">
+                          <p>list of matching breakpoints</p>
+  
+                      </div>
+  
+                  </li>
+              </ul>
+          </div>
+  
+  
+  </div>
+                  </div>
+              </div>
       </div>
     </div>
 </div>

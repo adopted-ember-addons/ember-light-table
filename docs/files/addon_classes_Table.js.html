@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -155,19 +155,13 @@ const {
   A: emberArray
 } = Ember;
 
-function filterBy(dependentKey, propertyKey, value) {
-  return computed(&#x60;${dependentKey}.[]&#x60;, &#x60;${dependentKey}.@each.${propertyKey}&#x60;, function() {
-    return emberArray(this.get(dependentKey).filterBy(propertyKey, value));
-  });
-}
-
 const RowSyncArrayProxy = SyncArrayProxy.extend({
   serializeContentObjects(objects) {
     return Table.createRows(objects);
   },
 
   serializeSyncArrayObjects(objects) {
-    return objects.map(o =&gt; get(o, &#x27;content&#x27;));
+    return objects.map((o) =&gt; get(o, &#x27;content&#x27;));
   }
 });
 
@@ -176,10 +170,10 @@ const RowSyncArrayProxy = SyncArrayProxy.extend({
  * @private
  */
 
- /**
-  * @module Table
-  * @class Table
-  */
+/**
+ * @module Table
+ * @class Table
+ */
 export default class Table extends Ember.Object.extend({
   /**
    * @property columns
@@ -205,57 +199,63 @@ export default class Table extends Ember.Object.extend({
    * @property expandedRows
    * @type {Ember.Array}
    */
-  expandedRows: filterBy(&#x27;rows&#x27;, &#x27;expanded&#x27;, true).readOnly(),
+  expandedRows: computed.filterBy(&#x27;rows&#x27;, &#x27;expanded&#x27;, true).readOnly(),
 
   /**
    * @property selectedRows
    * @type {Ember.Array}
    */
-  selectedRows: filterBy(&#x27;rows&#x27;, &#x27;selected&#x27;, true).readOnly(),
+  selectedRows: computed.filterBy(&#x27;rows&#x27;, &#x27;selected&#x27;, true).readOnly(),
 
   /**
    * @property visibleRows
    * @type {Ember.Array}
    */
-  visibleRows: filterBy(&#x27;rows&#x27;, &#x27;hidden&#x27;, false).readOnly(),
+  visibleRows: computed.filterBy(&#x27;rows&#x27;, &#x27;hidden&#x27;, false).readOnly(),
 
   /**
    * @property sortableColumns
    * @type {Ember.Array}
    */
-  sortableColumns: filterBy(&#x27;visibleColumns&#x27;, &#x27;sortable&#x27;, true).readOnly(),
+  sortableColumns: computed.filterBy(&#x27;visibleColumns&#x27;, &#x27;sortable&#x27;, true).readOnly(),
 
   /**
    * @property sortedColumns
    * @type {Ember.Array}
    */
-  sortedColumns: filterBy(&#x27;visibleColumns&#x27;, &#x27;sorted&#x27;, true).readOnly(),
+  sortedColumns: computed.filterBy(&#x27;visibleColumns&#x27;, &#x27;sorted&#x27;, true).readOnly(),
 
   /**
    * @property hideableColumns
    * @type {Ember.Array}
    */
-  hideableColumns: filterBy(&#x27;allColumns&#x27;, &#x27;hideable&#x27;, true).readOnly(),
+  hideableColumns: computed.filterBy(&#x27;allColumns&#x27;, &#x27;hideable&#x27;, true).readOnly(),
 
   /**
    * @property hiddenColumns
    * @type {Ember.Array}
    */
-  hiddenColumns: filterBy(&#x27;allColumns&#x27;, &#x27;hidden&#x27;, true).readOnly(),
+  hiddenColumns: computed.filterBy(&#x27;allColumns&#x27;, &#x27;hidden&#x27;, true).readOnly(),
+
+  /**
+   * @property responsiveHiddenColumns
+   * @type {Ember.Array}
+   */
+  responsiveHiddenColumns: computed.filterBy(&#x27;allColumns&#x27;, &#x27;responsiveHidden&#x27;, true).readOnly(),
 
   /**
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: filterBy(&#x27;allColumns&#x27;, &#x27;hidden&#x27;, false).readOnly(),
+  visibleColumns: computed.filterBy(&#x27;allColumns&#x27;, &#x27;isHidden&#x27;, false).readOnly(),
 
   /**
    * @property visibleColumnGroups
    * @type {Ember.Array}
    */
-  visibleColumnGroups: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.{hidden,isVisibleGroupColumn}&#x27;, function() {
+  visibleColumnGroups: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.{isHidden,isVisibleGroupColumn}&#x27;, function() {
     return emberArray(this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
-      if (c.get(&#x27;isVisibleGroupColumn&#x27;) || (!c.get(&#x27;isGroupColumn&#x27;) &amp;&amp; !c.get(&#x27;hidden&#x27;))) {
+      if (c.get(&#x27;isVisibleGroupColumn&#x27;) || (!c.get(&#x27;isGroupColumn&#x27;) &amp;&amp; !c.get(&#x27;isHidden&#x27;))) {
         arr.push(c);
       }
       return arr;
@@ -280,7 +280,7 @@ export default class Table extends Ember.Object.extend({
       if (isEmpty(subColumns)) {
         arr.push(c);
       } else {
-        subColumns.forEach(sc =&gt; arr.push(sc));
+        subColumns.forEach((sc) =&gt; arr.push(sc));
       }
       return arr;
     }, []));
@@ -302,11 +302,17 @@ export default class Table extends Ember.Object.extend({
     let _rows = emberArray(Table.createRows(rows));
     let _options = mergeOptionsWithGlobals(options);
 
-    if(_options.enableSync) {
-      _rows = RowSyncArrayProxy.create({ syncArray: rows, content: _rows });
+    if (_options.enableSync) {
+      _rows = RowSyncArrayProxy.create({
+        syncArray: rows,
+        content: _rows
+      });
     }
 
-    this.setProperties({ columns: _columns, rows: _rows });
+    this.setProperties({
+      columns: _columns,
+      rows: _rows
+    });
   }
 
   destroy() {
@@ -314,7 +320,7 @@ export default class Table extends Ember.Object.extend({
 
     let rows = this.get(&#x27;rows&#x27;);
 
-    if(rows instanceof RowSyncArrayProxy) {
+    if (rows instanceof RowSyncArrayProxy) {
       rows.destroy();
     }
   }
@@ -353,7 +359,7 @@ export default class Table extends Ember.Object.extend({
    * @param  {Object} options
    */
   addRows(rows = [], options = {}) {
-    rows.forEach(r =&gt; this.addRow(r, options));
+    rows.forEach((r) =&gt; this.addRow(r, options));
   }
 
   /**
@@ -415,9 +421,8 @@ export default class Table extends Ember.Object.extend({
    * @param  {Array}    rows
    */
   removeRows(rows = []) {
-    rows.forEach(r =&gt; this.removeRow(r));
+    rows.forEach((r) =&gt; this.removeRow(r));
   }
-
 
   /**
    * Remove a row at the specified index
@@ -543,7 +548,7 @@ export default class Table extends Ember.Object.extend({
    * @return {Array}
    */
   static createRows(rows = [], options = {}) {
-    return rows.map(r =&gt; Table.createRow(r, options));
+    return rows.map((r) =&gt; Table.createRow(r, options));
   }
 
   /**
@@ -565,7 +570,7 @@ export default class Table extends Ember.Object.extend({
    * @return {Array}
    */
   static createColumns(columns = []) {
-    return columns.map(c =&gt; Table.createColumn(c));
+    return columns.map((c) =&gt; Table.createColumn(c));
   }
 }
 

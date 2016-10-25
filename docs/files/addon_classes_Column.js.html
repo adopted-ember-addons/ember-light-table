@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -149,10 +149,10 @@ const {
   A: emberArray
 } = Ember;
 
- /**
-  * @module Table
-  * @class Column
-  */
+/**
+ * @module Table
+ * @class Column
+ */
 export default class Column extends Ember.Object.extend({
   /**
    * @property hideable
@@ -167,6 +167,14 @@ export default class Column extends Ember.Object.extend({
    * @default false
    */
   hidden: false,
+
+  /**
+   * If true, this column has been hidden due to the responsive behavior
+   * @property responsiveHidden
+   * @type {Boolean}
+   * @default false
+   */
+  responsiveHidden: false,
 
   /**
    * @property ascending
@@ -219,6 +227,27 @@ export default class Column extends Ember.Object.extend({
    * @optional
    */
   subColumns: null,
+
+  /**
+   * An array of media breakpoints that determine when this column will be shown
+   *
+   * If we have the following breakpoints defined in &#x60;app/breakpoints.js&#x60;:
+   *
+   * - mobile
+   * - tablet
+   * - desktop
+   *
+   * And we want to show this column only for tablet and desktop media, the following
+   * array should be specified: &#x60;[&#x27;tablet&#x27;, &#x27;desktop&#x27;]&#x60;.
+   *
+   * If this property is &#x60;null&#x60;, &#x60;undefined&#x60;, or &#x60;[]&#x60;, then this column will always
+   * be shown, regardless of the current media type.
+   *
+   * @property breakpoints
+   * @type {Array}
+   * @optional
+   */
+  breakpoints: null,
 
   /**
    * Type of column component
@@ -306,11 +335,20 @@ export default class Column extends Ember.Object.extend({
   cellClassNames: null,
 
   /**
-   * A format function used to calculate a cell&#x27;s value
+   * A format function used to calculate a cell&#x27;s value. This method will be passed
+   * the raw value if &#x60;valuePath&#x60; is specified.
+   *
    * @property format
    * @type {Function}
    */
   format: null,
+
+  /**
+   * True if &#x60;hidden&#x60; or &#x60;responsiveHidden&#x60; is true.
+   * @property isHidden
+   * @type {Boolean}
+   */
+  isHidden: computed.or(&#x27;hidden&#x27;, &#x27;responsiveHidden&#x27;).readOnly(),
 
   /**
    * @property isGroupColumn
@@ -324,8 +362,8 @@ export default class Column extends Ember.Object.extend({
    * @type {Boolean}
    * @private
    */
-  isVisibleGroupColumn: computed(&#x27;visibleSubColumns.[]&#x27;, &#x27;hidden&#x27;, function() {
-    return !isEmpty(this.get(&#x27;visibleSubColumns&#x27;)) &amp;&amp; !this.get(&#x27;hidden&#x27;);
+  isVisibleGroupColumn: computed(&#x27;visibleSubColumns.[]&#x27;, &#x27;isHidden&#x27;, function() {
+    return !isEmpty(this.get(&#x27;visibleSubColumns&#x27;)) &amp;&amp; !this.get(&#x27;isHidden&#x27;);
   }).readOnly(),
 
   /**
@@ -333,9 +371,9 @@ export default class Column extends Ember.Object.extend({
    * @type {Array}
    * @private
    */
-  visibleSubColumns: computed(&#x27;subColumns.[]&#x27;, &#x27;subColumns.@each.hidden&#x27;, &#x27;hidden&#x27;, function() {
+  visibleSubColumns: computed(&#x27;subColumns.[]&#x27;, &#x27;subColumns.@each.isHidden&#x27;, &#x27;isHidden&#x27;, function() {
     let subColumns = this.get(&#x27;subColumns&#x27;);
-    return isEmpty(subColumns) || this.get(&#x27;hidden&#x27;) ? [] : subColumns.filterBy(&#x27;hidden&#x27;, false);
+    return isEmpty(subColumns) || this.get(&#x27;isHidden&#x27;) ? [] : subColumns.filterBy(&#x27;isHidden&#x27;, false);
   }).readOnly()
 }) {
   /**
@@ -344,15 +382,15 @@ export default class Column extends Ember.Object.extend({
    * @param {Object} options
    */
   constructor(options = {}) {
-    if(options instanceof Column) {
+    if (options instanceof Column) {
       return options;
     }
 
     super();
     this.setProperties(options);
 
-    if(!isEmpty(options.subColumns)) {
-      this.set(&#x27;subColumns&#x27;, emberArray(options.subColumns.map(sc =&gt; new Column(sc))));
+    if (!isEmpty(options.subColumns)) {
+      this.set(&#x27;subColumns&#x27;, emberArray(options.subColumns.map((sc) =&gt; new Column(sc))));
     }
   }
 }

@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -178,9 +178,15 @@ const Column = Component.extend({
     return cssStyleify(this.get(&#x27;column&#x27;).getProperties([&#x27;width&#x27;]));
   }),
 
-  align: computed(&#x27;column.align&#x27;, function () {
+  align: computed(&#x27;column.align&#x27;, function() {
     return &#x60;align-${this.get(&#x27;column.align&#x27;)}&#x60;;
-  }).readOnly(),
+  }),
+
+  /**
+   * @property label
+   * @type {String}
+   */
+  label: computed.oneWay(&#x27;column.label&#x27;),
 
   /**
    * @property table
@@ -210,7 +216,7 @@ const Column = Component.extend({
    * @property colspan
    * @type {Number}
    */
-  colspan: computed(&#x27;column&#x27;, &#x27;column.visibleSubColumns.[]&#x27;, function () {
+  colspan: computed(&#x27;column&#x27;, &#x27;column.visibleSubColumns.[]&#x27;, function() {
     let subColumns = this.get(&#x27;column.visibleSubColumns&#x27;);
     return !isEmpty(subColumns) ? subColumns.length : 1;
   }),
@@ -219,7 +225,7 @@ const Column = Component.extend({
    * @property rowspan
    * @type {Number}
    */
-  rowspan: computed(&#x27;column.visibleSubColumns.[]&#x27;, function () {
+  rowspan: computed(&#x27;column.visibleSubColumns.[]&#x27;, function() {
     let subColumns = this.get(&#x27;column.visibleSubColumns&#x27;);
     return !isEmpty(subColumns) ? 1 : 2;
   }),

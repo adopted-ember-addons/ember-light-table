@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -144,11 +144,13 @@
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-light-table/templates/components/lt-body&#x27;;
 import callAction from &#x27;ember-light-table/utils/call-action&#x27;;
+import Row from &#x27;ember-light-table/classes/Row&#x27;;
 
 const {
   Component,
   computed,
-  run
+  run,
+  observer
 } = Ember;
 
 /**
@@ -318,8 +320,58 @@ export default Component.extend({
   useVirtualScrollbar: false,
 
   /**
+   * Set this property to scroll to a specific px offset.
+   *
+   * This only works when &#x60;useVirtualScrollbar&#x60; is &#x60;true&#x60;, i.e. when you are
+   * using fixed headers / footers.
+   *
+   * @property scrollTo
+   * @type {Number}
+   * @default null
+   */
+  scrollTo: null,
+  _scrollTo: null,
+
+  /**
+   * Set this property to a &#x60;Row&#x60; to scroll that &#x60;Row&#x60; into view.
+   *
+   * This only works when &#x60;useVirtualScrollbar&#x60; is &#x60;true&#x60;, i.e. when you are
+   * using fixed headers / footers.
+   *
+   * @property scrollToRow
+   * @type {Row}
+   * @default null
+   */
+  scrollToRow: null,
+  _scrollToRow: null,
+
+  /**
+   * @property targetScrollOffset
+   * @type {Number}
+   * @default 0
+   * @private
+   */
+  targetScrollOffset: 0,
+
+  /**
+   * @property currentScrollOffset
+   * @type {Number}
+   * @default 0
+   * @private
+   */
+  currentScrollOffset: 0,
+
+  /**
+   * @property hasReachedTargetScrollOffset
+   * @type {Boolean}
+   * @default true
+   * @private
+   */
+  hasReachedTargetScrollOffset: true,
+
+  /**
    * Allows to customize the component used to render rows
-   * 
+   *
    * &#x60;&#x60;&#x60;hbs
    * {{#light-table table as |t|}}
    *    {{t.body rowComponent=(component &#x27;my-row&#x27;)}}
@@ -333,7 +385,7 @@ export default Component.extend({
 
   /**
    * Allows to customize the component used to render spanned rows
-   * 
+   *
    * &#x60;&#x60;&#x60;hbs
    * {{#light-table table as |t|}}
    *    {{t.body spannedRowComponent=(component &#x27;my-spanned-row&#x27;)}}
@@ -347,7 +399,7 @@ export default Component.extend({
 
   /**
    * Allows to customize the component used to render infinite loader
-   * 
+   *
    * &#x60;&#x60;&#x60;hbs
    * {{#light-table table as |t|}}
    *    {{t.body infinityComponent=(component &#x27;my-infinity&#x27;)}}
@@ -377,9 +429,73 @@ export default Component.extend({
     run.once(this, this._setupVirtualScrollbar);
   },
 
+  didReceiveAttrs() {
+    this._super(...arguments);
+    this.setupScrollOffset();
+  },
+
+  destroy() {
+    this._super(...arguments);
+    run.cancel(this._checkTargetOffsetTimer);
+    run.cancel(this._setTargetOffsetTimer);
+  },
+
   _setupVirtualScrollbar() {
-    const { fixedHeader, fixedFooter } = this.get(&#x27;sharedOptions&#x27;);
+    let { fixedHeader, fixedFooter } = this.get(&#x27;sharedOptions&#x27;);
     this.set(&#x27;useVirtualScrollbar&#x27;, fixedHeader || fixedFooter);
+  },
+
+  onRowsChange: observer(&#x27;rows.[]&#x27;, function() {
+    this._checkTargetOffsetTimer = run.scheduleOnce(&#x27;afterRender&#x27;, this, this.checkTargetScrollOffset);
+  }),
+
+  setupScrollOffset() {
+    let {
+      scrollTo,
+      _scrollTo,
+      scrollToRow,
+      _scrollToRow
+    } = this.getProperties([&#x27;scrollTo&#x27;, &#x27;_scrollTo&#x27;, &#x27;scrollToRow&#x27;, &#x27;_scrollToRow&#x27;]);
+    let targetScrollOffset = null;
+
+    this.setProperties({ _scrollTo: scrollTo, _scrollToRow: scrollToRow });
+
+    if (scrollTo !== _scrollTo) {
+      targetScrollOffset = Number.parseInt(scrollTo, 10);
+
+      if (Number.isNaN(targetScrollOffset)) {
+        targetScrollOffset = null;
+      }
+
+      this.setProperties({
+        targetScrollOffset,
+        hasReachedTargetScrollOffset: targetScrollOffset &lt;= 0
+      });
+    } else if (scrollToRow !== _scrollToRow &amp;&amp; scrollToRow instanceof Row) {
+      let rowElement = document.getElementById(scrollToRow.get(&#x27;rowId&#x27;));
+
+      if (rowElement instanceof Element) {
+        targetScrollOffset = rowElement.offsetTop;
+      }
+
+      this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
+    }
+  },
+
+  checkTargetScrollOffset() {
+    if (!this.get(&#x27;hasReachedTargetScrollOffset&#x27;)) {
+      let targetScrollOffset = this.get(&#x27;targetScrollOffset&#x27;);
+      let currentScrollOffset = this.get(&#x27;currentScrollOffset&#x27;);
+
+      if (targetScrollOffset &gt; currentScrollOffset) {
+        this.set(&#x27;targetScrollOffset&#x27;, null);
+        this._setTargetOffsetTimer = run.schedule(&#x27;render&#x27;, null, () =&gt; {
+          this.set(&#x27;targetScrollOffset&#x27;, targetScrollOffset);
+        });
+      } else {
+        this.set(&#x27;hasReachedTargetScrollOffset&#x27;, true);
+      }
+    }
   },
 
   toggleExpandedRow(row) {
@@ -415,7 +531,7 @@ export default Component.extend({
 
       if (canSelect) {
         if (e.shiftKey &amp;&amp; multiSelect) {
-          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach(r =&gt; r.set(&#x27;selected&#x27;, !isSelected));
+          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach((r) =&gt; r.set(&#x27;selected&#x27;, !isSelected));
           this._prevSelectedIndex = currIndex;
         } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) &amp;&amp; multiSelect) {
           row.toggleProperty(&#x27;selected&#x27;);
@@ -445,6 +561,21 @@ export default Component.extend({
      */
     onRowDoubleClick(/* row */) {
       callAction(this, &#x27;onRowDoubleClick&#x27;, ...arguments);
+    },
+
+    /**
+     * onScroll action - sent when user scrolls
+     *
+     * This only works when &#x60;useVirtualScrollbar&#x60; is &#x60;true&#x60;, i.e. when you are
+     * using fixed headers / footers.
+     *
+     * @event onScroll
+     * @param {Number} scrollOffset The scroll offset in px
+     * @param {Event} event The scroll event
+     */
+    onScroll(scrollOffset /* , event */) {
+      this.set(&#x27;currentScrollOffset&#x27;, scrollOffset);
+      callAction(this, &#x27;onScroll&#x27;, ...arguments);
     },
 
     /**

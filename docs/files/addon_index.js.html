@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -244,43 +244,43 @@ import Row from &#x27;./classes/Row&#x27;;
  * @submodule Table Declaration
  */
 
- /**
-  * The &#x60;light-table&#x60; component exposes 3 contextual component (head, body, and foot).
-  *
-  * &#x60;&#x60;&#x60;hbs
-  * {{#light-table table as |t|}}
-  *
-  *   {{t.head}}
-  *
-  *   {{#t.body as |body|}}
-  *     {{#body.expanded-row as |row|}}
-  *       Hello &lt;b&gt;{{row.firstName}}&lt;/b&gt;
-  *     {{/body.expanded-row}}
-  *
-  *     {{#if isLoading}}
-  *       {{#body.loader}}
-  *         Loading...
-  *       {{/body.loader}}
-  *     {{/if}}
-  *
-  *     {{#if table.isEmpty}}
-  *       {{#body.no-data}}
-  *         No users found.
-  *       {{/body.no-data}}
-  *     {{/if}}
-  *   {{/t.body}}
-  *
-  *   {{t.foot}}
-  *
-  * {{/light-table}}
-  * &#x60;&#x60;&#x60;
-  *
-  * Each of these contextual components have a wide array of options so it is advised to look
-  * through their documentation.
-  *
-  * @module Usage
-  * @submodule Component Declaration
-  */
+/**
+ * The &#x60;light-table&#x60; component exposes 3 contextual component (head, body, and foot).
+ *
+ * &#x60;&#x60;&#x60;hbs
+ * {{#light-table table as |t|}}
+ *
+ *   {{t.head}}
+ *
+ *   {{#t.body as |body|}}
+ *     {{#body.expanded-row as |row|}}
+ *       Hello &lt;b&gt;{{row.firstName}}&lt;/b&gt;
+ *     {{/body.expanded-row}}
+ *
+ *     {{#if isLoading}}
+ *       {{#body.loader}}
+ *         Loading...
+ *       {{/body.loader}}
+ *     {{/if}}
+ *
+ *     {{#if table.isEmpty}}
+ *       {{#body.no-data}}
+ *         No users found.
+ *       {{/body.no-data}}
+ *     {{/if}}
+ *   {{/t.body}}
+ *
+ *   {{t.foot}}
+ *
+ * {{/light-table}}
+ * &#x60;&#x60;&#x60;
+ *
+ * Each of these contextual components have a wide array of options so it is advised to look
+ * through their documentation.
+ *
+ * @module Usage
+ * @submodule Component Declaration
+ */
 export default Table;
 export { Table, Column, Row };
 

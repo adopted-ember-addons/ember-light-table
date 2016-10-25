@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -143,10 +143,12 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 
- /**
-  * @module Table
-  * @class Row
-  */
+const { computed, guidFor } = Ember;
+
+/**
+ * @module Table
+ * @class Row
+ */
 export default class Row extends Ember.ObjectProxy.extend({
   /**
    * @property hidden
@@ -176,6 +178,19 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @type {String | Array}
    */
   classNames: null,
+
+  /**
+   * Element ID for the corresponding &#x60;{{lt-row}}&#x60;.
+   *
+   * Note: named &#x60;rowId&#x60; in order to not shadow the &#x60;content.id&#x60; property.
+   *
+   * @property rowId
+   * @type {String}
+   * @readOnly
+   */
+  rowId: computed(function() {
+    return guidFor(this);
+  }).readOnly()
 }) {
   /**
    * @class Row

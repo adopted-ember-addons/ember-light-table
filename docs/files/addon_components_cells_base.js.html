@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -212,9 +212,10 @@ const Cell = Component.extend({
    * @type {Mixed}
    */
   value: computed(&#x27;rawValue&#x27;, function() {
-    const rawValue = this.get(&#x27;rawValue&#x27;);
-    const format = this.get(&#x27;column.format&#x27;);
-    if(format &amp;&amp; typeof format === &#x27;function&#x27;) {
+    let rawValue = this.get(&#x27;rawValue&#x27;);
+    let format = this.get(&#x27;column.format&#x27;);
+
+    if (format &amp;&amp; typeof format === &#x27;function&#x27;) {
       return format.call(this, rawValue);
     }
     return rawValue;

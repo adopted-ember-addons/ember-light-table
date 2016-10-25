@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -156,13 +156,13 @@ export default Ember.ArrayProxy.extend({
    * @property syncArray
    * @type {Array}
    */
-   syncArray: null,
+  syncArray: null,
 
-   /**
-    * @property syncEnabled
-    * @type {Boolean}
-    */
-   syncEnabled: true,
+  /**
+   * @property syncEnabled
+   * @type {Boolean}
+   */
+  syncEnabled: true,
 
   init() {
     this._super(...arguments);
@@ -183,7 +183,10 @@ export default Ember.ArrayProxy.extend({
       didChange: &#x27;syncArrayDidChange&#x27;
     });
 
-    this.setProperties({ syncArray: null, content: null });
+    this.setProperties({
+      syncArray: null,
+      content: null
+    });
   },
 
   /**
@@ -206,17 +209,17 @@ export default Ember.ArrayProxy.extend({
     return objects;
   },
 
-  syncArrayWillChange() { /* Not needed */},
+  syncArrayWillChange() { /* Not needed */ },
 
   syncArrayDidChange(syncArray, start, removeCount, addCount) {
     let content = this.get(&#x27;content&#x27;);
     let objectsToAdd = EMPTY_ARRAY;
 
-    if(!this.get(&#x27;syncEnabled&#x27;)) {
+    if (!this.get(&#x27;syncEnabled&#x27;)) {
       return;
     }
 
-    if(addCount &gt; 0) {
+    if (addCount &gt; 0) {
       objectsToAdd = this.serializeContentObjects(syncArray.slice(start, start + addCount));
     }
 
@@ -226,7 +229,7 @@ export default Ember.ArrayProxy.extend({
   replaceContent(start, removeCount, objectsToAdd) {
     let syncArray = this.get(&#x27;syncArray&#x27;);
 
-    if(!this.get(&#x27;syncEnabled&#x27;)) {
+    if (!this.get(&#x27;syncEnabled&#x27;)) {
       return this._super(...arguments);
     }
 

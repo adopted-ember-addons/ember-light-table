@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -247,11 +247,11 @@ export default Ember.Mixin.create({
      * @param  {Event}   event   The click event
      */
     onColumnClick(column) {
-      if(column.sortable &amp;&amp; this.get(&#x27;sortOnClick&#x27;)) {
-        if(column.sorted) {
+      if (column.sortable &amp;&amp; this.get(&#x27;sortOnClick&#x27;)) {
+        if (column.sorted) {
           column.toggleProperty(&#x27;ascending&#x27;);
         } else {
-          if(!this.get(&#x27;multiColumnSort&#x27;)) {
+          if (!this.get(&#x27;multiColumnSort&#x27;)) {
             this.get(&#x27;table.sortedColumns&#x27;).setEach(&#x27;sorted&#x27;, false);
           }
           column.set(&#x27;sorted&#x27;, true);

@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.4.4" target="_blank">
-                                  Tag: v1.4.4
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.0" target="_blank">
+                                  Tag: v1.5.0
                                 </a>
                             </h4>
                         </div>
@@ -145,12 +145,25 @@ import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-light-table/templates/components/light-table&#x27;;
 import Table from &#x27;ember-light-table/classes/Table&#x27;;
 import cssStyleify from &#x27;ember-light-table/utils/css-styleify&#x27;;
+import callAction from &#x27;ember-light-table/utils/call-action&#x27;;
 
 const {
   assert,
   Component,
-  computed
+  computed,
+  inject,
+  observer,
+  on,
+  isNone,
+  isEmpty,
+  A: emberArray
 } = Ember;
+
+function intersections(array1, array2) {
+  return array1.filter((n) =&gt; {
+    return array2.indexOf(n) &gt; -1;
+  });
+}
 
 /**
  * @module Light Table
@@ -177,6 +190,8 @@ const LightTable = Component.extend({
   layout,
   classNameBindings: [&#x27;:ember-light-table&#x27;],
   attributeBindings: [&#x27;style&#x27;],
+
+  media: inject.service(),
 
   /**
    * @property table
@@ -230,13 +245,50 @@ const LightTable = Component.extend({
   tableClassNames: &#x27;&#x27;,
 
   /**
+   * Enable responsive behavior
+   *
+   * @property responsive
+   * @type {Boolean}
+   * @default false
+   */
+  responsive: false,
+
+  /**
+   * A hash to determine the number of columns to show per given breakpoint.
+   * If this is specified, it will override any column specific breakpoints.
+   *
+   * If we have the following breakpoints defined in &#x60;app/breakpoints.js&#x60;:
+   *
+   * - mobile
+   * - tablet
+   * - desktop
+   *
+   * The following hash can be passed in:
+   *
+   * &#x60;&#x60;&#x60;js
+   * {
+   *  mobile: 2,
+   *  tablet: 4
+   * }
+   * &#x60;&#x60;&#x60;
+   *
+   * If there is no rule specified for a given breakpoint (i.e. &#x60;desktop&#x60;),
+   * all columns will be shown.
+   *
+   * @property breakpoints
+   * @type {Object}
+   * @default null
+   */
+  breakpoints: null,
+
+  /**
    * Table component shared options
    *
    * @property sharedOptions
    * @type {Object}
    * @private
    */
-  sharedOptions: computed(function () {
+  sharedOptions: computed(function() {
     return {
       height: this.get(&#x27;height&#x27;),
       fixedHeader: false,
@@ -244,13 +296,91 @@ const LightTable = Component.extend({
     };
   }).readOnly(),
 
-  style: computed(&#x27;height&#x27;, function () {
+  style: computed(&#x27;height&#x27;, function() {
     return cssStyleify(this.getProperties([&#x27;height&#x27;]));
   }),
 
   init() {
     this._super(...arguments);
-    assert(&#x27;[ember-light-table] table must be an instance of Table&#x27;, this.get(&#x27;table&#x27;) instanceof Table);
+
+    let table = this.get(&#x27;table&#x27;);
+    let media = this.get(&#x27;media&#x27;);
+
+    assert(&#x27;[ember-light-table] table must be an instance of Table&#x27;, table instanceof Table);
+
+    if (isNone(media)) {
+      this.set(&#x27;responsive&#x27;, false);
+    }
+  },
+
+  onMediaChange: on(&#x27;init&#x27;, observer(&#x27;media.matches.[]&#x27;, &#x27;table.allColumns.[]&#x27;, function() {
+    let responsive = this.get(&#x27;responsive&#x27;);
+    let matches = this.get(&#x27;media.matches&#x27;);
+    let breakpoints = this.get(&#x27;breakpoints&#x27;);
+    let table = this.get(&#x27;table&#x27;);
+    let numColumns = 0;
+
+    if (!responsive) {
+      return;
+    }
+
+    this.send(&#x27;onBeforeResponsiveChange&#x27;, matches);
+
+    if (!isNone(breakpoints)) {
+      Object.keys(breakpoints).forEach((b) =&gt; {
+        if (matches.indexOf(b) &gt; -1) {
+          numColumns = Math.max(numColumns, breakpoints[b]);
+        }
+      });
+
+      this._displayColumns(numColumns);
+    } else {
+      table.get(&#x27;allColumns&#x27;).forEach((c) =&gt; {
+        let breakpoints = c.get(&#x27;breakpoints&#x27;);
+        let isMatch = isEmpty(breakpoints) || intersections(matches, breakpoints).length &gt; 0;
+        c.set(&#x27;responsiveHidden&#x27;, !isMatch);
+      });
+    }
+
+    this.send(&#x27;onAfterResponsiveChange&#x27;, matches);
+  })),
+
+  _displayColumns(numColumns) {
+    let table = this.get(&#x27;table&#x27;);
+    let hiddenColumns = table.get(&#x27;responsiveHiddenColumns&#x27;);
+    let visibleColumns = table.get(&#x27;visibleColumns&#x27;);
+
+    if (!numColumns) {
+      hiddenColumns.setEach(&#x27;responsiveHidden&#x27;, false);
+    } else if (visibleColumns.length &gt; numColumns) {
+      emberArray(visibleColumns.slice(numColumns, visibleColumns.length)).setEach(&#x27;responsiveHidden&#x27;, true);
+    } else if (visibleColumns.length &lt; numColumns) {
+      emberArray(hiddenColumns.slice(0, numColumns - visibleColumns.length)).setEach(&#x27;responsiveHidden&#x27;, false);
+    }
+  },
+
+  actions: {
+    /**
+     * onBeforeResponsiveChange action.
+     * Called before any column visibility is altered.
+     *
+     * @event onBeforeResponsiveChange
+     * @param  {Array} matches list of matching breakpoints
+     */
+    onBeforeResponsiveChange(/* matches */) {
+      callAction(this, &#x27;onBeforeResponsiveChange&#x27;, ...arguments);
+    },
+
+    /**
+     * onAfterResponsiveChange action.
+     * Called after all column visibility has been altered.
+     *
+     * @event onAfterResponsiveChange
+     * @param  {Array} matches list of matching breakpoints
+     */
+    onAfterResponsiveChange(/* matches */) {
+      callAction(this, &#x27;onAfterResponsiveChange&#x27;, ...arguments);
+    }
   }
 });
 
