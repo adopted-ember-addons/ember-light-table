@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.5.1
+
+### Pull Requests
+
+- [#241](https://github.com/offirgolan/ember-light-table/pull/241)  [BUGFIX] Add safe checks to scroll logic  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.5.0
 
 ### Pull Requests
