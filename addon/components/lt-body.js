@@ -328,10 +328,10 @@ export default Component.extend({
         targetScrollOffset,
         hasReachedTargetScrollOffset: targetScrollOffset <= 0
       });
-    } else if (scrollToRow !== _scrollToRow && scrollToRow instanceof Row) {
+    } else if (scrollToRow !== _scrollToRow && scrollToRow && scrollToRow instanceof Row) {
       let rowElement = document.getElementById(scrollToRow.get('rowId'));
 
-      if (rowElement instanceof Element) {
+      if (rowElement && rowElement instanceof Element) {
         targetScrollOffset = rowElement.offsetTop;
       }
 
