@@ -17,7 +17,7 @@ export default Ember.Component.extend({
       width: '40px',
       sortable: false,
       cellComponent: 'row-toggle',
-      breakpoints: ['xs', 'sm', 'md']
+      breakpoints: ['mobile', 'tablet', 'desktop']
     }, {
       label: 'Avatar',
       valuePath: 'avatar',
@@ -32,19 +32,19 @@ export default Ember.Component.extend({
       label: 'Last Name',
       valuePath: 'lastName',
       width: '150px',
-      breakpoints: ['sm', 'md', 'lg']
+      breakpoints: ['tablet', 'desktop', 'jumbo']
     }, {
       label: 'Address',
       valuePath: 'address',
-      breakpoints: ['sm', 'md', 'lg']
+      breakpoints: ['tablet', 'desktop', 'jumbo']
     }, {
       label: 'State',
       valuePath: 'state',
-      breakpoints: ['md', 'lg']
+      breakpoints: ['desktop', 'jumbo']
     }, {
       label: 'Country',
       valuePath: 'country',
-      breakpoints: ['lg']
+      breakpoints: ['jumbo']
     }];
   }),
 
@@ -82,7 +82,7 @@ export default Ember.Component.extend({
     },
 
     onAfterResponsiveChange(matches) {
-      if (matches.indexOf('lg') > -1) {
+      if (matches.indexOf('jumbo') > -1) {
         this.get('table.expandedRows').setEach('expanded', false);
       }
     }
