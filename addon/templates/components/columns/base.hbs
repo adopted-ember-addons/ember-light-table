@@ -8,5 +8,5 @@
 {{/if}}
 
 {{#if isResizable}}
-  {{lt-column-resizer column=column resizeOnDrag=resizeOnDrag columnResized=(action 'columnResized')}}
+  {{lt-column-resizer column=column resizeOnDrag=resizeOnDrag isResizing=(mut isResizing) columnResized=(action 'columnResized')}}
 {{/if}}

@@ -87,6 +87,14 @@
           user-select: none;
 }
 
+.ember-light-table .lt-column.is-resizing {
+  pointer-events: none;
+}
+
+.ember-light-table.is-resizing {
+  cursor: col-resize;
+}
+
 .ember-light-table .lt-column .lt-column-resizer {
   width: 5px;
   cursor: col-resize;
