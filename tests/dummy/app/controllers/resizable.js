@@ -17,24 +17,29 @@ export default TableController.extend({
       label: 'First Name',
       valuePath: 'firstName',
       resizable: true,
+      minResizeWidth: 50,
       width: '150px'
     }, {
       label: 'Last Name',
       valuePath: 'lastName',
       resizable: true,
+      minResizeWidth: 50,
       width: '150px'
     }, {
       label: 'Address',
       valuePath: 'address',
-      resizable: true
+      resizable: true,
+      minResizeWidth: 100
     }, {
       label: 'State',
       valuePath: 'state',
-      resizable: true
+      resizable: true,
+      minResizeWidth: 100
     }, {
       label: 'Country',
       valuePath: 'country',
-      resizable: true
+      resizable: true,
+      minResizeWidth: 100
     }];
   })
 });

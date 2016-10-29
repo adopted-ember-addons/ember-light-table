@@ -2,7 +2,8 @@ import Ember from 'ember';
 import layout from '../templates/components/lt-column-resizer';
 
 const {
-  $
+  $,
+  computed
 } = Ember;
 
 export default Ember.Component.extend({
@@ -14,6 +15,10 @@ export default Ember.Component.extend({
   isResizing: false,
   startWidth: null,
   startX: null,
+
+  $column: computed(function() {
+    return $(this.get('element')).parent('th');
+  }).volatile().readOnly(),
 
   didInsertElement() {
     this._super(...arguments);
@@ -41,16 +46,18 @@ export default Ember.Component.extend({
   },
 
   mouseDown(e) {
-    let $column = this._getColumn();
+    let $column = this.get('$column');
 
     e.preventDefault();
     e.stopPropagation();
 
     this.setProperties({
       isResizing: true,
-      startWidth: $column.width(),
+      startWidth: $column.outerWidth(),
       startX: e.pageX
     });
+
+    this.$().closest('.ember-light-table').addClass('is-resizing');
   },
 
   _mouseUp(e) {
@@ -58,11 +65,14 @@ export default Ember.Component.extend({
       e.preventDefault();
       e.stopPropagation();
 
-      let $column = this._getColumn();
+      let $column = this.get('$column');
+      let width = `${$column.outerWidth()}px`;
 
       this.set('isResizing', false);
-      this.set('column.width', `${$column.width()}px`);
-      this.sendAction('columnResized', this.get('column.width'));
+      this.set('column.width', width);
+
+      this.sendAction('columnResized', width);
+      this.$().closest('.ember-light-table').removeClass('is-resizing');
     }
   },
 
@@ -72,19 +82,16 @@ export default Ember.Component.extend({
       e.stopPropagation();
 
       let resizeOnDrag = this.get('resizeOnDrag');
-      let $column = this._getColumn();
+      let $column = this.get('$column');
+      let minResizeWidth = this.get('column.minResizeWidth');
       let { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
-      let width = startWidth + (e.pageX - startX);
+      let width = Math.max(startWidth + (e.pageX - startX), minResizeWidth);
 
       if (resizeOnDrag) {
         this.set('column.width', `${width}px`);
       } else {
-        $column.width(`${width}px`);
+        $column.outerWidth(`${width}px`);
       }
     }
-  },
-
-  _getColumn() {
-    return $(this.get('element')).parent('th');
   }
 });

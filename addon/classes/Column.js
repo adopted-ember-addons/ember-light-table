@@ -78,6 +78,14 @@ export default class Column extends Ember.Object.extend({
   align: 'left',
 
   /**
+   * The minimum width (in px) that this column can be resized to.
+   * @property minResizeWidth
+   * @type {Number}
+   * @default 0
+   */
+  minResizeWidth: 0,
+
+  /**
    * An array of sub columns to be grouped together
    * @property subColumns
    * @type {Array}
