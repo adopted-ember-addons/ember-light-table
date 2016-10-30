@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.5.2
+
+### Pull Requests
+
+- [#244](https://github.com/offirgolan/ember-light-table/pull/244)  [FEATURE] minResizeWidth + Event bubbling fix  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.5.1
 
 ### Pull Requests

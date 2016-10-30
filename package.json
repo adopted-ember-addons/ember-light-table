@@ -1,6 +1,6 @@
 {
   "name": "ember-light-table",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Lightweight, component based table for Ember 2.x",
   "homepage": "https://github.com/offirgolan/ember-light-table",
   "directories": {
