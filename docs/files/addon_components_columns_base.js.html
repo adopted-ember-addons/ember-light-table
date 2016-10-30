@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.1" target="_blank">
-                                  Tag: v1.5.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.5.2" target="_blank">
+                                  Tag: v1.5.2
                                 </a>
                             </h4>
                         </div>
@@ -166,13 +166,14 @@ const Column = Component.extend({
   tagName: &#x27;th&#x27;,
   classNames: [&#x27;lt-column&#x27;],
   attributeBindings: [&#x27;style&#x27;, &#x27;colspan&#x27;, &#x27;rowspan&#x27;],
-  classNameBindings: [&#x27;align&#x27;, &#x27;isGroupColumn:lt-group-column&#x27;, &#x27;isHideable&#x27;, &#x27;isSortable&#x27;, &#x27;isSorted&#x27;, &#x27;isResizable&#x27;, &#x27;column.classNames&#x27;],
+  classNameBindings: [&#x27;align&#x27;, &#x27;isGroupColumn:lt-group-column&#x27;, &#x27;isHideable&#x27;, &#x27;isSortable&#x27;, &#x27;isSorted&#x27;, &#x27;isResizable&#x27;, &#x27;isResizing&#x27;, &#x27;column.classNames&#x27;],
 
   isGroupColumn: computed.readOnly(&#x27;column.isGroupColumn&#x27;),
   isSortable: computed.readOnly(&#x27;column.sortable&#x27;),
   isSorted: computed.readOnly(&#x27;column.sorted&#x27;),
   isHideable: computed.readOnly(&#x27;column.hideable&#x27;),
   isResizable: computed.readOnly(&#x27;column.resizable&#x27;),
+  isResizing: false,
 
   style: computed(&#x27;column.width&#x27;, function() {
     return cssStyleify(this.get(&#x27;column&#x27;).getProperties([&#x27;width&#x27;]));

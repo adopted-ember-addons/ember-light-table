@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.5.1"
+        "version": "v1.5.2"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
@@ -250,7 +250,7 @@
             "module": "Table",
             "namespace": "",
             "file": "addon/classes/Column.js",
-            "line": 236,
+            "line": 244,
             "is_constructor": 1,
             "params": [
                 {
@@ -582,6 +582,17 @@
         {
             "file": "addon/classes/Column.js",
             "line": 80,
+            "description": "The minimum width (in px) that this column can be resized to.",
+            "itemtype": "property",
+            "name": "minResizeWidth",
+            "type": "{Number}",
+            "default": "0",
+            "class": "Column",
+            "module": "Table"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 88,
             "description": "An array of sub columns to be grouped together",
             "itemtype": "property",
             "name": "subColumns",
@@ -592,7 +603,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 88,
+            "line": 96,
             "description": "An array of media breakpoints that determine when this column will be shown\n\nIf we have the following breakpoints defined in `app/breakpoints.js`:\n\n- mobile\n- tablet\n- desktop\n\nAnd we want to show this column only for tablet and desktop media, the following\narray should be specified: `['tablet', 'desktop']`.\n\nIf this property is `null`, `undefined`, or `[]`, then this column will always\nbe shown, regardless of the current media type.",
             "itemtype": "property",
             "name": "breakpoints",
@@ -603,7 +614,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 109,
+            "line": 117,
             "description": "Type of column component\n\nYou can create your own column types by running the blueprint:\n`ember g column-type my-column-type`\n\nThis will generate a component for you which represents the `<th>`\nelement for the column. If you want to apply custom actions to the `th`,\nor do some custom styling of the `th` with classNameBindings, all of that is\navailable to you in this component.\n\nYou can then specify the custom type you created as a string here, to use it.",
             "itemtype": "property",
             "name": "type",
@@ -614,7 +625,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 129,
+            "line": 137,
             "description": "Type of cell component\n\nYou can create your own cell types by running the blueprint:\n`ember g cell-type my-cell-type`\n\nThis will generate a component for you which represents the `<td>`\ncells in the column. If you want to apply custom actions to the `td`,\nor do some custom styling of the `td` with classNameBindings, all of that is\navailable to you in this component.\n\nYou can then specify the custom type you created as a string here, to use it.",
             "itemtype": "property",
             "name": "cellType",
@@ -625,7 +636,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 148,
+            "line": 156,
             "description": "Component name for the column",
             "itemtype": "property",
             "name": "component",
@@ -636,7 +647,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 156,
+            "line": 164,
             "description": "Component name for the column cells. This component is automatically passed row,\ncolumn, and value variables, and you can specify a valuePath to set what property\nthe value is set to.",
             "itemtype": "property",
             "name": "cellComponent",
@@ -647,7 +658,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 166,
+            "line": 174,
             "itemtype": "property",
             "name": "valuePath",
             "type": "{String}",
@@ -656,7 +667,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 172,
+            "line": 180,
             "itemtype": "property",
             "name": "width",
             "type": "{String}",
@@ -665,7 +676,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 178,
+            "line": 186,
             "description": "Class names to be applied to header and footer cells of this column",
             "itemtype": "property",
             "name": "classNames",
@@ -675,7 +686,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 186,
+            "line": 194,
             "description": "Class names to be applied to all cells of this column",
             "itemtype": "property",
             "name": "cellClassNames",
@@ -685,7 +696,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 194,
+            "line": 202,
             "description": "A format function used to calculate a cell's value. This method will be passed\nthe raw value if `valuePath` is specified.",
             "itemtype": "property",
             "name": "format",
@@ -695,7 +706,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 203,
+            "line": 211,
             "description": "True if `hidden` or `responsiveHidden` is true.",
             "itemtype": "property",
             "name": "isHidden",
@@ -705,7 +716,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 210,
+            "line": 218,
             "itemtype": "property",
             "name": "isGroupColumn",
             "type": "{Boolean}",
@@ -716,7 +727,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 217,
+            "line": 225,
             "itemtype": "property",
             "name": "isVisibleGroupColumn",
             "type": "{Boolean}",
@@ -727,7 +738,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 226,
+            "line": 234,
             "itemtype": "property",
             "name": "visibleSubColumns",
             "type": "{Array}",
@@ -1434,7 +1445,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 42,
+            "line": 43,
             "itemtype": "property",
             "name": "label",
             "type": "{String}",
@@ -1443,7 +1454,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 48,
+            "line": 49,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -1452,7 +1463,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 54,
+            "line": 55,
             "itemtype": "property",
             "name": "column",
             "type": "{Column}",
@@ -1461,7 +1472,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 60,
+            "line": 61,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -1470,7 +1481,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 66,
+            "line": 67,
             "itemtype": "property",
             "name": "sortIcons",
             "type": "{Object}",
@@ -1479,7 +1490,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 72,
+            "line": 73,
             "itemtype": "property",
             "name": "colspan",
             "type": "{Number}",
@@ -1488,7 +1499,7 @@
         },
         {
             "file": "addon/components/columns/base.js",
-            "line": 81,
+            "line": 82,
             "itemtype": "property",
             "name": "rowspan",
             "type": "{Number}",
