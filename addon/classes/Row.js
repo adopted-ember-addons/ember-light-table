@@ -35,6 +35,14 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @type {String | Array}
    */
   classNames: null,
+  
+  /**
+   * Data content for this row.
+   *
+   * @property content
+   * @type {Object}
+   */
+  content: null,
 
   /**
    * Element ID for the corresponding `{{lt-row}}`.
