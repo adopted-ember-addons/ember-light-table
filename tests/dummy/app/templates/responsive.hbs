@@ -1,6 +1,6 @@
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="table-1">
+    <div class="panel-heading" role="tab">
       <a role="button" data-toggle="collapse" data-parent="#accordion" href="#code-snippet" aria-expanded="true" aria-controls="code-snippet">
         <h4 class="panel-title">Responsive Example <span class="code-icon fa fa-code pull-right"></span></h4>
       </a>
@@ -9,67 +9,26 @@
       <div class="panel-body code-snippet">
        <ul class="nav nav-tabs" role="tablist">
          <li role="presentation" class="active"><a href="#component" aria-controls="component" role="tab" data-toggle="tab">component.js</a></li>
+         <li role="presentation"><a href="#table-common" aria-controls="table-common" role="tab" data-toggle="tab">table-common.js</a></li>
          <li role="presentation"><a href="#template" aria-controls="template" role="tab" data-toggle="tab">template.hbs</a></li>
          <li role="presentation"><a href="#responsive-expanded-row" aria-controls="responsive-expanded-row" role="tab" data-toggle="tab">responsive-expanded-row.hbs</a></li>
+         <li role="presentation"><a href="#row-toggle" aria-controls="row-toggle" role="tab" data-toggle="tab">row-toggle.hbs</a></li>
          <li role="presentation"><a href="#user-avatar" aria-controls="user-avatar" role="tab" data-toggle="tab">user-avatar.hbs</a></li>
          <li role="presentation"><a href="#table-loader" aria-controls="table-loader" role="tab" data-toggle="tab">table-loader.hbs</a></li>
-         <li role="presentation"><a href="#row-toggle" aria-controls="row-toggle" role="tab" data-toggle="tab">row-toggle.hbs</a></li>
        </ul>
        <div class="tab-content">
          <div role="tabpanel" class="tab-pane fade in active" id="component">{{code-snippet name="responsive-table.js"}}</div>
+         <div role="tabpanel" class="tab-pane fade" id="table-common">{{code-snippet name="table-common.js"}}</div>
          <div role="tabpanel" class="tab-pane fade" id="template">{{code-snippet name="responsive-table.hbs"}}</div>
          <div role="tabpanel" class="tab-pane fade" id="responsive-expanded-row">{{code-snippet name="responsive-expanded-row.hbs"}}</div>
+         <div role="tabpanel" class="tab-pane fade" id="row-toggle">{{code-snippet name="row-toggle.hbs"}}</div>
          <div role="tabpanel" class="tab-pane fade" id="user-avatar">{{code-snippet name="user-avatar.hbs"}}</div>
          <div role="tabpanel" class="tab-pane fade" id="table-loader">{{code-snippet name="table-loader.hbs"}}</div>
-         <div role="tabpanel" class="tab-pane fade" id="row-toggle">{{code-snippet name="row-toggle.hbs"}}</div>
        </div>
       </div>
     </div>
     <div class="panel-body table-container">
-{{!-- BEGIN-SNIPPET responsive-table --}}
-{{#light-table table
-  height='65vh'
-  responsive=true
-  onAfterResponsiveChange=(action 'onAfterResponsiveChange')
-  as |t|
-}}
-
-  {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
-    fixed=true
-  }}
-
-  {{#t.body
-    canSelect=false
-    expandOnClick=false
-    onScrolledToBottom=(action 'onScrolledToBottom')
-    as |body|
-  }}
-    {{#body.expanded-row as |row|}}
-      {{responsive-expanded-row table=table row=row}}
-    {{/body.expanded-row}}
-
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
-    {{/if}}
-  {{/t.body}}
-
-  {{#t.foot fixed=true as |columns|}}
-    <tr>
-      <td class="align-center" colspan={{columns.length}}>
-        <i class="fa fa-chevron-left pull-left" aria-hidden="true"></i>
-        Resize your browser to check out the responsive behavior
-        <i class="fa fa-chevron-right pull-right" aria-hidden="true"></i>
-      </td>
-    </tr>
-  {{/t.foot}}
-
-{{/light-table}}
-{{!-- END-SNIPPET --}}
+      {{responsive-table model=model}}
     </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ const { computed, guidFor } = Ember;
 
 /**
  * @module Table
+ * @extends Ember.ObjectProxy
  * @class Row
  */
 export default class Row extends Ember.ObjectProxy.extend({
@@ -35,9 +36,13 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @type {String | Array}
    */
   classNames: null,
-  
+
   /**
-   * Data content for this row.
+   * Data content for this row. Since this class extends Ember.ObjectProxy,
+   * all properties are forwarded to the content. This means that instead of
+   * `row.content.foo` you can just do `row.foo`. Please note that methods are
+   * not forwarded. You will not be able to do `row.save()`, instead, you would have
+   * to do `row.content.save()`.
    *
    * @property content
    * @type {Object}
