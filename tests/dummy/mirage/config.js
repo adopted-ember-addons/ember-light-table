@@ -26,8 +26,6 @@ export default function() {
     limit = Number(limit || 20);
     dir = dir || 'asc';
 
-    console.log(page, limit, sort, dir);
-
     if (sort) {
       users = emberArray(users).sortBy(sort);
       if (dir !== 'asc') {

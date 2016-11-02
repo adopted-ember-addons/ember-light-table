@@ -32,6 +32,7 @@ export default Ember.Component.extend(TableCommon, {
       label: 'Contact Information',
       sortable: false,
       align: 'center',
+
       subColumns: [{
         label: 'Address',
         valuePath: 'address'

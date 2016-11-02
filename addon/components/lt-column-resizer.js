@@ -6,6 +6,8 @@ const {
   computed
 } = Ember;
 
+const TOP_LEVEL_CLASS = '.ember-light-table';
+
 export default Ember.Component.extend({
   layout,
   classNameBindings: [':lt-column-resizer', 'isResizing'],
@@ -57,7 +59,7 @@ export default Ember.Component.extend({
       startX: e.pageX
     });
 
-    this.$().closest('.ember-light-table').addClass('is-resizing');
+    this.$().closest(TOP_LEVEL_CLASS).addClass('is-resizing');
   },
 
   _mouseUp(e) {
@@ -72,7 +74,7 @@ export default Ember.Component.extend({
       this.set('column.width', width);
 
       this.sendAction('columnResized', width);
-      this.$().closest('.ember-light-table').removeClass('is-resizing');
+      this.$().closest(TOP_LEVEL_CLASS).removeClass('is-resizing');
     }
   },
 
@@ -82,15 +84,20 @@ export default Ember.Component.extend({
       e.stopPropagation();
 
       let resizeOnDrag = this.get('resizeOnDrag');
-      let $column = this.get('$column');
       let minResizeWidth = this.get('column.minResizeWidth');
       let { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
-      let width = Math.max(startWidth + (e.pageX - startX), minResizeWidth);
+      let width = `${Math.max(startWidth + (e.pageX - startX), minResizeWidth)}px`;
+
+      let $column = this.get('$column');
+      let $index = this.get('table.visibleColumns').indexOf(this.get('column')) + 1;
+      let $table = this.$().closest(TOP_LEVEL_CLASS);
+
+      $column.outerWidth(width);
+      $(`thead td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(width);
+      $(`tfoot td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(width);
 
       if (resizeOnDrag) {
-        this.set('column.width', `${width}px`);
-      } else {
-        $column.outerWidth(`${width}px`);
+        $(`tbody td:nth-child(${$index})`, $table).outerWidth(width);
       }
     }
   }
