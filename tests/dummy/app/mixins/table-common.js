@@ -25,9 +25,8 @@ export default Ember.Mixin.create({
   init() {
     this._super(...arguments);
 
-    let sort = this.get('sort');
     let table = new Table(this.get('columns'), this.get('model'), { enableSync: true });
-    let sortColumn = table.get('allColumns').findBy('valuePath', sort);
+    let sortColumn = table.get('allColumns').findBy('valuePath', this.get('sort'));
 
     // Setup initial sort column
     if (sortColumn) {
