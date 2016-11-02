@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/b132d64f" target="_blank">
-                                  Tag: 1.5.2.b132d64f
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/a98c9b4b" target="_blank">
+                                  Tag: 1.5.2.a98c9b4b
                                 </a>
                             </h4>
                         </div>
@@ -147,6 +147,7 @@ const { computed, guidFor } = Ember;
 
 /**
  * @module Table
+ * @extends Ember.ObjectProxy
  * @class Row
  */
 export default class Row extends Ember.ObjectProxy.extend({
@@ -178,6 +179,18 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @type {String | Array}
    */
   classNames: null,
+
+  /**
+   * Data content for this row. Since this class extends Ember.ObjectProxy,
+   * all properties are forwarded to the content. This means that instead of
+   * &#x60;row.content.foo&#x60; you can just do &#x60;row.foo&#x60;. Please note that methods are
+   * not forwarded. You will not be able to do &#x60;row.save()&#x60;, instead, you would have
+   * to do &#x60;row.content.save()&#x60;.
+   *
+   * @property content
+   * @type {Object}
+   */
+  content: null,
 
   /**
    * Element ID for the corresponding &#x60;{{lt-row}}&#x60;.

@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "1.5.2.b132d64f"
+        "version": "1.5.2.a98c9b4b"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
@@ -138,6 +138,7 @@
             "tag": "module",
             "file": "addon/classes/Table.js",
             "line": 146,
+            "extends": "Ember.ObjectProxy",
             "access": "private",
             "tagname": ""
         },
@@ -271,7 +272,8 @@
             "module": "Table",
             "namespace": "",
             "file": "addon/classes/Row.js",
-            "line": 52,
+            "line": 65,
+            "extends": "Ember.ObjectProxy",
             "is_constructor": 1,
             "params": [
                 {
@@ -749,7 +751,7 @@
         },
         {
             "file": "addon/classes/Row.js",
-            "line": 10,
+            "line": 11,
             "itemtype": "property",
             "name": "hidden",
             "type": "{Boolean}",
@@ -759,7 +761,7 @@
         },
         {
             "file": "addon/classes/Row.js",
-            "line": 17,
+            "line": 18,
             "itemtype": "property",
             "name": "expanded",
             "type": "{Boolean}",
@@ -769,7 +771,7 @@
         },
         {
             "file": "addon/classes/Row.js",
-            "line": 24,
+            "line": 25,
             "itemtype": "property",
             "name": "selected",
             "type": "{Boolean}",
@@ -779,7 +781,7 @@
         },
         {
             "file": "addon/classes/Row.js",
-            "line": 31,
+            "line": 32,
             "description": "Class names to be applied to this row",
             "itemtype": "property",
             "name": "classNames",
@@ -789,7 +791,17 @@
         },
         {
             "file": "addon/classes/Row.js",
-            "line": 39,
+            "line": 40,
+            "description": "Data content for this row. Since this class extends Ember.ObjectProxy,\nall properties are forwarded to the content. This means that instead of\n`row.content.foo` you can just do `row.foo`. Please note that methods are\nnot forwarded. You will not be able to do `row.save()`, instead, you would have\nto do `row.content.save()`.",
+            "itemtype": "property",
+            "name": "content",
+            "type": "{Object}",
+            "class": "Row",
+            "module": "Table"
+        },
+        {
+            "file": "addon/classes/Row.js",
+            "line": 52,
             "description": "Element ID for the corresponding `{{lt-row}}`.\n\nNote: named `rowId` in order to not shadow the `content.id` property.",
             "itemtype": "property",
             "name": "rowId",
