@@ -1,5 +1,8 @@
-import _ from 'lodash/lodash';
+import Ember from 'ember';
 
+const {
+  A: emberArray
+} = Ember;
 export default function() {
 
   // These comments are here to help you get started. Feel free to delete them.
@@ -19,23 +22,23 @@ export default function() {
     let { page, limit, sort, dir } = request.queryParams;
     let users = schema.users.all().models;
 
-    page = page || 1;
-    limit = limit || 20;
+    page = Number(page || 1);
+    limit = Number(limit || 20);
     dir = dir || 'asc';
 
+    console.log(page, limit, sort, dir);
+
     if (sort) {
-      users = _.sortBy(users, sort);
+      users = emberArray(users).sortBy(sort);
       if (dir !== 'asc') {
         users = users.reverse();
       }
     }
 
     let offset = (page - 1) * limit;
-    users = _.take(_.drop(users, offset), limit);
+    users = users.slice(offset, offset + limit);
 
-    return {
-      users
-    };
+    return { users };
   });
 
   /*

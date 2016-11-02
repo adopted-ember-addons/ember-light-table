@@ -1,0 +1,37 @@
+{{!-- BEGIN-SNIPPET selectable-table --}}
+{{#ember-wormhole to="table-actions"}}
+  {{#if hasSelection}}
+    <div class="table-action fa fa-check-square-o" title="Deselect all" {{action 'deselectAll'}}></div>
+    <div class="table-action fa fa-trash-o delete" title="Delete selected" {{action 'deleteAll'}}></div>
+  {{else}}
+    <div class="table-action fa fa-square-o" title="Select all" {{action 'selectAll'}}></div>
+  {{/if}}
+{{/ember-wormhole}}
+
+{{#light-table table height='65vh' as |t|}}
+  {{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    fixed=true
+  }}
+
+  {{#t.body
+    multiSelect=true
+    onScrolledToBottom=(action 'onScrolledToBottom')
+    as |body|
+  }}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
+
+    {{#if (and (not isLoading) table.isEmpty)}}
+      {{#body.no-data}}
+        {{no-data}}
+      {{/body.no-data}}
+    {{/if}}
+  {{/t.body}}
+{{/light-table}}
+{{!-- END-SNIPPET --}}

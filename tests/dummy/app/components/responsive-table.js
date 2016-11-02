@@ -1,11 +1,12 @@
+// BEGIN-SNIPPET responsive-table
 import Ember from 'ember';
-import TableController from './table';
+import TableCommon from '../mixins/table-common';
 
 const {
   computed
 } = Ember;
 
-export default TableController.extend({
+export default Ember.Component.extend(TableCommon, {
   columns: computed(function() {
     return [{
       width: '40px',
@@ -50,3 +51,4 @@ export default TableController.extend({
     }
   }
 });
+// END-SNIPPET

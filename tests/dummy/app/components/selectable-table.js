@@ -1,11 +1,14 @@
+// BEGIN-SNIPPET selectable-table
 import Ember from 'ember';
-import TableController from './table';
+import TableCommon from '../mixins/table-common';
 
 const {
   computed
 } = Ember;
 
-export default TableController.extend({
+export default Ember.Component.extend(TableCommon, {
+  hasSelection: computed.notEmpty('table.selectedRows'),
+
   columns: computed(function() {
     return [{
       label: 'Avatar',
@@ -31,5 +34,20 @@ export default TableController.extend({
       label: 'Country',
       valuePath: 'country'
     }];
-  })
+  }),
+
+  actions: {
+    selectAll() {
+      this.get('table.rows').setEach('selected', true);
+    },
+
+    deselectAll() {
+      this.get('table.selectedRows').setEach('selected', false);
+    },
+
+    deleteAll() {
+      this.get('table').removeRows(this.get('table.selectedRows'));
+    }
+  }
 });
+// END-SNIPPET
