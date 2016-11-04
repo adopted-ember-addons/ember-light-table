@@ -9,38 +9,50 @@ const {
 export default Ember.Component.extend(TableCommon, {
   columns: computed(function() {
     return [{
-      label: 'Avatar',
-      valuePath: 'avatar',
-      width: '60px',
+      label: 'User Details',
       sortable: false,
-      cellComponent: 'user-avatar'
+      align: 'center',
+
+      subColumns: [{
+        label: 'Avatar',
+        valuePath: 'avatar',
+        width: '60px',
+        sortable: false,
+        cellComponent: 'user-avatar'
+      }, {
+        label: 'First',
+        resizable: true,
+        valuePath: 'firstName',
+        width: '150px',
+        minResizeWidth: 75
+      }, {
+        label: 'Last',
+        resizable: true,
+        valuePath: 'lastName',
+        width: '150px',
+        minResizeWidth: 75
+      }]
     }, {
-      label: 'First Name',
-      valuePath: 'firstName',
-      resizable: true,
-      minResizeWidth: 50,
-      width: '150px'
-    }, {
-      label: 'Last Name',
-      valuePath: 'lastName',
-      resizable: true,
-      minResizeWidth: 50,
-      width: '150px'
-    }, {
-      label: 'Address',
-      valuePath: 'address',
-      resizable: true,
-      minResizeWidth: 100
-    }, {
-      label: 'State',
-      valuePath: 'state',
-      resizable: true,
-      minResizeWidth: 100
-    }, {
-      label: 'Country',
-      valuePath: 'country',
-      resizable: true,
-      minResizeWidth: 100
+      label: 'Contact Information',
+      sortable: false,
+      align: 'center',
+
+      subColumns: [{
+        label: 'Address',
+        resizable: true,
+        valuePath: 'address',
+        minResizeWidth: 100
+      }, {
+        label: 'State',
+        resizable: true,
+        valuePath: 'state',
+        minResizeWidth: 100
+      }, {
+        label: 'Country',
+        resizable: true,
+        valuePath: 'country',
+        minResizeWidth: 100
+      }]
     }];
   })
 });
