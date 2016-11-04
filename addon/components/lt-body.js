@@ -328,11 +328,13 @@ export default Component.extend({
         targetScrollOffset,
         hasReachedTargetScrollOffset: targetScrollOffset <= 0
       });
-    } else if (scrollToRow !== _scrollToRow && scrollToRow && scrollToRow instanceof Row) {
-      let rowElement = document.getElementById(scrollToRow.get('rowId'));
+    } else if (scrollToRow !== _scrollToRow) {
+      if (scrollToRow instanceof Row) {
+        let rowElement = document.getElementById(scrollToRow.get('rowId'));
 
-      if (rowElement && rowElement instanceof Element) {
-        targetScrollOffset = rowElement.offsetTop;
+        if (rowElement instanceof Element) {
+          targetScrollOffset = rowElement.offsetTop;
+        }
       }
 
       this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
