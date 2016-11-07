@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 const {
+  run,
   computed
 } = Ember;
 
@@ -15,7 +16,12 @@ export default Ember.Mixin.create({
 
   dragDirection: computed('isDragTarget', function() {
     if (this.get('isDragTarget')) {
-      return `drag-${this._getDragDirection()}`;
+      let columns = this.get('dragColumnGroup');
+      let targetIdx = columns.indexOf(this.get('column'));
+      let sourceIdx = columns.indexOf(sourceColumn);
+      let direction = (sourceIdx - targetIdx) < 0 ? 'right' : 'left';
+
+      return `drag-${direction}`;
     }
   }).readOnly(),
 
@@ -42,6 +48,13 @@ export default Ember.Mixin.create({
     sourceColumn = column;
     this.set('isDragging', true);
     this.sendAction('onColumnDrag', sourceColumn, ...arguments);
+
+    /*
+      NOTE: This is a fix for Firefox to prevent the click event
+      from being triggered after a drop.
+     */
+    this.__click__ = this.click;
+    this.click = undefined;
   },
 
   dragEnter(e) {
@@ -66,16 +79,10 @@ export default Ember.Mixin.create({
     this.set('isDragTarget', false);
   },
 
-  dragEnd(e) {
+  dragEnd() {
     this._super(...arguments);
 
-    e.preventDefault();
-    e.stopPropagation();
-
-    this.setProperties({
-      isDragTarget: false,
-      isDragging: false
-    });
+    this.setProperties({ isDragTarget: false, isDragging: false });
 
     /*
       If sourceColumn still references a column, it means that a successful
@@ -85,6 +92,11 @@ export default Ember.Mixin.create({
       this.sendAction('onColumnDrop', sourceColumn, false, ...arguments);
       sourceColumn = null;
     }
+
+    /*
+      Restore click event
+     */
+    this._clickResetTimer = run.next(this, () => this.click = this.__click__);
   },
 
   drop(e) {
@@ -109,20 +121,14 @@ export default Ember.Mixin.create({
 
     table.propertyDidChange('columns');
 
-    this.setProperties({
-      isDragTarget: false,
-      isDragging: false
-    });
+    this.setProperties({ isDragTarget: false, isDragging: false });
 
     this.sendAction('onColumnDrop', sourceColumn, true, ...arguments);
     sourceColumn = null;
   },
 
-  _getDragDirection() {
-    let columns = this.get('dragColumnGroup');
-    let targetIdx = columns.indexOf(this.get('column'));
-    let sourceIdx = columns.indexOf(sourceColumn);
-
-    return (sourceIdx - targetIdx) < 0 ? 'right' : 'left';
+  destroy() {
+    this._super(...arguments);
+    run.cancel(this._clickResetTimer);
   }
 });
