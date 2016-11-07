@@ -19,7 +19,9 @@
               resizeOnDrag=resizeOnDrag
               click=(action 'onColumnClick' column)
               doubleClick=(action 'onColumnDoubleClick' column)
-              onColumnResized=(action 'onColumnResized')}}
+              onColumnResized=(action 'onColumnResized')
+              onColumnDrag=(action 'onColumnDrag')
+              onColumnDrop=(action 'onColumnDrop')}}
           {{/each}}
         </tr>
       {{/if}}

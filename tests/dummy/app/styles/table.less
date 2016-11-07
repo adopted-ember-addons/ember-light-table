@@ -1,3 +1,5 @@
+@border-color: #DADADA;
+
 .ember-light-table {
   width: 95%;
   margin: 0 auto;
@@ -14,11 +16,29 @@
   }
 
   tfoot .lt-column {
-    border-top: 1px solid #DADADA;
+    border-top: 1px solid @border-color;
   }
 
   thead .lt-column {
-    border-bottom: 1px solid #DADADA;
+    border-bottom: 1px solid @border-color;
+  }
+
+  thead th,
+  tfoot th {
+    &.is-dragging {
+      opacity: 0.75;
+      background: #eee;
+    }
+
+    &.is-drag-target {
+      &.drag-right {
+        border-right: 1px dotted @border-color;
+      }
+
+      &.drag-left {
+        border-left: 1px dotted @border-color;
+      }
+    }
   }
 
   .lt-column {
@@ -68,7 +88,7 @@
     }
 
     td {
-      border-color: #DADADA;
+      border-color: @border-color;
       border-width: 0;
       border-bottom-width: 1px;
       border-style: solid;

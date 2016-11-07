@@ -73,7 +73,7 @@ export default Ember.Component.extend({
       this.set('isResizing', false);
       this.set('column.width', width);
 
-      this.sendAction('columnResized', width);
+      this.sendAction('onColumnResized', width);
       this.$().closest(TOP_LEVEL_CLASS).removeClass('is-resizing');
     }
   },

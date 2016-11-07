@@ -12,7 +12,7 @@ test('create column - default options', function(assert) {
   assert.equal(col.sorted, false);
   assert.equal(col.sorted, false);
   assert.equal(col.label, '');
-  assert.equal(col.subColumns, null);
+  assert.deepEqual(col.subColumns, []);
   assert.equal(col.component, null);
   assert.equal(col.cellComponent, null);
   assert.equal(col.valuePath, null);
@@ -32,7 +32,7 @@ test('create column - column instance', function(assert) {
 test('CP - isGroupColumn', function(assert) {
   let col = new Column();
   assert.ok(col);
-  assert.equal(col.subColumns, null);
+  assert.deepEqual(col.subColumns, []);
   assert.equal(col.get('isGroupColumn'), false);
 
   col.set('subColumns', [new Column()]);
