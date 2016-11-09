@@ -31,10 +31,11 @@ export default Ember.Mixin.create({
   }).readOnly(),
 
   isDropTarget: computed(function() {
+    let column = this.get('column');
     /*
       A column is a valid drop target only if its in the same group
      */
-    return this.get('column._group') === sourceColumn.get('_group');
+    return column.get('droppable') && column.get('_group') === sourceColumn.get('_group');
   }).volatile().readOnly(),
 
   dragStart(e) {

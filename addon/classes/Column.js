@@ -79,7 +79,7 @@ export default class Column extends Ember.Object.extend({
   resizable: false,
 
   /**
-   * Whether the column can be reorder via drag n drop.
+   * Whether the column can be reorder via drag and drop.
    *
    * CSS Classes:
    *  - `is-draggable`
@@ -93,6 +93,15 @@ export default class Column extends Ember.Object.extend({
    * @default false
    */
   draggable: false,
+
+  /**
+   * Whether the column is a valid drop target.
+   *
+   * @property droppable
+   * @type {Boolean}
+   * @default true
+   */
+  droppable: true,
 
   /**
    * Whether the column is sorted.
