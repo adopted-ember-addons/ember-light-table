@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/a98c9b4b" target="_blank">
-                                  Tag: 1.5.2.a98c9b4b
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.6.0" target="_blank">
+                                  Tag: v1.6.0
                                 </a>
                             </h4>
                         </div>
@@ -243,8 +243,8 @@ export default Ember.Mixin.create({
      * onColumnClick action. Handles column sorting.
      *
      * @event onColumnClick
-     * @param  {Column}   column The column that was clicked
-     * @param  {Event}   event   The click event
+     * @param  {Column} column The column that was clicked
+     * @param  {Event} event The click event
      */
     onColumnClick(column) {
       if (column.sortable &amp;&amp; this.get(&#x27;sortOnClick&#x27;)) {
@@ -264,8 +264,8 @@ export default Ember.Mixin.create({
      * onColumnDoubleClick action.
      *
      * @event onColumnDoubleClick
-     * @param  {Column}   column The column that was clicked
-     * @param  {Event}   event   The click event
+     * @param  {Column} column The column that was clicked
+     * @param  {Event} event   The click event
      */
     onColumnDoubleClick(/* column */) {
       callAction(this, &#x27;onColumnDoubleClick&#x27;, ...arguments);
@@ -275,11 +275,32 @@ export default Ember.Mixin.create({
      * onColumnResized action.
      *
      * @event onColumnResized
-     * @param  {Column}   column The column that was resized
-     * @param  {String}   width  The final width of the column
+     * @param  {Column} column The column that was resized
+     * @param  {String} width  The final width of the column
      */
     onColumnResized(/* column, width */) {
       callAction(this, &#x27;onColumnResized&#x27;, ...arguments);
+    },
+
+    /**
+     * onColumnDrag action.
+     *
+     * @event onColumnDrag
+     * @param  {Column} column The column that is being dragged
+     */
+    onColumnDrag(/* column */) {
+      callAction(this, &#x27;onColumnDrag&#x27;, ...arguments);
+    },
+
+    /**
+     * onColumnDrop action.
+     *
+     * @event onColumnDrop
+     * @param  {Column} column The column that was dropped
+     * @param  {Boolean} isSuccess The column was successfully dropped and sorted
+     */
+    onColumnDrop(/* column, isSuccess */) {
+      callAction(this, &#x27;onColumnDrop&#x27;, ...arguments);
     }
   }
 });

@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/a98c9b4b" target="_blank">
-                                  Tag: 1.5.2.a98c9b4b
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.6.0" target="_blank">
+                                  Tag: v1.6.0
                                 </a>
                             </h4>
                         </div>
@@ -175,7 +175,7 @@ const Cell = Component.extend({
 
   align: computed(&#x27;column.align&#x27;, function() {
     return &#x60;align-${this.get(&#x27;column.align&#x27;)}&#x60;;
-  }).readOnly(),
+  }),
 
   /**
    * @property table

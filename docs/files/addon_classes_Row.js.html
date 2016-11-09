@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/a98c9b4b" target="_blank">
-                                  Tag: 1.5.2.a98c9b4b
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.6.0" target="_blank">
+                                  Tag: v1.6.0
                                 </a>
                             </h4>
                         </div>
@@ -152,6 +152,11 @@ const { computed, guidFor } = Ember;
  */
 export default class Row extends Ember.ObjectProxy.extend({
   /**
+   * Whether the row is hidden.
+   *
+   * CSS Classes:
+   *  - &#x60;is-hidden&#x60;
+   *
    * @property hidden
    * @type {Boolean}
    * @default false
@@ -159,6 +164,11 @@ export default class Row extends Ember.ObjectProxy.extend({
   hidden: false,
 
   /**
+   * Whether the row is expanded.
+   *
+   * CSS Classes:
+   *  - &#x60;is-expanded&#x60;
+   *
    * @property expanded
    * @type {Boolean}
    * @default false
@@ -166,6 +176,11 @@ export default class Row extends Ember.ObjectProxy.extend({
   expanded: false,
 
   /**
+   * Whether the row is selected.
+   *
+   * CSS Classes:
+   *  - &#x60;is-selected&#x60;
+   *
    * @property selected
    * @type {Boolean}
    * @default false
@@ -193,7 +208,7 @@ export default class Row extends Ember.ObjectProxy.extend({
   content: null,
 
   /**
-   * Element ID for the corresponding &#x60;{{lt-row}}&#x60;.
+   * Rows&#x27;s unique ID.
    *
    * Note: named &#x60;rowId&#x60; in order to not shadow the &#x60;content.id&#x60; property.
    *

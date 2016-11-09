@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/a98c9b4b" target="_blank">
-                                  Tag: 1.5.2.a98c9b4b
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.6.0" target="_blank">
+                                  Tag: v1.6.0
                                 </a>
                             </h4>
                         </div>
@@ -151,7 +151,6 @@ const {
   get,
   computed,
   isNone,
-  isEmpty,
   A: emberArray
 } = Ember;
 
@@ -254,12 +253,12 @@ export default class Table extends Ember.Object.extend({
    * @type {Ember.Array}
    */
   visibleColumnGroups: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.{isHidden,isVisibleGroupColumn}&#x27;, function() {
-    return emberArray(this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
+    return this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
       if (c.get(&#x27;isVisibleGroupColumn&#x27;) || (!c.get(&#x27;isGroupColumn&#x27;) &amp;&amp; !c.get(&#x27;isHidden&#x27;))) {
-        arr.push(c);
+        arr.pushObject(c);
       }
       return arr;
-    }, []));
+    }, emberArray([]));
   }).readOnly(),
 
   /**
@@ -275,15 +274,10 @@ export default class Table extends Ember.Object.extend({
    * @type {Ember.Array}
    */
   allColumns: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.subColumns&#x27;, function() {
-    return emberArray(this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
-      let subColumns = c.get(&#x27;subColumns&#x27;);
-      if (isEmpty(subColumns)) {
-        arr.push(c);
-      } else {
-        subColumns.forEach((sc) =&gt; arr.push(sc));
-      }
+    return this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
+      arr.pushObjects(c.get(&#x27;isGroupColumn&#x27;) ? c.get(&#x27;subColumns&#x27;) : [c]);
       return arr;
-    }, []));
+    }, emberArray([]));
   }).readOnly()
 }) {
   /**
