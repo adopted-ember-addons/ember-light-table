@@ -7,7 +7,7 @@ Changelog
 
 - [#252](https://github.com/offirgolan/ember-light-table/pull/252)  [BUGFIX] Resizable column improvements  *by [Offir Golan](https://github.com/offirgolan)*
 - [#254](https://github.com/offirgolan/ember-light-table/pull/254)  [BUGFIX] repeated scrollToRow  *by [Jan Buschtöns](https://github.com/buschtoens)*
-- [#244](https://github.com/offirgolan/ember-light-table/pull/244)  [FEATURE] Draggable Columns  *by [Offir Golan](https://github.com/offirgolan)*
+- [#258](https://github.com/offirgolan/ember-light-table/pull/258)  [FEATURE] Draggable Columns  *by [Offir Golan](https://github.com/offirgolan)*
 
 ## v1.5.2
 
