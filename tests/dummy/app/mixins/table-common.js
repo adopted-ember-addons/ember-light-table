@@ -10,7 +10,7 @@ const {
 export default Ember.Mixin.create({
   store: inject.service(),
 
-  page: 1,
+  page: 0,
   limit: 10,
   dir: 'asc',
   sort: 'firstName',
@@ -59,10 +59,9 @@ export default Ember.Mixin.create({
         this.setProperties({
           dir: column.ascending ? 'asc' : 'desc',
           sort: column.get('valuePath'),
-          page: 1
+          page: 0
         });
         this.get('model').clear();
-        this.fetchRecords();
       }
     }
   }

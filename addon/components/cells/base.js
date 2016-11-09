@@ -32,7 +32,7 @@ const Cell = Component.extend({
 
   align: computed('column.align', function() {
     return `align-${this.get('column.align')}`;
-  }).readOnly(),
+  }),
 
   /**
    * @property table

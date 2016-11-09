@@ -79,6 +79,7 @@
   float: right;
 }
 
+.ember-light-table .lt-column.is-draggable,
 .ember-light-table .lt-column.is-sortable {
   cursor: pointer;
   -webkit-user-select: none;

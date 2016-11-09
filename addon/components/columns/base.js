@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/columns/base';
+import DraggableColumnMixin from 'ember-light-table/mixins/draggable-column';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
 
 const {
@@ -18,18 +19,19 @@ const {
  * @class Base Column
  */
 
-const Column = Component.extend({
+const Column = Component.extend(DraggableColumnMixin, {
   layout,
   tagName: 'th',
   classNames: ['lt-column'],
   attributeBindings: ['style', 'colspan', 'rowspan'],
-  classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isHideable', 'isSortable', 'isSorted', 'isResizable', 'isResizing', 'column.classNames'],
+  classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isHideable', 'isSortable', 'isSorted', 'isResizable', 'isResizing', 'isDraggable', 'column.classNames'],
 
   isGroupColumn: computed.readOnly('column.isGroupColumn'),
   isSortable: computed.readOnly('column.sortable'),
   isSorted: computed.readOnly('column.sorted'),
   isHideable: computed.readOnly('column.hideable'),
   isResizable: computed.readOnly('column.resizable'),
+  isDraggable: computed.readOnly('column.draggable'),
   isResizing: false,
 
   style: computed('column.width', function() {
@@ -86,13 +88,7 @@ const Column = Component.extend({
   rowspan: computed('column.visibleSubColumns.[]', function() {
     let subColumns = this.get('column.visibleSubColumns');
     return !isEmpty(subColumns) ? 1 : 2;
-  }),
-
-  actions: {
-    columnResized(width) {
-      this.sendAction('columnResized', this.get('column'), width);
-    }
-  }
+  })
 });
 
 Column.reopenClass({

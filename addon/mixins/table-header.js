@@ -100,8 +100,8 @@ export default Ember.Mixin.create({
      * onColumnClick action. Handles column sorting.
      *
      * @event onColumnClick
-     * @param  {Column}   column The column that was clicked
-     * @param  {Event}   event   The click event
+     * @param  {Column} column The column that was clicked
+     * @param  {Event} event The click event
      */
     onColumnClick(column) {
       if (column.sortable && this.get('sortOnClick')) {
@@ -121,8 +121,8 @@ export default Ember.Mixin.create({
      * onColumnDoubleClick action.
      *
      * @event onColumnDoubleClick
-     * @param  {Column}   column The column that was clicked
-     * @param  {Event}   event   The click event
+     * @param  {Column} column The column that was clicked
+     * @param  {Event} event   The click event
      */
     onColumnDoubleClick(/* column */) {
       callAction(this, 'onColumnDoubleClick', ...arguments);
@@ -132,11 +132,32 @@ export default Ember.Mixin.create({
      * onColumnResized action.
      *
      * @event onColumnResized
-     * @param  {Column}   column The column that was resized
-     * @param  {String}   width  The final width of the column
+     * @param  {Column} column The column that was resized
+     * @param  {String} width  The final width of the column
      */
     onColumnResized(/* column, width */) {
       callAction(this, 'onColumnResized', ...arguments);
+    },
+
+    /**
+     * onColumnDrag action.
+     *
+     * @event onColumnDrag
+     * @param  {Column} column The column that is being dragged
+     */
+    onColumnDrag(/* column */) {
+      callAction(this, 'onColumnDrag', ...arguments);
+    },
+
+    /**
+     * onColumnDrop action.
+     *
+     * @event onColumnDrop
+     * @param  {Column} column The column that was dropped
+     * @param  {Boolean} isSuccess The column was successfully dropped and sorted
+     */
+    onColumnDrop(/* column, isSuccess */) {
+      callAction(this, 'onColumnDrop', ...arguments);
     }
   }
 });

@@ -9,6 +9,11 @@ const { computed, guidFor } = Ember;
  */
 export default class Row extends Ember.ObjectProxy.extend({
   /**
+   * Whether the row is hidden.
+   *
+   * CSS Classes:
+   *  - `is-hidden`
+   *
    * @property hidden
    * @type {Boolean}
    * @default false
@@ -16,6 +21,11 @@ export default class Row extends Ember.ObjectProxy.extend({
   hidden: false,
 
   /**
+   * Whether the row is expanded.
+   *
+   * CSS Classes:
+   *  - `is-expanded`
+   *
    * @property expanded
    * @type {Boolean}
    * @default false
@@ -23,6 +33,11 @@ export default class Row extends Ember.ObjectProxy.extend({
   expanded: false,
 
   /**
+   * Whether the row is selected.
+   *
+   * CSS Classes:
+   *  - `is-selected`
+   *
    * @property selected
    * @type {Boolean}
    * @default false
@@ -50,7 +65,7 @@ export default class Row extends Ember.ObjectProxy.extend({
   content: null,
 
   /**
-   * Element ID for the corresponding `{{lt-row}}`.
+   * Rows's unique ID.
    *
    * Note: named `rowId` in order to not shadow the `content.id` property.
    *
