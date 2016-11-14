@@ -359,7 +359,7 @@ export default Component.extend({
 
   toggleExpandedRow(row) {
     let multi = this.get('multiRowExpansion');
-    let shouldExpand = !row.expanded;
+    let shouldExpand = !row.get('expanded');
 
     if (multi) {
       row.toggleProperty('expanded');
@@ -403,10 +403,8 @@ export default Component.extend({
           }
         }
         this._prevSelectedIndex = currIndex;
-      } else {
-        if (this.get('canExpand') && this.get('expandOnClick')) {
-          this.toggleExpandedRow(row);
-        }
+      } else if (this.get('canExpand') && this.get('expandOnClick')) {
+        this.toggleExpandedRow(row);
       }
 
       callAction(this, 'onRowClick', ...arguments);
