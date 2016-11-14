@@ -1,6 +1,35 @@
 import Ember from 'ember';
 
-const { computed, guidFor } = Ember;
+const { get, computed, guidFor, isNone, isArray } = Ember;
+
+function buildPassthroughProperty(defaultValue) {
+  return computed('_passthroughMappings', {
+    get(key) {
+      let mappings = this.get('_passthroughMappings');
+
+      if (!mappings || !mappings[key]) {
+        let value = this.get('_passthroughBuffer')[key];
+        return isNone(value) ? defaultValue : value;
+      }
+
+      let { path, isInverted } = mappings[key];
+      let value = this.get(path);
+      return isInverted ? !value : value;
+    },
+    set(key, value) {
+      let mappings = this.get('_passthroughMappings');
+
+      if (!mappings || !mappings[key]) {
+        this.get('_passthroughBuffer')[key] = value;
+        return value;
+      }
+
+      let { path, isInverted } = mappings[key];
+      this.set(path, isInverted ? !value : value);
+      return isInverted ? !this.get(path) : this.get(path);
+    }
+  });
+}
 
 /**
  * @module Table
@@ -8,6 +37,67 @@ const { computed, guidFor } = Ember;
  * @class Row
  */
 export default class Row extends Ember.ObjectProxy.extend({
+  /**
+   * Properties listed here are passed through to the `content` object instead
+   * of getting shadowed by the `ObjectProxy` behavior of `Row`.
+   *
+   * You can use mappings similar to `classNameBindings` in `Ember.Component`.
+   *
+   * - `'selected'` - transparently pass through the `selected` property
+   * - `'expanded:isShowingMore'` - map the `expanded` property to the
+   *   `isShowingMore` property
+   * - `'hidden:!visible'` - map the `hidden` property to the `visible` property
+   *   and invert the value
+   *
+   * @property passthrough
+   * @type {Array}
+   * @default []
+   */
+  passthrough: computed(() => []),
+
+  /**
+   * Processed look-up object of `passthrough` for faster access.
+   *
+   * @property _passthroughMappings
+   * @type {Object}
+   * @private
+   */
+  _passthroughMappings: computed('passthrough.[]', function() {
+    let passthroughMappings = {};
+    let properties = this.get('passthrough');
+
+    if (!isArray(properties) || !get(properties, 'length')) {
+      return null;
+    }
+
+    // jshint ignore:start
+    properties.forEach((p) => {
+      let [, mapFrom, isInverted = false, mapTo = mapFrom] =
+        /^(\w+)(?::(!?)(\w+))?$/.exec(p);
+      if (mapFrom) {
+        passthroughMappings[mapFrom] = {
+          mapFrom,
+          mapTo,
+          isInverted: Boolean(isInverted),
+          path: `content.${mapTo}`
+        };
+      }
+    });
+    // jshint ignore:end
+
+    return passthroughMappings;
+  }),
+
+  /**
+   * Internal buffer for properties that are the defined on the `Row` object
+   * itself, but not passed through to the `content` object.
+   *
+   * @property _passthroughMappings
+   * @type {Object}
+   * @private
+   */
+  _passthroughBuffer: computed(() => ({})),
+
   /**
    * Whether the row is hidden.
    *
@@ -18,7 +108,7 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @type {Boolean}
    * @default false
    */
-  hidden: false,
+  hidden: buildPassthroughProperty(false),
 
   /**
    * Whether the row is expanded.
@@ -30,7 +120,7 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @type {Boolean}
    * @default false
    */
-  expanded: false,
+  expanded: buildPassthroughProperty(false),
 
   /**
    * Whether the row is selected.
@@ -42,7 +132,7 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @type {Boolean}
    * @default false
    */
-  selected: false,
+  selected: buildPassthroughProperty(false),
 
   /**
    * Class names to be applied to this row
@@ -50,7 +140,7 @@ export default class Row extends Ember.ObjectProxy.extend({
    * @property classNames
    * @type {String | Array}
    */
-  classNames: null,
+  classNames: buildPassthroughProperty(),
 
   /**
    * Data content for this row. Since this class extends Ember.ObjectProxy,
