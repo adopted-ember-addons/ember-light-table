@@ -1,6 +1,34 @@
 Changelog
 =========
 
+## v1.6.0
+
+### Pull Requests
+
+- [#252](https://github.com/offirgolan/ember-light-table/pull/252)  [BUGFIX] Resizable column improvements  *by [Offir Golan](https://github.com/offirgolan)*
+- [#254](https://github.com/offirgolan/ember-light-table/pull/254)  [BUGFIX] repeated scrollToRow  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#258](https://github.com/offirgolan/ember-light-table/pull/258)  [FEATURE] Draggable Columns  *by [Offir Golan](https://github.com/offirgolan)*
+
+## v1.5.2
+
+### Pull Requests
+
+- [#244](https://github.com/offirgolan/ember-light-table/pull/244)  [FEATURE] minResizeWidth + Event bubbling fix  *by [Offir Golan](https://github.com/offirgolan)*
+
+## v1.5.1
+
+### Pull Requests
+
+- [#241](https://github.com/offirgolan/ember-light-table/pull/241)  [BUGFIX] Add safe checks to scroll logic  *by [Offir Golan](https://github.com/offirgolan)*
+
+## v1.5.0
+
+### Pull Requests
+
+- [#221](https://github.com/offirgolan/ember-light-table/pull/221)  [FEATURE] Add label to base column to be used in column types  *by [Offir Golan](https://github.com/offirgolan)*
+- [#228](https://github.com/offirgolan/ember-light-table/pull/228)  [FEATURE] ScrollTo and ScrollToRow  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#235](https://github.com/offirgolan/ember-light-table/pull/235)  [FEATURE] Responsive Columns  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.4.4
 
 ### Pull Requests

@@ -79,12 +79,21 @@
   float: right;
 }
 
+.ember-light-table .lt-column.is-draggable,
 .ember-light-table .lt-column.is-sortable {
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+
+.ember-light-table .lt-column.is-resizing {
+  pointer-events: none;
+}
+
+.ember-light-table.is-resizing {
+  cursor: col-resize;
 }
 
 .ember-light-table .lt-column .lt-column-resizer {

@@ -8,7 +8,6 @@ const {
   get,
   computed,
   isNone,
-  isEmpty,
   A: emberArray
 } = Ember;
 
@@ -95,22 +94,28 @@ export default class Table extends Ember.Object.extend({
   hiddenColumns: computed.filterBy('allColumns', 'hidden', true).readOnly(),
 
   /**
+   * @property responsiveHiddenColumns
+   * @type {Ember.Array}
+   */
+  responsiveHiddenColumns: computed.filterBy('allColumns', 'responsiveHidden', true).readOnly(),
+
+  /**
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: computed.filterBy('allColumns', 'hidden', false).readOnly(),
+  visibleColumns: computed.filterBy('allColumns', 'isHidden', false).readOnly(),
 
   /**
    * @property visibleColumnGroups
    * @type {Ember.Array}
    */
-  visibleColumnGroups: computed('columns.[]', 'columns.@each.{hidden,isVisibleGroupColumn}', function() {
-    return emberArray(this.get('columns').reduce((arr, c) => {
-      if (c.get('isVisibleGroupColumn') || (!c.get('isGroupColumn') && !c.get('hidden'))) {
-        arr.push(c);
+  visibleColumnGroups: computed('columns.[]', 'columns.@each.{isHidden,isVisibleGroupColumn}', function() {
+    return this.get('columns').reduce((arr, c) => {
+      if (c.get('isVisibleGroupColumn') || (!c.get('isGroupColumn') && !c.get('isHidden'))) {
+        arr.pushObject(c);
       }
       return arr;
-    }, []));
+    }, emberArray([]));
   }).readOnly(),
 
   /**
@@ -126,15 +131,10 @@ export default class Table extends Ember.Object.extend({
    * @type {Ember.Array}
    */
   allColumns: computed('columns.[]', 'columns.@each.subColumns', function() {
-    return emberArray(this.get('columns').reduce((arr, c) => {
-      let subColumns = c.get('subColumns');
-      if (isEmpty(subColumns)) {
-        arr.push(c);
-      } else {
-        subColumns.forEach((sc) => arr.push(sc));
-      }
+    return this.get('columns').reduce((arr, c) => {
+      arr.pushObjects(c.get('isGroupColumn') ? c.get('subColumns') : [c]);
       return arr;
-    }, []));
+    }, emberArray([]));
   }).readOnly()
 }) {
   /**

@@ -18,18 +18,38 @@
         {{#link-to 'index' tagName="li"}}
           {{link-to 'Home' 'index'}}
         {{/link-to}}
-        {{#link-to 'grouped' tagName="li"}}
-          {{link-to 'Grouped Columns' 'grouped'}}
+        {{#link-to 'responsive' tagName="li"}}
+          {{link-to 'Responsive' 'responsive'}}
         {{/link-to}}
-        {{#link-to 'resizable' tagName="li"}}
-          {{link-to 'Resizable Columns' 'resizable'}}
+        {{#link-to 'scrolling' tagName="li"}}
+          {{link-to 'Scrolling' 'scrolling'}}
         {{/link-to}}
-        {{#link-to 'expandable' tagName="li"}}
-          {{link-to 'Expandable Rows' 'expandable'}}
-        {{/link-to}}
-        {{#link-to 'selectable' tagName="li"}}
-          {{link-to 'Selectable Rows' 'selectable'}}
-        {{/link-to}}
+        <li class='dropdown'>
+          <a class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Columns <span class='fa fa-caret-down'></span></a>
+          <ul class='nav navbar-nav dropdown-menu'>
+            {{#link-to 'grouped' tagName="li"}}
+              {{link-to 'Grouped Columns' 'grouped'}}
+            {{/link-to}}
+            {{#link-to 'resizable' tagName="li"}}
+              {{link-to 'Resizable Columns' 'resizable'}}
+            {{/link-to}}
+            {{#link-to 'draggable' tagName="li"}}
+              {{link-to 'Draggable Columns' 'draggable'}}
+            {{/link-to}}
+          </ul>
+        </li>
+
+        <li class='dropdown'>
+          <a class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Rows <span class='fa fa-caret-down'></span></a>
+          <ul class='nav navbar-nav dropdown-menu'>
+            {{#link-to 'expandable' tagName="li"}}
+              {{link-to 'Expandable Rows' 'expandable'}}
+            {{/link-to}}
+            {{#link-to 'selectable' tagName="li"}}
+              {{link-to 'Selectable Rows' 'selectable'}}
+            {{/link-to}}
+          </ul>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="docs">Documentation</a></li>

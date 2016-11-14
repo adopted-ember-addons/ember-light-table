@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 const {
+  guidFor,
   isEmpty,
+  makeArray,
   computed,
   A: emberArray
 } = Ember;
@@ -12,6 +14,11 @@ const {
  */
 export default class Column extends Ember.Object.extend({
   /**
+   * Whether the column can be hidden.
+   *
+   * CSS Classes:
+   *  - `is-hideable`
+   *
    * @property hideable
    * @type {Boolean}
    * @default true
@@ -19,11 +26,25 @@ export default class Column extends Ember.Object.extend({
   hideable: true,
 
   /**
+   * Whether the column can is hidden.
+   *
+   * CSS Classes:
+   *  - `is-hidden`
+   *
    * @property hidden
    * @type {Boolean}
    * @default false
    */
   hidden: false,
+
+  /**
+   * If true, this column has been hidden due to the responsive behavior
+   *
+   * @property responsiveHidden
+   * @type {Boolean}
+   * @default false
+   */
+  responsiveHidden: false,
 
   /**
    * @property ascending
@@ -33,6 +54,11 @@ export default class Column extends Ember.Object.extend({
   ascending: true,
 
   /**
+   * Whether the column can be sorted.
+   *
+   * CSS Classes:
+   *  - `is-sortable`
+   *
    * @property sortable
    * @type {Boolean}
    * @default true
@@ -40,6 +66,12 @@ export default class Column extends Ember.Object.extend({
   sortable: true,
 
   /**
+   * Whether the column can be resized.
+   *
+   * CSS Classes:
+   *  - `is-resizable`
+   *  - `is-resizing`
+   *
    * @property resizable
    * @type {Boolean}
    * @default false
@@ -47,6 +79,36 @@ export default class Column extends Ember.Object.extend({
   resizable: false,
 
   /**
+   * Whether the column can be reorder via drag and drop.
+   *
+   * CSS Classes:
+   *  - `is-draggable`
+   *  - `is-dragging`
+   *  - `is-drag-target`
+   *    - `drag-left`
+   *    - `drag-right`
+   *
+   * @property draggable
+   * @type {Boolean}
+   * @default false
+   */
+  draggable: false,
+
+  /**
+   * Whether the column is a valid drop target.
+   *
+   * @property droppable
+   * @type {Boolean}
+   * @default true
+   */
+  droppable: true,
+
+  /**
+   * Whether the column is sorted.
+   *
+   * CSS Classes:
+   *  - `is-sorted`
+   *
    * @property sorted
    * @type {Boolean}
    * @default false
@@ -70,12 +132,41 @@ export default class Column extends Ember.Object.extend({
   align: 'left',
 
   /**
+   * The minimum width (in px) that this column can be resized to.
+   * @property minResizeWidth
+   * @type {Number}
+   * @default 0
+   */
+  minResizeWidth: 0,
+
+  /**
    * An array of sub columns to be grouped together
    * @property subColumns
    * @type {Array}
    * @optional
    */
   subColumns: null,
+
+  /**
+   * An array of media breakpoints that determine when this column will be shown
+   *
+   * If we have the following breakpoints defined in `app/breakpoints.js`:
+   *
+   * - mobile
+   * - tablet
+   * - desktop
+   *
+   * And we want to show this column only for tablet and desktop media, the following
+   * array should be specified: `['tablet', 'desktop']`.
+   *
+   * If this property is `null`, `undefined`, or `[]`, then this column will always
+   * be shown, regardless of the current media type.
+   *
+   * @property breakpoints
+   * @type {Array}
+   * @optional
+   */
+  breakpoints: null,
 
   /**
    * Type of column component
@@ -163,11 +254,41 @@ export default class Column extends Ember.Object.extend({
   cellClassNames: null,
 
   /**
-   * A format function used to calculate a cell's value
+   * A format function used to calculate a cell's value. This method will be passed
+   * the raw value if `valuePath` is specified.
+   *
    * @property format
    * @type {Function}
    */
   format: null,
+
+  /**
+   * Column's unique ID.
+   *
+   * @property columnId
+   * @type {String}
+   * @private
+   */
+  columnId: computed(function() {
+    return guidFor(this);
+  }).readOnly(),
+
+  /**
+   * A reference to the belonging column group. This will only have
+   * a value if this column is a sub column.
+   *
+   * @property format
+   * @type {Function}
+   * @private
+   */
+  _group: null,
+
+  /**
+   * True if `hidden` or `responsiveHidden` is true.
+   * @property isHidden
+   * @type {Boolean}
+   */
+  isHidden: computed.or('hidden', 'responsiveHidden').readOnly(),
 
   /**
    * @property isGroupColumn
@@ -181,8 +302,8 @@ export default class Column extends Ember.Object.extend({
    * @type {Boolean}
    * @private
    */
-  isVisibleGroupColumn: computed('visibleSubColumns.[]', 'hidden', function() {
-    return !isEmpty(this.get('visibleSubColumns')) && !this.get('hidden');
+  isVisibleGroupColumn: computed('visibleSubColumns.[]', 'isHidden', function() {
+    return !isEmpty(this.get('visibleSubColumns')) && !this.get('isHidden');
   }).readOnly(),
 
   /**
@@ -190,9 +311,11 @@ export default class Column extends Ember.Object.extend({
    * @type {Array}
    * @private
    */
-  visibleSubColumns: computed('subColumns.[]', 'subColumns.@each.hidden', 'hidden', function() {
+  visibleSubColumns: computed('subColumns.[]', 'subColumns.@each.isHidden', 'isHidden', function() {
     let subColumns = this.get('subColumns');
-    return isEmpty(subColumns) || this.get('hidden') ? [] : subColumns.filterBy('hidden', false);
+    let isHidden = this.get('isHidden');
+
+    return emberArray(isHidden ? [] : subColumns.filterBy('isHidden', false));
   }).readOnly()
 }) {
   /**
@@ -208,8 +331,11 @@ export default class Column extends Ember.Object.extend({
     super();
     this.setProperties(options);
 
-    if (!isEmpty(options.subColumns)) {
-      this.set('subColumns', emberArray(options.subColumns.map((sc) => new Column(sc))));
-    }
+    let { subColumns } = options;
+
+    subColumns = emberArray(makeArray(subColumns).map((sc) => new Column(sc)));
+    subColumns.setEach('_group', this);
+
+    this.set('subColumns', subColumns);
   }
 }

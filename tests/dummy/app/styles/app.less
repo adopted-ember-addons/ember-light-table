@@ -10,6 +10,10 @@ html,body {
   height: 100%;
 }
 
+label {
+  font-weight: 600;
+}
+
 .navbar.navbar-default {
   background-color: white;
   margin: 0;
@@ -163,6 +167,15 @@ html,body {
   border: 1px solid #ccc;
 }
 
+.row-toggle {
+  color: @accent-color;
+  cursor: pointer;
+
+  &:hover, &:active, &:focus {
+    color: darken(@accent-color, 5%)
+  }
+}
+
 .tip {
   text-align: center;
   font-size: 13px;
@@ -171,5 +184,33 @@ html,body {
   .icon-info {
     color: @accent-color;
     margin-right: 3px;
+  }
+}
+
+form .form-group {
+  input, select {
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 0 15px;
+    border: 1px solid #d9d9d9;
+    color: #6E6E6E;
+    font-family: 'Roboto', sans-serif;
+    -webkti-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: all 0.3s linear 0s;
+    box-shadow: none;
+
+    &:focus {
+      color: #333333;
+      border-color: #b9b9b9;
+      outline: none;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+    }
   }
 }

@@ -25,9 +25,12 @@
               resizeOnDrag=resizeOnDrag
               click=(action 'onColumnClick' column)
               doubleClick=(action 'onColumnDoubleClick' column)
-              columnResized=(action 'onColumnResized')}}
+              onColumnResized=(action 'onColumnResized')
+              onColumnDrag=(action 'onColumnDrag')
+              onColumnDrop=(action 'onColumnDrop')}}
           {{/each}}
         </tr>
+
         <tr>
           {{#each subColumns as |column|}}
             {{component (concat 'light-table/columns/' column.type) column
@@ -39,7 +42,9 @@
               resizeOnDrag=resizeOnDrag
               click=(action 'onColumnClick' column)
               doubleClick=(action 'onColumnDoubleClick' column)
-              columnResized=(action 'onColumnResized')}}
+              onColumnResized=(action 'onColumnResized')
+              onColumnDrag=(action 'onColumnDrag')
+              onColumnDrop=(action 'onColumnDrop')}}
           {{/each}}
         </tr>
       {{/if}}

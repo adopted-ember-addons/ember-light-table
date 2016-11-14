@@ -1,0 +1,32 @@
+{{!-- BEGIN-SNIPPET resizable-table --}}
+{{#light-table table height='65vh' as |t|}}
+
+  {{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    resizeOnDrag=true
+    fixed=true
+  }}
+
+  {{#t.body
+    canSelect=false
+    onScrolledToBottom=(action 'onScrolledToBottom')
+    as |body|
+  }}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
+  {{/t.body}}
+
+  {{t.foot
+    onColumnClick=(action 'onColumnClick')
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    resizeOnDrag=true
+    fixed=true
+  }}
+{{/light-table}}
+{{!-- END-SNIPPET --}}

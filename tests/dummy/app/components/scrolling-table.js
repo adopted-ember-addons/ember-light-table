@@ -1,11 +1,16 @@
+// BEGIN-SNIPPET scrolling-table
 import Ember from 'ember';
-import TableController from './table';
+import TableCommon from '../mixins/table-common';
 
 const {
   computed
 } = Ember;
 
-export default TableController.extend({
+export default Ember.Component.extend(TableCommon, {
+  currentScrollOffset: 0,
+  scrollTo: 0,
+  scrollToRow: null,
+
   columns: computed(function() {
     return [{
       label: 'Avatar',
@@ -16,25 +21,21 @@ export default TableController.extend({
     }, {
       label: 'First Name',
       valuePath: 'firstName',
-      resizable: true,
       width: '150px'
     }, {
       label: 'Last Name',
       valuePath: 'lastName',
-      resizable: true,
       width: '150px'
     }, {
       label: 'Address',
-      valuePath: 'address',
-      resizable: true
+      valuePath: 'address'
     }, {
       label: 'State',
-      valuePath: 'state',
-      resizable: true
+      valuePath: 'state'
     }, {
       label: 'Country',
-      valuePath: 'country',
-      resizable: true
+      valuePath: 'country'
     }];
   })
 });
+// END-SNIPPET

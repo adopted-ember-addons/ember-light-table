@@ -2,8 +2,11 @@ import Ember from 'ember';
 import layout from '../templates/components/lt-column-resizer';
 
 const {
-  $
+  $,
+  computed
 } = Ember;
+
+const TOP_LEVEL_CLASS = '.ember-light-table';
 
 export default Ember.Component.extend({
   layout,
@@ -14,6 +17,10 @@ export default Ember.Component.extend({
   isResizing: false,
   startWidth: null,
   startX: null,
+
+  $column: computed(function() {
+    return $(this.get('element')).parent('th');
+  }).volatile().readOnly(),
 
   didInsertElement() {
     this._super(...arguments);
@@ -41,16 +48,18 @@ export default Ember.Component.extend({
   },
 
   mouseDown(e) {
-    let $column = this._getColumn();
+    let $column = this.get('$column');
 
     e.preventDefault();
     e.stopPropagation();
 
     this.setProperties({
       isResizing: true,
-      startWidth: $column.width(),
+      startWidth: $column.outerWidth(),
       startX: e.pageX
     });
+
+    this.$().closest(TOP_LEVEL_CLASS).addClass('is-resizing');
   },
 
   _mouseUp(e) {
@@ -58,11 +67,14 @@ export default Ember.Component.extend({
       e.preventDefault();
       e.stopPropagation();
 
-      let $column = this._getColumn();
+      let $column = this.get('$column');
+      let width = `${$column.outerWidth()}px`;
 
       this.set('isResizing', false);
-      this.set('column.width', `${$column.width()}px`);
-      this.sendAction('columnResized', this.get('column.width'));
+      this.set('column.width', width);
+
+      this.sendAction('onColumnResized', width);
+      this.$().closest(TOP_LEVEL_CLASS).removeClass('is-resizing');
     }
   },
 
@@ -72,19 +84,21 @@ export default Ember.Component.extend({
       e.stopPropagation();
 
       let resizeOnDrag = this.get('resizeOnDrag');
-      let $column = this._getColumn();
+      let minResizeWidth = this.get('column.minResizeWidth');
       let { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
-      let width = startWidth + (e.pageX - startX);
+      let width = `${Math.max(startWidth + (e.pageX - startX), minResizeWidth)}px`;
+
+      let $column = this.get('$column');
+      let $index = this.get('table.visibleColumns').indexOf(this.get('column')) + 1;
+      let $table = this.$().closest(TOP_LEVEL_CLASS);
+
+      $column.outerWidth(width);
+      $(`thead td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(width);
+      $(`tfoot td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(width);
 
       if (resizeOnDrag) {
-        this.set('column.width', `${width}px`);
-      } else {
-        $column.width(`${width}px`);
+        $(`tbody td:nth-child(${$index})`, $table).outerWidth(width);
       }
     }
-  },
-
-  _getColumn() {
-    return $(this.get('element')).parent('th');
   }
 });

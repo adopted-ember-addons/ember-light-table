@@ -6,8 +6,8 @@
 [![Download Total](https://img.shields.io/npm/dt/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-light-table.svg)](https://emberobserver.com/addons/ember-light-table)
 [![Code Climate](https://codeclimate.com/github/offirgolan/ember-light-table/badges/gpa.svg)](https://codeclimate.com/github/offirgolan/ember-light-table)
-[![Test Coverage](https://codeclimate.com/github/offirgolan/ember-light-table/badges/coverage.svg)](https://codeclimate.com/github/offirgolan/ember-light-table/coverage)
-[![Dependency Status](https://david-dm.org/offirgolan/ember-light-table.svg)](https://david-dm.org/offirgolan/ember-light-table)
+[]([![Test Coverage](https://codeclimate.com/github/offirgolan/ember-light-table/badges/coverage.svg)](https://codeclimate.com/github/offirgolan/ember-light-table/coverage))
+[]([![Dependency Status](https://david-dm.org/offirgolan/ember-light-table.svg)](https://david-dm.org/offirgolan/ember-light-table))
 
 A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.
 
@@ -15,16 +15,19 @@ A lightweight contextual component based table addon that follows Ember's action
 
 - Custom component based column headers and cells
 - Infinite scroll support
-- Select & Multi-select
+- Select & Multi-select with keyboard support (CMD/CTRL, SHIFT)
 - Fixed header and footer
 - Grouped columns
 - Resizable columns
 - Expandable rows
+- Responsive
+- Scroll Tracking
 - Easy table manipulation
-- Easy override to table header and footer
+- Easy override to table header, body, and footer
 - Contextual component for header, body, and footer, as well as loading, no data, and expanded row
 
 ## Installation
+
 ```shell
 ember install ember-light-table
 ```

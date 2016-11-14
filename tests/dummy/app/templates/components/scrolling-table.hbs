@@ -1,0 +1,75 @@
+{{!-- BEGIN-SNIPPET scrolling --}}
+{{#light-table table height='65vh' as |t|}}
+
+  {{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    fixed=true
+  }}
+
+  {{#t.body
+    canSelect=false
+    scrollTo=scrollTo
+    scrollToRow=scrollToRow
+    onScroll=(action (mut currentScrollOffset))
+    onScrolledToBottom=(action 'onScrolledToBottom')
+    as |body|
+  }}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
+  {{/t.body}}
+
+  {{#t.foot fixed=true as |columns|}}
+    <tr>
+      <td colspan={{columns.length}}>
+        <form class="form-inline" onsubmit="return false;">
+          <div class="form-group">
+            <label>
+              Current Scroll Position:
+            </label>
+            <span class="form-control-static">
+              {{if (eq currentScrollOffset null) 'N/A' (concat currentScrollOffset 'px')}}
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="scrollTo">
+              Scroll To:
+            </label>
+            {{one-way-input
+              update=(action (mut scrollTo))
+              value=scrollTo
+              class="form-control"
+              name="scrollTo"
+              type="number"
+              min=0
+              step=10
+            }}
+          </div>
+
+          <div class="form-group">
+            <label for="scrollToRow">
+              Scroll To Row:
+            </label>
+            {{#one-way-select selectedValue
+              options=table.visibleRows
+              value=scrollToRow
+              update=(action (mut scrollToRow))
+              class="form-control"
+              name="scrollToRow"
+              as |row|
+            }}
+              {{row.id}} - {{row.firstName}} {{row.lastName}}
+            {{/one-way-select}}
+          </div>
+        </form>
+      </td>
+    </tr>
+  {{/t.foot}}
+
+{{/light-table}}
+{{!-- END-SNIPPET --}}
