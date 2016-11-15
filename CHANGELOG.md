@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.6.1
+
+### Pull Requests
+
+- [#266](https://github.com/offirgolan/ember-light-table/pull/266)  [BUGFIX] Require ember-scrollable@^0.3.5  *by [Jan Buschtöns](https://github.com/buschtoens)*
+
 ## v1.6.0
 
 ### Pull Requests
