@@ -59,6 +59,7 @@ export default Ember.Mixin.create({
         this.setProperties({
           dir: column.ascending ? 'asc' : 'desc',
           sort: column.get('valuePath'),
+          canLoadMore: true,
           page: 0
         });
         this.get('model').clear();
