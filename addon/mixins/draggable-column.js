@@ -44,7 +44,7 @@ export default Ember.Mixin.create({
     let column = this.get('column');
 
     e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', column.get('columnId'));
+    e.dataTransfer.setData('text', column.get('columnId'));
 
     sourceColumn = column;
     this.set('isDragging', true);
