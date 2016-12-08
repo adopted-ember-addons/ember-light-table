@@ -43,8 +43,11 @@ export default Ember.Mixin.create({
 
     let column = this.get('column');
 
+    /*
+      NOTE: IE requires setData type to be 'text'
+     */
+    e.dataTransfer.setData('text', column.get('columnId'));
     e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', column.get('columnId'));
 
     sourceColumn = column;
     this.set('isDragging', true);
