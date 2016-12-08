@@ -18,13 +18,17 @@ export default Component.extend(InViewportMixin, {
 
   didInsertElement() {
     this._super(...arguments);
+
+    let scrollBuffer = this.get('scrollBuffer');
+    let width = this.$().width();
+
     this.setProperties({
       viewportSpy: true,
       viewportTolerance: {
-        bottom: this.get('scrollBuffer'),
+        bottom: scrollBuffer,
         top: 0,
-        left: 0,
-        right: 0
+        left: width / 2,
+        right: width / 2
       }
     });
   },

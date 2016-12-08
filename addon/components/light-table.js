@@ -153,8 +153,60 @@ const LightTable = Component.extend({
     };
   }).readOnly(),
 
-  style: computed('height', function() {
-    return cssStyleify(this.getProperties(['height']));
+  visibleColumns: computed.readOnly('table.visibleColumns'),
+
+  /**
+   * Calculates the total width of the visible columns via their `width`
+   * propert.
+   *
+   * Returns 0 for the following conditions
+   *  - All widths are not set
+   *  - Widths are not the same unit
+   *  - Unit cannot be determined
+   *
+   * @property totalWidth
+   * @type {Number}
+   * @private
+   */
+  totalWidth: computed('visibleColumns.[]', 'visibleColumns.@each.width', function() {
+    let visibleColumns = this.get('visibleColumns');
+    let widths = visibleColumns.getEach('width');
+    let unit = (widths[0] || '').match(/\D+$/);
+    let totalWidth = 0;
+
+    if (isEmpty(unit)) {
+      return 0;
+    }
+
+    unit = unit[0];
+
+    /*
+      1. Check if all widths are present
+      2. Check if all widths are the same unit
+     */
+    for (let i = 0; i < widths.length; i++) {
+      let width = widths[i];
+
+      if (isNone(width) || width.indexOf(unit) === -1) {
+        return 0;
+      }
+
+      totalWidth += parseInt(width, 10);
+    }
+
+    return `${totalWidth}${unit}`;
+  }),
+
+  style: computed('totalWidth', 'height', function() {
+    let totalWidth = this.get('totalWidth');
+    let style = this.getProperties(['height']);
+
+    if (totalWidth) {
+      style.width = totalWidth;
+      style.overflowX = 'auto';
+    }
+
+    return cssStyleify(style);
   }),
 
   init() {

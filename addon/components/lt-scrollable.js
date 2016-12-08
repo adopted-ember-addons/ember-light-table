@@ -6,5 +6,7 @@ const {
 } = Ember;
 
 export default Component.extend({
-  layout
+  layout,
+  tagName: '',
+  virtualScrollbar: false
 });
