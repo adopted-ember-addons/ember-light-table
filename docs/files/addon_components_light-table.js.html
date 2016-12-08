@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.6.1" target="_blank">
-                                  Tag: v1.6.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.7.0" target="_blank">
+                                  Tag: v1.7.0
                                 </a>
                             </h4>
                         </div>
@@ -145,7 +145,6 @@ import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-light-table/templates/components/light-table&#x27;;
 import Table from &#x27;ember-light-table/classes/Table&#x27;;
 import cssStyleify from &#x27;ember-light-table/utils/css-styleify&#x27;;
-import callAction from &#x27;ember-light-table/utils/call-action&#x27;;
 
 const {
   assert,
@@ -296,8 +295,60 @@ const LightTable = Component.extend({
     };
   }).readOnly(),
 
-  style: computed(&#x27;height&#x27;, function() {
-    return cssStyleify(this.getProperties([&#x27;height&#x27;]));
+  visibleColumns: computed.readOnly(&#x27;table.visibleColumns&#x27;),
+
+  /**
+   * Calculates the total width of the visible columns via their &#x60;width&#x60;
+   * propert.
+   *
+   * Returns 0 for the following conditions
+   *  - All widths are not set
+   *  - Widths are not the same unit
+   *  - Unit cannot be determined
+   *
+   * @property totalWidth
+   * @type {Number}
+   * @private
+   */
+  totalWidth: computed(&#x27;visibleColumns.[]&#x27;, &#x27;visibleColumns.@each.width&#x27;, function() {
+    let visibleColumns = this.get(&#x27;visibleColumns&#x27;);
+    let widths = visibleColumns.getEach(&#x27;width&#x27;);
+    let unit = (widths[0] || &#x27;&#x27;).match(/\D+$/);
+    let totalWidth = 0;
+
+    if (isEmpty(unit)) {
+      return 0;
+    }
+
+    unit = unit[0];
+
+    /*
+      1. Check if all widths are present
+      2. Check if all widths are the same unit
+     */
+    for (let i = 0; i &lt; widths.length; i++) {
+      let width = widths[i];
+
+      if (isNone(width) || width.indexOf(unit) === -1) {
+        return 0;
+      }
+
+      totalWidth += parseInt(width, 10);
+    }
+
+    return &#x60;${totalWidth}${unit}&#x60;;
+  }),
+
+  style: computed(&#x27;totalWidth&#x27;, &#x27;height&#x27;, function() {
+    let totalWidth = this.get(&#x27;totalWidth&#x27;);
+    let style = this.getProperties([&#x27;height&#x27;]);
+
+    if (totalWidth) {
+      style.width = totalWidth;
+      style.overflowX = &#x27;auto&#x27;;
+    }
+
+    return cssStyleify(style);
   }),
 
   init() {
@@ -368,7 +419,7 @@ const LightTable = Component.extend({
      * @param  {Array} matches list of matching breakpoints
      */
     onBeforeResponsiveChange(/* matches */) {
-      callAction(this, &#x27;onBeforeResponsiveChange&#x27;, ...arguments);
+      this.sendAction(&#x27;onBeforeResponsiveChange&#x27;, ...arguments);
     },
 
     /**
@@ -379,7 +430,7 @@ const LightTable = Component.extend({
      * @param  {Array} matches list of matching breakpoints
      */
     onAfterResponsiveChange(/* matches */) {
-      callAction(this, &#x27;onAfterResponsiveChange&#x27;, ...arguments);
+      this.sendAction(&#x27;onAfterResponsiveChange&#x27;, ...arguments);
     }
   }
 });

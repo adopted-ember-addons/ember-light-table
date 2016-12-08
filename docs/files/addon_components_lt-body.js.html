@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.6.1" target="_blank">
-                                  Tag: v1.6.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.7.0" target="_blank">
+                                  Tag: v1.7.0
                                 </a>
                             </h4>
                         </div>
@@ -143,7 +143,6 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-light-table/templates/components/lt-body&#x27;;
-import callAction from &#x27;ember-light-table/utils/call-action&#x27;;
 import Row from &#x27;ember-light-table/classes/Row&#x27;;
 
 const {
@@ -552,7 +551,7 @@ export default Component.extend({
         }
       }
 
-      callAction(this, &#x27;onRowClick&#x27;, ...arguments);
+      this.sendAction(&#x27;onRowClick&#x27;, ...arguments);
     },
 
     /**
@@ -562,7 +561,7 @@ export default Component.extend({
      * @param  {Event}   event   The click event
      */
     onRowDoubleClick(/* row */) {
-      callAction(this, &#x27;onRowDoubleClick&#x27;, ...arguments);
+      this.sendAction(&#x27;onRowDoubleClick&#x27;, ...arguments);
     },
 
     /**
@@ -577,7 +576,7 @@ export default Component.extend({
      */
     onScroll(scrollOffset /* , event */) {
       this.set(&#x27;currentScrollOffset&#x27;, scrollOffset);
-      callAction(this, &#x27;onScroll&#x27;, ...arguments);
+      this.sendAction(&#x27;onScroll&#x27;, ...arguments);
     },
 
     /**
@@ -586,7 +585,7 @@ export default Component.extend({
      * @event onScrolledToBottom
      */
     onScrolledToBottom() {
-      callAction(this, &#x27;onScrolledToBottom&#x27;);
+      this.sendAction(&#x27;onScrolledToBottom&#x27;);
     }
   }
 });

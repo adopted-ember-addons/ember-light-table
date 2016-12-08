@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.6.1"
+        "version": "v1.7.0"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
@@ -160,7 +160,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "addon/mixins/table-header.js",
-            "line": 12,
+            "line": 11,
             "itemtype": "main"
         },
         "Cell Types": {
@@ -356,7 +356,7 @@
             "module": "Light Table",
             "namespace": "",
             "file": "addon/components/light-table.js",
-            "line": 30,
+            "line": 29,
             "description": "```hbs\n{{#light-table table as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nPlease see the documentation for the [Head](../classes/t.head.html), [Body](../classes/t.body.html), and [Foot](../classes/t.foot.html) components\nfor more details on all possible options and actions.",
             "mainName": "Components",
             "tag": "main",
@@ -374,7 +374,7 @@
             "module": "Light Table",
             "namespace": "",
             "file": "addon/components/lt-body.js",
-            "line": 17,
+            "line": 16,
             "description": "```hbs\n{{#light-table table as |t|}}\n  {{#t.body multiSelect=true onRowClick=(action 'rowClicked')}}\n    {{#body.expanded-row as |row|}}\n      Hello <b>{{row.firstName}}</b>\n    {{/body.expanded-row}}\n\n    {{#if isLoading}}\n      {{#body.loader}}\n        Loading...\n      {{/body.loader}}\n    {{/if}}\n\n    {{#if table.isEmpty}}\n      {{#body.no-data}}\n        No users found.\n      {{/body.no-data}}\n    {{/if}}\n  {{/t.body}}\n{{/light-table}}\n```"
         },
         "t.foot": {
@@ -425,7 +425,7 @@
             "module": "Light Table",
             "namespace": "",
             "file": "addon/mixins/table-header.js",
-            "line": 12,
+            "line": 11,
             "extends": "Ember.Mixin",
             "access": "private",
             "tagname": ""
@@ -1574,7 +1574,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 53,
+            "line": 52,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -1583,7 +1583,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 59,
+            "line": 58,
             "description": "This is used to propate custom user defined actions to custom cell and header components.\nAs an example, lets say I have a table with a column defined with `cellComponent: 'delete-user'`\n\n```hbs\n{{#light-table table tableActions=(hash\n  deleteUser=(action 'deleteUser')\n ) as |t|}}\n  {{t.head}}\n  {{t.body}}\n  {{t.foot}}\n{{/light-table}}\n```\n\nNow in the `delete-user` component, we can access that `deleteUser` action and pass it the\nrow object which will bubble all the way to where you defined that action.\n\n```hbs\n<button {{action tableActions.deleteUser row}}>Delete Me</button>\n```",
             "itemtype": "property",
             "name": "tableActions",
@@ -1593,7 +1593,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 86,
+            "line": 85,
             "description": "Table height.",
             "itemtype": "property",
             "name": "height",
@@ -1604,7 +1604,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 95,
+            "line": 94,
             "description": "Class names that will be added to all <table> tags",
             "itemtype": "property",
             "name": "tableClassNames",
@@ -1615,7 +1615,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 104,
+            "line": 103,
             "description": "Enable responsive behavior",
             "itemtype": "property",
             "name": "responsive",
@@ -1626,7 +1626,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 113,
+            "line": 112,
             "description": "A hash to determine the number of columns to show per given breakpoint.\nIf this is specified, it will override any column specific breakpoints.\n\nIf we have the following breakpoints defined in `app/breakpoints.js`:\n\n- mobile\n- tablet\n- desktop\n\nThe following hash can be passed in:\n\n```js\n{\n mobile: 2,\n tablet: 4\n}\n```\n\nIf there is no rule specified for a given breakpoint (i.e. `desktop`),\nall columns will be shown.",
             "itemtype": "property",
             "name": "breakpoints",
@@ -1637,7 +1637,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 141,
+            "line": 140,
             "description": "Table component shared options",
             "itemtype": "property",
             "name": "sharedOptions",
@@ -1649,7 +1649,19 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 220,
+            "line": 157,
+            "description": "Calculates the total width of the visible columns via their `width`\npropert.\n\nReturns 0 for the following conditions\n - All widths are not set\n - Widths are not the same unit\n - Unit cannot be determined",
+            "itemtype": "property",
+            "name": "totalWidth",
+            "type": "{Number}",
+            "access": "private",
+            "tagname": "",
+            "class": "light-table",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/light-table.js",
+            "line": 271,
             "description": "onBeforeResponsiveChange action.\nCalled before any column visibility is altered.",
             "itemtype": "event",
             "name": "onBeforeResponsiveChange",
@@ -1665,7 +1677,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 231,
+            "line": 282,
             "description": "onAfterResponsiveChange action.\nCalled after all column visibility has been altered.",
             "itemtype": "event",
             "name": "onAfterResponsiveChange",
@@ -1681,7 +1693,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 48,
+            "line": 47,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -1692,7 +1704,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 55,
+            "line": 54,
             "itemtype": "property",
             "name": "sharedOptions",
             "type": "{Object}",
@@ -1703,7 +1715,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 62,
+            "line": 61,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -1712,7 +1724,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 68,
+            "line": 67,
             "description": "Allows a user to select a row on click. All this will do is apply the necessary\nCSS classes and add the row to `table.selectedRows`. If `multiSelect` is disabled\nonly one row will be selected at a time.",
             "itemtype": "property",
             "name": "canSelect",
@@ -1723,7 +1735,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 79,
+            "line": 78,
             "description": "Allows for expanding row. This will create a new row under the row that was\nclicked with the template provided by `body.expanded-row`.\n\n```hbs\n{{#body.expanded-row as |row|}}\n This is the content of the expanded row for {{row.firstName}}\n{{/body.expanded-row}}\n```",
             "itemtype": "property",
             "name": "canExpand",
@@ -1734,7 +1746,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 95,
+            "line": 94,
             "description": "Allows a user to select multiple rows with the `ctrl`, `cmd`, and `shift` keys.\nThese rows can be easily accessed via `table.get('selectedRows')`",
             "itemtype": "property",
             "name": "multiSelect",
@@ -1745,7 +1757,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 105,
+            "line": 104,
             "description": "When multiSelect is true, this property determines whether or not `ctrl`\n(or `cmd`) is required to select additional rows, one by one. When false,\nsimply clicking on subsequent rows will select or deselect them.\n\n`shift` to select many consecutive rows is unaffected by this property.",
             "itemtype": "property",
             "name": "multiSelectRequiresKeyboard",
@@ -1756,7 +1768,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 118,
+            "line": 117,
             "description": "Hide scrollbar when not scrolling",
             "itemtype": "property",
             "name": "autoHideScrollbar",
@@ -1767,7 +1779,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 127,
+            "line": 126,
             "description": "Allows multiple rows to be expanded at once",
             "itemtype": "property",
             "name": "multiRowExpansion",
@@ -1778,7 +1790,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 136,
+            "line": 135,
             "description": "Expand a row on click",
             "itemtype": "property",
             "name": "expandOnClick",
@@ -1789,7 +1801,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 145,
+            "line": 144,
             "description": "If true, the body block will yield columns and rows, allowing you\nto define your own table body",
             "itemtype": "property",
             "name": "overwrite",
@@ -1800,7 +1812,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 155,
+            "line": 154,
             "description": "ID of main table component. Used to generate divs for ember-wormhole",
             "itemtype": "property",
             "name": "tableId",
@@ -1812,7 +1824,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 164,
+            "line": 163,
             "itemtype": "property",
             "name": "scrollBuffer",
             "type": "{Number}",
@@ -1822,7 +1834,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 171,
+            "line": 170,
             "itemtype": "property",
             "name": "useVirtualScrollbar",
             "type": "{Boolean}",
@@ -1834,7 +1846,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 179,
+            "line": 178,
             "description": "Set this property to scroll to a specific px offset.\n\nThis only works when `useVirtualScrollbar` is `true`, i.e. when you are\nusing fixed headers / footers.",
             "itemtype": "property",
             "name": "scrollTo",
@@ -1845,7 +1857,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 192,
+            "line": 191,
             "description": "Set this property to a `Row` to scroll that `Row` into view.\n\nThis only works when `useVirtualScrollbar` is `true`, i.e. when you are\nusing fixed headers / footers.",
             "itemtype": "property",
             "name": "scrollToRow",
@@ -1856,7 +1868,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 205,
+            "line": 204,
             "itemtype": "property",
             "name": "targetScrollOffset",
             "type": "{Number}",
@@ -1868,7 +1880,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 213,
+            "line": 212,
             "itemtype": "property",
             "name": "currentScrollOffset",
             "type": "{Number}",
@@ -1880,7 +1892,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 221,
+            "line": 220,
             "itemtype": "property",
             "name": "hasReachedTargetScrollOffset",
             "type": "{Boolean}",
@@ -1892,7 +1904,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 229,
+            "line": 228,
             "description": "Allows to customize the component used to render rows\n\n```hbs\n{{#light-table table as |t|}}\n   {{t.body rowComponent=(component 'my-row')}}\n{{/light-table}}\n```",
             "itemtype": "property",
             "name": "rowComponent",
@@ -1903,7 +1915,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 243,
+            "line": 242,
             "description": "Allows to customize the component used to render spanned rows\n\n```hbs\n{{#light-table table as |t|}}\n   {{t.body spannedRowComponent=(component 'my-spanned-row')}}\n{{/light-table}}\n```",
             "itemtype": "property",
             "name": "spannedRowComponent",
@@ -1914,7 +1926,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 257,
+            "line": 256,
             "description": "Allows to customize the component used to render infinite loader\n\n```hbs\n{{#light-table table as |t|}}\n   {{t.body infinityComponent=(component 'my-infinity')}}\n{{/light-table}}\n```",
             "itemtype": "property",
             "name": "infinityComponent",
@@ -1925,7 +1937,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 373,
+            "line": 372,
             "description": "onRowClick action. Handles selection, and row expansion.",
             "itemtype": "event",
             "name": "onRowClick",
@@ -1946,7 +1958,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 415,
+            "line": 414,
             "description": "onRowDoubleClick action.",
             "itemtype": "event",
             "name": "onRowDoubleClick",
@@ -1967,7 +1979,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 425,
+            "line": 424,
             "description": "onScroll action - sent when user scrolls\n\nThis only works when `useVirtualScrollbar` is `true`, i.e. when you are\nusing fixed headers / footers.",
             "itemtype": "event",
             "name": "onScroll",
@@ -1988,7 +2000,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 440,
+            "line": 439,
             "description": "onScrolledToBottom action - sent when user scrolls to the bottom",
             "itemtype": "event",
             "name": "onScrolledToBottom",
@@ -1997,7 +2009,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 19,
+            "line": 18,
             "itemtype": "property",
             "name": "table",
             "type": "{Table}",
@@ -2008,7 +2020,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 26,
+            "line": 25,
             "itemtype": "property",
             "name": "sharedOptions",
             "type": "{Object}",
@@ -2019,7 +2031,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 33,
+            "line": 32,
             "itemtype": "property",
             "name": "tableActions",
             "type": "{Object}",
@@ -2028,7 +2040,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 39,
+            "line": 38,
             "itemtype": "property",
             "name": "fixed",
             "type": "{Boolean}",
@@ -2038,7 +2050,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 46,
+            "line": 45,
             "itemtype": "property",
             "name": "sortOnClick",
             "type": "{Boolean}",
@@ -2048,7 +2060,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 53,
+            "line": 52,
             "itemtype": "property",
             "name": "multiColumnSort",
             "type": "{Boolean}",
@@ -2058,7 +2070,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 60,
+            "line": 59,
             "description": "Resize all cells in the column instead of just the header / footer",
             "itemtype": "property",
             "name": "resizeOnDrag",
@@ -2069,7 +2081,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 69,
+            "line": 68,
             "itemtype": "property",
             "name": "iconAscending",
             "type": "{String}",
@@ -2079,7 +2091,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 76,
+            "line": 75,
             "itemtype": "property",
             "name": "iconDescending",
             "type": "{String}",
@@ -2089,7 +2101,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 83,
+            "line": 82,
             "description": "ID of main table component. Used to generate divs for ember-wormhole",
             "type": "{String}",
             "class": "TableHeaderMixin",
@@ -2097,7 +2109,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 99,
+            "line": 98,
             "description": "onColumnClick action. Handles column sorting.",
             "itemtype": "event",
             "name": "onColumnClick",
@@ -2118,7 +2130,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 120,
+            "line": 119,
             "description": "onColumnDoubleClick action.",
             "itemtype": "event",
             "name": "onColumnDoubleClick",
@@ -2139,7 +2151,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 131,
+            "line": 130,
             "description": "onColumnResized action.",
             "itemtype": "event",
             "name": "onColumnResized",
@@ -2160,7 +2172,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 142,
+            "line": 141,
             "description": "onColumnDrag action.",
             "itemtype": "event",
             "name": "onColumnDrag",
@@ -2176,7 +2188,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 152,
+            "line": 151,
             "description": "onColumnDrop action.",
             "itemtype": "event",
             "name": "onColumnDrop",
@@ -2199,7 +2211,7 @@
     "warnings": [
         {
             "message": "Missing item type\nID of main table component. Used to generate divs for ember-wormhole",
-            "line": " addon/mixins/table-header.js:83"
+            "line": " addon/mixins/table-header.js:82"
         }
     ]
 }
