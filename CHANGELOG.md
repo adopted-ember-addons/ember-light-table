@@ -1,6 +1,13 @@
 Changelog
 =========
 
+## v1.7.0
+
+### Pull Requests
+
+- [#222](https://github.com/offirgolan/ember-light-table/pull/222)  [FEATURE] Support horizontal scrolling  *by [Offir Golan](https://github.com/offirgolan)*
+- [#281](https://github.com/offirgolan/ember-light-table/pull/281)  [BUGFIX] Resolve IE drag and drop crashes  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.6.1
 
 ### Pull Requests
