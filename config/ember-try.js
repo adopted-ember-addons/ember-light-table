@@ -18,10 +18,8 @@ module.exports = {
       }
     }
   }, {
-  }, {
     name: 'ember-2.6.2',
     allowedToFail: true
-  }, {
   }, {
     name: 'ember-2.7.3',
     allowedToFail: true
