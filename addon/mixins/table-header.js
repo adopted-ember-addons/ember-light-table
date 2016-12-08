@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import callAction from 'ember-light-table/utils/call-action';
 
 const {
   computed
@@ -114,7 +113,7 @@ export default Ember.Mixin.create({
           column.set('sorted', true);
         }
       }
-      callAction(this, 'onColumnClick', ...arguments);
+      this.sendAction('onColumnClick', ...arguments);
     },
 
     /**
@@ -125,7 +124,7 @@ export default Ember.Mixin.create({
      * @param  {Event} event   The click event
      */
     onColumnDoubleClick(/* column */) {
-      callAction(this, 'onColumnDoubleClick', ...arguments);
+      this.sendAction('onColumnDoubleClick', ...arguments);
     },
 
     /**
@@ -136,7 +135,7 @@ export default Ember.Mixin.create({
      * @param  {String} width  The final width of the column
      */
     onColumnResized(/* column, width */) {
-      callAction(this, 'onColumnResized', ...arguments);
+      this.sendAction('onColumnResized', ...arguments);
     },
 
     /**
@@ -146,7 +145,7 @@ export default Ember.Mixin.create({
      * @param  {Column} column The column that is being dragged
      */
     onColumnDrag(/* column */) {
-      callAction(this, 'onColumnDrag', ...arguments);
+      this.sendAction('onColumnDrag', ...arguments);
     },
 
     /**
@@ -157,7 +156,7 @@ export default Ember.Mixin.create({
      * @param  {Boolean} isSuccess The column was successfully dropped and sorted
      */
     onColumnDrop(/* column, isSuccess */) {
-      callAction(this, 'onColumnDrop', ...arguments);
+      this.sendAction('onColumnDrop', ...arguments);
     }
   }
 });

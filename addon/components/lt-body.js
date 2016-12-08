@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/lt-body';
-import callAction from 'ember-light-table/utils/call-action';
 import Row from 'ember-light-table/classes/Row';
 
 const {
@@ -409,7 +408,7 @@ export default Component.extend({
         }
       }
 
-      callAction(this, 'onRowClick', ...arguments);
+      this.sendAction('onRowClick', ...arguments);
     },
 
     /**
@@ -419,7 +418,7 @@ export default Component.extend({
      * @param  {Event}   event   The click event
      */
     onRowDoubleClick(/* row */) {
-      callAction(this, 'onRowDoubleClick', ...arguments);
+      this.sendAction('onRowDoubleClick', ...arguments);
     },
 
     /**
@@ -434,7 +433,7 @@ export default Component.extend({
      */
     onScroll(scrollOffset /* , event */) {
       this.set('currentScrollOffset', scrollOffset);
-      callAction(this, 'onScroll', ...arguments);
+      this.sendAction('onScroll', ...arguments);
     },
 
     /**
@@ -443,7 +442,7 @@ export default Component.extend({
      * @event onScrolledToBottom
      */
     onScrolledToBottom() {
-      callAction(this, 'onScrolledToBottom');
+      this.sendAction('onScrolledToBottom');
     }
   }
 });

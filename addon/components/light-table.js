@@ -2,7 +2,6 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/light-table';
 import Table from 'ember-light-table/classes/Table';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
-import callAction from 'ember-light-table/utils/call-action';
 
 const {
   assert,
@@ -277,7 +276,7 @@ const LightTable = Component.extend({
      * @param  {Array} matches list of matching breakpoints
      */
     onBeforeResponsiveChange(/* matches */) {
-      callAction(this, 'onBeforeResponsiveChange', ...arguments);
+      this.sendAction('onBeforeResponsiveChange', ...arguments);
     },
 
     /**
@@ -288,7 +287,7 @@ const LightTable = Component.extend({
      * @param  {Array} matches list of matching breakpoints
      */
     onAfterResponsiveChange(/* matches */) {
-      callAction(this, 'onAfterResponsiveChange', ...arguments);
+      this.sendAction('onAfterResponsiveChange', ...arguments);
     }
   }
 });
