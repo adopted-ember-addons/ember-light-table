@@ -1,31 +1,35 @@
 /*jshint node:true*/
+
 module.exports = {
-  command: 'ember test',
+  useVersionCompatibility: true,
   scenarios: [{
     name: 'default',
     bower: {
       dependencies: {}
     }
   }, {
-    name: 'ember-2.3',
+    name: 'ember-lts-2.4',
     bower: {
       dependencies: {
-        'ember': '~2.3.0'
+        'ember': 'components/ember#lts-2-4'
+      },
+      resolutions: {
+        'ember': 'lts-2-4'
       }
     }
   }, {
-    name: 'ember-2.4',
-    bower: {
-      dependencies: {
-        'ember': '~2.4.0'
-      }
-    }
+  }, {
+    name: 'ember-2.6.2',
+    allowedToFail: true
+  }, {
+  }, {
+    name: 'ember-2.7.3',
+    allowedToFail: true
   }, {
     name: 'ember-release',
     bower: {
       dependencies: {
-        'ember': 'components/ember#release',
-        'ember-data': 'components/ember-data#release'
+        'ember': 'components/ember#release'
       },
       resolutions: {
         'ember': 'release'
@@ -33,6 +37,7 @@ module.exports = {
     }
   }, {
     name: 'ember-beta',
+    allowedToFail: true,
     bower: {
       dependencies: {
         'ember': 'components/ember#beta'
@@ -43,6 +48,7 @@ module.exports = {
     }
   }, {
     name: 'ember-canary',
+    allowedToFail: true,
     bower: {
       dependencies: {
         'ember': 'components/ember#canary'

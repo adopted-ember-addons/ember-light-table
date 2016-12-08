@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "0.12"
+  - "4"
 
 sudo: required
 dist: trusty
@@ -19,19 +19,8 @@ addons:
     packages:
       - google-chrome-stable
 
-env:
-  - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-2.3
-  - EMBER_TRY_SCENARIO=ember-2.4
-  - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
-
 matrix:
   fast_finish: true
-  allow_failures:
-    - env: EMBER_TRY_SCENARIO=ember-beta
-    - env: EMBER_TRY_SCENARIO=ember-canary
 
 before_install:
   - export DISPLAY=:99.0
@@ -47,7 +36,7 @@ install:
   - bower install
 
 script:
-  - ember try:one $EMBER_TRY_SCENARIO --- ember test
+  - COVERAGE=true ember try:each
 
 after_script:
   - codeclimate-test-reporter < coverage/lcov.info

@@ -1,3 +1,4 @@
+// jscs: disable
 import Ember from 'ember';
 import MediaService from 'ember-responsive/media';
 
@@ -15,9 +16,9 @@ MediaService.reopen({
   _forceSetBreakpoint(breakpoint) {
     let found = false;
 
-    let props = {};
+    const props = {};
     this.get('_breakpointArr').forEach(function(bp) {
-      let val = bp === breakpoint;
+      const val = bp === breakpoint;
       if (val) {
         found = true;
       }
@@ -45,14 +46,15 @@ MediaService.reopen({
 
 export default Ember.Test.registerAsyncHelper('setBreakpoint', function(app, breakpoint) {
   // this should use getOwner once that's supported
-  let mediaService = app.__deprecatedInstance__.lookup('service:media');
+  const mediaService = app.__deprecatedInstance__.lookup('service:media');
   mediaService._forceSetBreakpoint(breakpoint);
 });
 
 export function setBreakpointForIntegrationTest(container, breakpoint) {
-  let mediaService = getOwner(container).lookup('service:media');
+  const mediaService = getOwner(container).lookup('service:media');
   mediaService._forceSetBreakpoint(breakpoint);
   container.set('media', mediaService);
 
   return mediaService;
 }
+// jscs: enable
