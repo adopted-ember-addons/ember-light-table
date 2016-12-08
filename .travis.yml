@@ -38,7 +38,7 @@ install:
   - bower install
 
 script:
-  - COVERAGE=true ember try:each
+  - ember try:each
 
 after_script:
   - codeclimate-test-reporter < coverage/lcov.info
