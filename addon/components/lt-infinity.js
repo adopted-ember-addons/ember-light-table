@@ -25,10 +25,10 @@ export default Component.extend(InViewportMixin, {
     this.setProperties({
       viewportSpy: true,
       viewportTolerance: {
+        left: width,
+        right: width,
         bottom: scrollBuffer,
-        top: 0,
-        left: width / 2,
-        right: width / 2
+        top: 0
       }
     });
   },
