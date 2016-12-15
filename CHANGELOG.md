@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.7.1
+
+### Pull Requests
+
+- [#286](https://github.com/offirgolan/ember-light-table/pull/286)  [BUGFIX] In viewport left/right tolerance adjustment  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.7.0
 
 ### Pull Requests
