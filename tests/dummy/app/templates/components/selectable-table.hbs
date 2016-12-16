@@ -1,11 +1,13 @@
 {{!-- BEGIN-SNIPPET selectable-table --}}
 {{#ember-wormhole to="table-actions"}}
-  {{#if hasSelection}}
-    <div class="table-action fa fa-check-square-o" title="Deselect all" {{action 'deselectAll'}}></div>
-    <div class="table-action fa fa-trash-o delete" title="Delete selected" {{action 'deleteAll'}}></div>
-  {{else}}
-    <div class="table-action fa fa-square-o" title="Select all" {{action 'selectAll'}}></div>
-  {{/if}}
+  <div>
+    {{#if hasSelection}}
+      <div class="table-action fa fa-check-square-o" title="Deselect all" {{action 'deselectAll'}}></div>
+      <div class="table-action fa fa-trash-o delete" title="Delete selected" {{action 'deleteAll'}}></div>
+    {{else}}
+      <div class="table-action fa fa-square-o" title="Select all" {{action 'selectAll'}}></div>
+    {{/if}}
+  </div>
 {{/ember-wormhole}}
 
 {{#light-table table height='65vh' as |t|}}
