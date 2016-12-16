@@ -76,6 +76,17 @@ export default Component.extend({
   canSelect: true,
 
   /**
+   * Select a row on click. If this is set to `false` and multiSelect is
+   * enabled, using click + `shift`, `cmd`, or `ctrl` will still work as
+   * intended, while clicking on the row will not set the row as selected.
+   *
+   * @property selectOnClick
+   * @type {Boolean}
+   * @default true
+   */
+  selectOnClick: true,
+
+  /**
    * Allows for expanding row. This will create a new row under the row that was
    * clicked with the template provided by `body.expanded-row`.
    *
@@ -271,7 +282,6 @@ export default Component.extend({
   columns: computed.readOnly('table.visibleColumns'),
   colspan: computed.readOnly('columns.length'),
 
-  _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
 
   init() {
@@ -357,10 +367,10 @@ export default Component.extend({
   },
 
   toggleExpandedRow(row) {
-    let multi = this.get('multiRowExpansion');
+    let multiRowExpansion = this.get('multiRowExpansion');
     let shouldExpand = !row.expanded;
 
-    if (multi) {
+    if (multiRowExpansion) {
       row.toggleProperty('expanded');
     } else {
       this.get('table.expandedRows').setEach('expanded', false);
@@ -380,32 +390,38 @@ export default Component.extend({
       let multiSelect = this.get('multiSelect');
       let multiSelectRequiresKeyboard = this.get('multiSelectRequiresKeyboard');
       let canSelect = this.get('canSelect');
+      let selectOnClick = this.get('selectOnClick');
+      let canExpand = this.get('canExpand');
+      let expandOnClick = this.get('expandOnClick');
       let isSelected = row.get('selected');
       let currIndex = rows.indexOf(row);
       let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
 
-      this._currSelectedIndex = currIndex;
-      this._prevSelectedIndex = prevIndex;
+      this._prevSelectedIndex = currIndex;
+
+      let toggleExpandedRow = () => {
+        if (canExpand && expandOnClick) {
+          this.toggleExpandedRow(row);
+        }
+      };
 
       if (canSelect) {
         if (e.shiftKey && multiSelect) {
-          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach((r) => r.set('selected', !isSelected));
-          this._prevSelectedIndex = currIndex;
+          rows
+            .slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1)
+            .forEach((r) => r.set('selected', !isSelected));
         } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) && multiSelect) {
           row.toggleProperty('selected');
         } else {
-          this.get('table.selectedRows').setEach('selected', false);
-          row.set('selected', !isSelected);
-
-          if (this.get('canExpand') && this.get('expandOnClick')) {
-            this.toggleExpandedRow(row);
+          if (selectOnClick) {
+            this.get('table.selectedRows').setEach('selected', false);
+            row.set('selected', !isSelected);
           }
+
+          toggleExpandedRow();
         }
-        this._prevSelectedIndex = currIndex;
       } else {
-        if (this.get('canExpand') && this.get('expandOnClick')) {
-          this.toggleExpandedRow(row);
-        }
+        toggleExpandedRow();
       }
 
       this.sendAction('onRowClick', ...arguments);
