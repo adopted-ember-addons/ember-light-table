@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.7.1" target="_blank">
-                                  Tag: v1.7.1
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.8.0" target="_blank">
+                                  Tag: v1.8.0
                                 </a>
                             </h4>
                         </div>
@@ -217,6 +217,17 @@ export default Component.extend({
    * @default true
    */
   canSelect: true,
+
+  /**
+   * Select a row on click. If this is set to &#x60;false&#x60; and multiSelect is
+   * enabled, using click + &#x60;shift&#x60;, &#x60;cmd&#x60;, or &#x60;ctrl&#x60; will still work as
+   * intended, while clicking on the row will not set the row as selected.
+   *
+   * @property selectOnClick
+   * @type {Boolean}
+   * @default true
+   */
+  selectOnClick: true,
 
   /**
    * Allows for expanding row. This will create a new row under the row that was
@@ -414,7 +425,6 @@ export default Component.extend({
   columns: computed.readOnly(&#x27;table.visibleColumns&#x27;),
   colspan: computed.readOnly(&#x27;columns.length&#x27;),
 
-  _currSelectedIndex: -1,
   _prevSelectedIndex: -1,
 
   init() {
@@ -500,10 +510,10 @@ export default Component.extend({
   },
 
   toggleExpandedRow(row) {
-    let multi = this.get(&#x27;multiRowExpansion&#x27;);
+    let multiRowExpansion = this.get(&#x27;multiRowExpansion&#x27;);
     let shouldExpand = !row.expanded;
 
-    if (multi) {
+    if (multiRowExpansion) {
       row.toggleProperty(&#x27;expanded&#x27;);
     } else {
       this.get(&#x27;table.expandedRows&#x27;).setEach(&#x27;expanded&#x27;, false);
@@ -523,32 +533,38 @@ export default Component.extend({
       let multiSelect = this.get(&#x27;multiSelect&#x27;);
       let multiSelectRequiresKeyboard = this.get(&#x27;multiSelectRequiresKeyboard&#x27;);
       let canSelect = this.get(&#x27;canSelect&#x27;);
+      let selectOnClick = this.get(&#x27;selectOnClick&#x27;);
+      let canExpand = this.get(&#x27;canExpand&#x27;);
+      let expandOnClick = this.get(&#x27;expandOnClick&#x27;);
       let isSelected = row.get(&#x27;selected&#x27;);
       let currIndex = rows.indexOf(row);
       let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
 
-      this._currSelectedIndex = currIndex;
-      this._prevSelectedIndex = prevIndex;
+      this._prevSelectedIndex = currIndex;
+
+      let toggleExpandedRow = () =&gt; {
+        if (canExpand &amp;&amp; expandOnClick) {
+          this.toggleExpandedRow(row);
+        }
+      };
 
       if (canSelect) {
         if (e.shiftKey &amp;&amp; multiSelect) {
-          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach((r) =&gt; r.set(&#x27;selected&#x27;, !isSelected));
-          this._prevSelectedIndex = currIndex;
+          rows
+            .slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1)
+            .forEach((r) =&gt; r.set(&#x27;selected&#x27;, !isSelected));
         } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) &amp;&amp; multiSelect) {
           row.toggleProperty(&#x27;selected&#x27;);
         } else {
-          this.get(&#x27;table.selectedRows&#x27;).setEach(&#x27;selected&#x27;, false);
-          row.set(&#x27;selected&#x27;, !isSelected);
-
-          if (this.get(&#x27;canExpand&#x27;) &amp;&amp; this.get(&#x27;expandOnClick&#x27;)) {
-            this.toggleExpandedRow(row);
+          if (selectOnClick) {
+            this.get(&#x27;table.selectedRows&#x27;).setEach(&#x27;selected&#x27;, false);
+            row.set(&#x27;selected&#x27;, !isSelected);
           }
+
+          toggleExpandedRow();
         }
-        this._prevSelectedIndex = currIndex;
       } else {
-        if (this.get(&#x27;canExpand&#x27;) &amp;&amp; this.get(&#x27;expandOnClick&#x27;)) {
-          this.toggleExpandedRow(row);
-        }
+        toggleExpandedRow();
       }
 
       this.sendAction(&#x27;onRowClick&#x27;, ...arguments);
