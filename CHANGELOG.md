@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.8.0
+
+### Pull Requests
+
+- [#290](https://github.com/offirgolan/ember-light-table/pull/290)  [FEATURE] Add selectOnClick option  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## v1.7.1
 
 ### Pull Requests
