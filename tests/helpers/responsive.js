@@ -2,7 +2,9 @@
 import Ember from 'ember';
 import MediaService from 'ember-responsive/media';
 
-const { K, getOwner } = Ember;
+const {
+  getOwner
+} = Ember;
 const { classify } = Ember.String;
 
 MediaService.reopen({
@@ -35,7 +37,7 @@ MediaService.reopen({
     }
   },
 
-  match: K, // do not set up listeners in test
+  match() {}, // do not set up listeners in test
 
   init() {
     this._super(...arguments);
