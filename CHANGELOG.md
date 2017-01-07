@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.8.1
+
+### Pull Requests
+- [#303](https://github.com/offirgolan/ember-light-table/pull/303)  Remove deprecated Ember.K  *by [cibernox](https://github.com/cibernox)*
+- [#308](https://github.com/offirgolan/ember-light-table/pull/308)  Update ember-in-viewport to the latest version 🚀  *by [Offir Golan](https://github.com/offirgolan/greenkeeper)*
+
 ## v1.8.0
 
 ### Pull Requests
