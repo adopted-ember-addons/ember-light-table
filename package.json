@@ -52,7 +52,7 @@
     "ember-one-way-controls": "2.0.0",
     "ember-owner-test-utils": "0.1.1",
     "ember-resolver": "^2.0.3",
-    "ember-responsive": "2.0.0",
+    "ember-responsive": "2.0.1",
     "ember-suave": "4.0.1",
     "ember-truth-helpers": "1.3.0",
     "loader.js": "^4.0.10",
