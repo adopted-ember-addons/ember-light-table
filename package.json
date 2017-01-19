@@ -33,7 +33,7 @@
     "ember-cli-es5-shim": "0.3.0",
     "ember-cli-github-pages": "^0.1.0",
     "ember-cli-htmlbars-inline-precompile": "^0.3.3",
-    "ember-cli-inject-live-reload": "^1.4.1",
+    "ember-cli-inject-live-reload": "^1.6.1",
     "ember-cli-jshint": "^2.0.1",
     "ember-cli-less": "1.5.3",
     "ember-cli-mirage": "0.2.4",
