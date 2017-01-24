@@ -68,7 +68,7 @@
     "ember-composable-helpers": "^1.1.2",
     "ember-get-config": "0.2.0",
     "ember-in-viewport": "2.1.1",
-    "ember-scrollable": "^0.3.5",
+    "ember-scrollable": "^0.3.6",
     "ember-truth-helpers": "1.2.0",
     "ember-wormhole": "^0.5.1"
   },
