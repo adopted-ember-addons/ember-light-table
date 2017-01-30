@@ -1,6 +1,6 @@
 {
   "name": "ember-light-table",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Lightweight, component based table for Ember 2.x",
   "homepage": "https://github.com/offirgolan/ember-light-table",
   "directories": {
@@ -23,7 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.5.0",
-    "ember-ajax": "2.5.3",
+    "ember-ajax": "2.5.4",
     "ember-cli": "^2.10.0",
     "ember-cli-app-version": "^2.0.0",
     "ember-cli-autoprefixer": "0.6.0",
@@ -36,7 +36,7 @@
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-jshint": "^2.0.1",
     "ember-cli-less": "1.5.3",
-    "ember-cli-mirage": "0.2.4",
+    "ember-cli-mirage": "0.2.5",
     "ember-cli-qunit": "^3.0.2",
     "ember-cli-release": "1.0.0-beta.2",
     "ember-cli-sri": "^2.1.0",
@@ -68,7 +68,7 @@
     "ember-composable-helpers": "^1.1.2",
     "ember-get-config": "0.2.0",
     "ember-in-viewport": "2.1.1",
-    "ember-scrollable": "^0.3.5",
+    "ember-scrollable": "^0.4.0",
     "ember-truth-helpers": "1.2.0",
     "ember-wormhole": "^0.5.1"
   },
