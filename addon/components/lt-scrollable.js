@@ -8,5 +8,6 @@ const {
 export default Component.extend({
   layout,
   tagName: '',
-  virtualScrollbar: false
+  vertical: true,
+  horizontal: false
 });
