@@ -1,6 +1,16 @@
 Changelog
 =========
 
+## v1.8.2
+
+### Pull Requests
+
+- [#321](https://github.com/offirgolan/ember-light-table/pull/321)  Update ember-scrollable to the latest version 🚀  *by [Offir Golan](https://github.com/offirgolan/greenkeeper)*
+
+#### Commits
+
+- [e2438a50](https://github.com/offirgolan/ember-light-table/commit/e2438a508e890ee7ccce7a02fde9654c047ebee8) **fix(package)**: update ember-scrollable to version 0.4.0 *by [greenkeeper[bot]](https://github.com/greenkeeper[bot])*
+
 ## v1.8.1
 
 ### Pull Requests
