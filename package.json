@@ -63,7 +63,7 @@
     "table"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.7",
+    "ember-cli-babel": "5.2.1",
     "ember-cli-htmlbars": "^1.0.11",
     "ember-composable-helpers": "^1.1.2",
     "ember-get-config": "0.2.0",
