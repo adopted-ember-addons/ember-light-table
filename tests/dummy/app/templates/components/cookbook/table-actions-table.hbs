@@ -1,0 +1,27 @@
+{{!-- BEGIN-SNIPPET table-actions-table --}}
+{{#light-table table height='65vh' tableActions=(hash
+  deleteUser=(action 'deleteUser')
+  notifyUser=(action 'notifyUser')
+) as |t|}}
+
+  {{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    fixed=true
+  }}
+
+  {{#t.body
+    canSelect=false
+    onScrolledToBottom=(action 'onScrolledToBottom')
+    as |body|
+  }}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
+  {{/t.body}}
+
+{{/light-table}}
+{{!-- END-SNIPPET --}}

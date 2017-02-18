@@ -25,6 +25,7 @@ Router.map(function() {
     this.route('client-side');
     this.route('pagination');
     this.route('custom-row');
+    this.route('table-actions');
   });
 });
 

@@ -21,7 +21,7 @@ export default Ember.Component.extend(TableCommon, {
     return [`${this.get('sort')}:${this.get('dir')}`];
   }).readOnly(),
 
-  // Filter Logic
+  // Filter Input Setup
   selectedFilter: computed.oneWay('possibleFilters.firstObject'),
   possibleFilters: computed('table.columns', function() {
     return this.get('table.columns').filterBy('sortable', true);
@@ -67,8 +67,8 @@ export default Ember.Component.extend(TableCommon, {
     this.get('table').setRows(rows);
   }).restartable(),
 
-  filterAndSortModel: task(function*(timeoutMs = 200) {
-    yield timeout(timeoutMs); // debounce
+  filterAndSortModel: task(function*(debounceMs = 200) {
+    yield timeout(debounceMs); // debounce
 
     let query = this.get('query');
     let model = this.get('sortedModel');
