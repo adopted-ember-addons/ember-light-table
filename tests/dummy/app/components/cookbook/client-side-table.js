@@ -8,8 +8,6 @@ const {
 } = Ember;
 
 export default Ember.Component.extend(TableCommon, {
-  page: 1,
-  limit: 100,
   query: '',
 
   // No need for `enableSync` here
@@ -57,7 +55,7 @@ export default Ember.Component.extend(TableCommon, {
   }),
 
   fetchRecords: task(function*() {
-    let records = yield this.get('store').query('user', this.getProperties(['page', 'limit']));
+    let records = yield this.get('store').query('user', { page: 1, limit: 100 });
     this.get('model').setObjects(records.toArray());
     this.set('meta', records.get('meta'));
     yield this.get('filterAndSortModel').perform();

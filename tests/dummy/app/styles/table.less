@@ -65,11 +65,11 @@
     height: 50px;
 
     &.is-selected {
-      background-color: #DEDEDE !important;
+      background-color: #DEDEDE;
     }
 
     &:not(.is-selected):hover {
-      background-color: #F5F4F4 !important;
+      background-color: #F5F4F4;
     }
 
     &:last-of-type {
@@ -80,10 +80,18 @@
 
     &.lt-expanded-row, &.lt-no-data {
       &:hover {
-        background-color: transparent !important;
+        background-color: transparent;
       }
       td {
         padding: 15px;
+      }
+    }
+
+    &.colored-row {
+      color: white;
+
+      &:hover {
+        opacity: 0.8;
       }
     }
 
