@@ -17,5 +17,6 @@ export default Mirage.Factory.extend({
   email: faker.internet.email,
   username: faker.internet.userName,
   avatar: faker.internet.avatar,
-  bio: faker.lorem.paragraph
+  bio: faker.lorem.paragraph,
+  color: faker.internet.color
 });

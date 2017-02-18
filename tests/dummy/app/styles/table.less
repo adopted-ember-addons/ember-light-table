@@ -109,4 +109,22 @@ tfoot {
     display: flex;
     justify-content: space-between;
   }
+
+  .pagination {
+    margin: 5px 0;
+    li > a {
+      color: darken(@accent-color, 5%);
+    }
+
+    li > a:hover,
+    li > a:focus,
+    li.active > a:hover,
+    li.active > a:focus,
+    li.active > a {
+      color: white;
+      background: darken(@accent-color, 10%);
+      border-color: darken(@accent-color, 15%);
+
+    }
+  }
 }
