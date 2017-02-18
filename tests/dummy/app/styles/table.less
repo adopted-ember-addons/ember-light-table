@@ -65,11 +65,11 @@
     height: 50px;
 
     &.is-selected {
-      background-color: #DEDEDE !important;
+      background-color: #DEDEDE;
     }
 
     &:not(.is-selected):hover {
-      background-color: #F5F4F4 !important;
+      background-color: #F5F4F4;
     }
 
     &:last-of-type {
@@ -80,10 +80,18 @@
 
     &.lt-expanded-row, &.lt-no-data {
       &:hover {
-        background-color: transparent !important;
+        background-color: transparent;
       }
       td {
         padding: 15px;
+      }
+    }
+
+    &.colored-row {
+      color: white;
+
+      &:hover {
+        opacity: 0.8;
       }
     }
 
@@ -108,5 +116,23 @@ tfoot {
   form {
     display: flex;
     justify-content: space-between;
+  }
+
+  .pagination {
+    margin: 5px 0;
+    li > a {
+      color: darken(@accent-color, 5%);
+    }
+
+    li > a:hover,
+    li > a:focus,
+    li.active > a:hover,
+    li.active > a:focus,
+    li.active > a {
+      color: white;
+      background: darken(@accent-color, 10%);
+      border-color: darken(@accent-color, 15%);
+
+    }
   }
 }

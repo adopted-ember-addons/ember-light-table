@@ -1,6 +1,6 @@
-// BEGIN-SNIPPET resizable-table
+// BEGIN-SNIPPET draggable-table
 import Ember from 'ember';
-import TableCommon from '../mixins/table-common';
+import TableCommon from '../../mixins/table-common';
 
 const {
   computed
@@ -12,46 +12,42 @@ export default Ember.Component.extend(TableCommon, {
       label: 'User Details',
       sortable: false,
       align: 'center',
-
+      draggable: true,
       subColumns: [{
         label: 'Avatar',
         valuePath: 'avatar',
         width: '60px',
         sortable: false,
+        draggable: true,
         cellComponent: 'user-avatar'
       }, {
         label: 'First',
-        resizable: true,
         valuePath: 'firstName',
         width: '150px',
-        minResizeWidth: 75
+        draggable: true
       }, {
         label: 'Last',
-        resizable: true,
         valuePath: 'lastName',
         width: '150px',
-        minResizeWidth: 75
+        draggable: true
       }]
     }, {
       label: 'Contact Information',
       sortable: false,
       align: 'center',
-
+      draggable: true,
       subColumns: [{
         label: 'Address',
-        resizable: true,
         valuePath: 'address',
-        minResizeWidth: 100
+        draggable: true
       }, {
         label: 'State',
-        resizable: true,
         valuePath: 'state',
-        minResizeWidth: 100
+        draggable: true
       }, {
         label: 'Country',
-        resizable: true,
         valuePath: 'country',
-        minResizeWidth: 100
+        draggable: true
       }]
     }];
   })

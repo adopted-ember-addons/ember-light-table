@@ -1,10 +1,12 @@
 // BEGIN-SNIPPET table-common
 import Ember from 'ember';
 import Table from 'ember-light-table';
+import { task } from 'ember-concurrency';
 
 const {
   inject,
-  isEmpty
+  isEmpty,
+  computed
 } = Ember;
 
 export default Ember.Mixin.create({
@@ -15,17 +17,19 @@ export default Ember.Mixin.create({
   dir: 'asc',
   sort: 'firstName',
 
-  isLoading: false,
+  isLoading: computed.oneWay('fetchRecords.isRunning'),
   canLoadMore: true,
+  enableSync: true,
 
   model: null,
+  meta: null,
   columns: null,
   table: null,
 
   init() {
     this._super(...arguments);
 
-    let table = new Table(this.get('columns'), this.get('model'), { enableSync: true });
+    let table = new Table(this.get('columns'), this.get('model'), { enableSync: this.get('enableSync') });
     let sortColumn = table.get('allColumns').findBy('valuePath', this.get('sort'));
 
     // Setup initial sort column
@@ -36,21 +40,18 @@ export default Ember.Mixin.create({
     this.set('table', table);
   },
 
-  fetchRecords() {
-    this.set('isLoading', true);
-    this.get('store').query('user', this.getProperties(['page', 'limit', 'sort', 'dir'])).then((records) => {
-      this.get('model').pushObjects(records.toArray());
-      this.set('canLoadMore', !isEmpty(records));
-    }).finally(() => {
-      this.set('isLoading', false);
-    });
-  },
+  fetchRecords: task(function*() {
+    let records = yield this.get('store').query('user', this.getProperties(['page', 'limit', 'sort', 'dir']));
+    this.get('model').pushObjects(records.toArray());
+    this.set('meta', records.get('meta'));
+    this.set('canLoadMore', !isEmpty(records));
+  }).restartable(),
 
   actions: {
     onScrolledToBottom() {
       if (this.get('canLoadMore')) {
         this.incrementProperty('page');
-        this.fetchRecords();
+        this.get('fetchRecords').perform();
       }
     },
 

@@ -14,5 +14,6 @@ export default DS.Model.extend({
   email: attr('string'),
   username: attr('string'),
   avatar: attr('string'),
-  bio: attr('string')
+  bio: attr('string'),
+  color: attr('string')
 });
