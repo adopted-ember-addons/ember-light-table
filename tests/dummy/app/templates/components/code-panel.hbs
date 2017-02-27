@@ -1,0 +1,30 @@
+<div class="panel-group" id={{concat elementId "-code-panel"}} role="tablist">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab">
+      <a role="button" data-toggle="collapse" data-parent="#{{concat elementId "-code-panel"}}" href="#{{concat elementId "-code-snippet"}}">
+        <h4 class="panel-title">{{title}} <span class="code-icon fa fa-code pull-right"></span></h4>
+      </a>
+    </div>
+
+    <div id={{concat elementId "-code-snippet"}} class="panel-collapse {{if collapse 'collapse'}}" role="tabpanel">
+      <div class="panel-body code-snippet">
+        <ul class="nav nav-tabs" role="tablist">
+          {{#each snippets as |snippet index|}}
+            <li role="presentation" class="{{if (eq index 0) 'active'}}">
+              <a href="#{{classify snippet}}" aria-controls="{{classify snippet}}" role="tab" data-toggle="tab">{{snippet}}</a>
+            </li>
+          {{/each}}
+        </ul>
+        <div class="tab-content">
+          {{#each snippets as |snippet index|}}
+            <div role="tabpanel" class="tab-pane fade {{if (eq index 0) 'in active'}}" id="{{classify snippet}}">{{code-snippet name=snippet}}</div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-body table-container">
+      {{yield}}
+    </div>
+  </div>
+</div>

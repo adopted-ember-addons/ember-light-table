@@ -26,6 +26,12 @@ export default function() {
     limit = Number(limit || 20);
     dir = dir || 'asc';
 
+    let meta = {
+      page,
+      limit,
+      totalPages: Math.ceil(users.length / limit)
+    };
+
     if (sort) {
       users = emberArray(users).sortBy(sort);
       if (dir !== 'asc') {
@@ -36,7 +42,7 @@ export default function() {
     let offset = (page - 1) * limit;
     users = users.slice(offset, offset + limit);
 
-    return { users };
+    return { users, meta };
   });
 
   /*

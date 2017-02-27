@@ -18,7 +18,7 @@ const Row = Component.extend({
   tableActions: null,
   canExpand: false,
   canSelect: false,
-  colpan: 1,
+  colspan: 1,
 
   isSelected: computed.readOnly('row.selected'),
   isExpanded: computed.readOnly('row.expanded')

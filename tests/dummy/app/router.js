@@ -7,13 +7,26 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('grouped');
-  this.route('expandable');
-  this.route('selectable');
-  this.route('resizable');
-  this.route('draggable');
   this.route('responsive');
   this.route('scrolling');
+
+  this.route('columns', function() {
+    this.route('grouped');
+    this.route('resizable');
+    this.route('draggable');
+  });
+
+  this.route('rows', function() {
+    this.route('expandable');
+    this.route('selectable');
+  });
+
+  this.route('cookbook', function() {
+    this.route('client-side');
+    this.route('pagination');
+    this.route('custom-row');
+    this.route('table-actions');
+  });
 });
 
 export default Router;

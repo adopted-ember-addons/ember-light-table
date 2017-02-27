@@ -1,6 +1,28 @@
 Changelog
 =========
 
+## v1.8.3
+
+### Pull Requests
+
+- [#322](https://github.com/offirgolan/ember-light-table/pull/322)  Fix typo for default colspan  *by [Ilya Radchenko](https://github.com/knownasilya)*
+- [#318](https://github.com/offirgolan/ember-light-table/pull/318)  Change <span> to <i> tag for sorting icons  *by [Julie Graceffa](https://github.com/jewls618)*
+- [#332](https://github.com/offirgolan/ember-light-table/pull/332)  Bump ember-scrollable  *by [Offir Golan](https://github.com/offirgolan)*
+
+#### Commits
+
+- [70320d05](https://github.com/offirgolan/ember-light-table/commit/70320d05a99021e35d5c0878dccf6499ce88216c) **fix(package)**: update ember-get-config to version 0.2.1 *by [greenkeeper[bot]](https://github.com/greenkeeper[bot])*
+
+## v1.8.2
+
+### Pull Requests
+
+- [#321](https://github.com/offirgolan/ember-light-table/pull/321)  Update ember-scrollable to the latest version 🚀  *by [Offir Golan](https://github.com/offirgolan/greenkeeper)*
+
+#### Commits
+
+- [e2438a50](https://github.com/offirgolan/ember-light-table/commit/e2438a508e890ee7ccce7a02fde9654c047ebee8) **fix(package)**: update ember-scrollable to version 0.4.0 *by [greenkeeper[bot]](https://github.com/greenkeeper[bot])*
+
 ## v1.8.1
 
 ### Pull Requests
