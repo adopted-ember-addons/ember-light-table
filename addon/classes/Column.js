@@ -5,6 +5,7 @@ const {
   isEmpty,
   makeArray,
   computed,
+  merge,
   A: emberArray
 } = Ember;
 
@@ -139,6 +140,14 @@ export default class Column extends Ember.Object.extend({
    */
   minResizeWidth: 0,
 
+  /**
+   * The parent column for this subcolumn.
+   * @property parent
+   * @type Column
+   * @optional
+   */
+  parent: null,
+  
   /**
    * An array of sub columns to be grouped together
    * @property subColumns
@@ -333,7 +342,7 @@ export default class Column extends Ember.Object.extend({
 
     let { subColumns } = options;
 
-    subColumns = emberArray(makeArray(subColumns).map((sc) => new Column(sc)));
+    subColumns = emberArray(makeArray(subColumns).map((sc) => merge(sc, { parent: this })).map((sc) => new Column(sc)));
     subColumns.setEach('_group', this);
 
     this.set('subColumns', subColumns);
