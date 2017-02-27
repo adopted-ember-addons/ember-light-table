@@ -1,6 +1,6 @@
 // BEGIN-SNIPPET expandable-table
 import Ember from 'ember';
-import TableCommon from '../mixins/table-common';
+import TableCommon from '../../mixins/table-common';
 
 const {
   computed

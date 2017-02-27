@@ -1,6 +1,6 @@
-// BEGIN-SNIPPET grouped-table
+// BEGIN-SNIPPET resizable-table
 import Ember from 'ember';
-import TableCommon from '../mixins/table-common';
+import TableCommon from '../../mixins/table-common';
 
 const {
   computed
@@ -21,12 +21,16 @@ export default Ember.Component.extend(TableCommon, {
         cellComponent: 'user-avatar'
       }, {
         label: 'First',
+        resizable: true,
         valuePath: 'firstName',
-        width: '150px'
+        width: '150px',
+        minResizeWidth: 75
       }, {
         label: 'Last',
+        resizable: true,
         valuePath: 'lastName',
-        width: '150px'
+        width: '150px',
+        minResizeWidth: 75
       }]
     }, {
       label: 'Contact Information',
@@ -35,13 +39,19 @@ export default Ember.Component.extend(TableCommon, {
 
       subColumns: [{
         label: 'Address',
-        valuePath: 'address'
+        resizable: true,
+        valuePath: 'address',
+        minResizeWidth: 100
       }, {
         label: 'State',
-        valuePath: 'state'
+        resizable: true,
+        valuePath: 'state',
+        minResizeWidth: 100
       }, {
         label: 'Country',
-        valuePath: 'country'
+        resizable: true,
+        valuePath: 'country',
+        minResizeWidth: 100
       }]
     }];
   })

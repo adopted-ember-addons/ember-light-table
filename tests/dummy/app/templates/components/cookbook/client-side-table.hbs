@@ -1,0 +1,40 @@
+{{!-- BEGIN-SNIPPET client-side-table --}}
+{{#light-table table height='65vh' as |t|}}
+
+  {{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    fixed=true
+  }}
+
+  {{#t.body
+    canSelect=false
+    as |body|
+  }}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
+  {{/t.body}}
+
+  {{#t.foot fixed=true as |columns|}}
+    <tr>
+      <td class="align-center" colspan={{columns.length}}>
+        {{one-way-select selectedFilter
+            options=possibleFilters
+            optionValuePath="valuePath"
+            optionLabelPath="label"
+            update=(action (pipe (action (mut selectedFilter)) (action 'onSearchChange')))
+        }}
+        {{one-way-input
+          value=query
+          placeholder="Search..."
+          update=(action (pipe (action (mut query)) (action 'onSearchChange')))
+        }}
+      </td>
+    </tr>
+  {{/t.foot}}
+{{/light-table}}
+{{!-- END-SNIPPET --}}
