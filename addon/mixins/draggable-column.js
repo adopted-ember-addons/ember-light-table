@@ -44,7 +44,7 @@ export default Ember.Mixin.create({
     /*
       A column is a valid drop target only if its in the same group
      */
-    return column.get('droppable') && column.get('dragColumnGroup') === sourceColumn.get('dragColumnGroup');
+    return column.get('droppable') && column.get('parent') === sourceColumn.get('parent');
   }).volatile().readOnly(),
 
   dragStart(e) {
