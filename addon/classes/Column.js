@@ -140,6 +140,17 @@ export default class Column extends Ember.Object.extend({
   minResizeWidth: 0,
 
   /**
+   * The parent column (or group) for this sub-column.
+   * This will only have a value if this column is a sub-column.
+   * Note: this doesn't update if you move this sub-column to another parent after instantiation.
+   *
+   * @property parent
+   * @type Column
+   * @optional
+   */
+  parent: null,
+
+  /**
    * An array of sub columns to be grouped together
    * @property subColumns
    * @type {Array}
@@ -274,16 +285,6 @@ export default class Column extends Ember.Object.extend({
   }).readOnly(),
 
   /**
-   * A reference to the belonging column group. This will only have
-   * a value if this column is a sub column.
-   *
-   * @property format
-   * @type {Function}
-   * @private
-   */
-  _group: null,
-
-  /**
    * True if `hidden` or `responsiveHidden` is true.
    * @property isHidden
    * @type {Boolean}
@@ -334,7 +335,7 @@ export default class Column extends Ember.Object.extend({
     let { subColumns } = options;
 
     subColumns = emberArray(makeArray(subColumns).map((sc) => new Column(sc)));
-    subColumns.setEach('_group', this);
+    subColumns.setEach('parent', this);
 
     this.set('subColumns', subColumns);
   }
