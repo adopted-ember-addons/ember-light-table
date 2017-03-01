@@ -73,7 +73,7 @@ test('CP - visibleSubColumns', function(assert) {
   assert.equal(col.get('visibleSubColumns.length'), 0);
 });
 
-test('subcolumns / parent', function(assert) {
+test('subColumns / parent', function(assert) {
   let col = new Column({
     subColumns: [{}]
   });

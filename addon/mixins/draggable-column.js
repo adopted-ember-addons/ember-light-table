@@ -25,9 +25,18 @@ export default Ember.Mixin.create({
     }
   }).readOnly(),
 
-  dragColumnGroup: computed('column._group', function() {
-    let columnGroup = this.get('column._group');
-    return columnGroup ? columnGroup.get('subColumns') : this.get('table.columns');
+  /**
+   * Array of Columns indicating where the column can be potentially dragged.
+   * If the column is part of a group (has a parent column), this will be all of the columns in that group,
+   * otherwise it's all of the columns in the table.
+   *
+   * @property dragColumnGroup
+   * @type Array
+   * @readonly
+   */
+  dragColumnGroup: computed('column.parent', function() {
+    let parent = this.get('column.parent');
+    return parent ? parent.get('subColumns') : this.get('table.columns');
   }).readOnly(),
 
   isDropTarget: computed(function() {
@@ -35,7 +44,7 @@ export default Ember.Mixin.create({
     /*
       A column is a valid drop target only if its in the same group
      */
-    return column.get('droppable') && column.get('_group') === sourceColumn.get('_group');
+    return column.get('droppable') && column.get('dragColumnGroup') === sourceColumn.get('dragColumnGroup');
   }).volatile().readOnly(),
 
   dragStart(e) {
