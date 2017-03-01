@@ -5,7 +5,6 @@ const {
   isEmpty,
   makeArray,
   computed,
-  merge,
   A: emberArray
 } = Ember;
 
