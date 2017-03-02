@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.8.4
+
+### Pull Requests
+
+- [#348](https://github.com/offirgolan/ember-light-table/pull/348)  Update Column.js to support parent  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+
 ## v1.8.3
 
 ### Pull Requests
