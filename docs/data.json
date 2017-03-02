@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "1.8.3.7e98dc6b"
+        "version": "v1.8.4"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
@@ -99,6 +99,13 @@
             "classes": {
                 "t.head": 1
             },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/mixins/draggable-column.js": {
+            "name": "addon/mixins/draggable-column.js",
+            "modules": {},
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -251,7 +258,7 @@
             "module": "Table",
             "namespace": "",
             "file": "addon/classes/Column.js",
-            "line": 321,
+            "line": 322,
             "is_constructor": 1,
             "params": [
                 {
@@ -622,6 +629,17 @@
         {
             "file": "addon/classes/Column.js",
             "line": 142,
+            "description": "The parent column (or group) for this sub-column.\nThis will only have a value if this column is a sub-column.\nNote: this doesn't update if you move this sub-column to another parent after instantiation.",
+            "itemtype": "property",
+            "name": "parent",
+            "type": "Column",
+            "optional": 1,
+            "class": "Column",
+            "module": "Table"
+        },
+        {
+            "file": "addon/classes/Column.js",
+            "line": 153,
             "description": "An array of sub columns to be grouped together",
             "itemtype": "property",
             "name": "subColumns",
@@ -632,7 +650,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 150,
+            "line": 161,
             "description": "An array of media breakpoints that determine when this column will be shown\n\nIf we have the following breakpoints defined in `app/breakpoints.js`:\n\n- mobile\n- tablet\n- desktop\n\nAnd we want to show this column only for tablet and desktop media, the following\narray should be specified: `['tablet', 'desktop']`.\n\nIf this property is `null`, `undefined`, or `[]`, then this column will always\nbe shown, regardless of the current media type.",
             "itemtype": "property",
             "name": "breakpoints",
@@ -643,7 +661,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 171,
+            "line": 182,
             "description": "Type of column component\n\nYou can create your own column types by running the blueprint:\n`ember g column-type my-column-type`\n\nThis will generate a component for you which represents the `<th>`\nelement for the column. If you want to apply custom actions to the `th`,\nor do some custom styling of the `th` with classNameBindings, all of that is\navailable to you in this component.\n\nYou can then specify the custom type you created as a string here, to use it.",
             "itemtype": "property",
             "name": "type",
@@ -654,7 +672,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 191,
+            "line": 202,
             "description": "Type of cell component\n\nYou can create your own cell types by running the blueprint:\n`ember g cell-type my-cell-type`\n\nThis will generate a component for you which represents the `<td>`\ncells in the column. If you want to apply custom actions to the `td`,\nor do some custom styling of the `td` with classNameBindings, all of that is\navailable to you in this component.\n\nYou can then specify the custom type you created as a string here, to use it.",
             "itemtype": "property",
             "name": "cellType",
@@ -665,7 +683,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 210,
+            "line": 221,
             "description": "Component name for the column",
             "itemtype": "property",
             "name": "component",
@@ -676,7 +694,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 218,
+            "line": 229,
             "description": "Component name for the column cells. This component is automatically passed row,\ncolumn, and value variables, and you can specify a valuePath to set what property\nthe value is set to.",
             "itemtype": "property",
             "name": "cellComponent",
@@ -687,7 +705,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 228,
+            "line": 239,
             "itemtype": "property",
             "name": "valuePath",
             "type": "{String}",
@@ -696,7 +714,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 234,
+            "line": 245,
             "itemtype": "property",
             "name": "width",
             "type": "{String}",
@@ -705,7 +723,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 240,
+            "line": 251,
             "description": "Class names to be applied to header and footer cells of this column",
             "itemtype": "property",
             "name": "classNames",
@@ -715,7 +733,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 248,
+            "line": 259,
             "description": "Class names to be applied to all cells of this column",
             "itemtype": "property",
             "name": "cellClassNames",
@@ -725,7 +743,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 256,
+            "line": 267,
             "description": "A format function used to calculate a cell's value. This method will be passed\nthe raw value if `valuePath` is specified.",
             "itemtype": "property",
             "name": "format",
@@ -735,7 +753,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 265,
+            "line": 276,
             "description": "Column's unique ID.",
             "itemtype": "property",
             "name": "columnId",
@@ -747,19 +765,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 276,
-            "description": "A reference to the belonging column group. This will only have\na value if this column is a sub column.",
-            "itemtype": "property",
-            "name": "format",
-            "type": "{Function}",
-            "access": "private",
-            "tagname": "",
-            "class": "Column",
-            "module": "Table"
-        },
-        {
-            "file": "addon/classes/Column.js",
-            "line": 286,
+            "line": 287,
             "description": "True if `hidden` or `responsiveHidden` is true.",
             "itemtype": "property",
             "name": "isHidden",
@@ -769,7 +775,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 293,
+            "line": 294,
             "itemtype": "property",
             "name": "isGroupColumn",
             "type": "{Boolean}",
@@ -780,7 +786,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 300,
+            "line": 301,
             "itemtype": "property",
             "name": "isVisibleGroupColumn",
             "type": "{Boolean}",
@@ -791,7 +797,7 @@
         },
         {
             "file": "addon/classes/Column.js",
-            "line": 309,
+            "line": 310,
             "itemtype": "property",
             "name": "visibleSubColumns",
             "type": "{Array}",
@@ -2016,6 +2022,17 @@
             "itemtype": "event",
             "name": "onScrolledToBottom",
             "class": "t.body",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/mixins/draggable-column.js",
+            "line": 28,
+            "description": "Array of Columns indicating where the column can be potentially dragged.\nIf the column is part of a group (has a parent column), this will be all of the columns in that group,\notherwise it's all of the columns in the table.",
+            "itemtype": "property",
+            "name": "dragColumnGroup",
+            "type": "Array",
+            "readonly": "",
+            "class": "TableHeaderMixin",
             "module": "Light Table"
         },
         {

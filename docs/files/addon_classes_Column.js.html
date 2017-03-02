@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/7e98dc6b" target="_blank">
-                                  Tag: 1.8.3.7e98dc6b
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.8.4" target="_blank">
+                                  Tag: v1.8.4
                                 </a>
                             </h4>
                         </div>
@@ -283,6 +283,17 @@ export default class Column extends Ember.Object.extend({
   minResizeWidth: 0,
 
   /**
+   * The parent column (or group) for this sub-column.
+   * This will only have a value if this column is a sub-column.
+   * Note: this doesn&#x27;t update if you move this sub-column to another parent after instantiation.
+   *
+   * @property parent
+   * @type Column
+   * @optional
+   */
+  parent: null,
+
+  /**
    * An array of sub columns to be grouped together
    * @property subColumns
    * @type {Array}
@@ -417,16 +428,6 @@ export default class Column extends Ember.Object.extend({
   }).readOnly(),
 
   /**
-   * A reference to the belonging column group. This will only have
-   * a value if this column is a sub column.
-   *
-   * @property format
-   * @type {Function}
-   * @private
-   */
-  _group: null,
-
-  /**
    * True if &#x60;hidden&#x60; or &#x60;responsiveHidden&#x60; is true.
    * @property isHidden
    * @type {Boolean}
@@ -477,7 +478,7 @@ export default class Column extends Ember.Object.extend({
     let { subColumns } = options;
 
     subColumns = emberArray(makeArray(subColumns).map((sc) =&gt; new Column(sc)));
-    subColumns.setEach(&#x27;_group&#x27;, this);
+    subColumns.setEach(&#x27;parent&#x27;, this);
 
     this.set(&#x27;subColumns&#x27;, subColumns);
   }
