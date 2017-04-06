@@ -41,7 +41,7 @@
     "ember-cli-release": "1.0.0-beta.2",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-string-helpers": "1.0.0",
-    "ember-cli-test-loader": "^1.1.0",
+    "ember-cli-test-loader": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-cli-yuidoc": "0.8.8",
     "ember-code-snippet": "1.8.0",
