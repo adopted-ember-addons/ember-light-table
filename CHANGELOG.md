@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.8.5
+
+### Pull Requests
+
+- [#383](https://github.com/offirgolan/ember-light-table/pull/383)  Fix for ember-composable-helpers addon incompatibility  *by [Nicholas McClay](https://github.com/nmcclay)*
+
 ## v1.8.4
 
 ### Pull Requests
