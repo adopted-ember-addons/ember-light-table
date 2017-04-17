@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "1.8.4.e656b333"
+        "version": "v1.8.5"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
