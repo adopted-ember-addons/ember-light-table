@@ -40,7 +40,6 @@
     "ember-cli-qunit": "^3.0.2",
     "ember-cli-release": "1.0.0-beta.2",
     "ember-cli-sri": "^2.1.0",
-    "ember-cli-string-helpers": "1.0.0",
     "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-cli-yuidoc": "0.8.8",
@@ -67,6 +66,7 @@
   "dependencies": {
     "ember-cli-babel": "^5.1.7",
     "ember-cli-htmlbars": "^1.0.11",
+    "ember-cli-string-helpers": "1.0.0",
     "ember-composable-helpers": "^2.0.1",
     "ember-get-config": "0.2.1",
     "ember-in-viewport": "2.1.1",
