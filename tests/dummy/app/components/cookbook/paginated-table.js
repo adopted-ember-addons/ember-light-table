@@ -1,14 +1,12 @@
-// BEGIN-SNIPPET selectable-table
+// BEGIN-SNIPPET paginated-table
 import Ember from 'ember';
-import TableCommon from '../mixins/table-common';
+import TableCommon from '../../mixins/table-common';
 
 const {
   computed
 } = Ember;
 
 export default Ember.Component.extend(TableCommon, {
-  hasSelection: computed.notEmpty('table.selectedRows'),
-
   columns: computed(function() {
     return [{
       label: 'Avatar',
@@ -36,17 +34,23 @@ export default Ember.Component.extend(TableCommon, {
     }];
   }),
 
+  init() {
+    this._super(...arguments);
+    this.send('setPage', 1);
+  },
+
   actions: {
-    selectAll() {
-      this.get('table.rows').setEach('selected', true);
-    },
+    setPage(page) {
+      let totalPages = this.get('meta.totalPages');
+      let currPage = this.get('page');
 
-    deselectAll() {
-      this.get('table.selectedRows').setEach('selected', false);
-    },
+      if (page < 1 || page > totalPages || page === currPage) {
+        return;
+      }
 
-    deleteAll() {
-      this.get('table').removeRows(this.get('table.selectedRows'));
+      this.set('page', page);
+      this.get('model').clear();
+      this.get('fetchRecords').perform();
     }
   }
 });

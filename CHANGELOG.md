@@ -1,6 +1,30 @@
 Changelog
 =========
 
+## v1.8.5
+
+### Pull Requests
+
+- [#383](https://github.com/offirgolan/ember-light-table/pull/383)  Fix for ember-composable-helpers addon incompatibility  *by [Nicholas McClay](https://github.com/nmcclay)*
+
+## v1.8.4
+
+### Pull Requests
+
+- [#348](https://github.com/offirgolan/ember-light-table/pull/348)  Update Column.js to support parent  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+
+## v1.8.3
+
+### Pull Requests
+
+- [#322](https://github.com/offirgolan/ember-light-table/pull/322)  Fix typo for default colspan  *by [Ilya Radchenko](https://github.com/knownasilya)*
+- [#318](https://github.com/offirgolan/ember-light-table/pull/318)  Change <span> to <i> tag for sorting icons  *by [Julie Graceffa](https://github.com/jewls618)*
+- [#332](https://github.com/offirgolan/ember-light-table/pull/332)  Bump ember-scrollable  *by [Offir Golan](https://github.com/offirgolan)*
+
+#### Commits
+
+- [70320d05](https://github.com/offirgolan/ember-light-table/commit/70320d05a99021e35d5c0878dccf6499ce88216c) **fix(package)**: update ember-get-config to version 0.2.1 *by [greenkeeper[bot]](https://github.com/greenkeeper[bot])*
+
 ## v1.8.2
 
 ### Pull Requests
