@@ -438,7 +438,7 @@ export default Component.extend({
     },
 
     /**
-     * onScroll action - sent when user scrolls
+     * onScroll action - sent when user scrolls in the Y direction
      *
      * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
      * using fixed headers / footers.
