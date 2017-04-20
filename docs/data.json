@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.8.5"
+        "version": "v1.8.6"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
@@ -1997,7 +1997,7 @@
         {
             "file": "addon/components/lt-body.js",
             "line": 440,
-            "description": "onScroll action - sent when user scrolls\n\nThis only works when `useVirtualScrollbar` is `true`, i.e. when you are\nusing fixed headers / footers.",
+            "description": "onScroll action - sent when user scrolls in the Y direction\n\nThis only works when `useVirtualScrollbar` is `true`, i.e. when you are\nusing fixed headers / footers.",
             "itemtype": "event",
             "name": "onScroll",
             "params": [
