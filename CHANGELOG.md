@@ -1,6 +1,13 @@
 Changelog
 =========
 
+## v1.8.6
+
+### Pull Requests
+
+- [#385](https://github.com/offirgolan/ember-light-table/pull/385)  Fixes 'onScroll' deprecation  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+- [#386](https://github.com/offirgolan/ember-light-table/pull/386)  Move ember-cli-string-helpers to dependencies  *by [Jonathan Steele](https://github.com/ynnoj)*
+
 ## v1.8.5
 
 ### Pull Requests
