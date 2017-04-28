@@ -189,3 +189,29 @@ test('passed in components can have computed properties', function(assert) {
 
   assert.equal(this.$('.custom-row.is-active').length, 0, 'none of the items are active');
 });
+
+test('onScroll', function(assert) {
+  let done = assert.async();
+  let table = new Table(Columns, createUsers(10));
+
+  this.setProperties({
+    table,
+    currentScrollY: 0,
+    onScroll() {
+      assert.ok(true, 'onScroll worked');
+      done();
+    }
+  });
+
+  this.render(hbs `
+    {{#light-table table height='40vh' as |t|}}
+      {{t.head fixed=true}}
+      {{t.body
+        useVirtualScrollbar=true
+        onScroll=onScroll
+      }}
+    {{/light-table}}
+  `);
+
+  this.$('.tse-scroll-content').scrollTop(300).scroll();
+});
