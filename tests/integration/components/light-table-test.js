@@ -193,12 +193,13 @@ test('passed in components can have computed properties', function(assert) {
 test('onScroll', function(assert) {
   let done = assert.async();
   let table = new Table(Columns, createUsers(10));
+  let expectedScroll = 50;
 
   this.setProperties({
     table,
-    currentScrollY: 0,
-    onScroll() {
+    onScroll(actualScroll) {
       assert.ok(true, 'onScroll worked');
+      assert.equal(actualScroll, expectedScroll, 'scroll position is correct');
       done();
     }
   });
@@ -213,5 +214,5 @@ test('onScroll', function(assert) {
     {{/light-table}}
   `);
 
-  this.$('.tse-scroll-content').scrollTop(300).scroll();
+  this.$('.tse-scroll-content').scrollTop(expectedScroll).scroll();
 });
