@@ -65,7 +65,7 @@
   "dependencies": {
     "ember-cli-babel": "^5.1.7",
     "ember-cli-htmlbars": "^1.0.11",
-    "ember-cli-string-helpers": "1.0.0",
+    "ember-cli-string-helpers": "1.2.1",
     "ember-composable-helpers": "^2.0.1",
     "ember-get-config": "0.2.1",
     "ember-in-viewport": "2.1.1",
