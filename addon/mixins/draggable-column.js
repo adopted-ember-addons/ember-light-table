@@ -41,6 +41,8 @@ export default Ember.Mixin.create({
 
   isDropTarget: computed(function() {
     let column = this.get('column');
+
+    if (!column || !sourceColumn) { return false; }
     /*
       A column is a valid drop target only if its in the same group
      */
@@ -52,6 +54,7 @@ export default Ember.Mixin.create({
 
     let column = this.get('column');
 
+    if (!column) { return; }
     /*
       NOTE: IE requires setData type to be 'text'
      */
