@@ -84,6 +84,14 @@ export default Ember.Mixin.create({
 
     if (this.get('isDropTarget')) {
       e.preventDefault();
+      /*
+        NOTE: dragLeave will be triggered by any child elements inside the
+        column. This code ensures the column being dragged over continues to be
+        identified as the current drop target
+       */
+      if (!this.get('isDragTarget')) {
+        this.set('isDragTarget', this.get('column') !== sourceColumn);
+      }
     }
   },
 
