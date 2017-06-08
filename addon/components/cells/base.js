@@ -24,10 +24,18 @@ const Cell = Component.extend({
   attributeBindings: ['style'],
   classNameBindings: ['align', 'isSorted', 'column.cellClassNames'],
 
+  enableScaffolding: false,
+
   isSorted: computed.readOnly('column.sorted'),
 
-  style: computed('column.width', function() {
-    return cssStyleify(this.get('column').getProperties(['width']));
+  style: computed('enableScaffolding', 'column.width', function() {
+    let column = this.get('column');
+
+    if (this.get('enableScaffolding') || !column) {
+      return '';
+    }
+
+    return cssStyleify(column.getProperties(['width']));
   }),
 
   align: computed('column.align', function() {
