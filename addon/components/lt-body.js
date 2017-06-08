@@ -16,7 +16,7 @@ const {
 /**
  * ```hbs
  * {{#light-table table as |t|}}
- *   {{#t.body multiSelect=true onRowClick=(action 'rowClicked')}}
+ *   {{#t.body multiSelect=true onRowClick=(action 'rowClicked') as |body|}}
  *     {{#body.expanded-row as |row|}}
  *       Hello <b>{{row.firstName}}</b>
  *     {{/body.expanded-row}}
