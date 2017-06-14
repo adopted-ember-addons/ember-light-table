@@ -23,10 +23,10 @@ module.exports = {
       }
     }
   }, {
-    name: 'ember-lts-2.12',
+    name: 'ember-2.12.2',
     bower: {
       dependencies: {
-        'ember': 'components/ember#lts-2-12'
+        'ember': 'components/ember#2.12.2'
       },
       resolutions: {
         'ember': 'lts-2-12'

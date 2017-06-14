@@ -44,7 +44,7 @@ env:
   matrix:
     - EMBER_VERSION=ember-lts-2.4
     - EMBER_VERSION=ember-lts-2.8
-    - EMBER_VERSION=ember-lts-2.12
+    - EMBER_VERSION=ember-2.12.2
     - EMBER_VERSION=ember-release
     - EMBER_VERSION=ember-beta
     - EMBER_VERSION=ember-canary
