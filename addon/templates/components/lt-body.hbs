@@ -20,7 +20,7 @@
         {{else}}
           {{#each rows as |row|}}
             {{lt.row row columns
-              elementId=row.rowId
+              data-row-id=row.rowId
               table=table
               tableActions=tableActions
               canExpand=canExpand
