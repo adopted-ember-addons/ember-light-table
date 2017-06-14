@@ -3,11 +3,6 @@
 module.exports = {
   useVersionCompatibility: true,
   scenarios: [{
-    name: 'default',
-    bower: {
-      dependencies: {}
-    }
-  }, {
     name: 'ember-lts-2.4',
     bower: {
       dependencies: {
@@ -18,11 +13,25 @@ module.exports = {
       }
     }
   }, {
-    name: 'ember-2.6.2',
-    allowedToFail: true
+    name: 'ember-lts-2.8',
+    bower: {
+      dependencies: {
+        'ember': 'components/ember#lts-2-8'
+      },
+      resolutions: {
+        'ember': 'lts-2-8'
+      }
+    }
   }, {
-    name: 'ember-2.7.3',
-    allowedToFail: true
+    name: 'ember-2.12.2',
+    bower: {
+      dependencies: {
+        'ember': 'components/ember#2.12.2'
+      },
+      resolutions: {
+        'ember': 'lts-2-12'
+      }
+    }
   }, {
     name: 'ember-release',
     bower: {
@@ -35,7 +44,6 @@ module.exports = {
     }
   }, {
     name: 'ember-beta',
-    allowedToFail: true,
     bower: {
       dependencies: {
         'ember': 'components/ember#beta'
@@ -46,7 +54,6 @@ module.exports = {
     }
   }, {
     name: 'ember-canary',
-    allowedToFail: true,
     bower: {
       dependencies: {
         'ember': 'components/ember#canary'
