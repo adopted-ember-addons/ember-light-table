@@ -38,7 +38,20 @@ install:
   - bower install
 
 script:
-  - ember try:each
+  - ember try:one $EMBER_VERSION --skip-cleanup=true --- ember test
+
+env:
+  matrix:
+    - EMBER_VERSION=ember-lts-2.4
+    - EMBER_VERSION=ember-lts-2.8
+    - EMBER_VERSION=ember-release
+    - EMBER_VERSION=ember-beta
+    - EMBER_VERSION=ember-canary
+
+matrix:
+  allow_failures:
+    - env: EMBER_VERSION=ember-canary
+    - env: EMBER_VERSION=ember-beta
 
 after_script:
   - codeclimate-test-reporter < coverage/lcov.info
