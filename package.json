@@ -67,7 +67,7 @@
     "ember-resolver": "^4.0.0",
     "ember-responsive": "2.0.2",
     "ember-source": "~2.13.0",
-    "ember-suave": "4.0.1",
+    "eslint-plugin-ember-suave": "^1.0.0",
     "loader.js": "^4.2.3",
     "yuidoc-ember-theme": "^1.2.1"
   },
