@@ -66,6 +66,13 @@ export default Ember.Mixin.create({
   resizeOnDrag: false,
 
   /**
+   * CSS classes to be applied to an `<i class="lt-sort-icon></i>` tag that is
+   * inserted into the column's `<th>` element.
+   *
+   * For instance, if you have installed `ember-font-awesome`, you can set
+   * `iconAscending` to `'fa fa-sort-asc'`, which would yield this markup:
+   * `<i class="lt-sort-icon fa fa-sort-asc"></i>`
+   *
    * @property iconAscending
    * @type {String}
    * @default ''
@@ -73,6 +80,8 @@ export default Ember.Mixin.create({
   iconAscending: '',
 
   /**
+   * See `iconAscending`.
+   *
    * @property iconDescending
    * @type {String}
    * @default ''
