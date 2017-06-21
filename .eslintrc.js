@@ -12,5 +12,8 @@ module.exports = {
     browser: true
   },
   rules: {
+    'generator-star-spacing': ['error', { before: false, after: false }],
+    'ember-suave/require-access-in-comments': 'off',
+    'ember-suave/no-const-outside-module-scope': 'off'
   }
 };

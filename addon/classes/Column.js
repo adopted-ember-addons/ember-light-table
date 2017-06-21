@@ -5,14 +5,15 @@ const {
   isEmpty,
   makeArray,
   computed,
-  A: emberArray
+  A: emberArray,
+  Object: EmberObject
 } = Ember;
 
 /**
  * @module Table
  * @class Column
  */
-export default class Column extends Ember.Object.extend({
+export default class Column extends EmberObject.extend({
   /**
    * Whether the column can be hidden.
    *

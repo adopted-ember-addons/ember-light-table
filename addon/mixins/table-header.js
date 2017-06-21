@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
 const {
-  computed
+  computed,
+  Mixin
 } = Ember;
 
 /**
@@ -14,7 +15,7 @@ const {
  * @private
  */
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   /**
    * @property table
    * @type {Table}

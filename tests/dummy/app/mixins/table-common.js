@@ -6,10 +6,11 @@ import { task } from 'ember-concurrency';
 const {
   inject,
   isEmpty,
-  computed
+  computed,
+  Mixin
 } = Ember;
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   store: inject.service(),
 
   page: 0,

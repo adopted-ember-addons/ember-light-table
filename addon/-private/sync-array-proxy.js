@@ -1,13 +1,14 @@
 import Ember from 'ember';
 
 const {
+  ArrayProxy,
   assert,
   isArray
 } = Ember;
 
 const EMPTY_ARRAY = [];
 
-export default Ember.ArrayProxy.extend({
+export default ArrayProxy.extend({
   /**
    * The model that will be synchronized to the content of this proxy
    * @property syncArray

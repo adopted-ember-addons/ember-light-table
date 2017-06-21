@@ -8,7 +8,8 @@ const {
   get,
   computed,
   isNone,
-  A: emberArray
+  A: emberArray,
+  Object: EmberObject
 } = Ember;
 
 const RowSyncArrayProxy = SyncArrayProxy.extend({
@@ -30,7 +31,7 @@ const RowSyncArrayProxy = SyncArrayProxy.extend({
  * @module Table
  * @class Table
  */
-export default class Table extends Ember.Object.extend({
+export default class Table extends EmberObject.extend({
   /**
    * @property columns
    * @type {Ember.Array}

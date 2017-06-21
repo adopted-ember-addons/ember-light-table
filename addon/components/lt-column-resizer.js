@@ -3,12 +3,13 @@ import layout from '../templates/components/lt-column-resizer';
 
 const {
   $,
+  Component,
   computed
 } = Ember;
 
 const TOP_LEVEL_CLASS = '.ember-light-table';
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNameBindings: [':lt-column-resizer', 'isResizing'],
   column: null,

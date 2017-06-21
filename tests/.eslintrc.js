@@ -5,5 +5,8 @@ module.exports = {
   globals: {
     $: false,
     server: false
+  },
+  rules: {
+    'ember-suave/no-direct-property-access': 'off'
   }
 };

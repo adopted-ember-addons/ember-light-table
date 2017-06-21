@@ -1,13 +1,17 @@
 import Ember from 'ember';
 
-const { computed, guidFor } = Ember;
+const {
+  computed,
+  guidFor,
+  ObjectProxy
+} = Ember;
 
 /**
  * @module Table
  * @extends Ember.ObjectProxy
  * @class Row
  */
-export default class Row extends Ember.ObjectProxy.extend({
+export default class Row extends ObjectProxy.extend({
   /**
    * Whether the row is hidden.
    *
