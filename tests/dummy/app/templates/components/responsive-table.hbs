@@ -8,9 +8,10 @@
 
   {{!--
     In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
-    you need to have ember-font-awesome installed.
+    you need to have ember-font-awesome installed or manually include
+    the font-awesome assets, e.g. via a CDN.
   --}}
-  
+
   {{t.head
     onColumnClick=(action 'onColumnClick')
     iconAscending='fa fa-sort-asc'

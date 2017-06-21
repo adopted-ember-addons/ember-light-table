@@ -70,7 +70,8 @@ export default Mixin.create({
    * CSS classes to be applied to an `<i class="lt-sort-icon></i>` tag that is
    * inserted into the column's `<th>` element.
    *
-   * For instance, if you have installed `ember-font-awesome`, you can set
+   * For instance, if you have installed `ember-font-awesome` or include the
+   * `font-awesome` assets manually (e.g. via a CDN), you can set
    * `iconAscending` to `'fa fa-sort-asc'`, which would yield this markup:
    * `<i class="lt-sort-icon fa fa-sort-asc"></i>`
    *
