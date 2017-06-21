@@ -2,12 +2,13 @@ import Ember from 'ember';
 
 const {
   run,
-  computed
+  computed,
+  Mixin
 } = Ember;
 
 let sourceColumn;
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   classNameBindings: ['isDragging', 'isDragTarget', 'dragDirection'],
   attributeBindings: ['isDraggable:draggable'],
 

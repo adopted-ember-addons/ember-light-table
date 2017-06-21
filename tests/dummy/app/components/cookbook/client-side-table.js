@@ -4,10 +4,11 @@ import TableCommon from '../../mixins/table-common';
 import { task, timeout } from 'ember-concurrency';
 
 const {
+  Component,
   computed
 } = Ember;
 
-export default Ember.Component.extend(TableCommon, {
+export default Component.extend(TableCommon, {
   query: '',
 
   // No need for `enableSync` here

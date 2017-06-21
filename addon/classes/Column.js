@@ -5,14 +5,15 @@ const {
   isEmpty,
   makeArray,
   computed,
-  A: emberArray
+  A: emberArray,
+  Object: EmberObject
 } = Ember;
 
 /**
  * @module Table
  * @class Column
  */
-export default class Column extends Ember.Object.extend({
+export default class Column extends EmberObject.extend({
   /**
    * Whether the column can be hidden.
    *
@@ -325,11 +326,14 @@ export default class Column extends Ember.Object.extend({
    * @param {Object} options
    */
   constructor(options = {}) {
+    // TODO: Revert this, when babel#5862 is resolved.
+    //       https://github.com/babel/babel/issues/5862
+    super();
+
     if (options instanceof Column) {
       return options;
     }
 
-    super();
     this.setProperties(options);
 
     let { subColumns } = options;

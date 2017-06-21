@@ -1,8 +1,13 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
+const {
+  A,
+  Route
+} = Ember;
+
+export default Route.extend({
   model() {
-    return Ember.A([]);
+    return A([]);
   },
 
   resetController(controller, isExiting) {

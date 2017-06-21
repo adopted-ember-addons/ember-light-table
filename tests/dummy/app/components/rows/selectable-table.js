@@ -3,10 +3,11 @@ import Ember from 'ember';
 import TableCommon from '../../mixins/table-common';
 
 const {
+  Component,
   computed
 } = Ember;
 
-export default Ember.Component.extend(TableCommon, {
+export default Component.extend(TableCommon, {
   hasSelection: computed.notEmpty('table.selectedRows'),
 
   columns: computed(function() {
