@@ -1,6 +1,0 @@
-{
-  "name": "ember-light-table",
-  "devDependencies": {
-    "ember-qunit-notifications": "0.1.0"
-  }
-}
