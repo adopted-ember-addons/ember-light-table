@@ -2997,12 +2997,6 @@ ember-composable-helpers@^2.0.1:
     broccoli-funnel "^1.0.1"
     ember-cli-babel "^6.1.0"
 
-ember-computed-decorators@0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/ember-computed-decorators/-/ember-computed-decorators-0.2.2.tgz#7c934a575c55ac3a18b6aaeb7cd2cbe149bc9b34"
-  dependencies:
-    ember-cli-babel "^5.1.5"
-
 ember-concurrency@0.7.19:
   version "0.7.19"
   resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-0.7.19.tgz#095f2ede1b56ab068958cac5b55e77b9de67e1c6"
@@ -3072,14 +3066,15 @@ ember-factory-for-polyfill@^1.1.0:
     ember-cli-babel "^5.1.7"
     ember-cli-version-checker "^1.2.0"
 
-ember-font-awesome@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/ember-font-awesome/-/ember-font-awesome-2.2.0.tgz#8b7b5e4b1b5ff2b865b09331b9bf5506fb0c3c1e"
+ember-font-awesome@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/ember-font-awesome/-/ember-font-awesome-3.0.5.tgz#e1a7370e68b201bdf3b222c680a2cbcd184107cb"
   dependencies:
+    broccoli-funnel "^1.1.0"
     chalk "^1.1.3"
-    ember-cli-babel "^5.1.6"
-    ember-cli-htmlbars "^1.0.3"
-    ember-computed-decorators "0.2.2"
+    ember-cli-babel "^5.1.7"
+    ember-cli-htmlbars "^1.1.1"
+    font-awesome "^4.7.0"
 
 ember-get-config@0.2.1:
   version "0.2.1"
@@ -3858,6 +3853,10 @@ flat-cache@^1.2.1:
     del "^2.0.2"
     graceful-fs "^4.1.2"
     write "^0.2.1"
+
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
 
 for-in@^1.0.1:
   version "1.0.2"
