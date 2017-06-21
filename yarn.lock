@@ -2726,9 +2726,9 @@ ember-cli-lodash-subset@^1.0.11, ember-cli-lodash-subset@^1.0.7:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-1.0.12.tgz#af2e77eba5dcb0d77f3308d3a6fd7d3450f6e537"
 
-ember-cli-mirage@0.2.6:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-0.2.6.tgz#d8aecfbd47a6cbfcaf9531f920e04acb782a78c2"
+ember-cli-mirage@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-0.3.3.tgz#42b8779d857859341cbb219050ea2fec4d72ea88"
   dependencies:
     broccoli-funnel "^1.0.2"
     broccoli-merge-trees "^1.1.0"
@@ -2736,8 +2736,9 @@ ember-cli-mirage@0.2.6:
     chalk "^1.1.1"
     ember-cli-babel "^5.1.7"
     ember-cli-node-assets "^0.1.4"
-    ember-inflector "^1.9.2"
-    ember-lodash "^4.0"
+    ember-get-config "0.2.1"
+    ember-inflector "^2.0.0"
+    ember-lodash "^4.17.3"
     exists-sync "0.0.3"
     fake-xml-http-request "^1.4.0"
     faker "^3.0.0"
@@ -3109,12 +3110,6 @@ ember-in-viewport@2.1.1:
     ember-cli-babel "^5.1.6"
     ember-getowner-polyfill "^1.1.1"
 
-ember-inflector@^1.9.2:
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/ember-inflector/-/ember-inflector-1.12.1.tgz#d8bd2ca2f327b439720f89923fe614d46b5da1ca"
-  dependencies:
-    ember-cli-babel "^5.1.7"
-
 ember-inflector@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ember-inflector/-/ember-inflector-2.0.1.tgz#e9ac469ffa17992a43276bb1c9b8d87992b10d37"
@@ -3139,7 +3134,7 @@ ember-load-initializers@^1.0.0:
   dependencies:
     ember-cli-babel "^6.0.0-beta.7"
 
-ember-lodash@^4.0:
+ember-lodash@^4.17.3:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/ember-lodash/-/ember-lodash-4.17.4.tgz#62a76e322e140281c31406b6dd5a11cf318c452d"
   dependencies:
