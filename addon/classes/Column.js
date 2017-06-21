@@ -326,11 +326,14 @@ export default class Column extends EmberObject.extend({
    * @param {Object} options
    */
   constructor(options = {}) {
+    // TODO: Revert this, when babel#5862 is resolved.
+    //       https://github.com/babel/babel/issues/5862
+    super();
+
     if (options instanceof Column) {
       return options;
     }
 
-    super();
     this.setProperties(options);
 
     let { subColumns } = options;

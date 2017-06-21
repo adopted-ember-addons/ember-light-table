@@ -88,11 +88,14 @@ export default class Row extends ObjectProxy.extend({
    * @param {Object} options
    */
   constructor(content, options = {}) {
+    // TODO: Revert this, when babel#5862 is resolved.
+    //       https://github.com/babel/babel/issues/5862
+    super();
+
     if (content instanceof Row) {
       return content;
     }
 
-    super();
     this.setProperties(options);
     this.set('content', content);
   }
