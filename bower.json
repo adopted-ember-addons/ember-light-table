@@ -1,8 +1,5 @@
 {
   "name": "ember-light-table",
-  "dependencies": {
-    "es5-shim": "^4.0.5"
-  },
   "devDependencies": {
     "ember-qunit-notifications": "0.1.0"
   }
