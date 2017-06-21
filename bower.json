@@ -4,11 +4,7 @@
     "pretender": "~1.1.0",
     "Faker": "~3.1.0",
     "font-awesome": "~4.5.0",
-    "es5-shim": "^4.0.5",
-    "jquery": "2.2.4"
-  },
-  "resolutions": {
-    "jquery": "2.2.4"
+    "es5-shim": "^4.0.5"
   },
   "devDependencies": {
     "ember-qunit-notifications": "0.1.0"
