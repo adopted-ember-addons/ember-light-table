@@ -3,6 +3,7 @@ import Row from 'ember-light-table/classes/Row';
 import Column from 'ember-light-table/classes/Column';
 import SyncArrayProxy from 'ember-light-table/-private/sync-array-proxy';
 import { mergeOptionsWithGlobals } from 'ember-light-table/-private/global-options';
+import fixProto from 'ember-light-table/utils/fix-proto';
 
 const {
   get,
@@ -425,3 +426,6 @@ export default class Table extends EmberObject.extend({
     return columns.map((c) => Table.createColumn(c));
   }
 }
+
+// https://github.com/offirgolan/ember-light-table/issues/436#issuecomment-310138868
+fixProto(Table);

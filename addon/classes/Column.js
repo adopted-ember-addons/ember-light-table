@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import fixProto from 'ember-light-table/utils/fix-proto';
 
 const {
   guidFor,
@@ -344,3 +345,6 @@ export default class Column extends EmberObject.extend({
     this.set('subColumns', subColumns);
   }
 }
+
+// https://github.com/offirgolan/ember-light-table/issues/436#issuecomment-310138868
+fixProto(Column);
