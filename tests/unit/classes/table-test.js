@@ -74,6 +74,29 @@ test('CP - allColumns', function(assert) {
   assert.equal(table.get('allColumns.length'), 5);
 });
 
+test('CP - isEmpty', function(assert) {
+  let table = new Table([{}, {}], []);
+
+  assert.ok(table, 'table is set up correctly');
+  assert.ok(table.get('isEmpty'), 'table is initially empty');
+  table.pushRow({});
+  assert.notOk(table.get('isEmpty'), 'table is not empty after a row was pushed');
+  table.setRows([]);
+  assert.ok(table.get('isEmpty'), 'table is empty again after the rows were cleared');
+});
+
+test('CP - isEmpty (enableSync = true)', function(assert) {
+  let rowsArray = emberArray();
+  let table = new Table([{}, {}], rowsArray, { enableSync: true });
+
+  assert.ok(table, 'table is set up correctly');
+  assert.ok(table.get('isEmpty'), 'table is initially empty');
+  rowsArray.pushObject({});
+  assert.notOk(table.get('isEmpty'), 'table is not empty after a row was pushed');
+  rowsArray.clear();
+  assert.ok(table.get('isEmpty'), 'table is empty again after the rows were cleared');
+});
+
 test('table method - setRows', function(assert) {
   let table = new Table();
 
