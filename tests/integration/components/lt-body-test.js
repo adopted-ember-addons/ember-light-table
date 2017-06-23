@@ -191,6 +191,44 @@ test('hidden rows', function(assert) {
   assert.equal(this.$('tbody > tr').length, 4);
 });
 
+test('scaffolding', function(assert) {
+  const users = createUsers(1);
+  this.set('table', new Table(Columns, users));
+
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions enableScaffolding=true}}`);
+
+  const scaffoldingRow = this.$('tr:eq(0)');
+  const userRow = this.$('tr:eq(1)');
+  const userCells = userRow.children('.lt-cell');
+
+  assert.ok(
+    scaffoldingRow.hasClass('lt-scaffolding-row'),
+    'the first row of the <tbody> is a scaffolding row'
+  );
+  assert.ok(
+    !userRow.hasClass('lt-scaffolding-row'),
+    'the second row of the <tbody> is not a scaffolding row'
+  );
+
+  assert.equal(
+    userRow.attr('style'),
+    null,
+    'the second row of the <tbody> has no `style` attribute'
+  );
+
+  assert.ok(
+    Columns
+      .map((c, i) => {
+        const configuredWidth = Number.parseInt(c.width, 10);
+        const actualWidth = userCells.eq(i).width();
+
+        return configuredWidth ? configuredWidth === actualWidth : true;
+      })
+      .every(Boolean),
+    'the first actual data row has the correct widths'
+  );
+});
+
 test('overwrite', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
