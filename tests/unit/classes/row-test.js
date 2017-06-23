@@ -19,3 +19,8 @@ test('create row - row instance', function(assert) {
   assert.equal(row.get('foo'), 'bar');
   assert.equal(row2.get('foo'), 'bar');
 });
+
+test('reopen row', function(assert) {
+  assert.equal(typeof Row.reopen, 'function', 'reopen is a function');
+  assert.equal(typeof Row.reopenClass, 'function', 'reopenClass is a function');
+});
