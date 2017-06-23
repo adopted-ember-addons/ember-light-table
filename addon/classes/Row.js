@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import fixProto from 'ember-light-table/utils/fix-proto';
 
 const {
   computed,
@@ -100,3 +101,6 @@ export default class Row extends ObjectProxy.extend({
     this.set('content', content);
   }
 }
+
+// https://github.com/offirgolan/ember-light-table/issues/436#issuecomment-310138868
+fixProto(Row);

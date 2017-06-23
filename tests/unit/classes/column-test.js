@@ -29,6 +29,11 @@ test('create column - column instance', function(assert) {
   assert.equal(col2.label, 'Name');
 });
 
+test('reopen colum', function(assert) {
+  assert.equal(typeof Column.reopen, 'function', 'reopen is a function');
+  assert.equal(typeof Column.reopenClass, 'function', 'reopenClass is a function');
+});
+
 test('CP - isGroupColumn', function(assert) {
   let col = new Column();
   assert.ok(col);

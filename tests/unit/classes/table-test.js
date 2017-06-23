@@ -27,6 +27,11 @@ test('create table - with options', function(assert) {
   assert.ok(table.columns[0] instanceof Column);
 });
 
+test('reopen table', function(assert) {
+  assert.equal(typeof Table.reopen, 'function', 'reopen is a function');
+  assert.equal(typeof Table.reopenClass, 'function', 'reopenClass is a function');
+});
+
 test('CP - visibleColumnGroups', function(assert) {
   let table = new Table();
   let col = new Column();
