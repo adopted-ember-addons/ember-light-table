@@ -15,6 +15,14 @@
 
     <table class={{tableClassNames}}>
       <tbody class="lt-body">
+        {{#if enableScaffolding}}
+          <tr class="lt-scaffolding-row">
+            {{#each columns as |column|}}
+              <td style={{html-safe (if column.width (concat 'width: ' column.width))}} class="lt-scaffolding"></td>
+            {{/each}}
+          </tr>
+        {{/if}}
+
         {{#if overwrite}}
           {{yield columns rows}}
         {{else}}
@@ -23,6 +31,7 @@
               data-row-id=row.rowId
               table=table
               tableActions=tableActions
+              enableScaffolding=enableScaffolding
               canExpand=canExpand
               canSelect=canSelect
               click=(action 'onRowClick' row)
