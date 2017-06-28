@@ -40,6 +40,7 @@ ember install ember-light-table
 
 - :warning: **Bug reports**: If your bug hasn't been reported yet, please [**open an issue**][new-issue]. Try to pick a short but descriptive title. Make sure you're using the latest version of *ember-light-table*. In the issue body, try to provide exact steps for reproduction, ideally with example code. If you can't, please include any and all error messages, as many details as possible and exact information on which Ember.js / ember-cli version and browser / OS you're using.
 - :question: **Questions**: As with bugs, please make sure the question wasn't asked before. Also, see if the [Live Demo][demo], [Cookbook][cookbook] or [API docs][docs] already cover your problem. If not, please do [**open an issue**][new-issue].
+- ![Slack Icon](https://i.imgur.com/Bjckhpc.png) **Slack**: We're happy to help you in our [**#e-light-table**][slack] Slack channel! You can [create an Ember Community Slack account][slackin] here for free.
 
 ## :metal: Getting Involved
 
@@ -102,3 +103,6 @@ If a pull request is marked with [**help-wanted**][pr-help-wanted] we just don't
 [demo]: https://offirgolan.github.io/ember-light-table/
 [cookbook]: https://offirgolan.github.io/ember-light-table/#/cookbook
 [docs]: https://offirgolan.github.io/ember-light-table/docs/
+
+[slack]: https://embercommunity.slack.com/messages/C615THVGF
+[slackin]: https://ember-community-slackin.herokuapp.com/
