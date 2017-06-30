@@ -1,4 +1,4 @@
-import { findAll, find } from 'ember-native-dom-helpers';
+import { findAll, find, scrollTo } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import { skip } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -25,15 +25,13 @@ test('it renders', function(assert) {
 });
 
 // TODO: Figure out why tests is failing in Phantom.js
-skip('scrolled to bottom', function(assert) {
+skip('scrolled to bottom', async function(assert) {
   assert.expect(4);
-  let done = assert.async();
 
   this.set('table', new Table(Columns, createUsers(50)));
 
   this.on('onScrolledToBottom', () => {
     assert.ok(true);
-    done();
   });
 
   this.render(hbs `
@@ -51,10 +49,7 @@ skip('scrolled to bottom', function(assert) {
   assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
   assert.equal(scrollHeight, 2500, 'scroll height is 2500');
 
-  this.$(scrollContainer).animate({
-    scrollTop: scrollHeight
-  }, 0);
-
+  await scrollTo(scrollContainer, 0, scrollHeight);
 });
 
 test('fixed header', function(assert) {
@@ -111,7 +106,7 @@ skip('table assumes height of container', function(assert) {
     </div>
   `);
 
-  assert.equal(this.$('#lightTable').height(), 500, 'table is 500px height');
+  assert.equal(find('#lightTable').offsetHeight, 500, 'table is 500px height');
 
 });
 
@@ -133,10 +128,9 @@ skip('table body should consume all available space when not enough content to f
       {{/light-table}}
     </div>
   `);
-
-  assert.equal(this.$('.lt-head-wrap').height(), 42, 'header is 42px tall');
-  assert.equal(this.$('.lt-body-wrap').height(), 438, 'body is 438px tall');
-  assert.equal(this.$('.lt-foot-wrap').height(), 20, 'header is 20px tall');
+  assert.equal(find('.lt-head-wrap').offsetHeight, 42, 'header is 42px tall');
+  assert.equal(find('.lt-body-wrap').offsetHeight, 438, 'body is 438px tall');
+  assert.equal(find('.lt-foot-wrap').offsetHeight, 20, 'header is 20px tall');
 
 });
 
@@ -192,8 +186,7 @@ test('passed in components can have computed properties', function(assert) {
   assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
 });
 
-test('onScroll', function(assert) {
-  let done = assert.async();
+test('onScroll', async function(assert) {
   let table = new Table(Columns, createUsers(10));
   let expectedScroll = 50;
 
@@ -202,7 +195,6 @@ test('onScroll', function(assert) {
     onScroll(actualScroll) {
       assert.ok(true, 'onScroll worked');
       assert.equal(actualScroll, expectedScroll, 'scroll position is correct');
-      done();
     }
   });
 
@@ -216,5 +208,5 @@ test('onScroll', function(assert) {
     {{/light-table}}
   `);
 
-  this.$('.tse-scroll-content').scrollTop(expectedScroll).scroll();
+  await scrollTo('.tse-scroll-content', 0, expectedScroll);
 });
