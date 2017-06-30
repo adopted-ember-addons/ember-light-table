@@ -1,3 +1,4 @@
+import { find } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { Column } from 'ember-light-table';
@@ -11,5 +12,5 @@ test('it renders', function(assert) {
   // Handle any actions with this.on('myAction', function(val) { ... });"
   this.set('column', new Column());
   this.render(hbs`{{light-table/columns/base column=column}}`);
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(find('*').textContent.trim(), '');
 });

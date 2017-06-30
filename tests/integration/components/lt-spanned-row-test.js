@@ -1,3 +1,4 @@
+import { find } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -7,7 +8,7 @@ moduleForComponent('lt-spanned-row', 'Integration | Component | lt spanned row',
 
 test('it renders', function(assert) {
   this.render(hbs`{{lt-spanned-row}}`);
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(find('*').textContent.trim(), '');
 
   this.render(hbs`
     {{#lt-spanned-row}}
@@ -15,7 +16,7 @@ test('it renders', function(assert) {
     {{/lt-spanned-row}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(find('*').textContent.trim(), 'template block text');
 });
 
 test('visiblity', function(assert) {
@@ -26,10 +27,10 @@ test('visiblity', function(assert) {
       template block text
     {{/lt-spanned-row}}
   `);
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(find('*').textContent.trim(), 'template block text');
 
   this.set('visible', false);
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(find('*').textContent.trim(), '');
 });
 
 test('colspan', function(assert) {
@@ -38,8 +39,8 @@ test('colspan', function(assert) {
       template block text
     {{/lt-spanned-row}}
   `);
-  assert.equal(this.$().text().trim(), 'template block text');
-  assert.equal(this.$('td').attr('colspan'), 4);
+  assert.equal(find('*').textContent.trim(), 'template block text');
+  assert.equal(find('td').getAttribute('colspan'), 4);
 });
 
 test('yield', function(assert) {
@@ -49,5 +50,5 @@ test('yield', function(assert) {
       {{row.name}}
     {{/lt-spanned-row}}
   `);
-  assert.equal(this.$().text().trim(), 'Offir');
+  assert.equal(find('*').textContent.trim(), 'Offir');
 });

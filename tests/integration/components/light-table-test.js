@@ -1,9 +1,11 @@
+import { findAll, find } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import { skip } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
 import Table from 'ember-light-table';
 import Columns from '../../helpers/table-columns';
+import hasClass from '../../helpers/has-class';
 import RowComponent from 'ember-light-table/components/lt-row';
 import { register } from 'ember-owner-test-utils/test-support/register';
 import Ember from 'ember';
@@ -19,7 +21,7 @@ test('it renders', function(assert) {
   this.set('table', new Table());
   this.render(hbs `{{light-table table}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(find('*').textContent.trim(), '');
 });
 
 // TODO: Figure out why tests is failing in Phantom.js
@@ -41,12 +43,12 @@ skip('scrolled to bottom', function(assert) {
     {{/light-table}}
   `);
 
-  assert.equal(this.$('tbody > tr').length, 50, '50 rows are rendered');
+  assert.equal(findAll('tbody > tr').length, 50, '50 rows are rendered');
 
   let scrollContainer = '.tse-scroll-content';
-  let scrollHeight = this.$(scrollContainer).prop('scrollHeight');
+  let { scrollHeight } = find(scrollContainer);
 
-  assert.ok(this.$(scrollContainer).length > 0, 'scroll container was rendered');
+  assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
   assert.equal(scrollHeight, 2500, 'scroll height is 2500');
 
   this.$(scrollContainer).animate({
@@ -67,11 +69,11 @@ test('fixed header', function(assert) {
     {{/light-table}}
   `);
 
-  assert.equal(this.$('#lightTable_inline_head thead').length, 0);
+  assert.equal(findAll('#lightTable_inline_head thead').length, 0);
 
   this.set('fixed', false);
 
-  assert.equal(this.$('#lightTable_inline_head thead').length, 1);
+  assert.equal(findAll('#lightTable_inline_head thead').length, 1);
 });
 
 test('fixed footer', function(assert) {
@@ -86,11 +88,11 @@ test('fixed footer', function(assert) {
     {{/light-table}}
   `);
 
-  assert.equal(this.$('#lightTable_inline_foot tfoot').length, 0);
+  assert.equal(findAll('#lightTable_inline_foot tfoot').length, 0);
 
   this.set('fixed', false);
 
-  assert.equal(this.$('#lightTable_inline_foot tfoot').length, 1);
+  assert.equal(findAll('#lightTable_inline_foot tfoot').length, 1);
 });
 
 // TODO: Passes in Chrome but not in Phantom
@@ -150,7 +152,7 @@ test('accepts components that are used in the body', function(assert) {
     {{/light-table}}
   `);
 
-  assert.equal(this.$('.lt-row.custom-row').length, 1, 'row has custom-row class');
+  assert.equal(findAll('.lt-row.custom-row').length, 1, 'row has custom-row class');
 });
 
 test('passed in components can have computed properties', function(assert) {
@@ -174,20 +176,20 @@ test('passed in components can have computed properties', function(assert) {
     {{/light-table}}
   `);
 
-  assert.equal(this.$('.custom-row').length, 3, 'three custom rows were rendered');
-  assert.equal(this.$('.custom-row.is-active').length, 0, 'none of the items are active');
+  assert.equal(findAll('.custom-row').length, 3, 'three custom rows were rendered');
+  assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
 
   this.set('current', users[0]);
-
-  assert.ok(this.$('.custom-row:eq(0)').hasClass('is-active'), 'first custom row is active');
+  let [firstRow] = findAll('.custom-row');
+  assert.ok(hasClass(firstRow, 'is-active'), 'first custom row is active');
 
   this.set('current', users[2]);
-
-  assert.ok(this.$('.custom-row:eq(2)').hasClass('is-active'), 'third custom row is active');
+  let [,, thirdRow] = findAll('.custom-row');
+  assert.ok(hasClass(thirdRow, 'is-active'), 'third custom row is active');
 
   this.set('current', null);
 
-  assert.equal(this.$('.custom-row.is-active').length, 0, 'none of the items are active');
+  assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
 });
 
 test('onScroll', function(assert) {
