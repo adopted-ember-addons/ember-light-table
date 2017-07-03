@@ -38,7 +38,7 @@ test('click - non-sortable column', function(assert) {
   this.render(hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action 'onColumnClick')}}`);
 
   assert.equal(findAll('tr > th').length, 6);
-  let [nonSortableHeader] = findAll('tr > th');
+  let nonSortableHeader = find('tr > th');
   click(nonSortableHeader);
 });
 

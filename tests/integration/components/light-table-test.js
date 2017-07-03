@@ -178,7 +178,7 @@ test('passed in components can have computed properties', function(assert) {
   assert.ok(hasClass(firstRow, 'is-active'), 'first custom row is active');
 
   this.set('current', users[2]);
-  let [,, thirdRow] = findAll('.custom-row');
+  let thirdRow = find('.custom-row:nth-child(3)');
   assert.ok(hasClass(thirdRow, 'is-active'), 'third custom row is active');
 
   this.set('current', null);

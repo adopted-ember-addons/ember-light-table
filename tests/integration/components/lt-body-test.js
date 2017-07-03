@@ -34,7 +34,7 @@ test('row selection - enable or disable', function(assert) {
 
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}`);
 
-  let [row] = findAll('tr');
+  let row = find('tr');
 
   assert.notOk(hasClass(row, 'is-selectable'));
   assert.notOk(hasClass(row, 'is-selected'));
@@ -53,9 +53,9 @@ test('row selection - ctrl-click to modify selection', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true}}`);
-  let rows = findAll('tr');
-  let [firstRow, , , middleRow] = rows;
-  let lastRow = rows[rows.length - 1];
+  let firstRow = find('tr:first-child');
+  let middleRow = find('tr:nth-child(4)');
+  let lastRow = find('tr:last-child');
 
   assert.equal(findAll('tbody > tr').length, 5);
 
@@ -77,9 +77,9 @@ test('row selection - click to modify selection', function(assert) {
 
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false}}`);
 
-  let rows = findAll('tr');
-  let [firstRow, , , middleRow] = rows;
-  let lastRow = rows[rows.length - 1];
+  let firstRow = find('tr:first-child');
+  let middleRow = find('tr:nth-child(4)');
+  let lastRow = find('tr:last-child');
 
   assert.equal(findAll('tbody > tr').length, 5);
 
@@ -106,7 +106,7 @@ test('row expansion', function(assert) {
     {{/lt-body}}
   `);
 
-  let [row] = findAll('tr');
+  let row = find('tr');
 
   assert.notOk(hasClass(row, 'is-expandable'));
   click(row);
@@ -159,7 +159,7 @@ test('row actions', function(assert) {
   this.on('onRowDoubleClick', (row) => assert.ok(row));
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
 
-  let [row] = findAll('tr');
+  let row = find('tr');
   click(row);
   triggerEvent(row, 'dblclick');
 });
