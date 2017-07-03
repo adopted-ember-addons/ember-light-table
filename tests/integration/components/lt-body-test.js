@@ -1,9 +1,10 @@
+import { click, findAll, find, triggerEvent } from 'ember-native-dom-helpers';
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
 import Table from 'ember-light-table';
-import createClickEvent from '../../helpers/create-click-event';
+import hasClass from '../../helpers/has-class';
 import Columns from '../../helpers/table-columns';
 
 const {
@@ -24,7 +25,7 @@ moduleForComponent('lt-body', 'Integration | Component | lt body', {
 
 test('it renders', function(assert) {
   this.render(hbs `{{lt-body sharedOptions=sharedOptions}}`);
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(find('*').textContent.trim(), '');
 });
 
 test('row selection - enable or disable', function(assert) {
@@ -33,47 +34,42 @@ test('row selection - enable or disable', function(assert) {
 
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}`);
 
-  let row = this.$('tr:first');
+  let row = find('tr');
 
-  assert.ok(!row.hasClass('is-selectable'));
-  assert.ok(!row.hasClass('is-selected'));
-  row.click();
-  assert.ok(!row.hasClass('is-selected'));
+  assert.notOk(hasClass(row, 'is-selectable'));
+  assert.notOk(hasClass(row, 'is-selected'));
+  click(row);
+  assert.notOk(hasClass(row, 'is-selected'));
 
   this.set('canSelect', true);
 
-  assert.ok(row.hasClass('is-selectable'));
-  assert.ok(!row.hasClass('is-selected'));
-  row.click();
-  assert.ok(row.hasClass('is-selected'));
+  assert.ok(hasClass(row, 'is-selectable'));
+  assert.notOk(hasClass(row, 'is-selected'));
+  click(row);
+  assert.ok(hasClass(row, 'is-selected'));
 });
 
 test('row selection - ctrl-click to modify selection', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true}}`);
+  let firstRow = find('tr:first-child');
+  let middleRow = find('tr:nth-child(4)');
+  let lastRow = find('tr:last-child');
 
-  let firstRow = this.$('tr:first');
-  let middleRow = this.$('tr:nth-of-type(3)');
-  let lastRow = this.$('tr:last');
+  assert.equal(findAll('tbody > tr').length, 5);
 
-  assert.equal(this.$('tbody > tr').length, 5);
+  click(firstRow);
+  assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
 
-  firstRow.click();
-  assert.equal(this.$('tr.is-selected').length, 1, 'clicking a row selects it');
+  click(lastRow, { shiftKey: true });
+  assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
 
-  lastRow.trigger(createClickEvent({
-    shiftKey: true
-  }));
-  assert.equal(this.$('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
+  click(middleRow, { ctrlKey: true });
+  assert.equal(findAll('tr.is-selected').length, 4, 'ctrl-clicking a selected row deselects it');
 
-  middleRow.trigger(createClickEvent({
-    ctrlKey: true
-  }));
-  assert.equal(this.$('tr.is-selected').length, 4, 'ctrl-clicking a selected row deselects it');
-
-  firstRow.click();
-  assert.equal(this.$('tr.is-selected').length, 0, 'clicking a selected row deselects all rows');
+  click(firstRow);
+  assert.equal(findAll('tr.is-selected').length, 0, 'clicking a selected row deselects all rows');
 });
 
 test('row selection - click to modify selection', function(assert) {
@@ -81,25 +77,23 @@ test('row selection - click to modify selection', function(assert) {
 
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false}}`);
 
-  let firstRow = this.$('tr:first');
-  let middleRow = this.$('tr:nth-of-type(3)');
-  let lastRow = this.$('tr:last');
+  let firstRow = find('tr:first-child');
+  let middleRow = find('tr:nth-child(4)');
+  let lastRow = find('tr:last-child');
 
-  assert.equal(this.$('tbody > tr').length, 5);
+  assert.equal(findAll('tbody > tr').length, 5);
 
-  firstRow.click();
-  assert.equal(this.$('tr.is-selected').length, 1, 'clicking a row selects it');
+  click(firstRow);
+  assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
 
-  lastRow.trigger(createClickEvent({
-    shiftKey: true
-  }));
-  assert.equal(this.$('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
+  click(lastRow, { shiftKey: true });
+  assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
 
-  middleRow.click();
-  assert.equal(this.$('tr.is-selected').length, 4, 'clicking a selected row deselects it without affecting other selected rows');
+  click(middleRow);
+  assert.equal(findAll('tr.is-selected').length, 4, 'clicking a selected row deselects it without affecting other selected rows');
 
-  middleRow.click();
-  assert.equal(this.$('tr.is-selected').length, 5, 'clicking a deselected row selects it without affecting other selected rows');
+  click(middleRow);
+  assert.equal(findAll('tr.is-selected').length, 5, 'clicking a deselected row selects it without affecting other selected rows');
 });
 
 test('row expansion', function(assert) {
@@ -112,28 +106,29 @@ test('row expansion', function(assert) {
     {{/lt-body}}
   `);
 
-  let row = this.$('tr:first');
+  let row = find('tr');
 
-  assert.ok(!row.hasClass('is-expandable'));
-  row.click();
-  assert.equal(this.$('tr.lt-expanded-row').length, 0);
-  assert.equal(this.$('tbody > tr').length, 2);
-  assert.equal(this.$('tr.lt-expanded-row').text().trim(), '');
+  assert.notOk(hasClass(row, 'is-expandable'));
+  click(row);
+  assert.equal(findAll('tr.lt-expanded-row').length, 0);
+  assert.equal(findAll('tbody > tr').length, 2);
+  assert.notOk(find('tr.lt-expanded-row'));
 
   this.set('canExpand', true);
 
-  assert.ok(row.hasClass('is-expandable'));
-  row.click();
-  assert.equal(this.$('tr.lt-expanded-row').length, 1);
-  assert.equal(this.$('tbody > tr').length, 3);
-  assert.equal(row.next().text().trim(), 'Hello');
+  assert.ok(hasClass(row, 'is-expandable'));
+  click(row);
+  assert.equal(findAll('tr.lt-expanded-row').length, 1);
+  assert.equal(findAll('tbody > tr').length, 3);
+  assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
 
-  row = this.$('tr:last');
-  assert.ok(row.hasClass('is-expandable'));
-  row.click();
-  assert.equal(this.$('tr.lt-expanded-row').length, 1);
-  assert.equal(this.$('tbody > tr').length, 3);
-  assert.equal(row.next().text().trim(), 'Hello');
+  let allRows = findAll('tr');
+  row = allRows[allRows.length - 1];
+  assert.ok(hasClass(row, 'is-expandable'));
+  click(row);
+  assert.equal(findAll('tr.lt-expanded-row').length, 1);
+  assert.equal(findAll('tbody > tr').length, 3);
+  assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
 });
 
 test('row expansion - multiple', function(assert) {
@@ -144,17 +139,16 @@ test('row expansion - multiple', function(assert) {
     {{/lt-body}}
   `);
 
-  let rows = this.$('tr');
+  let rows = findAll('tr');
   assert.equal(rows.length, 2);
 
-  rows.each((i, r) => {
-    let row = $(r);
-    assert.ok(row.hasClass('is-expandable'));
-    row.click();
-    assert.equal(row.next().text().trim(), 'Hello');
+  rows.forEach((row) => {
+    assert.ok(hasClass(row, 'is-expandable'));
+    click(row);
+    assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
   });
 
-  assert.equal(this.$('tr.lt-expanded-row').length, 2);
+  assert.equal(findAll('tr.lt-expanded-row').length, 2);
 });
 
 test('row actions', function(assert) {
@@ -165,9 +159,9 @@ test('row actions', function(assert) {
   this.on('onRowDoubleClick', (row) => assert.ok(row));
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
 
-  let row = this.$('tr:first');
-  row.click();
-  row.dblclick();
+  let row = find('tr');
+  click(row);
+  triggerEvent(row, 'dblclick');
 });
 
 test('hidden rows', function(assert) {
@@ -175,20 +169,20 @@ test('hidden rows', function(assert) {
 
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions}}`);
 
-  assert.equal(this.$('tbody > tr').length, 5);
+  assert.equal(findAll('tbody > tr').length, 5);
 
   run(() => {
     this.get('table.rows').objectAt(0).set('hidden', true);
     this.get('table.rows').objectAt(1).set('hidden', true);
   });
 
-  assert.equal(this.$('tbody > tr').length, 3);
+  assert.equal(findAll('tbody > tr').length, 3);
 
   run(() => {
     this.get('table.rows').objectAt(0).set('hidden', false);
   });
 
-  assert.equal(this.$('tbody > tr').length, 4);
+  assert.equal(findAll('tbody > tr').length, 4);
 });
 
 test('scaffolding', function(assert) {
@@ -197,35 +191,21 @@ test('scaffolding', function(assert) {
 
   this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions enableScaffolding=true}}`);
 
-  const scaffoldingRow = this.$('tr:eq(0)');
-  const userRow = this.$('tr:eq(1)');
-  const userCells = userRow.children('.lt-cell');
+  const [scaffoldingRow, userRow] = findAll('tr');
+  const userCells = findAll('.lt-cell', userRow);
+
+  assert.ok(hasClass(scaffoldingRow, 'lt-scaffolding-row'), 'the first row of the <tbody> is a scaffolding row');
+  assert.notOk(hasClass(userRow, 'lt-scaffolding-row'), 'the second row of the <tbody> is not a scaffolding row');
+
+  assert.notOk(userRow.hasAttribute('style'), 'the second row of the <tbody> has no `style` attribute');
 
   assert.ok(
-    scaffoldingRow.hasClass('lt-scaffolding-row'),
-    'the first row of the <tbody> is a scaffolding row'
-  );
-  assert.ok(
-    !userRow.hasClass('lt-scaffolding-row'),
-    'the second row of the <tbody> is not a scaffolding row'
-  );
-
-  assert.equal(
-    userRow.attr('style'),
-    null,
-    'the second row of the <tbody> has no `style` attribute'
-  );
-
-  assert.ok(
-    Columns
-      .map((c, i) => {
-        const configuredWidth = Number.parseInt(c.width, 10);
-        const actualWidth = userCells.eq(i).width();
-
-        return configuredWidth ? configuredWidth === actualWidth : true;
-      })
-      .every(Boolean),
-    'the first actual data row has the correct widths'
+    Columns.map((c, i) => {
+      const configuredWidth = Number.parseInt(c.width, 10);
+      const actualWidth = Number.parseInt(userCells[i].style.width);
+      return configuredWidth ? configuredWidth === actualWidth : true;
+    }).every(Boolean),
+    'the first actual data row has the correct widths assigned'
   );
 });
 
@@ -238,5 +218,5 @@ test('overwrite', function(assert) {
     {{/lt-body}}
   `);
 
-  assert.equal(this.$().text().trim(), '6, 5');
+  assert.equal(find('*').textContent.trim(), '6, 5');
 });

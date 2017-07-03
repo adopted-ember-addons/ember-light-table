@@ -62,6 +62,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-font-awesome": "^3.0.5",
     "ember-load-initializers": "^1.0.0",
+    "ember-native-dom-helpers": "^0.5.0",
     "ember-one-way-controls": "2.0.0",
     "ember-owner-test-utils": "^0.1.2",
     "ember-resolver": "^4.0.0",
