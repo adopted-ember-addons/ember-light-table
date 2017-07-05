@@ -525,3 +525,27 @@ test('table modifications with sync enabled - sort', function(assert) {
   assert.equal(table.get('rows.length'), rows.get('length'));
   assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
 });
+
+test('setRowsSynced', function(assert) {
+  let initialRows = emberArray([]);
+  let otherRows = emberArray([]);
+  let table = new Table([], initialRows, { enableSync: true });
+  let initialLength = 5;
+  let otherLength = 13;
+
+  for (let i = 0; i < initialLength; i++) {
+    initialRows.pushObject({ position: i });
+  }
+  assert.deepEqual(table.get('rows').getEach('position'), initialRows.getEach('position'), 'the table is initialized with a synced array');
+
+  table.setRowsSynced(otherRows);
+  assert.deepEqual(table.get('rows').getEach('position'), otherRows.getEach('position'), 'the synced array may be replaced');
+
+  for (let i = 0; i < otherLength; i++) {
+    otherRows.pushObject({ position: i });
+  }
+  assert.deepEqual(table.get('rows').getEach('position'), otherRows.getEach('position'), 'the replacement array is correctly synced');
+
+  initialRows.popObject();
+  assert.deepEqual(table.get('rows').getEach('position'), otherRows.getEach('position'), 'mutating the replaced array has no effect');
+});
