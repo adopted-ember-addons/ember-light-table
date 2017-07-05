@@ -192,6 +192,26 @@ export default class Table extends EmberObject.extend({
   }
 
   /**
+   * The same as `setRows`, however the given array is synced, meaning that
+   * mutating the array also updates the table and vice-versa.
+   *
+   * Also see `enableSync` in the constructor options.
+   *
+   * @method setRowsSynced
+   * @param  {Array} rows
+   * @param  {Object} options
+   * @return {Array} rows
+   */
+  setRowsSynced(rows = [], options = {}) {
+    let _rows = RowSyncArrayProxy.create({
+      syncArray: rows,
+      content: emberArray(Table.createRows(rows, options))
+    });
+
+    return this.set('rows', _rows);
+  }
+
+  /**
    * Push the object onto the end of the row array if it is not already present.
    * @method addRow
    * @param  {Object} row
