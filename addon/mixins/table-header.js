@@ -2,7 +2,9 @@ import Ember from 'ember';
 
 const {
   computed,
-  Mixin
+  isEmpty,
+  Mixin,
+  warn
 } = Ember;
 
 /**
@@ -104,6 +106,19 @@ export default Mixin.create({
   sortIcons: computed('iconAscending', 'iconDescending', function() {
     return this.getProperties(['iconAscending', 'iconDescending']);
   }).readOnly(),
+
+  init() {
+    this._super(...arguments);
+
+    let fixed = this.get('fixed');
+    let height = this.get('sharedOptions.height');
+
+    warn(
+      'You did not set a `height` attribute for your table, but marked a header or footer to be fixed. This means that you have to set the table height via CSS. For more information please refer to:  https://github.com/offirgolan/ember-light-table/issues/446',
+      !fixed || fixed && !isEmpty(height),
+      { id: 'ember-light-table.height-attribute' }
+    );
+  },
 
   actions: {
     /**
