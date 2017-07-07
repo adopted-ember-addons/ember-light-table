@@ -145,15 +145,18 @@ export default class Table extends EmberObject.extend({
    * @param  {Array} columns
    * @param  {Array} rows
    * @param  {Object} options
-   *    - enableSync ( _Boolean_ ): If true, creates a two way sync between the table's rows
-   *                                and the passed rows collection
+   * @param  {Boolean} options.enableSync If `true`, creates a two way sync
+   *           between the table's rows and the passed rows collection. Also see
+   *           `setRowsSynced(rows)`.
+   * @param  {Object}  options.rowOptions Options hash passed through to
+   *           `createRow(content, options)`.
    */
   constructor(columns = [], rows = [], options = {}) {
     super();
 
-    let _columns = emberArray(Table.createColumns(columns));
-    let _rows = emberArray(Table.createRows(rows));
     let _options = mergeOptionsWithGlobals(options);
+    let _columns = emberArray(Table.createColumns(columns));
+    let _rows = emberArray(Table.createRows(rows, _options.rowOptions));
 
     if (_options.enableSync) {
       _rows = RowSyncArrayProxy.create({
@@ -189,6 +192,26 @@ export default class Table extends EmberObject.extend({
    */
   setRows(rows = [], options = {}) {
     return this.get('rows').setObjects(Table.createRows(rows, options));
+  }
+
+  /**
+   * The same as `setRows`, however the given array is synced, meaning that
+   * mutating the array also updates the table and vice-versa.
+   *
+   * Also see `enableSync` in the constructor options.
+   *
+   * @method setRowsSynced
+   * @param  {Array} rows
+   * @param  {Object} options
+   * @return {Array} rows
+   */
+  setRowsSynced(rows = [], options = {}) {
+    let _rows = RowSyncArrayProxy.create({
+      syncArray: rows,
+      content: emberArray(Table.createRows(rows, options))
+    });
+
+    return this.set('rows', _rows);
   }
 
   /**
