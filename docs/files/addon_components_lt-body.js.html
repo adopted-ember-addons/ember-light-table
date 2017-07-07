@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.8.6" target="_blank">
-                                  Tag: v1.8.6
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
+                                  Tag: v1.9.0
                                 </a>
                             </h4>
                         </div>
@@ -83,6 +83,9 @@
                                                     <li class="sub"><a href="../modules/Table Declaration.html">Table Declaration</a></li>
                                                     <li class="sub"><a href="../modules/Component Declaration.html">Component Declaration</a></li>
                                         </li>
+                                        <li>
+                                            <a href="../modules/Utils.html">Utils</a>
+                                        </li>
                                 </ol>
                         </div>
                     </div>
@@ -107,6 +110,9 @@
                                     </li>
                                     <li>
                                         <a href="../classes/Column.html">Column</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/fixProto.html">fixProto</a>
                                     </li>
                                     <li>
                                         <a href="../classes/light-table.html">light-table</a>
@@ -159,7 +165,7 @@ const {
 /**
  * &#x60;&#x60;&#x60;hbs
  * {{#light-table table as |t|}}
- *   {{#t.body multiSelect=true onRowClick=(action &#x27;rowClicked&#x27;)}}
+ *   {{#t.body multiSelect=true onRowClick=(action &#x27;rowClicked&#x27;) as |body|}}
  *     {{#body.expanded-row as |row|}}
  *       Hello &lt;b&gt;{{row.firstName}}&lt;/b&gt;
  *     {{/body.expanded-row}}
@@ -304,6 +310,21 @@ export default Component.extend({
    * @default false
    */
   overwrite: false,
+
+  /**
+   * If true, the body will prepend an invisible &#x60;&lt;tr&gt;&#x60; that scaffolds the
+   * widths of the table cells.
+   *
+   * ember-light-table uses [&#x60;table-layout: fixed&#x60;](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout).
+   * This means, that the widths of the columns are defined by the first row
+   * only. By prepending this scaffolding row, widths of columns only need to
+   * be specified once.
+   *
+   * @property enableScaffolding
+   * @type {Boolean}
+   * @default false
+   */
+  enableScaffolding: false,
 
   /**
    * ID of main table component. Used to generate divs for ember-wormhole
@@ -482,7 +503,7 @@ export default Component.extend({
       });
     } else if (scrollToRow !== _scrollToRow) {
       if (scrollToRow instanceof Row) {
-        let rowElement = document.getElementById(scrollToRow.get(&#x27;rowId&#x27;));
+        let rowElement = this.element.querySelector(&#x60;[data-row-id=${scrollToRow.get(&#x27;rowId&#x27;)}]&#x60;);
 
         if (rowElement instanceof Element) {
           targetScrollOffset = rowElement.offsetTop;

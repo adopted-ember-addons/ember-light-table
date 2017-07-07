@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Ember Light Table</title>
+    <title>addon/utils/fix-proto.js - Ember Light Table</title>
     <meta name="description" content="Lightweight, component based table for Ember 2.x">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
-    <link rel="stylesheet" href="./assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="./assets/css/main.css" id="site_styles">
-    <link rel="stylesheet" href="./assets/css/custom.css">
-    <link rel="stylesheet" href="./assets/vendor/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="./assets/vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700' rel='stylesheet' type='text/css'>
     
 </head>
@@ -18,8 +18,8 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a href="./" class="navbar-brand">
-            <img src="./assets/img/ember-logo.png" alt="">
+          <a href="../" class="navbar-brand">
+            <img src="../assets/img/ember-logo.png" alt="">
             <span>Light Table</span>
           </a>
         </div>
@@ -71,20 +71,20 @@
                         <div class="panel-body">
                                 <ol>
                                         <li>
-                                            <a href="./modules/Light Table.html">Light Table</a>
-                                                    <li class="sub"><a href="./modules/Cell Types.html">Cell Types</a></li>
-                                                    <li class="sub"><a href="./modules/Column Types.html">Column Types</a></li>
+                                            <a href="../modules/Light Table.html">Light Table</a>
+                                                    <li class="sub"><a href="../modules/Cell Types.html">Cell Types</a></li>
+                                                    <li class="sub"><a href="../modules/Column Types.html">Column Types</a></li>
                                         </li>
                                         <li>
-                                            <a href="./modules/Table.html">Table</a>
+                                            <a href="../modules/Table.html">Table</a>
                                         </li>
                                         <li>
-                                            <a href="./modules/Usage.html">Usage</a>
-                                                    <li class="sub"><a href="./modules/Table Declaration.html">Table Declaration</a></li>
-                                                    <li class="sub"><a href="./modules/Component Declaration.html">Component Declaration</a></li>
+                                            <a href="../modules/Usage.html">Usage</a>
+                                                    <li class="sub"><a href="../modules/Table Declaration.html">Table Declaration</a></li>
+                                                    <li class="sub"><a href="../modules/Component Declaration.html">Component Declaration</a></li>
                                         </li>
                                         <li>
-                                            <a href="./modules/Utils.html">Utils</a>
+                                            <a href="../modules/Utils.html">Utils</a>
                                         </li>
                                 </ol>
                         </div>
@@ -103,34 +103,34 @@
                         <div class="panel-body">
                             <ol>
                                     <li>
-                                        <a href="./classes/Base Cell.html">Base Cell</a>
+                                        <a href="../classes/Base Cell.html">Base Cell</a>
                                     </li>
                                     <li>
-                                        <a href="./classes/Base Column.html">Base Column</a>
+                                        <a href="../classes/Base Column.html">Base Column</a>
                                     </li>
                                     <li>
-                                        <a href="./classes/Column.html">Column</a>
+                                        <a href="../classes/Column.html">Column</a>
                                     </li>
                                     <li>
-                                        <a href="./classes/fixProto.html">fixProto</a>
+                                        <a href="../classes/fixProto.html">fixProto</a>
                                     </li>
                                     <li>
-                                        <a href="./classes/light-table.html">light-table</a>
+                                        <a href="../classes/light-table.html">light-table</a>
                                     </li>
                                     <li>
-                                        <a href="./classes/Row.html">Row</a>
+                                        <a href="../classes/Row.html">Row</a>
                                     </li>
                                     <li>
-                                        <a href="./classes/t.body.html">t.body</a>
+                                        <a href="../classes/t.body.html">t.body</a>
                                     </li>
                                     <li>
-                                        <a href="./classes/t.foot.html">t.foot</a>
+                                        <a href="../classes/t.foot.html">t.foot</a>
                                     </li>
                                     <li>
-                                        <a href="./classes/t.head.html">t.head</a>
+                                        <a href="../classes/t.head.html">t.head</a>
                                     </li>
                                     <li>
-                                        <a href="./classes/Table.html">Table</a>
+                                        <a href="../classes/Table.html">Table</a>
                                     </li>
                             </ol>
                         </div>
@@ -141,27 +141,90 @@
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
+<div class="page-header">
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
+</div>
 
-<div class="apidocs">
-    <div id="docs-main" class="content">
-        <div class="page-header">
-            <h1> <i class="fa fa-book" aria-hidden="true"></i> Welcome</h1>
-        </div>
+<div class="file">
+    <pre class="prettyprint linenums">
+/**
+ * @module Utils
+ * @private
+ */
 
-        <p>
-            Browse to a module or class using the sidebar to view its API documentation.
-        </p>
+/**
+ * Internet Explorer &lt;= 10 has no support for &#x60;__proto__&#x60;.
+ * This conditional polyfill works around that, so that static methods like
+ * &#x60;reopen&#x60; may be used. There are some caveats though.
+ *
+ * For more information, please see: [Issue #436 (comment)][436]
+ *
+ * [436]: https://github.com/offirgolan/ember-light-table/issues/436#issuecomment-310138868
+ *
+ * @class fixProto
+ */
 
-        <h3>Keyboard Shortcuts</h3>
+/**
+ * Whether or not this environment supports &#x60;__proto__&#x60;.
+ * IE &lt;= 10 is known to not support it-
+ *
+ * More information on &#x60;__proto__&#x60;:
+ *
+ *   https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/proto
+ *
+ * @const isProtoSupported
+ * @type {Boolean}
+ * @readOnly
+ */
+export const isProtoSupported = ({ __proto__: [] }) instanceof Array;
 
-        <ul>
-            <li><p>Press <kbd>s</kbd> to focus the API search box.</p></li>
+/**
+ * Assigns all properties of &#x60;defaults&#x60; to &#x60;obj&#x60;, if they are not already
+ * defined on &#x60;obj&#x60;. This means that &#x60;obj&#x60; is mutated in place.
+ *
+ * Taken from:
+ *
+ *   https://github.com/babel/babel/blob/64eafad472ebac6333671fff65a9669739e6cd88/packages/babel-helpers/src/helpers.js#L287-L299
+ *
+ * @method defaults
+ * @param  {Object} obj      The object to assign the default properties to
+ * @param  {Object} defaults The object that provides all default properties to
+ *                           be assigned
+ * @return {Object}          The &#x60;obj&#x60; that was passed in
+ */
+export function defaults(obj, defaults) {
+  const keys = Object.getOwnPropertyNames(defaults);
+  for (let i = 0; i &lt; keys.length; i++) {
+    const key = keys[i];
+    const value = Object.getOwnPropertyDescriptor(defaults, key);
+    if (value &amp;&amp; value.configurable &amp;&amp; obj[key] === undefined) {
+      Object.defineProperty(obj, key, value);
+    }
+  }
+  return obj;
+}
 
-            <li><p>Use <kbd>Up</kbd> and <kbd>Down</kbd> to navigate search results.</p></li>
+/**
+ * Conditionally attempt to polyfill support for &#x60;__proto__&#x60; in environments
+ * that do not support it.
+ *
+ * If &#x60;__proto__&#x60; is not supported, this function assigns all properties and
+ * methods pf &#x60;Class.__proto__&#x60; to &#x60;Class&#x60; itself.
+ *
+ * @method fixProto
+ * @param  {Function} Class The base class
+ * @return {Function}       The &#x60;Class&#x60; that was passed in
+ */
+export default function fixProto(Class) {
+  if (isProtoSupported) {
+    return;
+  }
 
-            <li><p>Use <kbd>Enter</kbd> to select a search result.</p></li>
-        </ul>
-    </div>
+  // https://github.com/babel/babel/tree/64eafad472ebac6333671fff65a9669739e6cd88/packages/babel-plugin-transform-proto-to-assign#example
+  return defaults(Class, Class.__proto__);
+}
+
+    </pre>
 </div>
                         </div>
                     </div>
@@ -169,12 +232,12 @@
             </div>
         </div>
     </div>
-    <script src="./assets/vendor/prettify/prettify-min.js"></script>
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
     <script>prettyPrint();</script>
-    <script src="./assets/vendor/jquery/jquery.min.js"></script>
-    <script src="./assets/vendor/jquery-ui/jquery-ui.min.js"></script>
-    <script src="./assets/vendor/bootstrap/js/bootstrap.js"></script>
-    <script src="./assets/vendor/github-slugger/slugger.js"></script>
-    <script src="./assets/js/yuidoc-bootstrap.js"></script>
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../assets/vendor/github-slugger/slugger.js"></script>
+    <script src="../assets/js/yuidoc-bootstrap.js"></script>
 </body>
 </html>

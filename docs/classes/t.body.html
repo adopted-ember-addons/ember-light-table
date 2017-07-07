@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.8.6" target="_blank">
-                                  Tag: v1.8.6
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
+                                  Tag: v1.9.0
                                 </a>
                             </h4>
                         </div>
@@ -83,6 +83,9 @@
                                                     <li class="sub"><a href="../modules/Table Declaration.html">Table Declaration</a></li>
                                                     <li class="sub"><a href="../modules/Component Declaration.html">Component Declaration</a></li>
                                         </li>
+                                        <li>
+                                            <a href="../modules/Utils.html">Utils</a>
+                                        </li>
                                 </ol>
                         </div>
                     </div>
@@ -107,6 +110,9 @@
                                     </li>
                                     <li>
                                         <a href="../classes/Column.html">Column</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/fixProto.html">fixProto</a>
                                     </li>
                                     <li>
                                         <a href="../classes/light-table.html">light-table</a>
@@ -139,7 +145,7 @@
 
 <div class="page-header">
     <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> t.body Class
-            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L16" target="_blank">
+            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L16" target="_blank">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
     </h1>
@@ -153,7 +159,7 @@
 
 
         <div class="foundat">
-            Defined In: <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L16">addon/components/lt-body.js:16</a>
+            Defined In: <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L16">addon/components/lt-body.js:16</a>
         </div>
 </div>
 
@@ -161,7 +167,7 @@
 
   <div class="class-description">
   <pre class="code prettyprint"><code class="language-hbs">{{#light-table table as |t|}}
-  {{#t.body multiSelect=true onRowClick=(action 'rowClicked')}}
+  {{#t.body multiSelect=true onRowClick=(action 'rowClicked') as |body|}}
     {{#body.expanded-row as |row|}}
       Hello &lt;b&gt;{{row.firstName}}&lt;/b&gt;
     {{/body.expanded-row}}
@@ -241,6 +247,10 @@
                               </li>
                               <li class="index-item property private">
                                   <a href="#property_currentScrollOffset">currentScrollOffset</a>
+
+                              </li>
+                              <li class="index-item property">
+                                  <a href="#property_enableScaffolding">enableScaffolding</a>
 
                               </li>
                               <li class="index-item property">
@@ -364,7 +374,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L128">addon/components/lt-body.js:128</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L128">addon/components/lt-body.js:128</a>
           </p>
   
   
@@ -393,7 +403,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L89">addon/components/lt-body.js:89</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L89">addon/components/lt-body.js:89</a>
           </p>
   
   
@@ -427,7 +437,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L67">addon/components/lt-body.js:67</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L67">addon/components/lt-body.js:67</a>
           </p>
   
   
@@ -459,7 +469,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L223">addon/components/lt-body.js:223</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L238">addon/components/lt-body.js:238</a>
           </p>
   
   
@@ -470,6 +480,40 @@
       </div>
   
           <p><br><strong>Default:</strong> 0</p>
+  
+  
+  </div>
+  <div id="property_enableScaffolding" class="property item">
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#property_enableScaffolding"></a>
+          enableScaffolding
+      </h3>
+      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L165">addon/components/lt-body.js:165</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          <p>If true, the body will prepend an invisible <code>&lt;tr&gt;</code> that scaffolds the
+  widths of the table cells.</p>
+  <p>ember-light-table uses <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout"><code>table-layout: fixed</code></a>.
+  This means, that the widths of the columns are defined by the first row
+  only. By prepending this scaffolding row, widths of columns only need to
+  be specified once.</p>
+  
+      </div>
+  
+          <p><br><strong>Default:</strong> false</p>
   
   
   </div>
@@ -487,7 +531,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L146">addon/components/lt-body.js:146</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L146">addon/components/lt-body.js:146</a>
           </p>
   
   
@@ -517,7 +561,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L231">addon/components/lt-body.js:231</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L246">addon/components/lt-body.js:246</a>
           </p>
   
   
@@ -545,7 +589,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L267">addon/components/lt-body.js:267</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L282">addon/components/lt-body.js:282</a>
           </p>
   
   
@@ -578,7 +622,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L137">addon/components/lt-body.js:137</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L137">addon/components/lt-body.js:137</a>
           </p>
   
   
@@ -607,7 +651,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L105">addon/components/lt-body.js:105</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L105">addon/components/lt-body.js:105</a>
           </p>
   
   
@@ -637,7 +681,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L115">addon/components/lt-body.js:115</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L115">addon/components/lt-body.js:115</a>
           </p>
   
   
@@ -669,7 +713,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L155">addon/components/lt-body.js:155</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L155">addon/components/lt-body.js:155</a>
           </p>
   
   
@@ -699,7 +743,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L239">addon/components/lt-body.js:239</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L254">addon/components/lt-body.js:254</a>
           </p>
   
   
@@ -732,7 +776,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L174">addon/components/lt-body.js:174</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L189">addon/components/lt-body.js:189</a>
           </p>
   
   
@@ -760,7 +804,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L189">addon/components/lt-body.js:189</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L204">addon/components/lt-body.js:204</a>
           </p>
   
   
@@ -791,7 +835,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L202">addon/components/lt-body.js:202</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L217">addon/components/lt-body.js:217</a>
           </p>
   
   
@@ -822,7 +866,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L78">addon/components/lt-body.js:78</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L78">addon/components/lt-body.js:78</a>
           </p>
   
   
@@ -854,7 +898,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L54">addon/components/lt-body.js:54</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L54">addon/components/lt-body.js:54</a>
           </p>
   
   
@@ -881,7 +925,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L253">addon/components/lt-body.js:253</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L268">addon/components/lt-body.js:268</a>
           </p>
   
   
@@ -915,7 +959,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L47">addon/components/lt-body.js:47</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L47">addon/components/lt-body.js:47</a>
           </p>
   
   
@@ -942,7 +986,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L61">addon/components/lt-body.js:61</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L61">addon/components/lt-body.js:61</a>
           </p>
   
   
@@ -970,7 +1014,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L165">addon/components/lt-body.js:165</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L180">addon/components/lt-body.js:180</a>
           </p>
   
   
@@ -999,7 +1043,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L215">addon/components/lt-body.js:215</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L230">addon/components/lt-body.js:230</a>
           </p>
   
   
@@ -1028,7 +1072,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L181">addon/components/lt-body.js:181</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L196">addon/components/lt-body.js:196</a>
           </p>
   
   
@@ -1062,7 +1106,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L382">addon/components/lt-body.js:382</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L397">addon/components/lt-body.js:397</a>
           </p>
   
   
@@ -1118,7 +1162,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L430">addon/components/lt-body.js:430</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L445">addon/components/lt-body.js:445</a>
           </p>
   
   
@@ -1174,7 +1218,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L440">addon/components/lt-body.js:440</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L455">addon/components/lt-body.js:455</a>
           </p>
   
   
@@ -1232,7 +1276,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/components/lt-body.js#L455">addon/components/lt-body.js:455</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/lt-body.js#L470">addon/components/lt-body.js:470</a>
           </p>
   
   

@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.8.6" target="_blank">
-                                  Tag: v1.8.6
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
+                                  Tag: v1.9.0
                                 </a>
                             </h4>
                         </div>
@@ -83,6 +83,9 @@
                                                     <li class="sub"><a href="../modules/Table Declaration.html">Table Declaration</a></li>
                                                     <li class="sub"><a href="../modules/Component Declaration.html">Component Declaration</a></li>
                                         </li>
+                                        <li>
+                                            <a href="../modules/Utils.html">Utils</a>
+                                        </li>
                                 </ol>
                         </div>
                     </div>
@@ -107,6 +110,9 @@
                                     </li>
                                     <li>
                                         <a href="../classes/Column.html">Column</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/fixProto.html">fixProto</a>
                                     </li>
                                     <li>
                                         <a href="../classes/light-table.html">light-table</a>
@@ -139,7 +145,7 @@
 
 <div class="page-header">
     <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> Table Class
-            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L140" target="_blank">
+            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L142" target="_blank">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
     </h1>
@@ -153,7 +159,7 @@
 
 
         <div class="foundat">
-            Defined In: <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L140">addon/classes/Table.js:140</a>
+            Defined In: <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L142">addon/classes/Table.js:142</a>
         </div>
 </div>
 
@@ -191,7 +197,7 @@
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L140">addon/classes/Table.js:140</a>
+		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L142">addon/classes/Table.js:142</a>
 		</p>
 
 
@@ -222,12 +228,28 @@
 						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
-					<div class="param-description"><ul>
-<li>enableSync ( <em>Boolean</em> ): If true, creates a two way sync between the table's rows
-and the passed rows collection</li>
-</ul>
+
+						<ul class="params-list">
+							<li class="param">
+									<code class="param-name">enableSync</code>
+									<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+								<div class="param-description"><p>If <code>true</code>, creates a two way sync
+between the table's rows and the passed rows collection. Also see
+<code>setRowsSynced(rows)</code>.</p>
 </div>
 
+							</li>
+							<li class="param">
+									<code class="param-name">rowOptions</code>
+									<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+								<div class="param-description"><p>Options hash passed through to
+<code>createRow(content, options)</code>.</p>
+</div>
+
+							</li>
+						</ul>
 				</li>
 			</ul>
 		</div>
@@ -372,6 +394,10 @@ and the passed rows collection</li>
                                   <a href="#method_setRows">setRows</a>
 
                               </li>
+                              <li class="index-item method">
+                                  <a href="#method_setRowsSynced">setRowsSynced</a>
+
+                              </li>
                       </ul>
                   </div>
 
@@ -472,7 +498,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L299">addon/classes/Table.js:299</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L324">addon/classes/Table.js:324</a>
   		</p>
   
   
@@ -523,7 +549,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L308">addon/classes/Table.js:308</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L333">addon/classes/Table.js:333</a>
   		</p>
   
   
@@ -577,7 +603,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L192">addon/classes/Table.js:192</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L217">addon/classes/Table.js:217</a>
   		</p>
   
   
@@ -638,7 +664,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L206">addon/classes/Table.js:206</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L231">addon/classes/Table.js:231</a>
   		</p>
   
   
@@ -700,7 +726,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L405">addon/classes/Table.js:405</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L430">addon/classes/Table.js:430</a>
   		</p>
   
   
@@ -762,7 +788,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L416">addon/classes/Table.js:416</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L441">addon/classes/Table.js:441</a>
   		</p>
   
   
@@ -827,7 +853,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L381">addon/classes/Table.js:381</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L406">addon/classes/Table.js:406</a>
   		</p>
   
   
@@ -899,7 +925,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L393">addon/classes/Table.js:393</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L418">addon/classes/Table.js:418</a>
   		</p>
   
   
@@ -970,7 +996,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L341">addon/classes/Table.js:341</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L366">addon/classes/Table.js:366</a>
   		</p>
   
   
@@ -1046,7 +1072,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L242">addon/classes/Table.js:242</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L267">addon/classes/Table.js:267</a>
   		</p>
   
   
@@ -1123,7 +1149,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L317">addon/classes/Table.js:317</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L342">addon/classes/Table.js:342</a>
   		</p>
   
   
@@ -1186,7 +1212,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L329">addon/classes/Table.js:329</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L354">addon/classes/Table.js:354</a>
   		</p>
   
   
@@ -1252,7 +1278,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L216">addon/classes/Table.js:216</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L241">addon/classes/Table.js:241</a>
   		</p>
   
   
@@ -1325,7 +1351,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L229">addon/classes/Table.js:229</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L254">addon/classes/Table.js:254</a>
   		</p>
   
   
@@ -1392,7 +1418,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L354">addon/classes/Table.js:354</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L379">addon/classes/Table.js:379</a>
   		</p>
   
   
@@ -1443,7 +1469,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L372">addon/classes/Table.js:372</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L397">addon/classes/Table.js:397</a>
   		</p>
   
   
@@ -1494,7 +1520,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L363">addon/classes/Table.js:363</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L388">addon/classes/Table.js:388</a>
   		</p>
   
   
@@ -1545,7 +1571,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L256">addon/classes/Table.js:256</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L281">addon/classes/Table.js:281</a>
   		</p>
   
   
@@ -1596,7 +1622,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L278">addon/classes/Table.js:278</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L303">addon/classes/Table.js:303</a>
   		</p>
   
   
@@ -1647,7 +1673,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L269">addon/classes/Table.js:269</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L294">addon/classes/Table.js:294</a>
   		</p>
   
   
@@ -1701,7 +1727,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L289">addon/classes/Table.js:289</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L314">addon/classes/Table.js:314</a>
   		</p>
   
   
@@ -1767,7 +1793,7 @@ and the passed rows collection</li>
   	<div class="meta">
   				<p>
   				Defined in
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L181">addon/classes/Table.js:181</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L186">addon/classes/Table.js:186</a>
   		</p>
   
   
@@ -1775,6 +1801,81 @@ and the passed rows collection</li>
   	</div>
   
   	<div class="description"><p>Replace all the row's content with content of the argument. If argument is an empty array rows will be cleared.</p>
+  </div>
+  
+  		<div class="params">
+  			<h4>Parameters:</h4>
+  
+  			<ul class="params-list">
+  				<li class="param">
+  						<code class="param-name">rows</code>
+  						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+  
+  
+  
+  				</li>
+  				<li class="param">
+  						<code class="param-name">options</code>
+  						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+  
+  
+  
+  				</li>
+  			</ul>
+  		</div>
+  
+  		<div class="returns">
+  			<h4>Returns:</h4>
+  
+  			<div class="returns-description">
+  						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+  					<p>rows</p>
+  
+  			</div>
+  		</div>
+  
+  </div>
+  <div id="method_setRowsSynced" class="method item">
+  	<span class="method-signature">
+  	<span class="name anchorable-toc">
+  		<a class="fa fa-link toc-anchor" href="#method_setRowsSynced"></a>
+  		setRowsSynced
+  	</span>
+  
+  		<div class="args">
+  			<span class="paren">(</span><ul class="args-list inline commas">
+  				<li class="arg">
+  						<code>rows</code>
+  				</li>
+  				<li class="arg">
+  						<code>options</code>
+  				</li>
+  			</ul><span class="paren">)</span>
+  		</div>
+  		<span class="returns-inline">
+  			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+  		</span>
+  	</span>
+  
+  
+  
+  
+  
+  
+  
+  	<div class="meta">
+  				<p>
+  				Defined in
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L197">addon/classes/Table.js:197</a>
+  		</p>
+  
+  
+  
+  	</div>
+  
+  	<div class="description"><p>The same as <code>setRows</code>, however the given array is synced, meaning that
+  mutating the array also updates the table and vice-versa.</p>
+  <p>Also see <code>enableSync</code> in the constructor options.</p>
   </div>
   
   		<div class="params">
@@ -1828,7 +1929,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L129">addon/classes/Table.js:129</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L131">addon/classes/Table.js:131</a>
           </p>
   
   
@@ -1855,7 +1956,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L34">addon/classes/Table.js:34</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L36">addon/classes/Table.js:36</a>
           </p>
   
   
@@ -1883,7 +1984,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L54">addon/classes/Table.js:54</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L56">addon/classes/Table.js:56</a>
           </p>
   
   
@@ -1910,7 +2011,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L90">addon/classes/Table.js:90</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L92">addon/classes/Table.js:92</a>
           </p>
   
   
@@ -1937,7 +2038,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L84">addon/classes/Table.js:84</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L86">addon/classes/Table.js:86</a>
           </p>
   
   
@@ -1964,7 +2065,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L48">addon/classes/Table.js:48</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L50">addon/classes/Table.js:50</a>
           </p>
   
   
@@ -1991,7 +2092,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L96">addon/classes/Table.js:96</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L98">addon/classes/Table.js:98</a>
           </p>
   
   
@@ -2018,7 +2119,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L41">addon/classes/Table.js:41</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L43">addon/classes/Table.js:43</a>
           </p>
   
   
@@ -2046,7 +2147,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L60">addon/classes/Table.js:60</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L62">addon/classes/Table.js:62</a>
           </p>
   
   
@@ -2073,7 +2174,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L72">addon/classes/Table.js:72</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L74">addon/classes/Table.js:74</a>
           </p>
   
   
@@ -2100,7 +2201,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L78">addon/classes/Table.js:78</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L80">addon/classes/Table.js:80</a>
           </p>
   
   
@@ -2127,7 +2228,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L108">addon/classes/Table.js:108</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L110">addon/classes/Table.js:110</a>
           </p>
   
   
@@ -2154,7 +2255,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L102">addon/classes/Table.js:102</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L104">addon/classes/Table.js:104</a>
           </p>
   
   
@@ -2181,7 +2282,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L66">addon/classes/Table.js:66</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L68">addon/classes/Table.js:68</a>
           </p>
   
   
@@ -2208,7 +2309,7 @@ and the passed rows collection</li>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/classes/Table.js#L121">addon/classes/Table.js:121</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/classes/Table.js#L123">addon/classes/Table.js:123</a>
           </p>
   
   

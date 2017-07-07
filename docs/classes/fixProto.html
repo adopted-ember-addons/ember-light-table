@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Base Column - Ember Light Table</title>
+    <title>fixProto - Ember Light Table</title>
     <meta name="description" content="Lightweight, component based table for Ember 2.x">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -144,8 +144,8 @@
 
 
 <div class="page-header">
-    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> Base Column Class
-            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/columns/base.js#L17" target="_blank">
+    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> fixProto Class
+            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/utils/fix-proto.js#L6" target="_blank">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
     </h1>
@@ -155,22 +155,30 @@
 <div class="content-meta">
 
 
-            Module: <a href="../modules/Column Types.html">Column Types</a>
+            Module: <a href="../modules/Utils.html">Utils</a>
 
 
         <div class="foundat">
-            Defined In: <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/columns/base.js#L17">addon/components/columns/base.js:17</a>
+            Defined In: <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/utils/fix-proto.js#L6">addon/utils/fix-proto.js:6</a>
         </div>
 </div>
 
 
 
+  <div class="class-description">
+  <p>Internet Explorer &lt;= 10 has no support for <code>__proto__</code>.
+This conditional polyfill works around that, so that static methods like
+<code>reopen</code> may be used. There are some caveats though.</p>
+<p>For more information, please see: <a href="https://github.com/offirgolan/ember-light-table/issues/436#issuecomment-310138868">Issue #436 (comment)</a></p>
+
+  </div>
 
 <div>
     <div class="page-section">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
+            <li role="presentation"><a href="#tab_methods" aria-controls="tab_methods" role="tab" data-toggle="tab">Methods</a></li>
 
             <li role="presentation"><a href="#tab_properties" aria-controls="tab_properties" role="tab" data-toggle="tab">Properties</a></li>
 
@@ -204,37 +212,27 @@
               </form>
 
           <div id="tab_index" role="tabpanel" class="tab-pane active" >
+                  <div class="index-section methods">
+                      <h3>Methods</h3>
+
+                      <ul class="index-list methods">
+                              <li class="index-item method">
+                                  <a href="#method_defaults">defaults</a>
+
+                              </li>
+                              <li class="index-item method">
+                                  <a href="#method_fixProto">fixProto</a>
+
+                              </li>
+                      </ul>
+                  </div>
 
                   <div class="index-section properties">
                       <h3>Properties</h3>
 
                       <ul class="index-list properties">
                               <li class="index-item property">
-                                  <a href="#property_colspan">colspan</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_column">column</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_label">label</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_rowspan">rowspan</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_sortIcons">sortIcons</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_table">table</a>
-
-                              </li>
-                              <li class="index-item property">
-                                  <a href="#property_tableActions">tableActions</a>
+                                  <a href="#property_isProtoSupported">isProtoSupported</a>
 
                               </li>
                       </ul>
@@ -243,193 +241,189 @@
 
           </div>
 
+              <div id="tab_methods" role="tabpanel" class="tab-pane">
+                  <div class="item-list">
+  <div id="method_defaults" class="method item">
+  	<span class="method-signature">
+  	<span class="name anchorable-toc">
+  		<a class="fa fa-link toc-anchor" href="#method_defaults"></a>
+  		defaults
+  	</span>
+  
+  		<div class="args">
+  			<span class="paren">(</span><ul class="args-list inline commas">
+  				<li class="arg">
+  						<code>obj</code>
+  				</li>
+  				<li class="arg">
+  						<code>defaults</code>
+  				</li>
+  			</ul><span class="paren">)</span>
+  		</div>
+  		<span class="returns-inline">
+  			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+  		</span>
+  	</span>
+  
+  
+  
+  
+  
+  
+  
+  	<div class="meta">
+  				<p>
+  				Defined in
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/utils/fix-proto.js#L32">addon/utils/fix-proto.js:32</a>
+  		</p>
+  
+  
+  
+  	</div>
+  
+  	<div class="description"><p>Assigns all properties of <code>defaults</code> to <code>obj</code>, if they are not already
+  defined on <code>obj</code>. This means that <code>obj</code> is mutated in place.</p>
+  <p>Taken from:</p>
+  <p><a href="https://github.com/babel/babel/blob/64eafad472ebac6333671fff65a9669739e6cd88/packages/babel-helpers/src/helpers.js#L287-L299">https://github.com/babel/babel/blob/64eafad472ebac6333671fff65a9669739e6cd88/packages/babel-helpers/src/helpers.js#L287-L299</a></p>
+  </div>
+  
+  		<div class="params">
+  			<h4>Parameters:</h4>
+  
+  			<ul class="params-list">
+  				<li class="param">
+  						<code class="param-name">obj</code>
+  						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+  
+  
+  					<div class="param-description"><p>The object to assign the default properties to</p>
+  </div>
+  
+  				</li>
+  				<li class="param">
+  						<code class="param-name">defaults</code>
+  						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+  
+  
+  					<div class="param-description"><p>The object that provides all default properties to
+  be assigned</p>
+  </div>
+  
+  				</li>
+  			</ul>
+  		</div>
+  
+  		<div class="returns">
+  			<h4>Returns:</h4>
+  
+  			<div class="returns-description">
+  						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+  					<p>The <code>obj</code> that was passed in</p>
+  
+  			</div>
+  		</div>
+  
+  </div>
+  <div id="method_fixProto" class="method item">
+  	<span class="method-signature">
+  	<span class="name anchorable-toc">
+  		<a class="fa fa-link toc-anchor" href="#method_fixProto"></a>
+  		fixProto
+  	</span>
+  
+  		<div class="args">
+  			<span class="paren">(</span><ul class="args-list inline commas">
+  				<li class="arg">
+  						<code>Class</code>
+  				</li>
+  			</ul><span class="paren">)</span>
+  		</div>
+  		<span class="returns-inline">
+  			<span class="type"><a href="http://emberjs.com/api/classes/Function.html" class="crosslink external" target="_blank">Function</a></span>
+  		</span>
+  	</span>
+  
+  
+  
+  
+  
+  
+  
+  	<div class="meta">
+  				<p>
+  				Defined in
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/utils/fix-proto.js#L58">addon/utils/fix-proto.js:58</a>
+  		</p>
+  
+  
+  
+  	</div>
+  
+  	<div class="description"><p>Conditionally attempt to polyfill support for <code>__proto__</code> in environments
+  that do not support it.</p>
+  <p>If <code>__proto__</code> is not supported, this function assigns all properties and
+  methods pf <code>Class.__proto__</code> to <code>Class</code> itself.</p>
+  </div>
+  
+  		<div class="params">
+  			<h4>Parameters:</h4>
+  
+  			<ul class="params-list">
+  				<li class="param">
+  						<code class="param-name">Class</code>
+  						<span class="type"><a href="http://emberjs.com/api/classes/Function.html" class="crosslink external" target="_blank">Function</a></span>
+  
+  
+  					<div class="param-description"><p>The base class</p>
+  </div>
+  
+  				</li>
+  			</ul>
+  		</div>
+  
+  		<div class="returns">
+  			<h4>Returns:</h4>
+  
+  			<div class="returns-description">
+  						<span class="type"><a href="http://emberjs.com/api/classes/Function.html" class="crosslink external" target="_blank">Function</a></span>:
+  					<p>The <code>Class</code> that was passed in</p>
+  
+  			</div>
+  		</div>
+  
+  </div>
+                  </div>
+              </div>
 
               <div id="tab_properties" role="tabpanel" class="tab-pane">
                   <div class="item-list">
-  <div id="property_colspan" class="property item">
+  <div id="property_isProtoSupported" class="property item">
       <h3 class="name anchorable-toc">
-          <a class="fa fa-link toc-anchor" href="#property_colspan"></a>
-          colspan
+          <a class="fa fa-link toc-anchor" href="#property_isProtoSupported"></a>
+          isProtoSupported
       </h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
   
   
   
+          <span class="flag final">const</span>
   
   
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/columns/base.js#L75">addon/components/columns/base.js:75</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/utils/fix-proto.js#L18">addon/utils/fix-proto.js:18</a>
           </p>
   
   
       </div>
   
       <div class="description">
-          
-      </div>
+          <p>Whether or not this environment supports <code>__proto__</code>.
+  IE &lt;= 10 is known to not support it-</p>
+  <p>More information on <code>__proto__</code>:</p>
+  <p><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/proto">https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/proto</a></p>
   
-  
-  
-  </div>
-  <div id="property_column" class="property item">
-      <h3 class="name anchorable-toc">
-          <a class="fa fa-link toc-anchor" href="#property_column"></a>
-          column
-      </h3>
-      <span class="type"><a href="../classes/Column.html" class="crosslink">Column</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/columns/base.js#L57">addon/components/columns/base.js:57</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_label" class="property item">
-      <h3 class="name anchorable-toc">
-          <a class="fa fa-link toc-anchor" href="#property_label"></a>
-          label
-      </h3>
-      <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/columns/base.js#L45">addon/components/columns/base.js:45</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_rowspan" class="property item">
-      <h3 class="name anchorable-toc">
-          <a class="fa fa-link toc-anchor" href="#property_rowspan"></a>
-          rowspan
-      </h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/columns/base.js#L84">addon/components/columns/base.js:84</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_sortIcons" class="property item">
-      <h3 class="name anchorable-toc">
-          <a class="fa fa-link toc-anchor" href="#property_sortIcons"></a>
-          sortIcons
-      </h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/columns/base.js#L69">addon/components/columns/base.js:69</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_table" class="property item">
-      <h3 class="name anchorable-toc">
-          <a class="fa fa-link toc-anchor" href="#property_table"></a>
-          table
-      </h3>
-      <span class="type"><a href="../classes/Table.html" class="crosslink">Table</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/columns/base.js#L51">addon/components/columns/base.js:51</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
-      </div>
-  
-  
-  
-  </div>
-  <div id="property_tableActions" class="property item">
-      <h3 class="name anchorable-toc">
-          <a class="fa fa-link toc-anchor" href="#property_tableActions"></a>
-          tableActions
-      </h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/columns/base.js#L63">addon/components/columns/base.js:63</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          
       </div>
   
   

@@ -7,6 +7,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Row",
         "Table",
         "TableHeaderMixin",
+        "fixProto",
         "light-table",
         "t.body",
         "t.foot",
@@ -19,7 +20,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Light Table",
         "Table",
         "Table Declaration",
-        "Usage"
+        "Usage",
+        "Utils"
     ],
     "allModules": [
         {
@@ -52,6 +54,10 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Usage",
             "name": "Usage",
             "description": "## Installation\n```shell\nember install ember-light-table\n```\n\n## Looking for help?\nIf it is a bug [please open an issue on GitHub](http://github.com/offirgolan/ember-light-table/issues).\n\n## Usage\nThere are two parts to this addon. The first is the [Table](../classes/Table.html) which you create with column definitions and rows, and the second is the component declaration."
+        },
+        {
+            "displayName": "Utils",
+            "name": "Utils"
         }
     ],
     "elements": []

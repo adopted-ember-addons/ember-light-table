@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.8.6" target="_blank">
-                                  Tag: v1.8.6
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
+                                  Tag: v1.9.0
                                 </a>
                             </h4>
                         </div>
@@ -83,6 +83,9 @@
                                                     <li class="sub"><a href="../modules/Table Declaration.html">Table Declaration</a></li>
                                                     <li class="sub"><a href="../modules/Component Declaration.html">Component Declaration</a></li>
                                         </li>
+                                        <li>
+                                            <a href="../modules/Utils.html">Utils</a>
+                                        </li>
                                 </ol>
                         </div>
                     </div>
@@ -107,6 +110,9 @@
                                     </li>
                                     <li>
                                         <a href="../classes/Column.html">Column</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/fixProto.html">fixProto</a>
                                     </li>
                                     <li>
                                         <a href="../classes/light-table.html">light-table</a>
@@ -139,7 +145,7 @@
 
 <div class="page-header">
     <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> TableHeaderMixin Class
-            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L11" target="_blank">
+            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L14" target="_blank">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
     </h1>
@@ -157,7 +163,7 @@
 
 
         <div class="foundat">
-            Defined In: <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L11">addon/mixins/table-header.js:11</a>
+            Defined In: <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L14">addon/mixins/table-header.js:14</a>
         </div>
 </div>
 
@@ -330,7 +336,7 @@
   	<div class="meta">
   				<p>Inherited from
   				<a href="http://emberjs.com/api/classes/Ember.Mixin.html#method_apply">Ember.Mixin</a>:
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/packages/ember-metal/lib/mixin.js#L632">packages/ember-metal/lib/mixin.js:632</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/packages/ember-metal/lib/mixin.js#L632">packages/ember-metal/lib/mixin.js:632</a>
   		</p>
   
   
@@ -390,7 +396,7 @@
   	<div class="meta">
   				<p>Inherited from
   				<a href="http://emberjs.com/api/classes/Ember.Mixin.html#method_detect">Ember.Mixin</a>:
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/packages/ember-metal/lib/mixin.js#L661">packages/ember-metal/lib/mixin.js:661</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/packages/ember-metal/lib/mixin.js#L661">packages/ember-metal/lib/mixin.js:661</a>
   		</p>
   
   
@@ -447,7 +453,7 @@
   	<div class="meta">
   				<p>Inherited from
   				<a href="http://emberjs.com/api/classes/Ember.Mixin.html#method_reopen">Ember.Mixin</a>:
-  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/packages/ember-metal/lib/mixin.js#L596">packages/ember-metal/lib/mixin.js:596</a>
+  		<a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/packages/ember-metal/lib/mixin.js#L596">packages/ember-metal/lib/mixin.js:596</a>
   		</p>
   
   
@@ -491,7 +497,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/draggable-column.js#L28">addon/mixins/draggable-column.js:28</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/draggable-column.js#L29">addon/mixins/draggable-column.js:29</a>
           </p>
   
   
@@ -521,7 +527,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L38">addon/mixins/table-header.js:38</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L41">addon/mixins/table-header.js:41</a>
           </p>
   
   
@@ -549,14 +555,20 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L68">addon/mixins/table-header.js:68</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L71">addon/mixins/table-header.js:71</a>
           </p>
   
   
       </div>
   
       <div class="description">
-          
+          <p>CSS classes to be applied to an <code>&lt;i class="lt-sort-icon&gt;&lt;/i&gt;</code> tag that is
+  inserted into the column's <code>&lt;th&gt;</code> element.</p>
+  <p>For instance, if you have installed <code>ember-font-awesome</code> or include the
+  <code>font-awesome</code> assets manually (e.g. via a CDN), you can set
+  <code>iconAscending</code> to <code>'fa fa-sort-asc'</code>, which would yield this markup:
+  <code>&lt;i class="lt-sort-icon fa fa-sort-asc"&gt;&lt;/i&gt;</code></p>
+  
       </div>
   
           <p><br><strong>Default:</strong> &#x27;&#x27;</p>
@@ -577,14 +589,15 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L75">addon/mixins/table-header.js:75</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L86">addon/mixins/table-header.js:86</a>
           </p>
   
   
       </div>
   
       <div class="description">
-          
+          <p>See <code>iconAscending</code>.</p>
+  
       </div>
   
           <p><br><strong>Default:</strong> &#x27;&#x27;</p>
@@ -605,7 +618,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L52">addon/mixins/table-header.js:52</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L55">addon/mixins/table-header.js:55</a>
           </p>
   
   
@@ -633,7 +646,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L59">addon/mixins/table-header.js:59</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L62">addon/mixins/table-header.js:62</a>
           </p>
   
   
@@ -663,7 +676,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L25">addon/mixins/table-header.js:25</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L28">addon/mixins/table-header.js:28</a>
           </p>
   
   
@@ -690,7 +703,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L45">addon/mixins/table-header.js:45</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L48">addon/mixins/table-header.js:48</a>
           </p>
   
   
@@ -719,7 +732,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L18">addon/mixins/table-header.js:18</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L21">addon/mixins/table-header.js:21</a>
           </p>
   
   
@@ -746,7 +759,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L32">addon/mixins/table-header.js:32</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L35">addon/mixins/table-header.js:35</a>
           </p>
   
   
@@ -779,7 +792,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L98">addon/mixins/table-header.js:98</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L124">addon/mixins/table-header.js:124</a>
           </p>
   
   
@@ -835,7 +848,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L119">addon/mixins/table-header.js:119</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L145">addon/mixins/table-header.js:145</a>
           </p>
   
   
@@ -891,7 +904,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L141">addon/mixins/table-header.js:141</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L167">addon/mixins/table-header.js:167</a>
           </p>
   
   
@@ -936,7 +949,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L151">addon/mixins/table-header.js:151</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L177">addon/mixins/table-header.js:177</a>
           </p>
   
   
@@ -992,7 +1005,7 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.8.6/addon/mixins/table-header.js#L130">addon/mixins/table-header.js:130</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/mixins/table-header.js#L156">addon/mixins/table-header.js:156</a>
           </p>
   
   

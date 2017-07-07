@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.8.6" target="_blank">
-                                  Tag: v1.8.6
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
+                                  Tag: v1.9.0
                                 </a>
                             </h4>
                         </div>
@@ -83,6 +83,9 @@
                                                     <li class="sub"><a href="../modules/Table Declaration.html">Table Declaration</a></li>
                                                     <li class="sub"><a href="../modules/Component Declaration.html">Component Declaration</a></li>
                                         </li>
+                                        <li>
+                                            <a href="../modules/Utils.html">Utils</a>
+                                        </li>
                                 </ol>
                         </div>
                     </div>
@@ -107,6 +110,9 @@
                                     </li>
                                     <li>
                                         <a href="../classes/Column.html">Column</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/fixProto.html">fixProto</a>
                                     </li>
                                     <li>
                                         <a href="../classes/light-table.html">light-table</a>
@@ -144,7 +150,10 @@
 import Ember from &#x27;ember&#x27;;
 
 const {
-  computed
+  computed,
+  isEmpty,
+  Mixin,
+  warn
 } = Ember;
 
 /**
@@ -157,7 +166,7 @@ const {
  * @private
  */
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   /**
    * @property table
    * @type {Table}
@@ -209,6 +218,14 @@ export default Ember.Mixin.create({
   resizeOnDrag: false,
 
   /**
+   * CSS classes to be applied to an &#x60;&lt;i class=&quot;lt-sort-icon&gt;&lt;/i&gt;&#x60; tag that is
+   * inserted into the column&#x27;s &#x60;&lt;th&gt;&#x60; element.
+   *
+   * For instance, if you have installed &#x60;ember-font-awesome&#x60; or include the
+   * &#x60;font-awesome&#x60; assets manually (e.g. via a CDN), you can set
+   * &#x60;iconAscending&#x60; to &#x60;&#x27;fa fa-sort-asc&#x27;&#x60;, which would yield this markup:
+   * &#x60;&lt;i class=&quot;lt-sort-icon fa fa-sort-asc&quot;&gt;&lt;/i&gt;&#x60;
+   *
    * @property iconAscending
    * @type {String}
    * @default &#x27;&#x27;
@@ -216,6 +233,8 @@ export default Ember.Mixin.create({
   iconAscending: &#x27;&#x27;,
 
   /**
+   * See &#x60;iconAscending&#x60;.
+   *
    * @property iconDescending
    * @type {String}
    * @default &#x27;&#x27;
@@ -236,6 +255,19 @@ export default Ember.Mixin.create({
   sortIcons: computed(&#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;, function() {
     return this.getProperties([&#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;]);
   }).readOnly(),
+
+  init() {
+    this._super(...arguments);
+
+    let fixed = this.get(&#x27;fixed&#x27;);
+    let height = this.get(&#x27;sharedOptions.height&#x27;);
+
+    warn(
+      &#x27;You did not set a &#x60;height&#x60; attribute for your table, but marked a header or footer to be fixed. This means that you have to set the table height via CSS. For more information please refer to:  https://github.com/offirgolan/ember-light-table/issues/446&#x27;,
+      !fixed || fixed &amp;&amp; !isEmpty(height),
+      { id: &#x27;ember-light-table.height-attribute&#x27; }
+    );
+  },
 
   actions: {
     /**
