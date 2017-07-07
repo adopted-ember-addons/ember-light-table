@@ -1,6 +1,25 @@
 Changelog
 =========
 
+## v1.9.0
+
+### Pull Requests
+
+- [#390](https://github.com/offirgolan/ember-light-table/pull/390)  Move ember-truth-helpers to dependencies  *by [fsmanuel/chore](https://github.com/fsmanuel/chore)*
+- [#422](https://github.com/offirgolan/ember-light-table/pull/422)  Fix missing 'as body' on example code  *by [Ahmad Suhendri](https://github.com/ahmadsoe)*
+- [#438](https://github.com/offirgolan/ember-light-table/pull/438)  Modernize ELT, kill bower and enable yarn  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#440](https://github.com/offirgolan/ember-light-table/pull/440) **tests/table**: isEmpty & isEmpty (enableSync = true)  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#441](https://github.com/offirgolan/ember-light-table/pull/441) **readme**: add more information on collaborating  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#439](https://github.com/offirgolan/ember-light-table/pull/439)  Polyfill support for __proto__ in IE <= 10  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#421](https://github.com/offirgolan/ember-light-table/pull/421) **lt-body**: add enableScaffolding option  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#445](https://github.com/offirgolan/ember-light-table/pull/445) **readme**: add link to #e-light-table Slack channel  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#449](https://github.com/offirgolan/ember-light-table/pull/449) **head & foot**: make `table.height` optional, warn in `table-header` mixin  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#451](https://github.com/offirgolan/ember-light-table/pull/451) **table**: add `setRowsSynced` method  *by [Jan Buschtöns](https://github.com/buschtoens)*
+
+#### Commits
+
+- [b0db5b15](https://github.com/offirgolan/ember-light-table/commit/b0db5b15d96e1b7bfd8f96a3001bfac6338ec0b3) **update ember-scrollable version (#408)**: //github.com/offirgolan/ember-light-table/issues/396 *by [Rusty Toms](https://github.com/RustyToms)*
+
 ## v1.8.6
 
 ### Pull Requests
