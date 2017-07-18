@@ -56,7 +56,7 @@ const LightTable = Component.extend({
   table: null,
 
   /**
-   * This is used to propate custom user defined actions to custom cell and header components.
+   * This is used to propagate custom user defined actions to custom cell and header components.
    * As an example, lets say I have a table with a column defined with `cellComponent: 'delete-user'`
    *
    * ```hbs
@@ -81,6 +81,34 @@ const LightTable = Component.extend({
    * @type {Object}
    */
   tableActions: null,
+
+  /**
+   * Object to store any arbitrary configuration meant to be used by custom
+   * components.
+   *
+   * ```hbs
+   * {{#light-table table
+   *   extra=(hash
+   *     highlightColor="yellow"
+   *    )
+   *    as |t|
+   *  }}
+   *   {{t.head}}
+   *   {{t.body}}
+   *   {{t.foot}}
+   * {{/light-table}}
+   * ```
+   *
+   * Now in all custom components, you can access this value like so:
+   *
+   * ```hbs
+   * <span style="background: {{extra.highlightColor}}">{{value}}<span>
+   * ```
+   *
+   * @property extra
+   * @type {Object}
+   */
+  extra: null,
 
   /**
    * Table height.

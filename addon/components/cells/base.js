@@ -67,6 +67,12 @@ const Cell = Component.extend({
   tableActions: null,
 
   /**
+   * @property extra
+   * @type {Object}
+   */
+  extra: null,
+
+  /**
    * @property rawValue
    * @type {Mixed}
    */

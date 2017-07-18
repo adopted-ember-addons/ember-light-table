@@ -2,5 +2,7 @@
   {{component (concat 'light-table/cells/' column.cellType) column row
     table=table
     rawValue=(get row column.valuePath)
-    tableActions=tableActions}}
+    tableActions=tableActions
+    extra=extra
+  }}
 {{/each}}

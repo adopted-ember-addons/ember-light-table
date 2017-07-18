@@ -67,6 +67,12 @@ const Column = Component.extend(DraggableColumnMixin, {
   tableActions: null,
 
   /**
+   * @property extra
+   * @type {Object}
+   */
+  extra: null,
+
+  /**
    * @property sortIcons
    * @type {Object}
    */
