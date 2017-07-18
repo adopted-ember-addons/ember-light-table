@@ -21,6 +21,7 @@
             {{component (concat 'light-table/columns/' column.type) column
               table=table
               tableActions=tableActions
+              extra=extra
               sortIcons=sortIcons
               resizeOnDrag=resizeOnDrag
               click=(action 'onColumnClick' column)
@@ -38,6 +39,7 @@
               rowspan=1
               classNames="lt-sub-column"
               tableActions=tableActions
+              extra=extra
               sortIcons=sortIcons
               resizeOnDrag=resizeOnDrag
               click=(action 'onColumnClick' column)

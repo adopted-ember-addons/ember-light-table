@@ -65,6 +65,12 @@ export default Component.extend({
   tableActions: null,
 
   /**
+   * @property extra
+   * @type {Object}
+   */
+  extra: null,
+
+  /**
    * Allows a user to select a row on click. All this will do is apply the necessary
    * CSS classes and add the row to `table.selectedRows`. If `multiSelect` is disabled
    * only one row will be selected at a time.

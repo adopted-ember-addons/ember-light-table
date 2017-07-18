@@ -39,6 +39,12 @@ export default Mixin.create({
   tableActions: null,
 
   /**
+   * @property extra
+   * @type {Object}
+   */
+  extra: null,
+
+  /**
    * @property fixed
    * @type {Boolean}
    * @default false

@@ -16,6 +16,7 @@ const Row = Component.extend({
   columns: null,
   row: null,
   tableActions: null,
+  extra: null,
   canExpand: false,
   canSelect: false,
   colspan: 1,
