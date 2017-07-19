@@ -16,6 +16,22 @@ test('it renders', function(assert) {
   assert.equal(find('*').textContent.trim(), '');
 });
 
+test('it accepts a string as `valuePath`', function(assert) {
+  this.set('columns', Table.createColumns([
+    {
+      valuePath: 'foo',
+      format(value) {
+        return `${typeof value} "${value}"`;
+      }
+    }
+  ]));
+  this.set('row', { foo: 'hello' });
+
+  this.render(hbs`{{lt-row row columns}}`);
+
+  assert.equal(find('*').textContent.trim(), 'string "hello"');
+});
+
 test('it accepts an array as `valuePath`', function(assert) {
   this.set('columns', Table.createColumns([
     {
