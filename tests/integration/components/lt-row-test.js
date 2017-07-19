@@ -1,6 +1,7 @@
 import { find } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Table from 'ember-light-table';
 
 moduleForComponent('lt-row', 'Integration | Component | lt row', {
   integration: true
@@ -13,4 +14,20 @@ test('it renders', function(assert) {
   this.render(hbs`{{lt-row}}`);
 
   assert.equal(find('*').textContent.trim(), '');
+});
+
+test('it accepts an array as `valuePath`', function(assert) {
+  this.set('columns', Table.createColumns([
+    {
+      valuePath: ['foo', 'bar'],
+      format(values) {
+        return values.join(' ');
+      }
+    }
+  ]));
+  this.set('row', { foo: 'hello', bar: 'world' });
+
+  this.render(hbs`{{lt-row row columns}}`);
+
+  assert.equal(find('*').textContent.trim(), 'hello world');
 });
