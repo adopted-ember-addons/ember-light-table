@@ -1,6 +1,6 @@
 {{#each columns as |column|}}
   {{component (concat 'light-table/cells/' column.cellType) column row
     table=table
-    rawValue=(get row column.valuePath)
+    rawValue=(collect row column.valuePath)
     tableActions=tableActions}}
 {{/each}}
