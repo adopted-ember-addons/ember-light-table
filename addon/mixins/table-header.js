@@ -69,13 +69,24 @@ export default Mixin.create({
   resizeOnDrag: false,
 
   /**
-   * CSS classes to be applied to an `<i class="lt-sort-icon></i>` tag that is
-   * inserted into the column's `<th>` element.
+   * CSS classes to be applied to an `<i class="lt-sort-icon"></i>` tag that is
+   * inserted into the column's `<th>` element when the column is sortable but
+   * not yet sorted.
    *
    * For instance, if you have installed `ember-font-awesome` or include the
    * `font-awesome` assets manually (e.g. via a CDN), you can set
-   * `iconAscending` to `'fa fa-sort-asc'`, which would yield this markup:
-   * `<i class="lt-sort-icon fa fa-sort-asc"></i>`
+   * `iconSortable` to `'fa fa-sort'`, which would yield this markup:
+   * `<i class="lt-sort-icon fa fa-sort"></i>`
+   *
+   * @property iconSortable
+   * @type {String}
+   * @default ''
+   */
+  iconSortable: '',
+
+  /**
+   * See `iconSortable`.  CSS classes to apply to `<i class="lt-sort-icon"></i>`
+   * when the column is sorted ascending.
    *
    * @property iconAscending
    * @type {String}
@@ -84,9 +95,10 @@ export default Mixin.create({
   iconAscending: '',
 
   /**
-   * See `iconAscending`.
+   * See `iconSortable`.  CSS classes to apply to `<i class="lt-sort-icon"></i>`
+   * when the column is sorted descending.
    *
-   * @property iconDescending
+   * @property iconDesci
    * @type {String}
    * @default ''
    */
@@ -103,8 +115,8 @@ export default Mixin.create({
   subColumns: computed.readOnly('table.visibleSubColumns'),
   columns: computed.readOnly('table.visibleColumns'),
 
-  sortIcons: computed('iconAscending', 'iconDescending', function() {
-    return this.getProperties(['iconAscending', 'iconDescending']);
+  sortIcons: computed('iconSortable', 'iconAscending', 'iconDescending', function() {
+    return this.getProperties(['iconSortable', 'iconAscending', 'iconDescending']);
   }).readOnly(),
 
   init() {
