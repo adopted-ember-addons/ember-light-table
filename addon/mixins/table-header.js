@@ -98,7 +98,7 @@ export default Mixin.create({
    * See `iconSortable`.  CSS classes to apply to `<i class="lt-sort-icon"></i>`
    * when the column is sorted descending.
    *
-   * @property iconDesci
+   * @property iconDescending
    * @type {String}
    * @default ''
    */
