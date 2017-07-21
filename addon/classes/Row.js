@@ -1,11 +1,7 @@
 import Ember from 'ember';
 import fixProto from 'ember-light-table/utils/fix-proto';
 
-const {
-  computed,
-  guidFor,
-  ObjectProxy
-} = Ember;
+const { computed, guidFor, ObjectProxy } = Ember;
 
 /**
  * @module Table

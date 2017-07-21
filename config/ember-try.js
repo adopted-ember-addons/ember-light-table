@@ -1,4 +1,5 @@
 /* eslint-env node */
+/* eslint-disable prettier/prettier */
 module.exports = {
   useVersionCompatibility: true,
   scenarios: [

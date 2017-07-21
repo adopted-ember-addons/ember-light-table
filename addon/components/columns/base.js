@@ -3,11 +3,7 @@ import layout from 'ember-light-table/templates/components/columns/base';
 import DraggableColumnMixin from 'ember-light-table/mixins/draggable-column';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
 
-const {
-  Component,
-  computed,
-  isEmpty
-} = Ember;
+const { Component, computed, computed: { reads }, isEmpty } = Ember;
 
 /**
  * @module Light Table
@@ -24,7 +20,17 @@ const Column = Component.extend(DraggableColumnMixin, {
   tagName: 'th',
   classNames: ['lt-column'],
   attributeBindings: ['style', 'colspan', 'rowspan'],
-  classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isHideable', 'isSortable', 'isSorted', 'isResizable', 'isResizing', 'isDraggable', 'column.classNames'],
+  classNameBindings: [
+    'align',
+    'isGroupColumn:lt-group-column',
+    'isHideable',
+    'isSortable',
+    'isSorted',
+    'isResizable',
+    'isResizing',
+    'isDraggable',
+    'column.classNames'
+  ],
 
   isGroupColumn: computed.readOnly('column.isGroupColumn'),
   isSortable: computed.readOnly('column.sortable'),
@@ -46,7 +52,7 @@ const Column = Component.extend(DraggableColumnMixin, {
    * @property label
    * @type {String}
    */
-  label: computed.oneWay('column.label'),
+  label: reads('column.label'),
 
   /**
    * @property table

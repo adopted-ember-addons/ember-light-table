@@ -16,7 +16,7 @@ const {
 } = Ember;
 
 function intersections(array1, array2) {
-  return array1.filter((n) => {
+  return array1.filter(n => {
     return array2.indexOf(n) > -1;
   });
 }
@@ -167,34 +167,38 @@ const LightTable = Component.extend({
    * @type {Number}
    * @private
    */
-  totalWidth: computed('visibleColumns.[]', 'visibleColumns.@each.width', function() {
-    let visibleColumns = this.get('visibleColumns');
-    let widths = visibleColumns.getEach('width');
-    let unit = (widths[0] || '').match(/\D+$/);
-    let totalWidth = 0;
+  totalWidth: computed(
+    'visibleColumns.[]',
+    'visibleColumns.@each.width',
+    function() {
+      let visibleColumns = this.get('visibleColumns');
+      let widths = visibleColumns.getEach('width');
+      let unit = (widths[0] || '').match(/\D+$/);
+      let totalWidth = 0;
 
-    if (isEmpty(unit)) {
-      return 0;
-    }
-
-    unit = unit[0];
-
-    /*
-      1. Check if all widths are present
-      2. Check if all widths are the same unit
-     */
-    for (let i = 0; i < widths.length; i++) {
-      let width = widths[i];
-
-      if (isNone(width) || width.indexOf(unit) === -1) {
+      if (isEmpty(unit)) {
         return 0;
       }
 
-      totalWidth += parseInt(width, 10);
-    }
+      unit = unit[0];
 
-    return `${totalWidth}${unit}`;
-  }),
+      /*
+      1. Check if all widths are present
+      2. Check if all widths are the same unit
+     */
+      for (let i = 0; i < widths.length; i++) {
+        let width = widths[i];
+
+        if (isNone(width) || width.indexOf(unit) === -1) {
+          return 0;
+        }
+
+        totalWidth += parseInt(width, 10);
+      }
+
+      return `${totalWidth}${unit}`;
+    }
+  ),
 
   style: computed('totalWidth', 'height', function() {
     let totalWidth = this.get('totalWidth');
@@ -214,44 +218,52 @@ const LightTable = Component.extend({
     let table = this.get('table');
     let media = this.get('media');
 
-    assert('[ember-light-table] table must be an instance of Table', table instanceof Table);
+    assert(
+      '[ember-light-table] table must be an instance of Table',
+      table instanceof Table
+    );
 
     if (isNone(media)) {
       this.set('responsive', false);
     }
   },
 
-  onMediaChange: on('init', observer('media.matches.[]', 'table.allColumns.[]', function() {
-    let responsive = this.get('responsive');
-    let matches = this.get('media.matches');
-    let breakpoints = this.get('breakpoints');
-    let table = this.get('table');
-    let numColumns = 0;
+  onMediaChange: on(
+    'init',
+    observer('media.matches.[]', 'table.allColumns.[]', function() {
+      let responsive = this.get('responsive');
+      let matches = this.get('media.matches');
+      let breakpoints = this.get('breakpoints');
+      let table = this.get('table');
+      let numColumns = 0;
 
-    if (!responsive) {
-      return;
-    }
+      if (!responsive) {
+        return;
+      }
 
-    this.send('onBeforeResponsiveChange', matches);
+      this.send('onBeforeResponsiveChange', matches);
 
-    if (!isNone(breakpoints)) {
-      Object.keys(breakpoints).forEach((b) => {
-        if (matches.indexOf(b) > -1) {
-          numColumns = Math.max(numColumns, breakpoints[b]);
-        }
-      });
+      if (!isNone(breakpoints)) {
+        Object.keys(breakpoints).forEach(b => {
+          if (matches.indexOf(b) > -1) {
+            numColumns = Math.max(numColumns, breakpoints[b]);
+          }
+        });
 
-      this._displayColumns(numColumns);
-    } else {
-      table.get('allColumns').forEach((c) => {
-        let breakpoints = c.get('breakpoints');
-        let isMatch = isEmpty(breakpoints) || intersections(matches, breakpoints).length > 0;
-        c.set('responsiveHidden', !isMatch);
-      });
-    }
+        this._displayColumns(numColumns);
+      } else {
+        table.get('allColumns').forEach(c => {
+          let breakpoints = c.get('breakpoints');
+          let isMatch =
+            isEmpty(breakpoints) ||
+            intersections(matches, breakpoints).length > 0;
+          c.set('responsiveHidden', !isMatch);
+        });
+      }
 
-    this.send('onAfterResponsiveChange', matches);
-  })),
+      this.send('onAfterResponsiveChange', matches);
+    })
+  ),
 
   _displayColumns(numColumns) {
     let table = this.get('table');
@@ -261,9 +273,13 @@ const LightTable = Component.extend({
     if (!numColumns) {
       hiddenColumns.setEach('responsiveHidden', false);
     } else if (visibleColumns.length > numColumns) {
-      emberArray(visibleColumns.slice(numColumns, visibleColumns.length)).setEach('responsiveHidden', true);
+      emberArray(
+        visibleColumns.slice(numColumns, visibleColumns.length)
+      ).setEach('responsiveHidden', true);
     } else if (visibleColumns.length < numColumns) {
-      emberArray(hiddenColumns.slice(0, numColumns - visibleColumns.length)).setEach('responsiveHidden', false);
+      emberArray(
+        hiddenColumns.slice(0, numColumns - visibleColumns.length)
+      ).setEach('responsiveHidden', false);
     }
   },
 

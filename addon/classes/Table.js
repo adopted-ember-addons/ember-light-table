@@ -8,6 +8,7 @@ import fixProto from 'ember-light-table/utils/fix-proto';
 const {
   get,
   computed,
+  computed: { empty, filterBy },
   isNone,
   A: emberArray,
   Object: EmberObject
@@ -19,7 +20,7 @@ const RowSyncArrayProxy = SyncArrayProxy.extend({
   },
 
   serializeSyncArrayObjects(objects) {
-    return objects.map((o) => get(o, 'content'));
+    return objects.map(o => get(o, 'content'));
   }
 });
 
@@ -51,82 +52,99 @@ export default class Table extends EmberObject.extend({
    * @property isEmpty
    * @type {Boolean}
    */
-  isEmpty: computed.empty('rows').readOnly(),
+  isEmpty: empty('rows').readOnly(),
 
   /**
    * @property expandedRows
    * @type {Ember.Array}
    */
-  expandedRows: computed.filterBy('rows', 'expanded', true).readOnly(),
+  expandedRows: filterBy('rows', 'expanded', true).readOnly(),
 
   /**
    * @property selectedRows
    * @type {Ember.Array}
    */
-  selectedRows: computed.filterBy('rows', 'selected', true).readOnly(),
+  selectedRows: filterBy('rows', 'selected', true).readOnly(),
 
   /**
    * @property visibleRows
    * @type {Ember.Array}
    */
-  visibleRows: computed.filterBy('rows', 'hidden', false).readOnly(),
+  visibleRows: filterBy('rows', 'hidden', false).readOnly(),
 
   /**
    * @property sortableColumns
    * @type {Ember.Array}
    */
-  sortableColumns: computed.filterBy('visibleColumns', 'sortable', true).readOnly(),
+  sortableColumns: filterBy('visibleColumns', 'sortable', true).readOnly(),
 
   /**
    * @property sortedColumns
    * @type {Ember.Array}
    */
-  sortedColumns: computed.filterBy('visibleColumns', 'sorted', true).readOnly(),
+  sortedColumns: filterBy('visibleColumns', 'sorted', true).readOnly(),
 
   /**
    * @property hideableColumns
    * @type {Ember.Array}
    */
-  hideableColumns: computed.filterBy('allColumns', 'hideable', true).readOnly(),
+  hideableColumns: filterBy('allColumns', 'hideable', true).readOnly(),
 
   /**
    * @property hiddenColumns
    * @type {Ember.Array}
    */
-  hiddenColumns: computed.filterBy('allColumns', 'hidden', true).readOnly(),
+  hiddenColumns: filterBy('allColumns', 'hidden', true).readOnly(),
 
   /**
    * @property responsiveHiddenColumns
    * @type {Ember.Array}
    */
-  responsiveHiddenColumns: computed.filterBy('allColumns', 'responsiveHidden', true).readOnly(),
+  responsiveHiddenColumns: filterBy(
+    'allColumns',
+    'responsiveHidden',
+    true
+  ).readOnly(),
 
   /**
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: computed.filterBy('allColumns', 'isHidden', false).readOnly(),
+  visibleColumns: filterBy('allColumns', 'isHidden', false).readOnly(),
 
   /**
    * @property visibleColumnGroups
    * @type {Ember.Array}
    */
-  visibleColumnGroups: computed('columns.[]', 'columns.@each.{isHidden,isVisibleGroupColumn}', function() {
-    return this.get('columns').reduce((arr, c) => {
-      if (c.get('isVisibleGroupColumn') || (!c.get('isGroupColumn') && !c.get('isHidden'))) {
-        arr.pushObject(c);
-      }
-      return arr;
-    }, emberArray([]));
-  }).readOnly(),
+  visibleColumnGroups: computed(
+    'columns.[]',
+    'columns.@each.{isHidden,isVisibleGroupColumn}',
+    function() {
+      return this.get('columns').reduce((arr, c) => {
+        if (
+          c.get('isVisibleGroupColumn') ||
+          (!c.get('isGroupColumn') && !c.get('isHidden'))
+        ) {
+          arr.pushObject(c);
+        }
+        return arr;
+      }, emberArray([]));
+    }
+  ).readOnly(),
 
   /**
    * @property visibleSubColumns
    * @type {Ember.Array}
    */
-  visibleSubColumns: computed('columns.[]', 'columns.@each.visibleSubColumns', function() {
-    return emberArray([].concat(...this.get('columns').getEach('visibleSubColumns')));
-  }).readOnly(),
+  visibleSubColumns: computed(
+    'columns.[]',
+    'columns.@each.visibleSubColumns',
+    function() {
+      return emberArray(
+        [].concat(...this.get('columns').getEach('visibleSubColumns'))
+      );
+    }
+  ).readOnly(),
 
   /**
    * @property allColumns
@@ -235,7 +253,7 @@ export default class Table extends EmberObject.extend({
    * @param  {Object} options
    */
   addRows(rows = [], options = {}) {
-    rows.forEach((r) => this.addRow(r, options));
+    rows.forEach(r => this.addRow(r, options));
   }
 
   /**
@@ -297,7 +315,7 @@ export default class Table extends EmberObject.extend({
    * @param  {Array}    rows
    */
   removeRows(rows = []) {
-    rows.forEach((r) => this.removeRow(r));
+    rows.forEach(r => this.removeRow(r));
   }
 
   /**
@@ -424,7 +442,7 @@ export default class Table extends EmberObject.extend({
    * @return {Array}
    */
   static createRows(rows = [], options = {}) {
-    return rows.map((r) => Table.createRow(r, options));
+    return rows.map(r => Table.createRow(r, options));
   }
 
   /**
@@ -446,7 +464,7 @@ export default class Table extends EmberObject.extend({
    * @return {Array}
    */
   static createColumns(columns = []) {
-    return columns.map((c) => Table.createColumn(c));
+    return columns.map(c => Table.createColumn(c));
   }
 }
 

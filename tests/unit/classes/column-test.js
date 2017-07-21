@@ -31,7 +31,11 @@ test('create column - column instance', function(assert) {
 
 test('reopen colum', function(assert) {
   assert.equal(typeof Column.reopen, 'function', 'reopen is a function');
-  assert.equal(typeof Column.reopenClass, 'function', 'reopenClass is a function');
+  assert.equal(
+    typeof Column.reopenClass,
+    'function',
+    'reopenClass is a function'
+  );
 });
 
 test('CP - isGroupColumn', function(assert) {
@@ -86,5 +90,4 @@ test('subColumns / parent', function(assert) {
   assert.equal(col.subColumns.length, 1);
 
   assert.equal(col.subColumns[0].get('parent'), col);
-
 });

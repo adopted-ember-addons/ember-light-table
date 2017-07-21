@@ -2,12 +2,7 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/lt-body';
 import Row from 'ember-light-table/classes/Row';
 
-const {
-  Component,
-  computed,
-  run,
-  observer
-} = Ember;
+const { Component, computed, run, observer } = Ember;
 
 /**
  * @module Light Table
@@ -327,7 +322,11 @@ export default Component.extend({
   },
 
   onRowsChange: observer('rows.[]', function() {
-    this._checkTargetOffsetTimer = run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
+    this._checkTargetOffsetTimer = run.scheduleOnce(
+      'afterRender',
+      this,
+      this.checkTargetScrollOffset
+    );
   }),
 
   setupScrollOffset() {
@@ -336,7 +335,12 @@ export default Component.extend({
       _scrollTo,
       scrollToRow,
       _scrollToRow
-    } = this.getProperties(['scrollTo', '_scrollTo', 'scrollToRow', '_scrollToRow']);
+    } = this.getProperties([
+      'scrollTo',
+      '_scrollTo',
+      'scrollToRow',
+      '_scrollToRow'
+    ]);
     let targetScrollOffset = null;
 
     this.setProperties({ _scrollTo: scrollTo, _scrollToRow: scrollToRow });
@@ -354,14 +358,19 @@ export default Component.extend({
       });
     } else if (scrollToRow !== _scrollToRow) {
       if (scrollToRow instanceof Row) {
-        let rowElement = this.element.querySelector(`[data-row-id=${scrollToRow.get('rowId')}]`);
+        let rowElement = this.element.querySelector(
+          `[data-row-id=${scrollToRow.get('rowId')}]`
+        );
 
         if (rowElement instanceof Element) {
           targetScrollOffset = rowElement.offsetTop;
         }
       }
 
-      this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
+      this.setProperties({
+        targetScrollOffset,
+        hasReachedTargetScrollOffset: true
+      });
     }
   },
 
@@ -410,7 +419,8 @@ export default Component.extend({
       let expandOnClick = this.get('expandOnClick');
       let isSelected = row.get('selected');
       let currIndex = rows.indexOf(row);
-      let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
+      let prevIndex =
+        this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
 
       this._prevSelectedIndex = currIndex;
 
@@ -423,9 +433,15 @@ export default Component.extend({
       if (canSelect) {
         if (e.shiftKey && multiSelect) {
           rows
-            .slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1)
-            .forEach((r) => r.set('selected', !isSelected));
-        } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) && multiSelect) {
+            .slice(
+              Math.min(currIndex, prevIndex),
+              Math.max(currIndex, prevIndex) + 1
+            )
+            .forEach(r => r.set('selected', !isSelected));
+        } else if (
+          (!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) &&
+          multiSelect
+        ) {
           row.toggleProperty('selected');
         } else {
           if (selectOnClick) {

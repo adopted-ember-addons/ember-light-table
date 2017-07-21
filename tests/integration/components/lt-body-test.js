@@ -2,14 +2,14 @@ import { click, findAll, find, triggerEvent } from 'ember-native-dom-helpers';
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
+import startMirage, {
+  createUsers
+} from '../../helpers/setup-mirage-for-integration';
 import Table from 'ember-light-table';
 import hasClass from '../../helpers/has-class';
 import Columns from '../../helpers/table-columns';
 
-const {
-  run
-} = Ember;
+const { run } = Ember;
 
 moduleForComponent('lt-body', 'Integration | Component | lt body', {
   integration: true,
@@ -24,7 +24,7 @@ moduleForComponent('lt-body', 'Integration | Component | lt body', {
 });
 
 test('it renders', function(assert) {
-  this.render(hbs `{{lt-body sharedOptions=sharedOptions}}`);
+  this.render(hbs`{{lt-body sharedOptions=sharedOptions}}`);
   assert.equal(find('*').textContent.trim(), '');
 });
 
@@ -32,7 +32,9 @@ test('row selection - enable or disable', function(assert) {
   this.set('table', new Table(Columns, createUsers(1)));
   this.set('canSelect', false);
 
-  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}`);
+  this.render(
+    hbs`{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}`
+  );
 
   let row = find('tr');
 
@@ -52,7 +54,9 @@ test('row selection - enable or disable', function(assert) {
 test('row selection - ctrl-click to modify selection', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
-  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true}}`);
+  this.render(
+    hbs`{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true}}`
+  );
   let firstRow = find('tr:first-child');
   let middleRow = find('tr:nth-child(4)');
   let lastRow = find('tr:last-child');
@@ -60,22 +64,40 @@ test('row selection - ctrl-click to modify selection', function(assert) {
   assert.equal(findAll('tbody > tr').length, 5);
 
   click(firstRow);
-  assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
+  assert.equal(
+    findAll('tr.is-selected').length,
+    1,
+    'clicking a row selects it'
+  );
 
   click(lastRow, { shiftKey: true });
-  assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
+  assert.equal(
+    findAll('tr.is-selected').length,
+    5,
+    'shift-clicking another row selects it and all rows between'
+  );
 
   click(middleRow, { ctrlKey: true });
-  assert.equal(findAll('tr.is-selected').length, 4, 'ctrl-clicking a selected row deselects it');
+  assert.equal(
+    findAll('tr.is-selected').length,
+    4,
+    'ctrl-clicking a selected row deselects it'
+  );
 
   click(firstRow);
-  assert.equal(findAll('tr.is-selected').length, 0, 'clicking a selected row deselects all rows');
+  assert.equal(
+    findAll('tr.is-selected').length,
+    0,
+    'clicking a selected row deselects all rows'
+  );
 });
 
 test('row selection - click to modify selection', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
-  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false}}`);
+  this.render(
+    hbs`{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false}}`
+  );
 
   let firstRow = find('tr:first-child');
   let middleRow = find('tr:nth-child(4)');
@@ -84,23 +106,39 @@ test('row selection - click to modify selection', function(assert) {
   assert.equal(findAll('tbody > tr').length, 5);
 
   click(firstRow);
-  assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
+  assert.equal(
+    findAll('tr.is-selected').length,
+    1,
+    'clicking a row selects it'
+  );
 
   click(lastRow, { shiftKey: true });
-  assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
+  assert.equal(
+    findAll('tr.is-selected').length,
+    5,
+    'shift-clicking another row selects it and all rows between'
+  );
 
   click(middleRow);
-  assert.equal(findAll('tr.is-selected').length, 4, 'clicking a selected row deselects it without affecting other selected rows');
+  assert.equal(
+    findAll('tr.is-selected').length,
+    4,
+    'clicking a selected row deselects it without affecting other selected rows'
+  );
 
   click(middleRow);
-  assert.equal(findAll('tr.is-selected').length, 5, 'clicking a deselected row selects it without affecting other selected rows');
+  assert.equal(
+    findAll('tr.is-selected').length,
+    5,
+    'clicking a deselected row selects it without affecting other selected rows'
+  );
 });
 
 test('row expansion', function(assert) {
   this.set('table', new Table(Columns, createUsers(2)));
   this.set('canExpand', false);
 
-  this.render(hbs `
+  this.render(hbs`
     {{#lt-body table=table sharedOptions=sharedOptions canSelect=false canExpand=canExpand multiRowExpansion=false as |b|}}
       {{#b.expanded-row}} Hello {{/b.expanded-row}}
     {{/lt-body}}
@@ -133,7 +171,7 @@ test('row expansion', function(assert) {
 
 test('row expansion - multiple', function(assert) {
   this.set('table', new Table(Columns, createUsers(2)));
-  this.render(hbs `
+  this.render(hbs`
     {{#lt-body table=table sharedOptions=sharedOptions canExpand=true as |b|}}
       {{#b.expanded-row}} Hello {{/b.expanded-row}}
     {{/lt-body}}
@@ -142,7 +180,7 @@ test('row expansion - multiple', function(assert) {
   let rows = findAll('tr');
   assert.equal(rows.length, 2);
 
-  rows.forEach((row) => {
+  rows.forEach(row => {
     assert.ok(hasClass(row, 'is-expandable'));
     click(row);
     assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
@@ -155,9 +193,11 @@ test('row actions', function(assert) {
   assert.expect(2);
 
   this.set('table', new Table(Columns, createUsers(1)));
-  this.on('onRowClick', (row) => assert.ok(row));
-  this.on('onRowDoubleClick', (row) => assert.ok(row));
-  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`);
+  this.on('onRowClick', row => assert.ok(row));
+  this.on('onRowDoubleClick', row => assert.ok(row));
+  this.render(
+    hbs`{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`
+  );
 
   let row = find('tr');
   click(row);
@@ -167,7 +207,7 @@ test('row actions', function(assert) {
 test('hidden rows', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
-  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions}}`);
+  this.render(hbs`{{lt-body table=table sharedOptions=sharedOptions}}`);
 
   assert.equal(findAll('tbody > tr').length, 5);
 
@@ -189,15 +229,26 @@ test('scaffolding', function(assert) {
   const users = createUsers(1);
   this.set('table', new Table(Columns, users));
 
-  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions enableScaffolding=true}}`);
+  this.render(
+    hbs`{{lt-body table=table sharedOptions=sharedOptions enableScaffolding=true}}`
+  );
 
   const [scaffoldingRow, userRow] = findAll('tr');
   const userCells = findAll('.lt-cell', userRow);
 
-  assert.ok(hasClass(scaffoldingRow, 'lt-scaffolding-row'), 'the first row of the <tbody> is a scaffolding row');
-  assert.notOk(hasClass(userRow, 'lt-scaffolding-row'), 'the second row of the <tbody> is not a scaffolding row');
+  assert.ok(
+    hasClass(scaffoldingRow, 'lt-scaffolding-row'),
+    'the first row of the <tbody> is a scaffolding row'
+  );
+  assert.notOk(
+    hasClass(userRow, 'lt-scaffolding-row'),
+    'the second row of the <tbody> is not a scaffolding row'
+  );
 
-  assert.notOk(userRow.hasAttribute('style'), 'the second row of the <tbody> has no `style` attribute');
+  assert.notOk(
+    userRow.hasAttribute('style'),
+    'the second row of the <tbody> has no `style` attribute'
+  );
 
   assert.ok(
     Columns.map((c, i) => {
@@ -212,7 +263,7 @@ test('scaffolding', function(assert) {
 test('overwrite', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
 
-  this.render(hbs `
+  this.render(hbs`
     {{#lt-body table=table sharedOptions=sharedOptions overwrite=true as |columns rows|}}
       {{columns.length}}, {{rows.length}}
     {{/lt-body}}

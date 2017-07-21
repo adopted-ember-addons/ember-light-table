@@ -2,10 +2,7 @@ import Ember from 'ember';
 import layout from 'ember-light-table/templates/components/cells/base';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
 
-const {
-  Component,
-  computed
-} = Ember;
+const { Component, computed } = Ember;
 
 /**
  * @module Light Table

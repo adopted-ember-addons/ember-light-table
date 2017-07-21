@@ -29,13 +29,15 @@ test('render grouped columns', function(assert) {
 
 test('click - non-sortable column', function(assert) {
   this.set('table', new Table(Columns));
-  this.on('onColumnClick', (column) => {
+  this.on('onColumnClick', column => {
     assert.ok(column);
     assert.notOk(column.sortable);
     assert.equal(column.label, 'Avatar');
   });
 
-  this.render(hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action 'onColumnClick')}}`);
+  this.render(
+    hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action 'onColumnClick')}}`
+  );
 
   assert.equal(findAll('tr > th').length, 6);
   let nonSortableHeader = find('tr > th');
@@ -45,7 +47,7 @@ test('click - non-sortable column', function(assert) {
 test('click - sortable column', function(assert) {
   this.set('table', new Table(Columns));
   let asc = true;
-  this.on('onColumnClick', (column) => {
+  this.on('onColumnClick', column => {
     assert.ok(column);
     assert.ok(column.sortable);
     assert.ok(column.sorted);
@@ -53,7 +55,9 @@ test('click - sortable column', function(assert) {
     assert.equal(column.ascending, asc);
   });
 
-  this.render(hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action 'onColumnClick')}}`);
+  this.render(
+    hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action 'onColumnClick')}}`
+  );
   let allHeaders = findAll('tr > th');
   let sortableHeader = allHeaders[allHeaders.length - 1];
   assert.equal(findAll('tr > th').length, 6);
@@ -64,13 +68,15 @@ test('click - sortable column', function(assert) {
 
 test('double click', function(assert) {
   this.set('table', new Table(Columns));
-  this.on('onColumnDoubleClick', (column) => {
+  this.on('onColumnDoubleClick', column => {
     assert.ok(column);
     assert.notOk(column.sortable);
     assert.equal(column.label, 'Avatar');
   });
 
-  this.render(hbs`{{lt-head table=table renderInPlace=true onColumnDoubleClick=(action 'onColumnDoubleClick')}}`);
+  this.render(
+    hbs`{{lt-head table=table renderInPlace=true onColumnDoubleClick=(action 'onColumnDoubleClick')}}`
+  );
   let allHeaders = findAll('tr > th');
   let sortableHeader = allHeaders[allHeaders.length - 1];
 

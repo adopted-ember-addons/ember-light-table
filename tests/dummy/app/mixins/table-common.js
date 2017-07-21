@@ -3,15 +3,10 @@ import Ember from 'ember';
 import Table from 'ember-light-table';
 import { task } from 'ember-concurrency';
 
-const {
-  inject,
-  isEmpty,
-  computed,
-  Mixin
-} = Ember;
+const { inject: { service }, isEmpty, computed, Mixin } = Ember;
 
 export default Mixin.create({
-  store: inject.service(),
+  store: service(),
 
   page: 0,
   limit: 10,
@@ -30,8 +25,12 @@ export default Mixin.create({
   init() {
     this._super(...arguments);
 
-    let table = new Table(this.get('columns'), this.get('model'), { enableSync: this.get('enableSync') });
-    let sortColumn = table.get('allColumns').findBy('valuePath', this.get('sort'));
+    let table = new Table(this.get('columns'), this.get('model'), {
+      enableSync: this.get('enableSync')
+    });
+    let sortColumn = table
+      .get('allColumns')
+      .findBy('valuePath', this.get('sort'));
 
     // Setup initial sort column
     if (sortColumn) {
@@ -42,7 +41,10 @@ export default Mixin.create({
   },
 
   fetchRecords: task(function*() {
-    let records = yield this.get('store').query('user', this.getProperties(['page', 'limit', 'sort', 'dir']));
+    let records = yield this.get('store').query(
+      'user',
+      this.getProperties(['page', 'limit', 'sort', 'dir'])
+    );
     this.get('model').pushObjects(records.toArray());
     this.set('meta', records.get('meta'));
     this.set('canLoadMore', !isEmpty(records));

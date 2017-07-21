@@ -2,9 +2,13 @@ import { find } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('lt-spanned-row', 'Integration | Component | lt spanned row', {
-  integration: true
-});
+moduleForComponent(
+  'lt-spanned-row',
+  'Integration | Component | lt spanned row',
+  {
+    integration: true
+  }
+);
 
 test('it renders', function(assert) {
   this.render(hbs`{{lt-spanned-row}}`);
@@ -44,7 +48,6 @@ test('colspan', function(assert) {
 });
 
 test('yield', function(assert) {
-
   this.render(hbs`
     {{#lt-spanned-row yield=(hash name="Offir") as |row|}}
       {{row.name}}

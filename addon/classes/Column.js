@@ -305,21 +305,30 @@ export default class Column extends EmberObject.extend({
    * @type {Boolean}
    * @private
    */
-  isVisibleGroupColumn: computed('visibleSubColumns.[]', 'isHidden', function() {
-    return !isEmpty(this.get('visibleSubColumns')) && !this.get('isHidden');
-  }).readOnly(),
+  isVisibleGroupColumn: computed(
+    'visibleSubColumns.[]',
+    'isHidden',
+    function() {
+      return !isEmpty(this.get('visibleSubColumns')) && !this.get('isHidden');
+    }
+  ).readOnly(),
 
   /**
    * @property visibleSubColumns
    * @type {Array}
    * @private
    */
-  visibleSubColumns: computed('subColumns.[]', 'subColumns.@each.isHidden', 'isHidden', function() {
-    let subColumns = this.get('subColumns');
-    let isHidden = this.get('isHidden');
+  visibleSubColumns: computed(
+    'subColumns.[]',
+    'subColumns.@each.isHidden',
+    'isHidden',
+    function() {
+      let subColumns = this.get('subColumns');
+      let isHidden = this.get('isHidden');
 
-    return emberArray(isHidden ? [] : subColumns.filterBy('isHidden', false));
-  }).readOnly()
+      return emberArray(isHidden ? [] : subColumns.filterBy('isHidden', false));
+    }
+  ).readOnly()
 }) {
   /**
    * @class Column
@@ -339,7 +348,7 @@ export default class Column extends EmberObject.extend({
 
     let { subColumns } = options;
 
-    subColumns = emberArray(makeArray(subColumns).map((sc) => new Column(sc)));
+    subColumns = emberArray(makeArray(subColumns).map(sc => new Column(sc)));
     subColumns.setEach('parent', this);
 
     this.set('subColumns', subColumns);

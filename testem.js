@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* eslint-disable camelcase */
+/* eslint-disable camelcase, prettier/prettier */
 module.exports = {
   test_page: 'tests/index.html?hidepassed',
   disable_watching: true,

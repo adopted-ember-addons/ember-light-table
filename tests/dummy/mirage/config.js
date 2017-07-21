@@ -1,12 +1,9 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
 
-const {
-  A: emberArray
-} = Ember;
+const { A: emberArray } = Ember;
 
 export default function() {
-
   // These comments are here to help you get started. Feel free to delete them.
 
   this.passthrough('/write-coverage');

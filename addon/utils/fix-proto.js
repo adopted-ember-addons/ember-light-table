@@ -27,6 +27,7 @@
  * @type {Boolean}
  * @readOnly
  */
+// prettier-ignore
 export const isProtoSupported = ({ __proto__: [] }) instanceof Array;
 
 /**

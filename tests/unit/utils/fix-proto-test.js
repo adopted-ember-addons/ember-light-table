@@ -2,9 +2,7 @@ import Ember from 'ember';
 import fixProto from 'ember-light-table/utils/fix-proto';
 import { module, test } from 'qunit';
 
-const {
-  Object: EmberObject
-} = Ember;
+const { Object: EmberObject } = Ember;
 
 module('Unit | Utility | fix proto');
 
@@ -13,7 +11,9 @@ module('Unit | Utility | fix proto');
  * make any sense. The only relevent environments are IE <= 10.
  */
 
-test('ES6 classes that extend `Ember.Object` can be reopened after `fixProto` was used on them', function(assert) {
+test('ES6 classes that extend `Ember.Object` can be reopened after `fixProto` was used on them', function(
+  assert
+) {
   class DerivedClass extends EmberObject.extend() {}
 
   fixProto(DerivedClass);

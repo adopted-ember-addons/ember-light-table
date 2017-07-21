@@ -2,7 +2,9 @@ import { findAll, find, scrollTo } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import { skip } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
-import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
+import startMirage, {
+  createUsers
+} from '../../helpers/setup-mirage-for-integration';
 import Table from 'ember-light-table';
 import Columns from '../../helpers/table-columns';
 import hasClass from '../../helpers/has-class';
@@ -19,7 +21,7 @@ moduleForComponent('light-table', 'Integration | Component | light table', {
 
 test('it renders', function(assert) {
   this.set('table', new Table());
-  this.render(hbs `{{light-table table}}`);
+  this.render(hbs`{{light-table table}}`);
 
   assert.equal(find('*').textContent.trim(), '');
 });
@@ -34,7 +36,7 @@ skip('scrolled to bottom', async function(assert) {
     assert.ok(true);
   });
 
-  this.render(hbs `
+  this.render(hbs`
     {{#light-table table height='40vh' as |t|}}
       {{t.head}}
       {{t.body onScrolledToBottom=(action 'onScrolledToBottom')}}
@@ -46,7 +48,10 @@ skip('scrolled to bottom', async function(assert) {
   let scrollContainer = '.tse-scroll-content';
   let { scrollHeight } = find(scrollContainer);
 
-  assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
+  assert.ok(
+    findAll(scrollContainer).length > 0,
+    'scroll container was rendered'
+  );
   assert.equal(scrollHeight, 2500, 'scroll height is 2500');
 
   await scrollTo(scrollContainer, 0, scrollHeight);
@@ -57,7 +62,7 @@ test('fixed header', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
   this.set('fixed', true);
 
-  this.render(hbs `
+  this.render(hbs`
     {{#light-table table height='500px' id='lightTable' as |t|}}
       {{t.head fixed=fixed}}
       {{t.body}}
@@ -76,7 +81,7 @@ test('fixed footer', function(assert) {
   this.set('table', new Table(Columns, createUsers(5)));
   this.set('fixed', true);
 
-  this.render(hbs `
+  this.render(hbs`
     {{#light-table table height='500px' id='lightTable' as |t|}}
       {{t.body}}
       {{t.foot fixed=fixed}}
@@ -92,12 +97,11 @@ test('fixed footer', function(assert) {
 
 // TODO: Passes in Chrome but not in Phantom
 skip('table assumes height of container', function(assert) {
-
   assert.expect(1);
   this.set('table', new Table(Columns, createUsers(5)));
   this.set('fixed', true);
 
-  this.render(hbs `
+  this.render(hbs`
     <div style="height: 500px">
       {{#light-table table id='lightTable' as |t|}}
         {{t.body}}
@@ -107,17 +111,18 @@ skip('table assumes height of container', function(assert) {
   `);
 
   assert.equal(find('#lightTable').offsetHeight, 500, 'table is 500px height');
-
 });
 
 // TODO: figure out why this test doesn't work properly in Phantomjs
-skip('table body should consume all available space when not enough content to fill it', function(assert) {
-  assert.expect(3);
+skip(
+  'table body should consume all available space when not enough content to fill it',
+  function(assert) {
+    assert.expect(3);
 
-  this.set('table', new Table(Columns, createUsers(1)));
-  this.set('fixed', true);
+    this.set('table', new Table(Columns, createUsers(1)));
+    this.set('fixed', true);
 
-  this.render(hbs `
+    this.render(hbs`
     <div style="height: 500px">
       {{#light-table table id='lightTable' as |t|}}
         {{t.head fixed=true}}
@@ -128,41 +133,47 @@ skip('table body should consume all available space when not enough content to f
       {{/light-table}}
     </div>
   `);
-  assert.equal(find('.lt-head-wrap').offsetHeight, 42, 'header is 42px tall');
-  assert.equal(find('.lt-body-wrap').offsetHeight, 438, 'body is 438px tall');
-  assert.equal(find('.lt-foot-wrap').offsetHeight, 20, 'header is 20px tall');
-
-});
+    assert.equal(find('.lt-head-wrap').offsetHeight, 42, 'header is 42px tall');
+    assert.equal(find('.lt-body-wrap').offsetHeight, 438, 'body is 438px tall');
+    assert.equal(find('.lt-foot-wrap').offsetHeight, 20, 'header is 20px tall');
+  }
+);
 
 test('accepts components that are used in the body', function(assert) {
-
   register(this, 'component:custom-row', RowComponent);
 
   this.set('table', new Table(Columns, createUsers(1)));
 
-  this.render(hbs `
+  this.render(hbs`
     {{#light-table table as |t|}}
       {{t.body rowComponent=(component "custom-row" classNames="custom-row")}}
     {{/light-table}}
   `);
 
-  assert.equal(findAll('.lt-row.custom-row').length, 1, 'row has custom-row class');
+  assert.equal(
+    findAll('.lt-row.custom-row').length,
+    1,
+    'row has custom-row class'
+  );
 });
 
 test('passed in components can have computed properties', function(assert) {
-
-  register(this, 'component:custom-row', RowComponent.extend({
-    classNameBindings: ['isActive'],
-    current: null,
-    isActive: Ember.computed('row.content', 'current', function() {
-      return this.get('row.content') === this.get('current');
+  register(
+    this,
+    'component:custom-row',
+    RowComponent.extend({
+      classNameBindings: ['isActive'],
+      current: null,
+      isActive: Ember.computed('row.content', 'current', function() {
+        return this.get('row.content') === this.get('current');
+      })
     })
-  }));
+  );
 
   let users = createUsers(3);
   this.set('table', new Table(Columns, users));
 
-  this.render(hbs `
+  this.render(hbs`
     {{#light-table table as |t|}}
       {{t.body
         rowComponent=(component "custom-row" classNames="custom-row" current=current)
@@ -170,7 +181,11 @@ test('passed in components can have computed properties', function(assert) {
     {{/light-table}}
   `);
 
-  assert.equal(findAll('.custom-row').length, 3, 'three custom rows were rendered');
+  assert.equal(
+    findAll('.custom-row').length,
+    3,
+    'three custom rows were rendered'
+  );
   assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
 
   this.set('current', users[0]);
@@ -198,7 +213,7 @@ test('onScroll', async function(assert) {
     }
   });
 
-  this.render(hbs `
+  this.render(hbs`
     {{#light-table table height='40vh' as |t|}}
       {{t.head fixed=true}}
       {{t.body

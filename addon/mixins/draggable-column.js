@@ -1,10 +1,6 @@
 import Ember from 'ember';
 
-const {
-  run,
-  computed,
-  Mixin
-} = Ember;
+const { run, computed, Mixin } = Ember;
 
 let sourceColumn;
 
@@ -20,7 +16,7 @@ export default Mixin.create({
       let columns = this.get('dragColumnGroup');
       let targetIdx = columns.indexOf(this.get('column'));
       let sourceIdx = columns.indexOf(sourceColumn);
-      let direction = (sourceIdx - targetIdx) < 0 ? 'right' : 'left';
+      let direction = sourceIdx - targetIdx < 0 ? 'right' : 'left';
 
       return `drag-${direction}`;
     }
@@ -45,8 +41,13 @@ export default Mixin.create({
     /*
       A column is a valid drop target only if its in the same group
      */
-    return column.get('droppable') && column.get('parent') === sourceColumn.get('parent');
-  }).volatile().readOnly(),
+    return (
+      column.get('droppable') &&
+      column.get('parent') === sourceColumn.get('parent')
+    );
+  })
+    .volatile()
+    .readOnly(),
 
   dragStart(e) {
     this._super(...arguments);
@@ -110,7 +111,7 @@ export default Mixin.create({
     /*
       Restore click event
      */
-    this._clickResetTimer = run.next(this, () => this.click = this.__click__);
+    this._clickResetTimer = run.next(this, () => (this.click = this.__click__));
   },
 
   drop(e) {

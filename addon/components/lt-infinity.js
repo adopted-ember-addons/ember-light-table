@@ -2,11 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/lt-infinity';
 import InViewportMixin from 'ember-in-viewport';
 
-const {
-  Component,
-  observer,
-  run
-} = Ember;
+const { Component, observer, run } = Ember;
 
 export default Component.extend(InViewportMixin, {
   classNames: ['lt-infinity'],
@@ -56,7 +52,11 @@ export default Component.extend(InViewportMixin, {
   }),
 
   _scheduleScrolledToBottom() {
-    this._schedulerTimer = run.scheduleOnce('afterRender', this, this._debounceScrolledToBottom);
+    this._schedulerTimer = run.scheduleOnce(
+      'afterRender',
+      this,
+      this._debounceScrolledToBottom
+    );
   },
 
   _debounceScrolledToBottom(delay = 100) {
@@ -64,7 +64,12 @@ export default Component.extend(InViewportMixin, {
       This debounce is needed when there is not enough delay between onScrolledToBottom calls.
       Without this debounce, all rows will be rendered causing immense performance problems
      */
-    this._debounceTimer = run.debounce(this, this.sendAction, 'onScrolledToBottom', delay);
+    this._debounceTimer = run.debounce(
+      this,
+      this.sendAction,
+      'onScrolledToBottom',
+      delay
+    );
   },
 
   _cancelTimers() {

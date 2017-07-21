@@ -3,9 +3,13 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { Column } from 'ember-light-table';
 
-moduleForComponent('light-table/columns/base', 'Integration | Component | Columns | base', {
-  integration: true
-});
+moduleForComponent(
+  'light-table/columns/base',
+  'Integration | Component | Columns | base',
+  {
+    integration: true
+  }
+);
 
 test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');

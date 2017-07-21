@@ -1,17 +1,11 @@
 import Ember from 'ember';
 
-const {
-  isPresent,
-  String: {
-    dasherize,
-    htmlSafe
-  }
-} = Ember;
+const { isPresent, String: { dasherize, htmlSafe } } = Ember;
 
 export default function cssStyleify(hash = {}) {
   let styles = [];
 
-  Object.keys(hash).forEach((key) => {
+  Object.keys(hash).forEach(key => {
     let value = hash[key];
 
     if (isPresent(value)) {

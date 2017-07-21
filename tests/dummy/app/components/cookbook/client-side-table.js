@@ -3,10 +3,7 @@ import Ember from 'ember';
 import TableCommon from '../../mixins/table-common';
 import { task, timeout } from 'ember-concurrency';
 
-const {
-  Component,
-  computed
-} = Ember;
+const { Component, computed } = Ember;
 
 export default Component.extend(TableCommon, {
   query: '',
@@ -14,7 +11,9 @@ export default Component.extend(TableCommon, {
   // No need for `enableSync` here
   enableSync: false,
 
-  isLoading: computed.or('fetchRecords.isRunning', 'setRows.isRunning').readOnly(),
+  isLoading: computed
+    .or('fetchRecords.isRunning', 'setRows.isRunning')
+    .readOnly(),
 
   // Sort Logic
   sortedModel: computed.sort('model', 'sortBy').readOnly(),
@@ -29,34 +28,44 @@ export default Component.extend(TableCommon, {
   }).readOnly(),
 
   columns: computed(function() {
-    return [{
-      label: 'Avatar',
-      valuePath: 'avatar',
-      width: '60px',
-      sortable: false,
-      cellComponent: 'user-avatar'
-    }, {
-      label: 'First Name',
-      valuePath: 'firstName',
-      width: '150px'
-    }, {
-      label: 'Last Name',
-      valuePath: 'lastName',
-      width: '150px'
-    }, {
-      label: 'Address',
-      valuePath: 'address'
-    }, {
-      label: 'State',
-      valuePath: 'state'
-    }, {
-      label: 'Country',
-      valuePath: 'country'
-    }];
+    return [
+      {
+        label: 'Avatar',
+        valuePath: 'avatar',
+        width: '60px',
+        sortable: false,
+        cellComponent: 'user-avatar'
+      },
+      {
+        label: 'First Name',
+        valuePath: 'firstName',
+        width: '150px'
+      },
+      {
+        label: 'Last Name',
+        valuePath: 'lastName',
+        width: '150px'
+      },
+      {
+        label: 'Address',
+        valuePath: 'address'
+      },
+      {
+        label: 'State',
+        valuePath: 'state'
+      },
+      {
+        label: 'Country',
+        valuePath: 'country'
+      }
+    ];
   }),
 
   fetchRecords: task(function*() {
-    let records = yield this.get('store').query('user', { page: 1, limit: 100 });
+    let records = yield this.get('store').query('user', {
+      page: 1,
+      limit: 100
+    });
     this.get('model').setObjects(records.toArray());
     this.set('meta', records.get('meta'));
     yield this.get('filterAndSortModel').perform();
@@ -77,7 +86,7 @@ export default Component.extend(TableCommon, {
     let result = model;
 
     if (query !== '') {
-      result = model.filter((m) => {
+      result = model.filter(m => {
         return m.get(valuePath).toLowerCase().includes(query.toLowerCase());
       });
     }

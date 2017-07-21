@@ -1,11 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/lt-column-resizer';
 
-const {
-  $,
-  Component,
-  computed
-} = Ember;
+const { $, Component, computed } = Ember;
 
 const TOP_LEVEL_CLASS = '.ember-light-table';
 
@@ -21,7 +17,9 @@ export default Component.extend({
 
   $column: computed(function() {
     return $(this.get('element')).parent('th');
-  }).volatile().readOnly(),
+  })
+    .volatile()
+    .readOnly(),
 
   didInsertElement() {
     this._super(...arguments);
@@ -87,15 +85,23 @@ export default Component.extend({
       let resizeOnDrag = this.get('resizeOnDrag');
       let minResizeWidth = this.get('column.minResizeWidth');
       let { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
-      let width = `${Math.max(startWidth + (e.pageX - startX), minResizeWidth)}px`;
+      let width = `${Math.max(
+        startWidth + (e.pageX - startX),
+        minResizeWidth
+      )}px`;
 
       let $column = this.get('$column');
-      let $index = this.get('table.visibleColumns').indexOf(this.get('column')) + 1;
+      let $index =
+        this.get('table.visibleColumns').indexOf(this.get('column')) + 1;
       let $table = this.$().closest(TOP_LEVEL_CLASS);
 
       $column.outerWidth(width);
-      $(`thead td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(width);
-      $(`tfoot td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(width);
+      $(`thead td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(
+        width
+      );
+      $(`tfoot td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(
+        width
+      );
 
       if (resizeOnDrag) {
         $(`tbody td:nth-child(${$index})`, $table).outerWidth(width);
