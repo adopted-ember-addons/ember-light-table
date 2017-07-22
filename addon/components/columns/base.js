@@ -73,6 +73,23 @@ const Column = Component.extend(DraggableColumnMixin, {
   sortIcons: null,
 
   /**
+   * @property sortIconProperty
+   * @type {String|null}
+   * @private
+   */
+  sortIconProperty: computed('column.{sortable,sorted,ascending}', function() {
+    let sorted = this.get('column.sorted');
+
+    if (sorted) {
+      let ascending = this.get('column.ascending');
+      return ascending ? 'iconAscending' : 'iconDescending';
+    }
+
+    let sortable = this.get('column.sortable');
+    return sortable ? 'iconSortable' : null;
+  }),
+
+  /**
    * @property colspan
    * @type {Number}
    */

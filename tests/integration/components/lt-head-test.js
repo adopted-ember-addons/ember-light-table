@@ -3,6 +3,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Table from 'ember-light-table';
 import Columns, { GroupedColumns } from '../../helpers/table-columns';
+import hasClass from '../../helpers/has-class';
 
 moduleForComponent('lt-head', 'Integration | Component | lt head', {
   integration: true
@@ -60,6 +61,35 @@ test('click - sortable column', function(assert) {
   click(sortableHeader);
   asc = false;
   click(sortableHeader);
+});
+
+test('render sort icons', function(assert) {
+  this.set('table', new Table(Columns));
+
+  this.render(hbs`{{lt-head table=table renderInPlace=true iconSortable='fa-sort' iconAscending='fa-sort-asc' iconDescending='fa-sort-desc'}}`);
+
+  let allHeaders = findAll('tr > th ');
+  let sortableHeader = allHeaders[allHeaders.length - 1];
+  let sortIcon = find('.lt-sort-icon', sortableHeader);
+
+  // Sortable case
+  assert.ok(hasClass(sortIcon, 'fa-sort'), 'Sortable icon renders');
+  assert.notOk(hasClass(sortIcon, 'fa-sort-asc'));
+  assert.notOk(hasClass(sortIcon, 'fa-sort-desc'));
+
+  click(sortableHeader);
+
+  // Ascending case
+  assert.ok(hasClass(sortIcon, 'fa-sort-asc'), 'Ascending icon renders');
+  assert.notOk(hasClass(sortIcon, 'fa-sort'));
+  assert.notOk(hasClass(sortIcon, 'fa-sort-desc'));
+
+  click(sortableHeader);
+
+  // Descending case
+  assert.ok(hasClass(sortIcon, 'fa-sort-desc'), 'Descending icon renders');
+  assert.notOk(hasClass(sortIcon, 'fa-sort'));
+  assert.notOk(hasClass(sortIcon, 'fa-sort-asc'));
 });
 
 test('double click', function(assert) {
