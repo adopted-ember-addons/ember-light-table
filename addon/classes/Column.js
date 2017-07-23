@@ -239,8 +239,15 @@ export default class Column extends EmberObject.extend({
   cellComponent: null,
 
   /**
+   * The path to the `value` for this column and row. Light Table will basically
+   * call `Ember.get(row, valuePath)` and pass that as `rawValue` to the cell.
+   * The cell then formats `rawValue` and makes it available as `value`.
+   *
+   * If you pass an array, the cell will also receive an array of values as
+   * `rawValue` (and `value`).
+   *
    * @property valuePath
-   * @type {String}
+   * @type {String|String[]}
    */
   valuePath: null,
 
