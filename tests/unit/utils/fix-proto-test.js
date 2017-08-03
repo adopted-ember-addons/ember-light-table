@@ -1,10 +1,6 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 import fixProto from 'ember-light-table/utils/fix-proto';
 import { module, test } from 'qunit';
-
-const {
-  Object: EmberObject
-} = Ember;
 
 module('Unit | Utility | fix proto');
 

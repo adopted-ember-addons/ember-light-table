@@ -1,17 +1,11 @@
-import Ember from 'ember';
+import { A as emberArray } from '@ember/array';
+import EmberObject, { computed, get } from '@ember/object';
 import Row from 'ember-light-table/classes/Row';
 import Column from 'ember-light-table/classes/Column';
 import SyncArrayProxy from 'ember-light-table/-private/sync-array-proxy';
 import { mergeOptionsWithGlobals } from 'ember-light-table/-private/global-options';
 import fixProto from 'ember-light-table/utils/fix-proto';
-
-const {
-  get,
-  computed,
-  isNone,
-  A: emberArray,
-  Object: EmberObject
-} = Ember;
+import { isNone } from '@ember/utils';
 
 const RowSyncArrayProxy = SyncArrayProxy.extend({
   serializeContentObjects(objects) {

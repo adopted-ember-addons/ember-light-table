@@ -8,9 +8,8 @@ import Columns from '../../helpers/table-columns';
 import hasClass from '../../helpers/has-class';
 import RowComponent from 'ember-light-table/components/lt-row';
 import { register } from 'ember-owner-test-utils/test-support/register';
-import Ember from 'ember';
-
-const { Component, get } = Ember;
+import Component from '@ember/component';
+import { get, computed } from '@ember/object';
 
 moduleForComponent('light-table', 'Integration | Component | light table', {
   integration: true,
@@ -156,7 +155,7 @@ test('passed in components can have computed properties', function(assert) {
   register(this, 'component:custom-row', RowComponent.extend({
     classNameBindings: ['isActive'],
     current: null,
-    isActive: Ember.computed('row.content', 'current', function() {
+    isActive: computed('row.content', 'current', function() {
       return this.get('row.content') === this.get('current');
     })
   }));

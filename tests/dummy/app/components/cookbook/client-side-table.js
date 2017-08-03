@@ -1,12 +1,8 @@
 // BEGIN-SNIPPET client-side-table
-import Ember from 'ember';
+import Component from '@ember/component';
 import TableCommon from '../../mixins/table-common';
+import { computed } from '@ember/object';
 import { task, timeout } from 'ember-concurrency';
-
-const {
-  Component,
-  computed
-} = Ember;
 
 export default Component.extend(TableCommon, {
   query: '',

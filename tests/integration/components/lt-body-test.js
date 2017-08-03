@@ -1,15 +1,11 @@
 import { click, findAll, find, triggerEvent } from 'ember-native-dom-helpers';
-import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
 import Table from 'ember-light-table';
 import hasClass from '../../helpers/has-class';
 import Columns from '../../helpers/table-columns';
-
-const {
-  run
-} = Ember;
+import { run } from '@ember/runloop';
 
 moduleForComponent('lt-body', 'Integration | Component | lt body', {
   integration: true,

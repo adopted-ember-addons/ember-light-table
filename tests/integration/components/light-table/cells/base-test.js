@@ -1,7 +1,7 @@
 import { find } from 'ember-native-dom-helpers';
-import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import { run } from '@ember/runloop';
 import { Row, Column } from 'ember-light-table';
 
 moduleForComponent('light-table/cells/base', 'Integration | Component | Cells | base', {
@@ -66,7 +66,7 @@ test('cell with nested valuePath', function(assert) {
 
   assert.equal(find('*').textContent.trim(), '4');
 
-  Ember.run(() => this.get('row').set(this.get('column.valuePath'), 4));
+  run(() => this.get('row').set(this.get('column.valuePath'), 4));
 
   assert.equal(find('*').textContent.trim(), '8');
 });

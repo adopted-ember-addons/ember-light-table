@@ -1,13 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed, observer } from '@ember/object';
 import layout from 'ember-light-table/templates/components/lt-body';
+import { run } from '@ember/runloop';
 import Row from 'ember-light-table/classes/Row';
-
-const {
-  Component,
-  computed,
-  run,
-  observer
-} = Ember;
 
 /**
  * @module Light Table

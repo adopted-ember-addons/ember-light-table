@@ -1,10 +1,6 @@
-import Ember from 'ember';
-
-const {
-  ArrayProxy,
-  assert,
-  isArray
-} = Ember;
+import ArrayProxy from '@ember/array/proxy';
+import { assert } from '@ember/debug';
+import { isArray } from '@ember/array';
 
 const EMPTY_ARRAY = [];
 

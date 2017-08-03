@@ -1,10 +1,6 @@
-import Ember from 'ember';
+import { A as emberArray } from '@ember/array';
 import { Table, Column, Row } from 'ember-light-table';
 import { module, test } from 'qunit';
-
-const {
-  A: emberArray
-} = Ember;
 
 module('Unit | Classes | Table');
 

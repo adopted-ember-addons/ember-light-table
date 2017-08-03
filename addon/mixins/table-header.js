@@ -1,11 +1,7 @@
-import Ember from 'ember';
-
-const {
-  computed,
-  isEmpty,
-  Mixin,
-  warn
-} = Ember;
+import Mixin from '@ember/object/mixin';
+import { computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
+import { warn } from '@ember/debug';
 
 /**
  * @module Light Table

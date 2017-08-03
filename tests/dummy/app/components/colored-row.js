@@ -1,11 +1,7 @@
 // BEGIN-SNIPPET colored-row
-import Ember from 'ember';
+import { computed } from '@ember/computed';
+import { htmlSafe } from '@ember/string';
 import Row from 'ember-light-table/components/lt-row';
-
-const {
-  computed,
-  String: { htmlSafe }
-} = Ember;
 
 export default Row.extend({
   classNames: ['colored-row'],

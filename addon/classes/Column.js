@@ -1,14 +1,8 @@
-import Ember from 'ember';
+import { A as emberArray, makeArray } from '@ember/array';
+import EmberObject, { computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
+import { guidFor } from '@ember/object/internals';
 import fixProto from 'ember-light-table/utils/fix-proto';
-
-const {
-  guidFor,
-  isEmpty,
-  makeArray,
-  computed,
-  A: emberArray,
-  Object: EmberObject
-} = Ember;
 
 /**
  * @module Table

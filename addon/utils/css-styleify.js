@@ -1,12 +1,5 @@
-import Ember from 'ember';
-
-const {
-  isPresent,
-  String: {
-    dasherize,
-    htmlSafe
-  }
-} = Ember;
+import { dasherize, htmlSafe } from '@ember/string';
+import { isPresent } from '@ember/utils';
 
 export default function cssStyleify(hash = {}) {
   let styles = [];

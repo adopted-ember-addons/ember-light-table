@@ -1,19 +1,13 @@
-import Ember from 'ember';
+import { A as emberArray } from '@ember/array';
+import Component from '@ember/component';
+import { computed, observer } from '@ember/object';
+import { isEmpty, isNone } from '@ember/utils';
+import { assert } from '@ember/debug';
+import { on } from '@ember/object/evented';
+import { inject as service } from '@ember/service';
 import layout from 'ember-light-table/templates/components/light-table';
 import Table from 'ember-light-table/classes/Table';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
-
-const {
-  assert,
-  Component,
-  computed,
-  inject,
-  observer,
-  on,
-  isNone,
-  isEmpty,
-  A: emberArray
-} = Ember;
 
 function intersections(array1, array2) {
   return array1.filter((n) => {
@@ -47,7 +41,7 @@ const LightTable = Component.extend({
   classNameBindings: [':ember-light-table'],
   attributeBindings: ['style'],
 
-  media: inject.service(),
+  media: service(),
 
   /**
    * @property table
@@ -208,8 +202,8 @@ const LightTable = Component.extend({
     unit = unit[0];
 
     /*
-      1. Check if all widths are present
-      2. Check if all widths are the same unit
+     1. Check if all widths are present
+     2. Check if all widths are the same unit
      */
     for (let i = 0; i < widths.length; i++) {
       let width = widths[i];
