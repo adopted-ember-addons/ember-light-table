@@ -1,9 +1,5 @@
-import Ember from 'ember';
+import { A as emberArray } from '@ember/array';
 import ENV from '../config/environment';
-
-const {
-  A: emberArray
-} = Ember;
 
 export default function() {
 

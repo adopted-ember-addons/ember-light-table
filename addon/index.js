@@ -34,10 +34,8 @@ import Row from './classes/Row';
  *
  * ```javascript
  * // components/my-table.js
- * import Ember from 'ember';
+ * import { computed } from '@ember/object';
  * import Table from 'ember-light-table';
- *
- * const { computed } = Ember;
  *
  * export default Ember.Component.extend({
  *   model: null,

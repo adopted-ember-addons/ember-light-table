@@ -1,12 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { get, trySet } from '@ember/object';
 import layout from 'ember-light-table/templates/components/lt-foot';
 import TableHeaderMixin from 'ember-light-table/mixins/table-header';
-
-const {
-  Component,
-  get,
-  trySet
-} = Ember;
 
 /**
  * @module Light Table

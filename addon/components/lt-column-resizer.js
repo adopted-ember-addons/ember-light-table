@@ -1,11 +1,7 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import layout from '../templates/components/lt-column-resizer';
-
-const {
-  $,
-  Component,
-  computed
-} = Ember;
 
 const TOP_LEVEL_CLASS = '.ember-light-table';
 

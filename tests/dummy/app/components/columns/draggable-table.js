@@ -1,11 +1,7 @@
 // BEGIN-SNIPPET draggable-table
-import Ember from 'ember';
+import Component from '@ember/component';
 import TableCommon from '../../mixins/table-common';
-
-const {
-  Component,
-  computed
-} = Ember;
+import { computed } from '@ember/object';
 
 export default Component.extend(TableCommon, {
   columns: computed(function() {

@@ -1,12 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { observer } from '@ember/object';
+import { run } from '@ember/runloop';
 import layout from '../templates/components/lt-infinity';
 import InViewportMixin from 'ember-in-viewport';
-
-const {
-  Component,
-  observer,
-  run
-} = Ember;
 
 export default Component.extend(InViewportMixin, {
   classNames: ['lt-infinity'],
@@ -49,7 +45,7 @@ export default Component.extend(InViewportMixin, {
   scheduleScrolledToBottom: observer('rows.[]', 'viewportEntered', function() {
     if (this.get('viewportEntered')) {
       /*
-        Continue scheduling onScrolledToBottom until no longer in viewport
+       Continue scheduling onScrolledToBottom until no longer in viewport
        */
       this._scheduleScrolledToBottom();
     }
@@ -61,8 +57,8 @@ export default Component.extend(InViewportMixin, {
 
   _debounceScrolledToBottom(delay = 100) {
     /*
-      This debounce is needed when there is not enough delay between onScrolledToBottom calls.
-      Without this debounce, all rows will be rendered causing immense performance problems
+     This debounce is needed when there is not enough delay between onScrolledToBottom calls.
+     Without this debounce, all rows will be rendered causing immense performance problems
      */
     this._debounceTimer = run.debounce(this, this.sendAction, 'onScrolledToBottom', delay);
   },

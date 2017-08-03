@@ -1,17 +1,13 @@
 // BEGIN-SNIPPET table-common
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
+import { computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
+import { inject as service } from '@ember/service';
 import Table from 'ember-light-table';
 import { task } from 'ember-concurrency';
 
-const {
-  inject,
-  isEmpty,
-  computed,
-  Mixin
-} = Ember;
-
 export default Mixin.create({
-  store: inject.service(),
+  store: service(),
 
   page: 0,
   limit: 10,
