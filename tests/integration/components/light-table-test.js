@@ -1,4 +1,4 @@
-import { findAll, find, scrollTo } from 'ember-native-dom-helpers';
+import { findAll, find, scrollTo, click } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import { skip } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -9,6 +9,8 @@ import hasClass from '../../helpers/has-class';
 import RowComponent from 'ember-light-table/components/lt-row';
 import { register } from 'ember-owner-test-utils/test-support/register';
 import Ember from 'ember';
+
+const { Component, get } = Ember;
 
 moduleForComponent('light-table', 'Integration | Component | light table', {
   integration: true,
@@ -209,4 +211,46 @@ test('onScroll', async function(assert) {
   `);
 
   await scrollTo('.tse-scroll-content', 0, expectedScroll);
+});
+
+test('extra data and tableActions', async function(assert) {
+  assert.expect(4);
+
+  register(this, 'component:some-component', Component.extend({
+    classNames: 'some-component',
+    didReceiveAttrs() {
+      assert.equal(get(this, 'extra.someData'), 'someValue', 'extra data is passed');
+    },
+    click() {
+      get(this, 'tableActions.someAction')();
+    }
+  }));
+
+  const columns = [{
+    component: 'some-component',
+    cellComponent: 'some-component'
+  }];
+
+  this.set('table', new Table(columns, [{}]));
+
+  this.on('someAction', () => {
+    assert.ok(true, 'table action is passed');
+  });
+
+  this.render(hbs `
+    {{#light-table table
+      extra=(hash someData="someValue")
+      tableActions=(hash
+        someAction=(action "someAction")
+      )
+      as |t|
+    }}
+      {{t.head}}
+      {{t.body}}
+    {{/light-table}}
+  `);
+
+  for (const element of findAll('.some-component')) {
+    await click(element);
+  }
 });
