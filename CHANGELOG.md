@@ -1,6 +1,23 @@
 Changelog
 =========
 
+## v1.10.0
+
+### Pull Requests
+
+- [#445](https://github.com/offirgolan/ember-light-table/pull/445) **readme**: add link to #e-light-table Slack channel  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#449](https://github.com/offirgolan/ember-light-table/pull/449) **head & foot**: make `table.height` optional, warn in `table-header` mixin  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#451](https://github.com/offirgolan/ember-light-table/pull/451) **table**: add `setRowsSynced` method  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#457](https://github.com/offirgolan/ember-light-table/pull/457) **light-table**: add `extra` property  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#464](https://github.com/offirgolan/ember-light-table/pull/464) **light-table**: add `iconSortable` property  *by [Vince Eberle](https://github.com/ignatius-j)*
+- [#473](https://github.com/offirgolan/ember-light-table/pull/473) **refactor**: migrate to RFC 176 style ES6 module imports  *by [Robert Wagner](https://github.com/rwwagner90)*
+- [#462](https://github.com/offirgolan/ember-light-table/pull/462) **ci/travis**: use headless Chrome  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#466](https://github.com/offirgolan/ember-light-table/pull/466) **ci**: align Chrome headless usage with ember-cli 2.15  *by [Jan Buschtöns](https://github.com/buschtoens)*
+
+#### Commits
+
+- [a60647ab](https://github.com/offirgolan/ember-light-table/commit/a60647abb87904e031afc90d5a083a5496da53fa) **test(light-table)**: add case for `extra` and `tableActions` *by [Jan Buschtöns](https://github.com/buschtoens)*
+
 ## v1.9.0
 
 ### Pull Requests
