@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
-                                  Tag: v1.9.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.10.0" target="_blank">
+                                  Tag: v1.10.0
                                 </a>
                             </h4>
                         </div>
@@ -147,13 +147,9 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-
-const {
-  ArrayProxy,
-  assert,
-  isArray
-} = Ember;
+import ArrayProxy from &#x27;@ember/array/proxy&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import { isArray } from &#x27;@ember/array&#x27;;
 
 const EMPTY_ARRAY = [];
 

@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
-                                  Tag: v1.9.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.10.0" target="_blank">
+                                  Tag: v1.10.0
                                 </a>
                             </h4>
                         </div>
@@ -147,13 +147,9 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-
-const {
-  run,
-  computed,
-  Mixin
-} = Ember;
+import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { run } from &#x27;@ember/runloop&#x27;;
 
 let sourceColumn;
 
@@ -192,7 +188,7 @@ export default Mixin.create({
   isDropTarget: computed(function() {
     let column = this.get(&#x27;column&#x27;);
     /*
-      A column is a valid drop target only if its in the same group
+     A column is a valid drop target only if its in the same group
      */
     return column.get(&#x27;droppable&#x27;) &amp;&amp; column.get(&#x27;parent&#x27;) === sourceColumn.get(&#x27;parent&#x27;);
   }).volatile().readOnly(),
@@ -203,7 +199,7 @@ export default Mixin.create({
     let column = this.get(&#x27;column&#x27;);
 
     /*
-      NOTE: IE requires setData type to be &#x27;text&#x27;
+     NOTE: IE requires setData type to be &#x27;text&#x27;
      */
     e.dataTransfer.setData(&#x27;text&#x27;, column.get(&#x27;columnId&#x27;));
     e.dataTransfer.effectAllowed = &#x27;move&#x27;;
@@ -213,8 +209,8 @@ export default Mixin.create({
     this.sendAction(&#x27;onColumnDrag&#x27;, sourceColumn, ...arguments);
 
     /*
-      NOTE: This is a fix for Firefox to prevent the click event
-      from being triggered after a drop.
+     NOTE: This is a fix for Firefox to prevent the click event
+     from being triggered after a drop.
      */
     this.__click__ = this.click;
     this.click = undefined;
@@ -248,8 +244,8 @@ export default Mixin.create({
     this.setProperties({ isDragTarget: false, isDragging: false });
 
     /*
-      If sourceColumn still references a column, it means that a successful
-      drop did not happen.
+     If sourceColumn still references a column, it means that a successful
+     drop did not happen.
      */
     if (sourceColumn) {
       this.sendAction(&#x27;onColumnDrop&#x27;, sourceColumn, false, ...arguments);
@@ -257,7 +253,7 @@ export default Mixin.create({
     }
 
     /*
-      Restore click event
+     Restore click event
      */
     this._clickResetTimer = run.next(this, () =&gt; this.click = this.__click__);
   },

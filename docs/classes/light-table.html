@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
-                                  Tag: v1.9.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.10.0" target="_blank">
+                                  Tag: v1.10.0
                                 </a>
                             </h4>
                         </div>
@@ -145,7 +145,7 @@
 
 <div class="page-header">
     <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> light-table Class
-            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L29" target="_blank">
+            <a class="pull-right file-edit" href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L23" target="_blank">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
     </h1>
@@ -159,7 +159,7 @@
 
 
         <div class="foundat">
-            Defined In: <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L29">addon/components/light-table.js:29</a>
+            Defined In: <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L23">addon/components/light-table.js:23</a>
         </div>
 </div>
 
@@ -223,6 +223,10 @@ for more details on all possible options and actions.</p>
                       <ul class="index-list properties">
                               <li class="index-item property">
                                   <a href="#property_breakpoints">breakpoints</a>
+
+                              </li>
+                              <li class="index-item property">
+                                  <a href="#property_extra">extra</a>
 
                               </li>
                               <li class="index-item property">
@@ -290,7 +294,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L112">addon/components/light-table.js:112</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L134">addon/components/light-table.js:134</a>
           </p>
   
   
@@ -320,6 +324,49 @@ for more details on all possible options and actions.</p>
   
   
   </div>
+  <div id="property_extra" class="property item">
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#property_extra"></a>
+          extra
+      </h3>
+      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L79">addon/components/light-table.js:79</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          <p>Object to store any arbitrary configuration meant to be used by custom
+  components.</p>
+  <pre class="code prettyprint"><code class="language-hbs">{{#light-table table
+    extra=(hash
+      highlightColor="yellow"
+     )
+     as |t|
+   }}
+    {{t.head}}
+    {{t.body}}
+    {{t.foot}}
+  {{/light-table}}
+  </code></pre>
+  <p>Now in all custom components, you can access this value like so:</p>
+  <pre class="code prettyprint"><code class="language-hbs">&lt;span style="background: {{extra.highlightColor}}"&gt;{{value}}&lt;span&gt;
+  </code></pre>
+  
+      </div>
+  
+  
+  
+  </div>
   <div id="property_height" class="property item">
       <h3 class="name anchorable-toc">
           <a class="fa fa-link toc-anchor" href="#property_height"></a>
@@ -334,7 +381,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L85">addon/components/light-table.js:85</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L107">addon/components/light-table.js:107</a>
           </p>
   
   
@@ -363,7 +410,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L103">addon/components/light-table.js:103</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L125">addon/components/light-table.js:125</a>
           </p>
   
   
@@ -393,7 +440,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L140">addon/components/light-table.js:140</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L162">addon/components/light-table.js:162</a>
           </p>
   
   
@@ -421,7 +468,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L52">addon/components/light-table.js:52</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L46">addon/components/light-table.js:46</a>
           </p>
   
   
@@ -448,14 +495,14 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L58">addon/components/light-table.js:58</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L52">addon/components/light-table.js:52</a>
           </p>
   
   
       </div>
   
       <div class="description">
-          <p>This is used to propate custom user defined actions to custom cell and header components.
+          <p>This is used to propagate custom user defined actions to custom cell and header components.
   As an example, lets say I have a table with a column defined with <code>cellComponent: 'delete-user'</code></p>
   <pre class="code prettyprint"><code class="language-hbs">{{#light-table table tableActions=(hash
     deleteUser=(action 'deleteUser')
@@ -489,7 +536,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L94">addon/components/light-table.js:94</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L116">addon/components/light-table.js:116</a>
           </p>
   
   
@@ -519,7 +566,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L157">addon/components/light-table.js:157</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L179">addon/components/light-table.js:179</a>
           </p>
   
   
@@ -560,7 +607,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L282">addon/components/light-table.js:282</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L304">addon/components/light-table.js:304</a>
           </p>
   
   
@@ -606,7 +653,7 @@ for more details on all possible options and actions.</p>
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.9.0/addon/components/light-table.js#L271">addon/components/light-table.js:271</a>
+          <a href="https://github.com/offirgolan/ember-light-table/blob/v1.10.0/addon/components/light-table.js#L293">addon/components/light-table.js:293</a>
           </p>
   
   

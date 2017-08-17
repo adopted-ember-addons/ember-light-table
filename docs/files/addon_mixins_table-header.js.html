@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
-                                  Tag: v1.9.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.10.0" target="_blank">
+                                  Tag: v1.10.0
                                 </a>
                             </h4>
                         </div>
@@ -147,14 +147,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-
-const {
-  computed,
-  isEmpty,
-  Mixin,
-  warn
-} = Ember;
+import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { isEmpty } from &#x27;@ember/utils&#x27;;
+import { warn } from &#x27;@ember/debug&#x27;;
 
 /**
  * @module Light Table
@@ -188,6 +184,12 @@ export default Mixin.create({
   tableActions: null,
 
   /**
+   * @property extra
+   * @type {Object}
+   */
+  extra: null,
+
+  /**
    * @property fixed
    * @type {Boolean}
    * @default false
@@ -218,13 +220,24 @@ export default Mixin.create({
   resizeOnDrag: false,
 
   /**
-   * CSS classes to be applied to an &#x60;&lt;i class=&quot;lt-sort-icon&gt;&lt;/i&gt;&#x60; tag that is
-   * inserted into the column&#x27;s &#x60;&lt;th&gt;&#x60; element.
+   * CSS classes to be applied to an &#x60;&lt;i class=&quot;lt-sort-icon&quot;&gt;&lt;/i&gt;&#x60; tag that is
+   * inserted into the column&#x27;s &#x60;&lt;th&gt;&#x60; element when the column is sortable but
+   * not yet sorted.
    *
    * For instance, if you have installed &#x60;ember-font-awesome&#x60; or include the
    * &#x60;font-awesome&#x60; assets manually (e.g. via a CDN), you can set
-   * &#x60;iconAscending&#x60; to &#x60;&#x27;fa fa-sort-asc&#x27;&#x60;, which would yield this markup:
-   * &#x60;&lt;i class=&quot;lt-sort-icon fa fa-sort-asc&quot;&gt;&lt;/i&gt;&#x60;
+   * &#x60;iconSortable&#x60; to &#x60;&#x27;fa fa-sort&#x27;&#x60;, which would yield this markup:
+   * &#x60;&lt;i class=&quot;lt-sort-icon fa fa-sort&quot;&gt;&lt;/i&gt;&#x60;
+   *
+   * @property iconSortable
+   * @type {String}
+   * @default &#x27;&#x27;
+   */
+  iconSortable: &#x27;&#x27;,
+
+  /**
+   * See &#x60;iconSortable&#x60;.  CSS classes to apply to &#x60;&lt;i class=&quot;lt-sort-icon&quot;&gt;&lt;/i&gt;&#x60;
+   * when the column is sorted ascending.
    *
    * @property iconAscending
    * @type {String}
@@ -233,7 +246,8 @@ export default Mixin.create({
   iconAscending: &#x27;&#x27;,
 
   /**
-   * See &#x60;iconAscending&#x60;.
+   * See &#x60;iconSortable&#x60;.  CSS classes to apply to &#x60;&lt;i class=&quot;lt-sort-icon&quot;&gt;&lt;/i&gt;&#x60;
+   * when the column is sorted descending.
    *
    * @property iconDescending
    * @type {String}
@@ -252,8 +266,8 @@ export default Mixin.create({
   subColumns: computed.readOnly(&#x27;table.visibleSubColumns&#x27;),
   columns: computed.readOnly(&#x27;table.visibleColumns&#x27;),
 
-  sortIcons: computed(&#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;, function() {
-    return this.getProperties([&#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;]);
+  sortIcons: computed(&#x27;iconSortable&#x27;, &#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;, function() {
+    return this.getProperties([&#x27;iconSortable&#x27;, &#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;]);
   }).readOnly(),
 
   init() {

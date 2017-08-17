@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
-                                  Tag: v1.9.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.10.0" target="_blank">
+                                  Tag: v1.10.0
                                 </a>
                             </h4>
                         </div>
@@ -147,22 +147,16 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import { A as emberArray } from &#x27;@ember/array&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { computed, observer } from &#x27;@ember/object&#x27;;
+import { isEmpty, isNone } from &#x27;@ember/utils&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import { on } from &#x27;@ember/object/evented&#x27;;
+import { inject as service } from &#x27;@ember/service&#x27;;
 import layout from &#x27;ember-light-table/templates/components/light-table&#x27;;
 import Table from &#x27;ember-light-table/classes/Table&#x27;;
 import cssStyleify from &#x27;ember-light-table/utils/css-styleify&#x27;;
-
-const {
-  assert,
-  Component,
-  computed,
-  inject,
-  observer,
-  on,
-  isNone,
-  isEmpty,
-  A: emberArray
-} = Ember;
 
 function intersections(array1, array2) {
   return array1.filter((n) =&gt; {
@@ -196,7 +190,7 @@ const LightTable = Component.extend({
   classNameBindings: [&#x27;:ember-light-table&#x27;],
   attributeBindings: [&#x27;style&#x27;],
 
-  media: inject.service(),
+  media: service(),
 
   /**
    * @property table
@@ -205,7 +199,7 @@ const LightTable = Component.extend({
   table: null,
 
   /**
-   * This is used to propate custom user defined actions to custom cell and header components.
+   * This is used to propagate custom user defined actions to custom cell and header components.
    * As an example, lets say I have a table with a column defined with &#x60;cellComponent: &#x27;delete-user&#x27;&#x60;
    *
    * &#x60;&#x60;&#x60;hbs
@@ -230,6 +224,34 @@ const LightTable = Component.extend({
    * @type {Object}
    */
   tableActions: null,
+
+  /**
+   * Object to store any arbitrary configuration meant to be used by custom
+   * components.
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * {{#light-table table
+   *   extra=(hash
+   *     highlightColor=&quot;yellow&quot;
+   *    )
+   *    as |t|
+   *  }}
+   *   {{t.head}}
+   *   {{t.body}}
+   *   {{t.foot}}
+   * {{/light-table}}
+   * &#x60;&#x60;&#x60;
+   *
+   * Now in all custom components, you can access this value like so:
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * &lt;span style=&quot;background: {{extra.highlightColor}}&quot;&gt;{{value}}&lt;span&gt;
+   * &#x60;&#x60;&#x60;
+   *
+   * @property extra
+   * @type {Object}
+   */
+  extra: null,
 
   /**
    * Table height.
@@ -329,8 +351,8 @@ const LightTable = Component.extend({
     unit = unit[0];
 
     /*
-      1. Check if all widths are present
-      2. Check if all widths are the same unit
+     1. Check if all widths are present
+     2. Check if all widths are the same unit
      */
     for (let i = 0; i &lt; widths.length; i++) {
       let width = widths[i];

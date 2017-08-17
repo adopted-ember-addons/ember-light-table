@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.9.0" target="_blank">
-                                  Tag: v1.9.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.10.0" target="_blank">
+                                  Tag: v1.10.0
                                 </a>
                             </h4>
                         </div>
@@ -147,16 +147,12 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { isEmpty } from &#x27;@ember/utils&#x27;;
 import layout from &#x27;ember-light-table/templates/components/columns/base&#x27;;
 import DraggableColumnMixin from &#x27;ember-light-table/mixins/draggable-column&#x27;;
 import cssStyleify from &#x27;ember-light-table/utils/css-styleify&#x27;;
-
-const {
-  Component,
-  computed,
-  isEmpty
-} = Ember;
 
 /**
  * @module Light Table
@@ -216,10 +212,33 @@ const Column = Component.extend(DraggableColumnMixin, {
   tableActions: null,
 
   /**
+   * @property extra
+   * @type {Object}
+   */
+  extra: null,
+
+  /**
    * @property sortIcons
    * @type {Object}
    */
   sortIcons: null,
+
+  /**
+   * @property sortIconProperty
+   * @type {String|null}
+   * @private
+   */
+  sortIconProperty: computed(&#x27;column.{sortable,sorted,ascending}&#x27;, function() {
+    let sorted = this.get(&#x27;column.sorted&#x27;);
+
+    if (sorted) {
+      let ascending = this.get(&#x27;column.ascending&#x27;);
+      return ascending ? &#x27;iconAscending&#x27; : &#x27;iconDescending&#x27;;
+    }
+
+    let sortable = this.get(&#x27;column.sortable&#x27;);
+    return sortable ? &#x27;iconSortable&#x27; : null;
+  }),
 
   /**
    * @property colspan
