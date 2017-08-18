@@ -1,5 +1,5 @@
 // BEGIN-SNIPPET colored-row
-import { computed } from '@ember/computed';
+import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/string';
 import Row from 'ember-light-table/components/lt-row';
 
