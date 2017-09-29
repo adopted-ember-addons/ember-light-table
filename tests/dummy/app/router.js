@@ -24,10 +24,11 @@ Router.map(function() {
 
   this.route('cookbook', function() {
     this.route('client-side');
-    this.route('pagination');
     this.route('custom-row');
-    this.route('table-actions');
     this.route('horizontal-scrolling');
+    this.route('occlusion-rendering');
+    this.route('pagination');
+    this.route('table-actions');
   });
 });
 
