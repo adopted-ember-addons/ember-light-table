@@ -16,8 +16,9 @@
   }}
 
   {{#t.body
-    occluded=true
+    occlusion=true
     canSelect=false
+    onScrolledToBottom=(action 'onScrolledToBottom')
   as |body|
   }}
     {{#if isLoading}}

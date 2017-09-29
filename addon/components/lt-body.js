@@ -163,6 +163,8 @@ export default Component.extend({
    */
   overwrite: false,
 
+  occlusion: false,
+
   /**
    * If true, the body will prepend an invisible `<tr>` that scaffolds the
    * widths of the table cells.

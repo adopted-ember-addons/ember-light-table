@@ -63,6 +63,15 @@
           flex: 1 0 auto;
 }
 
+.ember-light-table .lt-scrollable.vertical-collection {
+  overflow-y: auto;
+}
+
+/* This is for when useVirtualScrollbar is disabled */
+.ember-light-table .lt-head-wrap {
+  padding-right: 14px;
+}
+
 .ember-light-table .align-left {
   text-align: left;
 }
