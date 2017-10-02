@@ -68,7 +68,7 @@
 }
 
 /* This is for when useVirtualScrollbar is disabled */
-.ember-light-table .lt-head-wrap {
+.ember-light-table.occlusion .lt-head-wrap {
   padding-right: 14px;
 }
 

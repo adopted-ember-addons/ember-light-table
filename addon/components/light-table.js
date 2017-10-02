@@ -38,7 +38,7 @@ function intersections(array1, array2) {
 
 const LightTable = Component.extend({
   layout,
-  classNameBindings: [':ember-light-table'],
+  classNameBindings: [':ember-light-table', 'occlusion'],
   attributeBindings: ['style'],
 
   media: service(),
@@ -160,6 +160,27 @@ const LightTable = Component.extend({
   breakpoints: null,
 
   /**
+   * Toggles occlusion rendering functionality. Currently experimental.
+   * If set to true, you must set {{#crossLink 't.body/estimatedRowHeight:property'}}{{/crossLink}} to
+   * something other than the default value.
+   *
+   * @property occlusion
+   * @type Boolean
+   * @default False
+   */
+  occlusion: false,
+
+  /**
+   * Estimated size of a row. Used in `vertical-collection` to determine roughly the number
+   * of rows exist out of the viewport.
+   *
+   * @property estimatedRowHeight
+   * @type Number
+   * @default false
+   */
+  estimatedRowHeight: 0,
+
+  /**
    * Table component shared options
    *
    * @property sharedOptions
@@ -170,7 +191,9 @@ const LightTable = Component.extend({
     return {
       height: this.get('height'),
       fixedHeader: false,
-      fixedFooter: false
+      fixedFooter: false,
+      occlusion: this.get('occlusion'),
+      estimatedRowHeight: this.get('estimatedRowHeight')
     };
   }).readOnly(),
 

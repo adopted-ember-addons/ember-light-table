@@ -1,5 +1,9 @@
 {{!-- BEGIN-SNIPPET occluded-table --}}
-{{#light-table table height='65vh' as |t|}}
+{{#light-table table
+               height='65vh'
+               occlusion=true
+               estimatedRowHeight=50
+  as |t|}}
 
 {{!--
   In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
@@ -8,15 +12,10 @@
 --}}
 
   {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconSortable='fa fa-sort'
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
     fixed=true
   }}
 
   {{#t.body
-    occlusion=true
     canSelect=false
     onScrolledToBottom=(action 'onScrolledToBottom')
   as |body|

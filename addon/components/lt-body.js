@@ -163,8 +163,6 @@ export default Component.extend({
    */
   overwrite: false,
 
-  occlusion: false,
-
   /**
    * If true, the body will prepend an invisible `<tr>` that scaffolds the
    * widths of the table cells.
@@ -318,19 +316,33 @@ export default Component.extend({
     this.setupScrollOffset();
   },
 
-  didInsertElement(){
+  didInsertElement() {
     this._super(...arguments);
-    const lightTableContainer = this.element.parentElement;
-    const totalHeight = lightTableContainer.getBoundingClientRect().height;
-    const headerElem = lightTableContainer.querySelector('.lt-head-wrap');
-    const headerHeight = headerElem.getBoundingClientRect().height;
-    this.set('height', totalHeight - headerHeight);
+    if (this.get('sharedOptions.occlusion')) {
+      this._setupScrollAreaDimensions();
+    }
   },
 
   destroy() {
     this._super(...arguments);
     run.cancel(this._checkTargetOffsetTimer);
     run.cancel(this._setTargetOffsetTimer);
+  },
+
+  /**
+   * Calculates the available height remaining in the body of the table by taking the table height defined
+   * on the light table component and subtracting the rendered height of the header.
+   * May need to extend this to include the footer.
+   *
+   * @method _setupScrollAreaDimensions
+   * @private
+   */
+  _setupScrollAreaDimensions() {
+    const lightTableContainer = this.element.parentElement;
+    const { height: totalHeight } = lightTableContainer.getBoundingClientRect();
+    const headerElem = lightTableContainer.querySelector('.lt-head-wrap');
+    const { height: headerHeight } = headerElem.getBoundingClientRect();
+    this.set('height', totalHeight - headerHeight);
   },
 
   _setupVirtualScrollbar() {
@@ -435,8 +447,8 @@ export default Component.extend({
       if (canSelect) {
         if (e.shiftKey && multiSelect) {
           rows
-            .slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1)
-            .forEach((r) => r.set('selected', !isSelected));
+          .slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1)
+          .forEach((r) => r.set('selected', !isSelected));
         } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) && multiSelect) {
           row.toggleProperty('selected');
         } else {

@@ -4,7 +4,7 @@ import TableCommon from '../../mixins/table-common';
 import { computed } from '@ember/object';
 
 export default Component.extend(TableCommon, {
-  limit: 200,
+  limit: 100,
   columns: computed(function() {
     return [{
       label: 'Avatar',
@@ -22,13 +22,16 @@ export default Component.extend(TableCommon, {
       width: '150px'
     }, {
       label: 'Address',
-      valuePath: 'address'
+      valuePath: 'address',
+      width: '150px'
     }, {
       label: 'State',
-      valuePath: 'state'
+      valuePath: 'state',
+      width: '100px'
     }, {
       label: 'Country',
-      valuePath: 'country'
+      valuePath: 'country',
+      width: '100px'
     }];
   }),
 
