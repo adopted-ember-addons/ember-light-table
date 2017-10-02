@@ -446,9 +446,7 @@ export default Component.extend({
 
       if (canSelect) {
         if (e.shiftKey && multiSelect) {
-          rows
-          .slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1)
-          .forEach((r) => r.set('selected', !isSelected));
+          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach((r) => r.set('selected', !isSelected));
         } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) && multiSelect) {
           row.toggleProperty('selected');
         } else {
