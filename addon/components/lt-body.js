@@ -318,6 +318,15 @@ export default Component.extend({
     this.setupScrollOffset();
   },
 
+  didInsertElement(){
+    this._super(...arguments);
+    const lightTableContainer = this.element.parentElement;
+    const totalHeight = lightTableContainer.getBoundingClientRect().height;
+    const headerElem = lightTableContainer.querySelector('.lt-head-wrap');
+    const headerHeight = headerElem.getBoundingClientRect().height;
+    this.set('height', totalHeight - headerHeight);
+  },
+
   destroy() {
     this._super(...arguments);
     run.cancel(this._checkTargetOffsetTimer);

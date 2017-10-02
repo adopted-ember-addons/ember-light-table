@@ -4,6 +4,7 @@ import TableCommon from '../../mixins/table-common';
 import { computed } from '@ember/object';
 
 export default Component.extend(TableCommon, {
+  limit: 200,
   columns: computed(function() {
     return [{
       label: 'Avatar',
@@ -29,6 +30,12 @@ export default Component.extend(TableCommon, {
       label: 'Country',
       valuePath: 'country'
     }];
-  })
+  }),
+
+  init(){
+    this._super(...arguments);
+    this.set('page', 1);
+    this.get('fetchRecords').perform();
+  }
 });
 // END-SNIPPET
