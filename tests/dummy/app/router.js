@@ -28,6 +28,7 @@ Router.map(function() {
     this.route('custom-row');
     this.route('table-actions');
     this.route('horizontal-scrolling');
+    this.route('custom-sort-icon');
   });
 });
 
