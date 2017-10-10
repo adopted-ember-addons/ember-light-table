@@ -323,8 +323,8 @@ export default Component.extend({
   },
 
   _setupVirtualScrollbar() {
-    let { fixedHeader, fixedFooter } = this.get('sharedOptions');
-    this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
+      let { fixedFooter } = this.get('sharedOptions');
+      this.set('useVirtualScrollbar',  fixedFooter);
   },
 
   onRowsChange: observer('rows.[]', function() {
