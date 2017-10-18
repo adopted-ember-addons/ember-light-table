@@ -112,29 +112,31 @@ export default Mixin.create({
   drop(e) {
     this._super(...arguments);
 
-    let table = this.get('table');
     let targetColumn = this.get('column');
-    let columns = this.get('dragColumnGroup');
+    if (targetColumn.droppable) {
+      let table = this.get('table');
+      let columns = this.get('dragColumnGroup');
 
-    let _columns = columns.toArray();
-    let targetColumnIdx = _columns.indexOf(targetColumn);
+      let _columns = columns.toArray();
+      let targetColumnIdx = _columns.indexOf(targetColumn);
 
-    e.dataTransfer.dropEffect = 'move';
-    e.preventDefault();
-    e.stopPropagation();
+      e.dataTransfer.dropEffect = 'move';
+      e.preventDefault();
+      e.stopPropagation();
 
-    table.propertyWillChange('columns');
+      table.propertyWillChange('columns');
 
-    _columns.removeObject(sourceColumn);
-    _columns.insertAt(targetColumnIdx, sourceColumn);
-    columns.setObjects(_columns);
+      _columns.removeObject(sourceColumn);
+      _columns.insertAt(targetColumnIdx, sourceColumn);
+      columns.setObjects(_columns);
 
-    table.propertyDidChange('columns');
+      table.propertyDidChange('columns');
 
-    this.setProperties({ isDragTarget: false, isDragging: false });
+      this.setProperties({ isDragTarget: false, isDragging: false });
 
-    this.sendAction('onColumnDrop', sourceColumn, true, ...arguments);
-    sourceColumn = null;
+      this.sendAction('onColumnDrop', sourceColumn, true, ...arguments);
+      sourceColumn = null;
+    }
   },
 
   destroy() {
