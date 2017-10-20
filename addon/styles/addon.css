@@ -72,6 +72,15 @@
   padding-right: 14px;
 }
 
+.ember-light-table vertical-collection {
+  display: table;
+  table-layout: fixed;
+}
+
+.ember-light-table vertical-collection occluded-content:first-of-type {
+  display: table-caption;
+}
+
 .ember-light-table .align-left {
   text-align: left;
 }
