@@ -107,6 +107,17 @@ export default Mixin.create({
   iconDescending: '',
 
   /**
+   * See `iconSortable, iconAsending, or iconDescending.  Custom sorting component
+   * name to use instead of the default `<i class="lt-sort-icon"></i>` template. Uses
+   * the same properties.
+   * 
+   * @property iconComponent
+   * @type {String}
+   * @default false
+   */
+  iconComponent: null,
+
+  /**
    * ID of main table component. Used to generate divs for ember-wormhole
    * @type {String}
    */
@@ -117,8 +128,8 @@ export default Mixin.create({
   subColumns: computed.readOnly('table.visibleSubColumns'),
   columns: computed.readOnly('table.visibleColumns'),
 
-  sortIcons: computed('iconSortable', 'iconAscending', 'iconDescending', function() {
-    return this.getProperties(['iconSortable', 'iconAscending', 'iconDescending']);
+  sortIcons: computed('iconSortable', 'iconAscending', 'iconDescending', 'iconComponent', function() {
+    return this.getProperties(['iconSortable', 'iconAscending', 'iconDescending', 'iconComponent']);
   }).readOnly(),
 
   init() {
