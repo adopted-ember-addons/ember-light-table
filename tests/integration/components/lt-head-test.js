@@ -95,6 +95,11 @@ test('render sort icons', function(assert) {
 });
 
 test('custom iconComponent has arguments', function(assert) {
+  const sortableColumns = Columns.filter((column) => {
+    return column.sortable !== false;
+  });
+
+  assert.expect(6 * sortableColumns.length);
   const iconSortable = 'unfold_more';
   const iconAscending = 'fa-sort-asc';
   const iconDescending = 'fa-sort-desc';
@@ -104,9 +109,9 @@ test('custom iconComponent has arguments', function(assert) {
     iconSortable,
     iconAscending,
     iconDescending,
-    iconComponent
+    iconComponent,
+    table: new Table(Columns)
   });
-  this.set('table', new Table(Columns));
   this.register(`component:${iconComponent}`, Component.extend({
     init() {
       this._super(...arguments);
