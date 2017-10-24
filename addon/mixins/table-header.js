@@ -107,10 +107,8 @@ export default Mixin.create({
   iconDescending: '',
 
   /**
-   * See `iconSortable, iconAsending, or iconDescending.  Custom sorting component
-   * name to use instead of the default `<i class="lt-sort-icon"></i>` template. Uses
-   * the same properties.
-   * 
+   * Custom sorting component name to use instead of the default `<i class="lt-sort-icon"></i>` template.
+   * See `iconSortable, iconAsending, or iconDescending.
    * @property iconComponent
    * @type {String}
    * @default false

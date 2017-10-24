@@ -4,6 +4,8 @@ import hbs from 'htmlbars-inline-precompile';
 import Table from 'ember-light-table';
 import Columns, { GroupedColumns } from '../../helpers/table-columns';
 import hasClass from '../../helpers/has-class';
+import Component from '@ember/component';
+import { isPresent } from '@ember/utils';
 
 moduleForComponent('lt-head', 'Integration | Component | lt head', {
   integration: true
@@ -91,6 +93,34 @@ test('render sort icons', function(assert) {
   assert.notOk(hasClass(sortIcon, 'fa-sort'));
   assert.notOk(hasClass(sortIcon, 'fa-sort-asc'));
 });
+
+test('custom iconComponent has arguments', function(assert) {
+  const iconSortable = 'unfold_more';
+  const iconAscending = 'fa-sort-asc';
+  const iconDescending = 'fa-sort-desc';
+  const iconComponent = 'custom-icon-component';
+
+  this.setProperties({
+    iconSortable,
+    iconAscending,
+    iconDescending,
+    iconComponent
+  });
+  this.set('table', new Table(Columns));
+  this.register(`component:${iconComponent}`, Component.extend({
+    init() {
+      this._super(...arguments);
+      assert.ok(isPresent(this.get('sortIconProperty')));
+      assert.ok(isPresent(this.get('sortIcons')));
+      assert.equal(this.get('sortIcons.iconSortable'), iconSortable);
+      assert.equal(this.get('sortIcons.iconAscending'), iconAscending);
+      assert.equal(this.get('sortIcons.iconDescending'), iconDescending);
+      assert.equal(this.get('sortIcons.iconComponent'), iconComponent);
+    }
+  }));
+
+  this.render(hbs`{{lt-head table=table renderInPlace=true iconSortable=iconSortable iconAscending=iconAscending iconDescending=iconDescending iconComponent=iconComponent}}`);
+}),
 
 test('double click', function(assert) {
   this.set('table', new Table(Columns));
