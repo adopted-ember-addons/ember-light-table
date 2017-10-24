@@ -110,3 +110,59 @@
 .ember-light-table .lt-row.is-selectable {
   cursor: pointer;
 }
+
+
+/*Following is the custom CSS to mock fixed header layout*/
+
+.light-table-wrapper {
+  padding-top: 2.5rem;
+  /*Leave room for the header area*/
+}
+
+.light-table-wrapper.scrollable {
+  position: relative;
+  height: 100%;
+}
+
+.light-table-wrapper .scroll-area {
+  overflow: auto;
+  /*Make this box scroll*/
+  height: 100%;
+  border-bottom: 0.0625rem solid #ECEFF1;
+  border-top: 0.0625rem solid #ECEFF1;
+}
+
+.light-table-wrapper .fixable .fix {
+  position: absolute;
+  /*Escape the scrolling context*/
+}
+
+.light-table-wrapper thead {
+  border: 0;
+}
+
+.light-table-wrapper table {
+  table-layout: fixed;
+}
+
+.light-table-wrapper .fixable .fix {
+  /*Move above the scroll area into the fake header*/
+  top: 0;
+  /*Must absolutely position the top to avoid bugs in Firefox and IE6*/
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+
+.light-table-wrapper .fixable .lt-column {
+  position: initial;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.light-table-wrapper tr.fixable:first-child {
+  height: auto !important;
+}
+
+.light-table-wrapper .ember-light-table {
+  overflow: initial !important;
+}

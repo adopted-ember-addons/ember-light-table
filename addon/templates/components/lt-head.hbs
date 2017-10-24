@@ -1,6 +1,4 @@
-{{#ember-wormhole to=(concat tableId '_inline_head') renderInPlace=renderInPlace}}
-  <table class={{tableClassNames}}>
-    <thead class="lt-head">
+{{#ember-wormhole to=(concat tableId '_inline_head')}}
       {{#if hasBlock}}
         {{yield columnGroups subColumns}}
       {{else}}
@@ -16,7 +14,7 @@
           </tr>
         {{/if}}
 
-        <tr>
+        <tr class="{{if fixed "fixable" "" }}">
           {{#each columnGroups as |column|}}
             {{component (concat 'light-table/columns/' column.type) column
               table=table
@@ -24,6 +22,7 @@
               extra=extra
               sortIcons=sortIcons
               resizeOnDrag=resizeOnDrag
+              fix = fixed
               click=(action 'onColumnClick' column)
               doubleClick=(action 'onColumnDoubleClick' column)
               onColumnResized=(action 'onColumnResized')
@@ -50,6 +49,4 @@
           {{/each}}
         </tr>
       {{/if}}
-    </thead>
-  </table>
 {{/ember-wormhole}}
