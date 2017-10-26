@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.10.0"
+        "version": "v1.11.0"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
@@ -2288,6 +2288,17 @@
         {
             "file": "addon/mixins/table-header.js",
             "line": 109,
+            "description": "Custom sorting component name to use instead of the default `<i class=\"lt-sort-icon\"></i>` template.\nSee `iconSortable`, `iconAsending`, or `iconDescending`.",
+            "itemtype": "property",
+            "name": "iconComponent",
+            "type": "{String}",
+            "default": "false",
+            "class": "TableHeaderMixin",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/mixins/table-header.js",
+            "line": 118,
             "description": "ID of main table component. Used to generate divs for ember-wormhole",
             "type": "{String}",
             "class": "TableHeaderMixin",
@@ -2295,7 +2306,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 138,
+            "line": 147,
             "description": "onColumnClick action. Handles column sorting.",
             "itemtype": "event",
             "name": "onColumnClick",
@@ -2316,7 +2327,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 159,
+            "line": 168,
             "description": "onColumnDoubleClick action.",
             "itemtype": "event",
             "name": "onColumnDoubleClick",
@@ -2337,7 +2348,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 170,
+            "line": 179,
             "description": "onColumnResized action.",
             "itemtype": "event",
             "name": "onColumnResized",
@@ -2358,7 +2369,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 181,
+            "line": 190,
             "description": "onColumnDrag action.",
             "itemtype": "event",
             "name": "onColumnDrag",
@@ -2374,7 +2385,7 @@
         },
         {
             "file": "addon/mixins/table-header.js",
-            "line": 191,
+            "line": 200,
             "description": "onColumnDrop action.",
             "itemtype": "event",
             "name": "onColumnDrop",
@@ -2454,7 +2465,7 @@
     "warnings": [
         {
             "message": "Missing item type\nID of main table component. Used to generate divs for ember-wormhole",
-            "line": " addon/mixins/table-header.js:109"
+            "line": " addon/mixins/table-header.js:118"
         }
     ]
 }

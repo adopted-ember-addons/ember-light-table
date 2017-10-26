@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.10.0" target="_blank">
-                                  Tag: v1.10.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.11.0" target="_blank">
+                                  Tag: v1.11.0
                                 </a>
                             </h4>
                         </div>
@@ -230,6 +230,14 @@ export default Mixin.create({
 
     if (this.get(&#x27;isDropTarget&#x27;)) {
       e.preventDefault();
+      /*
+        NOTE: dragLeave will be triggered by any child elements inside the
+        column. This code ensures the column being dragged over continues to be
+        identified as the current drop target
+       */
+      if (!this.get(&#x27;isDragTarget&#x27;)) {
+        this.set(&#x27;isDragTarget&#x27;, this.get(&#x27;column&#x27;) !== sourceColumn);
+      }
     }
   },
 
@@ -261,29 +269,31 @@ export default Mixin.create({
   drop(e) {
     this._super(...arguments);
 
-    let table = this.get(&#x27;table&#x27;);
     let targetColumn = this.get(&#x27;column&#x27;);
-    let columns = this.get(&#x27;dragColumnGroup&#x27;);
+    if (targetColumn.droppable) {
+      let table = this.get(&#x27;table&#x27;);
+      let columns = this.get(&#x27;dragColumnGroup&#x27;);
 
-    let _columns = columns.toArray();
-    let targetColumnIdx = _columns.indexOf(targetColumn);
+      let _columns = columns.toArray();
+      let targetColumnIdx = _columns.indexOf(targetColumn);
 
-    e.dataTransfer.dropEffect = &#x27;move&#x27;;
-    e.preventDefault();
-    e.stopPropagation();
+      e.dataTransfer.dropEffect = &#x27;move&#x27;;
+      e.preventDefault();
+      e.stopPropagation();
 
-    table.propertyWillChange(&#x27;columns&#x27;);
+      table.propertyWillChange(&#x27;columns&#x27;);
 
-    _columns.removeObject(sourceColumn);
-    _columns.insertAt(targetColumnIdx, sourceColumn);
-    columns.setObjects(_columns);
+      _columns.removeObject(sourceColumn);
+      _columns.insertAt(targetColumnIdx, sourceColumn);
+      columns.setObjects(_columns);
 
-    table.propertyDidChange(&#x27;columns&#x27;);
+      table.propertyDidChange(&#x27;columns&#x27;);
 
-    this.setProperties({ isDragTarget: false, isDragging: false });
+      this.setProperties({ isDragTarget: false, isDragging: false });
 
-    this.sendAction(&#x27;onColumnDrop&#x27;, sourceColumn, true, ...arguments);
-    sourceColumn = null;
+      this.sendAction(&#x27;onColumnDrop&#x27;, sourceColumn, true, ...arguments);
+      sourceColumn = null;
+    }
   },
 
   destroy() {

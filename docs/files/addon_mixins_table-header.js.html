@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.10.0" target="_blank">
-                                  Tag: v1.10.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.11.0" target="_blank">
+                                  Tag: v1.11.0
                                 </a>
                             </h4>
                         </div>
@@ -256,6 +256,15 @@ export default Mixin.create({
   iconDescending: &#x27;&#x27;,
 
   /**
+   * Custom sorting component name to use instead of the default &#x60;&lt;i class=&quot;lt-sort-icon&quot;&gt;&lt;/i&gt;&#x60; template.
+   * See &#x60;iconSortable&#x60;, &#x60;iconAsending&#x60;, or &#x60;iconDescending&#x60;.
+   * @property iconComponent
+   * @type {String}
+   * @default false
+   */
+  iconComponent: null,
+
+  /**
    * ID of main table component. Used to generate divs for ember-wormhole
    * @type {String}
    */
@@ -266,8 +275,8 @@ export default Mixin.create({
   subColumns: computed.readOnly(&#x27;table.visibleSubColumns&#x27;),
   columns: computed.readOnly(&#x27;table.visibleColumns&#x27;),
 
-  sortIcons: computed(&#x27;iconSortable&#x27;, &#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;, function() {
-    return this.getProperties([&#x27;iconSortable&#x27;, &#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;]);
+  sortIcons: computed(&#x27;iconSortable&#x27;, &#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;, &#x27;iconComponent&#x27;, function() {
+    return this.getProperties([&#x27;iconSortable&#x27;, &#x27;iconAscending&#x27;, &#x27;iconDescending&#x27;, &#x27;iconComponent&#x27;]);
   }).readOnly(),
 
   init() {
