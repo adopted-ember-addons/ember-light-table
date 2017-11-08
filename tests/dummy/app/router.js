@@ -29,6 +29,7 @@ Router.map(function() {
     this.route('occlusion-rendering');
     this.route('pagination');
     this.route('table-actions');
+    this.route('custom-sort-icon');
   });
 });
 

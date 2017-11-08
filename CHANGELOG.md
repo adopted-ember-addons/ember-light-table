@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## v1.11.0
+
+#### Commits
+
+- [e16af170](https://github.com/offirgolan/ember-light-table/commit/e16af170a67492d4644ff113836706f0595387cc) **feat(table-header)**: custom icon components (#489) *by [RedTn](https://github.com/RedTn)*
+- [daa657ee](https://github.com/offirgolan/ember-light-table/commit/daa657eea93414bbe2f9c34dfb99cd741a0d30f3) **fix(draggable-column)**: ensure the drop target remains properly identified (#496) *by [akshay-kr](https://github.com/akshay-kr)*
+- [2e2faf93](https://github.com/offirgolan/ember-light-table/commit/2e2faf93a0d7979fa8e74de85c0eea18addc9564) **fix(draggable-column)**: ensure the drop target remains properly identified (#418) *by [RustyToms](https://github.com/RustyToms)*
+
 ## v1.10.0
 
 ### Pull Requests
