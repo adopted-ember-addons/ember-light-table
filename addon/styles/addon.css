@@ -72,6 +72,10 @@
   padding-right: 14px;
 }
 
+.ember-light-table.occlusion .lt-head-wrap table {
+  display: inline
+}
+
 .ember-light-table vertical-collection {
   display: table;
   table-layout: fixed;
