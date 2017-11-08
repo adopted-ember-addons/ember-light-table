@@ -23,6 +23,7 @@
     "test": "ember try:each"
   },
   "dependencies": {
+    "@html-next/vertical-collection": "^1.0.0-beta.9",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.2",
     "ember-cli-string-helpers": "^1.5.0",
@@ -34,7 +35,6 @@
     "ember-wormhole": "^0.5.1"
   },
   "devDependencies": {
-    "@html-next/vertical-collection": "^1.0.0-beta.8",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
     "ember-cli": "2.13.2",
