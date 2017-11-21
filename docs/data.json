@@ -3,7 +3,7 @@
         "name": "Ember Light Table",
         "description": "Lightweight, component based table for Ember 2.x",
         "url": "https://github.com/offirgolan/ember-light-table",
-        "version": "v1.11.0"
+        "version": "v1.12.0"
     },
     "files": {
         "addon/-private/sync-array-proxy.js": {
@@ -1760,6 +1760,28 @@
         {
             "file": "addon/components/light-table.js",
             "line": 162,
+            "description": "Toggles occlusion rendering functionality. Currently experimental.\nIf set to true, you must set {{#crossLink 't.body/estimatedRowHeight:property'}}{{/crossLink}} to\nsomething other than the default value.",
+            "itemtype": "property",
+            "name": "occlusion",
+            "type": "Boolean",
+            "default": "False",
+            "class": "light-table",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/light-table.js",
+            "line": 173,
+            "description": "Estimated size of a row. Used in `vertical-collection` to determine roughly the number\nof rows exist out of the viewport.",
+            "itemtype": "property",
+            "name": "estimatedRowHeight",
+            "type": "Number",
+            "default": "false",
+            "class": "light-table",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/light-table.js",
+            "line": 183,
             "description": "Table component shared options",
             "itemtype": "property",
             "name": "sharedOptions",
@@ -1771,7 +1793,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 179,
+            "line": 202,
             "description": "Calculates the total width of the visible columns via their `width`\npropert.\n\nReturns 0 for the following conditions\n - All widths are not set\n - Widths are not the same unit\n - Unit cannot be determined",
             "itemtype": "property",
             "name": "totalWidth",
@@ -1783,7 +1805,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 293,
+            "line": 316,
             "description": "onBeforeResponsiveChange action.\nCalled before any column visibility is altered.",
             "itemtype": "event",
             "name": "onBeforeResponsiveChange",
@@ -1799,7 +1821,7 @@
         },
         {
             "file": "addon/components/light-table.js",
-            "line": 304,
+            "line": 327,
             "description": "onAfterResponsiveChange action.\nCalled after all column visibility has been altered.",
             "itemtype": "event",
             "name": "onAfterResponsiveChange",
@@ -2090,7 +2112,18 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 398,
+            "line": 332,
+            "description": "Calculates the available height remaining in the body of the table by taking the table height defined\non the light table component and subtracting the rendered height of the header.\nMay need to extend this to include the footer.",
+            "itemtype": "method",
+            "name": "_setupScrollAreaDimensions",
+            "access": "private",
+            "tagname": "",
+            "class": "t.body",
+            "module": "Light Table"
+        },
+        {
+            "file": "addon/components/lt-body.js",
+            "line": 421,
             "description": "onRowClick action. Handles selection, and row expansion.",
             "itemtype": "event",
             "name": "onRowClick",
@@ -2111,7 +2144,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 446,
+            "line": 467,
             "description": "onRowDoubleClick action.",
             "itemtype": "event",
             "name": "onRowDoubleClick",
@@ -2132,7 +2165,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 456,
+            "line": 477,
             "description": "onScroll action - sent when user scrolls in the Y direction\n\nThis only works when `useVirtualScrollbar` is `true`, i.e. when you are\nusing fixed headers / footers.",
             "itemtype": "event",
             "name": "onScroll",
@@ -2153,7 +2186,7 @@
         },
         {
             "file": "addon/components/lt-body.js",
-            "line": 471,
+            "line": 492,
             "description": "onScrolledToBottom action - sent when user scrolls to the bottom",
             "itemtype": "event",
             "name": "onScrolledToBottom",

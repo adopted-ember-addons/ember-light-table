@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.11.0" target="_blank">
-                                  Tag: v1.11.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.12.0" target="_blank">
+                                  Tag: v1.12.0
                                 </a>
                             </h4>
                         </div>
@@ -187,7 +187,7 @@ function intersections(array1, array2) {
 
 const LightTable = Component.extend({
   layout,
-  classNameBindings: [&#x27;:ember-light-table&#x27;],
+  classNameBindings: [&#x27;:ember-light-table&#x27;, &#x27;occlusion&#x27;],
   attributeBindings: [&#x27;style&#x27;],
 
   media: service(),
@@ -309,6 +309,27 @@ const LightTable = Component.extend({
   breakpoints: null,
 
   /**
+   * Toggles occlusion rendering functionality. Currently experimental.
+   * If set to true, you must set {{#crossLink &#x27;t.body/estimatedRowHeight:property&#x27;}}{{/crossLink}} to
+   * something other than the default value.
+   *
+   * @property occlusion
+   * @type Boolean
+   * @default False
+   */
+  occlusion: false,
+
+  /**
+   * Estimated size of a row. Used in &#x60;vertical-collection&#x60; to determine roughly the number
+   * of rows exist out of the viewport.
+   *
+   * @property estimatedRowHeight
+   * @type Number
+   * @default false
+   */
+  estimatedRowHeight: 0,
+
+  /**
    * Table component shared options
    *
    * @property sharedOptions
@@ -319,7 +340,9 @@ const LightTable = Component.extend({
     return {
       height: this.get(&#x27;height&#x27;),
       fixedHeader: false,
-      fixedFooter: false
+      fixedFooter: false,
+      occlusion: this.get(&#x27;occlusion&#x27;),
+      estimatedRowHeight: this.get(&#x27;estimatedRowHeight&#x27;)
     };
   }).readOnly(),
 
