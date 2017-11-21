@@ -23,6 +23,7 @@ A lightweight contextual component based table addon that follows Ember's action
 - Easy table manipulation
 - Easy override to table header, body, and footer
 - Contextual component for header, body, and footer, as well as loading, no data, and expanded row
+- **EXPERIMENTAL** Occlusion rendering leveraging [vertical-collection](https://github.com/html-next/vertical-collection). See [Demo](http://offirgolan.github.io/ember-light-table/#/cookbook/occlusion-rendering).
 
 ## Installation
 

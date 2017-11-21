@@ -23,6 +23,7 @@
     "test": "ember try:each"
   },
   "dependencies": {
+    "@html-next/vertical-collection": "^1.0.0-beta.9",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.2",
     "ember-cli-string-helpers": "^1.5.0",
