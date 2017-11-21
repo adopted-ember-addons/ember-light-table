@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.12.0
+
+#### Commits
+
+- [7feb748c](https://github.com/offirgolan/ember-light-table/commit/7feb748c670f31975156de2abca59958266daddf) **feat(lt-body)**: Preliminary Vertical collection integration (#483) *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+
 ## v1.11.0
 
 #### Commits
