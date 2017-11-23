@@ -1,4 +1,3 @@
----
 language: node_js
 node_js:
   - "6"
@@ -16,13 +15,16 @@ addons:
 
 env:
   # we recommend testing LTS's and latest stable release (bonus points to beta/canary)
-  - EMBER_TRY_SCENARIO=ember-lts-2.4
-  - EMBER_TRY_SCENARIO=ember-lts-2.8
-  - EMBER_TRY_SCENARIO=ember-2.12.2
-  - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
-  - EMBER_TRY_SCENARIO=ember-default
+  matrix:
+    - EMBER_TRY_SCENARIO=ember-lts-2.4
+    - EMBER_TRY_SCENARIO=ember-lts-2.8
+    - EMBER_TRY_SCENARIO=ember-2.12.2
+    - EMBER_TRY_SCENARIO=ember-release
+    - EMBER_TRY_SCENARIO=ember-beta
+    - EMBER_TRY_SCENARIO=ember-canary
+    - EMBER_TRY_SCENARIO=ember-default
+  global:
+    secure: cXZnI/8sP5KOzzFnb5t+kaTL1by1dn8Hn15vQfPodvNOuYEiRsZnqDYadVlN0SEJoF6MWvh3EMhu7f386DO30t/56Hvj3+Da3AypUP7gvrinXud5Tiawyc9/R7JUS1bliHHVZ9JiCdxclD5X0j1W8jQ+EwDgQz0mfpbpNobTgcwLKMlFJzL7fQU+ptNuYVc7U2qz0iRiqj1ImeAoGJgyTLpaJ6qqAUGjo7c3AzcX1Uhgpghj013W6q8Kab2jIHOsL9lx5ePd8nZ8UT4+jha6ab7CTyZsjp5VzGvyDeV/KHAVPU095m7UgSlXJJ3BrS5jKqTblW80YsXuYXiea+f/qD9b9qvVde4H/PIA4RmNQMt0yOUlXoSGS1C8ewGxxKN6cOebGTq72Au/aXBp5JfK/O/YkE2E6uvhT7NcPH1m++VncoXaABo0GSO1GMuqfK/VjnPBu1xKSosSy5Bl0lOOV1SVawxlmIyRZwNjD+MqbVn71solqFkzmF9PhtqKlnaD9s5Tahxcv//W2FSlSOYWddLe7G3VyCJUB2DMgxU6pdz3ois/m3G2ub6Qk7KTHHqFSRfLipw929MGV104ypkXZwLlgvHcM9ddw75dupIxq8ZKaESgzUt5HVpEQl8+Hq/Jg/neEKEYwSbMgRML7gtuqCRAscLY2a6fM1tIQMg7xfw=
 
 matrix:
   fast_finish: true
@@ -33,10 +35,13 @@ matrix:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
-  - yarn global add codeclimate-test-reporter
+  - yarn global add codeclimate-test-reporter greenkeeper-lockfile@1
 
 install:
   - yarn install --no-lockfile
+
+before_script:
+  - greenkeeper-lockfile-update
 
 script:
   # Usually, it's ok to finish the test scenario without reverting
@@ -45,3 +50,4 @@ script:
 
 after_script:
   - codeclimate-test-reporter < coverage/lcov.info
+  - greenkeeper-lockfile-upload
