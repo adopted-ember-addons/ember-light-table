@@ -316,33 +316,10 @@ export default Component.extend({
     this.setupScrollOffset();
   },
 
-  didInsertElement() {
-    this._super(...arguments);
-    if (this.get('sharedOptions.occlusion')) {
-      this._setupScrollAreaDimensions();
-    }
-  },
-
   destroy() {
     this._super(...arguments);
     run.cancel(this._checkTargetOffsetTimer);
     run.cancel(this._setTargetOffsetTimer);
-  },
-
-  /**
-   * Calculates the available height remaining in the body of the table by taking the table height defined
-   * on the light table component and subtracting the rendered height of the header.
-   * May need to extend this to include the footer.
-   *
-   * @method _setupScrollAreaDimensions
-   * @private
-   */
-  _setupScrollAreaDimensions() {
-    const lightTableContainer = this.element.parentElement;
-    const { height: totalHeight } = lightTableContainer.getBoundingClientRect();
-    const headerElem = lightTableContainer.querySelector('.lt-head-wrap');
-    const { height: headerHeight } = headerElem.getBoundingClientRect();
-    this.set('height', totalHeight - headerHeight);
   },
 
   _setupVirtualScrollbar() {
