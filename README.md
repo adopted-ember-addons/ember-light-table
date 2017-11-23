@@ -6,6 +6,9 @@
 [![Download Total](https://img.shields.io/npm/dt/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-light-table.svg)](https://emberobserver.com/addons/ember-light-table)
 [![Code Climate](https://codeclimate.com/github/offirgolan/ember-light-table/badges/gpa.svg)](https://codeclimate.com/github/offirgolan/ember-light-table)
+[![Greenkeeper badge](https://badges.greenkeeper.io/offirgolan/ember-light-table.svg)](https://greenkeeper.io/)
+[![dependencies Status](https://david-dm.org/offirgolan/ember-light-table/status.svg)](https://david-dm.org/offirgolan/ember-light-table)
+[![devDependencies Status](https://david-dm.org/offirgolan/ember-light-table/dev-status.svg)](https://david-dm.org/offirgolan/ember-light-table?type=dev)
 
 A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.
 
