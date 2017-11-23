@@ -195,6 +195,17 @@ export default Component.extend({
   scrollBuffer: 500,
 
   /**
+   * @property scrollBufferRows
+   * @type {Number}
+   * @default 500 / estimatedRowHeight
+   */
+  scrollBufferRows: computed('scrollBuffer', 'sharedOptions.estimatedRowHeight', function() {
+    return Math.ceil(
+      this.get('scrollBuffer') / (this.get('sharedOptions.estimatedRowHeight') || 1)
+    );
+  }),
+
+  /**
    * @property useVirtualScrollbar
    * @type {Boolean}
    * @default false
