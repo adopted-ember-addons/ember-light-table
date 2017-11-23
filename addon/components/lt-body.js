@@ -507,6 +507,24 @@ export default Component.extend({
      */
     onScrolledToBottom() {
       this.sendAction('onScrolledToBottom');
+    },
+
+    firstVisibleChanged(item, index /* , key */) {
+      const estimateScrollOffset = index * this.get('sharedOptions.estimatedRowHeight');
+      this.sendAction('onScroll', estimateScrollOffset, null);
+    },
+
+    lastVisibleChanged(/* item, index, key */) {
+      this.sendAction('lastVisibleChanged', ...arguments);
+    },
+
+    firstReached(/* item, index, key */) {
+      this.sendAction('firstReached', ...arguments);
+    },
+
+    lastReached(/* item, index, key */) {
+      this.sendAction('lastReached', ...arguments);
+      this.sendAction('onScrolledToBottom');
     }
   }
 });
