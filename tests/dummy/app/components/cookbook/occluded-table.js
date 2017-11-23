@@ -22,16 +22,13 @@ export default Component.extend(TableCommon, {
       width: '150px'
     }, {
       label: 'Address',
-      valuePath: 'address',
-      width: '150px'
+      valuePath: 'address'
     }, {
       label: 'State',
-      valuePath: 'state',
-      width: '100px'
+      valuePath: 'state'
     }, {
       label: 'Country',
-      valuePath: 'country',
-      width: '100px'
+      valuePath: 'country'
     }];
   }),
 

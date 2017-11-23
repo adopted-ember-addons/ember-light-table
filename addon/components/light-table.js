@@ -42,6 +42,7 @@ const LightTable = Component.extend({
   attributeBindings: ['style'],
 
   media: service(),
+  scrollbarThickness: service(),
 
   /**
    * @property table
@@ -241,12 +242,18 @@ const LightTable = Component.extend({
     return `${totalWidth}${unit}`;
   }),
 
-  style: computed('totalWidth', 'height', function() {
+  style: computed('totalWidth', 'height', 'occlusion', function() {
     let totalWidth = this.get('totalWidth');
     let style = this.getProperties(['height']);
 
     if (totalWidth) {
-      style.width = totalWidth;
+      if (this.get('occlusion')) {
+        const scrollbarThickness = this.get('scrollbarThickness.thickness');
+        style.width = `calc(${totalWidth} + ${scrollbarThickness}px)`;
+      } else {
+        style.width = totalWidth;
+      }
+
       style.overflowX = 'auto';
     }
 

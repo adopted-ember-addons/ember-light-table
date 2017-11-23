@@ -2,6 +2,8 @@ import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import { warn } from '@ember/debug';
+import { inject as service } from '@ember/service';
+import cssStyleify from 'ember-light-table/utils/css-styleify';
 
 /**
  * @module Light Table
@@ -14,6 +16,10 @@ import { warn } from '@ember/debug';
  */
 
 export default Mixin.create({
+  attributeBindings: ['style'],
+
+  scrollbarThickness: service(),
+
   /**
    * @property table
    * @type {Table}
@@ -128,6 +134,13 @@ export default Mixin.create({
 
   sortIcons: computed('iconSortable', 'iconAscending', 'iconDescending', 'iconComponent', function() {
     return this.getProperties(['iconSortable', 'iconAscending', 'iconDescending', 'iconComponent']);
+  }).readOnly(),
+
+  style: computed('sharedOptions.occlusion', function() {
+    if (this.get('sharedOptions.occlusion')) {
+      const scrollbarThickness = this.get('scrollbarThickness.thickness');
+      return cssStyleify({ paddingRight: `${scrollbarThickness}px` });
+    }
   }).readOnly(),
 
   init() {
