@@ -1,6 +1,20 @@
 Changelog
 =========
 
+## v1.12.1
+
+This patch release primarily re-enabled dynamic column sizing for occlusion tables and wires up the `onScrolledToBottom` and `onScroll` actions.
+However, we have to (temporarily) remove expanded rows. See [this comment in #514]( https://github.com/offirgolan/ember-light-table/pull/514#issuecomment-346613745) for more details.
+
+#### Commits
+
+- [55f5962e](https://github.com/offirgolan/ember-light-table/commit/55f5962e934b2c003e29812bc9ec76be18bbce7e) **fix(occlusion)**: remove colspan from loader and no-data spanned rows *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [5f6637e3](https://github.com/offirgolan/ember-light-table/commit/5f6637e33445b0b73cc572f902661d5c98559757) **fix(occlusion)**: temporarily remove yield inside vertical-collection *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [ee30bb83](https://github.com/offirgolan/ember-light-table/commit/ee30bb83ddad3f7e4c62dba60f1f33605f494199) **fix(occlusion)**: wire up onScroll and onScrolledToBottom *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [b93f0671](https://github.com/offirgolan/ember-light-table/commit/b93f0671ad635bf4024aaab1f7773db52df45cc7) **fix(occlusion)**: pass bufferSize based on scrollBuffer *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [c240a23c](https://github.com/offirgolan/ember-light-table/commit/c240a23c837d750c41511f93c190976e1d40d588) **fix(occlusion)**: tbody sizing via flexbox, dynamic column widths *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [140ea0d6](https://github.com/offirgolan/ember-light-table/commit/140ea0d60058136de6ad632aaf8b38b2c292b1c7) **docs(README)**: update "help wanted" label link *by [Jan Buschtöns](https://github.com/buschtoens)*
+
 ## v1.12.0
 
 #### Commits
