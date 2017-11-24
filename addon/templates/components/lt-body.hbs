@@ -67,15 +67,6 @@
 
       <table class={{tableClassNames}}>
         <tbody class="lt-body">
-        {{#if enableScaffolding}}
-          <tr class="lt-scaffolding-row">
-            {{#each columns as |column|}}
-              <td
-                style={{html-safe (if column.width (concat 'width: ' column.width))}} class="lt-scaffolding"></td>
-            {{/each}}
-          </tr>
-        {{/if}}
-
         {{#if overwrite}}
           {{yield columns rows}}
         {{else}}
@@ -103,8 +94,8 @@
                      doubleClick=(action 'onRowDoubleClick' row)}}
           {{/vertical-collection}}
           {{yield (hash
-                    loader=(component lt.spanned-row classes='lt-is-loading' colspan=colspan)
-                    no-data=(component lt.spanned-row classes='lt-no-data' colspan=colspan)
+                    loader=(component lt.spanned-row classes='lt-is-loading')
+                    no-data=(component lt.spanned-row classes='lt-no-data')
                     expanded-row=(component lt.spanned-row visible=false)
                   ) rows}}
         {{/if}}
