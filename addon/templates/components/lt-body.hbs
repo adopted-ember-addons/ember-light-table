@@ -101,13 +101,6 @@
                      canSelect=canSelect
                      click=(action 'onRowClick' row)
                      doubleClick=(action 'onRowDoubleClick' row)}}
-
-            {{yield (hash
-                      expanded-row=(component lt.spanned-row classes='lt-expanded-row' colspan=colspan yield=row visible=row.expanded)
-                      loader=(component lt.spanned-row visible=false)
-                      no-data=(component lt.spanned-row visible=false)
-                    ) rows}}
-
           {{/vertical-collection}}
           {{yield (hash
                     loader=(component lt.spanned-row classes='lt-is-loading' colspan=colspan)
