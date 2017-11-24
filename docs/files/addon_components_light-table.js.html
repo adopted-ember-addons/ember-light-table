@@ -13,13 +13,14 @@
     <link rel="stylesheet" href="../assets/css/theme.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700' rel='stylesheet' type='text/css'>
     
+
 </head>
 <body>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
           <a href="../" class="navbar-brand">
-            <img src="../assets/img/ember-logo.png" alt="">
+              <img src="../assets/img/ember-logo.png" alt="enterprise logo">
             <span>Light Table</span>
           </a>
         </div>
@@ -53,8 +54,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.12.0" target="_blank">
-                                  Tag: v1.12.0
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.12.1" target="_blank">
+                                  Tag: v1.12.1
                                 </a>
                             </h4>
                         </div>
@@ -191,6 +192,7 @@ const LightTable = Component.extend({
   attributeBindings: [&#x27;style&#x27;],
 
   media: service(),
+  scrollbarThickness: service(),
 
   /**
    * @property table
@@ -390,12 +392,18 @@ const LightTable = Component.extend({
     return &#x60;${totalWidth}${unit}&#x60;;
   }),
 
-  style: computed(&#x27;totalWidth&#x27;, &#x27;height&#x27;, function() {
+  style: computed(&#x27;totalWidth&#x27;, &#x27;height&#x27;, &#x27;occlusion&#x27;, function() {
     let totalWidth = this.get(&#x27;totalWidth&#x27;);
     let style = this.getProperties([&#x27;height&#x27;]);
 
     if (totalWidth) {
-      style.width = totalWidth;
+      if (this.get(&#x27;occlusion&#x27;)) {
+        const scrollbarThickness = this.get(&#x27;scrollbarThickness.thickness&#x27;);
+        style.width = &#x60;calc(${totalWidth} + ${scrollbarThickness}px)&#x60;;
+      } else {
+        style.width = totalWidth;
+      }
+
       style.overflowX = &#x27;auto&#x27;;
     }
 
