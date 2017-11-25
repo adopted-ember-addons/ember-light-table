@@ -14,6 +14,7 @@
   table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .ember-light-table .lt-scaffolding {
@@ -30,16 +31,15 @@
 .ember-light-table .lt-foot-wrap {
   overflow-y: auto;
   overflow-x: hidden;
-}
 
-.ember-light-table .lt-head-wrap,
-.ember-light-table .lt-foot-wrap {
   -webkit-box-flex: 0;
-      -ms-flex: 0 1 auto;
-          flex: 0 1 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
 }
 
 .ember-light-table .lt-body-wrap {
+  overflow-y: hidden;
+
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -48,8 +48,8 @@
       -ms-flex-direction: column;
           flex-direction: column;
   -webkit-box-flex: 1;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
 }
 
 .ember-light-table .lt-column {
@@ -59,8 +59,22 @@
 .ember-light-table .lt-scrollable {
   width: 100%;
   -webkit-box-flex: 1;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.ember-light-table .lt-scrollable.vertical-collection {
+  overflow-y: auto;
+}
+
+.ember-light-table vertical-collection {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+}
+
+.ember-light-table vertical-collection occluded-content:first-of-type {
+  display: table-caption;
 }
 
 .ember-light-table .align-left {

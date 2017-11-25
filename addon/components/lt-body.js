@@ -195,6 +195,17 @@ export default Component.extend({
   scrollBuffer: 500,
 
   /**
+   * @property scrollBufferRows
+   * @type {Number}
+   * @default 500 / estimatedRowHeight
+   */
+  scrollBufferRows: computed('scrollBuffer', 'sharedOptions.estimatedRowHeight', function() {
+    return Math.ceil(
+      this.get('scrollBuffer') / (this.get('sharedOptions.estimatedRowHeight') || 1)
+    );
+  }),
+
+  /**
    * @property useVirtualScrollbar
    * @type {Boolean}
    * @default false
@@ -423,9 +434,7 @@ export default Component.extend({
 
       if (canSelect) {
         if (e.shiftKey && multiSelect) {
-          rows
-            .slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1)
-            .forEach((r) => r.set('selected', !isSelected));
+          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach((r) => r.set('selected', !isSelected));
         } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) && multiSelect) {
           row.toggleProperty('selected');
         } else {
@@ -474,6 +483,24 @@ export default Component.extend({
      * @event onScrolledToBottom
      */
     onScrolledToBottom() {
+      this.sendAction('onScrolledToBottom');
+    },
+
+    firstVisibleChanged(item, index /* , key */) {
+      const estimateScrollOffset = index * this.get('sharedOptions.estimatedRowHeight');
+      this.sendAction('onScroll', estimateScrollOffset, null);
+    },
+
+    lastVisibleChanged(/* item, index, key */) {
+      this.sendAction('lastVisibleChanged', ...arguments);
+    },
+
+    firstReached(/* item, index, key */) {
+      this.sendAction('firstReached', ...arguments);
+    },
+
+    lastReached(/* item, index, key */) {
+      this.sendAction('lastReached', ...arguments);
       this.sendAction('onScrolledToBottom');
     }
   }

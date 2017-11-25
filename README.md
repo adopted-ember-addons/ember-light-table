@@ -23,6 +23,7 @@ A lightweight contextual component based table addon that follows Ember's action
 - Easy table manipulation
 - Easy override to table header, body, and footer
 - Contextual component for header, body, and footer, as well as loading, no data, and expanded row
+- **EXPERIMENTAL** Occlusion rendering leveraging [vertical-collection](https://github.com/html-next/vertical-collection). See [Demo](http://offirgolan.github.io/ember-light-table/#/cookbook/occlusion-rendering).
 
 ## Installation
 
@@ -68,7 +69,7 @@ If you want to make a bigger change, we recommend [**opening an issue**][new-iss
 
 You don't have a specific feature in mind but want to help out anyways? Awesome!
 
-Issues marked with [**help-wanted**][help-wanted] are generally agreed upon and ready to get implemented. Oftentimes we have clearly outlined how these issues should get resolved.
+Issues marked with [**help wanted**][help-wanted] are generally agreed upon and ready to get implemented. Oftentimes we have clearly outlined how these issues should get resolved.
 
 We try hard to accurately estimate the overall difficulty and scope of issues and organize them with labels:
 
@@ -85,15 +86,15 @@ This way, you can get feedback early on or ask others for help. Your commits are
 
 Pull requests marked with [**ideas-wanted**][pr-ideas-wanted] are stuck and we would like to hear your thought.
 
-If a pull request is marked with [**help-wanted**][pr-help-wanted] we just don't have the time and resources to work on it right now. You're invited to continue working on it instead!
+If a pull request is marked with [**help wanted**][pr-help-wanted] we just don't have the time and resources to work on it right now. You're invited to continue working on it instead!
 
 [new-issue]: https://github.com/offirgolan/ember-light-table/issues/new
 
 [ideas-wanted]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3Aideas-wanted
-[help-wanted]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted
+[help-wanted]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
 
 [pr-ideas-wanted]: https://github.com/offirgolan/ember-light-table/pulls?q=is%3Apr+is%3Aopen+label%ideas-wanted
-[pr-help-wanted]: https://github.com/offirgolan/ember-light-table/pulls?q=is%3Apr+is%3Aopen+label%3Ahelp-wanted
+[pr-help-wanted]: https://github.com/offirgolan/ember-light-table/pulls?q=is%3Apr+is%3Aopen+label%3Ahelp+wanted
 
 [difficulty-easy]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3Adifficulty-easy
 [difficulty-medium]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3Adifficulty-medium
