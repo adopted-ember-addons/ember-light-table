@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## v1.12.2
+
+#### Commits
+
+- [6d71609d](https://github.com/offirgolan/ember-light-table/commit/6d71609da875453ff9792f636b88c5c2e7e7f385) **fix(occlusion)**: wire up lastVisibleChanged *by [Jan Buschtöns](https://github.com/buschtoens)*
+
 ## v1.12.1
 
 This patch release primarily re-enabled dynamic column sizing for occlusion tables and wires up the `onScrolledToBottom` and `onScroll` actions.
