@@ -487,6 +487,7 @@ export default Component.extend({
     },
 
     firstVisibleChanged(item, index /* , key */) {
+      this.sendAction('firstVisibleChanged', ...arguments);
       const estimateScrollOffset = index * this.get('sharedOptions.estimatedRowHeight');
       this.sendAction('onScroll', estimateScrollOffset, null);
     },
