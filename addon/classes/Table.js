@@ -1,4 +1,5 @@
 import { A as emberArray } from '@ember/array';
+import { assert } from '@ember/debug';
 import EmberObject, { computed, get } from '@ember/object';
 import Row from 'ember-light-table/classes/Row';
 import Column from 'ember-light-table/classes/Column';
@@ -147,6 +148,9 @@ export default class Table extends EmberObject.extend({
    */
   constructor(columns = [], rows = [], options = {}) {
     super();
+
+    assert('[ember-light-table] columns must be an array if defined', columns instanceof Array);
+    assert('[ember-light-table] rows must be an array if defined', rows instanceof Array);
 
     let _options = mergeOptionsWithGlobals(options);
     let _columns = emberArray(Table.createColumns(columns));
