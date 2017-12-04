@@ -23,6 +23,17 @@ test('create table - with options', function(assert) {
   assert.ok(table.columns[0] instanceof Column);
 });
 
+test('create table - invalid constructor', function(assert) {
+  assert.expect(2);
+
+  assert.throws(() => {
+    new Table([{}, {}], null);
+  }, /\[ember-light-table] rows must be an array if defined/, 'rows is not an array');
+  assert.throws(() => {
+    new Table(null, [{}]);
+  }, /\[ember-light-table] columns must be an array if defined/, 'columns is not an array');
+});
+
 test('reopen table', function(assert) {
   assert.equal(typeof Table.reopen, 'function', 'reopen is a function');
   assert.equal(typeof Table.reopenClass, 'function', 'reopenClass is a function');
