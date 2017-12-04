@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import { observer } from '@ember/object';
 import { run } from '@ember/runloop';
 import layout from '../templates/components/lt-infinity';
 import InViewportMixin from 'ember-in-viewport';
@@ -40,19 +39,6 @@ export default Component.extend(InViewportMixin, {
 
   didExitViewport() {
     this._cancelTimers();
-  },
-
-  scheduleScrolledToBottom: observer('rows.[]', 'viewportEntered', function() {
-    if (this.get('viewportEntered')) {
-      /*
-       Continue scheduling onScrolledToBottom until no longer in viewport
-       */
-      this._scheduleScrolledToBottom();
-    }
-  }),
-
-  _scheduleScrolledToBottom() {
-    this._schedulerTimer = run.scheduleOnce('afterRender', this, this._debounceScrolledToBottom);
   },
 
   _debounceScrolledToBottom(delay = 100) {
