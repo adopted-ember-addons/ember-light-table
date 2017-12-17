@@ -30,6 +30,7 @@ Router.map(function() {
     this.route('pagination');
     this.route('table-actions');
     this.route('custom-sort-icon');
+    this.route('external-model-table');
   });
 });
 

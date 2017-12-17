@@ -1,0 +1,14 @@
+{{!-- BEGIN-SNIPPET external-model-table-route --}}
+{{#code-panel
+  title="Externally Provided Model"
+  snippets=(array
+    "external-model-table.js"
+    "route-common.js"
+    "external-model-table.hbs"
+    "external-model-table-route.hbs"
+    "user-avatar.hbs"
+    "table-loader.hbs"
+)}}
+  {{cookbook/external-model-table model=model onSort=(route-action "onSort") fetchMore=(route-action "fetchMore") isLoading=fetchRecords.isRunning sort=sort}}
+{{/code-panel}}
+{{!-- END-SNIPPET --}}
