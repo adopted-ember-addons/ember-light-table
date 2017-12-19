@@ -15,7 +15,8 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'ember-source': null
+          'ember-source': null,
+          'ember-font-awesome': null
         }
       }
     },
@@ -31,7 +32,8 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'ember-source': null
+          'ember-source': null,
+          'ember-font-awesome': null
         }
       }
     },
