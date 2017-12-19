@@ -126,7 +126,7 @@ module('light-table', function(hooks) {
   });
 
   test('table body should consume all available space when not enough content to fill it', async function(assert) {
-    assert.expect(3);
+    assert.expect(1);
 
     this.set('table', new Table(Columns, this.createUsers(1)));
     this.set('fixed', true);
@@ -142,9 +142,13 @@ module('light-table', function(hooks) {
         {{/light-table}}
       </div>
     `);
-    assert.equal(find('.lt-head-wrap').offsetHeight, 38, 'header is 38px tall');
-    assert.equal(find('.lt-body-wrap').offsetHeight, 418, 'body is 438px tall');
-    assert.equal(find('.lt-foot-wrap').offsetHeight, 44, 'footer is 44px tall');
+    assert.equal(
+      find('.lt-head-wrap').offsetHeight
+      + find('.lt-body-wrap').offsetHeight
+      + find('.lt-foot-wrap').offsetHeight,
+      500,
+      'combined height is 500px'
+    );
 
   });
 
