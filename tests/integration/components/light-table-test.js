@@ -8,7 +8,6 @@ import hasClass from '../../helpers/has-class';
 import RowComponent from 'ember-light-table/components/lt-row';
 import Component from '@ember/component';
 import { get, computed } from '@ember/object';
-import { waitForQueue } from 'ember-concurrency';
 import { startMirage } from 'dummy/initializers/ember-cli-mirage';
 
 module('light-table', function(hooks) {
@@ -188,8 +187,6 @@ module('light-table', function(hooks) {
 
     assert.equal(findAll('.custom-row').length, 3, 'three custom rows were rendered');
     assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
-
-    await waitForQueue('afterRender');
 
     this.set('current', users[0]);
     let [firstRow] = findAll('.custom-row');
