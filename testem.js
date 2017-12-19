@@ -1,5 +1,4 @@
 /* eslint-env node */
-/* eslint-disable camelcase */
 module.exports = {
   test_page: 'tests/index.html?hidepassed',
   disable_watching: true,
@@ -8,16 +7,16 @@ module.exports = {
   ],
   launch_in_dev: [
     'Chrome'
-  ]
+  ],
+  browser_args: {
+    Chrome: {
+      mode: 'ci',
+      args: [
+        '--disable-gpu',
+        '--headless',
+        '--remote-debugging-port=0',
+        '--window-size=1440,900'
+      ]
+    }
+  }
 };
-
-if (process.env.HEADLESS === 'true') {
-  module.exports.browser_args = {
-    'Chrome': [
-      '--headless',
-      '--disable-gpu',
-      '--remote-debugging-port=9222',
-      '--window-size=1440,900'
-    ]
-  };
-}
