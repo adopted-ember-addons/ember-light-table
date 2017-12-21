@@ -39,7 +39,6 @@ export default Component.extend({
 
   meta: null,
   table: null,
-  rows: A([]),
 
   didReceiveAttrs: diffAttrs('model', function(changedAttrs, ...args) {
     this._super(...args);
@@ -57,6 +56,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
+    this.set('rows', A([]));
     let table = new Table(this.get('columns'), this.get('rows'), { enableSync: this.get('enableSync') });
     let sortColumn = table.get('allColumns').findBy('valuePath', this.get('sort'));
 
@@ -66,12 +66,6 @@ export default Component.extend({
     }
 
     this.set('table', table);
-  },
-
-  willDestroyElement() {
-    this._super(...arguments);
-
-    this.get('rows').clear();
   },
 
   actions: {
