@@ -16,8 +16,8 @@
 npm-debug.log*
 yarn-error.log
 testem.log
-lcov.dat
-.vscodeignore
-jsconfig.json
-/typings/*
-/.vscode/*
+
+# ember-try
+.node_modules.ember-try/
+bower.json.ember-try
+package.json.ember-try
