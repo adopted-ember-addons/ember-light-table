@@ -1,6 +1,7 @@
 import { findAll, find, scrollTo, click } from 'ember-native-dom-helpers';
-import { moduleForComponent, test } from 'ember-qunit';
-import { skip } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
+import { module, skip, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
 import Table from 'ember-light-table';
@@ -11,245 +12,248 @@ import { register } from 'ember-owner-test-utils/test-support/register';
 import Component from '@ember/component';
 import { get, computed } from '@ember/object';
 
-moduleForComponent('light-table', 'Integration | Component | light table', {
-  integration: true,
-  setup() {
-    startMirage(this.container);
-  }
-});
+module('Integration | Component | light table', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  this.set('table', new Table());
-  this.render(hbs `{{light-table table}}`);
+  hooks.beforeEach(function() {
+    this.setup = function() {
+      startMirage(this.container);
+    };
 
-  assert.equal(find('*').textContent.trim(), '');
-});
-
-// TODO: Figure out why tests is failing in Phantom.js
-skip('scrolled to bottom', async function(assert) {
-  assert.expect(4);
-
-  this.set('table', new Table(Columns, createUsers(50)));
-
-  this.on('onScrolledToBottom', () => {
-    assert.ok(true);
+    this.actions = {};
+    this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
   });
 
-  this.render(hbs `
-    {{#light-table table height='40vh' as |t|}}
-      {{t.head}}
-      {{t.body onScrolledToBottom=(action 'onScrolledToBottom')}}
-    {{/light-table}}
-  `);
+  test('it renders', async function(assert) {
+    this.set('table', new Table());
+    await render(hbs `{{light-table table}}`);
 
-  assert.equal(findAll('tbody > tr').length, 50, '50 rows are rendered');
+    assert.equal(find('*').textContent.trim(), '');
+  });
 
-  let scrollContainer = '.tse-scroll-content';
-  let { scrollHeight } = find(scrollContainer);
+  test('scrolled to bottom', async function(assert) {
+    assert.expect(4);
 
-  assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
-  assert.equal(scrollHeight, 2500, 'scroll height is 2500');
+    this.set('table', new Table(Columns, createUsers(50)));
 
-  await scrollTo(scrollContainer, 0, scrollHeight);
-});
+    this.set('onScrolledToBottom', () => {
+      assert.ok(true);
+    });
 
-test('fixed header', function(assert) {
-  assert.expect(2);
-  this.set('table', new Table(Columns, createUsers(5)));
-  this.set('fixed', true);
+    await render(hbs `
+      {{#light-table table height='40vh' as |t|}}
+        {{t.head fixed=true}}
+        {{t.body onScrolledToBottom=(action onScrolledToBottom)}}
+      {{/light-table}}
+    `);
 
-  this.render(hbs `
-    {{#light-table table height='500px' id='lightTable' as |t|}}
-      {{t.head fixed=fixed}}
-      {{t.body}}
-    {{/light-table}}
-  `);
+    assert.equal(findAll('tbody > tr').length, 50, '50 rows are rendered');
 
-  assert.equal(findAll('#lightTable_inline_head thead').length, 0);
+    let scrollContainer = '.tse-scroll-content';
+    let { scrollHeight } = find(scrollContainer);
 
-  this.set('fixed', false);
+    assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
+    assert.equal(scrollHeight, 2500, 'scroll height is 2500');
 
-  assert.equal(findAll('#lightTable_inline_head thead').length, 1);
-});
+    await scrollTo(scrollContainer, 0, scrollHeight);
+  });
 
-test('fixed footer', function(assert) {
-  assert.expect(2);
-  this.set('table', new Table(Columns, createUsers(5)));
-  this.set('fixed', true);
+  test('fixed header', async function(assert) {
+    assert.expect(2);
+    this.set('table', new Table(Columns, createUsers(5)));
+    this.set('fixed', true);
 
-  this.render(hbs `
-    {{#light-table table height='500px' id='lightTable' as |t|}}
-      {{t.body}}
-      {{t.foot fixed=fixed}}
-    {{/light-table}}
-  `);
+    await render(hbs `
+      {{#light-table table height='500px' id='lightTable' as |t|}}
+        {{t.head fixed=fixed}}
+        {{t.body}}
+      {{/light-table}}
+    `);
 
-  assert.equal(findAll('#lightTable_inline_foot tfoot').length, 0);
+    assert.equal(findAll('#lightTable_inline_head thead').length, 0);
 
-  this.set('fixed', false);
+    this.set('fixed', false);
 
-  assert.equal(findAll('#lightTable_inline_foot tfoot').length, 1);
-});
+    assert.equal(findAll('#lightTable_inline_head thead').length, 1);
+  });
 
-// TODO: Passes in Chrome but not in Phantom
-skip('table assumes height of container', function(assert) {
+  test('fixed footer', async function(assert) {
+    assert.expect(2);
+    this.set('table', new Table(Columns, createUsers(5)));
+    this.set('fixed', true);
 
-  assert.expect(1);
-  this.set('table', new Table(Columns, createUsers(5)));
-  this.set('fixed', true);
-
-  this.render(hbs `
-    <div style="height: 500px">
-      {{#light-table table id='lightTable' as |t|}}
+    await render(hbs `
+      {{#light-table table height='500px' id='lightTable' as |t|}}
         {{t.body}}
         {{t.foot fixed=fixed}}
       {{/light-table}}
-    </div>
-  `);
+    `);
 
-  assert.equal(find('#lightTable').offsetHeight, 500, 'table is 500px height');
+    assert.equal(findAll('#lightTable_inline_foot tfoot').length, 0);
 
-});
+    this.set('fixed', false);
 
-// TODO: figure out why this test doesn't work properly in Phantomjs
-skip('table body should consume all available space when not enough content to fill it', function(assert) {
-  assert.expect(3);
+    assert.equal(findAll('#lightTable_inline_foot tfoot').length, 1);
+  });
 
-  this.set('table', new Table(Columns, createUsers(1)));
-  this.set('fixed', true);
+  test('table assumes height of container', async function(assert) {
 
-  this.render(hbs `
-    <div style="height: 500px">
-      {{#light-table table id='lightTable' as |t|}}
-        {{t.head fixed=true}}
-        {{t.body}}
-        {{#t.foot fixed=true}}
-          Hello World
-        {{/t.foot}}
+    this.set('table', new Table(Columns, createUsers(5)));
+    this.set('fixed', true);
+
+    await render(hbs `
+      <div style="height: 500px">
+        {{#light-table table id='lightTable' as |t|}}
+          {{t.body}}
+          {{t.foot fixed=fixed}}
+        {{/light-table}}
+      </div>
+    `);
+
+    assert.equal(find('#lightTable').offsetHeight, 500, 'table is 500px height');
+
+  });
+
+  test('table body should consume all available space when not enough content to fill it', async function(assert) {
+    this.set('table', new Table(Columns, createUsers(1)));
+    this.set('fixed', true);
+
+    await render(hbs `
+      <div style="height: 500px">
+        {{#light-table table id='lightTable' as |t|}}
+          {{t.head fixed=true}}
+          {{t.body}}
+          {{#t.foot fixed=true}}
+            Hello World
+          {{/t.foot}}
+        {{/light-table}}
+      </div>
+    `);
+
+    const bodyHeight = find('.lt-body-wrap').offsetHeight;
+    const headHeight = find('.lt-head-wrap').offsetHeight;
+    const footHeight = find('.lt-foot-wrap').offsetHeight;
+
+    assert.equal(bodyHeight + headHeight + footHeight, 500, 'combined table content is 500px tall');
+    assert.ok(bodyHeight > (headHeight + footHeight), 'body is tallest element');
+  });
+
+  test('accepts components that are used in the body', async function(assert) {
+
+    this.owner.register('component:custom-row', RowComponent);
+
+    this.set('table', new Table(Columns, createUsers(1)));
+
+    await render(hbs `
+      {{#light-table table as |t|}}
+        {{t.body rowComponent=(component "custom-row" classNames="custom-row")}}
       {{/light-table}}
-    </div>
-  `);
-  assert.equal(find('.lt-head-wrap').offsetHeight, 42, 'header is 42px tall');
-  assert.equal(find('.lt-body-wrap').offsetHeight, 438, 'body is 438px tall');
-  assert.equal(find('.lt-foot-wrap').offsetHeight, 20, 'header is 20px tall');
+    `);
 
-});
-
-test('accepts components that are used in the body', function(assert) {
-
-  register(this, 'component:custom-row', RowComponent);
-
-  this.set('table', new Table(Columns, createUsers(1)));
-
-  this.render(hbs `
-    {{#light-table table as |t|}}
-      {{t.body rowComponent=(component "custom-row" classNames="custom-row")}}
-    {{/light-table}}
-  `);
-
-  assert.equal(findAll('.lt-row.custom-row').length, 1, 'row has custom-row class');
-});
-
-test('passed in components can have computed properties', function(assert) {
-
-  register(this, 'component:custom-row', RowComponent.extend({
-    classNameBindings: ['isActive'],
-    current: null,
-    isActive: computed('row.content', 'current', function() {
-      return this.get('row.content') === this.get('current');
-    })
-  }));
-
-  let users = createUsers(3);
-  this.set('table', new Table(Columns, users));
-
-  this.render(hbs `
-    {{#light-table table as |t|}}
-      {{t.body
-        rowComponent=(component "custom-row" classNames="custom-row" current=current)
-      }}
-    {{/light-table}}
-  `);
-
-  assert.equal(findAll('.custom-row').length, 3, 'three custom rows were rendered');
-  assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
-
-  this.set('current', users[0]);
-  let [firstRow] = findAll('.custom-row');
-  assert.ok(hasClass(firstRow, 'is-active'), 'first custom row is active');
-
-  this.set('current', users[2]);
-  let thirdRow = find('.custom-row:nth-child(3)');
-  assert.ok(hasClass(thirdRow, 'is-active'), 'third custom row is active');
-
-  this.set('current', null);
-
-  assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
-});
-
-test('onScroll', async function(assert) {
-  let table = new Table(Columns, createUsers(10));
-  let expectedScroll = 50;
-
-  this.setProperties({
-    table,
-    onScroll(actualScroll) {
-      assert.ok(true, 'onScroll worked');
-      assert.equal(actualScroll, expectedScroll, 'scroll position is correct');
-    }
+    assert.equal(findAll('.lt-row.custom-row').length, 1, 'row has custom-row class');
   });
 
-  this.render(hbs `
-    {{#light-table table height='40vh' as |t|}}
-      {{t.head fixed=true}}
-      {{t.body
-        useVirtualScrollbar=true
-        onScroll=onScroll
-      }}
-    {{/light-table}}
-  `);
+  test('passed in components can have computed properties', async function(assert) {
 
-  await scrollTo('.tse-scroll-content', 0, expectedScroll);
-});
+    this.owner.register('component:custom-row', RowComponent.extend({
+      classNameBindings: ['isActive'],
+      current: null,
+      isActive: computed('row.content', 'current', function() {
+        return this.get('row.content') === this.get('current');
+      })
+    }));
 
-test('extra data and tableActions', async function(assert) {
-  assert.expect(4);
+    let users = createUsers(3);
+    this.set('table', new Table(Columns, users));
 
-  register(this, 'component:some-component', Component.extend({
-    classNames: 'some-component',
-    didReceiveAttrs() {
-      assert.equal(get(this, 'extra.someData'), 'someValue', 'extra data is passed');
-    },
-    click() {
-      get(this, 'tableActions.someAction')();
-    }
-  }));
+    await render(hbs `
+      {{#light-table table as |t|}}
+        {{t.body
+          rowComponent=(component "custom-row" classNames="custom-row" current=current)
+        }}
+      {{/light-table}}
+    `);
 
-  const columns = [{
-    component: 'some-component',
-    cellComponent: 'some-component'
-  }];
+    assert.equal(findAll('.custom-row').length, 3, 'three custom rows were rendered');
+    assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
 
-  this.set('table', new Table(columns, [{}]));
+    this.set('current', users[0]);
+    let [firstRow] = findAll('.custom-row');
+    assert.ok(hasClass(firstRow, 'is-active'), 'first custom row is active');
 
-  this.on('someAction', () => {
-    assert.ok(true, 'table action is passed');
+    this.set('current', users[2]);
+    let thirdRow = find('.custom-row:nth-child(3)');
+    assert.ok(hasClass(thirdRow, 'is-active'), 'third custom row is active');
+
+    this.set('current', null);
+
+    assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
   });
 
-  this.render(hbs `
-    {{#light-table table
-      extra=(hash someData="someValue")
-      tableActions=(hash
-        someAction=(action "someAction")
-      )
-      as |t|
-    }}
-      {{t.head}}
-      {{t.body}}
-    {{/light-table}}
-  `);
+  test('onScroll', async function(assert) {
+    let table = new Table(Columns, createUsers(10));
+    let expectedScroll = 50;
 
-  for (const element of findAll('.some-component')) {
-    await click(element);
-  }
+    this.setProperties({
+      table,
+      onScroll(actualScroll) {
+        assert.ok(true, 'onScroll worked');
+        assert.equal(actualScroll, expectedScroll, 'scroll position is correct');
+      }
+    });
+
+    await render(hbs `
+      {{#light-table table height='40vh' as |t|}}
+        {{t.head fixed=true}}
+        {{t.body
+          useVirtualScrollbar=true
+          onScroll=onScroll
+        }}
+      {{/light-table}}
+    `);
+
+    await scrollTo('.tse-scroll-content', 0, expectedScroll);
+  });
+
+  test('extra data and tableActions', async function(assert) {
+    assert.expect(4);
+
+    this.owner.register('component:some-component', Component.extend({
+      classNames: 'some-component',
+      didReceiveAttrs() {
+        assert.equal(get(this, 'extra.someData'), 'someValue', 'extra data is passed');
+      },
+      click() {
+        get(this, 'tableActions.someAction')();
+      }
+    }));
+
+    const columns = [{
+      component: 'some-component',
+      cellComponent: 'some-component'
+    }];
+
+    this.set('table', new Table(columns, [{}]));
+
+    this.actions.someAction = () => {
+      assert.ok(true, 'table action is passed');
+    };
+
+    await render(hbs `
+      {{#light-table table
+        extra=(hash someData="someValue")
+        tableActions=(hash
+          someAction=(action "someAction")
+        )
+        as |t|
+      }}
+        {{t.head}}
+        {{t.body}}
+      {{/light-table}}
+    `);
+
+    for (const element of findAll('.some-component')) {
+      await click(element);
+    }
+  });
 });
