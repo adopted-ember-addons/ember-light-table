@@ -313,7 +313,16 @@ export default class Column extends EmberObject.extend({
     let isHidden = this.get('isHidden');
 
     return emberArray(isHidden ? [] : subColumns.filterBy('isHidden', false));
-  }).readOnly()
+  }).readOnly(),
+
+  init(...args) {
+    this._super(...args);
+
+    const subColumns = emberArray(makeArray(this.get('subColumns')).map((sc) => new Column(sc)));
+    subColumns.setEach('parent', this);
+
+    this.set('subColumns', subColumns);
+  }
 }) {
   /**
    * @class Column
@@ -323,20 +332,14 @@ export default class Column extends EmberObject.extend({
   constructor(options = {}) {
     // TODO: Revert this, when babel#5862 is resolved.
     //       https://github.com/babel/babel/issues/5862
-    super();
+    // HACK: Passing properties to super instead of manually setting them fixes the
+    //       implicit run loop creation for Ember 2.12.
+    //       https://travis-ci.org/offirgolan/ember-light-table/jobs/344818839#L790
+    super(options);
 
     if (options instanceof Column) {
       return options;
     }
-
-    this.setProperties(options);
-
-    let { subColumns } = options;
-
-    subColumns = emberArray(makeArray(subColumns).map((sc) => new Column(sc)));
-    subColumns.setEach('parent', this);
-
-    this.set('subColumns', subColumns);
   }
 }
 
