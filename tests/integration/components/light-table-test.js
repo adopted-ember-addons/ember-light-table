@@ -1,14 +1,13 @@
 import { findAll, find, scrollTo, click } from 'ember-native-dom-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { module, skip, test } from 'qunit';
+import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
 import Table from 'ember-light-table';
 import Columns from '../../helpers/table-columns';
 import hasClass from '../../helpers/has-class';
 import RowComponent from 'ember-light-table/components/lt-row';
-import { register } from 'ember-owner-test-utils/test-support/register';
 import Component from '@ember/component';
 import { get, computed } from '@ember/object';
 
