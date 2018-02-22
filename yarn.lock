@@ -8332,8 +8332,8 @@ sort-object-keys@^1.1.1:
   resolved "https://registry.yarnpkg.com/sort-object-keys/-/sort-object-keys-1.1.2.tgz#d3a6c48dc2ac97e6bc94367696e03f6d09d37952"
 
 sort-package-json@^1.4.0:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/sort-package-json/-/sort-package-json-1.7.1.tgz#f2e5fbffe8420cc1bb04485f4509f05e73b4c0f2"
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/sort-package-json/-/sort-package-json-1.8.0.tgz#57f290b25602c5219ed4ffbe53a9de0d61dcbd19"
   dependencies:
     sort-object-keys "^1.1.1"
 
