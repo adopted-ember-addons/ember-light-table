@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import { get, trySet } from '@ember/object';
 import layout from 'ember-light-table/templates/components/lt-foot';
 import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 
@@ -36,10 +35,5 @@ export default Component.extend(TableHeaderMixin, {
   classNames: ['lt-foot-wrap'],
   table: null,
   sharedOptions: null,
-
-  init() {
-    this._super(...arguments);
-
-    trySet(this, 'sharedOptions.fixedFooter', get(this, 'fixed'));
-  }
+  sharedOptionsFixedKey: 'fixedFooter'
 });

@@ -61,18 +61,22 @@ module('Integration | Component | light table', function(hooks) {
   test('fixed header', async function(assert) {
     assert.expect(2);
     this.set('table', new Table(Columns, createUsers(5)));
-    this.set('fixed', true);
 
     await render(hbs `
       {{#light-table table height='500px' id='lightTable' as |t|}}
-        {{t.head fixed=fixed}}
+        {{t.head fixed=true}}
         {{t.body}}
       {{/light-table}}
     `);
 
     assert.equal(findAll('#lightTable_inline_head thead').length, 0);
 
-    this.set('fixed', false);
+    await render(hbs `
+      {{#light-table table height='500px' id='lightTable' as |t|}}
+        {{t.head fixed=false}}
+        {{t.body}}
+      {{/light-table}}
+    `);
 
     assert.equal(findAll('#lightTable_inline_head thead').length, 1);
   });
@@ -80,18 +84,22 @@ module('Integration | Component | light table', function(hooks) {
   test('fixed footer', async function(assert) {
     assert.expect(2);
     this.set('table', new Table(Columns, createUsers(5)));
-    this.set('fixed', true);
 
     await render(hbs `
       {{#light-table table height='500px' id='lightTable' as |t|}}
         {{t.body}}
-        {{t.foot fixed=fixed}}
+        {{t.foot fixed=true}}
       {{/light-table}}
     `);
 
     assert.equal(findAll('#lightTable_inline_foot tfoot').length, 0);
 
-    this.set('fixed', false);
+    await render(hbs `
+      {{#light-table table height='500px' id='lightTable' as |t|}}
+        {{t.body}}
+        {{t.foot fixed=false}}
+      {{/light-table}}
+    `);
 
     assert.equal(findAll('#lightTable_inline_foot tfoot').length, 1);
   });
