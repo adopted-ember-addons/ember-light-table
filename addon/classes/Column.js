@@ -308,7 +308,7 @@ export default class Column extends EmberObject.extend({
    * @type {Array}
    * @private
    */
-  visibleSubColumns: computed('subColumns.[]', 'subColumns.@each.isHidden', 'isHidden', function() {
+  visibleSubColumns: computed('subColumns.@each.isHidden', 'isHidden', function() {
     let subColumns = this.get('subColumns');
     let isHidden = this.get('isHidden');
 
