@@ -29,7 +29,7 @@
     "ember-cli-string-helpers": "^1.5.0",
     "ember-composable-helpers": "^2.0.1",
     "ember-get-config": "^0.2.2",
-    "ember-in-viewport": "2.1.1",
+    "ember-in-viewport": "2.2.0",
     "ember-scrollable": "^0.4.10",
     "ember-truth-helpers": "^2.0.0",
     "ember-wormhole": "^0.5.1"
