@@ -78,6 +78,31 @@ test('CP - visibleSubColumns', function(assert) {
   assert.equal(col.get('visibleSubColumns.length'), 0);
 });
 
+test('CP - minResizeWidth', function(assert) {
+  let col = new Column({
+    minResizeWidth: '100px'
+  });
+  assert.ok(col);
+  assert.equal(col.get('_minResizeWidth'), 100);
+  col = new Column({
+    minResizeWidth: '100%'
+  });
+  assert.ok(col);
+  assert.equal(col.get('_minResizeWidth'), 100);
+
+  col = new Column({
+    minResizeWidth: '100'
+  });
+  assert.ok(col);
+  assert.equal(col.get('_minResizeWidth'), 100);
+
+  col = new Column({
+    minResizeWidth: 100
+  });
+  assert.ok(col);
+  assert.equal(col.get('_minResizeWidth'), 100);
+});
+
 test('subColumns / parent', function(assert) {
   let col = new Column({
     subColumns: [{}]
@@ -86,5 +111,4 @@ test('subColumns / parent', function(assert) {
   assert.equal(col.subColumns.length, 1);
 
   assert.equal(col.subColumns[0].get('parent'), col);
-
 });

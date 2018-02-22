@@ -1,7 +1,8 @@
 import { A as emberArray, makeArray } from '@ember/array';
+import { warn } from '@ember/debug';
 import EmberObject, { computed } from '@ember/object';
-import { isEmpty } from '@ember/utils';
 import { guidFor } from '@ember/object/internals';
+import { isEmpty, typeOf } from '@ember/utils';
 import fixProto from 'ember-light-table/utils/fix-proto';
 
 /**
@@ -129,11 +130,37 @@ export default class Column extends EmberObject.extend({
 
   /**
    * The minimum width (in px) that this column can be resized to.
-   * @property minResizeWidth
+   * @property _minResizeWidth
    * @type {Number}
    * @default 0
+   * @private
    */
-  minResizeWidth: 0,
+  _minResizeWidth: 0,
+
+  /**
+   * The minimum width that this column can be resized to.
+   * @property minResizeWidth
+   * @type {String}
+   * @default '0px'
+   */
+  minResizeWidth: computed({
+    get() {
+      return this.get('_minResizeWidth');
+    },
+    set(key, value) {
+      if (typeOf(value) === 'string') {
+        let [, quantity, units] = value.match(/(\d+)(px)?/) || [];
+        if (units !== 'px') {
+          warn('`value` attribute is interpreted as px regardless of provided units', {
+            id: 'ember-light-table.classes.Column'
+          });
+        }
+        this.set('_minResizeWidth', Number(quantity));
+      } else {
+        this.set('_minResizeWidth', value);
+      }
+    }
+  }),
 
   /**
    * The parent column (or group) for this sub-column.
