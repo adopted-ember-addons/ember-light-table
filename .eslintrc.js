@@ -17,6 +17,7 @@ module.exports = {
   },
   rules: {
     'generator-star-spacing': ['error', { before: false, after: false }],
+    'ember/closure-actions': 'off',
     'ember-suave/require-access-in-comments': 'off',
     'ember-suave/no-const-outside-module-scope': 'off'
   },

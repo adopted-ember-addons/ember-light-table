@@ -3,7 +3,6 @@ import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
 import { isEmpty, isNone } from '@ember/utils';
 import { assert } from '@ember/debug';
-import { on } from '@ember/object/evented';
 import { inject as service } from '@ember/service';
 import layout from 'ember-light-table/templates/components/light-table';
 import Table from 'ember-light-table/classes/Table';
@@ -213,7 +212,7 @@ const LightTable = Component.extend({
    * @type {Number}
    * @private
    */
-  totalWidth: computed('visibleColumns.[]', 'visibleColumns.@each.width', function() {
+  totalWidth: computed('visibleColumns.@each.width', function() {
     let visibleColumns = this.get('visibleColumns');
     let widths = visibleColumns.getEach('width');
     let unit = (widths[0] || '').match(/\D+$/);
@@ -271,9 +270,11 @@ const LightTable = Component.extend({
     if (isNone(media)) {
       this.set('responsive', false);
     }
+
+    this.onMediaChange();
   },
 
-  onMediaChange: on('init', observer('media.matches.[]', 'table.allColumns.[]', function() {
+  onMediaChange: observer('media.matches.[]', 'table.allColumns.[]', function() {
     let responsive = this.get('responsive');
     let matches = this.get('media.matches');
     let breakpoints = this.get('breakpoints');
@@ -303,7 +304,7 @@ const LightTable = Component.extend({
     }
 
     this.send('onAfterResponsiveChange', matches);
-  })),
+  }),
 
   _displayColumns(numColumns) {
     let table = this.get('table');
