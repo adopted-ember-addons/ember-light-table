@@ -10,7 +10,7 @@ export default Component.extend(InViewportMixin, {
   layout,
 
   rows: null,
-  scrollBuffer: null,
+  scrollBuffer: 0,
 
   didInsertElement() {
     this._super(...arguments);
