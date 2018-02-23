@@ -1,4 +1,5 @@
-import { click, findAll, find, triggerEvent } from 'ember-native-dom-helpers';
+import { click as nativeDomClick } from 'ember-native-dom-helpers';
+import { click, findAll, find, triggerEvent } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -41,14 +42,14 @@ module('Integration | Component | lt body', function(hooks) {
 
     assert.notOk(hasClass(row, 'is-selectable'));
     assert.notOk(hasClass(row, 'is-selected'));
-    click(row);
+    await click(row);
     assert.notOk(hasClass(row, 'is-selected'));
 
     this.set('canSelect', true);
 
     assert.ok(hasClass(row, 'is-selectable'));
     assert.notOk(hasClass(row, 'is-selected'));
-    click(row);
+    await click(row);
     assert.ok(hasClass(row, 'is-selected'));
   });
 
@@ -62,16 +63,16 @@ module('Integration | Component | lt body', function(hooks) {
 
     assert.equal(findAll('tbody > tr').length, 5);
 
-    click(firstRow);
+    await click(firstRow);
     assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
 
-    click(lastRow, { shiftKey: true });
+    nativeDomClick(lastRow, { shiftKey: true });
     assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
 
-    click(middleRow, { ctrlKey: true });
+    nativeDomClick(middleRow, { ctrlKey: true });
     assert.equal(findAll('tr.is-selected').length, 4, 'ctrl-clicking a selected row deselects it');
 
-    click(firstRow);
+    await click(firstRow);
     assert.equal(findAll('tr.is-selected').length, 0, 'clicking a selected row deselects all rows');
   });
 
@@ -88,16 +89,16 @@ module('Integration | Component | lt body', function(hooks) {
 
     assert.equal(findAll('tbody > tr').length, 5);
 
-    click(firstRow);
+    await click(firstRow);
     assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
 
-    click(lastRow, { shiftKey: true });
+    nativeDomClick(lastRow, { shiftKey: true });
     assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
 
-    click(middleRow);
+    await click(middleRow);
     assert.equal(findAll('tr.is-selected').length, 4, 'clicking a selected row deselects it without affecting other selected rows');
 
-    click(middleRow);
+    await click(middleRow);
     assert.equal(findAll('tr.is-selected').length, 5, 'clicking a deselected row selects it without affecting other selected rows');
   });
 
@@ -114,7 +115,7 @@ module('Integration | Component | lt body', function(hooks) {
     let row = find('tr');
 
     assert.notOk(hasClass(row, 'is-expandable'));
-    click(row);
+    await click(row);
     assert.equal(findAll('tr.lt-expanded-row').length, 0);
     assert.equal(findAll('tbody > tr').length, 2);
     assert.notOk(find('tr.lt-expanded-row'));
@@ -122,7 +123,7 @@ module('Integration | Component | lt body', function(hooks) {
     this.set('canExpand', true);
 
     assert.ok(hasClass(row, 'is-expandable'));
-    click(row);
+    await click(row);
     assert.equal(findAll('tr.lt-expanded-row').length, 1);
     assert.equal(findAll('tbody > tr').length, 3);
     assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
@@ -130,7 +131,7 @@ module('Integration | Component | lt body', function(hooks) {
     let allRows = findAll('tr');
     row = allRows[allRows.length - 1];
     assert.ok(hasClass(row, 'is-expandable'));
-    click(row);
+    await click(row);
     assert.equal(findAll('tr.lt-expanded-row').length, 1);
     assert.equal(findAll('tbody > tr').length, 3);
     assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
@@ -149,7 +150,7 @@ module('Integration | Component | lt body', function(hooks) {
 
     rows.forEach((row) => {
       assert.ok(hasClass(row, 'is-expandable'));
-      click(row);
+      nativeDomClick(row);
       assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
     });
 
@@ -167,8 +168,8 @@ module('Integration | Component | lt body', function(hooks) {
     );
 
     let row = find('tr');
-    click(row);
-    triggerEvent(row, 'dblclick');
+    await click(row);
+    await triggerEvent(row, 'dblclick');
   });
 
   test('hidden rows', async function(assert) {
