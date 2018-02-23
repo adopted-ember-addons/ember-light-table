@@ -1,6 +1,6 @@
-import { findAll, find, scrollTo, click } from 'ember-native-dom-helpers';
+import { scrollTo } from 'ember-native-dom-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, findAll, find, click } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
