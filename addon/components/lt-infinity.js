@@ -26,7 +26,7 @@ export default Component.extend(InViewportMixin, {
         left: width,
         right: width,
         bottom: scrollBuffer,
-        top: 0
+        top: scrollBuffer
       },
       scrollableArea: scrollableContent
     });
