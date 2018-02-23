@@ -10,6 +10,7 @@ export default Component.extend(InViewportMixin, {
   layout,
 
   rows: null,
+  scrollableContent: null,
   scrollBuffer: 0,
 
   didInsertElement() {
@@ -17,6 +18,7 @@ export default Component.extend(InViewportMixin, {
 
     let scrollBuffer = this.get('scrollBuffer');
     let width = this.$().width();
+    let scrollableContent = this.get('scrollableContent');
 
     this.setProperties({
       viewportSpy: true,
@@ -25,7 +27,8 @@ export default Component.extend(InViewportMixin, {
         right: width,
         bottom: scrollBuffer,
         top: 0
-      }
+      },
+      scrollableArea: scrollableContent
     });
   },
 
