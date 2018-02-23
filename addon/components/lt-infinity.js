@@ -20,7 +20,6 @@ export default Component.extend(InViewportMixin, {
 
     this.setProperties({
       viewportSpy: true,
-      viewportUseIntersectionObserver: false,
       viewportTolerance: {
         left: width,
         right: width,
