@@ -3415,12 +3415,6 @@ ember-export-application-global@^2.0.0:
   dependencies:
     ember-cli-babel "^6.0.0-beta.7"
 
-ember-factory-for-polyfill@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/ember-factory-for-polyfill/-/ember-factory-for-polyfill-1.3.1.tgz#b446ed64916d293c847a4955240eb2c993b86eae"
-  dependencies:
-    ember-cli-version-checker "^2.1.0"
-
 ember-font-awesome@^4.0.0-rc.2:
   version "4.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/ember-font-awesome/-/ember-font-awesome-4.0.0-rc.2.tgz#27735f57eb56509b51f2b5000da85e7fd84791df"
@@ -3445,19 +3439,11 @@ ember-get-config@^0.2.2, ember-get-config@^0.2.3, ember-get-config@^0.2.4:
     broccoli-file-creator "^1.1.1"
     ember-cli-babel "^6.3.0"
 
-ember-getowner-polyfill@^2.0.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/ember-getowner-polyfill/-/ember-getowner-polyfill-2.2.0.tgz#38e7dccbcac69d5ec694000329ec0b2be651d2b2"
-  dependencies:
-    ember-cli-version-checker "^2.1.0"
-    ember-factory-for-polyfill "^1.3.1"
-
-ember-in-viewport@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/ember-in-viewport/-/ember-in-viewport-2.2.1.tgz#16888231f91a22d7088dd724d9ffb6dedbc649a4"
+ember-in-viewport@DockYard/ember-in-viewport:
+  version "3.0.2"
+  resolved "https://codeload.github.com/DockYard/ember-in-viewport/tar.gz/53b84143db2d02a4cd60888d2740d9a23c0d8bee"
   dependencies:
     ember-cli-babel "^6.6.0"
-    ember-getowner-polyfill "^2.0.0"
 
 ember-inflector@^2.0.0:
   version "2.2.0"
