@@ -64,7 +64,7 @@
 }
 
 .lt-infinity {
-  height: 1px;
+  min-height: 1px;
 }
 
 .ember-light-table .lt-scrollable.vertical-collection {
