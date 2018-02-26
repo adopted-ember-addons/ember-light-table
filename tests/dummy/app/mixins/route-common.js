@@ -1,8 +1,8 @@
 // BEGIN-SNIPPET route-common
-import Ember from 'ember';
 import { task } from 'ember-concurrency';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   page: 1,
   limit: 10,
   dir: 'asc',
