@@ -10,7 +10,7 @@ export default Component.extend(InViewportMixin, {
   layout,
 
   rows: null,
-  scrollBuffer: null,
+  scrollBuffer: 0,
 
   didInsertElement() {
     this._super(...arguments);
@@ -20,6 +20,7 @@ export default Component.extend(InViewportMixin, {
 
     this.setProperties({
       viewportSpy: true,
+      viewportUseIntersectionObserver: false,
       viewportTolerance: {
         left: width,
         right: width,

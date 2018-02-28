@@ -1,13 +1,20 @@
-# Ember Light Table
+<div align="center">
+  <a href="https://offirgolan.github.io/ember-light-table/">
+    <img
+      src="https://rawgit.com/offirgolan/ember-light-table/master/docs/readme-logo.png"
+      alt="Ember Light Table"
+    >
+  </a>
+</div>
 
-[![Ember Version](https://embadge.io/v1/badge.svg?start=2.3.0)](https://embadge.io/v1/badge.svg?start=2.3.0)
+[![Ember Versions](https://img.shields.io/badge/Ember.js%20Versions-%5E2.12%20and%20%5E3.0-brightgreen.svg)](https://travis-ci.org/offirgolan/ember-light-table)
 [![Build Status](https://travis-ci.org/offirgolan/ember-light-table.svg)](https://travis-ci.org/offirgolan/ember-light-table)
 [![npm version](https://badge.fury.io/js/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
 [![Download Total](https://img.shields.io/npm/dt/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-light-table.svg)](https://emberobserver.com/addons/ember-light-table)
 [![Code Climate](https://codeclimate.com/github/offirgolan/ember-light-table/badges/gpa.svg)](https://codeclimate.com/github/offirgolan/ember-light-table)
 
-A lightweight contextual component based table addon that follows Ember's actions up, data down ideology.
+**Ember Light Table** is a  lightweight contextual component based table addon that follows Ember's actions up, data down ideology.
 
 ## Features
 
@@ -25,7 +32,8 @@ A lightweight contextual component based table addon that follows Ember's action
 - Contextual component for header, body, and footer, as well as loading, no data, and expanded row
 - **EXPERIMENTAL** Occlusion rendering leveraging [vertical-collection](https://github.com/html-next/vertical-collection). See [Demo](http://offirgolan.github.io/ember-light-table/#/cookbook/occlusion-rendering).
 
-## Installation
+Installation
+------------------------------------------------------------------------------
 
 ```shell
 ember install ember-light-table

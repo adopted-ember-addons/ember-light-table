@@ -119,7 +119,7 @@ export default class Table extends EmberObject.extend({
    * @property visibleSubColumns
    * @type {Ember.Array}
    */
-  visibleSubColumns: computed('columns.[]', 'columns.@each.visibleSubColumns', function() {
+  visibleSubColumns: computed('columns.@each.visibleSubColumns', function() {
     return emberArray([].concat(...this.get('columns').getEach('visibleSubColumns')));
   }).readOnly(),
 
@@ -127,7 +127,7 @@ export default class Table extends EmberObject.extend({
    * @property allColumns
    * @type {Ember.Array}
    */
-  allColumns: computed('columns.[]', 'columns.@each.subColumns', function() {
+  allColumns: computed('columns.@each.subColumns', function() {
     return this.get('columns').reduce((arr, c) => {
       arr.pushObjects(c.get('isGroupColumn') ? c.get('subColumns') : [c]);
       return arr;
