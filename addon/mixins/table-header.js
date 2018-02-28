@@ -1,5 +1,5 @@
 import Mixin from '@ember/object/mixin';
-import { computed, trySet } from '@ember/object';
+import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import { warn } from '@ember/debug';
 import { inject as service } from '@ember/service';
@@ -146,11 +146,8 @@ export default Mixin.create({
   init() {
     this._super(...arguments);
 
-    const fixed = this.get('fixed');
-    const sharedOptionsFixedPath = `sharedOptions.${this.get('sharedOptionsFixedKey')}`;
-    trySet(this, sharedOptionsFixedPath, fixed);
-
-    const height = this.get('sharedOptions.height');
+    let fixed = this.get('fixed');
+    let height = this.get('sharedOptions.height');
 
     warn(
       'You did not set a `height` attribute for your table, but marked a header or footer to be fixed. This means that you have to set the table height via CSS. For more information please refer to:  https://github.com/offirgolan/ember-light-table/issues/446',

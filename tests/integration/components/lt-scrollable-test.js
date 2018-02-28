@@ -1,26 +1,25 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { find } from 'ember-native-dom-helpers';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | lt scrollable', function(hooks) {
-  setupRenderingTest(hooks);
+moduleForComponent('lt-scrollable', 'Integration | Component | lt scrollable', {
+  integration: true
+});
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
+test('it renders', function(assert) {
+  // Set any properties with this.set('myProperty', 'value');
+  // Handle any actions with this.on('myAction', function(val) { ... });
 
-    await render(hbs`{{lt-scrollable}}`);
+  this.render(hbs`{{lt-scrollable}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+  assert.equal(find('*').textContent.trim(), '');
 
-    // Template block usage:
-    await render(hbs`
-      {{#lt-scrollable}}
-        template block text
-      {{/lt-scrollable}}
-    `);
+  // Template block usage:
+  this.render(hbs`
+    {{#lt-scrollable}}
+      template block text
+    {{/lt-scrollable}}
+  `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
-  });
+  assert.equal(find('*').textContent.trim(), 'template block text');
 });

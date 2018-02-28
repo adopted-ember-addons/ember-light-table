@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { get, trySet } from '@ember/object';
 import layout from 'ember-light-table/templates/components/lt-head';
 import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 
@@ -37,5 +38,10 @@ export default Component.extend(TableHeaderMixin, {
   classNames: ['lt-head-wrap'],
   table: null,
   sharedOptions: null,
-  sharedOptionsFixedKey: 'fixedHeader'
+
+  init() {
+    this._super(...arguments);
+
+    trySet(this, 'sharedOptions.fixedHeader', get(this, 'fixed'));
+  }
 });

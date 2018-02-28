@@ -5,9 +5,6 @@ export default function startMirage(container) {
 }
 
 export function createUsers(numUsers = 20) {
-  // TODO: avoid leaky state, use when available:
-  //       https://github.com/samselikoff/ember-cli-mirage/issues/1257
-  server.db.emptyData();
   server.createList('user', numUsers);
   return server.db.users;
 }
