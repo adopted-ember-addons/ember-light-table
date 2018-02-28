@@ -1,0 +1,31 @@
+{{!-- BEGIN-SNIPPET external-model-table --}}
+{{#light-table table height='65vh' as |t|}}
+
+  {{!--
+    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
+    you need to have ember-font-awesome installed or manually include
+    the font-awesome assets, e.g. via a CDN.
+  --}}
+
+  {{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconSortable='fa fa-sort'
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    fixed=true
+  }}
+
+  {{#t.body
+    canSelect=false
+    onScrolledToBottom=(action 'onScrolledToBottom')
+    as |body|
+  }}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
+  {{/t.body}}
+
+{{/light-table}}
+{{!-- END-SNIPPET --}}
