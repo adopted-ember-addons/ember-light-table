@@ -3439,9 +3439,9 @@ ember-get-config@^0.2.2, ember-get-config@^0.2.3, ember-get-config@^0.2.4:
     broccoli-file-creator "^1.1.1"
     ember-cli-babel "^6.3.0"
 
-ember-in-viewport@DockYard/ember-in-viewport:
-  version "2.2.1"
-  resolved "https://codeload.github.com/DockYard/ember-in-viewport/tar.gz/43a08389cd3f97ad07a6d1be301c185e75544a8d"
+ember-in-viewport@~3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ember-in-viewport/-/ember-in-viewport-3.0.0.tgz#2dec3fbbb70e3290b8dcedd2f1946d2362d12758"
   dependencies:
     ember-cli-babel "^6.6.0"
 
