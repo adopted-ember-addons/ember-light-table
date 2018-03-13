@@ -12,9 +12,9 @@ Router.map(function() {
   this.route('scrolling');
 
   this.route('columns', function() {
+    this.route('draggable');
     this.route('grouped');
     this.route('resizable');
-    this.route('draggable');
   });
 
   this.route('rows', function() {
@@ -23,13 +23,14 @@ Router.map(function() {
   });
 
   this.route('cookbook', function() {
+    this.route('/');
     this.route('client-side');
     this.route('custom-row');
+    this.route('custom-sort-icon');
     this.route('horizontal-scrolling');
     this.route('occlusion-rendering');
     this.route('pagination');
     this.route('table-actions');
-    this.route('custom-sort-icon');
   });
 });
 

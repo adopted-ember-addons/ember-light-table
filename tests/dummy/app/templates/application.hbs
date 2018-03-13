@@ -28,14 +28,14 @@
         {{#link-to '' tagName="li" classNames="dropdown" current-when='columns'}}
           <a class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Columns <span class='fa fa-caret-down'></span></a>
           <ul class='nav navbar-nav dropdown-menu'>
+            {{#link-to 'columns.draggable' tagName="li"}}
+              {{link-to 'Draggable Columns' 'columns.draggable'}}
+            {{/link-to}}
             {{#link-to 'columns.grouped' tagName="li"}}
               {{link-to 'Grouped Columns' 'columns.grouped'}}
             {{/link-to}}
             {{#link-to 'columns.resizable' tagName="li"}}
               {{link-to 'Resizable Columns' 'columns.resizable'}}
-            {{/link-to}}
-            {{#link-to 'columns.draggable' tagName="li"}}
-              {{link-to 'Draggable Columns' 'columns.draggable'}}
             {{/link-to}}
           </ul>
         {{/link-to}}
@@ -56,11 +56,17 @@
         {{#link-to '' tagName="li" classNames="dropdown" current-when='cookbook'}}
           <a class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Cookbook <span class='fa fa-caret-down'></span></a>
           <ul class='nav navbar-nav dropdown-menu'>
+            {{#link-to 'cookbook.index' tagName="li"}}
+              {{link-to 'Cookbook' 'cookbook.index'}}
+            {{/link-to}}
             {{#link-to 'cookbook.client-side' tagName="li"}}
               {{link-to 'Client Side Search & Sort' 'cookbook.client-side'}}
             {{/link-to}}
             {{#link-to 'cookbook.custom-row' tagName="li"}}
               {{link-to 'Custom Row Component' 'cookbook.custom-row'}}
+            {{/link-to}}
+            {{#link-to 'cookbook.custom-sort-icon' tagName="li"}}
+              {{link-to 'Custom Sort Icon' 'cookbook.custom-sort-icon'}}
             {{/link-to}}
             {{#link-to 'cookbook.horizontal-scrolling' tagName="li"}}
               {{link-to 'Horizontal Scrolling' 'cookbook.horizontal-scrolling'}}
@@ -73,9 +79,6 @@
             {{/link-to}}
             {{#link-to 'cookbook.table-actions' tagName="li"}}
               {{link-to 'Table Actions' 'cookbook.table-actions'}}
-            {{/link-to}}
-            {{#link-to 'cookbook.custom-sort-icon' tagName="li"}}
-              {{link-to 'Custom Sort Icon' 'cookbook.custom-sort-icon'}}
             {{/link-to}}
           </ul>
         {{/link-to}}
