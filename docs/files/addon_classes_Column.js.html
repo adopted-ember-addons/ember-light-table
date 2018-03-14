@@ -54,8 +54,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.12.2" target="_blank">
-                                  Tag: v1.12.2
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/630a3bed" target="_blank">
+                                  Tag: 1.12.2.630a3bed
                                 </a>
                             </h4>
                         </div>
@@ -458,12 +458,21 @@ export default class Column extends EmberObject.extend({
    * @type {Array}
    * @private
    */
-  visibleSubColumns: computed(&#x27;subColumns.[]&#x27;, &#x27;subColumns.@each.isHidden&#x27;, &#x27;isHidden&#x27;, function() {
+  visibleSubColumns: computed(&#x27;subColumns.@each.isHidden&#x27;, &#x27;isHidden&#x27;, function() {
     let subColumns = this.get(&#x27;subColumns&#x27;);
     let isHidden = this.get(&#x27;isHidden&#x27;);
 
     return emberArray(isHidden ? [] : subColumns.filterBy(&#x27;isHidden&#x27;, false));
-  }).readOnly()
+  }).readOnly(),
+
+  init(...args) {
+    this._super(...args);
+
+    const subColumns = emberArray(makeArray(this.get(&#x27;subColumns&#x27;)).map((sc) =&gt; new Column(sc)));
+    subColumns.setEach(&#x27;parent&#x27;, this);
+
+    this.set(&#x27;subColumns&#x27;, subColumns);
+  }
 }) {
   /**
    * @class Column
@@ -473,20 +482,14 @@ export default class Column extends EmberObject.extend({
   constructor(options = {}) {
     // TODO: Revert this, when babel#5862 is resolved.
     //       https://github.com/babel/babel/issues/5862
-    super();
+    // HACK: Passing properties to super instead of manually setting them fixes the
+    //       implicit run loop creation for Ember 2.12.
+    //       https://travis-ci.org/offirgolan/ember-light-table/jobs/344818839#L790
+    super(options);
 
     if (options instanceof Column) {
       return options;
     }
-
-    this.setProperties(options);
-
-    let { subColumns } = options;
-
-    subColumns = emberArray(makeArray(subColumns).map((sc) =&gt; new Column(sc)));
-    subColumns.setEach(&#x27;parent&#x27;, this);
-
-    this.set(&#x27;subColumns&#x27;, subColumns);
   }
 }
 

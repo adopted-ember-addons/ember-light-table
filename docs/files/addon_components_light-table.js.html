@@ -54,8 +54,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.12.2" target="_blank">
-                                  Tag: v1.12.2
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/630a3bed" target="_blank">
+                                  Tag: 1.12.2.630a3bed
                                 </a>
                             </h4>
                         </div>
@@ -153,7 +153,6 @@ import Component from &#x27;@ember/component&#x27;;
 import { computed, observer } from &#x27;@ember/object&#x27;;
 import { isEmpty, isNone } from &#x27;@ember/utils&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
-import { on } from &#x27;@ember/object/evented&#x27;;
 import { inject as service } from &#x27;@ember/service&#x27;;
 import layout from &#x27;ember-light-table/templates/components/light-table&#x27;;
 import Table from &#x27;ember-light-table/classes/Table&#x27;;
@@ -363,7 +362,7 @@ const LightTable = Component.extend({
    * @type {Number}
    * @private
    */
-  totalWidth: computed(&#x27;visibleColumns.[]&#x27;, &#x27;visibleColumns.@each.width&#x27;, function() {
+  totalWidth: computed(&#x27;visibleColumns.@each.width&#x27;, function() {
     let visibleColumns = this.get(&#x27;visibleColumns&#x27;);
     let widths = visibleColumns.getEach(&#x27;width&#x27;);
     let unit = (widths[0] || &#x27;&#x27;).match(/\D+$/);
@@ -421,9 +420,11 @@ const LightTable = Component.extend({
     if (isNone(media)) {
       this.set(&#x27;responsive&#x27;, false);
     }
+
+    this.onMediaChange();
   },
 
-  onMediaChange: on(&#x27;init&#x27;, observer(&#x27;media.matches.[]&#x27;, &#x27;table.allColumns.[]&#x27;, function() {
+  onMediaChange: observer(&#x27;media.matches.[]&#x27;, &#x27;table.allColumns.[]&#x27;, function() {
     let responsive = this.get(&#x27;responsive&#x27;);
     let matches = this.get(&#x27;media.matches&#x27;);
     let breakpoints = this.get(&#x27;breakpoints&#x27;);
@@ -453,7 +454,7 @@ const LightTable = Component.extend({
     }
 
     this.send(&#x27;onAfterResponsiveChange&#x27;, matches);
-  })),
+  }),
 
   _displayColumns(numColumns) {
     let table = this.get(&#x27;table&#x27;);

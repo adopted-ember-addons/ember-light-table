@@ -54,8 +54,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.12.2" target="_blank">
-                                  Tag: v1.12.2
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/630a3bed" target="_blank">
+                                  Tag: 1.12.2.630a3bed
                                 </a>
                             </h4>
                         </div>
@@ -149,6 +149,7 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import { A as emberArray } from &#x27;@ember/array&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
 import EmberObject, { computed, get } from &#x27;@ember/object&#x27;;
 import Row from &#x27;ember-light-table/classes/Row&#x27;;
 import Column from &#x27;ember-light-table/classes/Column&#x27;;
@@ -268,7 +269,7 @@ export default class Table extends EmberObject.extend({
    * @property visibleSubColumns
    * @type {Ember.Array}
    */
-  visibleSubColumns: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.visibleSubColumns&#x27;, function() {
+  visibleSubColumns: computed(&#x27;columns.@each.visibleSubColumns&#x27;, function() {
     return emberArray([].concat(...this.get(&#x27;columns&#x27;).getEach(&#x27;visibleSubColumns&#x27;)));
   }).readOnly(),
 
@@ -276,7 +277,7 @@ export default class Table extends EmberObject.extend({
    * @property allColumns
    * @type {Ember.Array}
    */
-  allColumns: computed(&#x27;columns.[]&#x27;, &#x27;columns.@each.subColumns&#x27;, function() {
+  allColumns: computed(&#x27;columns.@each.subColumns&#x27;, function() {
     return this.get(&#x27;columns&#x27;).reduce((arr, c) =&gt; {
       arr.pushObjects(c.get(&#x27;isGroupColumn&#x27;) ? c.get(&#x27;subColumns&#x27;) : [c]);
       return arr;
@@ -297,6 +298,9 @@ export default class Table extends EmberObject.extend({
    */
   constructor(columns = [], rows = [], options = {}) {
     super();
+
+    assert(&#x27;[ember-light-table] columns must be an array if defined&#x27;, columns instanceof Array);
+    assert(&#x27;[ember-light-table] rows must be an array if defined&#x27;, rows instanceof Array);
 
     let _options = mergeOptionsWithGlobals(options);
     let _columns = emberArray(Table.createColumns(columns));

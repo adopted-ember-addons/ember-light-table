@@ -54,8 +54,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.12.2" target="_blank">
-                                  Tag: v1.12.2
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/630a3bed" target="_blank">
+                                  Tag: 1.12.2.630a3bed
                                 </a>
                             </h4>
                         </div>
@@ -149,7 +149,7 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Mixin from &#x27;@ember/object/mixin&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
+import { computed, trySet } from &#x27;@ember/object&#x27;;
 import { isEmpty } from &#x27;@ember/utils&#x27;;
 import { warn } from &#x27;@ember/debug&#x27;;
 import { inject as service } from &#x27;@ember/service&#x27;;
@@ -296,8 +296,11 @@ export default Mixin.create({
   init() {
     this._super(...arguments);
 
-    let fixed = this.get(&#x27;fixed&#x27;);
-    let height = this.get(&#x27;sharedOptions.height&#x27;);
+    const fixed = this.get(&#x27;fixed&#x27;);
+    const sharedOptionsFixedPath = &#x60;sharedOptions.${this.get(&#x27;sharedOptionsFixedKey&#x27;)}&#x60;;
+    trySet(this, sharedOptionsFixedPath, fixed);
+
+    const height = this.get(&#x27;sharedOptions.height&#x27;);
 
     warn(
       &#x27;You did not set a &#x60;height&#x60; attribute for your table, but marked a header or footer to be fixed. This means that you have to set the table height via CSS. For more information please refer to:  https://github.com/offirgolan/ember-light-table/issues/446&#x27;,

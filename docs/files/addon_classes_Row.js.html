@@ -54,8 +54,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/v1.12.2" target="_blank">
-                                  Tag: v1.12.2
+                                <a role="button" href="https://github.com/offirgolan/ember-light-table/commits/630a3bed" target="_blank">
+                                  Tag: 1.12.2.630a3bed
                                 </a>
                             </h4>
                         </div>
@@ -237,14 +237,14 @@ export default class Row extends ObjectProxy.extend({
   constructor(content, options = {}) {
     // TODO: Revert this, when babel#5862 is resolved.
     //       https://github.com/babel/babel/issues/5862
-    super();
+    // HACK: Passing properties to super instead of manually setting them fixes the
+    //       implicit run loop creation for Ember 2.12.
+    //       https://travis-ci.org/offirgolan/ember-light-table/jobs/344818839#L790
+    super(Object.assign({}, options, { content }));
 
     if (content instanceof Row) {
       return content;
     }
-
-    this.setProperties(options);
-    this.set(&#x27;content&#x27;, content);
   }
 }
 
