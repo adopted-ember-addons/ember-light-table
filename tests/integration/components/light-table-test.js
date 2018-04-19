@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, findAll, find, click } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
-import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
+import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
 import Table from 'ember-light-table';
 import Columns from '../../helpers/table-columns';
 import hasClass from '../../helpers/has-class';
@@ -13,12 +13,9 @@ import { get, computed } from '@ember/object';
 
 module('Integration | Component | light table', function(hooks) {
   setupRenderingTest(hooks);
+  setupMirageTest(hooks);
 
   hooks.beforeEach(function() {
-    this.setup = function() {
-      startMirage(this.container);
-    };
-
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
   });
@@ -33,7 +30,7 @@ module('Integration | Component | light table', function(hooks) {
   test('scrolled to bottom', async function(assert) {
     assert.expect(4);
 
-    this.set('table', new Table(Columns, createUsers(50)));
+    this.set('table', new Table(Columns, this.server.createList('user', 50)));
 
     this.set('onScrolledToBottom', () => {
       assert.ok(true);
@@ -59,7 +56,7 @@ module('Integration | Component | light table', function(hooks) {
 
   test('fixed header', async function(assert) {
     assert.expect(2);
-    this.set('table', new Table(Columns, createUsers(5)));
+    this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
     await render(hbs `
       {{#light-table table height='500px' id='lightTable' as |t|}}
@@ -82,7 +79,7 @@ module('Integration | Component | light table', function(hooks) {
 
   test('fixed footer', async function(assert) {
     assert.expect(2);
-    this.set('table', new Table(Columns, createUsers(5)));
+    this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
     await render(hbs `
       {{#light-table table height='500px' id='lightTable' as |t|}}
@@ -105,7 +102,7 @@ module('Integration | Component | light table', function(hooks) {
 
   test('table assumes height of container', async function(assert) {
 
-    this.set('table', new Table(Columns, createUsers(5)));
+    this.set('table', new Table(Columns, this.server.createList('user', 5)));
     this.set('fixed', true);
 
     await render(hbs `
@@ -122,7 +119,7 @@ module('Integration | Component | light table', function(hooks) {
   });
 
   test('table body should consume all available space when not enough content to fill it', async function(assert) {
-    this.set('table', new Table(Columns, createUsers(1)));
+    this.set('table', new Table(Columns, this.server.createList('user', 1)));
     this.set('fixed', true);
 
     await render(hbs `
@@ -149,7 +146,7 @@ module('Integration | Component | light table', function(hooks) {
 
     this.owner.register('component:custom-row', RowComponent);
 
-    this.set('table', new Table(Columns, createUsers(1)));
+    this.set('table', new Table(Columns, this.server.createList('user', 1)));
 
     await render(hbs `
       {{#light-table table as |t|}}
@@ -170,7 +167,7 @@ module('Integration | Component | light table', function(hooks) {
       })
     }));
 
-    let users = createUsers(3);
+    let users = this.server.createList('user', 3);
     this.set('table', new Table(Columns, users));
 
     await render(hbs `
@@ -198,7 +195,7 @@ module('Integration | Component | light table', function(hooks) {
   });
 
   test('onScroll', async function(assert) {
-    let table = new Table(Columns, createUsers(10));
+    let table = new Table(Columns, this.server.createList('user', 10));
     let expectedScroll = 50;
 
     this.setProperties({
