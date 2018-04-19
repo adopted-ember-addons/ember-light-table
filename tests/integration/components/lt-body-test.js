@@ -199,7 +199,7 @@ module('Integration | Component | lt body', function(hooks) {
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions enableScaffolding=true}}`);
 
     const [scaffoldingRow, userRow] = findAll('tr');
-    const userCells = findAll('.lt-cell', userRow);
+    const userCells = userRow.querySelectorAll('.lt-cell');
 
     assert.ok(hasClass(scaffoldingRow, 'lt-scaffolding-row'), 'the first row of the <tbody> is a scaffolding row');
     assert.notOk(hasClass(userRow, 'lt-scaffolding-row'), 'the second row of the <tbody> is not a scaffolding row');
