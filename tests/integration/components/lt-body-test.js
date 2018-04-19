@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import startMirage, { createUsers } from '../../helpers/setup-mirage-for-integration';
+import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
 import Table from 'ember-light-table';
 import hasClass from '../../helpers/has-class';
 import Columns from '../../helpers/table-columns';
@@ -12,6 +12,7 @@ import { run } from '@ember/runloop';
 
 module('Integration | Component | lt body', function(hooks) {
   setupRenderingTest(hooks);
+  setupMirageTest(hooks);
 
   hooks.beforeEach(function() {
     this.actions = {};
@@ -23,8 +24,6 @@ module('Integration | Component | lt body', function(hooks) {
       fixedHeader: false,
       fixedFooter: false
     });
-
-    startMirage(this.container);
   });
 
   test('it renders', async function(assert) {
@@ -33,7 +32,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('row selection - enable or disable', async function(assert) {
-    this.set('table', new Table(Columns, createUsers(1)));
+    this.set('table', new Table(Columns, this.server.createList('user', 1)));
     this.set('canSelect', false);
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}`);
@@ -54,7 +53,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('row selection - ctrl-click to modify selection', async function(assert) {
-    this.set('table', new Table(Columns, createUsers(5)));
+    this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true}}`);
     let firstRow = find('tr:first-child');
@@ -77,7 +76,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('row selection - click to modify selection', async function(assert) {
-    this.set('table', new Table(Columns, createUsers(5)));
+    this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
     await render(
       hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false}}`
@@ -103,7 +102,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('row expansion', async function(assert) {
-    this.set('table', new Table(Columns, createUsers(2)));
+    this.set('table', new Table(Columns, this.server.createList('user', 2)));
     this.set('canExpand', false);
 
     await render(hbs `
@@ -138,7 +137,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('row expansion - multiple', async function(assert) {
-    this.set('table', new Table(Columns, createUsers(2)));
+    this.set('table', new Table(Columns, this.server.createList('user', 2)));
     await render(hbs `
       {{#lt-body table=table sharedOptions=sharedOptions canExpand=true as |b|}}
         {{#b.expanded-row}} Hello {{/b.expanded-row}}
@@ -160,7 +159,7 @@ module('Integration | Component | lt body', function(hooks) {
   test('row actions', async function(assert) {
     assert.expect(2);
 
-    this.set('table', new Table(Columns, createUsers(1)));
+    this.set('table', new Table(Columns, this.server.createList('user', 1)));
     this.actions.onRowClick = (row) => assert.ok(row);
     this.actions.onRowDoubleClick = (row) => assert.ok(row);
     await render(
@@ -173,7 +172,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('hidden rows', async function(assert) {
-    this.set('table', new Table(Columns, createUsers(5)));
+    this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions}}`);
 
@@ -194,7 +193,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('scaffolding', async function(assert) {
-    const users = createUsers(1);
+    const users = this.server.createList('user', 1);
     this.set('table', new Table(Columns, users));
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions enableScaffolding=true}}`);
@@ -218,7 +217,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('overwrite', async function(assert) {
-    this.set('table', new Table(Columns, createUsers(5)));
+    this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
     await render(hbs `
       {{#lt-body table=table sharedOptions=sharedOptions overwrite=true as |columns rows|}}

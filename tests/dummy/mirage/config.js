@@ -18,7 +18,8 @@ export default function() {
 
   this.get('/users', function(schema, request) {
     let { page, limit, sort, dir } = request.queryParams;
-    let users = schema.users.all().models;
+    const collection = schema.users.all();
+    let { models: users } = collection;
 
     page = Number(page || 1);
     limit = Number(limit || 20);
@@ -40,7 +41,11 @@ export default function() {
     let offset = (page - 1) * limit;
     users = users.slice(offset, offset + limit);
 
-    return { users, meta };
+    collection.models = users;
+    const json = this.serialize(collection);
+    json.meta = meta;
+
+    return json;
   });
 
   /*
