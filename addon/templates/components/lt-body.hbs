@@ -56,7 +56,11 @@
       </table>
 
       {{#if onScrolledToBottom}}
-        {{lt.infinity rows=rows onScrolledToBottom=onScrolledToBottom scrollableContent=".lt-scrollable"}}
+        {{lt.infinity
+        rows=rows
+        inViewport=(action "inViewport")
+        exitViewport=(action "exitViewport")
+        scrollableContent=".lt-scrollable"}}
       {{/if}}
 
       <div id={{concat tableId '_inline_foot'}} class="lt-inline lt-foot"></div>

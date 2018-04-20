@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import layout from '../templates/components/lt-infinity';
 import InViewportMixin from 'ember-in-viewport';
+import { get } from '@ember/object';
 
 export default Component.extend(InViewportMixin, {
   classNames: ['lt-infinity'],
@@ -31,6 +32,10 @@ export default Component.extend(InViewportMixin, {
   },
 
   didEnterViewport() {
-    this.sendAction('onScrolledToBottom');
+    get(this, 'inViewport')();
+  },
+
+  didExitViewport() {
+    get(this, 'exitViewport')();
   }
 });
