@@ -32,6 +32,7 @@
     "ember-composable-helpers": "^2.1.0",
     "ember-get-config": "^0.2.4",
     "ember-in-viewport": "2.2.0",
+    "ember-responsive": "^2.0.5",
     "ember-scrollable": "^0.4.11",
     "ember-truth-helpers": "^2.0.0",
     "ember-wormhole": "^0.5.4"
@@ -70,7 +71,6 @@
     "ember-one-way-controls": "^3.0.1",
     "ember-owner-test-utils": "^0.1.2",
     "ember-resolver": "^4.5.0",
-    "ember-responsive": "^2.0.5",
     "ember-source": "~3.1.0",
     "ember-source-channel-url": "^1.0.1",
     "ember-try": "^0.2.23",
