@@ -3197,7 +3197,7 @@ ember-cli-yuidoc@0.8.8:
     rsvp "3.0.14"
     yuidocjs "^0.10.0"
 
-ember-cli@~3.1.2:
+ember-cli@~3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-3.1.4.tgz#95f7ff4302d535619b5d5ff1c7040877a67d4468"
   dependencies:
