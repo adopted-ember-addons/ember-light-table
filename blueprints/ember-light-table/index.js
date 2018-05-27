@@ -1,10 +1,10 @@
-/*jshint node:true*/
+/* jshint node:true*/
 module.exports = {
   description: 'Install Ember Light Table dependencies',
 
-  normalizeEntityName: function() {},
+  normalizeEntityName() {},
 
-  beforeInstall: function() {
+  beforeInstall() {
     return this.addAddonToProject('ember-responsive');
   }
 };
