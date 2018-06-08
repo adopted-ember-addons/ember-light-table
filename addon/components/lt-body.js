@@ -325,7 +325,7 @@ export default Component.extend({
       /*
        Continue scheduling onScrolledToBottom until no longer in viewport
        */
-      this._scheduleScrolledToBottom();
+      this._schedulerTimer = run.scheduleOnce('afterRender', this, this._debounceScrolledToBottom);
     }
   }),
 
@@ -349,8 +349,6 @@ export default Component.extend({
 
   destroy() {
     this._super(...arguments);
-    run.cancel(this._checkTargetOffsetTimer);
-    run.cancel(this._setTargetOffsetTimer);
     this._cancelTimers();
   },
 
@@ -427,13 +425,6 @@ export default Component.extend({
   },
 
   /**
-   * @method _scheduleScrolledToBottom
-   */
-  _scheduleScrolledToBottom() {
-    this._schedulerTimer = run.scheduleOnce('afterRender', this, this._debounceScrolledToBottom);
-  },
-
-  /**
    * @method _debounceScrolledToBottom
    */
   _debounceScrolledToBottom(delay = 100) {
@@ -448,6 +439,8 @@ export default Component.extend({
    * @method _cancelTimers
    */
   _cancelTimers() {
+    run.cancel(this._checkTargetOffsetTimer);
+    run.cancel(this._setTargetOffsetTimer);
     run.cancel(this._schedulerTimer);
     run.cancel(this._debounceTimer);
   },
