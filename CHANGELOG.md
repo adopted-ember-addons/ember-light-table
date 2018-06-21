@@ -1,6 +1,21 @@
 Changelog
 =========
 
+## v1.13.0
+
+#### Commits
+
+- [5dccab6a](https://github.com/offirgolan/ember-light-table/commit/5dccab6a47644eef0381b30004802aa88958f176) **test(light-table/onScrolledToBottom)**: skip *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [a3af0b48](https://github.com/offirgolan/ember-light-table/commit/a3af0b483e1bdf354031832faf72acbf1cbbdb31) **test(lt-body/scaffolding)**: use querySelectorAll for subquery *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [07972532](https://github.com/offirgolan/ember-light-table/commit/079725321d7a540c58e970815a757fe4298f4cd2) **fix(lt-infinity)**: disable intersection observer *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [59054009](https://github.com/offirgolan/ember-light-table/commit/59054009cce1eed818926eb34c1447a4fd0cdd82) **fix(classes/{Column,Row})**: assign properties in the Ember init hook *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [2cc88bac](https://github.com/offirgolan/ember-light-table/commit/2cc88bacf8389ff59b2680205f9bff50fd0ab15c) **fix(lt-infinity)**: set default scroll buffer to 0 *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [35c89933](https://github.com/offirgolan/ember-light-table/commit/35c8993315aba2730c3cbeaa6b3e3b3a2ad445f0) **refactor(mixins/table-header)**: set sharedOptions.fixed(Header|Footer) once in init *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [5a4fd499](https://github.com/offirgolan/ember-light-table/commit/5a4fd499195884235cde9924715ad59c0f74ffea) **docs(README)**: fix Ember.js versions badge *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [fa9e50b8](https://github.com/offirgolan/ember-light-table/commit/fa9e50b89ff00f652d77177e254326f1fce496e4) **docs(README)**: add logo *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [0d99b0f4](https://github.com/offirgolan/ember-light-table/commit/0d99b0f4655d6a02d0ee1d3c1801db822922269d) **fix(Table)**: constructor asserts param types (#522) *by [Redmond Tran](https://github.com/RedTn)*
+- [f5b56c97](https://github.com/offirgolan/ember-light-table/commit/f5b56c9710d6947e66f396ff511a67d57a1edf95) **fix(draggable-column)**: guard against undefined sourceColumn (#521) *by [Craig MacKenzie](https://github.com/cmackenz)*
+
 ## v1.12.2
 
 #### Commits
