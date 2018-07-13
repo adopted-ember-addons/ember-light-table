@@ -1,6 +1,8 @@
 import { A as emberArray } from '@ember/array';
 import { Table, Column, Row } from 'ember-light-table';
 import { module, test } from 'qunit';
+import DS from 'ember-data';
+import EmberObject from '@ember/object';
 
 module('Unit | Classes | Table', function() {
   test('create table - default options', function(assert) {
@@ -31,6 +33,28 @@ module('Unit | Classes | Table', function() {
     assert.throws(() => {
       new Table(null, [{}]);
     }, /\[ember-light-table] columns must be an array if defined/, 'columns is not an array');
+  });
+
+  test('create table - with RecordArray instance as rows', function(assert) {
+    assert.expect(3);
+
+    let models = ['Tom', 'Yehuda', 'Tomster'].map((name) => {
+      return EmberObject.create({ name });
+    });
+
+    let rows = DS.RecordArray.create({
+      content: emberArray(models),
+      objectAtContent(index) {
+        return this.get('content')[index];
+      }
+    });
+
+    let columns = [{ label: 'Name', valuePath: 'name' }];
+    let table = new Table(columns, rows);
+
+    assert.ok(table);
+    assert.equal(table.get('rows.length'), 3);
+    assert.equal(table.get('columns.length'), 1);
   });
 
   test('reopen table', function(assert) {
