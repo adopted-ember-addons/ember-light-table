@@ -68,7 +68,6 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-native-dom-helpers": "^0.6.2",
     "ember-one-way-controls": "^3.0.1",
-    "ember-owner-test-utils": "^0.1.2",
     "ember-resolver": "^4.5.0",
     "ember-responsive": "^2.0.5",
     "ember-source": "~3.1.0",
