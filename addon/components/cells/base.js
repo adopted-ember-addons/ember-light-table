@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from 'ember-light-table/templates/components/cells/base';
-import cssStyleify from 'ember-light-table/utils/css-styleify';
+import { htmlSafe } from '@ember/string';
 
 /**
  * @module Light Table
@@ -26,12 +26,16 @@ const Cell = Component.extend({
 
   style: computed('enableScaffolding', 'column.width', function() {
     let column = this.get('column');
+    let columnWidth = column.get('width');
 
     if (this.get('enableScaffolding') || !column) {
       return '';
     }
 
-    return cssStyleify(column.getProperties(['width']));
+    // For performance reasons, it's more interesting to bypass cssStyleify
+    // since it leads to a lot of garbage collections
+    // when displaying many cells
+    return columnWidth ? `width: ${htmlSafe(columnWidth)};` : '';
   }),
 
   align: computed('column.align', function() {
