@@ -33,7 +33,7 @@ const Cell = Component.extend({
     }
 
     // For performance reasons, it's more interesting to bypass cssStyleify
-    // which can leads to a lot of garbage collections
+    // since it leads to a lot of garbage collections
     // when displaying many cells
     return columnWidth ? `width: ${htmlSafe(columnWidth)};` : '';
   }),
