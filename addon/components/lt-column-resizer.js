@@ -25,15 +25,14 @@ export default Component.extend({
     this.__mouseMove = this._mouseMove.bind(this);
     this.__mouseUp = this._mouseUp.bind(this);
 
-    $(document).on('mousemove', this.__mouseMove);
-    $(document).on('mouseup', this.__mouseUp);
+    document.addEventListener('mousemove', this.__mouseMove);
+    document.addEventListener('mouseup', this.__mouseUp);
   },
 
   willDestroyElement() {
     this._super(...arguments);
-
-    $(document).off('mousemove', this.__mouseMove);
-    $(document).off('mouseup', this.__mouseUp);
+    document.removeEventListener('mousemove', this.__mouseMove);
+    document.removeEventListener('mouseip', this.__mouseUp);
   },
 
   click(e) {
