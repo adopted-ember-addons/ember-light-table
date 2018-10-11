@@ -35,7 +35,7 @@ const Cell = Component.extend({
     // For performance reasons, it's more interesting to bypass cssStyleify
     // since it leads to a lot of garbage collections
     // when displaying many cells
-    return columnWidth ? `width: ${htmlSafe(columnWidth)};` : '';
+    return columnWidth ? htmlSafe(`width: ${columnWidth};`) : null;
   }),
 
   align: computed('column.align', function() {
