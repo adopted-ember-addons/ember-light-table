@@ -320,6 +320,10 @@ const LightTable = Component.extend({
     }
   },
 
+  // No-ops for closure actions
+  onBeforeResponsiveChange() {},
+  onAfterResponsiveChange() {},
+
   actions: {
     /**
      * onBeforeResponsiveChange action.
@@ -329,7 +333,7 @@ const LightTable = Component.extend({
      * @param  {Array} matches list of matching breakpoints
      */
     onBeforeResponsiveChange(/* matches */) {
-      this.sendAction('onBeforeResponsiveChange', ...arguments);
+      this.onBeforeResponsiveChange(...arguments);
     },
 
     /**
@@ -340,7 +344,7 @@ const LightTable = Component.extend({
      * @param  {Array} matches list of matching breakpoints
      */
     onAfterResponsiveChange(/* matches */) {
-      this.sendAction('onAfterResponsiveChange', ...arguments);
+      this.onAfterResponsiveChange(...arguments);
     }
   }
 });

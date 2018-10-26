@@ -70,7 +70,7 @@ export default Component.extend({
       this.set('isResizing', false);
       this.set('column.width', width);
 
-      this.sendAction('onColumnResized', width);
+      this.onColumnResized(width);
       this.$().closest(TOP_LEVEL_CLASS).removeClass('is-resizing');
     }
   },
@@ -97,5 +97,8 @@ export default Component.extend({
         $(`tbody td:nth-child(${$index})`, $table).outerWidth(width);
       }
     }
-  }
+  },
+
+  // No-op for closure actions
+  onColumnResized() {}
 });
