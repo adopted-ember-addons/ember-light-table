@@ -16,7 +16,7 @@ export default Component.extend(InViewportMixin, {
     this._super(...arguments);
 
     let scrollBuffer = this.get('scrollBuffer');
-    let width = this.$().width();
+    let width = this.element.offsetWidth;
     let scrollableContent = this.get('scrollableContent');
 
     this.setProperties({

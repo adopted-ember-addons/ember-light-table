@@ -5,7 +5,7 @@ import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
 import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
 import Table from 'ember-light-table';
-import Columns from '../../helpers/table-columns';
+import Columns, { ResizableColumns } from '../../helpers/table-columns';
 import hasClass from '../../helpers/has-class';
 import RowComponent from 'ember-light-table/components/lt-row';
 import Component from '@ember/component';
@@ -259,5 +259,18 @@ module('Integration | Component | light table', function(hooks) {
     for (const element of findAll('.some-component')) {
       await click(element);
     }
+  });
+
+  test('dragging resizes columns', async function(assert) {
+    let table = new Table(ResizableColumns, this.server.createList('user', 10));
+    this.setProperties({ table });
+    await render(hbs `
+      {{#light-table table height='40vh' as |t|}}
+        {{t.head fixed=true}}
+        {{t.body}}
+      {{/light-table}}
+    `);
+    let ths = this.element.querySelectorAll('th.is-resizable');
+    assert.equal(ths.length, 5);
   });
 });
