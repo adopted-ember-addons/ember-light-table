@@ -284,6 +284,8 @@ export default Component.extend({
    */
   rowComponent: null,
 
+  defaultRowComponent: 'lt-row',
+
   /**
    * Allows to customize the component used to render spanned rows
    *
@@ -298,6 +300,8 @@ export default Component.extend({
    */
   spannedRowComponent: null,
 
+  defaultSpannedRowComponent: 'lt-spanned-row',
+
   /**
    * Allows to customize the component used to render infinite loader
    *
@@ -311,6 +315,10 @@ export default Component.extend({
    * @default null
    */
   infinityComponent: null,
+
+  defaultInfinityComponent: 'lt-infinity',
+
+  scrollableComponent: 'lt-scrollable',
 
   rows: computed.readOnly('table.visibleRows'),
   columns: computed.readOnly('table.visibleColumns'),
