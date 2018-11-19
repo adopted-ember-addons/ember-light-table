@@ -1,4 +1,3 @@
-import { click as nativeDomClick } from 'ember-native-dom-helpers';
 import { click, findAll, find, triggerEvent } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
@@ -9,6 +8,7 @@ import Table from 'ember-light-table';
 import hasClass from '../../helpers/has-class';
 import Columns from '../../helpers/table-columns';
 import { run } from '@ember/runloop';
+import { all } from 'rsvp';
 
 module('Integration | Component | lt body', function(hooks) {
   setupRenderingTest(hooks);
@@ -65,10 +65,10 @@ module('Integration | Component | lt body', function(hooks) {
     await click(firstRow);
     assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
 
-    nativeDomClick(lastRow, { shiftKey: true });
+    await click(lastRow, { shiftKey: true });
     assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
 
-    nativeDomClick(middleRow, { ctrlKey: true });
+    await click(middleRow, { ctrlKey: true });
     assert.equal(findAll('tr.is-selected').length, 4, 'ctrl-clicking a selected row deselects it');
 
     await click(firstRow);
@@ -91,7 +91,7 @@ module('Integration | Component | lt body', function(hooks) {
     await click(firstRow);
     assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
 
-    nativeDomClick(lastRow, { shiftKey: true });
+    await click(lastRow, { shiftKey: true });
     assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
 
     await click(middleRow);
@@ -147,11 +147,13 @@ module('Integration | Component | lt body', function(hooks) {
     let rows = findAll('tr');
     assert.equal(rows.length, 2);
 
-    rows.forEach((row) => {
-      assert.ok(hasClass(row, 'is-expandable'));
-      nativeDomClick(row);
-      assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
-    });
+    await all(
+      rows.map(async(row) => {
+        assert.ok(hasClass(row, 'is-expandable'));
+        await click(row);
+        assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
+      })
+    );
 
     assert.equal(findAll('tr.lt-expanded-row').length, 2);
   });
