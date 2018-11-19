@@ -178,7 +178,9 @@ export default Mixin.create({
           column.set('sorted', true);
         }
       }
-      this.sendAction('onColumnClick', ...arguments);
+      if (this.onColumnClick) {
+        this.onColumnClick(...arguments);
+      }
     },
 
     /**
@@ -189,7 +191,9 @@ export default Mixin.create({
      * @param  {Event} event   The click event
      */
     onColumnDoubleClick(/* column */) {
-      this.sendAction('onColumnDoubleClick', ...arguments);
+      if (this.onColumnDoubleClick) {
+        this.onColumnDoubleClick(...arguments);
+      }
     },
 
     /**
@@ -200,7 +204,9 @@ export default Mixin.create({
      * @param  {String} width  The final width of the column
      */
     onColumnResized(/* column, width */) {
-      this.sendAction('onColumnResized', ...arguments);
+      if (this.onColumnResized) {
+        this.onColumnResized(...arguments);
+      }
     },
 
     /**
@@ -210,7 +216,9 @@ export default Mixin.create({
      * @param  {Column} column The column that is being dragged
      */
     onColumnDrag(/* column */) {
-      this.sendAction('onColumnDrag', ...arguments);
+      if (this.onColumnDrag) {
+        this.onColumnDrag(...arguments);
+      }
     },
 
     /**
@@ -221,7 +229,9 @@ export default Mixin.create({
      * @param  {Boolean} isSuccess The column was successfully dropped and sorted
      */
     onColumnDrop(/* column, isSuccess */) {
-      this.sendAction('onColumnDrop', ...arguments);
+      if (this.onColumnDrop) {
+        this.onColumnDrop(...arguments);
+      }
     }
   }
 });

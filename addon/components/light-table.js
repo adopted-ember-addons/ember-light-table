@@ -329,7 +329,9 @@ const LightTable = Component.extend({
      * @param  {Array} matches list of matching breakpoints
      */
     onBeforeResponsiveChange(/* matches */) {
-      this.sendAction('onBeforeResponsiveChange', ...arguments);
+      if (this.onBeforeResponsiveChange) {
+        this.onBeforeResponsiveChange(...arguments);
+      }
     },
 
     /**
@@ -340,7 +342,9 @@ const LightTable = Component.extend({
      * @param  {Array} matches list of matching breakpoints
      */
     onAfterResponsiveChange(/* matches */) {
-      this.sendAction('onAfterResponsiveChange', ...arguments);
+      if (this.onAfterResponsiveChange) {
+        this.onAfterResponsiveChange(...arguments);
+      }
     }
   }
 });

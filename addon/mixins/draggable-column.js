@@ -57,7 +57,9 @@ export default Mixin.create({
 
     sourceColumn = column;
     this.set('isDragging', true);
-    this.sendAction('onColumnDrag', sourceColumn, ...arguments);
+    if (this.onColumnDrag) {
+      this.onColumnDrag(sourceColumn, ...arguments);
+    }
 
     /*
      NOTE: This is a fix for Firefox to prevent the click event
@@ -107,7 +109,9 @@ export default Mixin.create({
      drop did not happen.
      */
     if (sourceColumn) {
-      this.sendAction('onColumnDrop', sourceColumn, false, ...arguments);
+      if (this.onColumnDrop) {
+        this.onColumnDrop(sourceColumn, false, ...arguments);
+      }
       sourceColumn = null;
     }
 
@@ -142,7 +146,9 @@ export default Mixin.create({
 
       this.setProperties({ isDragTarget: false, isDragging: false });
 
-      this.sendAction('onColumnDrop', sourceColumn, true, ...arguments);
+      if (this.onColumnDrop) {
+        this.onColumnDrop(sourceColumn, true, ...arguments);
+      }
       sourceColumn = null;
     }
   },
