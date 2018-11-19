@@ -432,7 +432,9 @@ export default Component.extend({
      This debounce is needed when there is not enough delay between onScrolledToBottom calls.
      Without this debounce, all rows will be rendered causing immense performance problems
      */
-    this._debounceTimer = run.debounce(this, this.sendAction, 'onScrolledToBottom', delay);
+    if (this.onScrolledToBottom) {
+      this._debounceTimer = run.debounce(this, this.onScrolledToBottom, delay);
+    }
   },
 
   /**
@@ -489,7 +491,9 @@ export default Component.extend({
         toggleExpandedRow();
       }
 
-      this.sendAction('onRowClick', ...arguments);
+      if (this.onRowClick) {
+        this.onRowClick(...arguments);
+      }
     },
 
     /**
@@ -499,7 +503,9 @@ export default Component.extend({
      * @param  {Event}   event   The click event
      */
     onRowDoubleClick(/* row */) {
-      this.sendAction('onRowDoubleClick', ...arguments);
+      if (this.onRowDoubleClick) {
+        this.onRowDoubleClick(...arguments);
+      }
     },
 
     /**
@@ -514,7 +520,9 @@ export default Component.extend({
      */
     onScroll(scrollOffset /* , event */) {
       this.set('currentScrollOffset', scrollOffset);
-      this.sendAction('onScroll', ...arguments);
+      if (this.onScroll) {
+        this.onScroll(...arguments);
+      }
     },
 
     /**
@@ -533,22 +541,34 @@ export default Component.extend({
     },
 
     firstVisibleChanged(item, index /* , key */) {
-      this.sendAction('firstVisibleChanged', ...arguments);
+      if (this.firstVisibleChanged) {
+        this.firstVisibleChanged(...arguments);
+      }
       const estimateScrollOffset = index * this.get('sharedOptions.estimatedRowHeight');
-      this.sendAction('onScroll', estimateScrollOffset, null);
+      if (this.onScroll) {
+        this.onScroll(estimateScrollOffset, null);
+      }
     },
 
     lastVisibleChanged(/* item, index, key */) {
-      this.sendAction('lastVisibleChanged', ...arguments);
+      if (this.lastVisibleChanged) {
+        this.lastVisibleChanged(...arguments);
+      }
     },
 
     firstReached(/* item, index, key */) {
-      this.sendAction('firstReached', ...arguments);
+      if (this.firstReached) {
+        this.firstReached(...arguments);
+      }
     },
 
     lastReached(/* item, index, key */) {
-      this.sendAction('lastReached', ...arguments);
-      this.sendAction('onScrolledToBottom');
+      if (this.lastReached) {
+        this.lastReached(...arguments);
+      }
+      if (this.onScrolledToBottom) {
+        this.onScrolledToBottom();
+      }
     }
   }
 });
