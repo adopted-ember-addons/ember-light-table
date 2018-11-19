@@ -70,7 +70,9 @@ export default Component.extend({
       this.set('isResizing', false);
       this.set('column.width', width);
 
-      this.sendAction('onColumnResized', width);
+      if (this.onColumnResized) {
+        this.onColumnResized(width);
+      }
       this.$().closest(TOP_LEVEL_CLASS).removeClass('is-resizing');
     }
   },
