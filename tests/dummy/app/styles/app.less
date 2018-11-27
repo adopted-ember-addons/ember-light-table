@@ -143,13 +143,7 @@ label {
 
 .table-container {
   overflow-y: auto;
-
-  &.fixed-header {
-    overflow-y: hidden;
-    margin-bottom: 15px;
-  }
 }
-
 .user-actions {
   a {
     color: @accent-color;
@@ -217,4 +211,9 @@ form .form-group {
       -webkit-box-shadow: none;
     }
   }
+}
+
+.lt-frame {
+  display: flex;
+  flex-flow: column nowrap;
 }

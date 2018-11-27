@@ -1,5 +1,5 @@
 {{!-- BEGIN-SNIPPET paginated-table --}}
-{{#light-table table height='65vh' as |t|}}
+{{#light-table table as |t|}}
 
   {{!--
     In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
@@ -12,7 +12,6 @@
     iconSortable='fa fa-sort'
     iconAscending='fa fa-sort-asc'
     iconDescending='fa fa-sort-desc'
-    fixed=true
   }}
 
   {{#t.body
@@ -27,7 +26,7 @@
   {{/t.body}}
 
   {{#if meta}}
-    {{#t.foot fixed=true as |columns|}}
+    {{#t.foot as |columns|}}
       <tr>
         <td class="align-center" colspan={{columns.length}}>
           <ul class="pagination pagination-sm">

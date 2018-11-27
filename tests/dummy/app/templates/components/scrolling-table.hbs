@@ -1,82 +1,98 @@
 {{!-- BEGIN-SNIPPET scrolling-table --}}
-{{#light-table table height='65vh' as |t|}}
+<div class='table-actions'>
+  {{fixed-header-table-action value=fixed onChange=(action (mut fixed))}}
+  {{virtual-scrollbar-table-action value=virtual onChange=(action (mut virtual))}}
+</div>
 
-  {{!--
-    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
-    you need to have ember-font-awesome installed or manually include
-    the font-awesome assets, e.g. via a CDN.
-  --}}
+{{#lt-frame
+  height='65vh'
+  scrollbar=(if virtual 'virtual' 'standard')
+  as |frame|
+}}
+  {{frame.fixed-head-here}}
 
-  {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconSortable='fa fa-sort'
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
-    fixed=true
-  }}
+  {{#frame.scrollable-zone as |zone|}}
+    {{#frame.table table as |t|}}
+      {{!--
+        In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
+        you need to have ember-font-awesome installed or manually include
+        the font-awesome assets, e.g. via a CDN.
+      --}}
 
-  {{#t.body
-    useLegacyBehaviorFlags=false
-    scrollTo=scrollTo
-    scrollToRow=scrollToRow
-    onScroll=(action (mut currentScrollOffset))
-    onScrolledToBottom=(action 'onScrolledToBottom')
-    as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
-    {{/if}}
-  {{/t.body}}
+      {{t.head
+        fixed=fixed
+        onColumnClick=(action 'onColumnClick')
+        iconSortable='fa fa-sort'
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'
+      }}
 
-  {{#t.foot fixed=true as |columns|}}
-    <tr>
-      <td colspan={{columns.length}}>
-        <form class="form-inline" onsubmit="return false;">
-          <div class="form-group">
-            <label>
-              Current Scroll Position:
-            </label>
-            <span class="form-control-static">
-              {{if (eq currentScrollOffset null) 'N/A' (concat currentScrollOffset 'px')}}
-            </span>
-          </div>
+      {{#t.body
+        useLegacyBehaviorFlags=false
+        scrollToRow=scrollToRow
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        scrollTop=zone.scrollTop
+        onScrollTo=zone.onScrollTo
+        as |body|
+      }}
+        {{#if isLoading}}
+          {{#body.loader}}
+            {{table-loader}}
+          {{/body.loader}}
+        {{/if}}
+      {{/t.body}}
 
-          <div class="form-group">
-            <label for="scrollTo">
-              Scroll To:
-            </label>
-            {{one-way-input
-              update=(action (mut scrollTo))
-              value=scrollTo
-              class="form-control"
-              name="scrollTo"
-              type="number"
-              min=0
-              step=10
-            }}
-          </div>
+      {{#t.foot fixed=true as |columns|}}
+        <tr>
+          <td colspan={{columns.length}}>
+            <form class="form-inline" onsubmit="return false;">
+              <div class="form-group">
+                <label>
+                  Current Scroll Position:
+                </label>
+                <span class="form-control-static">
+                  {{if (eq zone.scrollTop null) 'N/A' (concat zone.scrollTop 'px')}}
+                </span>
+              </div>
 
-          <div class="form-group">
-            <label for="scrollToRow">
-              Scroll To Row:
-            </label>
-            {{#one-way-select selectedValue
-              options=table.visibleRows
-              value=scrollToRow
-              update=(action (mut scrollToRow))
-              class="form-control"
-              name="scrollToRow"
-              as |row|
-            }}
-              {{row.id}} - {{row.firstName}} {{row.lastName}}
-            {{/one-way-select}}
-          </div>
-        </form>
-      </td>
-    </tr>
-  {{/t.foot}}
+              <div class="form-group">
+                <label for="onScrollTo">
+                  Scroll To:
+                </label>
+                {{one-way-input
+                  update=zone.onScrollTo
+                  value=zone.scrollTop
+                  class="form-control"
+                  name="onScrollTo"
+                  type="number"
+                  min=0
+                  step=10
+                }}
+              </div>
 
-{{/light-table}}
+              <div class="form-group">
+                <label for="scrollToRow">
+                  Scroll To Row:
+                </label>
+                {{#one-way-select selectedValue
+                  options=table.visibleRows
+                  value=scrollToRow
+                  update=(action (mut scrollToRow))
+                  class="form-control"
+                  name="scrollToRow"
+                  as |row|
+                }}
+                  {{row.id}} - {{row.firstName}} {{row.lastName}}
+                {{/one-way-select}}
+              </div>
+            </form>
+          </td>
+        </tr>
+      {{/t.foot}}
+
+    {{/frame.table}}
+  {{/frame.scrollable-zone}}
+
+  {{frame.fixed-foot-here}}
+{{/lt-frame}}
 {{!-- END-SNIPPET --}}

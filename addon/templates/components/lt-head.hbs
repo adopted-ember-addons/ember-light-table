@@ -1,4 +1,4 @@
-{{#ember-wormhole to=(concat tableId '_inline_head') renderInPlace=renderInPlace}}
+{{#ember-wormhole to=(lt-head-id sharedOptions.frameId) renderInPlace=renderInPlace}}
   <table class={{tableClassNames}}>
     <thead class="lt-head">
       {{#if hasBlock}}
@@ -19,6 +19,7 @@
         <tr>
           {{#each columnGroups as |column|}}
             {{component (concat 'light-table/columns/' column.type) column
+              frameId=sharedOptions.frameId
               table=table
               tableActions=tableActions
               extra=extra
@@ -35,6 +36,7 @@
         <tr>
           {{#each subColumns as |column|}}
             {{component (concat 'light-table/columns/' column.type) column
+              frameId=sharedOptions.frameId
               table=table
               rowspan=1
               classNames="lt-sub-column"

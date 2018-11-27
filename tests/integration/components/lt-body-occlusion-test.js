@@ -26,12 +26,19 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
       fixedFooter: false,
       height: '500px',
       occlusion: true,
-      estimatedRowHeight: 30
+      estimatedRowHeight: 30,
+      frameId: 'some-frame'
     });
   });
 
   test('it renders', async function(assert) {
-    await render(hbs `{{lt-body sharedOptions=sharedOptions}}`);
+    await render(hbs `
+      <div id='some-frame'>
+        <div class='lt-scrollable'>
+          {{lt-body sharedOptions=sharedOptions}}
+        </div>
+      </div>
+    `);
     assert.equal(find('*').textContent.trim(), '');
   });
 
@@ -39,7 +46,13 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
     this.set('table', new Table(Columns, this.server.createList('user', 1)));
     this.set('canSelect', false);
 
-    await render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}`);
+    await render(hbs `
+      <div id='some-frame'>
+        <div class='lt-scrollable'>
+          {{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}
+        </div>
+      </div>
+    `);
 
     let row = find('tr');
 
@@ -59,7 +72,19 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
   test('row selection - ctrl-click to modify selection', async function(assert) {
     this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
-    await render(hbs `{{lt-body table=table scrollBuffer=200 sharedOptions=sharedOptions canSelect=true multiSelect=true}}`);
+    await render(hbs `
+      <div id='some-frame'>
+        <div class='lt-scrollable'>
+          {{lt-body
+            table=table
+            scrollBuffer=200
+            sharedOptions=sharedOptions
+            canSelect=true
+            multiSelect=true
+          }}
+        </div>
+      </div>
+    `);
     let firstRow = find('tr:nth-child(2)');
     let middleRow = find('tr:nth-child(4)');
     let lastRow = find('tr:nth-child(6)');
@@ -83,8 +108,13 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
     this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
     await render(
-      hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false}}`
-    );
+      hbs `
+        <div id='some-frame'>
+          <div class='lt-scrollable'>
+            {{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false}}
+          </div>
+        </div>
+    `);
 
     let firstRow = find('tr:nth-child(2)');
     let middleRow = find('tr:nth-child(4)');
@@ -111,9 +141,13 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
     this.set('table', new Table(Columns, this.server.createList('user', 1)));
     this.actions.onRowClick = (row) => assert.ok(row);
     this.actions.onRowDoubleClick = (row) => assert.ok(row);
-    await render(
-      hbs `{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`
-    );
+    await render(hbs `
+      <div id='some-frame'>
+        <div class='lt-scrollable'>
+          {{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}
+        </div>
+      </div>
+    `);
 
     let row = find('tr');
     await click(row);
@@ -123,7 +157,13 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
   test('hidden rows', async function(assert) {
     this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
-    await render(hbs `{{lt-body table=table sharedOptions=sharedOptions}}`);
+    await render(hbs `
+      <div id='some-frame'>
+        <div class='lt-scrollable'>
+          {{lt-body table=table sharedOptions=sharedOptions}}
+        </div>
+      </div>
+    `);
 
     assert.equal(findAll('tbody tr').length, 5);
 
@@ -147,9 +187,13 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
     this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
     await render(hbs `
-      {{#lt-body table=table sharedOptions=sharedOptions overwrite=true as |columns rows|}}
-        {{columns.length}}, {{rows.length}}
-      {{/lt-body}}
+      <div id='some-frame'>
+        <div class='lt-scrollable'>
+          {{#lt-body table=table sharedOptions=sharedOptions overwrite=true as |columns rows|}}
+            {{columns.length}}, {{rows.length}}
+          {{/lt-body}}
+        </div>
+      </div>
     `);
 
     assert.equal(find('*').textContent.trim(), '6, 5');

@@ -22,6 +22,7 @@ const Column = Component.extend(DraggableColumnMixin, {
   attributeBindings: ['style', 'colspan', 'rowspan'],
   classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isHideable', 'isSortable', 'isSorted', 'isResizable', 'isResizing', 'isDraggable', 'column.classNames'],
 
+  frameId: null,
   isGroupColumn: computed.readOnly('column.isGroupColumn'),
   isSortable: computed.readOnly('column.sortable'),
   isSorted: computed.readOnly('column.sorted'),
