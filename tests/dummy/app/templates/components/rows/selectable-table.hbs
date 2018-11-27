@@ -18,7 +18,8 @@
   }}
 
   {{#t.body
-    multiSelect=true
+    useLegacyBehaviorFlags=false
+    behaviors=(array (lt-multi-select))
     onScrolledToBottom=(action 'onScrolledToBottom')
     as |body|
   }}
