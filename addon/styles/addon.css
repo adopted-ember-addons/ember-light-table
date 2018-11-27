@@ -1,6 +1,6 @@
-.ember-light-table {
+.lt-table-container {
   height: inherit;
-  overflow: auto;
+  overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,14 +10,14 @@
           flex-direction: column;
 }
 
-.ember-light-table table {
+.lt-table-container table {
   table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
   box-sizing: border-box;
 }
 
-.ember-light-table .lt-scaffolding {
+td.lt-scaffolding {
   border: none;
   padding-top: 0;
   padding-bottom: 0;
@@ -27,8 +27,8 @@
   visibility: hidden;
 }
 
-.ember-light-table .lt-head-wrap,
-.ember-light-table .lt-foot-wrap {
+.lt-head-wrap,
+.lt-foot-wrap {
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -50,25 +50,23 @@
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
-}
-
-.ember-light-table .lt-column {
   position: relative;
 }
 
-.ember-light-table .lt-scrollable {
+.lt-table-container .lt-column {
+  position: relative;
+}
+
+.lt-scrollable {
   width: 100%;
+  overflow-y: auto;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
 }
 
-.lt-infinity {
+.ember-light-table .lt-infinity {
   min-height: 1px;
-}
-
-.ember-light-table .lt-scrollable.vertical-collection {
-  overflow-y: auto;
 }
 
 .ember-light-table vertical-collection {
@@ -79,26 +77,31 @@
 
 .ember-light-table vertical-collection occluded-content:first-of-type {
   display: table-caption;
+  position: relative;
 }
 
-.ember-light-table .align-left {
+.lt-standard-scrollable {
+  overflow: auto;
+}
+
+.lt-table-container .align-left {
   text-align: left;
 }
 
-.ember-light-table .align-right {
+.lt-table-container .align-right {
   text-align: right;
 }
 
-.ember-light-table .align-center {
+.lt-table-container .align-center {
   text-align: center;
 }
 
-.ember-light-table .lt-column .lt-sort-icon {
+.lt-column .lt-sort-icon {
   float: right;
 }
 
-.ember-light-table .lt-column.is-draggable,
-.ember-light-table .lt-column.is-sortable {
+.lt-column.is-draggable,
+.lt-column.is-sortable {
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -106,7 +109,7 @@
           user-select: none;
 }
 
-.ember-light-table .lt-column.is-resizing {
+.lt-column.is-resizing {
   pointer-events: none;
 }
 
@@ -114,7 +117,7 @@
   cursor: col-resize;
 }
 
-.ember-light-table .lt-column .lt-column-resizer {
+.lt-column .lt-column-resizer {
   width: 5px;
   cursor: col-resize;
   height: 100%;
@@ -124,7 +127,24 @@
   top: 0;
 }
 
-.ember-light-table .lt-row.is-expandable,
-.ember-light-table .lt-row.is-selectable {
+.lt-row.is-expandable,
+.lt-row.is-selectable {
   cursor: pointer;
+}
+
+.lt-scrollable {
+  width: 100%;
+  position: relative;
+}
+
+.lt-standard-scrollable {
+  overflow: auto;
+}
+
+.scrollable-content {
+  position: relative;
+}
+
+.lt-frame .lt-standard-scrollable {
+  height: 'auto';
 }

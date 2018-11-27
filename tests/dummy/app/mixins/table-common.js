@@ -17,6 +17,8 @@ export default Mixin.create({
   isLoading: computed.oneWay('fetchRecords.isRunning'),
   canLoadMore: true,
   enableSync: true,
+  fixed: true,
+  scrollbar: 'standard',
 
   model: null,
   meta: null,

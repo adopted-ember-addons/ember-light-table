@@ -1,33 +1,49 @@
 {{!-- BEGIN-SNIPPET resizable-table --}}
-{{#light-table table height='65vh' as |t|}}
+<div class='table-actions'>
+  {{fixed-header-table-action value=fixed onChange=(action (mut fixed))}}
+  {{virtual-scrollbar-table-action value=virtual onChange=(action (mut virtual))}}
+</div>
 
-  {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconSortable='fa fa-sort'
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
-    resizeOnDrag=true
-    fixed=true
-  }}
+{{#lt-frame
+  height='65vh'
+  scrollbar=(if virtual 'virtual' 'standard')
+  as |frame|
+}}
+  {{frame.fixed-head-here}}
 
-  {{#t.body
-    useLegacyBehaviorFlags=false
-    onScrolledToBottom=(action 'onScrolledToBottom')
-    as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
-    {{/if}}
-  {{/t.body}}
+  {{#frame.scrollable-zone}}
+    {{#frame.table table as |t|}}
+      {{t.head
+        fixed=fixed
+        onColumnClick=(action 'onColumnClick')
+        iconSortable='fa fa-sort'
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'
+        resizeOnDrag=true
+      }}
 
-  {{t.foot
-    onColumnClick=(action 'onColumnClick')
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
-    resizeOnDrag=true
-    fixed=true
-  }}
-{{/light-table}}
+      {{#t.body
+        useLegacyBehaviorFlags=false
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        as |body|
+      }}
+        {{#if isLoading}}
+          {{#body.loader}}
+            {{table-loader}}
+          {{/body.loader}}
+        {{/if}}
+      {{/t.body}}
+
+      {{t.foot
+        fixed=fixed
+        onColumnClick=(action 'onColumnClick')
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'
+        resizeOnDrag=true
+      }}
+    {{/frame.table}}
+  {{/frame.scrollable-zone}}
+
+  {{frame.fixed-foot-here}}
+{{/lt-frame}}
 {{!-- END-SNIPPET --}}
