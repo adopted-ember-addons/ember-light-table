@@ -10,7 +10,10 @@ import RowExpansionBehavior from 'ember-light-table/behaviors/row-expansion';
 import SingleSelectBehavior from 'ember-light-table/behaviors/single-select';
 import MultiSelectBehavior from 'ember-light-table/behaviors/multi-select';
 import { behaviorGroupFlag, behaviorFlag, behaviorInstanceOf } from 'ember-light-table/mixins/has-behaviors';
+import deprecatedAlias from 'ember-light-table/utils/deprecated-alias';
 import Row from 'ember-light-table/classes/Row';
+
+const deprecationUntil = '2.0';
 
 /**
  * @module Light Table
@@ -99,8 +102,16 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
    * @property canSelect
    * @type {Boolean}
    * @default true
+   * @deprecated Please set the value of the `behaviors` property directly.
    */
-  canSelect: behaviorGroupFlag('can-select'),
+  canSelect: deprecatedAlias(
+    '_canSelect',
+    'canSelect',
+    'Please set the value of the "behaviors" property directly.',
+    deprecationUntil
+  ),
+
+  _canSelect: behaviorGroupFlag('can-select'),
 
   /**
    * Select a row on click. If this is set to `false` and multiSelect is
@@ -110,8 +121,14 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
    * @property selectOnClick
    * @type {Boolean}
    * @default true
+   * @deprecated Please set the flag directly on the `behaviors/multi-select` instance.
    */
-  selectOnClick: computed.alias('_multiSelectBehavior.selectOnClick'),
+  selectOnClick: deprecatedAlias(
+    '_multiSelectBehavior.selectOnClick',
+    'selectOnClick',
+    'Please set the flag directly on the "behaviors/multi-select" instance.',
+    deprecationUntil
+  ),
 
   /**
    * Allows for expanding row. This will create a new row under the row that was
@@ -126,8 +143,16 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
    * @property canExpand
    * @type {Boolean}
    * @default false
+   * @deprecated Please set the value of the `behaviors` property directly.
    */
-  canExpand: behaviorGroupFlag('can-expand'),
+  canExpand: deprecatedAlias(
+    '_canExpand',
+    'canExpand',
+    'Please set the value of the "behaviors" property directly.',
+    deprecationUntil
+  ),
+
+  _canExpand: behaviorGroupFlag('can-expand'),
 
   /**
    * Allows a user to select multiple rows with the `ctrl`, `cmd`, and `shift` keys.
@@ -136,8 +161,16 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
    * @property multiSelect
    * @type {Boolean}
    * @default false
+   * @deprecated Please set the value of the `behaviors` property directly.
    */
-  multiSelect: behaviorFlag('can-select', '_multiSelectBehavior'),
+  multiSelect: deprecatedAlias(
+    '_multiSelect',
+    'multiSelect',
+    'Please set the value of the "behaviors" property directly.',
+    deprecationUntil
+  ),
+
+  _multiSelect: behaviorFlag('can-select', '_multiSelectBehavior'),
 
   /**
    * When multiSelect is true, this property determines whether or not `ctrl`
@@ -149,8 +182,14 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
    * @property multiSelectRequiresKeyboard
    * @type {Boolean}
    * @default true
+   * @deprecated Please set the flag directly on the `behaviors/multi-select` instance.
    */
-  multiSelectRequiresKeyboard: computed.alias('_multiSelectBehavior.requiresKeyboard'),
+  multiSelectRequiresKeyboard: deprecatedAlias(
+    '_multiSelectBehavior.requiresKeyboard',
+    'multiSelectRequiresKeyboard',
+    'Please set the flag directly on the "behaviors/multi-select" instance.',
+    deprecationUntil
+  ),
 
   /**
    * Hide scrollbar when not scrolling
@@ -167,8 +206,14 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
    * @property multiRowExpansion
    * @type {Boolean}
    * @default true
+   * @deprecated Please set the flag directly on the `behaviors/row-expansion` instance.
    */
-  multiRowExpansion: computed.alias('_rowExpansionBehavior.multiRow'),
+  multiRowExpansion: deprecatedAlias(
+    '_rowExpansionBehavior.multiRow',
+    'multiRowExpansion',
+    'Please set the flag directly on the "behaviors/row-expansion" instance.',
+    deprecationUntil
+  ),
 
   /**
    * Expand a row on click
@@ -176,8 +221,14 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
    * @property expandOnClick
    * @type {Boolean}
    * @default true
+   * @deprecated Please set the flag directly on the `behaviors/row-expansion` instance.
    */
-  expandOnClick: computed.alias('_rowExpansionBehavior.expandOnClick'),
+  expandOnClick: deprecatedAlias(
+    '_rowExpansionBehavior.expandOnClick',
+    'expandOnClick',
+    'Please set the flag directly on the "behaviors/row-expansion" instance.',
+    deprecationUntil
+  ),
 
   /**
    * If true, the body block will yield columns and rows, allowing you
