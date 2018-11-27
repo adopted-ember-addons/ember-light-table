@@ -22,6 +22,12 @@ const Row = Component.extend({
   isSelected: computed.readOnly('row.selected'),
   isExpanded: computed.readOnly('row.expanded'),
 
+  ltBody: null,
+
+  $ltBody: computed(function() {
+    return this.get('ltBody').$();
+  }).volatile().readOnly(),
+
   _onClick: on('click', function() {
     if (this.rowClick) {
       this.rowClick(this, ...arguments);

@@ -1,50 +1,66 @@
 {{!-- BEGIN-SNIPPET responsive-table --}}
-{{#light-table table
+<div class='table-actions'>
+  {{fixed-header-table-action value=fixed onChange=(action (mut fixed))}}
+  {{virtual-scrollbar-table-action value=virtual onChange=(action (mut virtual))}}
+</div>
+
+{{#lt-frame
   height='65vh'
-  responsive=true
-  onAfterResponsiveChange=(action 'onAfterResponsiveChange')
-  as |t|
+  scrollbar=(if virtual 'virtual' 'standard') as |frame|
 }}
+  {{frame.fixed-head-here}}
 
-  {{!--
-    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
-    you need to have ember-font-awesome installed or manually include
-    the font-awesome assets, e.g. via a CDN.
-  --}}
+  {{#frame.scrollable-zone}} 
+    {{#frame.table
+      table
+      responsive=true
+      onAfterResponsiveChange=(action 'onAfterResponsiveChange')
+      as |t|
+    }}
 
-  {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconSortable='fa fa-sort'
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
-    fixed=true
-  }}
+      {{!--
+        In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
+        you need to have ember-font-awesome installed or manually include
+        the font-awesome assets, e.g. via a CDN.
+      --}}
 
-  {{#t.body
-    useLegacyBehaviorFlags=false
-    onScrolledToBottom=(action 'onScrolledToBottom')
-    as |body|
-  }}
-    {{#body.expanded-row as |row|}}
-      {{responsive-expanded-row table=table row=row}}
-    {{/body.expanded-row}}
+      {{t.head
+        fixed=fixed
+        onColumnClick=(action 'onColumnClick')
+        iconSortable='fa fa-sort'
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'
+      }}
 
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
-    {{/if}}
-  {{/t.body}}
+      {{#t.body
+        useLegacyBehaviorFlags=false
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        as |body|
+      }}
+        {{#body.expanded-row as |row|}}
+          {{responsive-expanded-row table=table row=row}}
+        {{/body.expanded-row}}
 
-  {{#t.foot fixed=true as |columns|}}
-    <tr>
-      <td class="align-center" colspan={{columns.length}}>
-        <i class="fa fa-chevron-left pull-left" aria-hidden="true"></i>
-        Resize your browser to check out the responsive behavior
-        <i class="fa fa-chevron-right pull-right" aria-hidden="true"></i>
-      </td>
-    </tr>
-  {{/t.foot}}
+        {{#if isLoading}}
+          {{#body.loader}}
+            {{table-loader}}
+          {{/body.loader}}
+        {{/if}}
+      {{/t.body}}
 
-{{/light-table}}
+      {{#t.foot fixed=true as |columns|}}
+        <tr>
+          <td class="align-center" colspan={{columns.length}}>
+            <i class="fa fa-chevron-left pull-left" aria-hidden="true"></i>
+            Resize your browser to check out the responsive behavior
+            <i class="fa fa-chevron-right pull-right" aria-hidden="true"></i>
+          </td>
+        </tr>
+      {{/t.foot}}
+
+    {{/frame.table}}
+  {{/frame.scrollable-zone}}
+
+  {{frame.fixed-foot-here}}
+{{/lt-frame}}
 {{!-- END-SNIPPET --}}

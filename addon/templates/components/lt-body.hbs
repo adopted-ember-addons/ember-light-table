@@ -5,17 +5,8 @@
         ) as |lt|
 }}
   {{#unless sharedOptions.occlusion}}
-    {{#lt-scrollable
-      tagName=''
-      virtualScrollbar=useVirtualScrollbar
-      autoHide=autoHideScrollbar
-      scrollTo=targetScrollOffset
-      onScrollY=(action 'onScroll')
-    }}
-      <div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
-
-      <table class={{tableClassNames}}>
-        <tbody class="lt-body">
+    <table class={{tableClassNames}}>
+      <tbody class="lt-body">
         {{#if enableScaffolding}}
           <tr class="lt-scaffolding-row">
             {{#each columns as |column|}}
@@ -29,54 +20,51 @@
         {{else}}
           {{#each rows as |row|}}
             {{lt.row row columns
-                     data-row-id=row.rowId
-                     table=table
-                     tableActions=tableActions
-                     extra=extra
-                     enableScaffolding=enableScaffolding
-                     canExpand=canExpand
-                     canSelect=canSelect
-                     rowClick=(action 'onRowClick')
-                     rowDoubleClick=(action 'onRowDoubleClick')
-                     rowMouseDown=(action 'onRowMouseDown')
-                     rowMouseUp=(action 'onRowMouseUp')
-                     rowMouseMove=(action 'onRowMouseMove')
-                     rowTouchStart=(action 'onRowTouchStart')
-                     rowTouchEnd=(action 'onRowTouchEnd')
-                     rowTouchCancel=(action 'onRowTouchCancel')
-                     rowTouchLeave=(action 'onRowTouchLeave')
-                     rowTouchMove=(action 'onRowTouchMove')}}
-
+              data-row-id=row.rowId
+              ltBody=this
+              tableActions=tableActions
+              extra=extra
+              enableScaffolding=enableScaffolding
+              canExpand=canExpand
+              canSelect=canSelect
+              rowClick=(action 'onRowClick')
+              rowDoubleClick=(action 'onRowDoubleClick')
+              rowMouseDown=(action 'onRowMouseDown')
+              rowMouseUp=(action 'onRowMouseUp')
+              rowMouseMove=(action 'onRowMouseMove')
+              rowTouchStart=(action 'onRowTouchStart')
+              rowTouchEnd=(action 'onRowTouchEnd')
+              rowTouchCancel=(action 'onRowTouchCancel')
+              rowTouchLeave=(action 'onRowTouchLeave')
+              rowTouchMove=(action 'onRowTouchMove')
+            }}
             {{yield (hash
-                      expanded-row=(component lt.spanned-row classes='lt-expanded-row' colspan=colspan yield=row visible=row.expanded)
-                      loader=(component lt.spanned-row visible=false)
-                      no-data=(component lt.spanned-row visible=false)
-                    ) rows}}
+              expanded-row=(component lt.spanned-row classes='lt-expanded-row' colspan=colspan yield=row visible=row.expanded)
+              loader=(component lt.spanned-row visible=false)
+              no-data=(component lt.spanned-row visible=false)
+            ) rows}}
           {{/each}}
 
           {{yield (hash
-                    loader=(component lt.spanned-row classes='lt-is-loading' colspan=colspan)
-                    no-data=(component lt.spanned-row classes='lt-no-data' colspan=colspan)
-                    expanded-row=(component lt.spanned-row visible=false)
-                  ) rows}}
+            loader=(component lt.spanned-row classes='lt-is-loading' colspan=colspan)
+            no-data=(component lt.spanned-row classes='lt-no-data' colspan=colspan)
+            expanded-row=(component lt.spanned-row visible=false)
+          ) rows}}
         {{/if}}
-        </tbody>
-      </table>
+      </tbody>
+    </table>
 
-      {{#if onScrolledToBottom}}
-        {{lt.infinity
-          rows=rows
-          inViewport=(action "inViewport")
-          exitViewport=(action "exitViewport")
-          scrollableContent=".lt-scrollable"}}
-      {{/if}}
-
-      <div id={{concat tableId '_inline_foot'}} class="lt-inline lt-foot"></div>
-    {{/lt-scrollable}}
+    {{#if onScrolledToBottom}}
+      {{lt.infinity
+        rows=rows
+        inViewport=(action "inViewport")
+        exitViewport=(action "exitViewport")
+        scrollableContent=scrollableContainer
+        scrollBuffer=scrollBuffer
+      }}
+    {{/if}}
   {{else}}
-    <div class="lt-scrollable tse-scrollable vertical-collection">
-      <div id="{{concat tableId '_inline_head'}}" class="lt-inline lt-head"></div>
-
+    <div class="vertical-collection">
       <table class={{tableClassNames}}>
         <tbody class="lt-body">
         {{#if overwrite}}
@@ -88,7 +76,7 @@
               estimateHeight=sharedOptions.estimatedRowHeight
               shouldRecycle=sharedOptions.shouldRecycle
               bufferSize=scrollBufferRows
-              containerSelector='.lt-scrollable'
+              containerSelector=scrollableContainer
               firstVisibleChanged=(action 'firstVisibleChanged')
               lastVisibleChanged=(action 'lastVisibleChanged')
               firstReached=(action 'firstReached')
@@ -126,8 +114,6 @@
         {{/if}}
         </tbody>
       </table>
-
-      <div id="{{concat tableId '_inline_foot'}}" class="lt-inline lt-foot"></div>
     </div>
   {{/unless}}
 {{/with}}

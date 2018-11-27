@@ -1,31 +1,44 @@
 {{!-- BEGIN-SNIPPET horizontal-scrolling-table --}}
-{{#light-table table height='65vh' as |t|}}
+<div class='table-actions'>
+  {{fixed-header-table-action value=fixed onChange=(action (mut fixed))}}
+  {{virtual-scrollbar-table-action value=virtual onChange=(action (mut virtual))}}
+</div>
 
-  {{!--
-    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
-    you need to have ember-font-awesome installed or manually include
-    the font-awesome assets, e.g. via a CDN.
-  --}}
+{{#lt-frame
+  height='65vh'
+  scrollbar=(if virtual 'virtual' 'standard') as |frame|
+}}
+  {{frame.fixed-head-here}}
 
-  {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconSortable='fa fa-sort'
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
-    fixed=true
-  }}
+  {{#frame.scrollable-zone horizontal=true}}
+    {{#frame.table table as |t|}}
+      {{!--
+        In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
+        you need to have ember-font-awesome installed or manually include
+        the font-awesome assets, e.g. via a CDN.
+      --}}
 
-  {{#t.body
-    useLegacyBehaviorFlags=false
-    onScrolledToBottom=(action 'onScrolledToBottom')
-    as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
-    {{/if}}
-  {{/t.body}}
+      {{t.head
+        fixed=fixed
+        onColumnClick=(action 'onColumnClick')
+        iconSortable='fa fa-sort'
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'
+      }}
 
-{{/light-table}}
+      {{#t.body
+        useLegacyBehaviorFlags=false
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        as |body|
+      }}
+        {{#if isLoading}}
+          {{#body.loader}}
+            {{table-loader}}
+          {{/body.loader}}
+        {{/if}}
+      {{/t.body}}
+
+    {{/frame.table}}
+  {{/frame.scrollable-zone}}
+{{/lt-frame}}
 {{!-- END-SNIPPET --}}

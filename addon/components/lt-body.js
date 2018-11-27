@@ -1,6 +1,9 @@
 import Component from '@ember/component';
+import { A as emberArray } from '@ember/array';
 import { computed, observer } from '@ember/object';
-import { debounce, once, run } from '@ember/runloop';
+import { getOwner } from '@ember/application';
+import { debounce, run, schedule } from '@ember/runloop';
+import { warn } from '@ember/debug';
 import $ from 'jquery';
 import layout from 'ember-light-table/templates/components/lt-body';
 import { EKMixin } from 'ember-keyboard';
@@ -11,7 +14,6 @@ import SingleSelectBehavior from 'ember-light-table/behaviors/single-select';
 import MultiSelectBehavior from 'ember-light-table/behaviors/multi-select';
 import { behaviorGroupFlag, behaviorFlag, behaviorInstanceOf } from 'ember-light-table/mixins/has-behaviors';
 import deprecatedAlias from 'ember-light-table/utils/deprecated-alias';
-import Row from 'ember-light-table/classes/Row';
 
 const deprecationUntil = '2.0';
 
@@ -290,18 +292,11 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
    */
   useVirtualScrollbar: false,
 
-  /**
-   * Set this property to scroll to a specific px offset.
-   *
-   * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
-   * using fixed headers / footers.
-   *
-   * @property scrollTo
-   * @type {Number}
-   * @default null
-   */
   scrollTo: null,
-  _scrollTo: null,
+
+  _onScrollTo: observer('scrollTo', function() {
+    warn('Property "scrollTo" is not supported anymore, please use lt-scrollable directly instead.');
+  }),
 
   /**
    * Set this property to a `Row` to scroll that `Row` into view.
@@ -314,7 +309,18 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
    * @default null
    */
   scrollToRow: null,
-  _scrollToRow: null,
+
+  _onScrollToRow: observer('scrollToRow', function() {
+    let row = this.get('scrollToRow');
+    if (row) {
+      let ltRow = this.get('ltRows').findBy('row', row);
+      if (ltRow) {
+        schedule('afterRender', () => this.makeRowVisible(ltRow.$()));
+      } else {
+        throw 'Row passed to scrollToRow() is not part of the rendered table.';
+      }
+    }
+  }),
 
   /**
    * @property targetScrollOffset
@@ -401,22 +407,19 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
 
   _prevSelectedIndex: -1,
 
+  scrollableContainer: computed('sharedOptions.frameId', function() {
+    // TODO: FIX: lt-body should not know about .tse-scroll-content
+    const id = this.get('sharedOptions.frameId');
+    return `#${id} .tse-scroll-content, #${id} .lt-scrollable`;
+  }),
+
   init() {
     this._super(...arguments);
-
-    /*
-      We can only set `useVirtualScrollbar` once all contextual components have
-      been initialized since fixedHeader and fixedFooter are set on t.head and t.foot
-      initialization.
-     */
-    once(this, this._setupVirtualScrollbar);
-
     this._initDefaultBehaviorsIfNeeded();
   },
 
   didReceiveAttrs() {
     this._super(...arguments);
-    this.setupScrollOffset();
   },
 
   destroy() {
@@ -452,75 +455,38 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
     }
   },
 
-  _setupVirtualScrollbar() {
-    let { fixedHeader, fixedFooter } = this.get('sharedOptions');
-    this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
+  makeRowAtVisible(i, nbExtraRows = 0) {
+    this.makeRowVisible(this.get('ltRows').objectAt(i).$(), nbExtraRows);
   },
 
-  onRowsChange: observer('rows.[]', function() {
-    this._checkTargetOffsetTimer = run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
-  }),
+  $scrollableContainer: computed(function() {
+    return this.$().parents('.lt-scrollable');
+  }).volatile().readOnly(),
 
-  setupScrollOffset() {
-    let {
-      scrollTo,
-      _scrollTo,
-      scrollToRow,
-      _scrollToRow
-    } = this.getProperties(['scrollTo', '_scrollTo', 'scrollToRow', '_scrollToRow']);
-    let targetScrollOffset = null;
+  $scrollableContent: computed(function() {
+    return this.$().parents('.scrollable-content');
+  }).volatile().readOnly(),
 
-    this.setProperties({ _scrollTo: scrollTo, _scrollToRow: scrollToRow });
-
-    if (scrollTo !== _scrollTo) {
-      targetScrollOffset = Number.parseInt(scrollTo, 10);
-
-      if (Number.isNaN(targetScrollOffset)) {
-        targetScrollOffset = null;
-      }
-
-      this.setProperties({
-        targetScrollOffset,
-        hasReachedTargetScrollOffset: targetScrollOffset <= 0
-      });
-    } else if (scrollToRow !== _scrollToRow) {
-      if (scrollToRow instanceof Row) {
-        let rowElement = this.element.querySelector(`[data-row-id=${scrollToRow.get('rowId')}]`);
-
-        if (rowElement instanceof Element) {
-          targetScrollOffset = rowElement.offsetTop;
+  makeRowVisible($row, nbExtraRows = 0) {
+    let $scrollableContent = this.get('$scrollableContent');
+    let $scrollableContainer = this.get('$scrollableContainer');
+    if ($row.length !== 0 && $scrollableContent.length !== 0 && $scrollableContainer.length !== 0) {
+      let rt = $row.offset().top - $scrollableContent.offset().top;
+      let rh = $row.height();
+      let rb = rt + rh;
+      let h = $scrollableContainer.height();
+      let t = this.get('scrollTop');
+      let b = t + h;
+      let extraSpace = rh * nbExtraRows;
+      if (rt - extraSpace <= t) {
+        if (this.onScrollTo) {
+          this.onScrollTo(rt - extraSpace);
+        }
+      } else if (rb + extraSpace >= b) {
+        if (this.onScrollTo) {
+          this.onScrollTo(t + rb - b + extraSpace);
         }
       }
-
-      this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
-    }
-  },
-
-  checkTargetScrollOffset() {
-    if (!this.get('hasReachedTargetScrollOffset')) {
-      let targetScrollOffset = this.get('targetScrollOffset');
-      let currentScrollOffset = this.get('currentScrollOffset');
-
-      if (targetScrollOffset > currentScrollOffset) {
-        this.set('targetScrollOffset', null);
-        this._setTargetOffsetTimer = run.schedule('render', null, () => {
-          this.set('targetScrollOffset', targetScrollOffset);
-        });
-      } else {
-        this.set('hasReachedTargetScrollOffset', true);
-      }
-    }
-  },
-
-  toggleExpandedRow(row) {
-    let multiRowExpansion = this.get('multiRowExpansion');
-    let shouldExpand = !row.expanded;
-
-    if (multiRowExpansion) {
-      row.toggleProperty('expanded');
-    } else {
-      this.get('table.expandedRows').setEach('expanded', false);
-      row.set('expanded', shouldExpand);
     }
   },
 
@@ -544,6 +510,13 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
     run.cancel(this._schedulerTimer);
     run.cancel(this._debounceTimer);
   },
+
+  ltRows: computed(function() {
+    let vrm = getOwner(this).lookup('-view-registry:main');
+    let q = this.$('tr:not(.lt-expanded-row)');
+    return emberArray($.makeArray(q.map((i, e) => vrm[e.id])));
+  }).volatile(),
+
   signalSelectionChanged() {
     this.get('behaviors').forEach((b) => b.onSelectionChanged(this));
   },
@@ -630,21 +603,6 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
     },
 
     /**
-     * onScroll action - sent when user scrolls in the Y direction
-     *
-     * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
-     * using fixed headers / footers.
-     *
-     * @event onScroll
-     * @param {Number} scrollOffset The scroll offset in px
-     * @param {Event} event The scroll event
-     */
-    onScroll(scrollOffset /* , event */) {
-      this.set('currentScrollOffset', scrollOffset);
-      this.onScroll(...arguments);
-    },
-
-    /**
      * lt-infinity action to determine if component is still in viewport
      * @event inViewport
      */
@@ -659,10 +617,10 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
       this.set('isInViewport', false);
     },
 
-    firstVisibleChanged(item, index /* , key */) {
-      this.firstVisibleChanged(...arguments);
-      const estimateScrollOffset = index * this.get('sharedOptions.estimatedRowHeight');
-      this.onScroll(estimateScrollOffset, null);
+    firstVisibleChanged(/* item, index, key */) {
+      if (this.firstVisibleChanged) {
+        this.firstVisibleChanged(...arguments);
+      }
     },
 
     lastVisibleChanged(/* item, index, key */) {
