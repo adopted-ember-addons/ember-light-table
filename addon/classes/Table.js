@@ -307,6 +307,22 @@ export default class Table extends EmberObject.extend({
     this.get('rows').removeAt(index);
   }
 
+  /**
+   * Select all the rows in the table
+   * @method selectAll
+   */
+  selectAll() {
+    this.get('rows').setEach('selected', true);
+  }
+
+  /**
+   * Deselect all the rows in the table
+   * @method selectAll
+   */
+  deselectAll() {
+    this.get('selectedRows').setEach('selected', false);
+  }
+
   // Columns
 
   /**

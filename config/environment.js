@@ -1,5 +1,9 @@
 'use strict';
 
 module.exports = function(/* environment, appConfig */) {
-  return { };
+  return {
+    emberKeyboard: {
+      listeners: ['keyUp', 'keyDown', 'keyPress', 'click', 'mouseDown', 'mouseUp', 'touchStart', 'touchEnd']
+    }
+  };
 };

@@ -9,10 +9,11 @@
   }}
 
   {{#t.body
-    canExpand=true
-    multiRowExpansion=false
+    useLegacyBehaviorFlags=false
+    behaviors=(array (lt-row-expansion multiRow=false))
     onScrolledToBottom=(action 'onScrolledToBottom')
-  as |body|}}
+    as |body|
+  }}
     {{#body.expanded-row as |row|}}
       {{expanded-row row=row}}
     {{/body.expanded-row}}
