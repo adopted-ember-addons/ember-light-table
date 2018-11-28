@@ -405,7 +405,13 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
     }
   }),
 
-  _prevSelectedIndex: -1,
+  /* Components to add in the scrollable content
+   *
+   * @property
+   * @type {[ { component, namedArgs ]} ]}
+   * @default []
+   */
+  decorations: null,
 
   scrollableContainer: computed('sharedOptions.frameId', function() {
     // TODO: FIX: lt-body should not know about .tse-scroll-content
@@ -415,6 +421,13 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
 
   init() {
     this._super(...arguments);
+
+    if (this.get('decorations') === null) {
+      this.set('decorations', emberArray());
+    }
+
+    this.get('table.focusIndex'); // so the observers are triggered
+
     this._initDefaultBehaviorsIfNeeded();
   },
 
@@ -490,6 +503,12 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
     }
   },
 
+  _onFocusedRowChanged: observer('table.focusIndex', function() {
+    if (typeof FastBoot === 'undefined') {
+      run.schedule('afterRender', null, () => this.makeRowVisible(this.$('tr.has-focus'), 0.5));
+    }
+  }),
+
   /**
    * @method _debounceScrolledToBottom
    */
@@ -516,6 +535,32 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
     let q = this.$('tr:not(.lt-expanded-row)');
     return emberArray($.makeArray(q.map((i, e) => vrm[e.id])));
   }).volatile(),
+
+  getLtRowAt(position) {
+    return this
+      .get('ltRows')
+      .find((ltr) => {
+        let top = ltr.get('top');
+        return top <= position && position < top + ltr.get('height');
+      });
+  },
+
+  pageSize: computed(function() {
+    let rows = this.get('table.rows');
+    if (rows.get('length') === 0) {
+      return 0;
+    }
+    let r0 = this.getLtRowAt(0);
+    if (!r0) {
+      r0 = this.get('ltRows').get('firstObject');
+    }
+    let rN = this.getLtRowAt(this.get('$scrollableContainer').height());
+    if (!rN) {
+      rN = this.get('ltRows').get('lastObject');
+    }
+    let i = (r) => rows.indexOf(r.get('row'));
+    return i(rN) - i(r0);
+  }).volatile().readOnly(),
 
   signalSelectionChanged() {
     this.get('behaviors').forEach((b) => b.onSelectionChanged(this));

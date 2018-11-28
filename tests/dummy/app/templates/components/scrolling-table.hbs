@@ -27,8 +27,10 @@
         iconDescending='fa fa-sort-desc'
       }}
 
+      <!-- lt-row focus is used for easy movements inside the table using the keyboard -->
       {{#t.body
         useLegacyBehaviorFlags=false
+        behaviors=(array (lt-row-focus))
         scrollToRow=scrollToRow
         onScrolledToBottom=(action 'onScrolledToBottom')
         scrollTop=zone.scrollTop

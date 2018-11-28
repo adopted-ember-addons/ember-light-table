@@ -6,7 +6,8 @@ import Column from 'ember-light-table/classes/Column';
 import SyncArrayProxy from 'ember-light-table/-private/sync-array-proxy';
 import { mergeOptionsWithGlobals } from 'ember-light-table/-private/global-options';
 import fixProto from 'ember-light-table/utils/fix-proto';
-import { isNone } from '@ember/utils';
+import { isNone, isEmpty } from '@ember/utils';
+import enforceUniqueness from 'ember-light-table/utils/enforce-uniqueness';
 
 const RowSyncArrayProxy = SyncArrayProxy.extend({
   serializeContentObjects(objects) {
@@ -65,6 +66,59 @@ export default class Table extends EmberObject.extend({
    * @type {Ember.Array}
    */
   visibleRows: computed.filterBy('rows', 'hidden', false).readOnly(),
+
+  /**
+   * Index of the row currently having the focus. Equals -1 if no row has the focus.
+   *
+   * @property focusIndex
+   * @type {Number}
+   */
+  focusIndex: computed('focusedRow', {
+    get() {
+      let rows = this.get('rows');
+      return rows.indexOf(this.get('focusedRow'));
+    },
+    set(key, value) {
+      let rows = this.get('rows');
+      if (!isEmpty(rows)) {
+        value = Math.min(rows.get('length') - 1, Math.max(0, value));
+        if (value !== -1) {
+          this.set('focusedRow', rows.objectAt(value));
+        }
+      } else {
+        value = -1;
+      }
+      return value;
+    }
+  }),
+
+  /**
+   * Row currently having the focus. Equals `null` if no row has the focus.
+   *
+   * @property focusedRow
+   * @type {Number}
+   */
+  focusedRow: computed('rows.{[],@each.hasFocus}', {
+    get() {
+      return this.get('rows').findBy('hasFocus');
+    },
+    set(key, value) {
+      if (value) {
+        value.set('hasFocus', true);
+      } else {
+        let r = this.get('focusedRow');
+        if (r) {
+          r.set('hasFocus', false);
+        }
+      }
+      return value;
+    }
+  }),
+
+  /**
+   * There is at most one row that has focus.
+   */
+  _applyFocusRules: enforceUniqueness('rows', 'hasFocus'),
 
   /**
    * @property sortableColumns
