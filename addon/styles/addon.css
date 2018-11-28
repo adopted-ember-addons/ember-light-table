@@ -10,6 +10,10 @@
           flex-direction: column;
 }
 
+.ember-light-table table {
+  overflow: visible; /* for decorations */
+}
+
 .lt-table-container table {
   table-layout: fixed;
   border-collapse: collapse;
@@ -143,6 +147,10 @@ td.lt-scaffolding {
 
 .scrollable-content {
   position: relative;
+}
+
+.ember-light-table .lt-selection-handle {
+  left: 0;
 }
 
 .lt-frame .lt-standard-scrollable {

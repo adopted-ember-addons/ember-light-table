@@ -1,0 +1,84 @@
+{{!-- BEGIN-SNIPPET spreadsheet-table --}}
+<div class="table-actions">
+  {{fixed-header-table-action value=fixed onChange=(action (mut fixed))}}
+  {{virtual-scrollbar-table-action value=virtual onChange=(action (mut virtual))}}
+  {{#if hasSelection}}
+    <div class="table-action fa fa-check-square-o" title="Deselect all" {{action 'deselectAll'}}></div>
+    <div class="table-action fa fa-trash-o delete" title="Delete selected" {{action 'deleteAll'}}></div>
+  {{else}}
+    <div class="table-action fa fa-square-o" title="Select all" {{action 'selectAll'}}></div>
+  {{/if}}
+</div>
+
+{{#lt-frame
+  height='75vh'
+  scrollbar=(if virtual 'virtual' 'standard')
+  as |frame|
+}}
+  {{frame.fixed-head-here}}
+
+  {{#frame.scrollable-zone as |zone|}}
+    {{#frame.table table as |t|}}
+      {{t.head
+        fixed=fixed
+        onColumnClick=(action 'onColumnClick')
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'
+      }}
+
+      {{#t.body
+        useLegacyBehaviorFlags=false
+        behaviors=(array (lt-row-focus) (lt-spreadsheet-select))
+        scrollTop=zone.scrollTop
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        onScrollTo=zone.onScrollTo
+        as |body|
+      }}
+        {{#if isLoading}}
+          {{#body.loader}}
+            {{table-loader}}
+          {{/body.loader}}
+        {{/if}}
+
+        {{#if (and (not isLoading) table.isEmpty)}}
+          {{#body.no-data}}
+            {{no-data}}
+          {{/body.no-data}}
+        {{/if}}
+      {{/t.body}}
+
+      {{#t.foot fixed=true as |columns|}}
+        <tr>
+          <td class='align-left' colspan={{columns.length}}>
+            <div class='explanations'> 
+              <div>
+                <h4>Mouse</h4>
+                  <dl class='mouse-list'>
+                    <dt>Left</dt> <dd>Set focus</dd>
+                    <dt>Left + Move</dt> <dd>Start or expand a selection range</dd>
+                    <dt>Shift + Left</dt> <dd>Create a selection range from focus</dd>
+                    <dt>Cmd + Left</dt> <dd>Add or expand a new inversion range</dd>
+                  </dl>
+              </div>
+              <div>
+                <h4>Keyboard</h4>
+                  <dl class='keyboard-list'>
+                    <dt>Up / Down</dt> <dd>Move focus</dd>
+                    <dt>Shift Up / Down</dt> <dd>Create or expand a selection range</dd>
+                    <dt>Enter / Shift + Enter</dt> <dd> Move focus inside range </dd>
+                    <dt>Home / End</dt> <dd> Go to start / end of table </dd>
+                    <dt>Page Up / Page Down</dt> <dd> Move up / down one page </dd>
+                    <dt>Ctrl + A / Esc</dt> <dd> Select / deselect all </dd>
+                  </dl>
+              </div>
+            </div>
+          </td>
+        </tr>
+      {{/t.foot}}
+
+    {{/frame.table}}
+  {{/frame.scrollable-zone}}
+
+  {{frame.fixed-foot-here}}
+{{/lt-frame}}
+{{!-- END-SNIPPET --}}
