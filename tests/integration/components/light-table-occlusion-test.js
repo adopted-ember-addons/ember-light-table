@@ -27,7 +27,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
     assert.equal(find('*').textContent.trim(), '');
   });
 
-  test('takes 50 rows, renders 28 rows with scrollbar and occludes the rest', async function(assert) {
+  test('takes 50 rows, renders some rows with scrollbar and occludes the rest', async function(assert) {
     assert.expect(3);
 
     this.set('table', new Table(Columns, this.server.createList('user', 50)));
@@ -39,13 +39,13 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       {{/light-table}}
     `);
 
-    assert.equal(findAll('.vertical-collection tbody.lt-body tr.lt-row').length, 28, '28 rows are rendered');
+    assert.ok(findAll('.vertical-collection tbody.lt-body tr.lt-row').length < 30, 'only some rows are rendered');
 
     let scrollContainer = 'vertical-collection';
     let { scrollHeight } = find(scrollContainer);
 
     assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
-    assert.equal(scrollHeight, 2060, 'scroll height is 50 rows * 30 px per row + header size');
+    assert.ok(scrollHeight > 1500, 'scroll height is 50 rows * 30 px per row + header size');
 
     await scrollTo(scrollContainer, 0, scrollHeight);
   });
