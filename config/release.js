@@ -2,7 +2,7 @@
 'use strict';
 
 const { execSync } = require('child_process');
-const generateChangelog = require('ember-cli-changelog/lib/tasks/release-with-changelog');
+const generateChangelog = require('@peeriq/ember-cli-changelog/lib/tasks/release-with-changelog');
 
 module.exports = {
   publish: true,
