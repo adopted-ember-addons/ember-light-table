@@ -3828,6 +3828,7 @@ ember-cli-update@^0.21.4:
 ember-cli-valid-component-name@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-valid-component-name/-/ember-cli-valid-component-name-1.0.0.tgz#71550ce387e0233065f30b30b1510aa2dfbe87ef"
+  integrity sha1-cVUM44fgIzBl8wswsVEKot++h+8=
   dependencies:
     silent-error "^1.0.0"
 
@@ -4029,9 +4030,10 @@ ember-disable-prototype-extensions@^1.1.2:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/ember-disable-prototype-extensions/-/ember-disable-prototype-extensions-1.1.3.tgz#1969135217654b5e278f9fe2d9d4e49b5720329e"
 
-ember-element-resize-detector@~0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/ember-element-resize-detector/-/ember-element-resize-detector-0.2.0.tgz#79170a97e59e29ecc07ffe1c5d3b84eb0af06326"
+ember-element-resize-detector@0.3.0, ember-element-resize-detector@~0.2.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/ember-element-resize-detector/-/ember-element-resize-detector-0.3.0.tgz#33dbba7aa86da2b931dac16d887d960a28e15daa"
+  integrity sha512-nbhEifEjHgryf/Rsd3taVJBNrXvyVhseTu3Y+zvUBCLRxY07eCiHfz9Jb6ZnXSUgThoACPZuEkMReGZX6iqNkQ==
   dependencies:
     broccoli-funnel "^1.0.2"
     broccoli-merge-trees "^1.1.1"
@@ -4200,8 +4202,9 @@ ember-runtime-enumerable-includes-polyfill@^2.0.0:
     ember-cli-version-checker "^2.1.0"
 
 ember-scrollable@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/ember-scrollable/-/ember-scrollable-0.5.0.tgz#843e8486e2ea69a4febfd963163b148154e346f2"
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/ember-scrollable/-/ember-scrollable-0.5.1.tgz#804953b644bba4d32b08657005c42a219ab36a77"
+  integrity sha512-78TC1EOPtAPcNMz94GhKrEFG/mEhAMN7X3ySP1bePx2D4G7n/ZgITp6W479wdpKPqTBh1Linx9muk+zjX0BF7g==
   dependencies:
     ember-cli-babel "^6.8.0"
     ember-cli-htmlbars "^2.0.1"
@@ -4216,8 +4219,9 @@ ember-source-channel-url@^1.0.1:
     got "^8.0.1"
 
 ember-source@~3.1.0:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.1.3.tgz#431929098e84f8e9c18529cfe32cd3e920851107"
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.1.4.tgz#e7e6cd45a0bc695ad9f9efe5fa32b2cfd2071d7a"
+  integrity sha512-m2Wzf/unzOSnj1EzUNBaLrv4RuWpJVoE+VvlXA2CJ4QC4XjUtJEhtTb8QFNsX3+rjmD92uYoMcX5IpAfB2bnfg==
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
