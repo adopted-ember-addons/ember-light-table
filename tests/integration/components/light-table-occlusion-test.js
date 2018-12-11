@@ -27,21 +27,25 @@ module('Integration | Component | light table | occlusion', function(hooks) {
     assert.equal(find('*').textContent.trim(), '');
   });
 
-  test('takes 50 rows, renders some rows with scrollbar and occludes the rest', async function(assert) {
-    assert.expect(3);
+  test('scrolled to bottom', async function(assert) {
+    assert.expect(4);
 
     this.set('table', new Table(Columns, this.server.createList('user', 50)));
+
+    this.set('onScrolledToBottom', () => {
+      assert.ok(true);
+    });
 
     await render(hbs `
       {{#light-table table height='40vh' occlusion=true estimatedRowHeight=30 as |t|}}
         {{t.head fixed=true}}
-        {{t.body}}
+        {{t.body onScrolledToBottom=(action onScrolledToBottom)}}
       {{/light-table}}
     `);
 
     assert.ok(findAll('.vertical-collection tbody.lt-body tr.lt-row').length < 30, 'only some rows are rendered');
 
-    let scrollContainer = 'vertical-collection';
+    let scrollContainer = '.lt-scrollable.tse-scrollable.vertical-collection';
     let { scrollHeight } = find(scrollContainer);
 
     assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
