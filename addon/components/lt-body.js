@@ -449,6 +449,7 @@ export default Component.extend({
   onRowClick() {},
   onRowDoubleClick() {},
   onScroll() {},
+  firstVisibleChanged() {},
   lastVisibleChanged() {},
   firstReached() {},
   lastReached() {},
