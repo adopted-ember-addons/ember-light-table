@@ -1,12 +1,12 @@
 {{#if column.component}}
   {{component column.component column=column table=table tableActions=tableActions extra=extra sortIcons=sortIcons}}
 {{else}}
-  {{label}}
   {{#if (and sortIcons.iconComponent sortIconProperty)}}
     {{component sortIcons.iconComponent sortIcons=sortIcons sortIconProperty=sortIconProperty}}
   {{else if sortIconProperty}}
     <i class="lt-sort-icon {{get sortIcons sortIconProperty}}"></i>
   {{/if}}
+  {{label}}
 {{/if}}
 
 {{#if isResizable}}
