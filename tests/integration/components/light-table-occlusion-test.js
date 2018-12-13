@@ -10,12 +10,15 @@ import hasClass from '../../helpers/has-class';
 import RowComponent from 'ember-light-table/components/lt-row';
 import Component from '@ember/component';
 import { get, computed } from '@ember/object';
+import { run } from '@ember/runloop';
+import registerWaiter from 'ember-raf-scheduler/test-support/register-waiter';
 
 module('Integration | Component | light table | occlusion', function(hooks) {
   setupRenderingTest(hooks);
   setupMirageTest(hooks);
 
   hooks.beforeEach(function() {
+    registerWaiter();
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
   });
@@ -177,15 +180,21 @@ module('Integration | Component | light table | occlusion', function(hooks) {
     assert.equal(findAll('.custom-row').length, 3, 'three custom rows were rendered');
     assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
 
-    this.set('current', users[0]);
+    run(() => {
+      this.set('current', users[0]);
+    });
     let firstRow = find('.custom-row:nth-child(2)');
     assert.ok(hasClass(firstRow, 'is-active'), 'first custom row is active');
 
-    this.set('current', users[2]);
+    run(() => {
+      this.set('current', users[2]);
+    });
     let thirdRow = find('.custom-row:nth-child(4)');
     assert.ok(hasClass(thirdRow, 'is-active'), 'third custom row is active');
 
-    this.set('current', null);
+    run(() => {
+      this.set('current', null);
+    });
 
     assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
   });

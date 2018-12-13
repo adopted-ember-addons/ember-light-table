@@ -89,7 +89,7 @@
     "configPath": "tests/dummy/config",
     "demoURL": "http://offirgolan.github.io/ember-light-table",
     "versionCompatibility": {
-      "ember": ">=2.3.0 <3.0.0"
+      "ember": ">=2.3.0 <4.0.0"
     }
   }
 }
