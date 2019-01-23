@@ -54,6 +54,42 @@ module('Integration | Component | light table', function(hooks) {
     await scrollTo(scrollContainer, 0, scrollHeight);
   });
 
+  test('scrolled to bottom (multiple tables)', async function(assert) {
+    assert.expect(4);
+
+    this.set('table', new Table(Columns, this.server.createList('user', 50)));
+
+    this.set('onScrolledToBottomTable1', () => {
+      assert.ok(false);
+    });
+
+    this.set('onScrolledToBottomTable2', () => {
+      assert.ok(true);
+    });
+
+    await render(hbs `
+      {{#light-table table height='40vh' id='table-1' as |t|}}
+        {{t.head fixed=true}}
+        {{t.body onScrolledToBottom=(action onScrolledToBottomTable1)}}
+      {{/light-table}}
+
+      {{#light-table table height='40vh' id='table-2' as |t|}}
+        {{t.head fixed=true}}
+        {{t.body onScrolledToBottom=(action onScrolledToBottomTable2)}}
+      {{/light-table}}
+    `);
+
+    assert.equal(findAll('#table-2 tbody > tr').length, 50, '50 rows are rendered');
+
+    let scrollContainer = '#table-2 .tse-scroll-content';
+    let { scrollHeight } = find(scrollContainer);
+
+    assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
+    assert.equal(scrollHeight, 2501, 'scroll height is 2500 + 1px for height of lt-infinity');
+
+    await scrollTo(scrollContainer, 0, scrollHeight);
+  });
+
   test('fixed header', async function(assert) {
     assert.expect(2);
     this.set('table', new Table(Columns, this.server.createList('user', 5)));
