@@ -296,4 +296,85 @@ module('Integration | Component | light table', function(hooks) {
       await click(element);
     }
   });
+
+  test('table body renders once when header is rendered in place', async function(assert) {
+    assert.expect(1);
+
+    this.owner.register('component:custom-row', RowComponent.extend({
+      didInsertElement() {
+        this._super(...arguments);
+        assert.ok(true, 'row is rendered once');
+      }
+    }));
+
+    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+
+    await render(hbs`
+      {{#light-table table height='500px' id='lightTable' as |t|}}
+        {{t.head}}
+        {{t.body rowComponent=(component "custom-row")}}
+      {{/light-table}}
+    `);
+  });
+
+  test('table body renders once when header is fixed', async function(assert) {
+    assert.expect(1);
+
+    this.owner.register('component:custom-row', RowComponent.extend({
+      didInsertElement() {
+        this._super(...arguments);
+        assert.ok(true, 'row is rendered once');
+      }
+    }));
+
+    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+
+    await render(hbs`
+      {{#light-table table height='500px' id='lightTable' as |t|}}
+        {{t.head fixed=true}}
+        {{t.body rowComponent=(component "custom-row")}}
+      {{/light-table}}
+    `);
+  });
+
+  test('table body renders once when footer is rendered in place', async function(assert) {
+    assert.expect(1);
+
+    this.owner.register('component:custom-row', RowComponent.extend({
+      didInsertElement() {
+        this._super(...arguments);
+        assert.ok(true, 'row is rendered once');
+      }
+    }));
+
+    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+
+    await render(hbs`
+      {{#light-table table height='500px' id='lightTable' as |t|}}
+        {{t.body rowComponent=(component "custom-row")}}
+        {{t.foot}}
+      {{/light-table}}
+    `);
+  });
+
+  test('table body renders once when footer is fixed', async function(assert) {
+    assert.expect(1);
+
+    this.owner.register('component:custom-row', RowComponent.extend({
+      didInsertElement() {
+        this._super(...arguments);
+        assert.ok(true, 'row is rendered once');
+      }
+    }));
+
+    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+
+    await render(hbs`
+      {{#light-table table height='500px' id='lightTable' as |t|}}
+        {{t.body rowComponent=(component "custom-row")}}
+        {{t.foot fixed=true}}
+      {{/light-table}}
+    `);
+  });
+
 });
