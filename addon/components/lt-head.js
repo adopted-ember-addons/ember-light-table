@@ -29,7 +29,6 @@ import TableHeaderMixin from 'ember-light-table/mixins/table-header';
  * will be empty
  *
  * The above examples using angle brackets (Ember 3.4+)
- *  
  * ```hbs
  * <LightTable table as |t|>
  *   <t.head onColumnClick=(action 'sortByColumn') />
@@ -45,7 +44,6 @@ import TableHeaderMixin from 'ember-light-table/mixins/table-header';
  *   </t.head>
  * </LightTable>
  * ```
- * 
  * @class t.head
  * @uses TableHeaderMixin
  */

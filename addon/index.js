@@ -134,7 +134,6 @@ import Row from './classes/Row';
  * through their documentation.
  *
  * The same component using angle bracket invocation, available in Ember 3.4+
- * 
  * ```hbs
  * <LightTable table as |t|>
  *

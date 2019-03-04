@@ -32,7 +32,6 @@ import Row from 'ember-light-table/classes/Row';
  * ```
  *
  * The above exampe using angle brackets (Ember 3.4+)
- * 
  * ```hbs
  * <LightTable table as |t|>
  *   <t.body multiSelect=true onRowClick=(action 'rowClicked') as |body|>
@@ -54,7 +53,6 @@ import Row from 'ember-light-table/classes/Row';
  *   </t.body>
  * </LightTable>
  * ```
- * 
  * @class t.body
  */
 
