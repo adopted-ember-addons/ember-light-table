@@ -31,6 +31,30 @@ import Row from 'ember-light-table/classes/Row';
  * {{/light-table}}
  * ```
  *
+ * The above exampe using angle brackets (Ember 3.4+)
+ * 
+ * ```hbs
+ * <LightTable table as |t|>
+ *   <t.body multiSelect=true onRowClick=(action 'rowClicked') as |body|>
+ *     <body.expanded-row as |row|>
+ *       Hello <b>{{row.firstName}}</b>
+ *     </body.expanded-row>
+ *
+ *     {{#if isLoading}}
+ *       <body.loader>
+ *         Loading...
+ *       </body.loader>
+ *     {{/if}}
+ *
+ *     {{#if table.isEmpty}}
+ *       <body.no-data>
+ *         No users found.
+ *       </body.no-data>
+ *     {{/if}}
+ *   </t.body>
+ * </LightTable>
+ * ```
+ * 
  * @class t.body
  */
 

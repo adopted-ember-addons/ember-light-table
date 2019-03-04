@@ -28,6 +28,16 @@ function intersections(array1, array2) {
  * {{/light-table}}
  * ```
  *
+ * Using angle brackets (Ember 3.4+)
+ * 
+ * ```hbs
+ * <LightTable table as |t|>
+ *   <t.head />
+ *   <t.body />
+ *   <t.foot />
+ * </LightTable>
+ * ```
+ * 
  * Please see the documentation for the [Head](../classes/t.head.html), [Body](../classes/t.body.html), and [Foot](../classes/t.foot.html) components
  * for more details on all possible options and actions.
  *

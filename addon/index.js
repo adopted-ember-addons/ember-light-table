@@ -133,6 +133,35 @@ import Row from './classes/Row';
  * Each of these contextual components have a wide array of options so it is advised to look
  * through their documentation.
  *
+ * The same component using angle bracket invocation, available in Ember 3.4+
+ * 
+ * ```hbs
+ * <LightTable table as |t|>
+ *
+ *   <t.head />
+ *
+ *   <t.body as |body|>
+ *     <body.expanded-row as |row|>
+ *       Hello <b>{{row.firstName}}</b>
+ *     </body.expanded-row>
+ *
+ *     {{#if isLoading}}
+ *       <body.loader>
+ *         Loading...
+ *       </body.loader>
+ *     {{/if}}
+ *
+ *     {{#if table.isEmpty}}
+ *       <body.no-data>
+ *         No users found.
+ *       </body.no-data>
+ *     {{/if}}
+ *   </t.body>
+ *
+ *   <t.foot>
+ *
+ * </LightTable>
+ * ```
  * @module Usage
  * @submodule Component Declaration
  */

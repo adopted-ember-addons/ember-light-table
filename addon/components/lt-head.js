@@ -28,6 +28,24 @@ import TableHeaderMixin from 'ember-light-table/mixins/table-header';
  * If you dont have grouped columns, the yielded `groups` will be an array of all visibile columns and `subColumns`
  * will be empty
  *
+ * The above examples using angle brackets (Ember 3.4+)
+ *  
+ * ```hbs
+ * <LightTable table as |t|>
+ *   <t.head onColumnClick=(action 'sortByColumn') />
+ * </LightTable>
+ * ```
+ *
+ * ```hbs
+ * <LightTable table as |t|>
+ *   <t.head onColumnClick=(action 'sortByColumn') as |groups subColumns|>
+ *     {{#each groups as |group|}}
+ *       {{!-- ... --}}
+ *     {{/each}}
+ *   </t.head>
+ * </LightTable>
+ * ```
+ * 
  * @class t.head
  * @uses TableHeaderMixin
  */

@@ -24,8 +24,23 @@ import TableHeaderMixin from 'ember-light-table/mixins/table-header';
  * {{/light-table}}
  * ```
  *
- * will be empty
+ * The above examples using angle brackets (Ember 3.4+)
  *
+ * ```hbs
+ * <LightTable table as |t|>
+ *   <t.foot onColumnClick=(action 'sortByColumn') />
+ * </LightTable>
+ * ```
+ *
+ * ```hbs
+ * <LightTable table as |t|>
+ *   <t.foot onColumnClick=(action 'sortByColumn') as |columns table|>
+ *     {{#each columns as |column|}}
+ *       {{!-- ... --}}
+ *     {{/each}}
+ *   </t.foot>
+ * </LightTable>
+ * ```
  * @class t.foot
  * @uses TableHeaderMixin
  */
