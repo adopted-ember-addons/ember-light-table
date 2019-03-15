@@ -19,6 +19,12 @@ export default Component.extend(InViewportMixin, {
     let width = this.$().width();
     let scrollableContent = this.get('scrollableContent');
 
+    // ember-in-viewport errors if `scrollableArea` does not correspond to an element,
+    // this could be the case when {{light-table}} is used with no fixed header/footer
+    if (scrollableContent && !document.querySelector('scrollableContent')) {
+      scrollableContent = undefined;
+    }
+
     this.setProperties({
       viewportSpy: true,
       viewportTolerance: {
