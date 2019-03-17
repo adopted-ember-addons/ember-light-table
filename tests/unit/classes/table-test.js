@@ -14,6 +14,17 @@ module('Unit | Classes | Table', function() {
   });
 
   test('create table - with options', function(assert) {
+    let table = Table.create({ columns: [{}, {}], rows: [{}] });
+
+    assert.ok(table);
+    assert.equal(table.get('rows.length'), 1);
+    assert.equal(table.get('columns.length'), 2);
+
+    assert.ok(table.rows[0] instanceof Row);
+    assert.ok(table.columns[0] instanceof Column);
+  });
+
+  test('new table - with options', function(assert) {
     let table = new Table([{}, {}], [{}]);
 
     assert.ok(table);
@@ -28,14 +39,47 @@ module('Unit | Classes | Table', function() {
     assert.expect(2);
 
     assert.throws(() => {
-      new Table([{}, {}], null);
+      Table.create({ columns: [{}, {}], rows: 'not-array' });
     }, /\[ember-light-table] rows must be an array if defined/, 'rows is not an array');
     assert.throws(() => {
-      new Table(null, [{}]);
+      Table.create({ columns: 'not-array', rows: [{}] });
+    }, /\[ember-light-table] columns must be an array if defined/, 'columns is not an array');
+  });
+
+  test('new table - invalid constructor', function(assert) {
+    assert.expect(2);
+
+    assert.throws(() => {
+      new Table([{}, {}], 'not-array');
+    }, /\[ember-light-table] rows must be an array if defined/, 'rows is not an array');
+    assert.throws(() => {
+      new Table('not-array', [{}]);
     }, /\[ember-light-table] columns must be an array if defined/, 'columns is not an array');
   });
 
   test('create table - with RecordArray instance as rows', function(assert) {
+    assert.expect(3);
+
+    let models = ['Tom', 'Yehuda', 'Tomster'].map((name) => {
+      return EmberObject.create({ name });
+    });
+
+    let rows = DS.RecordArray.create({
+      content: emberArray(models),
+      objectAtContent(index) {
+        return this.get('content')[index];
+      }
+    });
+
+    let columns = [{ label: 'Name', valuePath: 'name' }];
+    let table = Table.create({ columns, rows });
+
+    assert.ok(table);
+    assert.equal(table.get('rows.length'), 3);
+    assert.equal(table.get('columns.length'), 1);
+  });
+
+  test('new table - with RecordArray instance as rows', function(assert) {
     assert.expect(3);
 
     let models = ['Tom', 'Yehuda', 'Tomster'].map((name) => {
@@ -109,7 +153,18 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('allColumns.length'), 5);
   });
 
-  test('CP - isEmpty', function(assert) {
+  test('create CP - isEmpty', function(assert) {
+    let table = Table.create({ columns: [{}, {}], rows: [] });
+
+    assert.ok(table, 'table is set up correctly');
+    assert.ok(table.get('isEmpty'), 'table is initially empty');
+    table.pushRow({});
+    assert.notOk(table.get('isEmpty'), 'table is not empty after a row was pushed');
+    table.setRows([]);
+    assert.ok(table.get('isEmpty'), 'table is empty again after the rows were cleared');
+  });
+
+  test('new CP - isEmpty', function(assert) {
     let table = new Table([{}, {}], []);
 
     assert.ok(table, 'table is set up correctly');
@@ -120,9 +175,21 @@ module('Unit | Classes | Table', function() {
     assert.ok(table.get('isEmpty'), 'table is empty again after the rows were cleared');
   });
 
-  test('CP - isEmpty (enableSync = true)', function(assert) {
+  test('new CP - isEmpty (enableSync = true)', function(assert) {
     let rowsArray = emberArray();
     let table = new Table([{}, {}], rowsArray, { enableSync: true });
+
+    assert.ok(table, 'table is set up correctly');
+    assert.ok(table.get('isEmpty'), 'table is initially empty');
+    rowsArray.pushObject({});
+    assert.notOk(table.get('isEmpty'), 'table is not empty after a row was pushed');
+    rowsArray.clear();
+    assert.ok(table.get('isEmpty'), 'table is empty again after the rows were cleared');
+  });
+
+  test('create CP - isEmpty (enableSync = true)', function(assert) {
+    let rowsArray = emberArray();
+    let table = Table.create({ columns: [{}, {}], rows: rowsArray, enableSync: true });
 
     assert.ok(table, 'table is set up correctly');
     assert.ok(table.get('isEmpty'), 'table is initially empty');

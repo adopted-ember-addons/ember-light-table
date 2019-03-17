@@ -318,7 +318,7 @@ export default class Column extends EmberObject.extend({
   init(...args) {
     this._super(...args);
 
-    const subColumns = emberArray(makeArray(this.get('subColumns')).map((sc) => new Column(sc)));
+    const subColumns = emberArray(makeArray(this.get('subColumns')).map((sc) => Column.create(sc)));
     subColumns.setEach('parent', this);
 
     this.set('subColumns', subColumns);

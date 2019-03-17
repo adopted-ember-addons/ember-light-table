@@ -147,6 +147,14 @@ export default class Table extends EmberObject.extend({
    *           `createRow(content, options)`.
    */
   constructor(columns = [], rows = [], options = {}) {
+    // this enables Table.create({}) api which fixes deprectation introduced in ember 3.6
+    if (!isArray(columns) && typeof columns === 'object' && columns !== null) {
+      options = columns;
+      rows = columns.rows || [];
+      columns = columns.columns || [];
+      delete options.rows;
+      delete options.columns;
+    }
     super();
 
     assert('[ember-light-table] columns must be an array if defined', isArray(columns));
@@ -433,7 +441,7 @@ export default class Table extends EmberObject.extend({
    * @return {Column}
    */
   static createColumn(column) {
-    return new Column(column);
+    return Column.create(column);
   }
 
   /**
