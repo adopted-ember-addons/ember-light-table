@@ -1,6 +1,5 @@
 /* eslint ember/no-on-calls-in-components:off */
 /* eslint ember/no-side-effects:off */
-import $ from 'jquery';
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
 import { on } from '@ember/object/evented';
@@ -25,8 +24,16 @@ export default Component.extend({
   _oldUserSelect: null,
   offset: 0,
 
-  $ltBody: computed(function() {
-    return this.get('ltBody').$();
+  init() {
+    this._super(...arguments);
+    this.__onMouseUp = (e) =>
+      run.scheduleOnce('afterRender', null, () => this._onMouseUp(e));
+    this.__onMouseMove = (e) =>
+      run.scheduleOnce('afterRender', null, () => this._onMouseMove(e));
+  },
+
+  ltBodyElement: computed(function() {
+    return this.get('ltBody.element');
   }).volatile().readOnly(),
 
   ltRow: computed(function() {
@@ -34,10 +41,6 @@ export default Component.extend({
     if (ltBody) {
       return ltBody.get('ltRows').objectAt(this.get('rowIndex'));
     }
-  }).volatile().readOnly(),
-
-  $row: computed(function() {
-    return this.get('ltRow').$();
   }).volatile().readOnly(),
 
   isUp: computed('direction', 'inverse', function() {
@@ -55,26 +58,26 @@ export default Component.extend({
   }).volatile().readOnly(),
 
   _getMousePosition(event) {
-    return event.clientY - this.get('$ltBody').offset().top;
+    return event.clientY
+      - this.get('ltBodyElement').getBoundingClientRect().top
+      - window.scrollY;
   },
 
-  _setDomEvents: on('init', function() {
-    this._domEvents = {
-      mousemove: this._$onMouseMove,
-      mouseup: this._$onMouseUp
-    };
-  }),
+  _addEvents() {
+    document.body.addEventListener('mouseup', this.__onMouseUp);
+    document.body.addEventListener('mousemove', this.__onMouseMove);
+  },
 
   _removeEvents: on('willDestroyElement', function() {
-    $('body').off(this._domEvents, this);
+    document.body.removeEventListener('mousemove', this.__onMouseMove);
+    document.body.removeEventListener('mouseup', this.__onMouseUp);
   }),
 
   _onMouseDown: on('mouseDown', function(event) {
     this._initialMousePosition = this._getMousePosition(event);
-    let $body = $('body');
-    $body.on(this._domEvents, this);
-    this._oldUserSelect = $body.css('user-select');
-    $body.css('user-select', 'none');
+    this._addEvents();
+    this._oldUserSelect = document.body.style['user-select'];
+    document.body.style['user-select'] = 'none';
     if (this.drag) {
       this.drag();
     }
@@ -90,7 +93,7 @@ export default Component.extend({
 
   _onMouseMove(event) {
     if (this.get('isDestroyed')) {
-      $('body').off(this._domEvents);
+      this._removeEvents();
     } else if (this._initialMousePosition) {
       let offset = this._getMousePosition(event) - this.get('_initialMousePosition');
       this.set('offset', offset);
@@ -102,16 +105,11 @@ export default Component.extend({
     }
   },
 
-  _$onMouseMove(event) {
-    let that = event.data;
-    run.scheduleOnce('afterRender', null, () => that._onMouseMove.call(that, event));
-  },
-
   _onMouseUp(event) {
-    this._removeEvents();
     if (!this.get('isDestroyed')) {
+      this._removeEvents();
       let offset = this._getMousePosition(event) - this.get('_initialMousePosition');
-      $('body').css('user-select', this._oldUserSelect);
+      document.body.style['user-select'] = this._oldUserSelect;
       this._initialMousePosition = null;
       this.set('offset', 0);
       if (this.drop) {
@@ -120,19 +118,13 @@ export default Component.extend({
     }
   },
 
-  _$onMouseUp(event) {
-    let that = event.data;
-    run.scheduleOnce('afterRender', null, () => that._onMouseUp.call(that, event));
-  },
-
   positionUp: computed(function() {
-    let $row = this.get('$row');
-    return $row.offset().top - this.get('$ltBody').offset().top;
+    return this.get('ltRow.top');
+
   }).volatile().readOnly(),
 
   positionDown: computed(function() {
-    let $row = this.get('$row');
-    return this.get('positionUp') + $row.height();
+    return this.get('positionUp') + this.get('ltRow.height');
   }).volatile().readOnly(),
 
   _onResize: null,

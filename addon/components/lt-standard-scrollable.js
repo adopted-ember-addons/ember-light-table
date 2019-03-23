@@ -27,20 +27,20 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    this.$().on('scroll', (evt) => this._onScroll(evt));
+    this.get('element').addEventListener('scroll', (evt) => this._onScroll(evt));
   },
 
   _onScroll(event) {
-    let $ = this.$();
-    if ($) {
+    let element = this.get('element');
+    if (element) {
       if (this.onScroll) {
-        this.onScroll($.scrollTop(), event);
+        this.onScroll(element.scrollTop, event);
       }
     }
   },
 
   _onScrollToY: observer('scrollToY', function() {
-    this.$().scrollTop(this.get('scrollToY'));
+    this.get('element').scrollTop = this.get('scrollToY');
   })
 
 });
