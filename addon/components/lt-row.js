@@ -36,24 +36,26 @@ const Row = Component.extend({
 
   ltBody: null,
 
-  $ltBody: computed(function() {
-    return this.get('ltBody').$();
+  ltBodyElement: computed(function() {
+    return this.get('ltBody.element');
   }).volatile().readOnly(),
 
   left: computed(function() {
-    return this.$().offset().left - this.get('$ltBody').offset().left;
+    return this.get('element').getBoundingClientRect().left
+      - this.get('ltBodyElement').getBoundingClientRect().left;
   }).volatile().readOnly(),
 
   width: computed(function() {
-    return this.$().width();
+    return this.get('element').clientWidth;
   }).volatile().readOnly(),
 
   top: computed(function() {
-    return this.$().offset().top - this.get('$ltBody').offset().top;
+    return this.get('element').getBoundingClientRect().top
+      - this.get('ltBodyElement').getBoundingClientRect().top;
   }).volatile().readOnly(),
 
   height: computed(function() {
-    return this.$().height();
+    return this.get('element').clientHeight;
   }).volatile().readOnly(),
 
   _onClick: on('click', function() {
