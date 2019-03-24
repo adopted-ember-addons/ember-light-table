@@ -1,15 +1,21 @@
-{{#if virtualScrollbar}}
+{{#if virtual}}
   {{#ember-scrollable
-    classNames='lt-scrollable'
+    classNames=classNames
     autoHide=autoHide
     horizontal=horizontal
     vertical=vertical
-    scrollToY=scrollTo
-    onScrollY=onScrollY
-    as |scrollbar|
+    scrollToY=_scrollTopSet
+    onScrollY=(action 'onScroll')
   }}
-    {{yield}}
+    {{yield (hash scrollTop=_scrollTopGet onScrollTo=(action 'onScrollTo'))}}
   {{/ember-scrollable}}
 {{else}}
-  {{yield}}
+  {{#lt-standard-scrollable
+    height=height
+    classNames=classNames
+    scrollToY=_scrollTopSet
+    onScroll=(action 'onScroll')
+  }}
+    {{yield (hash scrollTop=_scrollTopGet onScrollTo=(action 'onScrollTo'))}}
+  {{/lt-standard-scrollable}}
 {{/if}}

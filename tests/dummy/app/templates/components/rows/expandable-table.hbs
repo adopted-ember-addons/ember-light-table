@@ -1,27 +1,43 @@
 {{!-- BEGIN-SNIPPET expandable-table --}}
-{{#light-table table height='65vh' as |t|}}
-  {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconSortable='fa fa-sort'
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
-    fixed=true
-  }}
+<div class='table-actions'>
+  {{fixed-header-table-action value=fixed onChange=(action (mut fixed))}}
+  {{virtual-scrollbar-table-action value=virtual onChange=(action (mut virtual))}}
+</div>
 
-  {{#t.body
-    canExpand=true
-    multiRowExpansion=false
-    onScrolledToBottom=(action 'onScrolledToBottom')
-  as |body|}}
-    {{#body.expanded-row as |row|}}
-      {{expanded-row row=row}}
-    {{/body.expanded-row}}
+{{#lt-frame
+  height='65vh'
+  scrollbar=(if virtual 'virtual' 'standard')
+  as |frame|
+}}
+  {{frame.fixed-head-here}}
 
-    {{#if isLoading}}
-     {{#body.loader}}
-       {{table-loader}}
-     {{/body.loader}}
-   {{/if}}
-  {{/t.body}}
-{{/light-table}}
+  {{#frame.scrollable-zone}}
+    {{#frame.table table as |t|}}
+      {{t.head
+        fixed=fixed
+        onColumnClick=(action 'onColumnClick')
+        iconSortable='fa fa-sort'
+        iconAscending='fa fa-sort-asc'
+        iconDescending='fa fa-sort-desc'
+      }}
+
+      {{#t.body
+        useLegacyBehaviorFlags=false
+        behaviors=(array (lt-row-expansion multiRow=false))
+        onScrolledToBottom=(action 'onScrolledToBottom')
+        as |body|
+      }}
+        {{#body.expanded-row as |row|}}
+          {{expanded-row row=row}}
+        {{/body.expanded-row}}
+
+        {{#if isLoading}}
+         {{#body.loader}}
+           {{table-loader}}
+         {{/body.loader}}
+       {{/if}}
+      {{/t.body}}
+    {{/frame.table}}
+  {{/frame.scrollable-zone}}
+{{/lt-frame}}
 {{!-- END-SNIPPET --}}

@@ -3,11 +3,11 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from '../templates/components/lt-column-resizer';
 
-const TOP_LEVEL_CLASS = '.ember-light-table';
-
 export default Component.extend({
   layout,
   classNameBindings: [':lt-column-resizer', 'isResizing'],
+
+  frameId: null,
   column: null,
   resizeOnDrag: false,
 
@@ -17,6 +17,15 @@ export default Component.extend({
 
   $column: computed(function() {
     return $(this.get('element')).parent('th');
+  }).volatile().readOnly(),
+
+  $frame: computed(function() {
+    let frameId = this.get('frameId');
+    return $(`#${frameId}`);
+  }).volatile().readOnly(),
+
+  $table: computed(function() {
+    return $('.ember-light-table', this.get('$frame'));
   }).volatile().readOnly(),
 
   didInsertElement() {
@@ -56,7 +65,7 @@ export default Component.extend({
       startX: e.pageX
     });
 
-    this.$().closest(TOP_LEVEL_CLASS).addClass('is-resizing');
+    this.get('$table').addClass('is-resizing');
   },
 
   _mouseUp(e) {
@@ -70,8 +79,10 @@ export default Component.extend({
       this.set('isResizing', false);
       this.set('column.width', width);
 
-      this.sendAction('onColumnResized', width);
-      this.$().closest(TOP_LEVEL_CLASS).removeClass('is-resizing');
+      if (this.onColumnResized) {
+        this.onColumnResized(width);
+      }
+      this.get('$table').removeClass('is-resizing');
     }
   },
 
@@ -87,14 +98,14 @@ export default Component.extend({
 
       let $column = this.get('$column');
       let $index = this.get('table.visibleColumns').indexOf(this.get('column')) + 1;
-      let $table = this.$().closest(TOP_LEVEL_CLASS);
+      let $frame = this.get('$frame');
 
       $column.outerWidth(width);
-      $(`thead td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(width);
-      $(`tfoot td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(width);
+      $(`thead td.lt-scaffolding:nth-child(${$index})`, $frame).outerWidth(width);
+      $(`tfoot td.lt-scaffolding:nth-child(${$index})`, $frame).outerWidth(width);
 
       if (resizeOnDrag) {
-        $(`tbody td:nth-child(${$index})`, $table).outerWidth(width);
+        $(`tbody td:nth-child(${$index})`, $frame).outerWidth(width);
       }
     }
   }

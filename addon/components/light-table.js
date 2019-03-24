@@ -14,6 +14,15 @@ function intersections(array1, array2) {
   });
 }
 
+const sharedProperties = [
+  'height',
+  'frameId',
+  'occlusion',
+  'estimatedRowHeight',
+  'occlusionContainerSelector',
+  'shouldRecycle'
+];
+
 /**
  * @module Light Table
  * @main light-table
@@ -37,7 +46,7 @@ function intersections(array1, array2) {
 
 const LightTable = Component.extend({
   layout,
-  classNameBindings: [':ember-light-table', 'occlusion'],
+  classNameBindings: [':ember-light-table', ':lt-table-container', 'occlusion'],
   attributeBindings: ['style'],
 
   media: service(),
@@ -160,6 +169,12 @@ const LightTable = Component.extend({
   breakpoints: null,
 
   /**
+   * This value is passed to lt-head and lt-foot so they can create a unique ids
+   * for ember-wormhole
+   */
+  frameId: null,
+
+  /**
    * Toggles occlusion rendering functionality. Currently experimental.
    * If set to true, you must set {{#crossLink 't.body/estimatedRowHeight:property'}}{{/crossLink}} to
    * something other than the default value.
@@ -191,22 +206,8 @@ const LightTable = Component.extend({
    */
   shouldRecycle: true,
 
-  /**
-   * Table component shared options
-   *
-   * @property sharedOptions
-   * @type {Object}
-   * @private
-   */
-  sharedOptions: computed(function() {
-    return {
-      height: this.get('height'),
-      fixedHeader: false,
-      fixedFooter: false,
-      occlusion: this.get('occlusion'),
-      estimatedRowHeight: this.get('estimatedRowHeight'),
-      shouldRecycle: this.get('shouldRecycle')
-    };
+  sharedOptions: computed(...sharedProperties, function() {
+    return this.getProperties(sharedProperties);
   }).readOnly(),
 
   visibleColumns: computed.readOnly('table.visibleColumns'),
@@ -341,7 +342,9 @@ const LightTable = Component.extend({
      * @param  {Array} matches list of matching breakpoints
      */
     onBeforeResponsiveChange(/* matches */) {
-      this.sendAction('onBeforeResponsiveChange', ...arguments);
+      if (this.onBeforeResponsiveChange) {
+        this.onBeforeResponsiveChange(...arguments);
+      }
     },
 
     /**
@@ -352,7 +355,9 @@ const LightTable = Component.extend({
      * @param  {Array} matches list of matching breakpoints
      */
     onAfterResponsiveChange(/* matches */) {
-      this.sendAction('onAfterResponsiveChange', ...arguments);
+      if (this.onAfterResponsiveChange) {
+        this.onAfterResponsiveChange(...arguments);
+      }
     }
   }
 });

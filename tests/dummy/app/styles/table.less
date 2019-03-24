@@ -1,44 +1,31 @@
 @border-color: #DADADA;
 
-.ember-light-table {
+@selected-background-color: lighten(@accent-color, 25%);
+@range-border: 1px solid @accent-color;
+@handle-color: darken(@accent-color, 25%);
+
+.lt-standard-scrollable {
+    flex: 1 0 0;
+}
+
+.lt-table-container {
+
   width: 95%;
   margin: 0 auto;
-  border-collapse: collapse;
   font-family: 'Open Sans', sans-serif;
 
-  .multi-select {
+  &.lt-fixed-head-here, &.lt-fixed-foot-here {
+    flex: 0 0 auto;
+    height: auto;
+  }
+
+  .lt-body-wrap {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
-
-  tfoot .lt-column {
-    border-top: 1px solid @border-color;
-  }
-
-  thead .lt-column {
-    border-bottom: 1px solid @border-color;
-  }
-
-  thead th,
-  tfoot th {
-    &.is-dragging {
-      opacity: 0.75;
-      background: #eee;
-    }
-
-    &.is-drag-target {
-      &.drag-right {
-        border-right: 1px dotted @border-color;
-      }
-
-      &.drag-left {
-        border-left: 1px dotted @border-color;
-      }
-    }
   }
 
   .lt-column {
@@ -61,11 +48,20 @@
     }
   }
 
+  .lt-body-wrap:focus {
+    .lt-row.has-focus {
+      outline-color: black;
+      outline-style: inset;
+      outline-width: 1px;
+      outline-offset: -1px;
+    }
+  }
+
   .lt-row {
     height: 50px;
 
     &.is-selected {
-      background-color: #DEDEDE;
+      background-color: @selected-background-color;
     }
 
     &:not(.is-selected):hover {
@@ -137,9 +133,100 @@ tfoot {
   }
 }
 
-
 .ember-light-table.occlusion {
   .lt-row td {
     vertical-align: middle;
+  }
+}
+
+.ember-light-table .body-decorations {
+  height: 0;
+  overflow: visible;
+}
+
+.ember-light-table .body-decorations .lt-selection-handle {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  overflow: visible;
+  &.lt-selection-handle-up > div {
+    cursor: n-resize;
+    bottom: 0;
+    > div {
+      top: 1px;
+    }
+  }
+  &.lt-selection-handle-down > div {
+    cursor: s-resize;
+    top: 0;
+    > div {
+      top: -1px;
+    }
+  }
+  > div {
+    display: block;
+    width: 0px;
+    height: 10px;
+    position: absolute;
+    left: 50%;
+    > div {
+      width: 50px;
+      height: 100%;
+      position: relative;
+      left: -50%;
+      border-radius: 2px;
+      background-color: @handle-color;
+      opacity: 0.5;
+    }
+  }
+}
+
+.ember-light-table .body-decorations .lt-row-range-box {
+  pointer-events: none;
+  background: transparent;
+  position: absolute;
+  border: @range-border;
+}
+
+.explanations {
+  display: flex;
+  align-content: flex-start;
+
+  font-size: smaller;
+
+  h4 {
+    padding: 5px;
+    background-color: lightgray;
+    font-size: small;
+  }
+
+  > * {
+    overflow: hidden;
+    flex: 1 1 auto;
+    margin: 15px 30px 15px 0;
+    dt {
+      &:after {
+        content: ':'
+      }
+      margin-top: 5px;
+    }
+  }
+
+  .mouse-list, .keyboard-list {
+    height: 75px;
+    display: flex;
+    flex-flow: column wrap;
+    align-content: flex-start;
+    dt {
+      margin-top: 5px;
+      flex-grow: 0;
+    }
+    dd {
+      flex-grow: 1;
+      justify-self: flex-start;
+    }
+    > * {
+      margin: 0 10px;
+    }
   }
 }

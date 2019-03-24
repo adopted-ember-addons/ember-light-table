@@ -1,7 +1,5 @@
 import Mixin from '@ember/object/mixin';
-import { computed, trySet } from '@ember/object';
-import { isEmpty } from '@ember/utils';
-import { warn } from '@ember/debug';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
 
@@ -122,12 +120,13 @@ export default Mixin.create({
   iconComponent: null,
 
   /**
-   * ID of main table component. Used to generate divs for ember-wormhole
+   * Id used to figure out where to render the content
+   * @property to
    * @type {String}
    */
-  tableId: null,
+  frameId: null,
 
-  renderInPlace: computed.oneWay('fixed'),
+  renderInPlace: computed.not('fixed'),
   columnGroups: computed.readOnly('table.visibleColumnGroups'),
   subColumns: computed.readOnly('table.visibleSubColumns'),
   columns: computed.readOnly('table.visibleColumns'),
@@ -142,22 +141,6 @@ export default Mixin.create({
       return cssStyleify({ paddingRight: `${scrollbarThickness}px` });
     }
   }).readOnly(),
-
-  init() {
-    this._super(...arguments);
-
-    const fixed = this.get('fixed');
-    const sharedOptionsFixedPath = `sharedOptions.${this.get('sharedOptionsFixedKey')}`;
-    trySet(this, sharedOptionsFixedPath, fixed);
-
-    const height = this.get('sharedOptions.height');
-
-    warn(
-      'You did not set a `height` attribute for your table, but marked a header or footer to be fixed. This means that you have to set the table height via CSS. For more information please refer to:  https://github.com/offirgolan/ember-light-table/issues/446',
-      !fixed || fixed && !isEmpty(height),
-      { id: 'ember-light-table.height-attribute' }
-    );
-  },
 
   actions: {
     /**
@@ -178,7 +161,9 @@ export default Mixin.create({
           column.set('sorted', true);
         }
       }
-      this.sendAction('onColumnClick', ...arguments);
+      if (this.onColumnClick) {
+        this.onColumnClick(...arguments);
+      }
     },
 
     /**
@@ -189,7 +174,9 @@ export default Mixin.create({
      * @param  {Event} event   The click event
      */
     onColumnDoubleClick(/* column */) {
-      this.sendAction('onColumnDoubleClick', ...arguments);
+      if (this.onColumnDoubleClick) {
+        this.onColumnDoubleClick(...arguments);
+      }
     },
 
     /**
@@ -200,7 +187,9 @@ export default Mixin.create({
      * @param  {String} width  The final width of the column
      */
     onColumnResized(/* column, width */) {
-      this.sendAction('onColumnResized', ...arguments);
+      if (this.onColumnResized) {
+        this.onColumnResized(...arguments);
+      }
     },
 
     /**
@@ -210,7 +199,9 @@ export default Mixin.create({
      * @param  {Column} column The column that is being dragged
      */
     onColumnDrag(/* column */) {
-      this.sendAction('onColumnDrag', ...arguments);
+      if (this.onColumnDrag) {
+        this.onColumnDrag(...arguments);
+      }
     },
 
     /**
@@ -221,7 +212,9 @@ export default Mixin.create({
      * @param  {Boolean} isSuccess The column was successfully dropped and sorted
      */
     onColumnDrop(/* column, isSuccess */) {
-      this.sendAction('onColumnDrop', ...arguments);
+      if (this.onColumnDrop) {
+        this.onColumnDrop(...arguments);
+      }
     }
   }
 });
