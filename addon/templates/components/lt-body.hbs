@@ -11,6 +11,7 @@
       autoHide=autoHideScrollbar
       scrollTo=targetScrollOffset
       onScrollY=(action 'onScroll')
+      as |scrollbar|
     }}
       <div id={{concat tableId '_inline_head'}} class="lt-inline lt-head"></div>
 
@@ -27,7 +28,7 @@
         {{#if overwrite}}
           {{yield columns rows}}
         {{else}}
-          {{#each rows as |row|}}
+          {{#each (if scrollbar (compute scrollbar.update rows) rows) as |row|}}
             {{lt.row row columns
                      data-row-id=row.rowId
                      table=table
