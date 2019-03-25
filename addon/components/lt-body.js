@@ -1,8 +1,20 @@
 import Component from '@ember/component';
+import { A as emberArray } from '@ember/array';
 import { computed, observer } from '@ember/object';
+import { getOwner } from '@ember/application';
+import { debounce, run, schedule } from '@ember/runloop';
+import { warn } from '@ember/debug';
 import layout from 'ember-light-table/templates/components/lt-body';
-import { run } from '@ember/runloop';
-import Row from 'ember-light-table/classes/Row';
+import { EKMixin } from 'ember-keyboard';
+import ActivateKeyboardOnFocusMixin from 'ember-keyboard/mixins/activate-keyboard-on-focus';
+import HasBehaviorsMixin from 'ember-light-table/mixins/has-behaviors';
+import RowExpansionBehavior from 'ember-light-table/behaviors/row-expansion';
+import SingleSelectBehavior from 'ember-light-table/behaviors/single-select';
+import MultiSelectBehavior from 'ember-light-table/behaviors/multi-select';
+import { behaviorGroupFlag, behaviorFlag, behaviorInstanceOf } from 'ember-light-table/mixins/has-behaviors';
+import deprecatedAlias from 'ember-light-table/utils/deprecated-alias';
+
+const deprecationUntil = '2.0';
 
 /**
  * @module Light Table
@@ -33,11 +45,14 @@ import Row from 'ember-light-table/classes/Row';
  *
  * @class t.body
  */
+export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehaviorsMixin, {
 
-export default Component.extend({
   layout,
   classNames: ['lt-body-wrap'],
-  classNameBindings: ['canSelect', 'multiSelect', 'canExpand'],
+
+  attributeBindings: ['tabindex'],
+
+  tabindex: 0,
 
   /**
    * @property table
@@ -60,6 +75,14 @@ export default Component.extend({
   tableActions: null,
 
   /**
+   * Turn this off to use the new way of specifying behaviors.
+   *
+   * @property useLegacyBehaviors
+   * @type {Object}
+   */
+  useLegacyBehaviorFlags: true,
+
+  /**
    * @property extra
    * @type {Object}
    */
@@ -80,8 +103,16 @@ export default Component.extend({
    * @property canSelect
    * @type {Boolean}
    * @default true
+   * @deprecated Please set the value of the `behaviors` property directly.
    */
-  canSelect: true,
+  canSelect: deprecatedAlias(
+    '_canSelect',
+    'canSelect',
+    'Please set the value of the "behaviors" property directly.',
+    deprecationUntil
+  ),
+
+  _canSelect: behaviorGroupFlag('can-select'),
 
   /**
    * Select a row on click. If this is set to `false` and multiSelect is
@@ -91,8 +122,14 @@ export default Component.extend({
    * @property selectOnClick
    * @type {Boolean}
    * @default true
+   * @deprecated Please set the flag directly on the `behaviors/multi-select` instance.
    */
-  selectOnClick: true,
+  selectOnClick: deprecatedAlias(
+    '_multiSelectBehavior.selectOnClick',
+    'selectOnClick',
+    'Please set the flag directly on the "behaviors/multi-select" instance.',
+    deprecationUntil
+  ),
 
   /**
    * Allows for expanding row. This will create a new row under the row that was
@@ -107,8 +144,16 @@ export default Component.extend({
    * @property canExpand
    * @type {Boolean}
    * @default false
+   * @deprecated Please set the value of the `behaviors` property directly.
    */
-  canExpand: false,
+  canExpand: deprecatedAlias(
+    '_canExpand',
+    'canExpand',
+    'Please set the value of the "behaviors" property directly.',
+    deprecationUntil
+  ),
+
+  _canExpand: behaviorGroupFlag('can-expand'),
 
   /**
    * Allows a user to select multiple rows with the `ctrl`, `cmd`, and `shift` keys.
@@ -117,8 +162,16 @@ export default Component.extend({
    * @property multiSelect
    * @type {Boolean}
    * @default false
+   * @deprecated Please set the value of the `behaviors` property directly.
    */
-  multiSelect: false,
+  multiSelect: deprecatedAlias(
+    '_multiSelect',
+    'multiSelect',
+    'Please set the value of the "behaviors" property directly.',
+    deprecationUntil
+  ),
+
+  _multiSelect: behaviorFlag('can-select', '_multiSelectBehavior'),
 
   /**
    * When multiSelect is true, this property determines whether or not `ctrl`
@@ -130,8 +183,14 @@ export default Component.extend({
    * @property multiSelectRequiresKeyboard
    * @type {Boolean}
    * @default true
+   * @deprecated Please set the flag directly on the `behaviors/multi-select` instance.
    */
-  multiSelectRequiresKeyboard: true,
+  multiSelectRequiresKeyboard: deprecatedAlias(
+    '_multiSelectBehavior.requiresKeyboard',
+    'multiSelectRequiresKeyboard',
+    'Please set the flag directly on the "behaviors/multi-select" instance.',
+    deprecationUntil
+  ),
 
   /**
    * Hide scrollbar when not scrolling
@@ -148,8 +207,14 @@ export default Component.extend({
    * @property multiRowExpansion
    * @type {Boolean}
    * @default true
+   * @deprecated Please set the flag directly on the `behaviors/row-expansion` instance.
    */
-  multiRowExpansion: true,
+  multiRowExpansion: deprecatedAlias(
+    '_rowExpansionBehavior.multiRow',
+    'multiRowExpansion',
+    'Please set the flag directly on the "behaviors/row-expansion" instance.',
+    deprecationUntil
+  ),
 
   /**
    * Expand a row on click
@@ -157,8 +222,14 @@ export default Component.extend({
    * @property expandOnClick
    * @type {Boolean}
    * @default true
+   * @deprecated Please set the flag directly on the `behaviors/row-expansion` instance.
    */
-  expandOnClick: true,
+  expandOnClick: deprecatedAlias(
+    '_rowExpansionBehavior.expandOnClick',
+    'expandOnClick',
+    'Please set the flag directly on the "behaviors/row-expansion" instance.',
+    deprecationUntil
+  ),
 
   /**
    * If true, the body block will yield columns and rows, allowing you
@@ -220,18 +291,11 @@ export default Component.extend({
    */
   useVirtualScrollbar: false,
 
-  /**
-   * Set this property to scroll to a specific px offset.
-   *
-   * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
-   * using fixed headers / footers.
-   *
-   * @property scrollTo
-   * @type {Number}
-   * @default null
-   */
   scrollTo: null,
-  _scrollTo: null,
+
+  _onScrollTo: observer('scrollTo', function() {
+    warn('Property "scrollTo" is not supported anymore, please use lt-scrollable directly instead.');
+  }),
 
   /**
    * Set this property to a `Row` to scroll that `Row` into view.
@@ -244,7 +308,18 @@ export default Component.extend({
    * @default null
    */
   scrollToRow: null,
-  _scrollToRow: null,
+
+  _onScrollToRow: observer('scrollToRow', function() {
+    let row = this.get('scrollToRow');
+    if (row) {
+      let ltRow = this.get('ltRows').findBy('row', row);
+      if (ltRow) {
+        schedule('afterRender', () => this.makeRowVisible(ltRow.get('element')));
+      } else {
+        throw 'Row passed to scrollToRow() is not part of the rendered table.';
+      }
+    }
+  }),
 
   /**
    * @property targetScrollOffset
@@ -329,22 +404,32 @@ export default Component.extend({
     }
   }),
 
-  _prevSelectedIndex: -1,
+  /* Components to add in the scrollable content
+   *
+   * @property
+   * @type {[ { component, namedArgs ]} ]}
+   * @default []
+   */
+  decorations: null,
+
+  scrollableContainer: computed('sharedOptions.frameId', function() {
+    // TODO: FIX: lt-body should not know about .tse-scroll-content
+    const id = this.get('sharedOptions.frameId');
+    return `#${id} .tse-scroll-content, #${id} .lt-scrollable`;
+  }),
 
   init() {
     this._super(...arguments);
-
-    /*
-      We can only set `useVirtualScrollbar` once all contextual components have
-      been initialized since fixedHeader and fixedFooter are set on t.head and t.foot
-      initialization.
-     */
-    run.once(this, this._setupVirtualScrollbar);
+    if (this.get('decorations') === null) {
+      this.set('decorations', emberArray());
+    }
+    this.get('table.focusIndex'); // so the observers are triggered
+    this.__preventPropagation = (e) => this._preventPropagation(e);
+    this._initDefaultBehaviorsIfNeeded();
   },
 
   didReceiveAttrs() {
     this._super(...arguments);
-    this.setupScrollOffset();
   },
 
   destroy() {
@@ -352,77 +437,74 @@ export default Component.extend({
     this._cancelTimers();
   },
 
-  _setupVirtualScrollbar() {
-    let { fixedHeader, fixedFooter } = this.get('sharedOptions');
-    this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
+  didInsertElement() {
+    this._super(...arguments);
+    document.addEventListener('keydown', this.__preventPropagation);
   },
 
-  onRowsChange: observer('rows.[]', function() {
-    this._checkTargetOffsetTimer = run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
-  }),
+  willDestroyElement() {
+    this._super(...arguments);
+    document.removeEventListener('keydown', this.__preventPropagation);
+  },
 
-  setupScrollOffset() {
-    let {
-      scrollTo,
-      _scrollTo,
-      scrollToRow,
-      _scrollToRow
-    } = this.getProperties(['scrollTo', '_scrollTo', 'scrollToRow', '_scrollToRow']);
-    let targetScrollOffset = null;
+  _preventPropagation(e) {
+    if (e.target === this.get('element') && [32, 33, 34, 35, 36, 38, 40].includes(e.keyCode)) {
+      return e.preventDefault();
+    }
+  },
 
-    this.setProperties({ _scrollTo: scrollTo, _scrollToRow: scrollToRow });
+  _multiSelectBehavior: behaviorInstanceOf(MultiSelectBehavior),
+  _rowExpansionBehavior: behaviorInstanceOf(RowExpansionBehavior),
 
-    if (scrollTo !== _scrollTo) {
-      targetScrollOffset = Number.parseInt(scrollTo, 10);
+  _initDefaultBehaviorsIfNeeded() {
+    this._initDefaultBehaviorsIfNeeded = function() {};
+    if (this.get('useLegacyBehaviorFlags')) {
+      this.activateBehavior(MultiSelectBehavior.create({}), true);
+      this.activateBehavior(SingleSelectBehavior.create({}), true);
+      this.activateBehavior(RowExpansionBehavior.create({}), false);
+    }
+  },
 
-      if (Number.isNaN(targetScrollOffset)) {
-        targetScrollOffset = null;
-      }
+  makeRowAtVisible(i, nbExtraRows = 0) {
+    this.makeRowVisible(this.get('ltRows').objectAt(i).get('element'), nbExtraRows);
+  },
 
-      this.setProperties({
-        targetScrollOffset,
-        hasReachedTargetScrollOffset: targetScrollOffset <= 0
-      });
-    } else if (scrollToRow !== _scrollToRow) {
-      if (scrollToRow instanceof Row) {
-        let rowElement = this.element.querySelector(`[data-row-id=${scrollToRow.get('rowId')}]`);
+  scrollableContainerElement: computed(function() {
+    return this.get('element').closest('.lt-scrollable');
+  }).volatile().readOnly(),
 
-        if (rowElement instanceof Element) {
-          targetScrollOffset = rowElement.offsetTop;
+  scrollableContentElement: computed(function() {
+    return this.get('element').closest('.scrollable-content');
+  }).volatile().readOnly(),
+
+  makeRowVisible(rowElement, nbExtraRows = 0) {
+    let scrollableContentElement = this.get('scrollableContentElement');
+    let scrollableContainerElement = this.get('scrollableContainerElement');
+    if (rowElement && scrollableContentElement && scrollableContainerElement) {
+      let rt = rowElement.getBoundingClientRect().top - scrollableContentElement.getBoundingClientRect().top;
+      let rh = rowElement.clientHeight;
+      let rb = rt + rh;
+      let h = scrollableContainerElement.clientHeight;
+      let t = this.get('scrollTop');
+      let b = t + h;
+      let extraSpace = rh * nbExtraRows;
+      if (rt - extraSpace <= t) {
+        if (this.onScrollTo) {
+          this.onScrollTo(rt - extraSpace);
+        }
+      } else if (rb + extraSpace >= b) {
+        if (this.onScrollTo) {
+          this.onScrollTo(t + rb - b + extraSpace);
         }
       }
-
-      this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
     }
   },
 
-  checkTargetScrollOffset() {
-    if (!this.get('hasReachedTargetScrollOffset')) {
-      let targetScrollOffset = this.get('targetScrollOffset');
-      let currentScrollOffset = this.get('currentScrollOffset');
-
-      if (targetScrollOffset > currentScrollOffset) {
-        this.set('targetScrollOffset', null);
-        this._setTargetOffsetTimer = run.schedule('render', null, () => {
-          this.set('targetScrollOffset', targetScrollOffset);
-        });
-      } else {
-        this.set('hasReachedTargetScrollOffset', true);
-      }
+  _onFocusedRowChanged: observer('table.focusIndex', function() {
+    if (typeof FastBoot === 'undefined') {
+      run.schedule('afterRender', null, () => this.makeRowVisible(this.get('element').querySelector('tr.has-focus'), 0.5));
     }
-  },
-
-  toggleExpandedRow(row) {
-    let multiRowExpansion = this.get('multiRowExpansion');
-    let shouldExpand = !row.expanded;
-
-    if (multiRowExpansion) {
-      row.toggleProperty('expanded');
-    } else {
-      this.get('table.expandedRows').setEach('expanded', false);
-      row.set('expanded', shouldExpand);
-    }
-  },
+  }),
 
   /**
    * @method _debounceScrolledToBottom
@@ -432,7 +514,7 @@ export default Component.extend({
      This debounce is needed when there is not enough delay between onScrolledToBottom calls.
      Without this debounce, all rows will be rendered causing immense performance problems
      */
-    this._debounceTimer = run.debounce(this, this.onScrolledToBottom, delay);
+    this._debounceTimer = debounce(this, this.onScrolledToBottom, delay);
   },
 
   /**
@@ -443,6 +525,42 @@ export default Component.extend({
     run.cancel(this._setTargetOffsetTimer);
     run.cancel(this._schedulerTimer);
     run.cancel(this._debounceTimer);
+  },
+
+  ltRows: computed(function() {
+    let vrm = getOwner(this).lookup('-view-registry:main');
+    let rowElements = this.get('element').querySelectorAll('tr:not(.lt-expanded-row)');
+    return emberArray([...rowElements].map((e) => vrm[e.id]));
+  }).volatile(),
+
+  getLtRowAt(position) {
+    return this
+      .get('ltRows')
+      .find((ltr) => {
+        let top = ltr.get('top');
+        return top <= position && position < top + ltr.get('height');
+      });
+  },
+
+  pageSize: computed(function() {
+    let rows = this.get('table.rows');
+    if (rows.get('length') === 0) {
+      return 0;
+    }
+    let r0 = this.getLtRowAt(0);
+    if (!r0) {
+      r0 = this.get('ltRows').get('firstObject');
+    }
+    let rN = this.getLtRowAt(this.get('scrollableContainerElement').clientHeight);
+    if (!rN) {
+      rN = this.get('ltRows').get('lastObject');
+    }
+    let i = (r) => rows.indexOf(r.get('row'));
+    return i(rN) - i(r0);
+  }).volatile().readOnly(),
+
+  signalSelectionChanged() {
+    this.get('behaviors').forEach((b) => b.onSelectionChanged(this));
   },
 
   // Noop for closure actions
@@ -456,75 +574,74 @@ export default Component.extend({
   onScrolledToBottom() {},
 
   actions: {
-    /**
-     * onRowClick action. Handles selection, and row expansion.
-     * @event onRowClick
-     * @param  {Row}   row The row that was clicked
-     * @param  {Event}   event   The click event
-     */
-    onRowClick(row, e) {
-      let rows = this.get('table.rows');
-      let multiSelect = this.get('multiSelect');
-      let multiSelectRequiresKeyboard = this.get('multiSelectRequiresKeyboard');
-      let canSelect = this.get('canSelect');
-      let selectOnClick = this.get('selectOnClick');
-      let canExpand = this.get('canExpand');
-      let expandOnClick = this.get('expandOnClick');
-      let isSelected = row.get('selected');
-      let currIndex = rows.indexOf(row);
-      let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
-
-      this._prevSelectedIndex = currIndex;
-
-      let toggleExpandedRow = () => {
-        if (canExpand && expandOnClick) {
-          this.toggleExpandedRow(row);
-        }
-      };
-
-      if (canSelect) {
-        if (e.shiftKey && multiSelect) {
-          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach((r) => r.set('selected', !isSelected));
-        } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) && multiSelect) {
-          row.toggleProperty('selected');
-        } else {
-          if (selectOnClick) {
-            this.get('table.selectedRows').setEach('selected', false);
-            row.set('selected', !isSelected);
-          }
-
-          toggleExpandedRow();
-        }
-      } else {
-        toggleExpandedRow();
+    onRowClick() {
+      this.triggerBehaviorEvent('rowClick', ...arguments);
+      if (this.onRowClick) {
+        this.onRowClick(...arguments);
       }
-
-      this.onRowClick(...arguments);
     },
 
-    /**
-     * onRowDoubleClick action.
-     * @event onRowDoubleClick
-     * @param  {Row}   row The row that was clicked
-     * @param  {Event}   event   The click event
-     */
-    onRowDoubleClick(/* row */) {
-      this.onRowDoubleClick(...arguments);
+    onRowDoubleClick() {
+      this.triggerBehaviorEvent('rowDoubleClick', ...arguments);
+      if (this.onRowDoubleClick) {
+        this.onRowDoubleClick(...arguments);
+      }
     },
 
-    /**
-     * onScroll action - sent when user scrolls in the Y direction
-     *
-     * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
-     * using fixed headers / footers.
-     *
-     * @event onScroll
-     * @param {Number} scrollOffset The scroll offset in px
-     * @param {Event} event The scroll event
-     */
-    onScroll(scrollOffset /* , event */) {
-      this.set('currentScrollOffset', scrollOffset);
-      this.onScroll(...arguments);
+    onRowMouseDown() {
+      this.triggerBehaviorEvent('rowMouseDown', ...arguments);
+      if (this.onRowMouseDown) {
+        this.onRowMouseDown(...arguments);
+      }
+    },
+
+    onRowMouseUp() {
+      this.triggerBehaviorEvent('rowMouseUp', ...arguments);
+      if (this.onRowMouseUp) {
+        this.onRowMouseUp(...arguments);
+      }
+    },
+
+    onRowMouseMove() {
+      this.triggerBehaviorEvent('rowMouseMove', ...arguments);
+      if (this.onRowMouseMove) {
+        this.onRowMouseMove(...arguments);
+      }
+    },
+
+    onRowTouchStart() {
+      this.triggerBehaviorEvent('rowTouchStart', ...arguments);
+      if (this.onRowTouchStart) {
+        this.onRowTouchStart(...arguments);
+      }
+    },
+
+    onRowTouchEnd() {
+      this.triggerBehaviorEvent('rowTouchEnd', ...arguments);
+      if (this.onRowTouchEnd) {
+        this.onRowTouchEnd(...arguments);
+      }
+    },
+
+    onRowTouchCancel() {
+      this.triggerBehaviorEvent('rowTouchCancel', ...arguments);
+      if (this.onRowTouchCancel) {
+        this.onRowTouchCancel(...arguments);
+      }
+    },
+
+    onRowTouchLeave() {
+      this.triggerBehaviorEvent('rowTouchLeave', ...arguments);
+      if (this.onRowTouchLeave) {
+        this.onRowTouchLeave(...arguments);
+      }
+    },
+
+    onRowTouchMove() {
+      this.triggerBehaviorEvent('rowTouchMove', ...arguments);
+      if (this.onRowTouchMove) {
+        this.onRowTouchMove(...arguments);
+      }
     },
 
     /**
@@ -542,10 +659,10 @@ export default Component.extend({
       this.set('isInViewport', false);
     },
 
-    firstVisibleChanged(item, index /* , key */) {
-      this.firstVisibleChanged(...arguments);
-      const estimateScrollOffset = index * this.get('sharedOptions.estimatedRowHeight');
-      this.onScroll(estimateScrollOffset, null);
+    firstVisibleChanged(/* item, index, key */) {
+      if (this.firstVisibleChanged) {
+        this.firstVisibleChanged(...arguments);
+      }
     },
 
     lastVisibleChanged(/* item, index, key */) {

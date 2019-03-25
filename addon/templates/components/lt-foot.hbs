@@ -1,4 +1,4 @@
-{{#ember-wormhole to=(concat tableId '_inline_foot') renderInPlace=renderInPlace}}
+{{#ember-wormhole to=(lt-foot-id sharedOptions.frameId) renderInPlace=renderInPlace}}
   <table class={{tableClassNames}}>
     <tfoot class="lt-foot">
       {{!-- Scaffolding is needed here to allow use of colspan in the footer --}}

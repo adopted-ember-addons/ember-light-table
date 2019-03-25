@@ -20,6 +20,7 @@ Router.map(function() {
   this.route('rows', function() {
     this.route('expandable');
     this.route('selectable');
+    this.route('spreadsheet');
   });
 
   this.route('cookbook', function() {

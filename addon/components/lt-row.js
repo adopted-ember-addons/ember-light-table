@@ -1,12 +1,24 @@
+/* eslint ember/no-on-calls-in-components:off */
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { on } from '@ember/object/evented';
 import layout from 'ember-light-table/templates/components/lt-row';
 
 const Row = Component.extend({
   layout,
   tagName: 'tr',
   classNames: ['lt-row'],
-  classNameBindings: ['isSelected', 'isExpanded', 'canExpand:is-expandable', 'canSelect:is-selectable', 'row.classNames'],
+
+  classNameBindings: [
+    'isSelected',
+    'isExpanded',
+    'hasFocus',
+    'canExpand:is-expandable',
+    'canSelect:is-selectable',
+    'canFocus:is-focusable',
+    'row.classNames'
+  ],
+
   attributeBindings: ['colspan', 'data-row-id'],
 
   columns: null,
@@ -15,10 +27,97 @@ const Row = Component.extend({
   extra: null,
   canExpand: false,
   canSelect: false,
+  canFocus: false,
   colspan: 1,
 
   isSelected: computed.readOnly('row.selected'),
-  isExpanded: computed.readOnly('row.expanded')
+  isExpanded: computed.readOnly('row.expanded'),
+  hasFocus: computed.readOnly('row.hasFocus'),
+
+  ltBody: null,
+
+  ltBodyElement: computed(function() {
+    return this.get('ltBody.element');
+  }).volatile().readOnly(),
+
+  left: computed(function() {
+    return this.get('element').getBoundingClientRect().left
+      - this.get('ltBodyElement').getBoundingClientRect().left;
+  }).volatile().readOnly(),
+
+  width: computed(function() {
+    return this.get('element').clientWidth;
+  }).volatile().readOnly(),
+
+  top: computed(function() {
+    return this.get('element').getBoundingClientRect().top
+      - this.get('ltBodyElement').getBoundingClientRect().top;
+  }).volatile().readOnly(),
+
+  height: computed(function() {
+    return this.get('element').clientHeight;
+  }).volatile().readOnly(),
+
+  _onClick: on('click', function() {
+    if (this.rowClick) {
+      this.rowClick(this, ...arguments);
+    }
+  }),
+
+  _onDoubleClick: on('doubleClick', function() {
+    if (this.rowDoubleClick) {
+      this.rowDoubleClick(this, ...arguments);
+    }
+  }),
+
+  _onMouseDown: on('mouseDown', function() {
+    if (this.rowMouseDown) {
+      this.rowMouseDown(this, ...arguments);
+    }
+  }),
+
+  _onMouseUp: on('mouseUp', function() {
+    if (this.rowMouseUp) {
+      this.rowMouseUp(this, ...arguments);
+    }
+  }),
+
+  _onMouseMove: on('mouseMove', function() {
+    if (this.rowMouseMove) {
+      this.rowMouseMove(this, ...arguments);
+    }
+  }),
+
+  _onTouchStart: on('touchStart', function() {
+    if (this.rowTouchStart) {
+      this.rowTouchStart(this, ...arguments);
+    }
+  }),
+
+  _onTouchEnd: on('touchEnd', function() {
+    if (this.rowTouchEnd) {
+      this.rowTouchEnd(this, ...arguments);
+    }
+  }),
+
+  _onTouchCancel: on('touchCancel', function() {
+    if (this.rowTouchCancel) {
+      this.rowTouchCancel(this, ...arguments);
+    }
+  }),
+
+  _onTouchLeave: on('touchLeave', function() {
+    if (this.rowTouchLeave) {
+      this.rowTouchLeave(this, ...arguments);
+    }
+  }),
+
+  _onTouchMove: on('touchMove', function() {
+    if (this.rowTouchMove) {
+      this.rowTouchMove(this, ...arguments);
+    }
+  })
+
 });
 
 Row.reopenClass({

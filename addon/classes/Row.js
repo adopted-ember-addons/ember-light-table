@@ -46,6 +46,18 @@ export default class Row extends ObjectProxy.extend({
   selected: false,
 
   /**
+   * Whether the focus is on the row.
+   *
+   * CSS Classes:
+   *  - `has-focus`
+   *
+   * @property hasFocus
+   * @type {Boolean}
+   * @default false
+   */
+  hasFocus: false,
+
+  /**
    * Class names to be applied to this row
    *
    * @property classNames
