@@ -64,6 +64,11 @@
         scrollBuffer=scrollBuffer
       }}
     {{/if}}
+    <div class='body-decorations'>
+      {{#each decorations as |decoration|}}
+        {{component decoration.component ltBody=this namedArgs=decoration.namedArgs}}
+      {{/each}}
+    </div>
   {{else}}
     <div class="vertical-collection">
       <table class={{tableClassNames}}>

@@ -4,7 +4,6 @@ import { computed, observer } from '@ember/object';
 import { getOwner } from '@ember/application';
 import { debounce, run, schedule } from '@ember/runloop';
 import { warn } from '@ember/debug';
-import $ from 'jquery';
 import layout from 'ember-light-table/templates/components/lt-body';
 import { EKMixin } from 'ember-keyboard';
 import ActivateKeyboardOnFocusMixin from 'ember-keyboard/mixins/activate-keyboard-on-focus';
@@ -315,7 +314,7 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
     if (row) {
       let ltRow = this.get('ltRows').findBy('row', row);
       if (ltRow) {
-        schedule('afterRender', () => this.makeRowVisible(ltRow.$()));
+        schedule('afterRender', () => this.makeRowVisible(ltRow.get('element')));
       } else {
         throw 'Row passed to scrollToRow() is not part of the rendered table.';
       }
@@ -421,13 +420,11 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
 
   init() {
     this._super(...arguments);
-
     if (this.get('decorations') === null) {
       this.set('decorations', emberArray());
     }
-
     this.get('table.focusIndex'); // so the observers are triggered
-
+    this.__preventPropagation = (e) => this._preventPropagation(e);
     this._initDefaultBehaviorsIfNeeded();
   },
 
@@ -442,17 +439,17 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
 
   didInsertElement() {
     this._super(...arguments);
-    $(document).on('keydown', this, this._preventPropagation);
+    document.addEventListener('keydown', this.__preventPropagation);
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    $(document).off('keydown', this, this._preventPropagation);
+    document.removeEventListener('keydown', this.__preventPropagation);
   },
 
   _preventPropagation(e) {
-    if (e.target === e.data.element && [32, 33, 34, 35, 36, 38, 40].includes(e.keyCode)) {
-      return false;
+    if (e.target === this.get('element') && [32, 33, 34, 35, 36, 38, 40].includes(e.keyCode)) {
+      return e.preventDefault();
     }
   },
 
@@ -469,25 +466,25 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
   },
 
   makeRowAtVisible(i, nbExtraRows = 0) {
-    this.makeRowVisible(this.get('ltRows').objectAt(i).$(), nbExtraRows);
+    this.makeRowVisible(this.get('ltRows').objectAt(i).get('element'), nbExtraRows);
   },
 
-  $scrollableContainer: computed(function() {
-    return this.$().parents('.lt-scrollable');
+  scrollableContainerElement: computed(function() {
+    return this.get('element').closest('.lt-scrollable');
   }).volatile().readOnly(),
 
-  $scrollableContent: computed(function() {
-    return this.$().parents('.scrollable-content');
+  scrollableContentElement: computed(function() {
+    return this.get('element').closest('.scrollable-content');
   }).volatile().readOnly(),
 
-  makeRowVisible($row, nbExtraRows = 0) {
-    let $scrollableContent = this.get('$scrollableContent');
-    let $scrollableContainer = this.get('$scrollableContainer');
-    if ($row.length !== 0 && $scrollableContent.length !== 0 && $scrollableContainer.length !== 0) {
-      let rt = $row.offset().top - $scrollableContent.offset().top;
-      let rh = $row.height();
+  makeRowVisible(rowElement, nbExtraRows = 0) {
+    let scrollableContentElement = this.get('scrollableContentElement');
+    let scrollableContainerElement = this.get('scrollableContainerElement');
+    if (rowElement && scrollableContentElement && scrollableContainerElement) {
+      let rt = rowElement.getBoundingClientRect().top - scrollableContentElement.getBoundingClientRect().top;
+      let rh = rowElement.clientHeight;
       let rb = rt + rh;
-      let h = $scrollableContainer.height();
+      let h = scrollableContainerElement.clientHeight;
       let t = this.get('scrollTop');
       let b = t + h;
       let extraSpace = rh * nbExtraRows;
@@ -505,7 +502,7 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
 
   _onFocusedRowChanged: observer('table.focusIndex', function() {
     if (typeof FastBoot === 'undefined') {
-      run.schedule('afterRender', null, () => this.makeRowVisible(this.$('tr.has-focus'), 0.5));
+      run.schedule('afterRender', null, () => this.makeRowVisible(this.get('element').querySelector('tr.has-focus'), 0.5));
     }
   }),
 
@@ -532,8 +529,8 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
 
   ltRows: computed(function() {
     let vrm = getOwner(this).lookup('-view-registry:main');
-    let q = this.$('tr:not(.lt-expanded-row)');
-    return emberArray($.makeArray(q.map((i, e) => vrm[e.id])));
+    let rowElements = this.get('element').querySelectorAll('tr:not(.lt-expanded-row)');
+    return emberArray([...rowElements].map((e) => vrm[e.id]));
   }).volatile(),
 
   getLtRowAt(position) {
@@ -554,7 +551,7 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
     if (!r0) {
       r0 = this.get('ltRows').get('firstObject');
     }
-    let rN = this.getLtRowAt(this.get('$scrollableContainer').height());
+    let rN = this.getLtRowAt(this.get('scrollableContainerElement').clientHeight);
     if (!rN) {
       rN = this.get('ltRows').get('lastObject');
     }
