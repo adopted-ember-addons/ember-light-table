@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { A as emberArray } from '@ember/array';
 import { computed, observer } from '@ember/object';
 import { getOwner } from '@ember/application';
-import { debounce, run, schedule } from '@ember/runloop';
+import { debounce, once, run, schedule } from '@ember/runloop';
 import { warn } from '@ember/debug';
 import layout from 'ember-light-table/templates/components/lt-body';
 import { EKMixin } from 'ember-keyboard';
@@ -562,6 +562,10 @@ export default Component.extend(EKMixin, ActivateKeyboardOnFocusMixin, HasBehavi
   signalSelectionChanged() {
     this.get('behaviors').forEach((b) => b.onSelectionChanged(this));
   },
+
+  onSelectionChanged: observer('table.rows.@each.selected', function() {
+    once(this, this.signalSelectionChanged);
+  }),
 
   // Noop for closure actions
   onRowClick() {},
