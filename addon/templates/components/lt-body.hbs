@@ -37,7 +37,9 @@
                      canExpand=canExpand
                      canSelect=canSelect
                      click=(action 'onRowClick' row)
-                     doubleClick=(action 'onRowDoubleClick' row)}}
+                     doubleClick=(action 'onRowDoubleClick' row)
+                     mouseEnter=(action 'onRowMouseEnter' row)
+                     mouseLeave=(action 'onRowMouseLeave' row)}}
 
             {{yield (hash
                       expanded-row=(component lt.spanned-row classes='lt-expanded-row' colspan=colspan yield=row visible=row.expanded)
@@ -96,7 +98,9 @@
                      canExpand=canExpand
                      canSelect=canSelect
                      click=(action 'onRowClick' row)
-                     doubleClick=(action 'onRowDoubleClick' row)}}
+                     doubleClick=(action 'onRowDoubleClick' row)
+                     mouseEnter=(action 'onRowMouseEnter' row)
+                     mouseLeave=(action 'onRowMouseLeave' row)}}
           {{/vertical-collection}}
           {{yield (hash
                     loader=(component lt.spanned-row classes='lt-is-loading')
