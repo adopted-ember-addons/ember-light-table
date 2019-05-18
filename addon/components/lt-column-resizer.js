@@ -16,7 +16,7 @@ export default Component.extend({
   startX: null,
 
   $column: computed(function() {
-    return $(this.get('element')).parent('th');
+    return this.$().parent('th');
   }).volatile().readOnly(),
 
   didInsertElement() {
@@ -25,15 +25,17 @@ export default Component.extend({
     this.__mouseMove = this._mouseMove.bind(this);
     this.__mouseUp = this._mouseUp.bind(this);
 
-    $(document).on('mousemove', this.__mouseMove);
-    $(document).on('mouseup', this.__mouseUp);
+    $(document)
+      .on('mousemove', this.__mouseMove)
+      .on('mouseup', this.__mouseUp);
   },
 
   willDestroyElement() {
     this._super(...arguments);
 
-    $(document).off('mousemove', this.__mouseMove);
-    $(document).off('mouseup', this.__mouseUp);
+    $(document)
+      .off('mousemove', this.__mouseMove)
+      .off('mouseup', this.__mouseUp);
   },
 
   click(e) {
