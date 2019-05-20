@@ -132,13 +132,11 @@ export default Mixin.create({
       e.preventDefault();
       e.stopPropagation();
 
-      table.propertyWillChange('columns');
-
       _columns.removeObject(sourceColumn);
       _columns.insertAt(targetColumnIdx, sourceColumn);
       columns.setObjects(_columns);
 
-      table.propertyDidChange('columns');
+      table.notifyPropertyChange('columns');
 
       this.setProperties({ isDragTarget: false, isDragging: false });
 
