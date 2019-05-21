@@ -66,6 +66,7 @@
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-native-dom-helpers": "^0.6.2",
+    "ember-notify-property-change-polyfill": "^0.0.2",
     "ember-one-way-controls": "^3.0.1",
     "ember-qunit": "^4.0.0",
     "ember-resolver": "^4.5.0",
