@@ -80,6 +80,9 @@
     "loader.js": "^4.6.0",
     "yuidoc-ember-theme": "^2.0.1"
   },
+  "resolutions": {
+    "ip-regex": "^2.1.0"
+  },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
   },

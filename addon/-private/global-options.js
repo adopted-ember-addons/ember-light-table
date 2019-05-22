@@ -7,5 +7,5 @@ const globalOptions = config['ember-light-table'] || {};
 export default globalOptions;
 
 export function mergeOptionsWithGlobals(options) {
-  return assign(assign({}, globalOptions), options);
+  return assign({}, globalOptions, options);
 }

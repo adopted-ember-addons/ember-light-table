@@ -125,16 +125,14 @@ export default Mixin.create({
       let table = this.get('table');
       let columns = this.get('dragColumnGroup');
 
-      let _columns = columns.toArray();
-      let targetColumnIdx = _columns.indexOf(targetColumn);
+      let targetColumnIdx = columns.indexOf(targetColumn);
 
       e.dataTransfer.dropEffect = 'move';
       e.preventDefault();
       e.stopPropagation();
 
-      _columns.removeObject(sourceColumn);
-      _columns.insertAt(targetColumnIdx, sourceColumn);
-      columns.setObjects(_columns);
+      columns.removeObject(sourceColumn);
+      columns.insertAt(targetColumnIdx, sourceColumn);
 
       table.notifyPropertyChange('columns');
 
