@@ -80,13 +80,13 @@ module('Integration | Component | light table', function(hooks) {
 
     assert.equal(findAll('#table-2 tbody > tr').length, 50, '50 rows are rendered');
 
-    let scrollContainer = '#table-2 .tse-scroll-content';
-    let { scrollHeight } = find(scrollContainer);
+    let scrollContainer = find('#table-2 .tse-scroll-content');
+    assert.ok(scrollContainer, 'scroll container was rendered');
+    let expectedScroll = 2501;
+    assert.equal(scrollContainer.scrollHeight, expectedScroll, 'scroll height is 2500 + 1px for height of lt-infinity');
 
-    assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
-    assert.equal(scrollHeight, 2501, 'scroll height is 2500 + 1px for height of lt-infinity');
-
-    await scrollTo(scrollContainer, 0, scrollHeight);
+    scrollContainer.scrollTop = expectedScroll;
+    await triggerEvent(scrollContainer, 'scroll');
   });
 
   test('fixed header', async function(assert) {
