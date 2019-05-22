@@ -1,25 +1,25 @@
 {{!-- BEGIN-SNIPPET selectable-table --}}
 <div class="table-actions">
   {{#if hasSelection}}
-    <div class="table-action fa fa-check-square-o" title="Deselect all" {{action 'deselectAll'}}></div>
-    <div class="table-action fa fa-trash-o delete" title="Delete selected" {{action 'deleteAll'}}></div>
+    <div class="table-action fa fa-check-square-o" title="Deselect all" {{action "deselectAll"}} role="button"></div>
+    <div class="table-action fa fa-trash-o delete" title="Delete selected" {{action "deleteAll"}} role="button"></div>
   {{else}}
-    <div class="table-action fa fa-square-o" title="Select all" {{action 'selectAll'}}></div>
+    <div class="table-action fa fa-square-o" title="Select all" {{action "selectAll"}} role="button"></div>
   {{/if}}
 </div>
 
-{{#light-table table height='65vh' as |t|}}
+{{#light-table table height="65vh" as |t|}}
   {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconSortable='fa fa-sort'
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
+    onColumnClick=(action "onColumnClick")
+    iconSortable="fa fa-sort"
+    iconAscending="fa fa-sort-asc"
+    iconDescending="fa fa-sort-desc"
     fixed=true
   }}
 
   {{#t.body
     multiSelect=true
-    onScrolledToBottom=(action 'onScrolledToBottom')
+    onScrolledToBottom=(action "onScrolledToBottom")
     as |body|
   }}
     {{#if isLoading}}
