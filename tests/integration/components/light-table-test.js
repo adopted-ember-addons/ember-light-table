@@ -1,6 +1,5 @@
-import { scrollTo } from 'ember-native-dom-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll, find, click } from '@ember/test-helpers';
+import { render, findAll, find, click, triggerEvent } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
 import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
@@ -45,13 +44,13 @@ module('Integration | Component | light table', function(hooks) {
 
     assert.equal(findAll('tbody > tr').length, 50, '50 rows are rendered');
 
-    let scrollContainer = '.tse-scroll-content';
-    let { scrollHeight } = find(scrollContainer);
+    let scrollContainer = find('.tse-scroll-content');
+    assert.ok(scrollContainer, 'scroll container was rendered');
+    let expectedScroll = 2501;
+    assert.equal(scrollContainer.scrollHeight, expectedScroll, 'scroll height is 2500 + 1px for height of lt-infinity');
 
-    assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
-    assert.equal(scrollHeight, 2501, 'scroll height is 2500 + 1px for height of lt-infinity');
-
-    await scrollTo(scrollContainer, 0, scrollHeight);
+    scrollContainer.scrollTop = expectedScroll;
+    await triggerEvent(scrollContainer, 'scroll');
   });
 
   test('scrolled to bottom (multiple tables)', async function(assert) {
@@ -252,7 +251,9 @@ module('Integration | Component | light table', function(hooks) {
       {{/light-table}}
     `);
 
-    await scrollTo('.tse-scroll-content', 0, expectedScroll);
+    let scrollContainer = find('.tse-scroll-content');
+    scrollContainer.scrollTop = expectedScroll;
+    await triggerEvent(scrollContainer, 'scroll');
   });
 
   test('extra data and tableActions', async function(assert) {

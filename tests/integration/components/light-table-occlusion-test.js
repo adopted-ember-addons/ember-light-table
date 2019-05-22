@@ -1,6 +1,5 @@
-import { scrollTo } from 'ember-native-dom-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll, find, click } from '@ember/test-helpers';
+import { render, findAll, find, click, triggerEvent } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
 import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
@@ -48,13 +47,13 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
     assert.ok(findAll('.vertical-collection tbody.lt-body tr.lt-row').length < 30, 'only some rows are rendered');
 
-    let scrollContainer = '.lt-scrollable.tse-scrollable.vertical-collection';
-    let { scrollHeight } = find(scrollContainer);
-
-    assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
+    let scrollContainer = find('.lt-scrollable.tse-scrollable.vertical-collection');
+    assert.ok(scrollContainer, 'scroll container was rendered');
+    let { scrollHeight } = scrollContainer;
     assert.ok(scrollHeight > 1500, 'scroll height is 50 rows * 30 px per row + header size');
+    scrollContainer.scrollTop = scrollHeight;
 
-    await scrollTo(scrollContainer, 0, scrollHeight);
+    await triggerEvent(scrollContainer, 'scroll');
   });
 
   test('fixed header', async function(assert) {
