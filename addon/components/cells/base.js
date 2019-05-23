@@ -89,6 +89,7 @@ const Cell = Component.extend({
     if (format && typeof format === 'function') {
       return format.call(this, rawValue);
     }
+
     return rawValue;
   })
 });

@@ -111,6 +111,7 @@ export default class Table extends EmberObject.extend({
       if (c.get('isVisibleGroupColumn') || (!c.get('isGroupColumn') && !c.get('isHidden'))) {
         arr.pushObject(c);
       }
+
       return arr;
     }, emberArray([]));
   }).readOnly(),

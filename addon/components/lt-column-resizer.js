@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import closest from 'ember-light-table/utils/closest';
 import layout from '../templates/components/lt-column-resizer';
-import closest from '../utils/closest';
 
 const TOP_LEVEL_CLASS = '.ember-light-table';
 
