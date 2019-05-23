@@ -32,7 +32,7 @@ export default Component.extend(InViewportMixin, {
   },
 
   didEnterViewport() {
-    get(this, 'inViewport')();
+    get(this, 'enterViewport')();
   },
 
   didExitViewport() {

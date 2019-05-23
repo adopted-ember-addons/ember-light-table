@@ -529,9 +529,9 @@ export default Component.extend({
 
     /**
      * lt-infinity action to determine if component is still in viewport
-     * @event inViewport
+     * @event enterViewport
      */
-    inViewport() {
+    enterViewport() {
       this.set('isInViewport', true);
     },
     /**
