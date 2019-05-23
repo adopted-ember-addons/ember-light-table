@@ -1096,11 +1096,6 @@
     "@webassemblyjs/wast-parser" "1.7.11"
     "@xtuc/long" "4.2.1"
 
-"@xg-wang/whatwg-fetch@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@xg-wang/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#f7b222c012a238e7d6e89ed3d72a1e0edb58453d"
-  integrity sha512-ULtqA6L75RLzTNW68IiOja0XYv4Ebc3OGMzfia1xxSEMpD0mk/pMvkQX0vbCFyQmKc5xGp80Ms2WiSlXLh8hbA==
-
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -2887,7 +2882,7 @@ broccoli-static-compiler@^0.1.4:
     broccoli-writer "^0.1.1"
     mkdirp "^0.3.5"
 
-broccoli-stew@^2.0.0, broccoli-stew@^2.0.1:
+broccoli-stew@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/broccoli-stew/-/broccoli-stew-2.1.0.tgz#ba73add17fda3b9b01d8cfb343a8b613b7136a0a"
   integrity sha512-tgCkuTWYl4uf7k7ib2D79KFEj2hCgnTUNPMnrCoAha0/4bywcNccmaZVWtL9Ex37yX5h5eAbnM/ak2ULoMwSSw==
@@ -4145,7 +4140,7 @@ ember-ast-helpers@0.3.5:
     "@glimmer/compiler" "^0.27.0"
     "@glimmer/syntax" "^0.27.0"
 
-ember-auto-import@^1.2.15, ember-auto-import@^1.2.19:
+ember-auto-import@^1.2.15, ember-auto-import@^1.2.19, ember-auto-import@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-1.3.0.tgz#0d0988790e60847315f9bba758299226a3ba75c6"
   integrity sha512-Fiw0lVSdARFI6/ewq7zDPmfC6+Ss+qIV6Xp0iwhlJOPa6HP1KpNodPXBnmzppMdnGMsnT72YdMgPbVXsyWMu8A==
@@ -4383,40 +4378,22 @@ ember-cli-lodash-subset@^2.0.1:
   resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-2.0.1.tgz#20cb68a790fe0fde2488ddfd8efbb7df6fe766f2"
   integrity sha1-IMtop5D+D94kiN39jvu332/nZvI=
 
-ember-cli-mirage@^0.4.1:
-  version "0.4.15"
-  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-0.4.15.tgz#dcf878e785853232d8ac725bb425aa545da63e79"
-  integrity sha512-5wCycS40pkohNPaLcyCn5BUjJ/4PGK9lz6j1tftJms5tBQhSjkZ37+pfhVKh3iYSId/+z0RTxVknykQH4P0sQA==
+ember-cli-mirage@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-1.0.0.tgz#e64132227e63bdd6e3a35df52a74cb19514a8c08"
+  integrity sha512-vBohHV4sE7tJQ/Nfl3Nmsdjliwqlx4/WG0yjIS5JYZWKewJ58FYMlsTLZKk7vfWf4Cq+aTGth+qyEfeSE8IuAQ==
   dependencies:
-    "@xg-wang/whatwg-fetch" "^3.0.0"
     broccoli-file-creator "^2.1.1"
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^3.0.2"
-    broccoli-stew "^2.0.1"
     broccoli-string-replace "^0.1.2"
-    chalk "^1.1.1"
+    chalk "^2.4.2"
     ember-auto-import "^1.2.19"
-    ember-cli-babel "^6.16.0"
-    ember-cli-node-assets "^0.2.2"
+    ember-cli-babel "^7.5.0"
     ember-get-config "^0.2.2"
     ember-inflector "^2.0.0 || ^3.0.0"
-    fake-xml-http-request "^2.0.0"
-    faker "^3.0.0"
     lodash "^4.17.11"
-    pretender "2.1.1"
-    route-recognizer "^0.3.4"
-
-ember-cli-node-assets@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/ember-cli-node-assets/-/ember-cli-node-assets-0.2.2.tgz#d2d55626e7cc6619f882d7fe55751f9266022708"
-  integrity sha1-0tVWJufMZhn4gtf+VXUfkmYCJwg=
-  dependencies:
-    broccoli-funnel "^1.0.1"
-    broccoli-merge-trees "^1.1.1"
-    broccoli-source "^1.1.0"
-    debug "^2.2.0"
-    lodash "^4.5.1"
-    resolve "^1.1.7"
+    pretender "3.0.1"
 
 ember-cli-normalize-entity-name@^1.0.0:
   version "1.0.0"
@@ -5598,10 +5575,10 @@ fake-xml-http-request@^2.0.0:
   resolved "https://registry.yarnpkg.com/fake-xml-http-request/-/fake-xml-http-request-2.0.0.tgz#41a92f0ca539477700cb1dafd2df251d55dac8ff"
   integrity sha512-UjNnynb6eLAB0lyh2PlTEkjRJORnNsVF1hbzU+PQv89/cyBV9GDRCy7JAcLQgeCLYT+3kaumWWZKEJvbaK74eQ==
 
-faker@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/faker/-/faker-3.1.0.tgz#0f908faf4e6ec02524e54a57e432c5c013e08c9f"
-  integrity sha1-D5CPr05uwCUk5UpX5DLFwBPgjJ8=
+faker@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-4.1.0.tgz#1e45bbbecc6774b3c195fad2835109c6d748cc3f"
+  integrity sha1-HkW7vsxndLPBlfrSg1EJxtdIzD8=
 
 fast-deep-equal@^2.0.1:
   version "2.0.1"
@@ -8107,7 +8084,7 @@ lodash.without@~3.2.1:
     lodash._basedifference "^3.0.0"
     lodash.restparam "^3.0.0"
 
-lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.6.1:
+lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
@@ -9516,14 +9493,14 @@ prepend-http@^2.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-pretender@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/pretender/-/pretender-2.1.1.tgz#5085f0a1272c31d5b57c488386f69e6ca207cb35"
-  integrity sha512-IkidsJzaroAanw3I43tKCFm2xCpurkQr9aPXv5/jpN+LfCwDaeI8rngVWtQZTx4qqbhc5zJspnLHJ4N/25KvDQ==
+pretender@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/pretender/-/pretender-3.0.1.tgz#817ac43faa3330aa17646968a115f232de10b2ca"
+  integrity sha512-NO5qK7vJls4uz1NxVKuAY6/aHLOVvchGAvrPWCRHRKpCLquBWQjk3CVx195Hs5yUdcQ4e3OlpUijmOzFzzOmWQ==
   dependencies:
-    "@xg-wang/whatwg-fetch" "^3.0.0"
     fake-xml-http-request "^2.0.0"
     route-recognizer "^0.3.3"
+    whatwg-fetch "^3.0.0"
 
 pretty-ms@^3.1.0:
   version "3.2.0"
@@ -10254,7 +10231,7 @@ resolve@1.9.0:
   dependencies:
     path-parse "^1.0.6"
 
-resolve@^1.1.3, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.10.1, resolve@^1.3.2, resolve@^1.3.3, resolve@^1.4.0, resolve@^1.5.0, resolve@^1.7.1, resolve@^1.8.1, resolve@^1.9.0:
+resolve@^1.1.3, resolve@^1.10.0, resolve@^1.10.1, resolve@^1.3.2, resolve@^1.3.3, resolve@^1.4.0, resolve@^1.5.0, resolve@^1.7.1, resolve@^1.8.1, resolve@^1.9.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.11.0.tgz#4014870ba296176b86343d50b60f3b50609ce232"
   integrity sha512-WL2pBDjqT6pGUNSUzMw00o4T7If+z4H2x3Gz893WoUQ5KW8Vr9txp00ykiP16VBaZF5+j/OcXJHZ9+PCvdiDKw==
@@ -10333,7 +10310,7 @@ rollup@^0.57.1:
     signal-exit "^3.0.2"
     sourcemap-codec "^1.4.1"
 
-route-recognizer@^0.3.3, route-recognizer@^0.3.4:
+route-recognizer@^0.3.3:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/route-recognizer/-/route-recognizer-0.3.4.tgz#39ab1ffbce1c59e6d2bdca416f0932611e4f3ca3"
   integrity sha512-2+MhsfPhvauN1O8KaXpXAOfR/fwe8dnUXVM+xw7yt40lJRfPVQxV6yryZm0cgRvAj5fMF/mdRZbL2ptwbs5i2g==
@@ -11846,6 +11823,11 @@ websocket-extensions@>=0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
   integrity sha512-nqHUnMXmBzT0w570r2JpJxfiSD1IzoI+HGVdd3aZ0yNi3ngvQ4jv1dtHt5VGxfI2yj5yqImPhOK4vmIh2xMbGg==
+
+whatwg-fetch@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
+  integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==
 
 which@1, which@^1.1.1, which@^1.2.14, which@^1.2.9, which@^1.3.0:
   version "1.3.1"
