@@ -12,8 +12,10 @@ const closest = (el, selector) => {
     if (parent && parent.matches(selector)) {
       return parent;
     }
+
     el = parent;
   }
+
   return null;
 };
 

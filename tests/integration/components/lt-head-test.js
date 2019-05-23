@@ -1,7 +1,6 @@
-import { triggerEvent, click, find, findAll } from '@ember/test-helpers';
+import { triggerEvent, click, find, findAll, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import Table from 'ember-light-table';
 import Columns, { GroupedColumns } from '../../helpers/table-columns';
