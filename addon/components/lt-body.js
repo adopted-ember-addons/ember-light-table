@@ -186,7 +186,7 @@ export default Component.extend({
   enableScaffolding: false,
 
   /**
-   * ID of main table component. Used to generate divs for ember-wormhole
+   * ID of main table component. Used to generate divs for ember-wormhole and set scope for scroll observers
    *
    * @property tableId
    * @type {String}
@@ -320,7 +320,7 @@ export default Component.extend({
    * fills the screen with row items until lt-infinity component has exited the viewport
    * @property scheduleScrolledToBottom
    */
-  scheduleScrolledToBottom: observer('rows.[]', 'isInViewport', function() {
+  scheduleScrolledToBottom: observer('isInViewport', function() {
     if (this.get('isInViewport')) {
       /*
        Continue scheduling onScrolledToBottom until no longer in viewport
