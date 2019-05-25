@@ -8,7 +8,6 @@ export default Component.extend(InViewportMixin, {
   classNameBindings: ['viewportEntered:in-viewport'],
   layout,
 
-  rows: null,
   scrollableContent: null,
   scrollBuffer: 50,
 

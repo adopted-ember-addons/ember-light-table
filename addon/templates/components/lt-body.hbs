@@ -58,7 +58,6 @@
 
       {{#if onScrolledToBottom}}
         {{lt.infinity
-          rows=rows
           enterViewport=(action "enterViewport")
           exitViewport=(action "exitViewport")
           scrollableContent=(concat "#" tableId " .lt-scrollable")}}
