@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { deprecate } from '@ember/application/deprecations';
 import { computed, observer } from '@ember/object';
 import layout from 'ember-light-table/templates/components/lt-body';
 import { run } from '@ember/runloop';
@@ -186,7 +187,7 @@ export default Component.extend({
   enableScaffolding: false,
 
   /**
-   * ID of main table component. Used to generate divs for ember-wormhole
+   * ID of main table component. Used to generate divs for ember-wormhole and set scope for scroll observers
    *
    * @property tableId
    * @type {String}
@@ -320,7 +321,7 @@ export default Component.extend({
    * fills the screen with row items until lt-infinity component has exited the viewport
    * @property scheduleScrolledToBottom
    */
-  scheduleScrolledToBottom: observer('rows.[]', 'isInViewport', function() {
+  scheduleScrolledToBottom: observer('isInViewport', function() {
     if (this.get('isInViewport')) {
       /*
        Continue scheduling onScrolledToBottom until no longer in viewport
@@ -528,11 +529,27 @@ export default Component.extend({
     },
 
     /**
-     * lt-infinity action to determine if component is still in viewport
+     * lt-infinity action to determine if component is still in viewport. Deprecated - please use enterViewport
      * @event inViewport
+     * @deprecated Use `enterViewport` instead.
      */
-    inViewport() {
-      this.set('isInViewport', true);
+    inViewport: null,
+
+    /**
+     * lt-infinity action to determine if component is still in viewport
+     * @event enterViewport
+     */
+    enterViewport() {
+      const inViewport = this.get('inViewport');
+      if (inViewport) {
+        deprecate('lt-infinity inViewport event is deprecated please use enterViewport instead', false, {
+          id: 'ember-light-table.inViewport',
+          until: '2.0.0'
+        });
+        inViewport();
+      } else {
+        this.set('isInViewport', true);
+      }
     },
     /**
      * lt-infinity action to determine if component has exited the viewport

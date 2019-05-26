@@ -1,38 +1,39 @@
 import Component from '@ember/component';
 import layout from '../templates/components/lt-infinity';
-import InViewportMixin from 'ember-in-viewport';
 import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
 
-export default Component.extend(InViewportMixin, {
-  classNames: ['lt-infinity'],
-  classNameBindings: ['viewportEntered:in-viewport'],
+export default Component.extend({
   layout,
 
-  rows: null,
+  inViewport: service(),
+
+  classNames: ['lt-infinity'],
   scrollableContent: null,
   scrollBuffer: 50,
 
   didInsertElement() {
     this._super(...arguments);
 
-    let scrollBuffer = this.get('scrollBuffer');
-    let width = this.element.offsetWidth;
-    let scrollableContent = this.get('scrollableContent');
-
-    this.setProperties({
+    const options = {
       viewportSpy: true,
       viewportTolerance: {
-        left: width,
-        right: width,
-        bottom: scrollBuffer,
-        top: 0
+        bottom: this.get('scrollBuffer')
       },
-      scrollableArea: scrollableContent
-    });
+      scrollableArea: this.get('scrollableContent')
+    };
+
+    const { onEnter, onExit } = this.get('inViewport').watchElement(get(this, 'element'), options);
+    onEnter(this.didEnterViewport.bind(this));
+    onExit(this.didExitViewport.bind(this));
+  },
+
+  willDestroyElement() {
+    this.get('inViewport').stopWatching(this.get('element'));
   },
 
   didEnterViewport() {
-    get(this, 'inViewport')();
+    get(this, 'enterViewport')();
   },
 
   didExitViewport() {
