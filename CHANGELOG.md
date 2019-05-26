@@ -1,6 +1,78 @@
 Changelog
 =========
 
+## UNRELEASED 2.X
+
+#### Bug Fixes
+* [#692](https://github.com/offirgolan/ember-light-table/pull/692) Replace propertyWillChange/propertyDidChange with notifyPropertyChange ([@mmadsen2](https://github.com/mmadsen2))
+* [#681](https://github.com/offirgolan/ember-light-table/pull/681) use `assign` instead of `merge` ([@bekzod](https://github.com/bekzod))
+* [#664](https://github.com/offirgolan/ember-light-table/pull/664) Fixing issue with multiple tables and onScrolledToBottom. ([@gmurphey](https://github.com/gmurphey))
+* [#666](https://github.com/offirgolan/ember-light-table/pull/666) Pinning ip-regex to fix build issue. ([@gmurphey](https://github.com/gmurphey))
+* [#596](https://github.com/offirgolan/ember-light-table/pull/596) [Draggable Column] Error when dragging column; "removeObject is not a function" ([@msenevir](https://github.com/msenevir))
+
+#### Committers: 4
+- mmadsen2 [@mmadsen2](https://github.com/mmadsen2)
+- bek ([@bekzod](https://github.com/bekzod))
+- Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
+- Mahen Seneviratne ([@msenevir](https://github.com/msenevir))
+
+## v2.0.0-beta.3 (2019-05-9)
+
+#### Breaking
+- [#657](https://github.com/offirgolan/ember-light-table/pull/657) Officially drop support for node 4 ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Enhancements
+* [#601](https://github.com/offirgolan/ember-light-table/pull/601) Avoid breaking line with sort icon in narrow columns ([@Goras](https://github.com/Gorzas))
+* [#648](https://github.com/offirgolan/ember-light-table/pull/648) Expose shouldRecycle property of vertical-collection ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Bug Fixes
+* [#672](https://github.com/offirgolan/ember-light-table/pull/672) bump vertical-collection to v1.0.0-beta.13 ([@fran-worley](https://github.com/fran-worley))
+* [#686](https://github.com/offirgolan/ember-light-table/pull/686) refactor: Remove sendAction() calls ([@MichalBryxi](https://github.com/MichalBryxi))
+* [#673](https://github.com/offirgolan/ember-light-table/pull/673) Replace merge with assign ([@fran-worley](https://github.com/fran-worley))
+* [#677](https://github.com/offirgolan/ember-light-table/pull/677) ensure ember-scrollable updates when rows are updated ([@fran-worley](https://github.com/fran-worley))
+
+#### Internal
+* [#598](https://github.com/offirgolan/ember-light-table/pull/598) Stop using nativeDomClick which is deprecated. ([@plcarmel](https://github.com/plcarmel))
+* [#649](https://github.com/offirgolan/ember-light-table/pull/649) Write integration tests for occlusion rendering ([@Gaurav0](https://github.com/Gaurav0))
+* [#651](https://github.com/offirgolan/ember-light-table/pull/651) Update ember-cli-changelog ([@Gaurav0](https://github.com/Gaurav0))
+* [#653](https://github.com/offirgolan/ember-light-table/pull/653) Fix scroll to bottom test ([@Gaurav0](https://github.com/Gaurav0))
+* [#655](https://github.com/offirgolan/ember-light-table/pull/655) Update ember-scrollable ([@Gaurav0](https://github.com/Gaurav0))
+* [#656](https://github.com/offirgolan/ember-light-table/pull/656) Assert and Test compatibility with LTS 3.4 ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Committers: 4
+- Pierre-Luc Carmel Biron ([@plcarmel](https://github.com/plcarmel))
+- Gaurav Munjal ([@Gaurav0](https://github.com/Gaurav0))
+- Fran Worley ([@fran-worley](https://github.com/fran-worley))
+- Michal Bryxi ([@MichalBryxi](https://github.com/MichalBryxi))
+
+## v2.0.0-beta.2 (2018-10-29)
+
+#### Enhancements
+*[#593](https://github.com/offirgolan/ember-light-table/pull/593) Remove jQuery usage ((@donaldwasserman)[https://github.com/donaldwasserman])
+
+#### Committers: 1
+- Donald Wasserman ((@donaldwasserman)[https://github.com/donaldwasserman])
+
+## v2.0.0-beta.1 (2018-10-26)
+
+#### Bug Fixes
+*[#590](https://github.com/offirgolan/ember-light-table/pull/590) replace `sendAction` with modern callable methods ((@donaldwasserman)[https://github.com/donaldwasserman])
+
+#### Committers: 1
+- Donald Wasserman ((@donaldwasserman)[https://github.com/donaldwasserman])
+
+## v2.0.0-beta.0 (2018-10-25)
+
+#### Enhancements
+* [#584](https://github.com/offirgolan/ember-light-table/pull/584) Improve cells performance ([@mostafa-sakhiri](https://github.com/mostafa-sakhiri))
+
+#### Bug Fixes
+* [#586](https://github.com/offirgolan/ember-light-table/pull/586) Incomplete use of htmlSafe() on Cell.style. ([@richard-viney](https://github.com/richard-viney))
+
+#### Committers: 2
+- mostafa-sakhiri ([@mostafa-sakhiri](https://github.com/mostafa-sakhiri))
+- Richard Viney ([@richard-viney](https://github.com/richard-viney))
+
 ## UNRELEASED MASTER
 
 #### Enhancements
