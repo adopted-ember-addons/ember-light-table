@@ -1,9 +1,62 @@
 Changelog
 =========
 
-## v1.13.1
+## UNRELEASED MASTER
 
-## v1.13.0
+#### Enhancements
+* [#584](https://github.com/offirgolan/ember-light-table/pull/584) Improve cells performance ([@mostafa-sakhiri](https://github.com/mostafa-sakhiri))
+* [#601](https://github.com/offirgolan/ember-light-table/pull/601) Avoid breaking line with sort icon in narrow columns ([@Goras](https://github.com/Gorzas))
+* [#648](https://github.com/offirgolan/ember-light-table/pull/648) Expose shouldRecycle property of vertical-collection ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Bug Fixes
+* [#692](https://github.com/offirgolan/ember-light-table/pull/692) Replace propertyWillChange/propertyDidChange with notifyPropertyChange ([@mmadsen2](https://github.com/mmadsen2))
+* [#681](https://github.com/offirgolan/ember-light-table/pull/681) use `assign` instead of `merge` ([@bekzod](https://github.com/bekzod))
+* [#664](https://github.com/offirgolan/ember-light-table/pull/664) Fixing issue with multiple tables and onScrolledToBottom. ([@gmurphey](https://github.com/gmurphey))
+* [#666](https://github.com/offirgolan/ember-light-table/pull/666) Pinning ip-regex to fix build issue. ([@gmurphey](https://github.com/gmurphey))
+* [#596](https://github.com/offirgolan/ember-light-table/pull/596) [Draggable Column] Error when dragging column; "removeObject is not a function" ([@msenevir](https://github.com/msenevir))
+* [#586](https://github.com/offirgolan/ember-light-table/pull/586) Incomplete use of htmlSafe() on Cell.style. ([@richard-viney](https://github.com/richard-viney))
+
+#### Internal
+* [#598](https://github.com/offirgolan/ember-light-table/pull/598) Stop using nativeDomClick which is deprecated. ([@plcarmel](https://github.com/plcarmel))
+- [#649](https://github.com/offirgolan/ember-light-table/pull/649) Write integration tests for occlusion rendering ([@Gaurav0](https://github.com/Gaurav0))
+- [#653](https://github.com/offirgolan/ember-light-table/pull/653) Fix scroll to bottom test ([@Gaurav0](https://github.com/Gaurav0))
+- [#651](https://github.com/offirgolan/ember-light-table/pull/651) Update ember-cli-changelog ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Committers: 8
+- Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
+- Mahen Seneviratne ([@msenevir](https://github.com/msenevir))
+- mmadsen2 [@mmadsen2](https://github.com/mmadsen2)
+- bek ([@bekzod](https://github.com/bekzod))
+- José David Cano Pérez ([@Goras](https://github.com/Gorzas))
+- Gaurav Munjal ([@Gaurav0](https://github.com/Gaurav0))
+- mostafa-sakhiri ([@mostafa-sakhiri](https://github.com/mostafa-sakhiri))
+- Richard Viney ([@richard-viney](https://github.com/richard-viney))
+- Pierre-Luc Carmel Biron ([@plcarmel](https://github.com/plcarmel))
+
+## v1.13.2 (2018-08-26)
+
+#### Bug Fixes
+- [e345fec](https://github.com/offirgolan/ember-light-table/commit/e345fec67916fc18ced40cd161dbf38de934e894) Use isArray to check columns, rows type ([@quaertym](https://github.com/quaertym))
+
+#### Internal
+- [7b50190](https://github.com/offirgolan/ember-light-table/commit/7b5019003b01ad4bb646d1f142ab63059bf4efd4) Update other dependencies ([@alexander-alvarez](https://github.com/alexander-alvarez))
+- [715d94b](https://github.com/offirgolan/ember-light-table/commit/715d94b47cd5cbe31af99db8d6faf8aa7c00f124) Update Ember scrollable ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Committers: 3
+- Emre Unal ([@quaertym](https://github.com/quaertym)
+- Alex Alvarez ([@alexander-alvarez](https://github.com/alexander-alvarez))
+- Gaurav Munjal ([@Gaurav0](https://github.com/Gaurav0))
+
+## v1.13.1 (2018-06-22)
+
+#### Internal
+- [ace7f4c](https://github.com/offirgolan/ember-light-table/commit/ace7f4cc3535853fb07c406d5e3a06467d6a7f0d) Update ember-cli to 3.1.4 ([@jrjohnson](https://github.com/jrjohnson))
+- [bf6edb8](https://github.com/offirgolan/ember-light-table/commit/bf6edb83fdc7fa195c786b7b1aa1826edde4518a) Update all dependencies ([@jrjohnson](https://github.com/jrjohnson))
+
+#### Committers: 1
+- Jonathan Johnson ([@jrjohnson](https://github.com/jrjohnson))
+
+## v1.13.0 (2018-06-21)
 
 #### Commits
 
