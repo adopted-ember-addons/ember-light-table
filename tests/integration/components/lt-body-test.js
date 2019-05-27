@@ -31,7 +31,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('row selection - enable or disable', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 1) }));
     this.set('canSelect', false);
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect tableId="light-table"}}`);
@@ -52,7 +52,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('row selection - ctrl-click to modify selection', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true tableId="light-table"}}`);
     let firstRow = find('tr:first-child');
@@ -75,7 +75,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('row selection - click to modify selection', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(
       hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false tableId="light-table"}}`
@@ -101,7 +101,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('row expansion', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 2)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 2) }));
     this.set('canExpand', false);
 
     await render(hbs `
@@ -136,7 +136,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('row expansion - multiple', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 2)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 2) }));
     await render(hbs `
       {{#lt-body table=table sharedOptions=sharedOptions canExpand=true tableId="light-table" as |b|}}
         {{#b.expanded-row}} Hello {{/b.expanded-row}}
@@ -160,7 +160,7 @@ module('Integration | Component | lt body', function(hooks) {
   test('row actions', async function(assert) {
     assert.expect(2);
 
-    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 1) }));
     this.actions.onRowClick = (row) => assert.ok(row);
     this.actions.onRowDoubleClick = (row) => assert.ok(row);
     await render(
@@ -173,7 +173,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('hidden rows', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions tableId="light-table"}}`);
 
@@ -195,7 +195,7 @@ module('Integration | Component | lt body', function(hooks) {
 
   test('scaffolding', async function(assert) {
     const users = this.server.createList('user', 1);
-    this.set('table', new Table(Columns, users));
+    this.set('table', Table.create({ columns: Columns, rows: users }));
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions enableScaffolding=true tableId="light-table"}}`);
 
@@ -218,7 +218,7 @@ module('Integration | Component | lt body', function(hooks) {
   });
 
   test('overwrite', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(hbs `
       {{#lt-body table=table sharedOptions=sharedOptions overwrite=true tableId="light-table" as |columns rows|}}

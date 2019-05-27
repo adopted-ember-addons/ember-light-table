@@ -35,7 +35,7 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
   });
 
   test('row selection - enable or disable', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 1) }));
     this.set('canSelect', false);
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}`);
@@ -56,7 +56,7 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
   });
 
   test('row selection - ctrl-click to modify selection', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(hbs `{{lt-body table=table scrollBuffer=200 sharedOptions=sharedOptions canSelect=true multiSelect=true}}`);
     let firstRow = find('tr:nth-child(2)');
@@ -79,7 +79,7 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
   });
 
   test('row selection - click to modify selection', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(
       hbs `{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false}}`
@@ -107,7 +107,7 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
   test('row actions', async function(assert) {
     assert.expect(2);
 
-    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 1) }));
     this.actions.onRowClick = (row) => assert.ok(row);
     this.actions.onRowDoubleClick = (row) => assert.ok(row);
     await render(
@@ -120,7 +120,7 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
   });
 
   test('hidden rows', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions}}`);
 
@@ -143,7 +143,7 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
   });
 
   test('overwrite', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(hbs `
       {{#lt-body table=table sharedOptions=sharedOptions overwrite=true as |columns rows|}}

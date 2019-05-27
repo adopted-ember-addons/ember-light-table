@@ -12,8 +12,8 @@ test('it renders', function(assert) {
 });
 
 test('it renders value', function(assert) {
-  this.set('column', new Column({ valuePath: 'foo' }));
-  this.set('row', new Row({ foo: 'bar' }));
+  this.set('column', Column.create({ valuePath: 'foo' }));
+  this.set('row', Row.create({ content: { foo: 'bar' } }));
 
   this.render(hbs`{{light-table/cells/<%= dasherizedModuleName %> column row rawValue=(get row column.valuePath)}}`);
 

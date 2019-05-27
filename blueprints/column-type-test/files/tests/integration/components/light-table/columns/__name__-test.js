@@ -12,7 +12,7 @@ test('it renders', function(assert) {
 });
 
 test('it renders label', function(assert) {
-  this.set('column', new Column({ label: '<%= dasherizedModuleName %>' }));
+  this.set('column', Column.create({ label: '<%= dasherizedModuleName %>' }));
 
   this.render(hbs`{{light-table/columns/<%= dasherizedModuleName %> column}}`);
 
