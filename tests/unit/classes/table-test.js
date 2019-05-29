@@ -566,6 +566,7 @@ module('Unit | Classes | Table', function() {
     for (let i = 0; i < initialLength; i++) {
       initialRows.pushObject({ position: i });
     }
+
     assert.deepEqual(table.get('rows').getEach('position'), initialRows.getEach('position'), 'the table is initialized with a synced array');
 
     table.setRowsSynced(otherRows);
@@ -574,6 +575,7 @@ module('Unit | Classes | Table', function() {
     for (let i = 0; i < otherLength; i++) {
       otherRows.pushObject({ position: i });
     }
+
     assert.deepEqual(table.get('rows').getEach('position'), otherRows.getEach('position'), 'the replacement array is correctly synced');
 
     initialRows.popObject();

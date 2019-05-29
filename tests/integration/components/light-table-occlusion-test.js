@@ -207,9 +207,11 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
     this.owner.register('component:some-component', Component.extend({
       classNames: 'some-component',
+
       didReceiveAttrs() {
         assert.equal(get(this, 'extra.someData'), 'someValue', 'extra data is passed');
       },
+
       click() {
         get(this, 'tableActions.someAction')();
       }

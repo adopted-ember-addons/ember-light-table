@@ -17,13 +17,16 @@ export default Component.extend({
 
     const options = {
       viewportSpy: true,
+
       viewportTolerance: {
         bottom: this.get('scrollBuffer')
       },
+
       scrollableArea: this.get('scrollableContent')
     };
 
     const { onEnter, onExit } = this.get('inViewport').watchElement(get(this, 'element'), options);
+
     onEnter(this.didEnterViewport.bind(this));
     onExit(this.didExitViewport.bind(this));
   },

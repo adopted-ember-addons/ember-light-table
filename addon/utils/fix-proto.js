@@ -52,6 +52,7 @@ export function defaults(obj, defaults) {
       Object.defineProperty(obj, key, value);
     }
   }
+
   return obj;
 }
 

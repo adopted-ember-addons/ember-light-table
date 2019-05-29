@@ -175,9 +175,11 @@ export default Mixin.create({
           if (!this.get('multiColumnSort')) {
             this.get('table.sortedColumns').setEach('sorted', false);
           }
+
           column.set('sorted', true);
         }
       }
+
       this.onColumnClick && this.onColumnClick(...arguments);
     },
 

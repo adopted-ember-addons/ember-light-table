@@ -1,7 +1,7 @@
 {{!-- BEGIN-SNIPPET table-actions-table --}}
-{{#light-table table height='65vh' tableActions=(hash
-  deleteUser=(action 'deleteUser')
-  notifyUser=(action 'notifyUser')
+{{#light-table table height="65vh" tableActions=(hash
+  deleteUser=(action "deleteUser")
+  notifyUser=(action "notifyUser")
 ) as |t|}}
 
   {{!--
@@ -11,16 +11,16 @@
   --}}
 
   {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconSortable='fa fa-sort'
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
+    onColumnClick=(action "onColumnClick")
+    iconSortable="fa fa-sort"
+    iconAscending="fa fa-sort-asc"
+    iconDescending="fa fa-sort-desc"
     fixed=true
   }}
 
   {{#t.body
     canSelect=false
-    onScrolledToBottom=(action 'onScrolledToBottom')
+    onScrolledToBottom=(action "onScrolledToBottom")
     as |body|
   }}
     {{#if isLoading}}
