@@ -23,7 +23,8 @@
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
-    "test:all": "ember try:each"
+    "test:all": "ember try:each",
+    "changelog": "lerna-changelog"
   },
   "dependencies": {
     "@html-next/vertical-collection": "^1.0.0-beta.13",
@@ -79,6 +80,7 @@
     "eslint-plugin-ember-suave": "^2.0.0-beta.1",
     "eslint-plugin-node": "^9.0.1",
     "faker": "^4.1.0",
+    "lerna-changelog": "^0.8.2",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0",
     "yuidoc-ember-theme": "^2.0.1"
@@ -94,6 +96,15 @@
     "demoURL": "http://offirgolan.github.io/ember-light-table",
     "versionCompatibility": {
       "ember": ">=2.18.0 <4.0.0"
+    }
+  },
+  "changelog": {
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": "Features",
+      "bug": "Bug Fixes",
+      "documentation": "Documentation",
+      "internal": "Internal"
     }
   }
 }
