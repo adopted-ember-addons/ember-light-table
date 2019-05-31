@@ -3,6 +3,10 @@ Changelog
 
 ## UNRELEASED 2.X
 
+#### :boom: Breaking Change
+* [#700](https://github.com/offirgolan/ember-light-table/pull/700) Set minimum supported ember version at 2.18 ([@fran-worley](https://github.com/fran-worley))
+* [#698](https://github.com/offirgolan/ember-light-table/pull/698) Drop support for Node 6 as end of life 30 April 2019 ([@fran-worley](https://github.com/fran-worley))
+
 #### Bug Fixes
 * [#692](https://github.com/offirgolan/ember-light-table/pull/692) Replace propertyWillChange/propertyDidChange with notifyPropertyChange ([@mmadsen2](https://github.com/mmadsen2))
 * [#681](https://github.com/offirgolan/ember-light-table/pull/681) use `assign` instead of `merge` ([@bekzod](https://github.com/bekzod))
@@ -10,11 +14,17 @@ Changelog
 * [#666](https://github.com/offirgolan/ember-light-table/pull/666) Pinning ip-regex to fix build issue. ([@gmurphey](https://github.com/gmurphey))
 * [#596](https://github.com/offirgolan/ember-light-table/pull/596) [Draggable Column] Error when dragging column; "removeObject is not a function" ([@msenevir](https://github.com/msenevir))
 
-#### Committers: 4
+#### Internal
+* [#697](https://github.com/offirgolan/ember-light-table/pull/697) Migrate from ember-cli-changelog to lerna-changelog ([@fran-worley](https://github.com/fran-worley))
+* [#696](https://github.com/offirgolan/ember-light-table/pull/696) Bump Ember CLI to 3.8 and update other dependencies ([@fran-worley](https://github.com/fran-worley))
+* [#693](https://github.com/offirgolan/ember-light-table/pull/693) Update ember-in-viewport, ember-wormhole, move ember-composable-helpers to devDependencies ([@fran-worley](https://github.com/fran-worley))
+
+#### Committers: 5
 - mmadsen2 [@mmadsen2](https://github.com/mmadsen2)
 - bek ([@bekzod](https://github.com/bekzod))
 - Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
 - Mahen Seneviratne ([@msenevir](https://github.com/msenevir))
+- Fran Worley ([@fran-worley](https://github.com/fran-worley))
 
 ## v2.0.0-beta.3 (2019-05-9)
 
