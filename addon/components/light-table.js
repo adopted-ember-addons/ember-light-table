@@ -185,6 +185,17 @@ const LightTable = Component.extend({
   estimatedRowHeight: 0,
 
   /**
+   * Whether `vertical-collection` should recycle table rows. This speeds up performance with occlusion
+   * rendering but may cause problems if any components expect to reset their state to the initial state
+   * with every rerender of the list.
+   *
+   * @property shouldRecycle
+   * @type Boolean
+   * @default true
+   */
+  shouldRecycle: true,
+
+  /**
    * Table component shared options
    *
    * @property sharedOptions
@@ -197,7 +208,8 @@ const LightTable = Component.extend({
       fixedHeader: false,
       fixedFooter: false,
       occlusion: this.get('occlusion'),
-      estimatedRowHeight: this.get('estimatedRowHeight')
+      estimatedRowHeight: this.get('estimatedRowHeight'),
+      shouldRecycle: this.get('shouldRecycle')
     };
   }).readOnly(),
 

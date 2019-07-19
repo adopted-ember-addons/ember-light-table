@@ -42,7 +42,7 @@
     "ember-cli": "~3.1.4",
     "ember-cli-app-version": "^3.2.0",
     "ember-cli-autoprefixer": "^0.8.1",
-    "ember-cli-changelog": "0.3.4",
+    "ember-cli-changelog": "html-next/ember-cli-changelog#v0.4.0-beta.1",
     "ember-cli-code-coverage": "^0.4.2",
     "ember-cli-dependency-checker": "^2.1.0",
     "ember-cli-eslint": "^4.2.1",
@@ -51,7 +51,7 @@
     "ember-cli-inject-live-reload": "^1.7.0",
     "ember-cli-less": "^1.5.5",
     "ember-cli-mirage": "^0.4.1",
-    "ember-cli-qunit": "^4.1.1",
+    "ember-qunit": "^4.0.0",
     "ember-cli-release": "1.0.0-beta.2",
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
@@ -78,6 +78,10 @@
     "eslint-plugin-node": "^6.0.1",
     "loader.js": "^4.6.0",
     "yuidoc-ember-theme": "^2.0.1"
+  },
+  "resolutions": {
+    "ember-element-resize-detector": "0.3.0",
+    "ip-regex": "^2.1.0"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"

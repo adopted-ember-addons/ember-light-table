@@ -11,7 +11,7 @@ import RowComponent from 'ember-light-table/components/lt-row';
 import Component from '@ember/component';
 import { get, computed } from '@ember/object';
 
-module('Integration | Component | light table', function(hooks) {
+module('Integration | Component | light table | occlusion', function(hooks) {
   setupRenderingTest(hooks);
   setupMirageTest(hooks);
 
@@ -22,7 +22,7 @@ module('Integration | Component | light table', function(hooks) {
 
   test('it renders', async function(assert) {
     this.set('table', new Table());
-    await render(hbs `{{light-table table}}`);
+    await render(hbs `{{light-table table height="40vh" occlusion=true estimatedRowHeight=30}}`);
 
     assert.equal(find('*').textContent.trim(), '');
   });
@@ -37,55 +37,19 @@ module('Integration | Component | light table', function(hooks) {
     });
 
     await render(hbs `
-      {{#light-table table height='40vh' as |t|}}
+      {{#light-table table height='40vh' occlusion=true estimatedRowHeight=30 as |t|}}
         {{t.head fixed=true}}
         {{t.body onScrolledToBottom=(action onScrolledToBottom)}}
       {{/light-table}}
     `);
 
-    assert.equal(findAll('tbody > tr').length, 50, '50 rows are rendered');
+    assert.ok(findAll('.vertical-collection tbody.lt-body tr.lt-row').length < 30, 'only some rows are rendered');
 
-    let scrollContainer = '.tse-scroll-content';
+    let scrollContainer = '.lt-scrollable.tse-scrollable.vertical-collection';
     let { scrollHeight } = find(scrollContainer);
 
     assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
-    assert.equal(scrollHeight, 2501, 'scroll height is 2500 + 1px for height of lt-infinity');
-
-    await scrollTo(scrollContainer, 0, scrollHeight);
-  });
-
-  test('scrolled to bottom (multiple tables)', async function(assert) {
-    assert.expect(4);
-
-    this.set('table', new Table(Columns, this.server.createList('user', 50)));
-
-    this.set('onScrolledToBottomTable1', () => {
-      assert.ok(false);
-    });
-
-    this.set('onScrolledToBottomTable2', () => {
-      assert.ok(true);
-    });
-
-    await render(hbs `
-      {{#light-table table height='40vh' id='table-1' as |t|}}
-        {{t.head fixed=true}}
-        {{t.body onScrolledToBottom=(action onScrolledToBottomTable1)}}
-      {{/light-table}}
-
-      {{#light-table table height='40vh' id='table-2' as |t|}}
-        {{t.head fixed=true}}
-        {{t.body onScrolledToBottom=(action onScrolledToBottomTable2)}}
-      {{/light-table}}
-    `);
-
-    assert.equal(findAll('#table-2 tbody > tr').length, 50, '50 rows are rendered');
-
-    let scrollContainer = '#table-2 .tse-scroll-content';
-    let { scrollHeight } = find(scrollContainer);
-
-    assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
-    assert.equal(scrollHeight, 2501, 'scroll height is 2500 + 1px for height of lt-infinity');
+    assert.ok(scrollHeight > 1500, 'scroll height is 50 rows * 30 px per row + header size');
 
     await scrollTo(scrollContainer, 0, scrollHeight);
   });
@@ -95,7 +59,7 @@ module('Integration | Component | light table', function(hooks) {
     this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
     await render(hbs `
-      {{#light-table table height='500px' id='lightTable' as |t|}}
+      {{#light-table table height='500px' id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
         {{t.head fixed=true}}
         {{t.body}}
       {{/light-table}}
@@ -104,7 +68,7 @@ module('Integration | Component | light table', function(hooks) {
     assert.equal(findAll('#lightTable_inline_head thead').length, 0);
 
     await render(hbs `
-      {{#light-table table height='500px' id='lightTable' as |t|}}
+      {{#light-table table height='500px' id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
         {{t.head fixed=false}}
         {{t.body}}
       {{/light-table}}
@@ -118,7 +82,7 @@ module('Integration | Component | light table', function(hooks) {
     this.set('table', new Table(Columns, this.server.createList('user', 5)));
 
     await render(hbs `
-      {{#light-table table height='500px' id='lightTable' as |t|}}
+      {{#light-table table height='500px' id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
         {{t.body}}
         {{t.foot fixed=true}}
       {{/light-table}}
@@ -127,7 +91,7 @@ module('Integration | Component | light table', function(hooks) {
     assert.equal(findAll('#lightTable_inline_foot tfoot').length, 0);
 
     await render(hbs `
-      {{#light-table table height='500px' id='lightTable' as |t|}}
+      {{#light-table table height='500px' id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
         {{t.body}}
         {{t.foot fixed=false}}
       {{/light-table}}
@@ -143,7 +107,7 @@ module('Integration | Component | light table', function(hooks) {
 
     await render(hbs `
       <div style="height: 500px">
-        {{#light-table table id='lightTable' as |t|}}
+        {{#light-table table id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
           {{t.body}}
           {{t.foot fixed=fixed}}
         {{/light-table}}
@@ -160,7 +124,7 @@ module('Integration | Component | light table', function(hooks) {
 
     await render(hbs `
       <div style="height: 500px">
-        {{#light-table table id='lightTable' as |t|}}
+        {{#light-table table id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
           {{t.head fixed=true}}
           {{t.body}}
           {{#t.foot fixed=true}}
@@ -185,7 +149,7 @@ module('Integration | Component | light table', function(hooks) {
     this.set('table', new Table(Columns, this.server.createList('user', 1)));
 
     await render(hbs `
-      {{#light-table table as |t|}}
+      {{#light-table table occlusion=true estimatedRowHeight=30 as |t|}}
         {{t.body rowComponent=(component "custom-row" classNames="custom-row")}}
       {{/light-table}}
     `);
@@ -207,7 +171,7 @@ module('Integration | Component | light table', function(hooks) {
     this.set('table', new Table(Columns, users));
 
     await render(hbs `
-      {{#light-table table as |t|}}
+      {{#light-table table height='500px' occlusion=true estimatedRowHeight=30 as |t|}}
         {{t.body
           rowComponent=(component "custom-row" classNames="custom-row" current=current)
         }}
@@ -218,41 +182,16 @@ module('Integration | Component | light table', function(hooks) {
     assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
 
     this.set('current', users[0]);
-    let [firstRow] = findAll('.custom-row');
+    let firstRow = find('.custom-row:nth-child(2)');
     assert.ok(hasClass(firstRow, 'is-active'), 'first custom row is active');
 
     this.set('current', users[2]);
-    let thirdRow = find('.custom-row:nth-child(3)');
+    let thirdRow = find('.custom-row:nth-child(4)');
     assert.ok(hasClass(thirdRow, 'is-active'), 'third custom row is active');
 
     this.set('current', null);
 
     assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
-  });
-
-  test('onScroll', async function(assert) {
-    let table = new Table(Columns, this.server.createList('user', 10));
-    let expectedScroll = 50;
-
-    this.setProperties({
-      table,
-      onScroll(actualScroll) {
-        assert.ok(true, 'onScroll worked');
-        assert.equal(actualScroll, expectedScroll, 'scroll position is correct');
-      }
-    });
-
-    await render(hbs `
-      {{#light-table table height='40vh' as |t|}}
-        {{t.head fixed=true}}
-        {{t.body
-          useVirtualScrollbar=true
-          onScroll=onScroll
-        }}
-      {{/light-table}}
-    `);
-
-    await scrollTo('.tse-scroll-content', 0, expectedScroll);
   });
 
   test('extra data and tableActions', async function(assert) {
@@ -281,6 +220,8 @@ module('Integration | Component | light table', function(hooks) {
 
     await render(hbs `
       {{#light-table table
+        occlusion=true
+        estimatedRowHeight=30
         extra=(hash someData="someValue")
         tableActions=(hash
           someAction=(action "someAction")
