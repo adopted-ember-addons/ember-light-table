@@ -362,37 +362,39 @@ export default Component.extend({
   }),
 
   setupScrollOffset() {
-    let {
-      scrollTo,
-      _scrollTo,
-      scrollToRow,
-      _scrollToRow
-    } = this.getProperties(['scrollTo', '_scrollTo', 'scrollToRow', '_scrollToRow']);
-    let targetScrollOffset = null;
+    if (document.getElementById(this.elementId)) {
+      let {
+        scrollTo,
+        _scrollTo,
+        scrollToRow,
+        _scrollToRow
+      } = this.getProperties(['scrollTo', '_scrollTo', 'scrollToRow', '_scrollToRow']);
+      let targetScrollOffset = null;
 
-    this.setProperties({ _scrollTo: scrollTo, _scrollToRow: scrollToRow });
+      this.setProperties({ _scrollTo: scrollTo, _scrollToRow: scrollToRow });
 
-    if (scrollTo !== _scrollTo) {
-      targetScrollOffset = Number.parseInt(scrollTo, 10);
+      if (scrollTo !== _scrollTo) {
+        targetScrollOffset = Number.parseInt(scrollTo, 10);
 
-      if (Number.isNaN(targetScrollOffset)) {
-        targetScrollOffset = null;
-      }
-
-      this.setProperties({
-        targetScrollOffset,
-        hasReachedTargetScrollOffset: targetScrollOffset <= 0
-      });
-    } else if (scrollToRow !== _scrollToRow) {
-      if (scrollToRow instanceof Row) {
-        let rowElement = this.element.querySelector(`[data-row-id=${scrollToRow.get('rowId')}]`);
-
-        if (rowElement instanceof Element) {
-          targetScrollOffset = rowElement.offsetTop;
+        if (Number.isNaN(targetScrollOffset)) {
+          targetScrollOffset = null;
         }
-      }
 
-      this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
+        this.setProperties({
+          targetScrollOffset,
+          hasReachedTargetScrollOffset: targetScrollOffset <= 0
+        });
+      } else if (scrollToRow !== _scrollToRow) {
+        if (scrollToRow instanceof Row) {
+          let rowElement = this.element.querySelector(`[data-row-id=${scrollToRow.get('rowId')}]`);
+
+          if (rowElement instanceof Element) {
+            targetScrollOffset = rowElement.offsetTop;
+          }
+        }
+
+        this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
+      }
     }
   },
 
