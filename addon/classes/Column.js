@@ -136,6 +136,14 @@ export default class Column extends EmberObject.extend({
   minResizeWidth: 0,
 
   /**
+   * The maximum width (in px) that this column can be resized to.
+   * @property maxResizeWidth
+   * @type {Number}
+   * @optional
+   */
+  maxResizeWidth: null,
+
+  /**
    * The parent column (or group) for this sub-column.
    * This will only have a value if this column is a sub-column.
    * Note: this doesn't update if you move this sub-column to another parent after instantiation.
