@@ -85,7 +85,8 @@
     "yuidoc-ember-theme": "^2.0.1"
   },
   "resolutions": {
-    "ip-regex": "^2.1.0"
+    "ip-regex": "^2.1.0",
+    "ember-cli/portfinder": "1.0.21"
   },
   "engines": {
     "node": "8.* || >= 10.*"
