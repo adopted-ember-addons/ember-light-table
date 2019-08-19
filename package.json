@@ -1,7 +1,7 @@
 {
   "name": "ember-light-table",
   "version": "2.0.0-beta.3",
-  "description": "Lightweight, component based table for Ember 2.18+",
+  "description": "Lightweight, component based table for Ember 3.4+",
   "keywords": [
     "ember-addon",
     "table"
@@ -95,7 +95,7 @@
     "configPath": "tests/dummy/config",
     "demoURL": "http://offirgolan.github.io/ember-light-table",
     "versionCompatibility": {
-      "ember": ">=2.18.0 <4.0.0"
+      "ember": ">=3.4.0 <4.0.0"
     }
   },
   "changelog": {
