@@ -16,6 +16,9 @@
 
 **Ember Light Table** is a  lightweight contextual component based table addon that follows Ember's actions up, data down ideology.
 
+# WARNING
+_The API for initializing Ember Light Table (v2.x) has recently changed. Please review the [Pull Request](https://github.com/offirgolan/ember-light-table/pull/701) for more information._
+
 ## Features
 
 - Custom component based column headers and cells
