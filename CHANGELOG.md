@@ -3,6 +3,8 @@ Changelog
 
 ## UNRELEASED 2.X
 
+## v2.0.0-beta.4 (2019-08-19)
+
 #### :boom: Breaking Change
 * [#701](https://github.com/offirgolan/ember-light-table/pull/701) Convert ES6 native classes to ember objects ([@fran-worley](https://github.com/fran-worley))
 * [#713](https://github.com/offirgolan/ember-light-table/pull/713) Set minimum supported ember version at 3.4 ([@fran-worley](https://github.com/fran-worley))
