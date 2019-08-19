@@ -4,10 +4,13 @@ Changelog
 ## UNRELEASED 2.X
 
 #### :boom: Breaking Change
-* [#700](https://github.com/offirgolan/ember-light-table/pull/700) Set minimum supported ember version at 2.18 ([@fran-worley](https://github.com/fran-worley))
+* [#701](https://github.com/offirgolan/ember-light-table/pull/701) Convert ES6 native classes to ember objects ([@fran-worley](https://github.com/fran-worley))
+* [#713](https://github.com/offirgolan/ember-light-table/pull/713) Set minimum supported ember version at 3.4 ([@fran-worley](https://github.com/fran-worley))
 * [#698](https://github.com/offirgolan/ember-light-table/pull/698) Drop support for Node 6 as end of life 30 April 2019 ([@fran-worley](https://github.com/fran-worley))
 
 #### Bug Fixes
+* [#701](https://github.com/offirgolan/ember-light-table/pull/701) Convert ES6 native classes to ember objects ([@fran-worley](https://github.com/fran-worley))
+* [#693](https://github.com/offirgolan/ember-light-table/pull/693) Update ember-in-viewport, ember-wormhole ([@fran-worley](https://github.com/fran-worley))
 * [#692](https://github.com/offirgolan/ember-light-table/pull/692) Replace propertyWillChange/propertyDidChange with notifyPropertyChange ([@mmadsen2](https://github.com/mmadsen2))
 * [#681](https://github.com/offirgolan/ember-light-table/pull/681) use `assign` instead of `merge` ([@bekzod](https://github.com/bekzod))
 * [#664](https://github.com/offirgolan/ember-light-table/pull/664) Fixing issue with multiple tables and onScrolledToBottom. ([@gmurphey](https://github.com/gmurphey))
@@ -15,9 +18,10 @@ Changelog
 * [#596](https://github.com/offirgolan/ember-light-table/pull/596) [Draggable Column] Error when dragging column; "removeObject is not a function" ([@msenevir](https://github.com/msenevir))
 
 #### Internal
+* [#716](https://github.com/offirgolan/ember-light-table/pull/716) Bump to ember cli 3.12 and update dependencies ([@fran-worley](https://github.com/fran-worley))
 * [#697](https://github.com/offirgolan/ember-light-table/pull/697) Migrate from ember-cli-changelog to lerna-changelog ([@fran-worley](https://github.com/fran-worley))
 * [#696](https://github.com/offirgolan/ember-light-table/pull/696) Bump Ember CLI to 3.8 and update other dependencies ([@fran-worley](https://github.com/fran-worley))
-* [#693](https://github.com/offirgolan/ember-light-table/pull/693) Update ember-in-viewport, ember-wormhole, move ember-composable-helpers to devDependencies ([@fran-worley](https://github.com/fran-worley))
+* [#693](https://github.com/offirgolan/ember-light-table/pull/693) Update ember-in-viewport, ember-wormhole ([@fran-worley](https://github.com/fran-worley))
 
 #### Committers: 5
 - mmadsen2 [@mmadsen2](https://github.com/mmadsen2)
