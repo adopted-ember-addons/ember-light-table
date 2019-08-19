@@ -6,6 +6,7 @@ import Column from 'ember-light-table/classes/Column';
 import SyncArrayProxy from 'ember-light-table/-private/sync-array-proxy';
 import { mergeOptionsWithGlobals } from 'ember-light-table/-private/global-options';
 import fixProto from 'ember-light-table/utils/fix-proto';
+import { assign } from '@ember/polyfills';
 import { isNone } from '@ember/utils';
 
 const RowSyncArrayProxy = SyncArrayProxy.extend({
@@ -133,43 +134,41 @@ export default class Table extends EmberObject.extend({
       arr.pushObjects(c.get('isGroupColumn') ? c.get('subColumns') : [c]);
       return arr;
     }, emberArray([]));
-  }).readOnly()
-}) {
+  }).readOnly(),
+
   /**
    * @class Table
    * @constructor
-   * @param  {Array} columns
-   * @param  {Array} rows
    * @param  {Object} options
+   * @param  {Array} options.columns
+   * @param  {Array} options.rows
    * @param  {Boolean} options.enableSync If `true`, creates a two way sync
    *           between the table's rows and the passed rows collection. Also see
    *           `setRowsSynced(rows)`.
    * @param  {Object}  options.rowOptions Options hash passed through to
    *           `createRow(content, options)`.
    */
-  constructor(columns = [], rows = [], options = {}) {
-    super();
-
+  init(options = {}) {
+    let { columns = [], rows = [] } = options;
     assert('[ember-light-table] columns must be an array if defined', isArray(columns));
     assert('[ember-light-table] rows must be an array if defined', isArray(rows));
 
-    let _options = mergeOptionsWithGlobals(options);
-    let _columns = emberArray(Table.createColumns(columns));
-    let _rows = emberArray(Table.createRows(rows, _options.rowOptions));
+    this.setProperties(mergeOptionsWithGlobals(options));
 
-    if (_options.enableSync) {
+    this.set('columns', emberArray(Table.createColumns(columns)));
+
+    let _rows = emberArray(Table.createRows(rows, this.get('rowOptions')));
+
+    if (this.get('enableSync')) {
       _rows = RowSyncArrayProxy.create({
         syncArray: rows,
         content: _rows
       });
     }
 
-    this.setProperties({
-      columns: _columns,
-      rows: _rows
-    });
+    this.set('rows', _rows);
   }
-
+}) {
   destroy() {
     this._super(...arguments);
 
@@ -411,7 +410,11 @@ export default class Table extends EmberObject.extend({
    * @return {Row}
    */
   static createRow(content, options = {}) {
-    return new Row(content, options);
+    if (content instanceof Row) {
+      return content;
+    } else {
+      return Row.create(assign({}, options, { content }));
+    }
   }
 
   /**
@@ -434,7 +437,11 @@ export default class Table extends EmberObject.extend({
    * @return {Column}
    */
   static createColumn(column) {
-    return new Column(column);
+    if (column instanceof Column) {
+      return column;
+    } else {
+      return Column.create(column);
+    }
   }
 
   /**

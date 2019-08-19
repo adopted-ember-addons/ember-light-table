@@ -23,7 +23,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    this.set('table', new Table());
+    this.set('table', Table.create());
     await render(hbs `{{light-table table height="40vh" occlusion=true estimatedRowHeight=30}}`);
 
     assert.equal(find('*').textContent.trim(), '');
@@ -32,7 +32,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
   test('scrolled to bottom', async function(assert) {
     assert.expect(4);
 
-    this.set('table', new Table(Columns, this.server.createList('user', 50)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 50) }));
 
     this.set('onScrolledToBottom', () => {
       assert.ok(true);
@@ -58,7 +58,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
   test('fixed header', async function(assert) {
     assert.expect(2);
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(hbs `
       {{#light-table table height='500px' id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
@@ -81,7 +81,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
   test('fixed footer', async function(assert) {
     assert.expect(2);
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(hbs `
       {{#light-table table height='500px' id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
@@ -104,7 +104,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
   test('table assumes height of container', async function(assert) {
 
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
     this.set('fixed', true);
 
     await render(hbs `
@@ -121,7 +121,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
   });
 
   test('table body should consume all available space when not enough content to fill it', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 1) }));
     this.set('fixed', true);
 
     await render(hbs `
@@ -148,7 +148,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
     this.owner.register('component:custom-row', RowComponent);
 
-    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 1) }));
 
     await render(hbs `
       {{#light-table table occlusion=true estimatedRowHeight=30 as |t|}}
@@ -170,7 +170,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
     }));
 
     let users = this.server.createList('user', 3);
-    this.set('table', new Table(Columns, users));
+    this.set('table', Table.create({ columns: Columns, rows: users }));
 
     await render(hbs `
       {{#light-table table height='500px' occlusion=true estimatedRowHeight=30 as |t|}}
@@ -222,7 +222,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       cellComponent: 'some-component'
     }];
 
-    this.set('table', new Table(columns, [{}]));
+    this.set('table', Table.create({ columns, rows: [{}] }));
 
     this.actions.someAction = () => {
       assert.ok(true, 'table action is passed');

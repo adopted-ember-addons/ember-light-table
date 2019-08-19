@@ -77,26 +77,7 @@ export default class Row extends ObjectProxy.extend({
   rowId: computed(function() {
     return guidFor(this);
   }).readOnly()
-}) {
-  /**
-   * @class Row
-   * @constructor
-   * @param {Object} content
-   * @param {Object} options
-   */
-  constructor(content, options = {}) {
-    // TODO: Revert this, when babel#5862 is resolved.
-    //       https://github.com/babel/babel/issues/5862
-    // HACK: Passing properties to super instead of manually setting them fixes the
-    //       implicit run loop creation for Ember 2.12.
-    //       https://travis-ci.org/offirgolan/ember-light-table/jobs/344818839#L790
-    super(Object.assign({}, options, { content }));
-
-    if (content instanceof Row) {
-      return content;
-    }
-  }
-}
+}) {}
 
 // https://github.com/offirgolan/ember-light-table/issues/436#issuecomment-310138868
 fixProto(Row);
