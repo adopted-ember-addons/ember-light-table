@@ -7,7 +7,7 @@
   </a>
 </div>
 
-[![Ember Versions](https://img.shields.io/badge/Ember.js%20Versions-%5E2.18%20and%20%5E3.0-brightgreen.svg)](https://travis-ci.org/offirgolan/ember-light-table)
+[![Ember Versions](https://img.shields.io/badge/Ember.js%20Versions-%5E3.4%20and%20%5E4.0-brightgreen.svg)](https://travis-ci.org/offirgolan/ember-light-table)
 [![Build Status](https://travis-ci.org/offirgolan/ember-light-table.svg)](https://travis-ci.org/offirgolan/ember-light-table)
 [![npm version](https://badge.fury.io/js/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
 [![Download Total](https://img.shields.io/npm/dt/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
@@ -36,8 +36,8 @@
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v2.18 or above
-* Ember CLI v2.18 or above
+* Ember.js v3.4 or above
+* Ember CLI v3.4 or above
 
 
 Installation
