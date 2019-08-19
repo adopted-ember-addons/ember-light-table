@@ -1,6 +1,6 @@
 {
   "name": "ember-light-table",
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0-beta.4",
   "description": "Lightweight, component based table for Ember 3.4+",
   "keywords": [
     "ember-addon",
