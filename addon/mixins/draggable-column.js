@@ -1,5 +1,5 @@
 import Mixin from '@ember/object/mixin';
-import { computed } from '@ember/object';
+import { computed, get } from '@ember/object';
 import { run } from '@ember/runloop';
 
 let sourceColumn;
@@ -36,13 +36,13 @@ export default Mixin.create({
     return parent ? parent.get('subColumns') : this.get('table.columns');
   }).readOnly(),
 
-  isDropTarget: computed(function() {
-    let column = this.get('column');
+  isDropTarget() {
+    let column = get(this, 'column');
     /*
      A column is a valid drop target only if its in the same group
      */
     return sourceColumn && column.get('droppable') && column.get('parent') === sourceColumn.get('parent');
-  }).volatile().readOnly(),
+  },
 
   dragStart(e) {
     this._super(...arguments);
@@ -70,7 +70,7 @@ export default Mixin.create({
   dragEnter(e) {
     this._super(...arguments);
 
-    if (this.get('isDropTarget')) {
+    if (this.isDropTarget()) {
       e.preventDefault();
       this.set('isDragTarget', this.get('column') !== sourceColumn);
     }
@@ -79,7 +79,7 @@ export default Mixin.create({
   dragOver(e) {
     this._super(...arguments);
 
-    if (this.get('isDropTarget')) {
+    if (this.isDropTarget()) {
       e.preventDefault();
       /*
         NOTE: dragLeave will be triggered by any child elements inside the

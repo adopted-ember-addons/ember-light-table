@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { get } from '@ember/object';
 import closest from 'ember-light-table/utils/closest';
 import layout from '../templates/components/lt-column-resizer';
 
@@ -15,9 +15,9 @@ export default Component.extend({
   startWidth: null,
   startX: null,
 
-  colElement: computed(function() {
-    return this.get('element').parentNode;
-  }).volatile().readOnly(),
+  colElement() {
+    return get(this, 'element').parentNode;
+  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -44,7 +44,7 @@ export default Component.extend({
   },
 
   mouseDown(e) {
-    let column = this.get('colElement');
+    let column = this.colElement();
 
     e.preventDefault();
     e.stopPropagation();
@@ -64,7 +64,7 @@ export default Component.extend({
       e.preventDefault();
       e.stopPropagation();
 
-      let column = this.get('colElement');
+      let column = this.colElement();
       let width = `${column.offsetWidth}px`;
 
       this.set('isResizing', false);
@@ -86,7 +86,7 @@ export default Component.extend({
       let { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
       let width = `${Math.max(startWidth + (e.pageX - startX), minResizeWidth)}px`;
 
-      let column = this.get('colElement');
+      let column = this.colElement();
       let index = this.get('table.visibleColumns').indexOf(this.get('column')) + 1;
       let table = closest(this.get('element'), TOP_LEVEL_CLASS);
 
