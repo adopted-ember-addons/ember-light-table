@@ -4945,7 +4945,7 @@ ember-cli-test-loader@^2.2.0:
   dependencies:
     ember-cli-babel "^6.8.1"
 
-ember-cli-typescript@^2.0.2:
+ember-cli-typescript@^2.0.0, ember-cli-typescript@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/ember-cli-typescript/-/ember-cli-typescript-2.0.2.tgz#464984131fbdc05655eb61d1c3cdd911d3137f0d"
   integrity sha512-7I5azCTxOgRDN8aSSnJZIKSqr+MGnT+jLTUbBYqF8wu6ojs2DUnTePxUcQMcvNh3Q3B1ySv7Q/uZFSjdU9gSjA==
@@ -5248,12 +5248,13 @@ ember-invoke-action@^1.5.0:
   dependencies:
     ember-cli-babel "^6.6.0"
 
-ember-lifeline@^3.0.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/ember-lifeline/-/ember-lifeline-3.1.1.tgz#a14936cfe840de4769a1800f8b0b1ab00770cc33"
-  integrity sha512-UsteL1i2LFS4BNSMKOIAJzIJQNypNqLCoHz23zZ6hpDTWuHB1R3mnK1mane40VVqwU8aRPoohJvowRBKXwdh6Q==
+ember-lifeline@^4.1.5:
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/ember-lifeline/-/ember-lifeline-4.1.5.tgz#a3db0c2357b533c65e1396c1c1d70609c2cd7276"
+  integrity sha512-uPnc577X8grg5/6SLCIkRvLuMRTGPErOl5VbwtzAktjq4Ce0owtTrr4kbAQ1gad9t9CBfCSfAQJ+FY9WNt9iCQ==
   dependencies:
     ember-cli-babel "^7.1.3"
+    ember-cli-typescript "^2.0.0"
 
 ember-load-initializers@^2.0.0:
   version "2.0.0"
@@ -5355,16 +5356,16 @@ ember-runtime-enumerable-includes-polyfill@^2.0.0:
     ember-cli-babel "^6.9.0"
     ember-cli-version-checker "^2.1.0"
 
-ember-scrollable@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/ember-scrollable/-/ember-scrollable-0.5.2.tgz#829e0e437075e47c079b21c1e56545a9bcc30494"
-  integrity sha512-hykRSdjwq00DcGwYip5AXhvQ9HCj8ZPbVRMjyuTR+HUkRYwBHPMGSU5IPLRI4j/eTJgxac8x2cHCKfYCgaEu/Q==
+ember-scrollable@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-scrollable/-/ember-scrollable-1.0.0.tgz#7a4baae8e16c5d8407a346081bbbc3c4a5551eae"
+  integrity sha512-XEKvI055MKqjCWwHjma2h2kBORbuMJtnmFmAyv6sX3H3DiyvwcLULyopciDiM56eL70vl/rOV8O6VvG6rTDkug==
   dependencies:
     ember-cli-babel "^6.8.0"
     ember-cli-htmlbars "^2.0.1"
     ember-component-inbound-actions "^1.3.0"
     ember-element-resize-detector "~0.4.0"
-    ember-lifeline "^3.0.1"
+    ember-lifeline "^4.1.5"
 
 ember-source-channel-url@^1.0.1, ember-source-channel-url@^1.1.0:
   version "1.2.0"
