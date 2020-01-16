@@ -2,13 +2,7 @@
   <table class={{tableClassNames}}>
     <tfoot class="lt-foot">
       {{!-- Scaffolding is needed here to allow use of colspan in the footer --}}
-      <tr class="lt-scaffolding-row">
-        {{#each columns as |column|}}
-          {{! template-lint-disable no-inline-styles }}
-          <td style={{html-safe (if column.width (concat "width: " column.width))}} class="lt-scaffolding"></td>
-          {{! template-lint-enable no-inline-styles }}
-        {{/each}}
-      </tr>
+      {{lt-scaffolding-row columns=columns}}
       {{#if hasBlock}}
         {{yield columns}}
       {{else}}

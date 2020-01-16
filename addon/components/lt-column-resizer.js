@@ -90,9 +90,17 @@ export default Component.extend({
       let index = this.get('table.visibleColumns').indexOf(this.get('column')) + 1;
       let table = closest(this.get('element'), TOP_LEVEL_CLASS);
 
-      column.width = width;
-      table.querySelector(`thead td.lt-scaffolding:nth-child(${index})`).style.width = width;
-      table.querySelector(`tfoot td.lt-scaffolding:nth-child(${index})`).style.width = width;
+      column.style.width = width;
+      const headerScaffoldingCell = table.querySelector(`thead td.lt-scaffolding:nth-child(${index})`);
+      if (headerScaffoldingCell) {
+        headerScaffoldingCell.style.width = width;
+      }
+
+      const footerScaffoldingCell = table.querySelector(`tfoot td.lt-scaffolding:nth-child(${index})`);
+      if (footerScaffoldingCell) {
+        footerScaffoldingCell.style.width = width;
+      }
+
       if (resizeOnDrag) {
         let cols = table.querySelectorAll(`tbody td:nth-child(${index})`);
         cols.forEach((col) => {

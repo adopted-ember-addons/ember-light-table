@@ -9,13 +9,9 @@
            the td's fail to hold their width. Creating a scaffolding will setup the table columns correctly
         --}}
         {{#if subColumns.length}}
-          <tr class="lt-scaffolding-row">
-            {{#each subColumns as |column|}}
-              {{! template-lint-disable no-inline-styles }}
-              <td style={{html-safe (if column.width (concat "width: " column.width))}} class="lt-scaffolding"></td>
-              {{! template-lint-enable no-inline-styles }}
-            {{/each}}
-          </tr>
+          {{lt-scaffolding-row columns=subColumns}}
+        {{else}}
+          {{lt-scaffolding-row columns=columnGroups}}
         {{/if}}
 
         <tr>
