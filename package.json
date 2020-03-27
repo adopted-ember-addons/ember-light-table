@@ -31,7 +31,7 @@
     "ember-cli-babel": "^7.10.0",
     "ember-cli-htmlbars": "^3.1.0",
     "ember-cli-string-helpers": "^4.0.0",
-    "ember-composable-helpers": "^2.0.0",
+    "ember-composable-helpers": "^3.1.1",
     "ember-get-config": "^0.2.4",
     "ember-in-viewport": "^3.5.8",
     "ember-scrollable": "^1.0.0",
