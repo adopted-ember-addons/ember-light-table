@@ -13,7 +13,7 @@ module.exports = function(defaults) {
     'ember-prism': {
       'components': ['markup-templating', 'handlebars', 'javascript'],
       plugins: [
-        'line-numbers',
+        'line-numbers'
       ]
     },
 
