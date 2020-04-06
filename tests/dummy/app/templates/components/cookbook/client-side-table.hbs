@@ -1,5 +1,5 @@
 {{!-- BEGIN-SNIPPET client-side-table --}}
-{{#light-table table height="65vh" as |t|}}
+<LightTable @table={{this.table}} @height="65vh" as |t|>
 
   {{!--
     In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
@@ -7,26 +7,23 @@
     the font-awesome assets, e.g. via a CDN.
   --}}
 
-  {{t.head
-    onColumnClick=(action "onColumnClick")
-    iconSortable="fa fa-sort"
-    iconAscending="fa fa-sort-asc"
-    iconDescending="fa fa-sort-desc"
-    fixed=true
-  }}
+  <t.head
+    @onColumnClick={{action "onColumnClick"}}
+    @iconSortable="fa fa-sort"
+    @iconAscending="fa fa-sort-asc"
+    @iconDescending="fa fa-sort-desc"
+    @fixed={{true}}
+  />
 
-  {{#t.body
-    canSelect=false
-    as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
+  <t.body @canSelect={{false}} as |body|>
+    {{#if this.isLoading}}
+      <body.loader>
+        <TableLoader/>
+      </body.loader>
     {{/if}}
-  {{/t.body}}
+  </t.body>
 
-  {{#t.foot fixed=true as |columns|}}
+  <t.foot @fixed={{true}} as |columns|>
     <tr>
       <td class="row" colspan={{columns.length}}>
         <div class="col-md-6">
@@ -50,6 +47,6 @@
         </div>
       </td>
     </tr>
-  {{/t.foot}}
-{{/light-table}}
+  </t.foot>
+</LightTable>
 {{!-- END-SNIPPET --}}

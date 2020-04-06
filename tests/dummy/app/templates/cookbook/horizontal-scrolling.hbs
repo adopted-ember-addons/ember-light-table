@@ -1,11 +1,11 @@
-{{#code-panel
-  title="Horizontal Scrolling"
-  snippets=(array
+<CodePanel
+  @title="Horizontal Scrolling"
+  @snippets={{array
     "horizontal-scrolling-table.js"
     "table-common.js"
     "horizontal-scrolling-table.hbs"
     "user-avatar.hbs"
     "table-loader.hbs"
-)}}
-  {{cookbook/horizontal-scrolling-table model=model}}
-{{/code-panel}}
+}}>
+  <Cookbook::HorizontalScrollingTable @model={{this.model}}/>
+</CodePanel>

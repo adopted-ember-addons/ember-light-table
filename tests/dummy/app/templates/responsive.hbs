@@ -1,6 +1,6 @@
-{{#code-panel
-  title="Responsive Example"
-  snippets=(array
+<CodePanel
+  @title="Responsive Example"
+  @snippets={{array
     "responsive-table.js"
     "table-common.js"
     "responsive-table.hbs"
@@ -8,6 +8,6 @@
     "row-toggle.hbs"
     "user-avatar.hbs"
     "table-loader.hbs"
-)}}
-  {{responsive-table model=model}}
-{{/code-panel}}
+}}>
+  <ResponsiveTable @model={{this.model}}/>
+</CodePanel>

@@ -1,5 +1,5 @@
 {{!-- BEGIN-SNIPPET paginated-table --}}
-{{#light-table table height="65vh" as |t|}}
+<LightTable @table={{this.table}} @height="65vh" as |t|>
 
   {{!--
     In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
@@ -7,49 +7,46 @@
     the font-awesome assets, e.g. via a CDN.
   --}}
 
-  {{t.head
-    onColumnClick=(pipe (action "onColumnClick") (action "setPage" 1))
-    iconSortable="fa fa-sort"
-    iconAscending="fa fa-sort-asc"
-    iconDescending="fa fa-sort-desc"
-    fixed=true
-  }}
+  <t.head
+    @onColumnClick={{pipe (action "onColumnClick") (action "setPage" 1)}}
+    @iconSortable="fa fa-sort"
+    @iconAscending="fa fa-sort-asc"
+    @iconDescending="fa fa-sort-desc"
+    @fixed={{true}}
+  />
 
-  {{#t.body
-    canSelect=false
-    as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
+  <t.body @canSelect={{false}} as |body|>
+    {{#if this.isLoading}}
+      <body.loader>
+        <TableLoader/>
+      </body.loader>
     {{/if}}
-  {{/t.body}}
+  </t.body>
 
-  {{#if meta}}
-    {{#t.foot fixed=true as |columns|}}
+  {{#if this.meta}}
+    <t.foot @fixed={{true}} as |columns|>
       <tr>
         <td class="align-center" colspan={{columns.length}}>
           <ul class="pagination pagination-sm">
-            <li class={{if (eq page 1) "disabled"}}>
-              <a {{action "setPage" (dec page)}} href="#" aria-label="Previous">
+            <li class={{if (eq this.page 1) "disabled"}}>
+              <a {{action "setPage" (dec this.page)}} href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            {{#each (range 1 meta.totalPages true) as |p|}}
-              <li class={{if (eq p page) "active"}}>
+            {{#each (range 1 this.meta.totalPages true) as |p|}}
+              <li class={{if (eq p this.page) "active"}}>
                 <a {{action "setPage" p}} href="#">{{p}}</a>
               </li>
             {{/each}}
-            <li class={{if (eq page meta.totalPages) "disabled"}}>
-              <a {{action "setPage" (inc page)}} href="#" aria-label="Next">
+            <li class={{if (eq this.page this.meta.totalPages) "disabled"}}>
+              <a {{action "setPage" (inc this.page)}} href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
           </ul>
         </td>
       </tr>
-    {{/t.foot}}
+    </t.foot>
   {{/if}}
-{{/light-table}}
+</LightTable>
 {{!-- END-SNIPPET --}}

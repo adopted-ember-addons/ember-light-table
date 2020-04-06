@@ -1,11 +1,11 @@
-{{#code-panel
-  title="Occlusion Rendering"
-  snippets=(array
+<CodePanel
+  @title="Occlusion Rendering"
+  @snippets={{array
     "occluded-table.js"
     "table-common.js"
     "occluded-table.hbs"
     "user-avatar.hbs"
     "table-loader.hbs"
-  )}}
-  {{cookbook/occluded-table model=model}}
-{{/code-panel}}
+  }}>
+  <Cookbook::OccludedTable @model={{this.model}}/>
+</CodePanel>

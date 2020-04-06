@@ -1,5 +1,5 @@
 {{!-- BEGIN-SNIPPET scrolling-table --}}
-{{#light-table table height="65vh" as |t|}}
+<LightTable @table={{this.table}} @height="65vh" as |t|>
 
   {{!--
     In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
@@ -7,30 +7,29 @@
     the font-awesome assets, e.g. via a CDN.
   --}}
 
-  {{t.head
-    onColumnClick=(action "onColumnClick")
-    iconSortable="fa fa-sort"
-    iconAscending="fa fa-sort-asc"
-    iconDescending="fa fa-sort-desc"
-    fixed=true
-  }}
+  <t.head
+    @onColumnClick={{action "onColumnClick"}}
+    @iconSortable="fa fa-sort"
+    @iconAscending="fa fa-sort-asc"
+    @iconDescending="fa fa-sort-desc"
+    @fixed={{true}}
+  />
 
-  {{#t.body
-    canSelect=false
-    scrollTo=scrollTo
-    scrollToRow=scrollToRow
-    onScroll=(action (mut currentScrollOffset))
-    onScrolledToBottom=(action "onScrolledToBottom")
-    as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
+  <t.body
+    @canSelect={{false}}
+    @scrollTo={{this.scrollTo}}
+    @scrollToRow={{this.scrollToRow}}
+    @onScroll={{action (mut this.currentScrollOffset)}}
+    @onScrolledToBottom={{action "onScrolledToBottom"}}
+  as |body|>
+    {{#if this.isLoading}}
+      <body.loader>
+        <TableLoader/>
+      </body.loader>
     {{/if}}
-  {{/t.body}}
+  </t.body>
 
-  {{#t.foot fixed=true as |columns|}}
+  <t.foot @fixed={{true}} as |columns|>
     <tr>
       <td colspan={{columns.length}}>
         <form class="form-inline" onsubmit="return false;">
@@ -68,7 +67,7 @@
         </form>
       </td>
     </tr>
-  {{/t.foot}}
+  </t.foot>
 
-{{/light-table}}
+</LightTable>
 {{!-- END-SNIPPET --}}

@@ -1,33 +1,32 @@
 {{!-- BEGIN-SNIPPET resizable-table --}}
-{{#light-table table height="65vh" as |t|}}
+<LightTable @table={{this.table}} @height="65vh" as |t|>
 
-  {{t.head
-    onColumnClick=(action "onColumnClick")
-    iconSortable="fa fa-sort"
-    iconAscending="fa fa-sort-asc"
-    iconDescending="fa fa-sort-desc"
-    resizeOnDrag=true
-    fixed=true
-  }}
+  <t.head
+    @onColumnClick={{action "onColumnClick"}}
+    @iconSortable="fa fa-sort"
+    @iconAscending="fa fa-sort-asc"
+    @iconDescending="fa fa-sort-desc"
+    @resizeOnDrag={{true}}
+    @fixed={{true}}
+  />
 
-  {{#t.body
-    canSelect=false
-    onScrolledToBottom=(action "onScrolledToBottom")
-    as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
+  <t.body
+    @canSelect={{false}}
+    @onScrolledToBottom={{action "onScrolledToBottom"}}
+  as |body|>
+    {{#if this.isLoading}}
+      <body.loader>
+        <TableLoader/>
+      </body.loader>
     {{/if}}
-  {{/t.body}}
+  </t.body>
 
-  {{t.foot
-    onColumnClick=(action "onColumnClick")
-    iconAscending="fa fa-sort-asc"
-    iconDescending="fa fa-sort-desc"
-    resizeOnDrag=true
-    fixed=true
-  }}
-{{/light-table}}
+  <t.foot
+    @onColumnClick={{action "onColumnClick"}}
+    @iconAscending="fa fa-sort-asc"
+    @iconDescending="fa fa-sort-desc"
+    @resizeOnDrag={{true}}
+    @fixed={{true}}
+  />
+</LightTable>
 {{!-- END-SNIPPET --}}

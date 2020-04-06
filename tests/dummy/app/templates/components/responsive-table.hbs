@@ -1,10 +1,10 @@
 {{!-- BEGIN-SNIPPET responsive-table --}}
-{{#light-table table
-  height="65vh"
-  responsive=true
-  onAfterResponsiveChange=(action "onAfterResponsiveChange")
-  as |t|
-}}
+<LightTable
+  @table={{this.table}}
+  @height="65vh"
+  @responsive={{true}}
+  @onAfterResponsiveChange={{action "onAfterResponsiveChange"}}
+as |t|>
 
   {{!--
     In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
@@ -12,32 +12,31 @@
     the font-awesome assets, e.g. via a CDN.
   --}}
 
-  {{t.head
-    onColumnClick=(action "onColumnClick")
-    iconSortable="fa fa-sort"
-    iconAscending="fa fa-sort-asc"
-    iconDescending="fa fa-sort-desc"
-    fixed=true
-  }}
+  <t.head
+    @onColumnClick={{action "onColumnClick"}}
+    @iconSortable="fa fa-sort"
+    @iconAscending="fa fa-sort-asc"
+    @iconDescending="fa fa-sort-desc"
+    @fixed={{true}}
+  />
 
-  {{#t.body
-    canSelect=false
-    expandOnClick=false
-    onScrolledToBottom=(action "onScrolledToBottom")
-    as |body|
-  }}
-    {{#body.expanded-row as |row|}}
-      {{responsive-expanded-row table=table row=row}}
-    {{/body.expanded-row}}
+  <t.body
+    @canSelect={{false}}
+    @expandOnClick={{false}}
+    @onScrolledToBottom={{action "onScrolledToBottom"}}
+  as |body|>
+    <body.expanded-row as |row|>
+      <ResponsiveExpandedRow @table={{this.table}} @row={{row}}/>
+    </body.expanded-row>
 
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
+    {{#if this.isLoading}}
+      <body.loader>
+        <TableLoader/>
+      </body.loader>
     {{/if}}
-  {{/t.body}}
+  </t.body>
 
-  {{#t.foot fixed=true as |columns|}}
+  <t.foot @fixed={{true}} as |columns|>
     <tr>
       <td class="align-center" colspan={{columns.length}}>
         <i class="fa fa-chevron-left pull-left" aria-hidden="true"></i>
@@ -45,7 +44,7 @@
         <i class="fa fa-chevron-right pull-right" aria-hidden="true"></i>
       </td>
     </tr>
-  {{/t.foot}}
+  </t.foot>
 
-{{/light-table}}
+</LightTable>
 {{!-- END-SNIPPET --}}

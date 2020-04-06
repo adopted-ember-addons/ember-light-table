@@ -1,31 +1,30 @@
 {{!-- BEGIN-SNIPPET draggable-table --}}
-{{#light-table table height="65vh" as |t|}}
-  {{t.head
-    onColumnClick=(action "onColumnClick")
-    iconSortable="fa fa-sort"
-    iconAscending="fa fa-sort-asc"
-    iconDescending="fa fa-sort-desc"
-    fixed=true
-  }}
+<LightTable @table={{this.table}} @height="65vh" as |t|>
+  <t.head
+    @onColumnClick={{action "onColumnClick"}}
+    @iconSortable="fa fa-sort"
+    @iconAscending="fa fa-sort-asc"
+    @iconDescending="fa fa-sort-desc"
+    @fixed={{true}}
+  />
 
-  {{#t.body
-    canSelect=false
-    onScrolledToBottom=(action "onScrolledToBottom")
-    as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
+  <t.body
+    @canSelect={{false}}
+    @onScrolledToBottom={{action "onScrolledToBottom"}}
+  as |body|>
+    {{#if this.isLoading}}
+      <body.loader>
+        <TableLoader/>
+      </body.loader>
     {{/if}}
-  {{/t.body}}
+  </t.body>
 
-  {{#t.foot fixed=true as |columns|}}
+  <t.foot @fixed={{true}} as |columns|>
     <tr>
       <td class="align-center" colspan={{columns.length}}>
         Drag and drop a column onto another to reorder the columns
       </td>
     </tr>
-  {{/t.foot}}
-{{/light-table}}
+  </t.foot>
+</LightTable>
 {{!-- END-SNIPPET --}}

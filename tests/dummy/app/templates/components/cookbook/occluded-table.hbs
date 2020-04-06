@@ -1,9 +1,10 @@
 {{!-- BEGIN-SNIPPET occluded-table --}}
-{{#light-table table
-               height="65vh"
-               occlusion=true
-               estimatedRowHeight=50
-  as |t|}}
+<LightTable
+  @table={{this.table}}
+  @height="65vh"
+  @occlusion={{true}}
+  @estimatedRowHeight={{50}}
+as |t|>
 
   {{!--
     In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
@@ -11,25 +12,20 @@
     the font-awesome assets, e.g. via a CDN.
   --}}
 
-  {{t.head
-    fixed=true
-  }}
+  <t.head @fixed={{true}}/>
 
-  {{#t.body
-    canSelect=false
-    scrollBuffer=200
-    onScrolledToBottom=(action "onScrolledToBottom")
-  as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
+  <t.body
+    @canSelect={{false}}
+    @scrollBuffer={{200}}
+    @onScrolledToBottom={{action "onScrolledToBottom"}}
+  as |body|>
+    {{#if this.isLoading}}
+      <body.loader>
+        <TableLoader/>
+      </body.loader>
     {{/if}}
-  {{/t.body}}
+  </t.body>
 
-  {{t.foot
-    fixed=true
-  }}
-{{/light-table}}
+  <t.foot @fixed={{true}}/>
+</LightTable>
 {{!-- END-SNIPPET --}}
