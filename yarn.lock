@@ -4065,11 +4065,16 @@ can-symlink@^1.0.0:
     tmp "0.0.28"
 
 caniuse-lite@^1.0.30000792, caniuse-lite@^1.0.30000805:
-  version "1.0.30000969"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000969.tgz#7664f571f2072657bde70b00a1fc1ba41f1942a9"
-  integrity sha512-Kus0yxkoAJgVc0bax7S4gLSlFifCa7MnSZL9p9VuS/HIKEL4seaqh28KIQAAO50cD/rJ5CiJkJFapkdDAlhFxQ==
+  version "1.0.30001039"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001039.tgz#b3814a1c38ffeb23567f8323500c09526a577bbe"
+  integrity sha512-SezbWCTT34eyFoWHgx8UWso7YtvtM7oosmFoXbCkdC6qJzRfBTeTgE9REtKtiuKXuMwWTZEvdnFNGAyVMorv8Q==
 
-caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30001093:
+caniuse-lite@^1.0.30000844:
+  version "1.0.30000971"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000971.tgz#d1000e4546486a6977756547352bc96a4cfd2b13"
+  integrity sha512-TQFYFhRS0O5rdsmSbF1Wn+16latXYsQJat66f7S7lizXW1PVpWJeZw9wqqVLIjuxDRz7s7xRUj13QCfd8hKn6g==
+
+caniuse-lite@^1.0.30001093:
   version "1.0.30001107"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001107.tgz#809360df7a5b3458f627aa46b0f6ed6d5239da9a"
   integrity sha512-86rCH+G8onCmdN4VZzJet5uPELII59cUzDphko3thQFgAQG1RNa+sVLDoALIhRYmflo5iSIzWY3vu1XTWtNMQQ==
@@ -5131,11 +5136,16 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.30:
-  version "1.3.135"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.135.tgz#f5799b95f2bcd8de17cde47d63392d83a4477041"
-  integrity sha512-xXLNstRdVsisPF3pL3H9TVZo2XkMILfqtD6RiWIUmDK2sFX1Bjwqmd8LBp0Kuo2FgKO63JXPoEVGm8WyYdwP0Q==
+  version "1.3.397"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.397.tgz#db640c2e67b08d590a504c20b56904537aa2bafa"
+  integrity sha512-zcUd1p/7yzTSdWkCTrqGvbnEOASy96d0RJL/lc5BDJoO23Z3G/VHd0yIPbguDU9n8QNUTCigLO7oEdtOb7fp2A==
 
-electron-to-chromium@^1.3.47, electron-to-chromium@^1.3.488:
+electron-to-chromium@^1.3.47:
+  version "1.3.136"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.136.tgz#758a156109077536780cfa8207b1aeaa99843e33"
+  integrity sha512-xHkYkbEi4kI+2w5v6yBGCQTRXL7N0PWscygTFZu/1bArnPSo2WR9xjdw4m06RR4J5PncrWJcuOVv+MAG2mK5JQ==
+
+electron-to-chromium@^1.3.488:
   version "1.3.512"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.512.tgz#620e6731c693ddaaf3750f23dde7f7c4347b7327"
   integrity sha512-y02hdFg7c4jTfREcXf4fRhHLt7BzofMgd7JAKY+u9i62E0D1eIpLQPFo5/eboZL0bIVY9YHZA53+vCGNFREOXA==
@@ -9913,20 +9923,20 @@ lodash.without@~3.2.1:
     lodash._basedifference "^3.0.0"
     lodash.restparam "^3.0.0"
 
-lodash@^4.0.0, lodash@^4.6.1:
+lodash@^4.0.0, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.5.1:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+
+lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.6.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
 
-lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.4:
+lodash@^4.17.19:
   version "4.17.19"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
   integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
-
-lodash@^4.17.15, lodash@^4.5.1:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -10433,9 +10443,9 @@ minizlib@^2.0.0, minizlib@^2.1.0:
     yallist "^4.0.0"
 
 miragejs@^0.1.31:
-  version "0.1.40"
-  resolved "https://registry.yarnpkg.com/miragejs/-/miragejs-0.1.40.tgz#5bcba7634312c012748ae7f294e1516b74b37182"
-  integrity sha512-7zxIcynzdS6425KZ2+TWD6F6DqESorulSDW2QBXf4iKyVn/J5vSielcubAK8sTKUefTPCrSRi7PwgNOb0JlmIg==
+  version "0.1.37"
+  resolved "https://registry.yarnpkg.com/miragejs/-/miragejs-0.1.37.tgz#e6b5bc3831490fe203248478c7bd160a70926bd5"
+  integrity sha512-noJV8pt3MUuSPrqvGlT+3HJbq+YYnvJG+3sjGEfKL9K5nQJBKqvn2FETvUQqc5U5hJItsMNlmi/ra4muCC5zeA==
   dependencies:
     "@miragejs/pretender-node-polyfill" "^0.1.0"
     inflected "^2.0.4"
@@ -10462,7 +10472,7 @@ miragejs@^0.1.31:
     lodash.uniq "^4.5.0"
     lodash.uniqby "^4.7.0"
     lodash.values "^4.3.0"
-    pretender "^3.4.3"
+    pretender "3.4.0"
 
 mississippi@^3.0.0:
   version "3.0.0"
@@ -11657,10 +11667,10 @@ prepend-http@^2.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-pretender@^3.4.3:
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/pretender/-/pretender-3.4.3.tgz#a3b4160516007075d29127262f3a0063d19896e9"
-  integrity sha512-AlbkBly9R8KR+R0sTCJ/ToOeEoUMtt52QVCetui5zoSmeLOU3S8oobFsyPLm1O2txR6t58qDNysqPnA1vVi8Hg==
+pretender@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/pretender/-/pretender-3.4.0.tgz#0ccd943eccff48126bcbb912acaf9c33b0829785"
+  integrity sha512-BxmCnuVOchuP1am8p038XhSDDrRXX0bNqp6GRJPu/VcnWNFssy/BIHBefMcB535lHfMeelonkIP1ETtHEHjOVQ==
   dependencies:
     fake-xml-http-request "^2.1.1"
     route-recognizer "^0.3.3"
