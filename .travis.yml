@@ -3,9 +3,8 @@ language: node_js
 node_js:
   # we recommend testing addons with the same minimum supported node version as Ember CLI
   # so that your addon works for all apps
-  - "12"
+  - "10"
 
-sudo: false
 dist: trusty
 
 addons:
@@ -27,6 +26,7 @@ env:
     - EMBER_TRY_SCENARIO=ember-lts-3.8
     - EMBER_TRY_SCENARIO=ember-lts-3.12
     - EMBER_TRY_SCENARIO=ember-lts-3.16
+    - EMBER_TRY_SCENARIO=ember-classic
     - EMBER_TRY_SCENARIO=ember-release
     - EMBER_TRY_SCENARIO=ember-beta
     - EMBER_TRY_SCENARIO=ember-canary
@@ -44,7 +44,7 @@ before_install:
   - yarn global add codeclimate-test-reporter
 
 install:
-  - yarn install --no-lockfile
+  - yarn install --no-lockfile --non-interactive
 
 script:
   - yarn lint:js

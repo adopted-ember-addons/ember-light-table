@@ -20,6 +20,8 @@ export default Mixin.create({
 
       return `drag-${direction}`;
     }
+
+    return '';
   }).readOnly(),
 
   /**

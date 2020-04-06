@@ -8,7 +8,7 @@ module('Integration | Component | lt spanned row', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`{{lt-spanned-row}}`);
-    assert.equal(find('*').textContent.trim(), '');
+    assert.equal(this.element.textContent.trim(), '');
 
     await render(hbs`
       {{#lt-spanned-row}}
@@ -16,7 +16,7 @@ module('Integration | Component | lt spanned row', function(hooks) {
       {{/lt-spanned-row}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.equal(this.element.textContent.trim(), 'template block text');
   });
 
   test('visiblity', async function(assert) {
@@ -27,10 +27,10 @@ module('Integration | Component | lt spanned row', function(hooks) {
         template block text
       {{/lt-spanned-row}}
     `);
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.equal(this.element.textContent.trim(), 'template block text');
 
     this.set('visible', false);
-    assert.equal(find('*').textContent.trim(), '');
+    assert.equal(this.element.textContent.trim(), '');
   });
 
   test('colspan', async function(assert) {
@@ -39,7 +39,7 @@ module('Integration | Component | lt spanned row', function(hooks) {
         template block text
       {{/lt-spanned-row}}
     `);
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.equal(this.element.textContent.trim(), 'template block text');
     assert.equal(find('td').getAttribute('colspan'), 4);
   });
 
@@ -50,6 +50,6 @@ module('Integration | Component | lt spanned row', function(hooks) {
         {{row.name}}
       {{/lt-spanned-row}}
     `);
-    assert.equal(find('*').textContent.trim(), 'Offir');
+    assert.equal(this.element.textContent.trim(), 'Offir');
   });
 });

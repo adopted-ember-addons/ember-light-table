@@ -170,7 +170,7 @@ export default class Table extends EmberObject.extend({
   }
 }) {
   destroy() {
-    this._super(...arguments);
+    super.destroy(...arguments);
 
     let rows = this.get('rows');
 
