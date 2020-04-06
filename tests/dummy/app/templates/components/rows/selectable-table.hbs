@@ -1,10 +1,10 @@
 {{!-- BEGIN-SNIPPET selectable-table --}}
 <div class="table-actions">
   {{#if this.hasSelection}}
-    <div class="table-action fa fa-check-square-o" title="Deselect all" {{action "deselectAll"}} role="button"></div>
-    <div class="table-action fa fa-trash-o delete" title="Delete selected" {{action "deleteAll"}} role="button"></div>
+    <div class="table-action fa fa-check-square-o" title="Deselect all" {{on "click" (fn this.deselectAll)}} role="button"></div>
+    <div class="table-action fa fa-trash-o delete" title="Delete selected" {{on "click" (fn this.deleteAll)}} role="button"></div>
   {{else}}
-    <div class="table-action fa fa-square-o" title="Select all" {{action "selectAll"}} role="button"></div>
+    <div class="table-action fa fa-square-o" title="Select all" {{on "click" (fn this.selectAll)}} role="button"></div>
   {{/if}}
 </div>
 

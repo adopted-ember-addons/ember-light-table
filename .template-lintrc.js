@@ -6,10 +6,6 @@ module.exports = {
     'no-inline-styles': {
       allowDynamicStyles: true
     },
-    'no-action': false,
     'no-implicit-this': false,
-    'link-href-attributes': false,
-    'require-valid-alt-text': false,
-    'no-invalid-role': false
   }
 };

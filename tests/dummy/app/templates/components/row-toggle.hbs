@@ -1,9 +1,8 @@
 {{!-- BEGIN-SNIPPET row-toggle --}}
-<a class="row-toggle"
-  href="#"
-  role="button"
-  {{action (toggle "expanded" @row)}}
+<button class="row-toggle"
+  type="button"
+  {{on "click" (fn (toggle "expanded" @row))}}
 >
   <i class="fa {{if @row.expanded "fa-chevron-down" "fa-chevron-right"}}"></i>
-</a>
+</button>
 {{!-- END-SNIPPET --}}

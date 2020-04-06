@@ -1,6 +1,6 @@
 // BEGIN-SNIPPET selectable-table
 import BaseTable from '../base-table';
-import { computed } from '@ember/object';
+import { computed, action } from '@ember/object';
 
 export default BaseTable.extend({
   hasSelection: computed.notEmpty('table.selectedRows'),
@@ -32,18 +32,19 @@ export default BaseTable.extend({
     }];
   }),
 
-  actions: {
-    selectAll() {
-      this.get('table.rows').setEach('selected', true);
-    },
+  @action
+  selectAll() {
+    this.get('table.rows').setEach('selected', true);
+  },
 
-    deselectAll() {
-      this.get('table.selectedRows').setEach('selected', false);
-    },
+  @action
+  deselectAll() {
+    this.get('table.selectedRows').setEach('selected', false);
+  },
 
-    deleteAll() {
-      this.get('table').removeRows(this.get('table.selectedRows'));
-    }
+  @action
+  deleteAll() {
+    this.get('table').removeRows(this.get('table.selectedRows'));
   }
 });
 // END-SNIPPET
