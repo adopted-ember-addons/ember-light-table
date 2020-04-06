@@ -84,6 +84,21 @@ module.exports = async function() {
             '@ember/jquery': '^0.5.1'
           }
         }
+      },
+      {
+        name: 'ember-classic',
+        env: {
+          EMBER_OPTIONAL_FEATURES: JSON.stringify({
+            'application-template-wrapper': true,
+            'default-async-observers': false,
+            'template-only-glimmer-components': false
+          })
+        },
+        npm: {
+          ember: {
+            edition: 'classic'
+          }
+        }
       }
     ]
   };

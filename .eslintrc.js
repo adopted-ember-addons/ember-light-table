@@ -1,9 +1,14 @@
+'use strict';
+
 module.exports = {
   root: true,
-
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaFeatures: {
+      legacyDecorators: true
+    }
   },
 
   plugins: [
@@ -25,7 +30,13 @@ module.exports = {
     'generator-star-spacing': ['error', { before: false, after: false }],
     'ember/no-observers': 'off',
     'ember-suave/require-access-in-comments': 'off',
-    'ember-suave/no-const-outside-module-scope': 'off'
+    'ember-suave/no-const-outside-module-scope': 'off',
+    'ember/no-jquery': 'error',
+    'ember/no-get': 'warn',
+    'ember/no-mixins': 'warn',
+    'ember/no-new-mixins': 'warn',
+    'ember/use-ember-data-rfc-395-imports': 'warn',
+    'ember/require-computed-property-dependencies': 'warn'
   },
 
   overrides: [

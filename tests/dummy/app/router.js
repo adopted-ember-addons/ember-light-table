@@ -1,11 +1,11 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-// eslint-disable-next-line ember-suave/no-direct-property-access
-const Router = EmberRouter.extend({
-  location: config.locationType,
-  rootURL: config.rootURL
-});
+export default class Router extends EmberRouter {
+  location = config.locationType;
+
+  rootURL = config.rootURL;
+}
 
 Router.map(function() {
   this.route('responsive');
@@ -32,5 +32,3 @@ Router.map(function() {
     this.route('table-actions');
   });
 });
-
-export default Router;

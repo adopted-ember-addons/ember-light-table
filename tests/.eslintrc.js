@@ -4,7 +4,6 @@ module.exports = {
   },
 
   globals: {
-    $: false,
     server: false
   },
 
