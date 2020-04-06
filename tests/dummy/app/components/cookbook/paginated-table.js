@@ -1,7 +1,7 @@
 // BEGIN-SNIPPET paginated-table
 import Component from '@ember/component';
 import TableCommon from '../../mixins/table-common';
-import { computed } from '@ember/object';
+import { computed, action } from '@ember/object';
 
 export default Component.extend(TableCommon, {
   columns: computed(function() {
@@ -36,19 +36,18 @@ export default Component.extend(TableCommon, {
     this.send('setPage', 1);
   },
 
-  actions: {
-    setPage(page) {
-      let totalPages = this.get('meta.totalPages');
-      let currPage = this.get('page');
+  @action
+  setPage(page) {
+    let totalPages = this.get('meta.totalPages');
+    let currPage = this.get('page');
 
-      if (page < 1 || page > totalPages || page === currPage) {
-        return;
-      }
-
-      this.set('page', page);
-      this.get('model').clear();
-      this.get('fetchRecords').perform();
+    if (page < 1 || page > totalPages || page === currPage) {
+      return;
     }
+
+    this.set('page', page);
+    this.get('model').clear();
+    this.get('fetchRecords').perform();
   }
 });
 // END-SNIPPET

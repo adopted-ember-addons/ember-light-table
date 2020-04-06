@@ -29,19 +29,21 @@
         <td class="align-center" colspan={{columns.length}}>
           <ul class="pagination pagination-sm">
             <li class={{if (eq this.page 1) "disabled"}}>
-              <a {{action "setPage" (dec this.page)}} href="#" aria-label="Previous">
+              <button type="button" {{on "click" (fn this.setPage (dec this.page))}} aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
-              </a>
+              </button>
             </li>
             {{#each (range 1 this.meta.totalPages true) as |p|}}
               <li class={{if (eq p this.page) "active"}}>
-                <a {{action "setPage" p}} href="#">{{p}}</a>
+                <button type="button" {{on "click" (fn this.setPage p)}}>
+                  {{p}}
+                </button>
               </li>
             {{/each}}
             <li class={{if (eq this.page this.meta.totalPages) "disabled"}}>
-              <a {{action "setPage" (inc this.page)}} href="#" aria-label="Next">
+              <button type="button" {{on "click" (fn this.setPage (inc this.page))}} aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
-              </a>
+              </button>
             </li>
           </ul>
         </td>

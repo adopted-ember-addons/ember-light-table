@@ -1,7 +1,7 @@
 // BEGIN-SNIPPET responsive-table
 import Component from '@ember/component';
 import TableCommon from '../mixins/table-common';
-import { computed } from '@ember/object';
+import { computed, action } from '@ember/object';
 
 export default Component.extend(TableCommon, {
   columns: computed(function() {
@@ -40,11 +40,10 @@ export default Component.extend(TableCommon, {
     }];
   }),
 
-  actions: {
-    onAfterResponsiveChange(matches) {
-      if (matches.indexOf('jumbo') > -1) {
-        this.get('table.expandedRows').setEach('expanded', false);
-      }
+  @action
+  onAfterResponsiveChange(matches) {
+    if (matches.indexOf('jumbo') > -1) {
+      this.get('table.expandedRows').setEach('expanded', false);
     }
   }
 });

@@ -3,8 +3,8 @@
   @table={{this.table}}
   @height="65vh"
   @tableActions={{hash
-    deleteUser=(action "deleteUser")
-    notifyUser=(action "notifyUser")
+    deleteUser=(fn this.deleteUser)
+    notifyUser=(fn this.notifyUser)
   }}
 as |t|>
 
