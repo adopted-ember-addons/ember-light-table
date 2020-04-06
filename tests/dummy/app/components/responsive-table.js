@@ -1,9 +1,8 @@
 // BEGIN-SNIPPET responsive-table
-import Component from '@ember/component';
-import TableCommon from '../mixins/table-common';
+import BaseTable from './base-table';
 import { computed, action } from '@ember/object';
 
-export default Component.extend(TableCommon, {
+export default BaseTable.extend({
   columns: computed(function() {
     return [{
       width: '40px',

@@ -1,10 +1,9 @@
 // BEGIN-SNIPPET client-side-table
-import Component from '@ember/component';
-import TableCommon from '../../mixins/table-common';
+import BaseTable from '../base-table';
 import { computed, action } from '@ember/object';
 import { task, timeout } from 'ember-concurrency';
 
-export default Component.extend(TableCommon, {
+export default BaseTable.extend({
   query: '',
 
   // No need for `enableSync` here
@@ -15,13 +14,13 @@ export default Component.extend(TableCommon, {
   // Sort Logic
   sortedModel: computed.sort('model', 'sortBy').readOnly(),
   sortBy: computed('dir', 'sort', function() {
-    return [`${this.get('sort')}:${this.get('dir')}`];
+    return [`${this.sort}:${this.dir}`];
   }).readOnly(),
 
   // Filter Input Setup
   selectedFilter: computed.oneWay('possibleFilters.firstObject'),
   possibleFilters: computed('table.columns', function() {
-    return this.get('table.columns').filterBy('sortable', true);
+    return this.table.columns.filterBy('sortable', true);
   }).readOnly(),
 
   columns: computed(function() {
@@ -52,33 +51,34 @@ export default Component.extend(TableCommon, {
   }),
 
   fetchRecords: task(function*() {
-    let records = yield this.get('store').query('user', { page: 1, limit: 100 });
-    this.get('model').setObjects(records.toArray());
-    this.set('meta', records.get('meta'));
-    yield this.get('filterAndSortModel').perform();
+    let records = yield this.store.query('user', { page: 1, limit: 100 });
+    this.model.setObjects(records.toArray());
+    this.set('meta', records.meta);
+    yield this.filterAndSortModel.perform();
   }).on('init'),
 
   setRows: task(function*(rows) {
-    this.get('table').setRows([]);
+    this.table.setRows([]);
     yield timeout(100); // Allows isLoading state to be shown
-    this.get('table').setRows(rows);
+    this.table.setRows(rows);
   }).restartable(),
 
   filterAndSortModel: task(function*(debounceMs = 200) {
     yield timeout(debounceMs); // debounce
 
-    let query = this.get('query');
-    let model = this.get('sortedModel');
-    let valuePath = this.get('selectedFilter.valuePath');
+    let { query } = this;
+    let model = this.sortedModel;
     let result = model;
 
-    if (query !== '') {
+    if (query !== '' && this.selectedFilter !== undefined) {
+      let { valuePath } = this.selectedFilter;
+
       result = model.filter((m) => {
         return m.get(valuePath).toLowerCase().includes(query.toLowerCase());
       });
     }
 
-    yield this.get('setRows').perform(result);
+    yield this.setRows.perform(result);
   }).restartable(),
 
   actions: {
@@ -86,10 +86,10 @@ export default Component.extend(TableCommon, {
       if (column.sorted) {
         this.setProperties({
           dir: column.ascending ? 'asc' : 'desc',
-          sort: column.get('valuePath')
+          sort: column.valuePath
         });
 
-        this.get('filterAndSortModel').perform(0);
+        this.filterAndSortModel.perform(0);
       }
     }
   },
