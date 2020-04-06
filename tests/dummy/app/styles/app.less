@@ -1,3 +1,4 @@
+@import "ember-power-select";
 @import "./loader.less";
 @import "./table.less";
 @accent-color: #dd6a58;
@@ -12,6 +13,20 @@ html,body {
 
 label {
   font-weight: 600;
+}
+
+.ember-power-select-trigger{
+  height: 35px;
+}
+
+.scrolling-select-control {
+  width: 40%;
+  label{
+    float: left;
+    margin-right: 3px;
+    margin-bottom: 0;
+    padding-top: 6px;
+  }
 }
 
 .navbar.navbar-default {
@@ -54,7 +69,9 @@ label {
     color: @accent-color;
   }
 
-  .navbar-nav>.active>a, .navbar-nav>.active>a:focus, .navbar-nav>.active>a:hover {
+  .navbar-nav .active,
+  .navbar-nav .active:focus,
+  .navbar-nav .active:hover {
     color: @accent-color;
     background-color: transparent;
   }

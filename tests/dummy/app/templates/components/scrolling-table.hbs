@@ -35,43 +35,35 @@
       <td colspan={{columns.length}}>
         <form class="form-inline" onsubmit="return false;">
           <div class="form-group">
-            <label>
-              Current Scroll Position:
-            </label>
+            <label>Current Scroll Position:</label>
             <span class="form-control-static">
-              {{if (eq currentScrollOffset null) "N/A" (concat currentScrollOffset "px")}}
+              {{if (eq this.currentScrollOffset null) "N/A" (concat this.currentScrollOffset "px")}}
             </span>
           </div>
 
           <div class="form-group">
-            <label for="scrollTo">
-              Scroll To:
-            </label>
-            {{one-way-input
-              update=(action (mut scrollTo))
-              value=scrollTo
-              class="form-control"
+            <label for="scrollTo">Scroll To:</label>
+            <Input
+              @key-down={{fn (mut this.scrollTo)}}
+              @value={{this.scrollTo}}
+              @type="number"
               name="scrollTo"
-              type="number"
-              min=0
-              step=10
-            }}
+              min="0"
+              step="10"
+              class="form-control"
+            />
           </div>
 
-          <div class="form-group">
-            <label for="scrollToRow">
-              Scroll To Row:
-            </label>
-            {{#one-way-select selectedValue
-              options=table.visibleRows
-              value=scrollToRow
-              update=(action (mut scrollToRow))
+          <div class="form-group scrolling-select-control">
+            <label for="scrollToRow">Scroll To Row:</label>
+            <PowerSelect @selected={{this.scrollToRow}}
+              @options={{this.table.visibleRows}}
+              @onChange={{fn (mut this.scrollToRow)}}
               class="form-control"
               name="scrollToRow"
-              as |row|
-            }}
+            as |row|>
               {{row.id}} - {{row.firstName}} {{row.lastName}}
-            {{/one-way-select}}
+            </PowerSelect>
           </div>
         </form>
       </td>

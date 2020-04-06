@@ -91,11 +91,12 @@ export default Component.extend(TableCommon, {
 
         this.get('filterAndSortModel').perform(0);
       }
-    },
-
-    onSearchChange() {
-      this.get('filterAndSortModel').perform();
     }
+  },
+
+  @action
+  onSearchChange() {
+    this.filterAndSortModel.perform();
   }
 });
 // END-SNIPPET

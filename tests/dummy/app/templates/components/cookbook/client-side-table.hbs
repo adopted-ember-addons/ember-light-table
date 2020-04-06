@@ -28,18 +28,26 @@
 
   {{#t.foot fixed=true as |columns|}}
     <tr>
-      <td class="align-center" colspan={{columns.length}}>
-        {{one-way-select selectedFilter
-            options=possibleFilters
-            optionValuePath="valuePath"
-            optionLabelPath="label"
-            update=(action (pipe (action (mut selectedFilter)) (action "onSearchChange")))
-        }}
-        {{one-way-input
-          value=query
-          placeholder="Search..."
-          update=(action (pipe (action (mut query)) (action "onSearchChange")))
-        }}
+      <td class="row" colspan={{columns.length}}>
+        <div class="col-md-6">
+          <PowerSelect @selected={{this.selectedFilter}}
+            @options={{this.possibleFilters}}
+            @onChange={{pipe-action (fn (mut this.selectedFilter)) (fn this.onSearchChange)}}
+            @placeholder="Select filter column..."
+            class="form-control"
+            name="scrollToRow"
+          as |option|>
+            {{option.label}}
+          </PowerSelect>
+        </div>
+        <div class="col-md-6">
+          <Input
+            @value={{this.query}}
+            @key-down={{pipe-action (fn (mut this.query)) (fn this.onSearchChange)}}
+            placeholder="Search..."
+            class="form-control"
+          />
+        </div>
       </td>
     </tr>
   {{/t.foot}}
