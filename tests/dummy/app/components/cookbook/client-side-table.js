@@ -1,7 +1,7 @@
 // BEGIN-SNIPPET client-side-table
 import Component from '@ember/component';
 import TableCommon from '../../mixins/table-common';
-import { computed } from '@ember/object';
+import { computed, action } from '@ember/object';
 import { task, timeout } from 'ember-concurrency';
 
 export default Component.extend(TableCommon, {
