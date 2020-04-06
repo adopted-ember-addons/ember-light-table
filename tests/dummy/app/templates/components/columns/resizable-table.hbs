@@ -2,7 +2,7 @@
 <LightTable @table={{this.table}} @height="65vh" as |t|>
 
   <t.head
-    @onColumnClick={{action "onColumnClick"}}
+    @onColumnClick={{fn this.onColumnClick}}
     @iconSortable="fa fa-sort"
     @iconAscending="fa fa-sort-asc"
     @iconDescending="fa fa-sort-desc"
@@ -12,7 +12,7 @@
 
   <t.body
     @canSelect={{false}}
-    @onScrolledToBottom={{action "onScrolledToBottom"}}
+    @onScrolledToBottom={{fn this.onScrolledToBottom}}
   as |body|>
     {{#if this.isLoading}}
       <body.loader>
@@ -22,7 +22,7 @@
   </t.body>
 
   <t.foot
-    @onColumnClick={{action "onColumnClick"}}
+    @onColumnClick={{fn this.onColumnClick}}
     @iconAscending="fa fa-sort-asc"
     @iconDescending="fa fa-sort-desc"
     @resizeOnDrag={{true}}

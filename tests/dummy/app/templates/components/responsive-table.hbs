@@ -13,7 +13,7 @@ as |t|>
   --}}
 
   <t.head
-    @onColumnClick={{action "onColumnClick"}}
+    @onColumnClick={{fn this.onColumnClick}}
     @iconSortable="fa fa-sort"
     @iconAscending="fa fa-sort-asc"
     @iconDescending="fa fa-sort-desc"
@@ -23,7 +23,7 @@ as |t|>
   <t.body
     @canSelect={{false}}
     @expandOnClick={{false}}
-    @onScrolledToBottom={{action "onScrolledToBottom"}}
+    @onScrolledToBottom={{fn this.onScrolledToBottom}}
   as |body|>
     <body.expanded-row as |row|>
       <ResponsiveExpandedRow @table={{this.table}} @row={{row}}/>

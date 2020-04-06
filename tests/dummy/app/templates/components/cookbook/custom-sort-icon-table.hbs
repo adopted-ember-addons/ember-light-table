@@ -2,7 +2,7 @@
 <LightTable @table={{this.table}} @height="65vh" as |t|>
 
   <t.head
-    @onColumnClick={{action "onColumnClick"}}
+    @onColumnClick={{fn this.onColumnClick}}
     @iconSortable="unfold_more"
     @iconAscending="keyboard_arrow_up"
     @iconDescending="keyboard_arrow_down"
@@ -12,7 +12,7 @@
 
   <t.body
     @canSelect={{false}}
-    @onScrolledToBottom={{action "onScrolledToBottom"}}
+    @onScrolledToBottom={{fn this.onScrolledToBottom}}
   as |body|>
     {{#if this.isLoading}}
       <body.loader>
