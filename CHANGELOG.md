@@ -3,6 +3,33 @@ Changelog
 
 ## UNRELEASED 2.X
 
+#### Bug Fixes
+* [#734](https://github.com/offirgolan/ember-light-table/pull/734) bump dependency addons ([@fran-worley](https://github.com/fran-worley))
+
+#### Internal
+* [#733](https://github.com/offirgolan/ember-light-table/pull/733) Bump Ember CLI to v3.16 (LTS) + bump core addons to latest ([@fran-worley](https://github.com/fran-worley))
+
+#### Committers: 1
+- Fran Worley ([@fran-worley](https://github.com/fran-worley))
+
+## v2.0.0-beta.5 (2020-01-16)
+
+#### :boom: Breaking Change
+* [#718](https://github.com/offirgolan/ember-light-table/pull/718) Replace volatile computed properties ([@fran-worley](https://github.com/fran-worley))
+
+#### Bug Fixes
+* [#722](https://github.com/offirgolan/ember-light-table/pull/722) Fix resizing columns issues(2.x) ([@TomaszWegrzyn](https://github.com/TomaszWegrzyn))
+* [#718](https://github.com/offirgolan/ember-light-table/pull/718) Replace volatile computed properties ([@fran-worley](https://github.com/fran-worley))
+
+#### Enhancements
+* [8d0b592](https://github.com/offirgolan/ember-light-table/commit/8d0b592938ddaecc6d7353eaefab749bcc77175f) Update ember-scrollable version to jquery-less ([@alexander-alvarez](https://github.com/alexander-alvarez))
+
+
+#### Committers: 3
+- Alexander Alvarez ([@alexander-alvarez](https://github.com/alexander-alvarez))
+- Tomasz Wegrzyn [@TomaszWegrzyn](https://github.com/TomaszWegrzyn)
+- Fran Worley ([@fran-worley](https://github.com/fran-worley))
+
 ## v2.0.0-beta.4 (2019-08-19)
 
 #### :boom: Breaking Change
