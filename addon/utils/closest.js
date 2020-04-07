@@ -16,7 +16,7 @@ const closest = (el, selector) => {
     el = parent;
   }
 
-  return null;
+  return;
 };
 
 export default closest;

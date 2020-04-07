@@ -29,7 +29,7 @@ const Cell = Component.extend({
     let columnWidth = column.get('width');
 
     if (this.get('enableScaffolding') || !column) {
-      return '';
+      return;
     }
 
     // For performance reasons, it's more interesting to bypass cssStyleify

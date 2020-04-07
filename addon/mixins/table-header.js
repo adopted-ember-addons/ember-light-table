@@ -142,7 +142,7 @@ export default Mixin.create({
       return cssStyleify({ paddingRight: `${scrollbarThickness}px` });
     }
 
-    return '';
+    return;
   }).readOnly(),
 
   init() {
