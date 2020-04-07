@@ -104,9 +104,19 @@ const Column = Component.extend(DraggableColumnMixin, {
    * @property rowspan
    * @type {Number}
    */
-  rowspan: computed('column.visibleSubColumns.[]', function() {
-    let subColumns = this.get('column.visibleSubColumns');
-    return !isEmpty(subColumns) ? 1 : 2;
+  rowspan: computed('column.visibleSubColumns.[]', {
+    get() {
+      if (this._rowspan) {
+        return this._rowspan;
+      }
+
+      let subColumns = this.get('column.visibleSubColumns');
+      return !isEmpty(subColumns) ? 1 : 2;
+    },
+
+    set(key, value) {
+      return this._rowspan = value;
+    }
   })
 });
 
