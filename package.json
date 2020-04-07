@@ -60,7 +60,7 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-template-lint": "^2.0.2",
     "ember-cli-uglify": "^3.0.0",
-    "ember-cli-yuidoc": "0.8.8",
+    "ember-cli-yuidoc": "0.9.1",
     "ember-code-snippet": "^3.0.0",
     "ember-concurrency": "^1.0.0",
     "ember-data": "^3.16.0",
@@ -82,7 +82,7 @@
     "eslint-plugin-ember-suave": "^2.0.1",
     "eslint-plugin-node": "^11.0.0",
     "faker": "^4.1.0",
-    "lerna-changelog": "^0.8.2",
+    "lerna-changelog": "^1.0.1",
     "loader.js": "^4.7.0",
     "qunit-dom": "^1.0.0",
     "yuidoc-ember-theme": "^2.0.1"
