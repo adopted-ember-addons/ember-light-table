@@ -3,7 +3,6 @@
 import { helper } from '@ember/component/helper';
 
 export function compute([action, ...params]) {
-  console('own helper');
   return action(...params);
 }
 
