@@ -5,7 +5,7 @@ node_js:
   # so that your addon works for all apps
   - "10"
 
-dist: trusty
+dist: xenial
 
 addons:
   chrome: stable
@@ -31,7 +31,6 @@ env:
     - EMBER_TRY_SCENARIO=ember-release
     - EMBER_TRY_SCENARIO=ember-beta
     - EMBER_TRY_SCENARIO=ember-canary
-    - EMBER_TRY_SCENARIO=ember-default
 
 matrix:
   fast_finish: true
