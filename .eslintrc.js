@@ -25,6 +25,7 @@ module.exports = {
   env: {
     browser: true
   },
+<<<<<<< HEAD
 
   rules: {
     'generator-star-spacing': ['error', { before: false, after: false }],
@@ -39,6 +40,9 @@ module.exports = {
     'ember/require-computed-property-dependencies': 'warn'
   },
 
+=======
+  rules: {},
+>>>>>>> 8a10e77... v3.16.1...v3.20.0
   overrides: [
     // node files
     {
@@ -70,11 +74,15 @@ module.exports = {
       },
 
       plugins: ['node'],
+<<<<<<< HEAD
 
       rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
         // add your custom rules and overrides for node files here
         'ember-suave/lines-between-object-properties': 'off'
       })
+=======
+      extends: ['plugin:node/recommended']
+>>>>>>> 8a10e77... v3.16.1...v3.20.0
     }
   ]
 };

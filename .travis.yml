@@ -5,7 +5,7 @@ node_js:
   # so that your addon works for all apps
   - "10"
 
-dist: trusty
+dist: xenial
 
 addons:
   chrome: stable
@@ -37,6 +37,30 @@ matrix:
   fast_finish: true
   allow_failures:
     - env: EMBER_TRY_SCENARIO=ember-canary
+<<<<<<< HEAD
+=======
+
+  include:
+    # runs linting and tests with current locked deps
+    - stage: "Tests"
+      name: "Tests"
+      script:
+        - yarn lint
+        - yarn test:ember
+
+    - stage: "Additional Tests"
+      name: "Floating Dependencies"
+      install:
+        - yarn install --no-lockfile --non-interactive
+      script:
+        - yarn test:ember
+
+    # we recommend new addons test the current and previous LTS
+    # as well as latest stable release (bonus points to beta/canary)
+    - env: EMBER_TRY_SCENARIO=ember-lts-3.12
+    - env: EMBER_TRY_SCENARIO=ember-lts-3.16
+    - env: EMBER_TRY_SCENARIO=ember-release
+>>>>>>> 8a10e77... v3.16.1...v3.20.0
     - env: EMBER_TRY_SCENARIO=ember-beta
 
 before_install:
