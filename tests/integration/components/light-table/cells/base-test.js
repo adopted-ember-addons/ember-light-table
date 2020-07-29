@@ -64,7 +64,7 @@ module('Integration | Component | Cells | base', function(hooks) {
 
     assert.equal(find('*').textContent.trim(), '4');
 
-    run(() => this.get('row').set(this.get('column.valuePath'), 4));
+    run(() => this.row.set(this.get('column.valuePath'), 4));
 
     assert.equal(find('*').textContent.trim(), '8');
   });

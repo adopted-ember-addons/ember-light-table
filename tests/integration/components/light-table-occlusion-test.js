@@ -165,7 +165,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       classNameBindings: ['isActive'],
       current: null,
       isActive: computed('row.content', 'current', function() {
-        return this.get('row.content') === this.get('current');
+        return this.get('row.content') === this.current;
       })
     }));
 

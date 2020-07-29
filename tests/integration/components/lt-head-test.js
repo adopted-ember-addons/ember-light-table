@@ -122,8 +122,8 @@ module('Integration | Component | lt head', function(hooks) {
     this.owner.register(`component:${iconComponent}`, Component.extend({
       init() {
         this._super(...arguments);
-        assert.ok(isPresent(this.get('sortIconProperty')));
-        assert.ok(isPresent(this.get('sortIcons')));
+        assert.ok(isPresent(this.sortIconProperty));
+        assert.ok(isPresent(this.sortIcons));
         assert.equal(this.get('sortIcons.iconSortable'), iconSortable);
         assert.equal(this.get('sortIcons.iconAscending'), iconAscending);
         assert.equal(this.get('sortIcons.iconDescending'), iconDescending);

@@ -108,7 +108,7 @@ export default class Table extends EmberObject.extend({
    * @type {Ember.Array}
    */
   visibleColumnGroups: computed('columns.[]', 'columns.@each.{isHidden,isVisibleGroupColumn}', function() {
-    return this.get('columns').reduce((arr, c) => {
+    return this.columns.reduce((arr, c) => {
       if (c.get('isVisibleGroupColumn') || (!c.get('isGroupColumn') && !c.get('isHidden'))) {
         arr.pushObject(c);
       }
@@ -122,7 +122,7 @@ export default class Table extends EmberObject.extend({
    * @type {Ember.Array}
    */
   visibleSubColumns: computed('columns.@each.visibleSubColumns', function() {
-    return emberArray([].concat(...this.get('columns').getEach('visibleSubColumns')));
+    return emberArray([].concat(...this.columns.getEach('visibleSubColumns')));
   }).readOnly(),
 
   /**
@@ -130,7 +130,7 @@ export default class Table extends EmberObject.extend({
    * @type {Ember.Array}
    */
   allColumns: computed('columns.@each.subColumns', function() {
-    return this.get('columns').reduce((arr, c) => {
+    return this.columns.reduce((arr, c) => {
       arr.pushObjects(c.get('isGroupColumn') ? c.get('subColumns') : [c]);
       return arr;
     }, emberArray([]));
@@ -157,9 +157,9 @@ export default class Table extends EmberObject.extend({
 
     this.set('columns', emberArray(Table.createColumns(columns)));
 
-    let _rows = emberArray(Table.createRows(rows, this.get('rowOptions')));
+    let _rows = emberArray(Table.createRows(rows, this.rowOptions));
 
-    if (this.get('enableSync')) {
+    if (this.enableSync) {
       _rows = RowSyncArrayProxy.create({
         syncArray: rows,
         content: _rows
@@ -172,7 +172,7 @@ export default class Table extends EmberObject.extend({
   destroy() {
     super.destroy(...arguments);
 
-    let rows = this.get('rows');
+    let rows = this.rows;
 
     if (rows instanceof RowSyncArrayProxy) {
       rows.destroy();
@@ -189,7 +189,7 @@ export default class Table extends EmberObject.extend({
    * @return {Array} rows
    */
   setRows(rows = [], options = {}) {
-    return this.get('rows').setObjects(Table.createRows(rows, options));
+    return this.rows.setObjects(Table.createRows(rows, options));
   }
 
   /**
@@ -220,8 +220,8 @@ export default class Table extends EmberObject.extend({
    */
   addRow(row, options = {}) {
     if (row instanceof Row) {
-      this.get('rows').addObject(row);
-    } else if (isNone(this.get('rows').findBy('content', row))) {
+      this.rows.addObject(row);
+    } else if (isNone(this.rows.findBy('content', row))) {
       this.pushRow(row, options);
     }
   }
@@ -245,7 +245,7 @@ export default class Table extends EmberObject.extend({
    */
   pushRow(row, options = {}) {
     let _row = Table.createRow(row, options);
-    this.get('rows').pushObject(_row);
+    this.rows.pushObject(_row);
     return _row;
   }
 
@@ -258,7 +258,7 @@ export default class Table extends EmberObject.extend({
    */
   pushRows(rows = [], options = {}) {
     let _rows = Table.createRows(rows, options);
-    this.get('rows').pushObjects(_rows);
+    this.rows.pushObjects(_rows);
     return _rows;
   }
 
@@ -272,7 +272,7 @@ export default class Table extends EmberObject.extend({
    */
   insertRowAt(index, row, options = {}) {
     let _row = Table.createRow(row, options);
-    this.get('rows').insertAt(index, _row);
+    this.rows.insertAt(index, _row);
     return _row;
   }
 
@@ -283,9 +283,9 @@ export default class Table extends EmberObject.extend({
    */
   removeRow(row) {
     if (row instanceof Row) {
-      this.get('rows').removeObject(row);
+      this.rows.removeObject(row);
     } else {
-      this.get('rows').removeObjects(this.get('rows').filterBy('content', row));
+      this.rows.removeObjects(this.rows.filterBy('content', row));
     }
   }
 
@@ -304,7 +304,7 @@ export default class Table extends EmberObject.extend({
    * @param  {Number}  index
    */
   removeRowAt(index) {
-    this.get('rows').removeAt(index);
+    this.rows.removeAt(index);
   }
 
   // Columns
@@ -316,7 +316,7 @@ export default class Table extends EmberObject.extend({
    * @return {Array} columns
    */
   setColumns(columns = []) {
-    return this.get('columns').setObjects(Table.createColumns(columns));
+    return this.columns.setObjects(Table.createColumns(columns));
   }
 
   /**
@@ -325,7 +325,7 @@ export default class Table extends EmberObject.extend({
    * @param  {Object} column
    */
   addColumn(column) {
-    this.get('columns').addObject(Table.createColumn(column));
+    this.columns.addObject(Table.createColumn(column));
   }
 
   /**
@@ -334,7 +334,7 @@ export default class Table extends EmberObject.extend({
    * @param  {Array} columns
    */
   addColumns(columns = []) {
-    this.get('columns').addObjects(Table.createColumns(columns));
+    this.columns.addObjects(Table.createColumns(columns));
   }
 
   /**
@@ -345,7 +345,7 @@ export default class Table extends EmberObject.extend({
    */
   pushColumn(column) {
     let _column = Table.createColumn(column);
-    this.get('columns').pushObject(_column);
+    this.columns.pushObject(_column);
     return _column;
   }
 
@@ -357,7 +357,7 @@ export default class Table extends EmberObject.extend({
    */
   pushColumns(columns = []) {
     let _columns = Table.createColumns(columns);
-    this.get('columns').pushObjects(_columns);
+    this.columns.pushObjects(_columns);
     return _columns;
   }
 
@@ -370,7 +370,7 @@ export default class Table extends EmberObject.extend({
    */
   insertColumnAt(index, column) {
     let _column = Table.createColumn(column);
-    this.get('columns').insertAt(index, _column);
+    this.columns.insertAt(index, _column);
     return _column;
   }
 
@@ -380,7 +380,7 @@ export default class Table extends EmberObject.extend({
    * @param  {Object}  column
    */
   removeColumn(column) {
-    return this.get('columns').removeObject(column);
+    return this.columns.removeObject(column);
   }
 
   /**
@@ -389,7 +389,7 @@ export default class Table extends EmberObject.extend({
    * @param  {Array}    columns
    */
   removeColumns(columns = []) {
-    return this.get('columns').removeObjects(columns);
+    return this.columns.removeObjects(columns);
   }
 
   /**
@@ -398,7 +398,7 @@ export default class Table extends EmberObject.extend({
    * @param  {Number}  index
    */
   removeColumnAt(index) {
-    this.get('columns').removeAt(index);
+    this.columns.removeAt(index);
   }
 
   /**

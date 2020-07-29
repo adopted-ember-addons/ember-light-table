@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import layout from '../templates/components/lt-infinity';
-import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
@@ -19,27 +18,27 @@ export default Component.extend({
       viewportSpy: true,
 
       viewportTolerance: {
-        bottom: this.get('scrollBuffer')
+        bottom: this.scrollBuffer
       },
 
-      scrollableArea: this.get('scrollableContent')
+      scrollableArea: this.scrollableContent
     };
 
-    const { onEnter, onExit } = this.get('inViewport').watchElement(get(this, 'element'), options);
+    const { onEnter, onExit } = this.inViewport.watchElement(this.element, options);
 
     onEnter(this.didEnterViewport.bind(this));
     onExit(this.didExitViewport.bind(this));
   },
 
   willDestroyElement() {
-    this.get('inViewport').stopWatching(this.get('element'));
+    this.inViewport.stopWatching(this.element);
   },
 
   didEnterViewport() {
-    get(this, 'enterViewport')();
+    this.enterViewport();
   },
 
   didExitViewport() {
-    get(this, 'exitViewport')();
+    this.exitViewport();
   }
 });

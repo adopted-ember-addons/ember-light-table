@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import { get } from '@ember/object';
 import closest from 'ember-light-table/utils/closest';
 import layout from '../templates/components/lt-column-resizer';
 
@@ -16,7 +15,7 @@ export default Component.extend({
   startX: null,
 
   colElement() {
-    return get(this, 'element').parentNode;
+    return this.element.parentNode;
   },
 
   didInsertElement() {
@@ -55,12 +54,12 @@ export default Component.extend({
       startX: e.pageX
     });
 
-    let topLevel = closest(this.get('element'), TOP_LEVEL_CLASS);
+    let topLevel = closest(this.element, TOP_LEVEL_CLASS);
     topLevel.classList.add('is-resizing');
   },
 
   _mouseUp(e) {
-    if (this.get('isResizing')) {
+    if (this.isResizing) {
       e.preventDefault();
       e.stopPropagation();
 
@@ -70,25 +69,25 @@ export default Component.extend({
       this.set('isResizing', false);
       this.set('column.width', width);
 
-      let topLevel = closest(this.get('element'), TOP_LEVEL_CLASS);
+      let topLevel = closest(this.element, TOP_LEVEL_CLASS);
       topLevel.classList.remove('is-resizing');
       this.onColumnResized(width);
     }
   },
 
   _mouseMove(e) {
-    if (this.get('isResizing')) {
+    if (this.isResizing) {
       e.preventDefault();
       e.stopPropagation();
 
-      let resizeOnDrag = this.get('resizeOnDrag');
+      let resizeOnDrag = this.resizeOnDrag;
       let minResizeWidth = this.get('column.minResizeWidth');
       let { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
       let width = `${Math.max(startWidth + (e.pageX - startX), minResizeWidth)}px`;
 
       let column = this.colElement();
-      let index = this.get('table.visibleColumns').indexOf(this.get('column')) + 1;
-      let table = closest(this.get('element'), TOP_LEVEL_CLASS);
+      let index = this.get('table.visibleColumns').indexOf(this.column) + 1;
+      let table = closest(this.element, TOP_LEVEL_CLASS);
 
       column.style.width = width;
       const headerScaffoldingCell = table.querySelector(`thead td.lt-scaffolding:nth-child(${index})`);

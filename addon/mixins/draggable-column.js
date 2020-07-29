@@ -1,5 +1,5 @@
 import Mixin from '@ember/object/mixin';
-import { computed, get } from '@ember/object';
+import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
 
 let sourceColumn;
@@ -11,10 +11,10 @@ export default Mixin.create({
   isDragging: false,
   isDragTarget: false,
 
-  dragDirection: computed('isDragTarget', function() {
-    if (this.get('isDragTarget')) {
-      let columns = this.get('dragColumnGroup');
-      let targetIdx = columns.indexOf(this.get('column'));
+  dragDirection: computed('column', 'dragColumnGroup', 'isDragTarget', function() {
+    if (this.isDragTarget) {
+      let columns = this.dragColumnGroup;
+      let targetIdx = columns.indexOf(this.column);
       let sourceIdx = columns.indexOf(sourceColumn);
       let direction = (sourceIdx - targetIdx) < 0 ? 'right' : 'left';
 
@@ -33,13 +33,13 @@ export default Mixin.create({
    * @type Array
    * @readonly
    */
-  dragColumnGroup: computed('column.parent', function() {
+  dragColumnGroup: computed('column.parent', 'table.columns', function() {
     let parent = this.get('column.parent');
     return parent ? parent.get('subColumns') : this.get('table.columns');
   }).readOnly(),
 
   isDropTarget() {
-    let column = get(this, 'column');
+    let column = this.column;
     /*
      A column is a valid drop target only if its in the same group
      */
@@ -49,7 +49,7 @@ export default Mixin.create({
   dragStart(e) {
     this._super(...arguments);
 
-    let column = this.get('column');
+    let column = this.column;
 
     /*
      NOTE: IE requires setData type to be 'text'
@@ -74,7 +74,7 @@ export default Mixin.create({
 
     if (this.isDropTarget()) {
       e.preventDefault();
-      this.set('isDragTarget', this.get('column') !== sourceColumn);
+      this.set('isDragTarget', this.column !== sourceColumn);
     }
   },
 
@@ -88,8 +88,8 @@ export default Mixin.create({
         column. This code ensures the column being dragged over continues to be
         identified as the current drop target
        */
-      if (!this.get('isDragTarget')) {
-        this.set('isDragTarget', this.get('column') !== sourceColumn);
+      if (!this.isDragTarget) {
+        this.set('isDragTarget', this.column !== sourceColumn);
       }
     }
   },
@@ -122,10 +122,10 @@ export default Mixin.create({
   drop(e) {
     this._super(...arguments);
 
-    let targetColumn = this.get('column');
+    let targetColumn = this.column;
     if (targetColumn.droppable) {
-      let table = this.get('table');
-      let columns = this.get('dragColumnGroup');
+      let table = this.table;
+      let columns = this.dragColumnGroup;
 
       let targetColumnIdx = columns.indexOf(targetColumn);
 

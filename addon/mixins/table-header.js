@@ -136,7 +136,7 @@ export default Mixin.create({
     return this.getProperties(['iconSortable', 'iconAscending', 'iconDescending', 'iconComponent']);
   }).readOnly(),
 
-  style: computed('sharedOptions.occlusion', function() {
+  style: computed('scrollbarThickness.thickness', 'sharedOptions.occlusion', function() {
     if (this.get('sharedOptions.occlusion')) {
       const scrollbarThickness = this.get('scrollbarThickness.thickness');
       return cssStyleify({ paddingRight: `${scrollbarThickness}px` });
@@ -148,8 +148,8 @@ export default Mixin.create({
   init() {
     this._super(...arguments);
 
-    const fixed = this.get('fixed');
-    const sharedOptionsFixedPath = `sharedOptions.${this.get('sharedOptionsFixedKey')}`;
+    const fixed = this.fixed;
+    const sharedOptionsFixedPath = `sharedOptions.${this.sharedOptionsFixedKey}`;
     trySet(this, sharedOptionsFixedPath, fixed);
 
     const height = this.get('sharedOptions.height');
@@ -170,11 +170,11 @@ export default Mixin.create({
      * @param  {Event} event The click event
      */
     onColumnClick(column) {
-      if (column.sortable && this.get('sortOnClick')) {
+      if (column.sortable && this.sortOnClick) {
         if (column.sorted) {
           column.toggleProperty('ascending');
         } else {
-          if (!this.get('multiColumnSort')) {
+          if (!this.multiColumnSort) {
             this.get('table.sortedColumns').setEach('sorted', false);
           }
 

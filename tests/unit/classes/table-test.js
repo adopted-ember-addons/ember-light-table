@@ -45,7 +45,7 @@ module('Unit | Classes | Table', function() {
     let rows = DS.RecordArray.create({
       content: emberArray(models),
       objectAtContent(index) {
-        return this.get('content')[index];
+        return this.content[index];
       }
     });
 

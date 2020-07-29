@@ -209,7 +209,7 @@ export default Component.extend({
    */
   scrollBufferRows: computed('scrollBuffer', 'sharedOptions.estimatedRowHeight', function() {
     return Math.ceil(
-      this.get('scrollBuffer') / (this.get('sharedOptions.estimatedRowHeight') || 1)
+      this.scrollBuffer / (this.get('sharedOptions.estimatedRowHeight') || 1)
     );
   }),
 
@@ -322,7 +322,7 @@ export default Component.extend({
    * @property scheduleScrolledToBottom
    */
   scheduleScrolledToBottom: observer('isInViewport', function() {
-    if (this.get('isInViewport')) {
+    if (this.isInViewport) {
       /*
        Continue scheduling onScrolledToBottom until no longer in viewport
        */
@@ -354,7 +354,7 @@ export default Component.extend({
   },
 
   _setupVirtualScrollbar() {
-    let { fixedHeader, fixedFooter } = this.get('sharedOptions');
+    let { fixedHeader, fixedFooter } = this.sharedOptions;
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
   },
 
@@ -398,9 +398,9 @@ export default Component.extend({
   },
 
   checkTargetScrollOffset() {
-    if (!this.get('hasReachedTargetScrollOffset')) {
-      let targetScrollOffset = this.get('targetScrollOffset');
-      let currentScrollOffset = this.get('currentScrollOffset');
+    if (!this.hasReachedTargetScrollOffset) {
+      let targetScrollOffset = this.targetScrollOffset;
+      let currentScrollOffset = this.currentScrollOffset;
 
       if (targetScrollOffset > currentScrollOffset) {
         this.set('targetScrollOffset', null);
@@ -414,7 +414,7 @@ export default Component.extend({
   },
 
   toggleExpandedRow(row) {
-    let multiRowExpansion = this.get('multiRowExpansion');
+    let multiRowExpansion = this.multiRowExpansion;
     let shouldExpand = !row.expanded;
 
     if (multiRowExpansion) {
@@ -465,12 +465,12 @@ export default Component.extend({
      */
     onRowClick(row, e) {
       let rows = this.get('table.rows');
-      let multiSelect = this.get('multiSelect');
-      let multiSelectRequiresKeyboard = this.get('multiSelectRequiresKeyboard');
-      let canSelect = this.get('canSelect');
-      let selectOnClick = this.get('selectOnClick');
-      let canExpand = this.get('canExpand');
-      let expandOnClick = this.get('expandOnClick');
+      let multiSelect = this.multiSelect;
+      let multiSelectRequiresKeyboard = this.multiSelectRequiresKeyboard;
+      let canSelect = this.canSelect;
+      let selectOnClick = this.selectOnClick;
+      let canExpand = this.canExpand;
+      let expandOnClick = this.expandOnClick;
       let isSelected = row.get('selected');
       let currIndex = rows.indexOf(row);
       let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
@@ -540,7 +540,7 @@ export default Component.extend({
      * @event enterViewport
      */
     enterViewport() {
-      const inViewport = this.get('inViewport');
+      const inViewport = this.inViewport;
       if (inViewport) {
         deprecate('lt-infinity inViewport event is deprecated please use enterViewport instead', false, {
           id: 'ember-light-table.inViewport',
