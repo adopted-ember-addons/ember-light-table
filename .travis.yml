@@ -22,8 +22,6 @@ env:
   matrix:
     # we recommend new addons test the current and previous LTS
     # as well as latest stable release (bonus points to beta/canary)
-    - EMBER_TRY_SCENARIO=ember-3.6
-    - EMBER_TRY_SCENARIO=ember-lts-3.8
     - EMBER_TRY_SCENARIO=ember-lts-3.12
     - EMBER_TRY_SCENARIO=ember-lts-3.16
     - EMBER_TRY_SCENARIO=ember-lts-3.20
