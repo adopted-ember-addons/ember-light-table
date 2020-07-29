@@ -13,13 +13,11 @@ module.exports = {
 
   plugins: [
     'ember',
-    'ember-suave'
   ],
 
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended',
-    'plugin:ember-suave/recommended'
   ],
 
   env: {
@@ -29,8 +27,6 @@ module.exports = {
   rules: {
     'generator-star-spacing': ['error', { before: false, after: false }],
     'ember/no-observers': 'off',
-    'ember-suave/require-access-in-comments': 'off',
-    'ember-suave/no-const-outside-module-scope': 'off',
     'ember/no-jquery': 'error',
     'ember/no-get': 'warn',
     'ember/no-mixins': 'warn',
@@ -71,10 +67,9 @@ module.exports = {
 
       plugins: ['node'],
 
-      rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        // add your custom rules and overrides for node files here
-        'ember-suave/lines-between-object-properties': 'off'
-      })
+      rules: { },
+
+      extends: ['plugin:node/recommended']
     }
   ]
 };
