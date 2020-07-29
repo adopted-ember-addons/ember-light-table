@@ -74,15 +74,11 @@ module.exports = {
       },
 
       plugins: ['node'],
-<<<<<<< HEAD
 
       rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
         // add your custom rules and overrides for node files here
         'ember-suave/lines-between-object-properties': 'off'
       })
-=======
-      extends: ['plugin:node/recommended']
->>>>>>> 8a10e77... v3.16.1...v3.20.0
     }
   ]
 };
