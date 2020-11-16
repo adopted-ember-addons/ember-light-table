@@ -88,7 +88,7 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://offirgolan.github.io/ember-light-table",
+    "demoURL": "http://adopted-ember-addons.github.io/ember-light-table",
     "versionCompatibility": {
       "ember": ">=2.3.0 <3.0.0"
     }

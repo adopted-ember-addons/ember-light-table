@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://offirgolan.github.io/ember-light-table/">
+  <a href="https://adopted-ember-addons.github.io/ember-light-table/">
     <img
       src="https://rawgit.com/offirgolan/ember-light-table/master/docs/readme-logo.png"
       alt="Ember Light Table"
@@ -33,7 +33,7 @@ _The API for initializing Ember Light Table (v2.x) has recently changed. Please 
 - Easy table manipulation
 - Easy override to table header, body, and footer
 - Contextual component for header, body, and footer, as well as loading, no data, and expanded row
-- **EXPERIMENTAL** Occlusion rendering leveraging [vertical-collection](https://github.com/html-next/vertical-collection). See [Demo](http://offirgolan.github.io/ember-light-table/#/cookbook/occlusion-rendering).
+- **EXPERIMENTAL** Occlusion rendering leveraging [vertical-collection](https://github.com/html-next/vertical-collection). See [Demo](http://adopted-ember-addons.github.io/ember-light-table/#/cookbook/occlusion-rendering).
 
 Installation
 ------------------------------------------------------------------------------
@@ -112,9 +112,9 @@ If a pull request is marked with [**help wanted**][pr-help-wanted] we just don't
 [difficulty-hard]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3Adifficulty-hard
 [difficulty-epic]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3Adifficulty-epic
 
-[demo]: https://offirgolan.github.io/ember-light-table/
-[cookbook]: https://offirgolan.github.io/ember-light-table/#/cookbook
-[docs]: https://offirgolan.github.io/ember-light-table/docs/
+[demo]: https://adopted-ember-addons.github.io/ember-light-table/
+[cookbook]: https://adopted-ember-addons.github.io/ember-light-table/#/cookbook
+[docs]: https://adopted-ember-addons.github.io/ember-light-table/docs/
 
 [slack]: https://embercommunity.slack.com/messages/C615THVGF
 [slackin]: https://ember-community-slackin.herokuapp.com/
