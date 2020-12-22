@@ -221,6 +221,14 @@ export default Component.extend({
   useVirtualScrollbar: false,
 
   /**
+   * @property virtualScrollbarSettled
+   * @type {Boolean}
+   * @default false
+   * @private
+   */
+  virtualScrollbarSettled: false,
+
+  /**
    * Set this property to scroll to a specific px offset.
    *
    * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
@@ -354,7 +362,10 @@ export default Component.extend({
 
   _setupVirtualScrollbar() {
     let { fixedHeader, fixedFooter } = this.get('sharedOptions');
-    this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
+    this.setProperties({
+      useVirtualScrollbar: fixedHeader || fixedFooter,
+      virtualScrollbarSettled: true
+    });
   },
 
   onRowsChange: observer('rows.[]', function() {

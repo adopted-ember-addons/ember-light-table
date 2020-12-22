@@ -1,4 +1,4 @@
-{{#if virtualScrollbar}}
+{{#if (and virtualScrollbarSettled virtualScrollbar)}}
   {{#ember-scrollable
     classNames='lt-scrollable'
     autoHide=autoHide
