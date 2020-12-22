@@ -17,6 +17,8 @@ const Row = Component.extend({
   canSelect: false,
   colspan: 1,
 
+  cellComponentPath: 'light-table/cells/',
+
   isSelected: computed.readOnly('row.selected'),
   isExpanded: computed.readOnly('row.expanded')
 });

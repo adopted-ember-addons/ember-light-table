@@ -35,5 +35,6 @@ export default Component.extend(TableHeaderMixin, {
   classNames: ['lt-foot-wrap'],
   table: null,
   sharedOptions: null,
-  sharedOptionsFixedKey: 'fixedFooter'
+  sharedOptionsFixedKey: 'fixedFooter',
+  columnComponentPath: 'light-table/columns/'
 });

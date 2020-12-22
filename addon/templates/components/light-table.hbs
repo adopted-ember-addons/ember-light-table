@@ -1,5 +1,5 @@
 {{yield (hash
-  head=(component 'lt-head'
+  head=(component headComponent
     tableId=elementId
     table=table
     tableActions=tableActions
@@ -7,7 +7,7 @@
     tableClassNames=tableClassNames
     sharedOptions=sharedOptions
   )
-  body=(component 'lt-body'
+  body=(component bodyComponent
     tableId=elementId
     table=table
     tableActions=tableActions
@@ -15,7 +15,7 @@
     tableClassNames=tableClassNames
     sharedOptions=sharedOptions
   )
-  foot=(component 'lt-foot'
+  foot=(component footComponent
     tableId=elementId
     table=table
     tableActions=tableActions

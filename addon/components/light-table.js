@@ -43,6 +43,10 @@ const LightTable = Component.extend({
   media: service(),
   scrollbarThickness: service(),
 
+  headComponent: 'lt-head',
+  bodyComponent: 'lt-body',
+  footComponent: 'lt-foot',
+
   /**
    * @property table
    * @type {Table}
