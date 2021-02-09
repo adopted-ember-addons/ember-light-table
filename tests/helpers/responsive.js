@@ -1,4 +1,5 @@
-// jscs: disable
+/* eslint-disable */
+
 import { A } from '@ember/array';
 import { classify } from '@ember/string';
 import { computed } from '@ember/object';

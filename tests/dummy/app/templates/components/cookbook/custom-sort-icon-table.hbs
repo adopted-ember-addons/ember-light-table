@@ -1,18 +1,18 @@
 {{!-- BEGIN-SNIPPET custom-sort-icon-table --}}
-{{#light-table table height='65vh' as |t|}}
+{{#light-table table height="65vh" as |t|}}
 
   {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconSortable='unfold_more'
-    iconAscending='keyboard_arrow_up'
-    iconDescending='keyboard_arrow_down'
-    iconComponent='materialize-icon'
+    onColumnClick=(action "onColumnClick")
+    iconSortable="unfold_more"
+    iconAscending="keyboard_arrow_up"
+    iconDescending="keyboard_arrow_down"
+    iconComponent="materialize-icon"
     fixed=true
   }}
 
   {{#t.body
     canSelect=false
-    onScrolledToBottom=(action 'onScrolledToBottom')
+    onScrolledToBottom=(action "onScrolledToBottom")
     as |body|
   }}
     {{#if isLoading}}

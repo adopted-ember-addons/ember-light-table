@@ -1,6 +1,5 @@
-import { scrollTo } from 'ember-native-dom-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll, find, click } from '@ember/test-helpers';
+import { render, findAll, find, click, triggerEvent } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
 import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
@@ -10,18 +9,21 @@ import hasClass from '../../helpers/has-class';
 import RowComponent from 'ember-light-table/components/lt-row';
 import Component from '@ember/component';
 import { get, computed } from '@ember/object';
+import { run } from '@ember/runloop';
+import registerWaiter from 'ember-raf-scheduler/test-support/register-waiter';
 
 module('Integration | Component | light table | occlusion', function(hooks) {
   setupRenderingTest(hooks);
   setupMirageTest(hooks);
 
   hooks.beforeEach(function() {
+    registerWaiter();
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
   });
 
   test('it renders', async function(assert) {
-    this.set('table', new Table());
+    this.set('table', Table.create());
     await render(hbs `{{light-table table height="40vh" occlusion=true estimatedRowHeight=30}}`);
 
     assert.equal(find('*').textContent.trim(), '');
@@ -30,7 +32,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
   test('scrolled to bottom', async function(assert) {
     assert.expect(4);
 
-    this.set('table', new Table(Columns, this.server.createList('user', 50)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 50) }));
 
     this.set('onScrolledToBottom', () => {
       assert.ok(true);
@@ -45,18 +47,18 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
     assert.ok(findAll('.vertical-collection tbody.lt-body tr.lt-row').length < 30, 'only some rows are rendered');
 
-    let scrollContainer = '.lt-scrollable.tse-scrollable.vertical-collection';
-    let { scrollHeight } = find(scrollContainer);
-
-    assert.ok(findAll(scrollContainer).length > 0, 'scroll container was rendered');
+    let scrollContainer = find('.lt-scrollable.tse-scrollable.vertical-collection');
+    assert.ok(scrollContainer, 'scroll container was rendered');
+    let { scrollHeight } = scrollContainer;
     assert.ok(scrollHeight > 1500, 'scroll height is 50 rows * 30 px per row + header size');
+    scrollContainer.scrollTop = scrollHeight;
 
-    await scrollTo(scrollContainer, 0, scrollHeight);
+    await triggerEvent(scrollContainer, 'scroll');
   });
 
   test('fixed header', async function(assert) {
     assert.expect(2);
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(hbs `
       {{#light-table table height='500px' id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
@@ -79,7 +81,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
   test('fixed footer', async function(assert) {
     assert.expect(2);
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
 
     await render(hbs `
       {{#light-table table height='500px' id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
@@ -102,7 +104,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
   test('table assumes height of container', async function(assert) {
 
-    this.set('table', new Table(Columns, this.server.createList('user', 5)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
     this.set('fixed', true);
 
     await render(hbs `
@@ -119,7 +121,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
   });
 
   test('table body should consume all available space when not enough content to fill it', async function(assert) {
-    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 1) }));
     this.set('fixed', true);
 
     await render(hbs `
@@ -146,7 +148,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
     this.owner.register('component:custom-row', RowComponent);
 
-    this.set('table', new Table(Columns, this.server.createList('user', 1)));
+    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 1) }));
 
     await render(hbs `
       {{#light-table table occlusion=true estimatedRowHeight=30 as |t|}}
@@ -163,12 +165,12 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       classNameBindings: ['isActive'],
       current: null,
       isActive: computed('row.content', 'current', function() {
-        return this.get('row.content') === this.get('current');
+        return this.get('row.content') === this.current;
       })
     }));
 
     let users = this.server.createList('user', 3);
-    this.set('table', new Table(Columns, users));
+    this.set('table', Table.create({ columns: Columns, rows: users }));
 
     await render(hbs `
       {{#light-table table height='500px' occlusion=true estimatedRowHeight=30 as |t|}}
@@ -181,15 +183,21 @@ module('Integration | Component | light table | occlusion', function(hooks) {
     assert.equal(findAll('.custom-row').length, 3, 'three custom rows were rendered');
     assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
 
-    this.set('current', users[0]);
+    run(() => {
+      this.set('current', users[0]);
+    });
     let firstRow = find('.custom-row:nth-child(2)');
     assert.ok(hasClass(firstRow, 'is-active'), 'first custom row is active');
 
-    this.set('current', users[2]);
+    run(() => {
+      this.set('current', users[2]);
+    });
     let thirdRow = find('.custom-row:nth-child(4)');
     assert.ok(hasClass(thirdRow, 'is-active'), 'third custom row is active');
 
-    this.set('current', null);
+    run(() => {
+      this.set('current', null);
+    });
 
     assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
   });
@@ -199,9 +207,11 @@ module('Integration | Component | light table | occlusion', function(hooks) {
 
     this.owner.register('component:some-component', Component.extend({
       classNames: 'some-component',
+
       didReceiveAttrs() {
         assert.equal(get(this, 'extra.someData'), 'someValue', 'extra data is passed');
       },
+
       click() {
         get(this, 'tableActions.someAction')();
       }
@@ -212,7 +222,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       cellComponent: 'some-component'
     }];
 
-    this.set('table', new Table(columns, [{}]));
+    this.set('table', Table.create({ columns, rows: [{}] }));
 
     this.actions.someAction = () => {
       assert.ok(true, 'table action is passed');

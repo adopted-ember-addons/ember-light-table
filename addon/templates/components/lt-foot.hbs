@@ -1,28 +1,24 @@
-{{#ember-wormhole to=(concat tableId '_inline_foot') renderInPlace=renderInPlace}}
+{{#ember-wormhole to=(concat tableId "_inline_foot") renderInPlace=renderInPlace}}
   <table class={{tableClassNames}}>
     <tfoot class="lt-foot">
       {{!-- Scaffolding is needed here to allow use of colspan in the footer --}}
-      <tr class="lt-scaffolding-row">
-        {{#each columns as |column|}}
-          <td style={{html-safe (if column.width (concat 'width: ' column.width))}} class="lt-scaffolding"></td>
-        {{/each}}
-      </tr>
+      {{lt-scaffolding-row columns=columns}}
       {{#if hasBlock}}
         {{yield columns}}
       {{else}}
         <tr>
           {{#each columns as |column|}}
-            {{component (concat 'light-table/columns/' column.type) column
+            {{component (concat "light-table/columns/" column.type) column
               table=table
               tableActions=tableActions
               extra=extra
               sortIcons=sortIcons
               resizeOnDrag=resizeOnDrag
-              click=(action 'onColumnClick' column)
-              doubleClick=(action 'onColumnDoubleClick' column)
-              onColumnResized=(action 'onColumnResized')
-              onColumnDrag=(action 'onColumnDrag')
-              onColumnDrop=(action 'onColumnDrop')}}
+              click=(action "onColumnClick" column)
+              doubleClick=(action "onColumnDoubleClick" column)
+              onColumnResized=(action "onColumnResized")
+              onColumnDrag=(action "onColumnDrag")
+              onColumnDrop=(action "onColumnDrop")}}
           {{/each}}
         </tr>
       {{/if}}

@@ -10,6 +10,12 @@ module.exports = function(defaults) {
       browsers: ['last 2 versions'],
       cascade: false
     },
+    'ember-prism': {
+      'components': ['markup-templating', 'handlebars', 'javascript'],
+      plugins: [
+        'line-numbers'
+      ]
+    },
 
     'ember-cli-babel': {
       includePolyfill: true

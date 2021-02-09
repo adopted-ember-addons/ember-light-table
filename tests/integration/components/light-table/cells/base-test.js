@@ -9,21 +9,21 @@ module('Integration | Component | Cells | base', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    this.set('column', new Column());
+    this.set('column', Column.create());
     await render(hbs`{{light-table/cells/base column=column}}`);
 
     assert.equal(find('*').textContent.trim(), '');
   });
 
   test('cell with column format', async function(assert) {
-    this.set('column', new Column({
+    this.set('column', Column.create({
       valuePath: 'num',
       format(value) {
         return value * 2;
       }
     }));
 
-    this.set('row', new Row());
+    this.set('row', Row.create());
 
     await render(hbs`{{light-table/cells/base column row rawValue=2}}`);
 
@@ -31,15 +31,13 @@ module('Integration | Component | Cells | base', function(hooks) {
   });
 
   test('cell format with no valuePath', async function(assert) {
-    this.set('column', new Column({
+    this.set('column', Column.create({
       format() {
         return this.get('row.num') * 2;
       }
     }));
 
-    this.set('row', new Row({
-      num: 2
-    }));
+    this.set('row', Row.create({ content: { num: 2 } }));
 
     await render(hbs`{{light-table/cells/base column row}}`);
 
@@ -47,26 +45,26 @@ module('Integration | Component | Cells | base', function(hooks) {
   });
 
   test('cell with nested valuePath', async function(assert) {
-    this.set('column', new Column({
+    this.set('column', Column.create({
       valuePath: 'foo.bar.baz',
       format(value) {
         return value * 2;
       }
     }));
 
-    this.set('row', new Row({
+    this.set('row', Row.create({ content: {
       foo: {
         bar: {
           baz: 2
         }
-      }
+      } }
     }));
 
     await render(hbs`{{light-table/cells/base column row rawValue=(get row column.valuePath)}}`);
 
     assert.equal(find('*').textContent.trim(), '4');
 
-    run(() => this.get('row').set(this.get('column.valuePath'), 4));
+    run(() => this.row.set(this.get('column.valuePath'), 4));
 
     assert.equal(find('*').textContent.trim(), '8');
   });

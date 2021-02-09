@@ -27,7 +27,7 @@ import Row from './classes/Row';
  * ```javascript
  * import Table from 'ember-light-table';
  *
- * const table = new Table(columns, rows, options);
+ * const table = Table.create({ columns: columns, rows: rows });
  * ```
  *
  * Here is a more real-word example
@@ -59,7 +59,7 @@ import Row from './classes/Row';
  *   }),
  *
  *   table: computed('model', function() {
- *    return new Table(this.get('columns'), this.get('model'));
+ *    return Table.create({ columns: this.get('columns'), rows: this.get('model') });
  *   })
  * });
  * ```
@@ -72,7 +72,7 @@ import Row from './classes/Row';
  * ```javascript
  * import Table from 'ember-light-table';
  *
- * const table = new Table(columns, model, { enableSync: true });
+ * const table = Table.create({ columns: columns, rows: model, enableSync: true });
  * ```
  *
  * The `enableSync` options creates a __two way__ sync. This means that any manipulation

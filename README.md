@@ -7,7 +7,7 @@
   </a>
 </div>
 
-[![Ember Versions](https://img.shields.io/badge/Ember.js%20Versions-%5E2.12%20and%20%5E3.0-brightgreen.svg)](https://travis-ci.org/offirgolan/ember-light-table)
+[![Ember Versions](https://img.shields.io/badge/Ember.js%20Versions-%5E3.4%20and%20%5E4.0-brightgreen.svg)](https://travis-ci.org/offirgolan/ember-light-table)
 [![Build Status](https://travis-ci.org/offirgolan/ember-light-table.svg)](https://travis-ci.org/offirgolan/ember-light-table)
 [![npm version](https://badge.fury.io/js/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
 [![Download Total](https://img.shields.io/npm/dt/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
@@ -34,6 +34,15 @@ _The API for initializing Ember Light Table (v2.x) has recently changed. Please 
 - Easy override to table header, body, and footer
 - Contextual component for header, body, and footer, as well as loading, no data, and expanded row
 - **EXPERIMENTAL** Occlusion rendering leveraging [vertical-collection](https://github.com/html-next/vertical-collection). See [Demo](http://adopted-ember-addons.github.io/ember-light-table/#/cookbook/occlusion-rendering).
+
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v3.12 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
+
 
 Installation
 ------------------------------------------------------------------------------

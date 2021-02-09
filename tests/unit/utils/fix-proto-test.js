@@ -25,7 +25,7 @@ module('Unit | Utility | fix proto', function() {
         return true;
       }
     });
-    let instance = new DerivedClass();
+    let instance = DerivedClass.create();
     assert.ok(instance.someMethod(), 'reopen works');
   });
 });

@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-light-table'
+  name: require('./package').name
 };

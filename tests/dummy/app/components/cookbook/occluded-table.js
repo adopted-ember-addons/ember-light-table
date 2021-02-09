@@ -35,7 +35,7 @@ export default Component.extend(TableCommon, {
   init() {
     this._super(...arguments);
     this.set('page', 1);
-    this.get('fetchRecords').perform();
+    this.fetchRecords.perform();
   }
 });
 // END-SNIPPET

@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 
 module('Unit | Classes | Column', function() {
   test('create column - default options', function(assert) {
-    let col = new Column();
+    let col = Column.create();
     assert.ok(col);
     assert.equal(col.hidden, false);
     assert.equal(col.ascending, true);
@@ -18,34 +18,24 @@ module('Unit | Classes | Column', function() {
     assert.equal(col.width, null);
   });
 
-  test('create column - column instance', function(assert) {
-    let col = new Column({ label: 'Name' });
-    let col2 = new Column(col);
-    assert.ok(col);
-    assert.ok(col2);
-    assert.equal(col, col2);
-    assert.equal(col.label, 'Name');
-    assert.equal(col2.label, 'Name');
-  });
-
   test('reopen colum', function(assert) {
     assert.equal(typeof Column.reopen, 'function', 'reopen is a function');
     assert.equal(typeof Column.reopenClass, 'function', 'reopenClass is a function');
   });
 
   test('CP - isGroupColumn', function(assert) {
-    let col = new Column();
+    let col = Column.create();
     assert.ok(col);
     assert.deepEqual(col.subColumns, []);
     assert.equal(col.get('isGroupColumn'), false);
 
-    col.set('subColumns', [new Column()]);
+    col.set('subColumns', [Column.create()]);
     assert.equal(col.subColumns.length, 1);
     assert.equal(col.get('isGroupColumn'), true);
   });
 
   test('CP - isVisibleGroupColumn', function(assert) {
-    let col = new Column({
+    let col = Column.create({
       subColumns: [{}, {}]
     });
     assert.ok(col);
@@ -63,7 +53,7 @@ module('Unit | Classes | Column', function() {
   });
 
   test('CP - visibleSubColumns', function(assert) {
-    let col = new Column({
+    let col = Column.create({
       subColumns: [{}, {}]
     });
     assert.ok(col);
@@ -78,7 +68,7 @@ module('Unit | Classes | Column', function() {
   });
 
   test('subColumns / parent', function(assert) {
-    let col = new Column({
+    let col = Column.create({
       subColumns: [{}]
     });
     assert.ok(col);

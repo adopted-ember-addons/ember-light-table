@@ -1,13 +1,13 @@
 {{!-- BEGIN-SNIPPET expanded-row --}}
 <div class="row">
   <div class="col-md-2">
-    <img src={{row.avatar}} class="user-avatar"/>
+    <img src={{row.avatar}} class="user-avatar" alt="avatar">
   </div>
   <div class="col-md-8">
     <p>{{row.bio}}</p>
 
     <div class="user-actions">
-      <a class="fa fa-envelope" href="mailto:{{{row.email}}}"></a>
+      <a class="fa fa-envelope" href="mailto:{{row.email}}"></a>
       <a class="fa fa-facebook"></a>
       <a class="fa fa-twitter"></a>
     </div>

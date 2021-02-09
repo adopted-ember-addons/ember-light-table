@@ -31,7 +31,7 @@ const Column = Component.extend(DraggableColumnMixin, {
   isResizing: false,
 
   style: computed('column.width', function() {
-    return cssStyleify(this.get('column').getProperties(['width']));
+    return cssStyleify(this.column.getProperties(['width']));
   }),
 
   align: computed('column.align', function() {
@@ -104,9 +104,19 @@ const Column = Component.extend(DraggableColumnMixin, {
    * @property rowspan
    * @type {Number}
    */
-  rowspan: computed('column.visibleSubColumns.[]', function() {
-    let subColumns = this.get('column.visibleSubColumns');
-    return !isEmpty(subColumns) ? 1 : 2;
+  rowspan: computed('_rowspan', 'column.visibleSubColumns.[]', {
+    get() {
+      if (this._rowspan) {
+        return this._rowspan;
+      }
+
+      let subColumns = this.get('column.visibleSubColumns');
+      return !isEmpty(subColumns) ? 1 : 2;
+    },
+
+    set(key, value) {
+      return this._rowspan = value;
+    }
   })
 });
 
