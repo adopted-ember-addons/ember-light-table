@@ -38,7 +38,8 @@ export default Component.extend(TableCommon, {
         label: 'Address',
         resizable: true,
         valuePath: 'address',
-        minResizeWidth: 100
+        minResizeWidth: 100,
+        maxResizeWidth: 400
       }, {
         label: 'State',
         resizable: true,

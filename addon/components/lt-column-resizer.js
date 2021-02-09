@@ -3,6 +3,7 @@ import closest from 'ember-light-table/utils/closest';
 import layout from '../templates/components/lt-column-resizer';
 
 const TOP_LEVEL_CLASS = '.ember-light-table';
+const { min, max } = Math;
 
 export default Component.extend({
   layout,
@@ -82,8 +83,11 @@ export default Component.extend({
 
       let resizeOnDrag = this.resizeOnDrag;
       let minResizeWidth = this.get('column.minResizeWidth');
+      let maxResizeWidth = this.get('column.maxResizeWidth');
       let { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
-      let width = `${Math.max(startWidth + (e.pageX - startX), minResizeWidth)}px`;
+      let currentWidth = startWidth + e.pageX - startX;
+      let adjustedByMaxWidth = maxResizeWidth ? min(currentWidth, maxResizeWidth) : currentWidth;
+      let width = `${ max(adjustedByMaxWidth, minResizeWidth) }px`;
 
       let column = this.colElement();
       let index = this.get('table.visibleColumns').indexOf(this.column) + 1;
