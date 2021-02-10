@@ -1,7 +1,6 @@
-import { triggerEvent, click, find, findAll } from '@ember/test-helpers';
+import { triggerEvent, click, find, findAll, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import Table from 'ember-light-table';
 import Columns, { GroupedColumns } from '../../helpers/table-columns';
@@ -18,7 +17,7 @@ module('Integration | Component | lt head', function(hooks) {
   });
 
   test('render columns', async function(assert) {
-    this.set('table', new Table(Columns));
+    this.set('table', Table.create({ columns: Columns }));
 
     await render(hbs`{{lt-head table=table renderInPlace=true}}`);
 
@@ -26,7 +25,7 @@ module('Integration | Component | lt head', function(hooks) {
   });
 
   test('render grouped columns', async function(assert) {
-    this.set('table', new Table(GroupedColumns));
+    this.set('table', Table.create({ columns: GroupedColumns }));
 
     await render(hbs`{{lt-head table=table renderInPlace=true}}`);
 
@@ -37,7 +36,7 @@ module('Integration | Component | lt head', function(hooks) {
   });
 
   test('click - non-sortable column', async function(assert) {
-    this.set('table', new Table(Columns));
+    this.set('table', Table.create({ columns: Columns }));
     this.set('onColumnClick', (column) => {
       assert.ok(column);
       assert.notOk(column.sortable);
@@ -52,7 +51,7 @@ module('Integration | Component | lt head', function(hooks) {
   });
 
   test('click - sortable column', async function(assert) {
-    this.set('table', new Table(Columns));
+    this.set('table', Table.create({ columns: Columns }));
     let asc = true;
     this.set('onColumnClick', (column) => {
       assert.ok(column);
@@ -72,7 +71,7 @@ module('Integration | Component | lt head', function(hooks) {
   });
 
   test('render sort icons', async function(assert) {
-    this.set('table', new Table(Columns));
+    this.set('table', Table.create({ columns: Columns }));
 
     await render(
       hbs`{{lt-head table=table renderInPlace=true iconSortable='fa-sort' iconAscending='fa-sort-asc' iconDescending='fa-sort-desc'}}`
@@ -118,13 +117,13 @@ module('Integration | Component | lt head', function(hooks) {
       iconAscending,
       iconDescending,
       iconComponent,
-      table: new Table(Columns)
+      table: Table.create({ columns: Columns })
     });
     this.owner.register(`component:${iconComponent}`, Component.extend({
       init() {
         this._super(...arguments);
-        assert.ok(isPresent(this.get('sortIconProperty')));
-        assert.ok(isPresent(this.get('sortIcons')));
+        assert.ok(isPresent(this.sortIconProperty));
+        assert.ok(isPresent(this.sortIcons));
         assert.equal(this.get('sortIcons.iconSortable'), iconSortable);
         assert.equal(this.get('sortIcons.iconAscending'), iconAscending);
         assert.equal(this.get('sortIcons.iconDescending'), iconDescending);
@@ -138,7 +137,7 @@ module('Integration | Component | lt head', function(hooks) {
   test('double click', async function(assert) {
     assert.expect(4);
 
-    this.set('table', new Table(Columns));
+    this.set('table', Table.create({ columns: Columns }));
     this.set('onColumnDoubleClick', (column) => {
       assert.ok(column);
       assert.notOk(column.sortable);

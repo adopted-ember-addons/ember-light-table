@@ -1,6 +1,5 @@
-import $ from 'jquery';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import closest from 'ember-light-table/utils/closest';
 import layout from '../templates/components/lt-column-resizer';
 
 const TOP_LEVEL_CLASS = '.ember-light-table';
@@ -15,9 +14,9 @@ export default Component.extend({
   startWidth: null,
   startX: null,
 
-  $column: computed(function() {
-    return $(this.get('element')).parent('th');
-  }).volatile().readOnly(),
+  colElement() {
+    return this.element.parentNode;
+  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -25,15 +24,14 @@ export default Component.extend({
     this.__mouseMove = this._mouseMove.bind(this);
     this.__mouseUp = this._mouseUp.bind(this);
 
-    $(document).on('mousemove', this.__mouseMove);
-    $(document).on('mouseup', this.__mouseUp);
+    document.addEventListener('mousemove', this.__mouseMove);
+    document.addEventListener('mouseup', this.__mouseUp);
   },
 
   willDestroyElement() {
     this._super(...arguments);
-
-    $(document).off('mousemove', this.__mouseMove);
-    $(document).off('mouseup', this.__mouseUp);
+    document.removeEventListener('mousemove', this.__mouseMove);
+    document.removeEventListener('mouseip', this.__mouseUp);
   },
 
   click(e) {
@@ -45,57 +43,72 @@ export default Component.extend({
   },
 
   mouseDown(e) {
-    let $column = this.get('$column');
+    let column = this.colElement();
 
     e.preventDefault();
     e.stopPropagation();
 
     this.setProperties({
       isResizing: true,
-      startWidth: $column.outerWidth(),
+      startWidth: column.offsetWidth,
       startX: e.pageX
     });
 
-    this.$().closest(TOP_LEVEL_CLASS).addClass('is-resizing');
+    let topLevel = closest(this.element, TOP_LEVEL_CLASS);
+    topLevel.classList.add('is-resizing');
   },
 
   _mouseUp(e) {
-    if (this.get('isResizing')) {
+    if (this.isResizing) {
       e.preventDefault();
       e.stopPropagation();
 
-      let $column = this.get('$column');
-      let width = `${$column.outerWidth()}px`;
+      let column = this.colElement();
+      let width = `${column.offsetWidth}px`;
 
       this.set('isResizing', false);
       this.set('column.width', width);
 
-      this.sendAction('onColumnResized', width);
-      this.$().closest(TOP_LEVEL_CLASS).removeClass('is-resizing');
+      let topLevel = closest(this.element, TOP_LEVEL_CLASS);
+      topLevel.classList.remove('is-resizing');
+      this.onColumnResized(width);
     }
   },
 
   _mouseMove(e) {
-    if (this.get('isResizing')) {
+    if (this.isResizing) {
       e.preventDefault();
       e.stopPropagation();
 
-      let resizeOnDrag = this.get('resizeOnDrag');
+      let resizeOnDrag = this.resizeOnDrag;
       let minResizeWidth = this.get('column.minResizeWidth');
       let { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
       let width = `${Math.max(startWidth + (e.pageX - startX), minResizeWidth)}px`;
 
-      let $column = this.get('$column');
-      let $index = this.get('table.visibleColumns').indexOf(this.get('column')) + 1;
-      let $table = this.$().closest(TOP_LEVEL_CLASS);
+      let column = this.colElement();
+      let index = this.get('table.visibleColumns').indexOf(this.column) + 1;
+      let table = closest(this.element, TOP_LEVEL_CLASS);
 
-      $column.outerWidth(width);
-      $(`thead td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(width);
-      $(`tfoot td.lt-scaffolding:nth-child(${$index})`, $table).outerWidth(width);
+      column.style.width = width;
+      const headerScaffoldingCell = table.querySelector(`thead td.lt-scaffolding:nth-child(${index})`);
+      if (headerScaffoldingCell) {
+        headerScaffoldingCell.style.width = width;
+      }
+
+      const footerScaffoldingCell = table.querySelector(`tfoot td.lt-scaffolding:nth-child(${index})`);
+      if (footerScaffoldingCell) {
+        footerScaffoldingCell.style.width = width;
+      }
 
       if (resizeOnDrag) {
-        $(`tbody td:nth-child(${$index})`, $table).outerWidth(width);
+        let cols = table.querySelectorAll(`tbody td:nth-child(${index})`);
+        cols.forEach((col) => {
+          col.style.width = width;
+        });
       }
     }
-  }
+  },
+
+  // No-op for closure actions
+  onColumnResized() {}
 });

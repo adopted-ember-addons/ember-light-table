@@ -1,8 +1,8 @@
 {{!-- BEGIN-SNIPPET responsive-table --}}
 {{#light-table table
-  height='65vh'
+  height="65vh"
   responsive=true
-  onAfterResponsiveChange=(action 'onAfterResponsiveChange')
+  onAfterResponsiveChange=(action "onAfterResponsiveChange")
   as |t|
 }}
 
@@ -13,17 +13,17 @@
   --}}
 
   {{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconSortable='fa fa-sort'
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
+    onColumnClick=(action "onColumnClick")
+    iconSortable="fa fa-sort"
+    iconAscending="fa fa-sort-asc"
+    iconDescending="fa fa-sort-desc"
     fixed=true
   }}
 
   {{#t.body
     canSelect=false
     expandOnClick=false
-    onScrolledToBottom=(action 'onScrolledToBottom')
+    onScrolledToBottom=(action "onScrolledToBottom")
     as |body|
   }}
     {{#body.expanded-row as |row|}}

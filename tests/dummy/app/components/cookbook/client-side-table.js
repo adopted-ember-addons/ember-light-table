@@ -15,7 +15,7 @@ export default Component.extend(TableCommon, {
   // Sort Logic
   sortedModel: computed.sort('model', 'sortBy').readOnly(),
   sortBy: computed('dir', 'sort', function() {
-    return [`${this.get('sort')}:${this.get('dir')}`];
+    return [`${this.sort}:${this.dir}`];
   }).readOnly(),
 
   // Filter Input Setup
@@ -52,23 +52,23 @@ export default Component.extend(TableCommon, {
   }),
 
   fetchRecords: task(function*() {
-    let records = yield this.get('store').query('user', { page: 1, limit: 100 });
-    this.get('model').setObjects(records.toArray());
+    let records = yield this.store.query('user', { page: 1, limit: 100 });
+    this.model.setObjects(records.toArray());
     this.set('meta', records.get('meta'));
-    yield this.get('filterAndSortModel').perform();
+    yield this.filterAndSortModel.perform();
   }).on('init'),
 
   setRows: task(function*(rows) {
-    this.get('table').setRows([]);
+    this.table.setRows([]);
     yield timeout(100); // Allows isLoading state to be shown
-    this.get('table').setRows(rows);
+    this.table.setRows(rows);
   }).restartable(),
 
   filterAndSortModel: task(function*(debounceMs = 200) {
     yield timeout(debounceMs); // debounce
 
-    let query = this.get('query');
-    let model = this.get('sortedModel');
+    let query = this.query;
+    let model = this.sortedModel;
     let valuePath = this.get('selectedFilter.valuePath');
     let result = model;
 
@@ -78,7 +78,7 @@ export default Component.extend(TableCommon, {
       });
     }
 
-    yield this.get('setRows').perform(result);
+    yield this.setRows.perform(result);
   }).restartable(),
 
   actions: {
@@ -89,12 +89,12 @@ export default Component.extend(TableCommon, {
           sort: column.get('valuePath')
         });
 
-        this.get('filterAndSortModel').perform(0);
+        this.filterAndSortModel.perform(0);
       }
     },
 
     onSearchChange() {
-      this.get('filterAndSortModel').perform();
+      this.filterAndSortModel.perform();
     }
   }
 });

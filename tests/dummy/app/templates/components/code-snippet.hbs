@@ -1,0 +1,7 @@
+{{!- https://github.com/ef4/ember-code-snippet/blob/master/CHANGELOG.md#300}}
+{{#let (get-code-snippet @name) as |snippet|}}
+  {{!- CodeBlock is provided by ember-prism -}}
+  <CodeBlock @language={{snippet.language}} class="line-numbers">
+    {{snippet.source}}
+  </CodeBlock>
+{{/let}}

@@ -41,7 +41,7 @@ export default Component.extend(TableCommon, {
       let confirmed = window.confirm(`Are you sure you want to delete ${row.get('firstName')} ${row.get('lastName')}?`);
 
       if (confirmed) {
-        this.get('table').removeRow(row);
+        this.table.removeRow(row);
         row.get('content').deleteRecord();
       }
     },

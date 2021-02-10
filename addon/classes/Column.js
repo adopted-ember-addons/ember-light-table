@@ -300,7 +300,7 @@ export default class Column extends EmberObject.extend({
    * @private
    */
   isVisibleGroupColumn: computed('visibleSubColumns.[]', 'isHidden', function() {
-    return !isEmpty(this.get('visibleSubColumns')) && !this.get('isHidden');
+    return !isEmpty(this.visibleSubColumns) && !this.isHidden;
   }).readOnly(),
 
   /**
@@ -309,39 +309,21 @@ export default class Column extends EmberObject.extend({
    * @private
    */
   visibleSubColumns: computed('subColumns.@each.isHidden', 'isHidden', function() {
-    let subColumns = this.get('subColumns');
-    let isHidden = this.get('isHidden');
+    let subColumns = this.subColumns;
+    let isHidden = this.isHidden;
 
     return emberArray(isHidden ? [] : subColumns.filterBy('isHidden', false));
   }).readOnly(),
 
-  init(...args) {
-    this._super(...args);
+  init(options = {}) {
+    this.setProperties(options);
 
-    const subColumns = emberArray(makeArray(this.get('subColumns')).map((sc) => new Column(sc)));
+    const subColumns = emberArray(makeArray(this.subColumns).map((sc) => Column.create(sc)));
     subColumns.setEach('parent', this);
 
     this.set('subColumns', subColumns);
   }
-}) {
-  /**
-   * @class Column
-   * @constructor
-   * @param {Object} options
-   */
-  constructor(options = {}) {
-    // TODO: Revert this, when babel#5862 is resolved.
-    //       https://github.com/babel/babel/issues/5862
-    // HACK: Passing properties to super instead of manually setting them fixes the
-    //       implicit run loop creation for Ember 2.12.
-    //       https://travis-ci.org/offirgolan/ember-light-table/jobs/344818839#L790
-    super(options);
-
-    if (options instanceof Column) {
-      return options;
-    }
-  }
-}
+}) {}
 
 // https://github.com/offirgolan/ember-light-table/issues/436#issuecomment-310138868
 fixProto(Column);

@@ -26,8 +26,8 @@ export default Mixin.create({
   init() {
     this._super(...arguments);
 
-    let table = new Table(this.get('columns'), this.get('model'), { enableSync: this.get('enableSync') });
-    let sortColumn = table.get('allColumns').findBy('valuePath', this.get('sort'));
+    let table = Table.create({ columns: this.columns, rows: this.model, enableSync: this.enableSync });
+    let sortColumn = table.get('allColumns').findBy('valuePath', this.sort);
 
     // Setup initial sort column
     if (sortColumn) {
@@ -38,17 +38,17 @@ export default Mixin.create({
   },
 
   fetchRecords: task(function*() {
-    let records = yield this.get('store').query('user', this.getProperties(['page', 'limit', 'sort', 'dir']));
-    this.get('model').pushObjects(records.toArray());
+    let records = yield this.store.query('user', this.getProperties(['page', 'limit', 'sort', 'dir']));
+    this.model.pushObjects(records.toArray());
     this.set('meta', records.get('meta'));
     this.set('canLoadMore', !isEmpty(records));
   }).restartable(),
 
   actions: {
     onScrolledToBottom() {
-      if (this.get('canLoadMore')) {
+      if (this.canLoadMore) {
         this.incrementProperty('page');
-        this.get('fetchRecords').perform();
+        this.fetchRecords.perform();
       }
     },
 
@@ -60,7 +60,7 @@ export default Mixin.create({
           canLoadMore: true,
           page: 0
         });
-        this.get('model').clear();
+        this.model.clear();
       }
     }
   }

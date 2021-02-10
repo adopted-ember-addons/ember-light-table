@@ -1,5 +1,5 @@
 {{!-- BEGIN-SNIPPET paginated-table --}}
-{{#light-table table height='65vh' as |t|}}
+{{#light-table table height="65vh" as |t|}}
 
   {{!--
     In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
@@ -8,10 +8,10 @@
   --}}
 
   {{t.head
-    onColumnClick=(pipe (action 'onColumnClick') (action 'setPage' 1))
-    iconSortable='fa fa-sort'
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
+    onColumnClick=(pipe (action "onColumnClick") (action "setPage" 1))
+    iconSortable="fa fa-sort"
+    iconAscending="fa fa-sort-asc"
+    iconDescending="fa fa-sort-desc"
     fixed=true
   }}
 
@@ -31,18 +31,18 @@
       <tr>
         <td class="align-center" colspan={{columns.length}}>
           <ul class="pagination pagination-sm">
-            <li class={{if (eq page 1) 'disabled'}}>
-              <a {{action 'setPage' (dec page)}} href="#" aria-label="Previous">
+            <li class={{if (eq page 1) "disabled"}}>
+              <a {{action "setPage" (dec page)}} href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
             {{#each (range 1 meta.totalPages true) as |p|}}
-              <li class={{if (eq p page) 'active'}}>
-                <a {{action 'setPage' p}} href="#">{{p}}</a>
+              <li class={{if (eq p page) "active"}}>
+                <a {{action "setPage" p}} href="#">{{p}}</a>
               </li>
             {{/each}}
-            <li class={{if (eq page meta.totalPages) 'disabled'}}>
-              <a {{action 'setPage' (inc page)}} href="#" aria-label="Next">
+            <li class={{if (eq page meta.totalPages) "disabled"}}>
+              <a {{action "setPage" (inc page)}} href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
