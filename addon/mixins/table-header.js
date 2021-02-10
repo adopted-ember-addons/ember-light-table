@@ -136,18 +136,20 @@ export default Mixin.create({
     return this.getProperties(['iconSortable', 'iconAscending', 'iconDescending', 'iconComponent']);
   }).readOnly(),
 
-  style: computed('sharedOptions.occlusion', function() {
+  style: computed('scrollbarThickness.thickness', 'sharedOptions.occlusion', function() {
     if (this.get('sharedOptions.occlusion')) {
       const scrollbarThickness = this.get('scrollbarThickness.thickness');
       return cssStyleify({ paddingRight: `${scrollbarThickness}px` });
     }
+
+    return;
   }).readOnly(),
 
   init() {
     this._super(...arguments);
 
-    const fixed = this.get('fixed');
-    const sharedOptionsFixedPath = `sharedOptions.${this.get('sharedOptionsFixedKey')}`;
+    const fixed = this.fixed;
+    const sharedOptionsFixedPath = `sharedOptions.${this.sharedOptionsFixedKey}`;
     trySet(this, sharedOptionsFixedPath, fixed);
 
     const height = this.get('sharedOptions.height');
@@ -168,17 +170,19 @@ export default Mixin.create({
      * @param  {Event} event The click event
      */
     onColumnClick(column) {
-      if (column.sortable && this.get('sortOnClick')) {
+      if (column.sortable && this.sortOnClick) {
         if (column.sorted) {
           column.toggleProperty('ascending');
         } else {
-          if (!this.get('multiColumnSort')) {
+          if (!this.multiColumnSort) {
             this.get('table.sortedColumns').setEach('sorted', false);
           }
+
           column.set('sorted', true);
         }
       }
-      this.sendAction('onColumnClick', ...arguments);
+
+      this.onColumnClick && this.onColumnClick(...arguments);
     },
 
     /**
@@ -189,7 +193,7 @@ export default Mixin.create({
      * @param  {Event} event   The click event
      */
     onColumnDoubleClick(/* column */) {
-      this.sendAction('onColumnDoubleClick', ...arguments);
+      this.onColumnDoubleClick && this.onColumnDoubleClick(...arguments);
     },
 
     /**
@@ -200,7 +204,7 @@ export default Mixin.create({
      * @param  {String} width  The final width of the column
      */
     onColumnResized(/* column, width */) {
-      this.sendAction('onColumnResized', ...arguments);
+      this.onColumnResized && this.onColumnResized(...arguments);
     },
 
     /**
@@ -210,7 +214,7 @@ export default Mixin.create({
      * @param  {Column} column The column that is being dragged
      */
     onColumnDrag(/* column */) {
-      this.sendAction('onColumnDrag', ...arguments);
+      this.onColumnDrag && this.onColumnDrag(...arguments);
     },
 
     /**
@@ -221,7 +225,7 @@ export default Mixin.create({
      * @param  {Boolean} isSuccess The column was successfully dropped and sorted
      */
     onColumnDrop(/* column, isSuccess */) {
-      this.sendAction('onColumnDrop', ...arguments);
+      this.onColumnDrop && this.onColumnDrop(...arguments);
     }
   }
 });

@@ -7,9 +7,9 @@ module('Integration | Component | lt infinity', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    this.inViewport = () => {};
+    this.enterViewport = () => {};
     this.exitViewport = () => {};
-    await render(hbs`{{lt-infinity inViewport=inViewport exitViewport=exitViewport}}`);
+    await render(hbs`{{lt-infinity enterViewport=enterViewport exitViewport=exitViewport}}`);
     assert.equal(find('*').textContent.trim(), '');
   });
 });

@@ -43,7 +43,7 @@ export default Component.extend(TableCommon, {
     },
 
     deleteAll() {
-      this.get('table').removeRows(this.get('table.selectedRows'));
+      this.table.removeRows(this.get('table.selectedRows'));
     }
   }
 });

@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { deprecate } from '@ember/application/deprecations';
 import { computed, observer } from '@ember/object';
 import layout from 'ember-light-table/templates/components/lt-body';
 import { run } from '@ember/runloop';
@@ -186,7 +187,7 @@ export default Component.extend({
   enableScaffolding: false,
 
   /**
-   * ID of main table component. Used to generate divs for ember-wormhole
+   * ID of main table component. Used to generate divs for ember-wormhole and set scope for scroll observers
    *
    * @property tableId
    * @type {String}
@@ -208,7 +209,7 @@ export default Component.extend({
    */
   scrollBufferRows: computed('scrollBuffer', 'sharedOptions.estimatedRowHeight', function() {
     return Math.ceil(
-      this.get('scrollBuffer') / (this.get('sharedOptions.estimatedRowHeight') || 1)
+      this.scrollBuffer / (this.get('sharedOptions.estimatedRowHeight') || 1)
     );
   }),
 
@@ -320,8 +321,8 @@ export default Component.extend({
    * fills the screen with row items until lt-infinity component has exited the viewport
    * @property scheduleScrolledToBottom
    */
-  scheduleScrolledToBottom: observer('rows.[]', 'isInViewport', function() {
-    if (this.get('isInViewport')) {
+  scheduleScrolledToBottom: observer('isInViewport', function() {
+    if (this.isInViewport) {
       /*
        Continue scheduling onScrolledToBottom until no longer in viewport
        */
@@ -353,7 +354,7 @@ export default Component.extend({
   },
 
   _setupVirtualScrollbar() {
-    let { fixedHeader, fixedFooter } = this.get('sharedOptions');
+    let { fixedHeader, fixedFooter } = this.sharedOptions;
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
   },
 
@@ -397,9 +398,9 @@ export default Component.extend({
   },
 
   checkTargetScrollOffset() {
-    if (!this.get('hasReachedTargetScrollOffset')) {
-      let targetScrollOffset = this.get('targetScrollOffset');
-      let currentScrollOffset = this.get('currentScrollOffset');
+    if (!this.hasReachedTargetScrollOffset) {
+      let targetScrollOffset = this.targetScrollOffset;
+      let currentScrollOffset = this.currentScrollOffset;
 
       if (targetScrollOffset > currentScrollOffset) {
         this.set('targetScrollOffset', null);
@@ -413,7 +414,7 @@ export default Component.extend({
   },
 
   toggleExpandedRow(row) {
-    let multiRowExpansion = this.get('multiRowExpansion');
+    let multiRowExpansion = this.multiRowExpansion;
     let shouldExpand = !row.expanded;
 
     if (multiRowExpansion) {
@@ -432,7 +433,7 @@ export default Component.extend({
      This debounce is needed when there is not enough delay between onScrolledToBottom calls.
      Without this debounce, all rows will be rendered causing immense performance problems
      */
-    this._debounceTimer = run.debounce(this, this.sendAction, 'onScrolledToBottom', delay);
+    this._debounceTimer = run.debounce(this, this.onScrolledToBottom, delay);
   },
 
   /**
@@ -445,6 +446,18 @@ export default Component.extend({
     run.cancel(this._debounceTimer);
   },
 
+  // Noop for closure actions
+  onRowClick() {},
+  onRowDoubleClick() {},
+  onRowMouseEnter() {},
+  onRowMouseLeave() {},
+  onScroll() {},
+  firstVisibleChanged() {},
+  lastVisibleChanged() {},
+  firstReached() {},
+  lastReached() {},
+  onScrolledToBottom() {},
+
   actions: {
     /**
      * onRowClick action. Handles selection, and row expansion.
@@ -454,12 +467,12 @@ export default Component.extend({
      */
     onRowClick(row, e) {
       let rows = this.get('table.rows');
-      let multiSelect = this.get('multiSelect');
-      let multiSelectRequiresKeyboard = this.get('multiSelectRequiresKeyboard');
-      let canSelect = this.get('canSelect');
-      let selectOnClick = this.get('selectOnClick');
-      let canExpand = this.get('canExpand');
-      let expandOnClick = this.get('expandOnClick');
+      let multiSelect = this.multiSelect;
+      let multiSelectRequiresKeyboard = this.multiSelectRequiresKeyboard;
+      let canSelect = this.canSelect;
+      let selectOnClick = this.selectOnClick;
+      let canExpand = this.canExpand;
+      let expandOnClick = this.expandOnClick;
       let isSelected = row.get('selected');
       let currIndex = rows.indexOf(row);
       let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
@@ -489,7 +502,7 @@ export default Component.extend({
         toggleExpandedRow();
       }
 
-      this.sendAction('onRowClick', ...arguments);
+      this.onRowClick(...arguments);
     },
 
     /**
@@ -499,7 +512,7 @@ export default Component.extend({
      * @param  {Event}   event   The click event
      */
     onRowDoubleClick(/* row, event */) {
-      this.sendAction('onRowDoubleClick', ...arguments);
+      this.onRowDoubleClick(...arguments);
     },
 
     /**
@@ -509,7 +522,7 @@ export default Component.extend({
      * @param  {Event}   event   The mouse event
      */
     onRowMouseEnter(/* row, event */) {
-      this.sendAction('onRowMouseEnter', ...arguments);
+      this.onRowMouseEnter(...arguments);
     },
 
     /**
@@ -519,7 +532,7 @@ export default Component.extend({
      * @param  {Event}   event   The mouse event
      */
     onRowMouseLeave(/* row, event */) {
-      this.sendAction('onRowMouseLeave', ...arguments);
+      this.onRowMouseLeave(...arguments);
     },
 
     /**
@@ -534,16 +547,33 @@ export default Component.extend({
      */
     onScroll(scrollOffset /* , event */) {
       this.set('currentScrollOffset', scrollOffset);
-      this.sendAction('onScroll', ...arguments);
+      this.onScroll(...arguments);
     },
 
     /**
-     * lt-infinity action to determine if component is still in viewport
+     * lt-infinity action to determine if component is still in viewport. Deprecated - please use enterViewport
      * @event inViewport
+     * @deprecated Use `enterViewport` instead.
      */
-    inViewport() {
-      this.set('isInViewport', true);
+    inViewport: null,
+
+    /**
+     * lt-infinity action to determine if component is still in viewport
+     * @event enterViewport
+     */
+    enterViewport() {
+      const inViewport = this.inViewport;
+      if (inViewport) {
+        deprecate('lt-infinity inViewport event is deprecated please use enterViewport instead', false, {
+          id: 'ember-light-table.inViewport',
+          until: '2.0.0'
+        });
+        inViewport();
+      } else {
+        this.set('isInViewport', true);
+      }
     },
+
     /**
      * lt-infinity action to determine if component has exited the viewport
      * @event exitViewport
@@ -553,22 +583,22 @@ export default Component.extend({
     },
 
     firstVisibleChanged(item, index /* , key */) {
-      this.sendAction('firstVisibleChanged', ...arguments);
+      this.firstVisibleChanged(...arguments);
       const estimateScrollOffset = index * this.get('sharedOptions.estimatedRowHeight');
-      this.sendAction('onScroll', estimateScrollOffset, null);
+      this.onScroll(estimateScrollOffset, null);
     },
 
     lastVisibleChanged(/* item, index, key */) {
-      this.sendAction('lastVisibleChanged', ...arguments);
+      this.lastVisibleChanged(...arguments);
     },
 
     firstReached(/* item, index, key */) {
-      this.sendAction('firstReached', ...arguments);
+      this.firstReached(...arguments);
     },
 
     lastReached(/* item, index, key */) {
-      this.sendAction('lastReached', ...arguments);
-      this.sendAction('onScrolledToBottom');
+      this.lastReached(...arguments);
+      this.onScrolledToBottom();
     }
   }
 });

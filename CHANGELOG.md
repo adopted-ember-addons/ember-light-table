@@ -1,9 +1,177 @@
 Changelog
 =========
 
-## v1.13.1
+## UNRELEASED 2.X
 
-## v1.13.0
+#### Bug Fixes
+* [#734](https://github.com/offirgolan/ember-light-table/pull/734) bump dependency addons ([@fran-worley](https://github.com/fran-worley))
+
+#### Internal
+* [#733](https://github.com/offirgolan/ember-light-table/pull/733) Bump Ember CLI to v3.16 (LTS) + bump core addons to latest ([@fran-worley](https://github.com/fran-worley))
+
+#### Committers: 1
+- Fran Worley ([@fran-worley](https://github.com/fran-worley))
+
+## v2.0.0-beta.5 (2020-01-16)
+
+#### :boom: Breaking Change
+* [#718](https://github.com/offirgolan/ember-light-table/pull/718) Replace volatile computed properties ([@fran-worley](https://github.com/fran-worley))
+
+#### Bug Fixes
+* [#722](https://github.com/offirgolan/ember-light-table/pull/722) Fix resizing columns issues(2.x) ([@TomaszWegrzyn](https://github.com/TomaszWegrzyn))
+* [#718](https://github.com/offirgolan/ember-light-table/pull/718) Replace volatile computed properties ([@fran-worley](https://github.com/fran-worley))
+
+#### Enhancements
+* [8d0b592](https://github.com/offirgolan/ember-light-table/commit/8d0b592938ddaecc6d7353eaefab749bcc77175f) Update ember-scrollable version to jquery-less ([@alexander-alvarez](https://github.com/alexander-alvarez))
+
+
+#### Committers: 3
+- Alexander Alvarez ([@alexander-alvarez](https://github.com/alexander-alvarez))
+- Tomasz Wegrzyn [@TomaszWegrzyn](https://github.com/TomaszWegrzyn)
+- Fran Worley ([@fran-worley](https://github.com/fran-worley))
+
+## v2.0.0-beta.4 (2019-08-19)
+
+#### :boom: Breaking Change
+* [#701](https://github.com/offirgolan/ember-light-table/pull/701) Convert ES6 native classes to ember objects ([@fran-worley](https://github.com/fran-worley))
+* [#713](https://github.com/offirgolan/ember-light-table/pull/713) Set minimum supported ember version at 3.4 ([@fran-worley](https://github.com/fran-worley))
+* [#698](https://github.com/offirgolan/ember-light-table/pull/698) Drop support for Node 6 as end of life 30 April 2019 ([@fran-worley](https://github.com/fran-worley))
+
+#### Bug Fixes
+* [#701](https://github.com/offirgolan/ember-light-table/pull/701) Convert ES6 native classes to ember objects ([@fran-worley](https://github.com/fran-worley))
+* [#693](https://github.com/offirgolan/ember-light-table/pull/693) Update ember-in-viewport, ember-wormhole ([@fran-worley](https://github.com/fran-worley))
+* [#692](https://github.com/offirgolan/ember-light-table/pull/692) Replace propertyWillChange/propertyDidChange with notifyPropertyChange ([@mmadsen2](https://github.com/mmadsen2))
+* [#681](https://github.com/offirgolan/ember-light-table/pull/681) use `assign` instead of `merge` ([@bekzod](https://github.com/bekzod))
+* [#664](https://github.com/offirgolan/ember-light-table/pull/664) Fixing issue with multiple tables and onScrolledToBottom. ([@gmurphey](https://github.com/gmurphey))
+* [#666](https://github.com/offirgolan/ember-light-table/pull/666) Pinning ip-regex to fix build issue. ([@gmurphey](https://github.com/gmurphey))
+* [#596](https://github.com/offirgolan/ember-light-table/pull/596) [Draggable Column] Error when dragging column; "removeObject is not a function" ([@msenevir](https://github.com/msenevir))
+
+#### Internal
+* [#716](https://github.com/offirgolan/ember-light-table/pull/716) Bump to ember cli 3.12 and update dependencies ([@fran-worley](https://github.com/fran-worley))
+* [#697](https://github.com/offirgolan/ember-light-table/pull/697) Migrate from ember-cli-changelog to lerna-changelog ([@fran-worley](https://github.com/fran-worley))
+* [#696](https://github.com/offirgolan/ember-light-table/pull/696) Bump Ember CLI to 3.8 and update other dependencies ([@fran-worley](https://github.com/fran-worley))
+* [#693](https://github.com/offirgolan/ember-light-table/pull/693) Update ember-in-viewport, ember-wormhole ([@fran-worley](https://github.com/fran-worley))
+
+#### Committers: 5
+- mmadsen2 [@mmadsen2](https://github.com/mmadsen2)
+- bek ([@bekzod](https://github.com/bekzod))
+- Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
+- Mahen Seneviratne ([@msenevir](https://github.com/msenevir))
+- Fran Worley ([@fran-worley](https://github.com/fran-worley))
+
+## v2.0.0-beta.3 (2019-05-9)
+
+#### Breaking
+- [#657](https://github.com/offirgolan/ember-light-table/pull/657) Officially drop support for node 4 ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Enhancements
+* [#601](https://github.com/offirgolan/ember-light-table/pull/601) Avoid breaking line with sort icon in narrow columns ([@Goras](https://github.com/Gorzas))
+* [#648](https://github.com/offirgolan/ember-light-table/pull/648) Expose shouldRecycle property of vertical-collection ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Bug Fixes
+* [#672](https://github.com/offirgolan/ember-light-table/pull/672) bump vertical-collection to v1.0.0-beta.13 ([@fran-worley](https://github.com/fran-worley))
+* [#686](https://github.com/offirgolan/ember-light-table/pull/686) refactor: Remove sendAction() calls ([@MichalBryxi](https://github.com/MichalBryxi))
+* [#673](https://github.com/offirgolan/ember-light-table/pull/673) Replace merge with assign ([@fran-worley](https://github.com/fran-worley))
+* [#677](https://github.com/offirgolan/ember-light-table/pull/677) ensure ember-scrollable updates when rows are updated ([@fran-worley](https://github.com/fran-worley))
+
+#### Internal
+* [#598](https://github.com/offirgolan/ember-light-table/pull/598) Stop using nativeDomClick which is deprecated. ([@plcarmel](https://github.com/plcarmel))
+* [#649](https://github.com/offirgolan/ember-light-table/pull/649) Write integration tests for occlusion rendering ([@Gaurav0](https://github.com/Gaurav0))
+* [#651](https://github.com/offirgolan/ember-light-table/pull/651) Update ember-cli-changelog ([@Gaurav0](https://github.com/Gaurav0))
+* [#653](https://github.com/offirgolan/ember-light-table/pull/653) Fix scroll to bottom test ([@Gaurav0](https://github.com/Gaurav0))
+* [#655](https://github.com/offirgolan/ember-light-table/pull/655) Update ember-scrollable ([@Gaurav0](https://github.com/Gaurav0))
+* [#656](https://github.com/offirgolan/ember-light-table/pull/656) Assert and Test compatibility with LTS 3.4 ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Committers: 4
+- Pierre-Luc Carmel Biron ([@plcarmel](https://github.com/plcarmel))
+- Gaurav Munjal ([@Gaurav0](https://github.com/Gaurav0))
+- Fran Worley ([@fran-worley](https://github.com/fran-worley))
+- Michal Bryxi ([@MichalBryxi](https://github.com/MichalBryxi))
+
+## v2.0.0-beta.2 (2018-10-29)
+
+#### Enhancements
+*[#593](https://github.com/offirgolan/ember-light-table/pull/593) Remove jQuery usage ((@donaldwasserman)[https://github.com/donaldwasserman])
+
+#### Committers: 1
+- Donald Wasserman ((@donaldwasserman)[https://github.com/donaldwasserman])
+
+## v2.0.0-beta.1 (2018-10-26)
+
+#### Bug Fixes
+*[#590](https://github.com/offirgolan/ember-light-table/pull/590) replace `sendAction` with modern callable methods ((@donaldwasserman)[https://github.com/donaldwasserman])
+
+#### Committers: 1
+- Donald Wasserman ((@donaldwasserman)[https://github.com/donaldwasserman])
+
+## v2.0.0-beta.0 (2018-10-25)
+
+#### Enhancements
+* [#584](https://github.com/offirgolan/ember-light-table/pull/584) Improve cells performance ([@mostafa-sakhiri](https://github.com/mostafa-sakhiri))
+
+#### Bug Fixes
+* [#586](https://github.com/offirgolan/ember-light-table/pull/586) Incomplete use of htmlSafe() on Cell.style. ([@richard-viney](https://github.com/richard-viney))
+
+#### Committers: 2
+- mostafa-sakhiri ([@mostafa-sakhiri](https://github.com/mostafa-sakhiri))
+- Richard Viney ([@richard-viney](https://github.com/richard-viney))
+
+## UNRELEASED MASTER
+
+#### Enhancements
+* [#584](https://github.com/offirgolan/ember-light-table/pull/584) Improve cells performance ([@mostafa-sakhiri](https://github.com/mostafa-sakhiri))
+* [#601](https://github.com/offirgolan/ember-light-table/pull/601) Avoid breaking line with sort icon in narrow columns ([@Goras](https://github.com/Gorzas))
+* [#648](https://github.com/offirgolan/ember-light-table/pull/648) Expose shouldRecycle property of vertical-collection ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Bug Fixes
+* [#692](https://github.com/offirgolan/ember-light-table/pull/692) Replace propertyWillChange/propertyDidChange with notifyPropertyChange ([@mmadsen2](https://github.com/mmadsen2))
+* [#681](https://github.com/offirgolan/ember-light-table/pull/681) use `assign` instead of `merge` ([@bekzod](https://github.com/bekzod))
+* [#664](https://github.com/offirgolan/ember-light-table/pull/664) Fixing issue with multiple tables and onScrolledToBottom. ([@gmurphey](https://github.com/gmurphey))
+* [#666](https://github.com/offirgolan/ember-light-table/pull/666) Pinning ip-regex to fix build issue. ([@gmurphey](https://github.com/gmurphey))
+* [#596](https://github.com/offirgolan/ember-light-table/pull/596) [Draggable Column] Error when dragging column; "removeObject is not a function" ([@msenevir](https://github.com/msenevir))
+* [#586](https://github.com/offirgolan/ember-light-table/pull/586) Incomplete use of htmlSafe() on Cell.style. ([@richard-viney](https://github.com/richard-viney))
+
+#### Internal
+* [#598](https://github.com/offirgolan/ember-light-table/pull/598) Stop using nativeDomClick which is deprecated. ([@plcarmel](https://github.com/plcarmel))
+- [#649](https://github.com/offirgolan/ember-light-table/pull/649) Write integration tests for occlusion rendering ([@Gaurav0](https://github.com/Gaurav0))
+- [#653](https://github.com/offirgolan/ember-light-table/pull/653) Fix scroll to bottom test ([@Gaurav0](https://github.com/Gaurav0))
+- [#651](https://github.com/offirgolan/ember-light-table/pull/651) Update ember-cli-changelog ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Committers: 8
+- Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
+- Mahen Seneviratne ([@msenevir](https://github.com/msenevir))
+- mmadsen2 [@mmadsen2](https://github.com/mmadsen2)
+- bek ([@bekzod](https://github.com/bekzod))
+- José David Cano Pérez ([@Goras](https://github.com/Gorzas))
+- Gaurav Munjal ([@Gaurav0](https://github.com/Gaurav0))
+- mostafa-sakhiri ([@mostafa-sakhiri](https://github.com/mostafa-sakhiri))
+- Richard Viney ([@richard-viney](https://github.com/richard-viney))
+- Pierre-Luc Carmel Biron ([@plcarmel](https://github.com/plcarmel))
+
+## v1.13.2 (2018-08-26)
+
+#### Bug Fixes
+- [e345fec](https://github.com/offirgolan/ember-light-table/commit/e345fec67916fc18ced40cd161dbf38de934e894) Use isArray to check columns, rows type ([@quaertym](https://github.com/quaertym))
+
+#### Internal
+- [7b50190](https://github.com/offirgolan/ember-light-table/commit/7b5019003b01ad4bb646d1f142ab63059bf4efd4) Update other dependencies ([@alexander-alvarez](https://github.com/alexander-alvarez))
+- [715d94b](https://github.com/offirgolan/ember-light-table/commit/715d94b47cd5cbe31af99db8d6faf8aa7c00f124) Update Ember scrollable ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Committers: 3
+- Emre Unal ([@quaertym](https://github.com/quaertym)
+- Alex Alvarez ([@alexander-alvarez](https://github.com/alexander-alvarez))
+- Gaurav Munjal ([@Gaurav0](https://github.com/Gaurav0))
+
+## v1.13.1 (2018-06-22)
+
+#### Internal
+- [ace7f4c](https://github.com/offirgolan/ember-light-table/commit/ace7f4cc3535853fb07c406d5e3a06467d6a7f0d) Update ember-cli to 3.1.4 ([@jrjohnson](https://github.com/jrjohnson))
+- [bf6edb8](https://github.com/offirgolan/ember-light-table/commit/bf6edb83fdc7fa195c786b7b1aa1826edde4518a) Update all dependencies ([@jrjohnson](https://github.com/jrjohnson))
+
+#### Committers: 1
+- Jonathan Johnson ([@jrjohnson](https://github.com/jrjohnson))
+
+## v1.13.0 (2018-06-21)
 
 #### Commits
 

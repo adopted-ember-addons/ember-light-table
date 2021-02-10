@@ -11,15 +11,17 @@ export default Mixin.create({
   isDragging: false,
   isDragTarget: false,
 
-  dragDirection: computed('isDragTarget', function() {
-    if (this.get('isDragTarget')) {
-      let columns = this.get('dragColumnGroup');
-      let targetIdx = columns.indexOf(this.get('column'));
+  dragDirection: computed('column', 'dragColumnGroup', 'isDragTarget', function() {
+    if (this.isDragTarget) {
+      let columns = this.dragColumnGroup;
+      let targetIdx = columns.indexOf(this.column);
       let sourceIdx = columns.indexOf(sourceColumn);
       let direction = (sourceIdx - targetIdx) < 0 ? 'right' : 'left';
 
       return `drag-${direction}`;
     }
+
+    return '';
   }).readOnly(),
 
   /**
@@ -31,23 +33,23 @@ export default Mixin.create({
    * @type Array
    * @readonly
    */
-  dragColumnGroup: computed('column.parent', function() {
+  dragColumnGroup: computed('column.parent', 'table.columns', function() {
     let parent = this.get('column.parent');
     return parent ? parent.get('subColumns') : this.get('table.columns');
   }).readOnly(),
 
-  isDropTarget: computed(function() {
-    let column = this.get('column');
+  isDropTarget() {
+    let column = this.column;
     /*
      A column is a valid drop target only if its in the same group
      */
     return sourceColumn && column.get('droppable') && column.get('parent') === sourceColumn.get('parent');
-  }).volatile().readOnly(),
+  },
 
   dragStart(e) {
     this._super(...arguments);
 
-    let column = this.get('column');
+    let column = this.column;
 
     /*
      NOTE: IE requires setData type to be 'text'
@@ -57,7 +59,7 @@ export default Mixin.create({
 
     sourceColumn = column;
     this.set('isDragging', true);
-    this.sendAction('onColumnDrag', sourceColumn, ...arguments);
+    this.onColumnDrag(sourceColumn, ...arguments);
 
     /*
      NOTE: This is a fix for Firefox to prevent the click event
@@ -70,24 +72,24 @@ export default Mixin.create({
   dragEnter(e) {
     this._super(...arguments);
 
-    if (this.get('isDropTarget')) {
+    if (this.isDropTarget()) {
       e.preventDefault();
-      this.set('isDragTarget', this.get('column') !== sourceColumn);
+      this.set('isDragTarget', this.column !== sourceColumn);
     }
   },
 
   dragOver(e) {
     this._super(...arguments);
 
-    if (this.get('isDropTarget')) {
+    if (this.isDropTarget()) {
       e.preventDefault();
       /*
         NOTE: dragLeave will be triggered by any child elements inside the
         column. This code ensures the column being dragged over continues to be
         identified as the current drop target
        */
-      if (!this.get('isDragTarget')) {
-        this.set('isDragTarget', this.get('column') !== sourceColumn);
+      if (!this.isDragTarget) {
+        this.set('isDragTarget', this.column !== sourceColumn);
       }
     }
   },
@@ -107,7 +109,7 @@ export default Mixin.create({
      drop did not happen.
      */
     if (sourceColumn) {
-      this.sendAction('onColumnDrop', sourceColumn, false, ...arguments);
+      this.onColumnDrop(sourceColumn, false, ...arguments);
       sourceColumn = null;
     }
 
@@ -120,10 +122,10 @@ export default Mixin.create({
   drop(e) {
     this._super(...arguments);
 
-    let targetColumn = this.get('column');
+    let targetColumn = this.column;
     if (targetColumn.droppable) {
-      let table = this.get('table');
-      let columns = this.get('dragColumnGroup');
+      let table = this.table;
+      let columns = this.dragColumnGroup;
 
       let targetColumnIdx = columns.indexOf(targetColumn);
 
@@ -131,16 +133,14 @@ export default Mixin.create({
       e.preventDefault();
       e.stopPropagation();
 
-      table.propertyWillChange('columns');
-
       columns.removeObject(sourceColumn);
       columns.insertAt(targetColumnIdx, sourceColumn);
 
-      table.propertyDidChange('columns');
+      table.notifyPropertyChange('columns');
 
       this.setProperties({ isDragTarget: false, isDragging: false });
 
-      this.sendAction('onColumnDrop', sourceColumn, true, ...arguments);
+      this.onColumnDrop(sourceColumn, true, ...arguments);
       sourceColumn = null;
     }
   },
@@ -148,5 +148,9 @@ export default Mixin.create({
   destroy() {
     this._super(...arguments);
     run.cancel(this._clickResetTimer);
-  }
+  },
+
+  // Noop for passed actions
+  onColumnDrag() {},
+  onColumnDrop() {}
 });
