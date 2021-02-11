@@ -74,7 +74,7 @@ module('Integration | Component | lt head', function(hooks) {
     this.set('table', Table.create({ columns: Columns }));
 
     await render(
-      hbs`{{lt-head table=table renderInPlace=true iconSortable='fa-sort' iconAscending='fa-sort-asc' iconDescending='fa-sort-desc'}}`
+      hbs`{{lt-head table=table renderInPlace=true iconSortable='fa-sort' iconAscending='fa-sort-up' iconDescending='fa-sort-down'}}`
     );
 
     const allHeaders = findAll('tr > th');
@@ -83,22 +83,22 @@ module('Integration | Component | lt head', function(hooks) {
 
     // Sortable case
     assert.ok(hasClass(sortIcon, 'fa-sort'), 'Sortable icon renders');
-    assert.notOk(hasClass(sortIcon, 'fa-sort-asc'));
-    assert.notOk(hasClass(sortIcon, 'fa-sort-desc'));
+    assert.notOk(hasClass(sortIcon, 'fa-sort-up'));
+    assert.notOk(hasClass(sortIcon, 'fa-sort-down'));
 
     await click(sortableHeader);
 
     // Ascending case
-    assert.ok(hasClass(sortIcon, 'fa-sort-asc'), 'Ascending icon renders');
+    assert.ok(hasClass(sortIcon, 'fa-sort-up'), 'Ascending icon renders');
     assert.notOk(hasClass(sortIcon, 'fa-sort'));
-    assert.notOk(hasClass(sortIcon, 'fa-sort-desc'));
+    assert.notOk(hasClass(sortIcon, 'fa-sort-down'));
 
     await click(sortableHeader);
 
     // Descending case
-    assert.ok(hasClass(sortIcon, 'fa-sort-desc'), 'Descending icon renders');
+    assert.ok(hasClass(sortIcon, 'fa-sort-down'), 'Descending icon renders');
     assert.notOk(hasClass(sortIcon, 'fa-sort'));
-    assert.notOk(hasClass(sortIcon, 'fa-sort-asc'));
+    assert.notOk(hasClass(sortIcon, 'fa-sort-up'));
   });
 
   test('custom iconComponent has arguments', function(assert) {
@@ -108,8 +108,8 @@ module('Integration | Component | lt head', function(hooks) {
 
     assert.expect(6 * sortableColumns.length);
     const iconSortable = 'unfold_more';
-    const iconAscending = 'fa-sort-asc';
-    const iconDescending = 'fa-sort-desc';
+    const iconAscending = 'fa-sort-up';
+    const iconDescending = 'fa-sort-down';
     const iconComponent = 'custom-icon-component';
 
     this.setProperties({
