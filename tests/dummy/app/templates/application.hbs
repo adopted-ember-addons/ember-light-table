@@ -7,81 +7,75 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      {{#link-to "index" class="navbar-brand"}}
-        <img src="images/ember-logo.png" alt="">
+      <LinkTo @route="index" class="navbar-brand">
+        <img src="images/ember-logo.png" alt="emberJs">
         <span>Light Table</span>
-      {{/link-to}}
+      </LinkTo>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        {{#link-to "index" tagName="li"}}
-          {{link-to "Home" "index"}}
-        {{/link-to}}
-        {{#link-to "responsive" tagName="li"}}
-          {{link-to "Responsive" "responsive"}}
-        {{/link-to}}
-        {{#link-to "scrolling" tagName="li"}}
-          {{link-to "Scrolling" "scrolling"}}
-        {{/link-to}}
+      <ul class="nav navbar-nav" role="navigation">
+        <li><LinkTo @route="index">Home</LinkTo></li>
+        <li><LinkTo @route="responsive" class="navbar-item">Responsive</LinkTo></li>
+        <li><LinkTo @route="scrolling" class="navbar-item">Scrolling</LinkTo></li>
 
-        {{#link-to "" tagName="li" classNames="dropdown" current-when="columns"}}
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Columns <span class="fa fa-caret-down"></span></a>
+        <li class="dropdown {{if (eq this.router.currentRoute.parent.name "columns") "active"}}">
+          <a class="dropdown-toggle"
+             data-toggle="dropdown"
+             role="button"
+             aria-haspopup="true"
+             aria-expanded="false"
+             href="#"
+          >
+            Columns <span class="fa fa-caret-down"></span>
+          </a>
           <ul class="nav navbar-nav dropdown-menu">
-            {{#link-to "columns.draggable" tagName="li"}}
-              {{link-to "Draggable Columns" "columns.draggable"}}
-            {{/link-to}}
-            {{#link-to "columns.grouped" tagName="li"}}
-              {{link-to "Grouped Columns" "columns.grouped"}}
-            {{/link-to}}
-            {{#link-to "columns.resizable" tagName="li"}}
-              {{link-to "Resizable Columns" "columns.resizable"}}
-            {{/link-to}}
+            <li><LinkTo @route="columns.draggable">Draggable Columns</LinkTo></li>
+            <li><LinkTo @route="columns.grouped">Grouped Columns</LinkTo></li>
+            <li><LinkTo @route="columns.resizable">Resizable Columns</LinkTo></li>
           </ul>
-        {{/link-to}}
+        </li>
 
-        {{#link-to "" tagName="li" classNames="dropdown" current-when="rows"}}
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rows <span class="fa fa-caret-down"></span></a>
+        <li class="dropdown {{if (eq this.router.currentRoute.parent.name "rows") "active"}}">
+          <a class="dropdown-toggle"
+             data-toggle="dropdown"
+             role="button"
+             aria-haspopup="true"
+             aria-expanded="false"
+             href="#"
+          >
+            Rows <span class="fa fa-caret-down"></span>
+          </a>
           <ul class="nav navbar-nav dropdown-menu">
-            {{#link-to "rows.expandable" tagName="li"}}
-              {{link-to "Expandable Rows" "rows.expandable"}}
-            {{/link-to}}
-            {{#link-to "rows.selectable" tagName="li"}}
-              {{link-to "Selectable Rows" "rows.selectable"}}
-            {{/link-to}}
+            <li><LinkTo @route="rows.expandable">Expandable Rows</LinkTo></li>
+            <li><LinkTo @route="rows.selectable">Selectable Rows</LinkTo></li>
           </ul>
-        {{/link-to}}
+        </li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
-        {{#link-to "" tagName="li" classNames="dropdown" current-when="cookbook"}}
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cookbook <span class="fa fa-caret-down"></span></a>
+        <li class="dropdown {{if (eq this.router.currentRoute.parent.name "cookbook") "active"}}">
+          <a class="dropdown-toggle"
+             data-toggle="dropdown"
+             role="button"
+             aria-haspopup="true"
+             aria-expanded="false"
+             href="#"
+          >
+            Cookbook <span class="fa fa-caret-down"></span>
+          </a>
           <ul class="nav navbar-nav dropdown-menu">
-            {{#link-to "cookbook.index" tagName="li"}}
-              {{link-to "Cookbook" "cookbook.index"}}
-            {{/link-to}}
-            {{#link-to "cookbook.client-side" tagName="li"}}
-              {{link-to "Client Side Search & Sort" "cookbook.client-side"}}
-            {{/link-to}}
-            {{#link-to "cookbook.custom-row" tagName="li"}}
-              {{link-to "Custom Row Component" "cookbook.custom-row"}}
-            {{/link-to}}
-            {{#link-to "cookbook.custom-sort-icon" tagName="li"}}
-              {{link-to "Custom Sort Icon" "cookbook.custom-sort-icon"}}
-            {{/link-to}}
-            {{#link-to "cookbook.horizontal-scrolling" tagName="li"}}
-              {{link-to "Horizontal Scrolling" "cookbook.horizontal-scrolling"}}
-            {{/link-to}}
-            {{#link-to "cookbook.occlusion-rendering" tagName="li"}}
-              {{link-to "Occlusion Rendering" "cookbook.occlusion-rendering"}}
-            {{/link-to}}
-            {{#link-to "cookbook.pagination" tagName="li"}}
-              {{link-to "Pagination" "cookbook.pagination"}}
-            {{/link-to}}
-            {{#link-to "cookbook.table-actions" tagName="li"}}
-              {{link-to "Table Actions" "cookbook.table-actions"}}
-            {{/link-to}}
+            <li><LinkTo @route="cookbook.index">Cookbook</LinkTo></li>
+            <li><LinkTo @route="cookbook.client-side">Client Side Search & Sort</LinkTo></li>
+            <li><LinkTo @route="cookbook.custom-row">Custom Row Component</LinkTo></li>
+            <li><LinkTo @route="cookbook.custom-sort-icon">Custom Sort Icon</LinkTo></li>
+            <li><LinkTo @route="cookbook.horizontal-scrolling">Horizontal Scrolling</LinkTo></li>
+            <li><LinkTo @route="cookbook.occlusion-rendering">Occlusion Rendering</LinkTo></li>
+            <li><LinkTo @route="cookbook.pagination">Pagination</LinkTo></li>
+            <li><LinkTo @route="cookbook.table-actions">Table Actions</LinkTo></li>
           </ul>
-        {{/link-to}}
+        </li>
+
         <li><a href="docs">Documentation</a></li>
         <li><a href="https://github.com/offirgolan/ember-light-table" class="fa fa-github github"></a></li>
       </ul>

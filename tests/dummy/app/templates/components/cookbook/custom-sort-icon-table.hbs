@@ -1,26 +1,25 @@
 {{!-- BEGIN-SNIPPET custom-sort-icon-table --}}
-{{#light-table table height="65vh" as |t|}}
+<LightTable @table={{this.table}} @height="65vh" as |t|>
 
-  {{t.head
-    onColumnClick=(action "onColumnClick")
-    iconSortable="unfold_more"
-    iconAscending="keyboard_arrow_up"
-    iconDescending="keyboard_arrow_down"
-    iconComponent="materialize-icon"
-    fixed=true
-  }}
+  <t.head
+    @onColumnClick={{fn this.onColumnClick}}
+    @iconSortable="unfold_more"
+    @iconAscending="keyboard_arrow_up"
+    @iconDescending="keyboard_arrow_down"
+    @iconComponent="materialize-icon"
+    @fixed={{true}}
+  />
 
-  {{#t.body
-    canSelect=false
-    onScrolledToBottom=(action "onScrolledToBottom")
-    as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
+  <t.body
+    @canSelect={{false}}
+    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+  as |body|>
+    {{#if this.isLoading}}
+      <body.loader>
+        <TableLoader/>
+      </body.loader>
     {{/if}}
-  {{/t.body}}
+  </t.body>
 
-{{/light-table}}
+</LightTable>
 {{!-- END-SNIPPET --}}

@@ -1,9 +1,8 @@
 // BEGIN-SNIPPET responsive-table
-import Component from '@ember/component';
-import TableCommon from '../mixins/table-common';
-import { computed } from '@ember/object';
+import BaseTable from './base-table';
+import { computed, action } from '@ember/object';
 
-export default Component.extend(TableCommon, {
+export default BaseTable.extend({
   columns: computed(function() {
     return [{
       width: '40px',
@@ -40,11 +39,10 @@ export default Component.extend(TableCommon, {
     }];
   }),
 
-  actions: {
-    onAfterResponsiveChange(matches) {
-      if (matches.indexOf('jumbo') > -1) {
-        this.get('table.expandedRows').setEach('expanded', false);
-      }
+  @action
+  onAfterResponsiveChange(matches) {
+    if (matches.indexOf('jumbo') > -1) {
+      this.get('table.expandedRows').setEach('expanded', false);
     }
   }
 });

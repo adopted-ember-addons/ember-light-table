@@ -1,11 +1,11 @@
-{{#code-panel
-  title="Scrolling Example"
-  snippets=(array
+<CodePanel
+  @title="Scrolling Example"
+  @snippets={{array
     "scrolling-table.js"
-    "table-common.js"
+    "base-table.js"
     "scrolling-table.hbs"
     "user-avatar.hbs"
     "table-loader.hbs"
-)}}
-  {{scrolling-table model=model}}
-{{/code-panel}}
+}}>
+  <ScrollingTable @model={{this.model}}/>
+</CodePanel>

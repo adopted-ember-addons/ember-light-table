@@ -71,6 +71,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-notify-property-change-polyfill": "^0.0.2",
     "ember-one-way-controls": "^3.0.1",
+    "ember-power-select": "^4.0.0",
     "ember-prism": "^0.7.0",
     "ember-qunit": "^4.6.0",
     "ember-resolver": "^8.0.0",

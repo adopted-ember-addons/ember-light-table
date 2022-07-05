@@ -1,11 +1,11 @@
-{{#code-panel
-  title="Client Side Search & Sort"
-  snippets=(array
+<CodePanel
+  @title="Client Side Search & Sort"
+  @snippets={{array
     "client-side-table.js"
-    "table-common.js"
+    "base-table.js"
     "client-side-table.hbs"
     "user-avatar.hbs"
     "table-loader.hbs"
-)}}
-  {{cookbook/client-side-table model=model}}
-{{/code-panel}}
+}}>
+  <Cookbook::ClientSideTable @model={{this.model}}/>
+</CodePanel>

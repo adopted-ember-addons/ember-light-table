@@ -1,11 +1,11 @@
-{{#code-panel
-  title="Grouped Columns"
-  snippets=(array
+<CodePanel
+  @title="Grouped Columns"
+  @snippets={{array
     "grouped-table.js"
-    "table-common.js"
+    "base-table.js"
     "grouped-table.hbs"
     "user-avatar.hbs"
     "table-loader.hbs"
-)}}
-  {{columns/grouped-table model=model}}
-{{/code-panel}}
+}}>
+  <Columns::GroupedTable @model={{this.model}}/>
+</CodePanel>

@@ -1,11 +1,11 @@
-{{#code-panel
-  title="Draggable Columns"
-  snippets=(array
+<CodePanel
+  @title="Draggable Columns"
+  @snippets={{array
     "draggable-table.js"
-    "table-common.js"
+    "base-table.js"
     "draggable-table.hbs"
     "user-avatar.hbs"
     "table-loader.hbs"
-)}}
-  {{columns/draggable-table model=model}}
-{{/code-panel}}
+}}>
+  <Columns::DraggableTable @model={{this.model}}/>
+</CodePanel>
