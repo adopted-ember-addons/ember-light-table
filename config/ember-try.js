@@ -1,16 +1,17 @@
 'use strict';
 
 const getChannelURL = require('ember-source-channel-url');
+const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function() {
   return {
     useYarn: true,
     scenarios: [
       {
-        name: 'ember-lts-3.12',
+        name: 'ember-3.13',
         npm: {
           devDependencies: {
-            'ember-source': '~3.12.0'
+            'ember-source': '~3.13.0'
           }
         }
       },
@@ -19,14 +20,6 @@ module.exports = async function() {
         npm: {
           devDependencies: {
             'ember-source': '~3.16.0'
-          }
-        }
-      },
-      {
-        name: 'ember-lts-3.20',
-        npm: {
-          devDependencies: {
-            'ember-source': '~3.20.0'
           }
         }
       },
@@ -89,7 +82,9 @@ module.exports = async function() {
             edition: 'classic'
           }
         }
-      }
+      },
+      embroiderSafe(),
+      embroiderOptimized(),
     ]
   };
 };

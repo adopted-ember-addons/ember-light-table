@@ -39,8 +39,9 @@ _The API for initializing Ember Light Table (v2.x) has recently changed. Please 
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.12 or above
+* Ember.js v3.13 or above
 * Ember CLI v2.13 or above
+* Embroider safe and optimized
 * Node.js v10 or above
 
 
