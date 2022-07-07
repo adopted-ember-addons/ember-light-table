@@ -42,7 +42,7 @@ export default BaseTable.extend({
   @action
   onAfterResponsiveChange(matches) {
     if (matches.indexOf('jumbo') > -1) {
-      this.get('table.expandedRows').setEach('expanded', false);
+      this.table.expandedRows.setEach('expanded', false);
     }
   }
 });

@@ -34,17 +34,17 @@ export default BaseTable.extend({
 
   @action
   selectAll() {
-    this.get('table.rows').setEach('selected', true);
+    this.table.rows.setEach('selected', true);
   },
 
   @action
   deselectAll() {
-    this.get('table.selectedRows').setEach('selected', false);
+    this.table.selectedRows.setEach('selected', false);
   },
 
   @action
   deleteAll() {
-    this.get('table').removeRows(this.get('table.selectedRows'));
+    this.table.removeRows(this.table.selectedRows);
   }
 });
 // END-SNIPPET

@@ -39,7 +39,7 @@ const Cell = Component.extend({
   }),
 
   align: computed('column.align', function() {
-    return `align-${this.get('column.align')}`;
+    return `align-${this.column.align}`;
   }),
 
   /**
@@ -84,7 +84,7 @@ const Cell = Component.extend({
    */
   value: computed('column.format', 'rawValue', function() {
     let rawValue = this.rawValue;
-    let format = this.get('column.format');
+    let format = this.column.format;
 
     if (format && typeof format === 'function') {
       return format.call(this, rawValue);

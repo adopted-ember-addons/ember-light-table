@@ -1,3 +1,4 @@
+/* eslint-disable ember/use-ember-data-rfc-395-imports */
 import { A as emberArray } from '@ember/array';
 import { Table, Column, Row } from 'ember-light-table';
 import { module, test } from 'qunit';

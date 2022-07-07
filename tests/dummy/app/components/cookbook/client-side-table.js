@@ -19,6 +19,7 @@ export default BaseTable.extend({
 
   // Filter Input Setup
   selectedFilter: computed.oneWay('possibleFilters.firstObject'),
+  // eslint-disable-next-line ember/require-computed-macros
   possibleFilters: computed('table.columns', function() {
     return this.table.columns.filterBy('sortable', true);
   }).readOnly(),

@@ -29,8 +29,8 @@ module.exports = {
     'ember/no-observers': 'off',
     'ember/no-jquery': 'error',
     'ember/no-get': 'warn',
-    'ember/no-mixins': 'warn',
-    'ember/no-new-mixins': 'warn',
+    'ember/no-mixins': 'off',
+    'ember/no-new-mixins': 'off',
     'ember/use-ember-data-rfc-395-imports': 'warn',
     'ember/require-computed-property-dependencies': 'warn'
   },

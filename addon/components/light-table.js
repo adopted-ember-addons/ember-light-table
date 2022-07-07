@@ -255,11 +255,11 @@ const LightTable = Component.extend({
 
   style: computed('height', 'occlusion', 'scrollbarThickness.thickness', 'totalWidth', function() {
     let totalWidth = this.totalWidth;
-    let style = this.getProperties(['height']);
+    let style =  { height: this.height };
 
     if (totalWidth) {
       if (this.occlusion) {
-        const scrollbarThickness = this.get('scrollbarThickness.thickness');
+        const scrollbarThickness = this.scrollbarThickness.thickness;
         style.width = `calc(${totalWidth} + ${scrollbarThickness}px)`;
       } else {
         style.width = totalWidth;
@@ -288,7 +288,7 @@ const LightTable = Component.extend({
 
   onMediaChange: observer('media.matches.[]', 'table.allColumns.[]', function() {
     let responsive = this.responsive;
-    let matches = this.get('media.matches');
+    let matches = this.media.matches;
     let breakpoints = this.breakpoints;
     let table = this.table;
     let numColumns = 0;

@@ -34,8 +34,8 @@ export default Mixin.create({
    * @readonly
    */
   dragColumnGroup: computed('column.parent', 'table.columns', function() {
-    let parent = this.get('column.parent');
-    return parent ? parent.get('subColumns') : this.get('table.columns');
+    let parent = this.column.get('parent');
+    return parent ? parent.get('subColumns') : this.table.columns;
   }).readOnly(),
 
   isDropTarget() {

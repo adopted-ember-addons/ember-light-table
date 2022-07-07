@@ -37,8 +37,8 @@ export default BaseTable.extend({
 
   @action
   setPage(page) {
-    let totalPages = this.get('meta.totalPages');
-    let currPage = this.get('page');
+    let totalPages = this.meta.totalPages;
+    let currPage = this.page;
 
     if (page < 1 || page > totalPages || page === currPage) {
       return;

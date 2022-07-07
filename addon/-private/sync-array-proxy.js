@@ -21,7 +21,7 @@ export default ArrayProxy.extend({
   init() {
     this._super(...arguments);
 
-    let syncArray = this.get('syncArray');
+    let syncArray = this.syncArray;
 
     assert('[ember-light-table] enableSync requires the passed array to be an instance of Ember.A', isArray(syncArray) && typeof syncArray.addArrayObserver === 'function');
 
@@ -32,7 +32,7 @@ export default ArrayProxy.extend({
   },
 
   destroy() {
-    this.get('syncArray').removeArrayObserver(this, {
+    this.syncArray.removeArrayObserver(this, {
       willChange: 'syncArrayWillChange',
       didChange: 'syncArrayDidChange'
     });
@@ -66,10 +66,10 @@ export default ArrayProxy.extend({
   syncArrayWillChange() { /* Not needed */ },
 
   syncArrayDidChange(syncArray, start, removeCount, addCount) {
-    let content = this.get('content');
+    let content = this.content;
     let objectsToAdd = EMPTY_ARRAY;
 
-    if (!this.get('syncEnabled')) {
+    if (!this.syncEnabled) {
       return;
     }
 
@@ -81,9 +81,9 @@ export default ArrayProxy.extend({
   },
 
   replaceContent(start, removeCount, objectsToAdd) {
-    let syncArray = this.get('syncArray');
+    let syncArray = this.syncArray;
 
-    if (!this.get('syncEnabled')) {
+    if (!this.syncEnabled) {
       return this._super(...arguments);
     }
 

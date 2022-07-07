@@ -8,7 +8,7 @@ export default Row.extend({
   attributeBindings: ['style'],
 
   style: computed('row.color', function() {
-    return htmlSafe(`background-color: ${this.get('row.color')};`);
+    return htmlSafe(`background-color: ${this.row.color};`);
   }).readOnly()
 });
 // END-SNIPPET

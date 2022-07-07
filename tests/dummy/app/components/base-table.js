@@ -38,7 +38,7 @@ export default Component.extend({
   },
 
   fetchRecords: task(function*() {
-    let records = yield this.store.query('user', this.getProperties(['page', 'limit', 'sort', 'dir']));
+    let records = yield this.store.query('user', [this.page, this.limit, this.sort, this.dir]);
     this.model.pushObjects(records.toArray());
     this.set('meta', records.get('meta'));
     this.set('canLoadMore', !isEmpty(records));
@@ -46,9 +46,9 @@ export default Component.extend({
 
   @action
   onScrolledToBottom() {
-    if (this.get('canLoadMore')) {
+    if (this.canLoadMore) {
       this.incrementProperty('page');
-      this.get('fetchRecords').perform();
+      this.fetchRecords.perform();
     }
   },
 
@@ -61,7 +61,7 @@ export default Component.extend({
         canLoadMore: true,
         page: 0
       });
-      this.get('model').clear();
+      this.model.clear();
     }
   }
 });

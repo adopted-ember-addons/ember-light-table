@@ -8,7 +8,7 @@ import Columns from '../../helpers/table-columns';
 import hasClass from '../../helpers/has-class';
 import RowComponent from 'ember-light-table/components/lt-row';
 import Component from '@ember/component';
-import { get, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
 import registerWaiter from 'ember-raf-scheduler/test-support/register-waiter';
 
@@ -165,7 +165,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       classNameBindings: ['isActive'],
       current: null,
       isActive: computed('row.content', 'current', function() {
-        return this.get('row.content') === this.current;
+        return this.row.content === this.current;
       })
     }));
 
@@ -209,11 +209,11 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       classNames: 'some-component',
 
       didReceiveAttrs() {
-        assert.equal(get(this, 'extra.someData'), 'someValue', 'extra data is passed');
+        assert.equal(this.extra.someData, 'someValue', 'extra data is passed');
       },
 
       click() {
-        get(this, 'tableActions.someAction')();
+        this.tableActions.someAction();
       }
     }));
 

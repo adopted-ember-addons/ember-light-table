@@ -209,7 +209,7 @@ export default Component.extend({
    */
   scrollBufferRows: computed('scrollBuffer', 'sharedOptions.estimatedRowHeight', function() {
     return Math.ceil(
-      this.scrollBuffer / (this.get('sharedOptions.estimatedRowHeight') || 1)
+      this.scrollBuffer / (this.sharedOptions.estimatedRowHeight || 1)
     );
   }),
 
@@ -368,7 +368,7 @@ export default Component.extend({
       _scrollTo,
       scrollToRow,
       _scrollToRow
-    } = this.getProperties(['scrollTo', '_scrollTo', 'scrollToRow', '_scrollToRow']);
+    } = this;
     let targetScrollOffset = null;
 
     this.setProperties({ _scrollTo: scrollTo, _scrollToRow: scrollToRow });
@@ -420,7 +420,7 @@ export default Component.extend({
     if (multiRowExpansion) {
       row.toggleProperty('expanded');
     } else {
-      this.get('table.expandedRows').setEach('expanded', false);
+      this.table.expandedRows.setEach('expanded', false);
       row.set('expanded', shouldExpand);
     }
   },
@@ -464,7 +464,7 @@ export default Component.extend({
      * @param  {Event}   event   The click event
      */
     onRowClick(row, e) {
-      let rows = this.get('table.rows');
+      let rows = this.table.rows;
       let multiSelect = this.multiSelect;
       let multiSelectRequiresKeyboard = this.multiSelectRequiresKeyboard;
       let canSelect = this.canSelect;
@@ -490,7 +490,7 @@ export default Component.extend({
           row.toggleProperty('selected');
         } else {
           if (selectOnClick) {
-            this.get('table.selectedRows').setEach('selected', false);
+            this.table.selectedRows.setEach('selected', false);
             row.set('selected', !isSelected);
           }
 
@@ -562,7 +562,7 @@ export default Component.extend({
 
     firstVisibleChanged(item, index /* , key */) {
       this.firstVisibleChanged(...arguments);
-      const estimateScrollOffset = index * this.get('sharedOptions.estimatedRowHeight');
+      const estimateScrollOffset = index * this.sharedOptions.estimatedRowHeight;
       this.onScroll(estimateScrollOffset, null);
     },
 
