@@ -1,3 +1,4 @@
+@import "ember-power-select";
 @import "./loader.less";
 @import "./table.less";
 @accent-color: #dd6a58;
@@ -12,6 +13,42 @@ html,body {
 
 label {
   font-weight: 600;
+}
+
+.ember-power-select-trigger{
+  height: 35px;
+}
+
+.scrolling-select-control {
+  width: 40%;
+  label{
+    float: left;
+    margin-right: 3px;
+    margin-bottom: 0;
+    padding-top: 6px;
+  }
+}
+
+.pagination{
+  button {
+    color: #d95743;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    position: relative;
+    float: left;
+    margin-left: -1px;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  .active button {
+    color: #fff;
+    background: #d4442e;
+    border-color: #c13c27;
+    z-index: 3;
+    cursor: default;
+  }
 }
 
 .navbar.navbar-default {
@@ -54,7 +91,9 @@ label {
     color: @accent-color;
   }
 
-  .navbar-nav>.active>a, .navbar-nav>.active>a:focus, .navbar-nav>.active>a:hover {
+  .navbar-nav .active,
+  .navbar-nav .active:focus,
+  .navbar-nav .active:hover {
     color: @accent-color;
     background-color: transparent;
   }
@@ -174,7 +213,8 @@ label {
 .row-toggle {
   color: @accent-color;
   cursor: pointer;
-
+  background-color: #fff;
+  border: 0;
   &:hover, &:active, &:focus {
     color: darken(@accent-color, 5%)
   }

@@ -1,12 +1,12 @@
-{{#code-panel
-  title="Custom Sort Icon"
-  snippets=(array
+<CodePanel
+  @title="Custom Sort Icon"
+  @snippets={{array
     "custom-sort-icon-table.js"
-    "table-common.js"
+    "base-table.js"
     "custom-sort-icon-table.hbs"
     "user-avatar.hbs"
     "table-loader.hbs"
     "materialize-icon.hbs"
-)}}
-  {{cookbook/custom-sort-icon-table model=model}}
-{{/code-panel}}
+}}>
+  <Cookbook::CustomSortIconTable @model={{this.model}}/>
+</CodePanel>

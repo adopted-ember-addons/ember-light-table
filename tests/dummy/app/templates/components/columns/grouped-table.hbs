@@ -1,23 +1,22 @@
 {{!-- BEGIN-SNIPPET grouped-table --}}
-{{#light-table table height="65vh" as |t|}}
-  {{t.head
-    onColumnClick=(action "onColumnClick")
-    iconSortable="fa fa-sort"
-    iconAscending="fa fa-sort-asc"
-    iconDescending="fa fa-sort-desc"
-    fixed=true
-  }}
+<LightTable @table={{this.table}} @height="65vh" as |t|>
+  <t.head
+    @onColumnClick={{fn this.onColumnClick}}
+    @iconSortable="fa fa-sort"
+    @iconAscending="fa fa-sort-asc"
+    @iconDescending="fa fa-sort-desc"
+    @fixed={{true}}
+  />
 
-  {{#t.body
-    canSelect=false
-    onScrolledToBottom=(action "onScrolledToBottom")
-    as |body|
-  }}
-    {{#if isLoading}}
-      {{#body.loader}}
-        {{table-loader}}
-      {{/body.loader}}
+  <t.body
+    @canSelect={{false}}
+    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+  as |body|>
+    {{#if this.isLoading}}
+      <body.loader>
+        <TableLoader/>
+      </body.loader>
     {{/if}}
-  {{/t.body}}
-{{/light-table}}
+  </t.body>
+</LightTable>
 {{!-- END-SNIPPET --}}

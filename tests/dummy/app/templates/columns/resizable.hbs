@@ -1,11 +1,11 @@
-{{#code-panel
-  title="Resizable Columns"
-  snippets=(array
+<CodePanel
+  @title="Resizable Columns"
+  @snippets={{array
     "resizable-table.js"
-    "table-common.js"
+    "base-table.js"
     "resizable-table.hbs"
     "user-avatar.hbs"
     "table-loader.hbs"
-)}}
-  {{columns/resizable-table model=model}}
-{{/code-panel}}
+}}>
+  <Columns::ResizableTable @model={{this.model}}/>
+</CodePanel>

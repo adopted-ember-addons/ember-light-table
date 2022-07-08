@@ -1,9 +1,8 @@
 // BEGIN-SNIPPET table-actions-table
-import Component from '@ember/component';
-import TableCommon from '../../mixins/table-common';
-import { computed } from '@ember/object';
+import BaseTable from '../base-table';
+import { computed, action } from '@ember/object';
 
-export default Component.extend(TableCommon, {
+export default BaseTable.extend({
   columns: computed(function() {
     return [{
       label: 'Avatar',
@@ -36,19 +35,19 @@ export default Component.extend(TableCommon, {
     }];
   }),
 
-  actions: {
-    deleteUser(row) {
-      let confirmed = window.confirm(`Are you sure you want to delete ${row.get('firstName')} ${row.get('lastName')}?`);
+  @action
+  deleteUser(row) {
+    let confirmed = window.confirm(`Are you sure you want to delete ${row.get('firstName')} ${row.get('lastName')}?`);
 
-      if (confirmed) {
-        this.table.removeRow(row);
-        row.get('content').deleteRecord();
-      }
-    },
-
-    notifyUser(row) {
-      window.alert(`${row.get('firstName')} ${row.get('lastName')} has been notified.`);
+    if (confirmed) {
+      this.table.removeRow(row);
+      row.get('content').deleteRecord();
     }
+  },
+
+  @action
+  notifyUser(row) {
+    window.alert(`${row.get('firstName')} ${row.get('lastName')} has been notified.`);
   }
 });
 // END-SNIPPET

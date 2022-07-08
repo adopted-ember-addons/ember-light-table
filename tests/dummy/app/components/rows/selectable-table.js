@@ -1,9 +1,8 @@
 // BEGIN-SNIPPET selectable-table
-import Component from '@ember/component';
-import TableCommon from '../../mixins/table-common';
-import { computed } from '@ember/object';
+import BaseTable from '../base-table';
+import { computed, action } from '@ember/object';
 
-export default Component.extend(TableCommon, {
+export default BaseTable.extend({
   hasSelection: computed.notEmpty('table.selectedRows'),
 
   columns: computed(function() {
@@ -33,18 +32,19 @@ export default Component.extend(TableCommon, {
     }];
   }),
 
-  actions: {
-    selectAll() {
-      this.get('table.rows').setEach('selected', true);
-    },
+  @action
+  selectAll() {
+    this.table.rows.setEach('selected', true);
+  },
 
-    deselectAll() {
-      this.get('table.selectedRows').setEach('selected', false);
-    },
+  @action
+  deselectAll() {
+    this.table.selectedRows.setEach('selected', false);
+  },
 
-    deleteAll() {
-      this.table.removeRows(this.get('table.selectedRows'));
-    }
+  @action
+  deleteAll() {
+    this.table.removeRows(this.table.selectedRows);
   }
 });
 // END-SNIPPET

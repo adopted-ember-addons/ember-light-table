@@ -1,11 +1,11 @@
-{{#code-panel
-  title="Pagination"
-  snippets=(array
+<CodePanel
+  @title="Pagination"
+  @snippets={{array
     "paginated-table.js"
-    "table-common.js"
+    "base-table.js"
     "paginated-table.hbs"
     "user-avatar.hbs"
     "table-loader.hbs"
-)}}
-  {{cookbook/paginated-table model=model}}
-{{/code-panel}}
+}}>
+  <Cookbook::PaginatedTable @model={{this.model}}/>
+</CodePanel>

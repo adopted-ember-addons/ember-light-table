@@ -81,12 +81,12 @@ export default Component.extend({
       e.stopPropagation();
 
       let resizeOnDrag = this.resizeOnDrag;
-      let minResizeWidth = this.get('column.minResizeWidth');
-      let { startX, startWidth } = this.getProperties(['startX', 'startWidth']);
+      let minResizeWidth = this.column.minResizeWidth;
+      let { startX, startWidth } = this;
       let width = `${Math.max(startWidth + (e.pageX - startX), minResizeWidth)}px`;
 
       let column = this.colElement();
-      let index = this.get('table.visibleColumns').indexOf(this.column) + 1;
+      let index = this.table.visibleColumns.indexOf(this.column) + 1;
       let table = closest(this.element, TOP_LEVEL_CLASS);
 
       column.style.width = width;

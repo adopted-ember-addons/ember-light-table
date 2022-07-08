@@ -127,15 +127,15 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
     assert.equal(findAll('tbody tr').length, 5);
 
     run(() => {
-      this.get('table.rows').objectAt(0).set('hidden', true);
-      this.get('table.rows').objectAt(1).set('hidden', true);
+      this.table.rows.objectAt(0).set('hidden', true);
+      this.table.rows.objectAt(1).set('hidden', true);
     });
     await settled();
 
     assert.equal(findAll('tbody tr').length, 3);
 
     run(() => {
-      this.get('table.rows').objectAt(0).set('hidden', false);
+      this.table.rows.objectAt(0).set('hidden', false);
     });
     await settled();
 

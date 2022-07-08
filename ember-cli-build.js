@@ -17,6 +17,10 @@ module.exports = function(defaults) {
       ]
     },
 
+    'ember-power-select': {
+      theme: 'bootstrap'
+    },
+
     'ember-cli-babel': {
       includePolyfill: true
     }

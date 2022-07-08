@@ -133,12 +133,17 @@ export default Mixin.create({
   columns: computed.readOnly('table.visibleColumns'),
 
   sortIcons: computed('iconSortable', 'iconAscending', 'iconDescending', 'iconComponent', function() {
-    return this.getProperties(['iconSortable', 'iconAscending', 'iconDescending', 'iconComponent']);
+    return { 
+      iconSortable: this.iconSortable, 
+      iconAscending: this.iconAscending, 
+      iconDescending: this.iconDescending, 
+      iconComponent: this.iconComponent 
+    }
   }).readOnly(),
 
   style: computed('scrollbarThickness.thickness', 'sharedOptions.occlusion', function() {
-    if (this.get('sharedOptions.occlusion')) {
-      const scrollbarThickness = this.get('scrollbarThickness.thickness');
+    if (this.sharedOptions?.occlusion) {
+      const scrollbarThickness = this.scrollbarThickness?.thickness;
       return cssStyleify({ paddingRight: `${scrollbarThickness}px` });
     }
 
@@ -152,7 +157,7 @@ export default Mixin.create({
     const sharedOptionsFixedPath = `sharedOptions.${this.sharedOptionsFixedKey}`;
     trySet(this, sharedOptionsFixedPath, fixed);
 
-    const height = this.get('sharedOptions.height');
+    const height = this.sharedOptions?.height;
 
     warn(
       'You did not set a `height` attribute for your table, but marked a header or footer to be fixed. This means that you have to set the table height via CSS. For more information please refer to:  https://github.com/offirgolan/ember-light-table/issues/446',
@@ -175,7 +180,7 @@ export default Mixin.create({
           column.toggleProperty('ascending');
         } else {
           if (!this.multiColumnSort) {
-            this.get('table.sortedColumns').setEach('sorted', false);
+            this.table.sortedColumns.setEach('sorted', false);
           }
 
           column.set('sorted', true);

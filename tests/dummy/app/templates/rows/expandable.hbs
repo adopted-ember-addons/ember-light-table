@@ -1,11 +1,11 @@
-{{#code-panel
-  title="Expandable Rows"
-  snippets=(array
+<CodePanel
+  @title="Expandable Rows"
+  @snippets={{array
     "expandable-table.js"
-    "table-common.js"
+    "base-table.js"
     "expandable-table.hbs"
     "expanded-row.hbs"
     "table-loader.hbs"
-)}}
-  {{rows/expandable-table model=model}}
-{{/code-panel}}
+}}>
+  <Rows::ExpandableTable @model={{this.model}}/>
+</CodePanel>
