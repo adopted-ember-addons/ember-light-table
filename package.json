@@ -29,6 +29,7 @@
     "changelog": "lerna-changelog"
   },
   "dependencies": {
+    "@babel/runtime": "^7.18.6",
     "@html-next/vertical-collection": "^1.0.0",
     "ember-cli-babel": "^7.21.0",
     "ember-cli-htmlbars": "^5.2.0",
