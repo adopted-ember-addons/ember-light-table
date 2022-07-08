@@ -41,7 +41,6 @@ Compatibility
 
 * Ember.js v3.13 or above
 * Ember CLI v2.13 or above
-* Embroider safe and optimized
 * Node.js v10 or above
 
 
