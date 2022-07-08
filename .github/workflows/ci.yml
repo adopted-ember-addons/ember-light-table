@@ -32,9 +32,9 @@
 #$   - scenario: ember-classic
 #$     allowedToFail: false
 #$   - scenario: embroider-safe
-#$     allowedToFail: false
+#$     allowedToFail: true
 #$   - scenario: embroider-optimized
-#$     allowedToFail: false
+#$     allowedToFail: true
 #$ nodeVersion: '10'
 #$ packageManager: yarn
 #
@@ -189,9 +189,7 @@ jobs:
           ember-lts-3.16,
           ember-lts-3.20,
           ember-default-with-jquery,
-          ember-classic,
-          embroider-safe,
-          embroider-optimized
+          ember-classic
         ]
         allow-failure: [false]
         include:
@@ -200,6 +198,10 @@ jobs:
           - ember-try-scenario: ember-beta
             allow-failure: true
           - ember-try-scenario: ember-release
+            allow-failure: true
+          - ember-try-scenario: embroider-safe
+            allow-failure: true
+          - ember-try-scenario: embroider-optimized
             allow-failure: true
 
     steps:
