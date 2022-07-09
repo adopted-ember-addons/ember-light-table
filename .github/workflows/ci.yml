@@ -35,7 +35,7 @@
 #$     allowedToFail: true
 #$   - scenario: embroider-optimized
 #$     allowedToFail: true
-#$ nodeVersion: '10'
+#$ nodeVersion: '14'
 #$ packageManager: yarn
 #
 
@@ -48,7 +48,7 @@ on:
   pull_request:
 
 env:
-  NODE_VERSION: '12'
+  NODE_VERSION: '14'
 
 jobs:
   lint:

@@ -92,7 +92,7 @@
     "yuidoc-ember-theme": "^2.0.1"
   },
   "engines": {
-    "node": "10.* || >= 12"
+    "node": "12.* || >= 14"
   },
   "ember": {
     "edition": "octane"
