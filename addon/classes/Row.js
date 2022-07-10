@@ -1,7 +1,6 @@
 import ObjectProxy from '@ember/object/proxy';
 import { computed } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
-import fixProto from 'ember-light-table/utils/fix-proto';
 
 /**
  * @module Table
@@ -78,6 +77,3 @@ export default class Row extends ObjectProxy.extend({
     return guidFor(this);
   }).readOnly()
 }) {}
-
-// https://github.com/offirgolan/ember-light-table/issues/436#issuecomment-310138868
-fixProto(Row);
