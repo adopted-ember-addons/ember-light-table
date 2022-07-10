@@ -2,7 +2,6 @@ import { A as emberArray, makeArray } from '@ember/array';
 import EmberObject, { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import { guidFor } from '@ember/object/internals';
-import fixProto from 'ember-light-table/utils/fix-proto';
 
 /**
  * @module Table
@@ -324,6 +323,3 @@ export default class Column extends EmberObject.extend({
     this.set('subColumns', subColumns);
   }
 }) {}
-
-// https://github.com/offirgolan/ember-light-table/issues/436#issuecomment-310138868
-fixProto(Column);
