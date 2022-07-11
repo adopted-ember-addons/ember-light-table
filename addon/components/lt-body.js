@@ -11,25 +11,25 @@ import Row from 'ember-light-table/classes/Row';
 
 /**
  * ```hbs
- * {{#light-table table as |t|}}
- *   {{#t.body multiSelect=true onRowClick=(action 'rowClicked') as |body|}}
- *     {{#body.expanded-row as |row|}}
+ * <LightTable @table={{this.table}} as |t| >
+ *   <t.body @multiSelect={{true}} @onRowClick={{this.rowClicked}} as |body| >
+ *     <body.ExpandedRow as |row| >
  *       Hello <b>{{row.firstName}}</b>
- *     {{/body.expanded-row}}
+ *     </body.ExpandedRow>
  *
- *     {{#if isLoading}}
+ *     {{#if this.isLoading}}
  *       {{#body.loader}}
  *         Loading...
  *       {{/body.loader}}
  *     {{/if}}
  *
- *     {{#if table.isEmpty}}
+ *     {{#if this.table.isEmpty}}
  *       {{#body.no-data}}
  *         No users found.
  *       {{/body.no-data}}
  *     {{/if}}
- *   {{/t.body}}
- * {{/light-table}}
+ *   </t.body>
+ * </LightTable>
  * ```
  *
  * @class t.body
@@ -100,9 +100,9 @@ export default Component.extend({
    * clicked with the template provided by `body.expanded-row`.
    *
    * ```hbs
-   * {{#body.expanded-row as |row|}}
+   * <Body.expandedRow as |row| >
    *  This is the content of the expanded row for {{row.firstName}}
-   * {{/body.expanded-row}}
+   * </Body.expandedRow>
    * ```
    *
    * @property canExpand
@@ -275,9 +275,9 @@ export default Component.extend({
    * Allows to customize the component used to render rows
    *
    * ```hbs
-   * {{#light-table table as |t|}}
-   *    {{t.body rowComponent=(component 'my-row')}}
-   * {{/light-table}}
+   * <LightTable @table={{this.table}} as |t|}}
+   *    <t.body @rowComponent={{component 'my-row'}} />
+   * </LightTable>
    * ```
    * @property rowComponent
    * @type {Ember.Component}
@@ -289,9 +289,9 @@ export default Component.extend({
    * Allows to customize the component used to render spanned rows
    *
    * ```hbs
-   * {{#light-table table as |t|}}
-   *    {{t.body spannedRowComponent=(component 'my-spanned-row')}}
-   * {{/light-table}}
+  * <LightTable @table={{this.table}} as |t| >
+   *    <t.body @spannedRowComponent={{component 'my-spanned-row'}} />
+   * </LightTable>
    * ```
    * @property spannedRowComponent
    * @type {Ember.Component}
@@ -303,9 +303,9 @@ export default Component.extend({
    * Allows to customize the component used to render infinite loader
    *
    * ```hbs
-   * {{#light-table table as |t|}}
-   *    {{t.body infinityComponent=(component 'my-infinity')}}
-   * {{/light-table}}
+   * <LightTable @table={{this.table}} as |t|>
+   *    <t.body @infinityComponent={{component 'my-infinity'}} />
+   * </LightTable>
    * ```
    * @property infinityComponent
    * @type {Ember.Component}
