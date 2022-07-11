@@ -1,14 +1,14 @@
 // BEGIN-SNIPPET grouped-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function () {
-    return [
-      {
-        label: 'User Details',
-        sortable: false,
-        align: 'center',
+@classic
+export default class GroupedTable extends BaseTable {
+  get columns() {
+    return [{
+      label: 'User Details',
+      sortable: false,
+      align: 'center',
 
         subColumns: [
           {
@@ -35,22 +35,17 @@ export default BaseTable.extend({
         sortable: false,
         align: 'center',
 
-        subColumns: [
-          {
-            label: 'Address',
-            valuePath: 'address',
-          },
-          {
-            label: 'State',
-            valuePath: 'state',
-          },
-          {
-            label: 'Country',
-            valuePath: 'country',
-          },
-        ],
-      },
-    ];
-  }),
-});
+      subColumns: [{
+        label: 'Address',
+        valuePath: 'address'
+      }, {
+        label: 'State',
+        valuePath: 'state'
+      }, {
+        label: 'Country',
+        valuePath: 'country'
+      }]
+    }];
+  }
+}
 // END-SNIPPET

@@ -1,31 +1,32 @@
 // BEGIN-SNIPPET base-table
+import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
 import { action } from '@ember/object';
 import { oneWay } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import Table from 'ember-light-table';
-import { task } from 'ember-concurrency';
+import { restartableTask } from 'ember-concurrency';
 
-export default Component.extend({
-  store: service(),
+@classic
+export default class BaseTable extends Component {
+  @service store;
 
-  page: 0,
-  limit: 10,
-  dir: 'asc',
-  sort: 'firstName',
+  page = 0;
+  limit = 10;
+  dir = 'asc';
+  sort = 'firstName';
 
-  isLoading: oneWay('fetchRecords.isRunning'),
-  canLoadMore: true,
-  enableSync: true,
+  isLoading = computed.oneWay('fetchRecords.isRunning');
+  canLoadMore = true;
+  enableSync = true;
 
-  model: null,
-  meta: null,
-  columns: null,
-  table: null,
+  model = null;
+  meta = null;
+  table = null;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     let table = Table.create({
       columns: this.columns,
@@ -40,19 +41,14 @@ export default Component.extend({
     }
 
     this.set('table', table);
-  },
+  }
 
-  fetchRecords: task(function* () {
-    let records = yield this.store.query('user', [
-      this.page,
-      this.limit,
-      this.sort,
-      this.dir,
-    ]);
+  @restartableTask *fetchRecords() {
+    const records = yield this.store.query('user', [this.page, this.limit, this.sort, this.dir]);
     this.model.pushObjects(records.toArray());
     this.set('meta', records.get('meta'));
     this.set('canLoadMore', !isEmpty(records));
-  }).restartable(),
+  }
 
   @action
   onScrolledToBottom() {
@@ -60,7 +56,7 @@ export default Component.extend({
       this.incrementProperty('page');
       this.fetchRecords.perform();
     }
-  },
+  }
 
   @action
   onColumnClick(column) {
@@ -73,6 +69,6 @@ export default Component.extend({
       });
       this.model.clear();
     }
-  },
-});
+  }
+}
 // END-SNIPPET

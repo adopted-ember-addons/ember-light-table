@@ -69,6 +69,7 @@
     "ember-composable-helpers": "^5.0.0",
     "ember-concurrency": "^2.2.1",
     "ember-data": "^3.16.0",
+    "ember-decorators": "^6.1.1",
     "ember-disable-prototype-extensions": "^1.1.3",
     "ember-export-application-global": "^2.0.1",
     "ember-load-initializers": "^2.1.2",
