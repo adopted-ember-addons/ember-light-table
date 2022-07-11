@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | lt foot', function(hooks) {
@@ -12,7 +12,7 @@ module('Integration | Component | lt foot', function(hooks) {
 
     await render(hbs`{{lt-foot renderInPlace=true}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     // Template block usage:"
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | lt foot', function(hooks) {
       {{/lt-foot}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });

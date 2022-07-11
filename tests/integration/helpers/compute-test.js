@@ -17,6 +17,6 @@ module('Integration | Helper | {{compute}}', function(hooks) {
     this.actions.square = (x) => x * x;
     await render(hbs`{{compute (action "square") 4}}`);
 
-    assert.equal(this.element.textContent.trim(), '16', '4 squared is 16');
+    assert.dom(this.element).hasText('16', '4 squared is 16');
   });
 });

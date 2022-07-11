@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find, findAll } from '@ember/test-helpers';
+import { render, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | lt-scaffolding-row', function(hooks) {
@@ -8,12 +8,12 @@ module('Integration | Component | lt-scaffolding-row', function(hooks) {
 
   test('it has lt-scaffolding-row class', async function(assert) {
     await render(hbs`{{lt-scaffolding-row}}`);
-    assert.ok(find('.lt-scaffolding-row'));
+    assert.dom('.lt-scaffolding-row').exists();
   });
 
   test('it renders <tr>', async function(assert) {
     await render(hbs`{{lt-scaffolding-row}}`);
-    assert.ok(find('tr'));
+    assert.dom('tr').exists();
   });
 
   test('it renders <td> for each column', async function(assert) {

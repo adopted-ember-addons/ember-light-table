@@ -26,7 +26,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
     this.set('table', Table.create());
     await render(hbs `{{light-table table height="40vh" occlusion=true estimatedRowHeight=30}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
   });
 
   test('scrolled to bottom', async function(assert) {
@@ -67,7 +67,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       {{/light-table}}
     `);
 
-    assert.equal(findAll('#lightTable_inline_head thead').length, 0);
+    assert.dom('#lightTable_inline_head thead').doesNotExist();
 
     await render(hbs `
       {{#light-table table height='500px' id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
@@ -76,7 +76,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       {{/light-table}}
     `);
 
-    assert.equal(findAll('#lightTable_inline_head thead').length, 1);
+    assert.dom('#lightTable_inline_head thead').exists({ count: 1 });
   });
 
   test('fixed footer', async function(assert) {
@@ -90,7 +90,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       {{/light-table}}
     `);
 
-    assert.equal(findAll('#lightTable_inline_foot tfoot').length, 0);
+    assert.dom('#lightTable_inline_foot tfoot').doesNotExist();
 
     await render(hbs `
       {{#light-table table height='500px' id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
@@ -99,7 +99,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       {{/light-table}}
     `);
 
-    assert.equal(findAll('#lightTable_inline_foot tfoot').length, 1);
+    assert.dom('#lightTable_inline_foot tfoot').exists({ count: 1 });
   });
 
   test('table assumes height of container', async function(assert) {
@@ -156,7 +156,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       {{/light-table}}
     `);
 
-    assert.equal(findAll('.lt-row.custom-row').length, 1, 'row has custom-row class');
+    assert.dom('.lt-row.custom-row').exists({ count: 1 }, 'row has custom-row class');
   });
 
   test('passed in components can have computed properties', async function(assert) {
@@ -180,8 +180,8 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       {{/light-table}}
     `);
 
-    assert.equal(findAll('.custom-row').length, 3, 'three custom rows were rendered');
-    assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
+    assert.dom('.custom-row').exists({ count: 3 }, 'three custom rows were rendered');
+    assert.dom('.custom-row.is-active').doesNotExist('none of the items are active');
 
     run(() => {
       this.set('current', users[0]);
@@ -199,7 +199,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       this.set('current', null);
     });
 
-    assert.notOk(find('.custom-row.is-active'), 'none of the items are active');
+    assert.dom('.custom-row.is-active').doesNotExist('none of the items are active');
   });
 
   test('extra data and tableActions', async function(assert) {
@@ -243,6 +243,7 @@ module('Integration | Component | light table | occlusion', function(hooks) {
       {{/light-table}}
     `);
 
+    /* eslint-disable no-unused-vars */
     for (const element of findAll('.some-component')) {
       await click(element);
     }

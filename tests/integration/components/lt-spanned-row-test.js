@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | lt spanned row', function(hooks) {
@@ -8,7 +8,7 @@ module('Integration | Component | lt spanned row', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`{{lt-spanned-row}}`);
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom(this.element).hasText('');
 
     await render(hbs`
       {{#lt-spanned-row}}
@@ -16,7 +16,7 @@ module('Integration | Component | lt spanned row', function(hooks) {
       {{/lt-spanned-row}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('template block text');
   });
 
   test('visiblity', async function(assert) {
@@ -27,10 +27,10 @@ module('Integration | Component | lt spanned row', function(hooks) {
         template block text
       {{/lt-spanned-row}}
     `);
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('template block text');
 
     this.set('visible', false);
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom(this.element).hasText('');
   });
 
   test('colspan', async function(assert) {
@@ -39,8 +39,8 @@ module('Integration | Component | lt spanned row', function(hooks) {
         template block text
       {{/lt-spanned-row}}
     `);
-    assert.equal(this.element.textContent.trim(), 'template block text');
-    assert.equal(find('td').getAttribute('colspan'), 4);
+    assert.dom(this.element).hasText('template block text');
+    assert.dom('td').hasAttribute('colspan', '4');
   });
 
   test('yield', async function(assert) {
@@ -50,6 +50,6 @@ module('Integration | Component | lt spanned row', function(hooks) {
         {{row.name}}
       {{/lt-spanned-row}}
     `);
-    assert.equal(this.element.textContent.trim(), 'Offir');
+    assert.dom(this.element).hasText('Offir');
   });
 });
