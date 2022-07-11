@@ -1,9 +1,10 @@
 // BEGIN-SNIPPET resizable-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function() {
+@classic
+export default class ResizableTable extends BaseTable {
+  get columns() {
     return [{
       label: 'User Details',
       sortable: false,
@@ -50,6 +51,6 @@ export default BaseTable.extend({
         minResizeWidth: 100
       }]
     }];
-  })
-});
+  }
+}
 // END-SNIPPET

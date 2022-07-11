@@ -1,9 +1,12 @@
+import classic from 'ember-classic-decorator';
+import { layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from '../templates/components/code-panel';
 
-export default Component.extend({
-  layout,
-  collapse: true,
-  title: '',
-  snippets: null
-});
+@classic
+@templateLayout(layout)
+export default class CodePanel extends Component {
+  collapse = true;
+  title = '';
+  snippets = null;
+}

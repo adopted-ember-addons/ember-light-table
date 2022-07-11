@@ -1,9 +1,10 @@
 // BEGIN-SNIPPET horizontal-scrolling-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function() {
+@classic
+export default class HorizontalScrollingTable extends BaseTable {
+  get columns() {
     return [{
       label: 'Avatar',
       valuePath: 'avatar',
@@ -31,6 +32,6 @@ export default BaseTable.extend({
       valuePath: 'country',
       width: '350px'
     }];
-  })
-});
+  }
+}
 // END-SNIPPET

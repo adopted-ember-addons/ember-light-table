@@ -1,9 +1,10 @@
 // BEGIN-SNIPPET expandable-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function() {
+@classic
+export default class ExpandableTable extends BaseTable {
+  get columns() {
     return [{
       label: 'First Name',
       valuePath: 'firstName'
@@ -11,6 +12,6 @@ export default BaseTable.extend({
       label: 'Last Name',
       valuePath: 'lastName'
     }];
-  })
-});
+  }
+}
 // END-SNIPPET

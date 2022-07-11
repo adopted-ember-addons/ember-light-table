@@ -25,7 +25,7 @@ module.exports = {
   },
 
   rules: {
-    'generator-star-spacing': ['error', { before: false, after: false }],
+    'generator-star-spacing': ['error', { before: true, after: false }],
     'ember/no-observers': 'off',
     'ember/no-jquery': 'error',
     'ember/no-get': 'warn',

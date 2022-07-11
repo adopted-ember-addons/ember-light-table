@@ -1,6 +1,8 @@
+import classic from 'ember-classic-decorator';
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import ENV from '../config/environment';
 
-export default JSONAPIAdapter.extend({
-  namespace: `${ENV.rootURL}api`
-});
+@classic
+export default class Application extends JSONAPIAdapter {
+  namespace = `${ENV.rootURL}api`;
+}

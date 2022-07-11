@@ -1,9 +1,11 @@
 // BEGIN-SNIPPET responsive-table
+import classic from 'ember-classic-decorator';
 import BaseTable from './base-table';
-import { computed, action } from '@ember/object';
+import { action } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function() {
+@classic
+export default class ResponsiveTable extends BaseTable {
+  get columns() {
     return [{
       width: '40px',
       sortable: false,
@@ -37,7 +39,7 @@ export default BaseTable.extend({
       valuePath: 'country',
       breakpoints: ['jumbo']
     }];
-  }),
+  }
 
   @action
   onAfterResponsiveChange(matches) {
@@ -45,5 +47,5 @@ export default BaseTable.extend({
       this.table.expandedRows.setEach('expanded', false);
     }
   }
-});
+}
 // END-SNIPPET
