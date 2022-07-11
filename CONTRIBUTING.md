@@ -2,7 +2,7 @@
 
 ## Installation
 
-* `git clone https://github.com/offirgolan/ember-light-table`
+* `git clone https://github.com/adopted-ember-addons/ember-light-table`
 * `cd ember-light-table`
 * `yarn install`
 

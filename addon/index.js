@@ -9,7 +9,7 @@ import Row from './classes/Row';
  * ```
  *
  * ## Looking for help?
- * If it is a bug [please open an issue on GitHub](http://github.com/offirgolan/ember-light-table/issues).
+ * If it is a bug [please open an issue on GitHub](https://github.com/adopted-ember-addons/ember-light-table/issues).
  *
  * ## Usage
  * There are two parts to this addon. The first is the [Table](../classes/Table.html) which you create with column definitions and rows, and the second is the component declaration.
