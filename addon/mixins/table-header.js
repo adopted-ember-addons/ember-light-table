@@ -160,7 +160,7 @@ export default Mixin.create({
     const height = this.sharedOptions?.height;
 
     warn(
-      'You did not set a `height` attribute for your table, but marked a header or footer to be fixed. This means that you have to set the table height via CSS. For more information please refer to:  https://github.com/offirgolan/ember-light-table/issues/446',
+      'You did not set a `height` attribute for your table, but marked a header or footer to be fixed. This means that you have to set the table height via CSS. For more information please refer to: https://github.com/adopted-ember-addons/ember-light-table/issues/446',
       !fixed || fixed && !isEmpty(height),
       { id: 'ember-light-table.height-attribute' }
     );

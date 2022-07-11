@@ -1,7 +1,7 @@
 {
   "name": "Ember Light Table",
   "description": "",
-  "url": "https://github.com/offirgolan/ember-light-table",
+  "url": "https://github.com/adopted-ember-addons/ember-light-table",
   "options": {
     "enabledEnvironments": ["production"],
     "paths": [
