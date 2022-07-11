@@ -1,4 +1,4 @@
-import { click, findAll, find, triggerEvent, settled, render } from '@ember/test-helpers';
+import { click, find, triggerEvent, settled, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -31,7 +31,7 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs `{{lt-body sharedOptions=sharedOptions}}`);
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
   });
 
   test('row selection - enable or disable', async function(assert) {
@@ -63,19 +63,19 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
     let middleRow = find('tr:nth-child(4)');
     let lastRow = find('tr:nth-child(6)');
 
-    assert.equal(findAll('tbody tr').length, 5);
+    assert.dom('tbody tr').exists({ count: 5 });
 
     await click(firstRow);
-    assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
+    assert.dom('tr.is-selected').exists({ count: 1 }, 'clicking a row selects it');
 
     await click(lastRow, { shiftKey: true });
-    assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
+    assert.dom('tr.is-selected').exists({ count: 5 }, 'shift-clicking another row selects it and all rows between');
 
     await click(middleRow, { ctrlKey: true });
-    assert.equal(findAll('tr.is-selected').length, 4, 'ctrl-clicking a selected row deselects it');
+    assert.dom('tr.is-selected').exists({ count: 4 }, 'ctrl-clicking a selected row deselects it');
 
     await click(firstRow);
-    assert.equal(findAll('tr.is-selected').length, 0, 'clicking a selected row deselects all rows');
+    assert.dom('tr.is-selected').doesNotExist('clicking a selected row deselects all rows');
   });
 
   test('row selection - click to modify selection', async function(assert) {
@@ -89,19 +89,25 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
     let middleRow = find('tr:nth-child(4)');
     let lastRow = find('tr:nth-child(6)');
 
-    assert.equal(findAll('tbody tr').length, 5);
+    assert.dom('tbody tr').exists({ count: 5 });
 
     await click(firstRow);
-    assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
+    assert.dom('tr.is-selected').exists({ count: 1 }, 'clicking a row selects it');
 
     await click(lastRow, { shiftKey: true });
-    assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
+    assert.dom('tr.is-selected').exists({ count: 5 }, 'shift-clicking another row selects it and all rows between');
 
     await click(middleRow);
-    assert.equal(findAll('tr.is-selected').length, 4, 'clicking a selected row deselects it without affecting other selected rows');
+    assert.dom('tr.is-selected').exists(
+      { count: 4 },
+      'clicking a selected row deselects it without affecting other selected rows'
+    );
 
     await click(middleRow);
-    assert.equal(findAll('tr.is-selected').length, 5, 'clicking a deselected row selects it without affecting other selected rows');
+    assert.dom('tr.is-selected').exists(
+      { count: 5 },
+      'clicking a deselected row selects it without affecting other selected rows'
+    );
   });
 
   test('row actions', async function(assert) {
@@ -124,7 +130,7 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions}}`);
 
-    assert.equal(findAll('tbody tr').length, 5);
+    assert.dom('tbody tr').exists({ count: 5 });
 
     run(() => {
       this.table.rows.objectAt(0).set('hidden', true);
@@ -132,14 +138,14 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
     });
     await settled();
 
-    assert.equal(findAll('tbody tr').length, 3);
+    assert.dom('tbody tr').exists({ count: 3 });
 
     run(() => {
       this.table.rows.objectAt(0).set('hidden', false);
     });
     await settled();
 
-    assert.equal(findAll('tbody tr').length, 4);
+    assert.dom('tbody tr').exists({ count: 4 });
   });
 
   test('overwrite', async function(assert) {
@@ -151,6 +157,6 @@ module('Integration | Component | lt body | occlusion', function(hooks) {
       {{/lt-body}}
     `);
 
-    assert.equal(find('*').textContent.trim(), '6, 5');
+    assert.dom('*').hasText('6, 5');
   });
 });

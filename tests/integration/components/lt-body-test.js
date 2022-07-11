@@ -27,7 +27,7 @@ module('Integration | Component | lt body', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs `{{lt-body sharedOptions=sharedOptions tableId="light-table"}}`);
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
   });
 
   test('row selection - enable or disable', async function(assert) {
@@ -59,19 +59,19 @@ module('Integration | Component | lt body', function(hooks) {
     let middleRow = find('tr:nth-child(4)');
     let lastRow = find('tr:last-child');
 
-    assert.equal(findAll('tbody > tr').length, 5);
+    assert.dom('tbody > tr').exists({ count: 5 });
 
     await click(firstRow);
-    assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
+    assert.dom('tr.is-selected').exists({ count: 1 }, 'clicking a row selects it');
 
     await click(lastRow, { shiftKey: true });
-    assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
+    assert.dom('tr.is-selected').exists({ count: 5 }, 'shift-clicking another row selects it and all rows between');
 
     await click(middleRow, { ctrlKey: true });
-    assert.equal(findAll('tr.is-selected').length, 4, 'ctrl-clicking a selected row deselects it');
+    assert.dom('tr.is-selected').exists({ count: 4 }, 'ctrl-clicking a selected row deselects it');
 
     await click(firstRow);
-    assert.equal(findAll('tr.is-selected').length, 0, 'clicking a selected row deselects all rows');
+    assert.dom('tr.is-selected').doesNotExist('clicking a selected row deselects all rows');
   });
 
   test('row selection - click to modify selection', async function(assert) {
@@ -85,19 +85,25 @@ module('Integration | Component | lt body', function(hooks) {
     let middleRow = find('tr:nth-child(4)');
     let lastRow = find('tr:last-child');
 
-    assert.equal(findAll('tbody > tr').length, 5);
+    assert.dom('tbody > tr').exists({ count: 5 });
 
     await click(firstRow);
-    assert.equal(findAll('tr.is-selected').length, 1, 'clicking a row selects it');
+    assert.dom('tr.is-selected').exists({ count: 1 }, 'clicking a row selects it');
 
     await click(lastRow, { shiftKey: true });
-    assert.equal(findAll('tr.is-selected').length, 5, 'shift-clicking another row selects it and all rows between');
+    assert.dom('tr.is-selected').exists({ count: 5 }, 'shift-clicking another row selects it and all rows between');
 
     await click(middleRow);
-    assert.equal(findAll('tr.is-selected').length, 4, 'clicking a selected row deselects it without affecting other selected rows');
+    assert.dom('tr.is-selected').exists(
+      { count: 4 },
+      'clicking a selected row deselects it without affecting other selected rows'
+    );
 
     await click(middleRow);
-    assert.equal(findAll('tr.is-selected').length, 5, 'clicking a deselected row selects it without affecting other selected rows');
+    assert.dom('tr.is-selected').exists(
+      { count: 5 },
+      'clicking a deselected row selects it without affecting other selected rows'
+    );
   });
 
   test('row expansion', async function(assert) {
@@ -114,25 +120,25 @@ module('Integration | Component | lt body', function(hooks) {
 
     assert.notOk(hasClass(row, 'is-expandable'));
     await click(row);
-    assert.equal(findAll('tr.lt-expanded-row').length, 0);
-    assert.equal(findAll('tbody > tr').length, 2);
-    assert.notOk(find('tr.lt-expanded-row'));
+    assert.dom('tr.lt-expanded-row').doesNotExist();
+    assert.dom('tbody > tr').exists({ count: 2 });
+    assert.dom('tr.lt-expanded-row').doesNotExist();
 
     this.set('canExpand', true);
 
     assert.ok(hasClass(row, 'is-expandable'));
     await click(row);
-    assert.equal(findAll('tr.lt-expanded-row').length, 1);
-    assert.equal(findAll('tbody > tr').length, 3);
-    assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
+    assert.dom('tr.lt-expanded-row').exists({ count: 1 });
+    assert.dom('tbody > tr').exists({ count: 3 });
+    assert.dom(row.nextElementSibling).hasText('Hello');
 
     let allRows = findAll('tr');
     row = allRows[allRows.length - 1];
     assert.ok(hasClass(row, 'is-expandable'));
     await click(row);
-    assert.equal(findAll('tr.lt-expanded-row').length, 1);
-    assert.equal(findAll('tbody > tr').length, 3);
-    assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
+    assert.dom('tr.lt-expanded-row').exists({ count: 1 });
+    assert.dom('tbody > tr').exists({ count: 3 });
+    assert.dom(row.nextElementSibling).hasText('Hello');
   });
 
   test('row expansion - multiple', async function(assert) {
@@ -150,11 +156,11 @@ module('Integration | Component | lt body', function(hooks) {
       rows.map(async(row) => {
         assert.ok(hasClass(row, 'is-expandable'));
         await click(row);
-        assert.equal(row.nextElementSibling.textContent.trim(), 'Hello');
+        assert.dom(row.nextElementSibling).hasText('Hello');
       })
     );
 
-    assert.equal(findAll('tr.lt-expanded-row').length, 2);
+    assert.dom('tr.lt-expanded-row').exists({ count: 2 });
   });
 
   test('row actions', async function(assert) {
@@ -177,20 +183,20 @@ module('Integration | Component | lt body', function(hooks) {
 
     await render(hbs `{{lt-body table=table sharedOptions=sharedOptions tableId="light-table"}}`);
 
-    assert.equal(findAll('tbody > tr').length, 5);
+    assert.dom('tbody > tr').exists({ count: 5 });
 
     run(() => {
       this.table.rows.objectAt(0).set('hidden', true);
       this.table.rows.objectAt(1).set('hidden', true);
     });
 
-    assert.equal(findAll('tbody > tr').length, 3);
+    assert.dom('tbody > tr').exists({ count: 3 });
 
     run(() => {
       this.table.rows.objectAt(0).set('hidden', false);
     });
 
-    assert.equal(findAll('tbody > tr').length, 4);
+    assert.dom('tbody > tr').exists({ count: 4 });
   });
 
   test('scaffolding', async function(assert) {
@@ -226,6 +232,6 @@ module('Integration | Component | lt body', function(hooks) {
       {{/lt-body}}
     `);
 
-    assert.equal(find('*').textContent.trim(), '6, 5');
+    assert.dom('*').hasText('6, 5');
   });
 });

@@ -21,7 +21,7 @@ module('Integration | Component | lt head', function(hooks) {
 
     await render(hbs`{{lt-head table=table renderInPlace=true}}`);
 
-    assert.equal(findAll('tr > th').length, 6);
+    assert.dom('tr > th').exists({ count: 6 });
   });
 
   test('render grouped columns', async function(assert) {
@@ -29,10 +29,10 @@ module('Integration | Component | lt head', function(hooks) {
 
     await render(hbs`{{lt-head table=table renderInPlace=true}}`);
 
-    assert.equal(find('tr:nth-child(2) > th').getAttribute('colspan'), 3);
-    assert.ok(find('tr:nth-child(2) > th').classList.contains('lt-group-column'));
-    assert.equal(findAll('tr').length, 3);
-    assert.equal(findAll('tr > th').length, 8);
+    assert.dom('tr:nth-child(2) > th').hasAttribute('colspan', '3');
+    assert.dom('tr:nth-child(2) > th').hasClass('lt-group-column');
+    assert.dom('tr').exists({ count: 3 });
+    assert.dom('tr > th').exists({ count: 8 });
   });
 
   test('click - non-sortable column', async function(assert) {
@@ -45,7 +45,7 @@ module('Integration | Component | lt head', function(hooks) {
 
     await render(hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action onColumnClick)}}`);
 
-    assert.equal(findAll('tr > th').length, 6);
+    assert.dom('tr > th').exists({ count: 6 });
     let nonSortableHeader = find('tr > th');
     click(nonSortableHeader);
   });
@@ -64,7 +64,7 @@ module('Integration | Component | lt head', function(hooks) {
     await render(hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action onColumnClick)}}`);
     let allHeaders = findAll('tr > th');
     let sortableHeader = allHeaders[allHeaders.length - 1];
-    assert.equal(findAll('tr > th').length, 6);
+    assert.dom('tr > th').exists({ count: 6 });
     await click(sortableHeader);
     asc = false;
     await click(sortableHeader);
