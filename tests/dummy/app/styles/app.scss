@@ -1,7 +1,7 @@
 @import "ember-power-select";
 @import "./loader.less";
 @import "./table.less";
-@accent-color: #dd6a58;
+$accent-color: #dd6a58;
 
 html,body {
   min-height: 100%;
@@ -88,13 +88,13 @@ label {
   }
 
   .navbar-nav>li>a:focus, .navbar-nav>li>a:hover {
-    color: @accent-color;
+    color: $accent-color;
   }
 
   .navbar-nav .active,
   .navbar-nav .active:focus,
   .navbar-nav .active:hover {
-    color: @accent-color;
+    color: $accent-color;
     background-color: transparent;
   }
 }
@@ -129,13 +129,13 @@ label {
       }
 
       &.delete {
-        color: @accent-color;
+        color: $accent-color;
       }
     }
   }
 
   .panel-heading {
-    background-color: @accent-color;
+    background-color: $accent-color;
     padding: 0;
     a {
       color: #F9F9F9;
@@ -191,7 +191,7 @@ label {
 
 .user-actions {
   a {
-    color: @accent-color;
+    color: $accent-color;
     padding-right: 10px;
     font-size: 18px;
     width: 30px;
@@ -200,7 +200,7 @@ label {
     padding-top: 10px;
 
     &:hover, &:active, &:focus {
-      color: darken(@accent-color, 5%)
+      color: darken($accent-color, 5%)
     }
   }
 }
@@ -211,12 +211,12 @@ label {
 }
 
 .row-toggle {
-  color: @accent-color;
+  color: $accent-color;
   cursor: pointer;
   background-color: #fff;
   border: 0;
   &:hover, &:active, &:focus {
-    color: darken(@accent-color, 5%)
+    color: darken($accent-color, 5%)
   }
 }
 
@@ -226,7 +226,7 @@ label {
   color: #4E4E4E;
 
   .icon-info {
-    color: @accent-color;
+    color: $accent-color;
     margin-right: 3px;
   }
 }
