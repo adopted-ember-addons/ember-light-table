@@ -8,20 +8,20 @@ import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 
 /**
  * ```hbs
- * {{#light-table table as |t|}}
- *   {{t.foot onColumnClick=(action 'sortByColumn')}}
- * {{/light-table}}
+ * <LightTable @table={{this.table}} as |t|>
+ *   <t.foot @onColumnClick={{this.sortByColumn}} />
+ * </LightTable>
  * ```
  * If you want to define your own tfoot, just declare the contextual component in a block.
  *
  * ```hbs
- * {{#light-table table as |t|}}
- *   {{#t.foot onColumnClick=(action 'sortByColumn') as |columns table|}}
+ * <LightTable @table={{this.table}} as |t|>
+ *   <t.foot @onColumnClick={{this.sortByColumn}} as |columns table|?
  *     {{#each columns as |column|}}
  *       {{!-- ... --}}
  *     {{/each}}
- *   {{/t.foot}}
- * {{/light-table}}
+ *   </t.foot>
+ * </LightTable>
  * ```
  *
  * will be empty

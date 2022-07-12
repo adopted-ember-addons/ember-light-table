@@ -21,11 +21,11 @@ function intersections(array1, array2) {
 
 /**
  * ```hbs
- * {{#light-table table as |t|}}
- *   {{t.head}}
- *   {{t.body}}
- *   {{t.foot}}
- * {{/light-table}}
+ * <LightTable @table={{this.table}} as |t| >
+ *   <t.head />
+ *   <t.nody />
+ *   <t.foot />
+ * </LightTable>
  * ```
  *
  * Please see the documentation for the [Head](../classes/t.head.html), [Body](../classes/t.body.html), and [Foot](../classes/t.foot.html) components
@@ -54,20 +54,22 @@ const LightTable = Component.extend({
    * As an example, lets say I have a table with a column defined with `cellComponent: 'delete-user'`
    *
    * ```hbs
-   * {{#light-table table tableActions=(hash
-   *   deleteUser=(action 'deleteUser')
-   *  ) as |t|}}
-   *   {{t.head}}
-   *   {{t.body}}
-   *   {{t.foot}}
-   * {{/light-table}}
+   *  <LightTable 
+   *    @table={{this.table}} 
+   *    @tableActions={{hash deleteUser=this.deleteUser}} 
+   *    as |t| 
+   *  >
+   *   <t.head />
+   *   <t.body />
+   *   <t.foot />
+   * </LightTable>
    * ```
    *
    * Now in the `delete-user` component, we can access that `deleteUser` action and pass it the
    * row object which will bubble all the way to where you defined that action.
    *
    * ```hbs
-   * <button {{action tableActions.deleteUser row}}>Delete Me</button>
+   * * <button {{on 'click' (fn @tableActions.deleteUser @row)}}>Delete Me</button>
    * ```
    *
    *
@@ -81,16 +83,16 @@ const LightTable = Component.extend({
    * components.
    *
    * ```hbs
-   * {{#light-table table
-   *   extra=(hash
+   * <LightTable @table={{this.table}}
+   *   @extra={{hash
    *     highlightColor="yellow"
-   *    )
+   *    }}
    *    as |t|
    *  }}
-   *   {{t.head}}
-   *   {{t.body}}
-   *   {{t.foot}}
-   * {{/light-table}}
+   *   <t.head />
+   *   <t.body />
+   *   <t.foot />
+   * </LightTable>
    * ```
    *
    * Now in all custom components, you can access this value like so:
