@@ -101,7 +101,7 @@
     "configPath": "tests/dummy/config",
     "demoURL": "http://adopted-ember-addons.github.io/ember-light-table",
     "versionCompatibility": {
-      "ember": ">=3.13.0 <4.0.0"
+      "ember": ">=3.16.0 <4.0.0"
     }
   },
   "changelog": {
@@ -114,7 +114,7 @@
     }
   },
   "volta": {
-    "node": "10.23.0",
-    "yarn": "1.22.10"
+    "node": "14.20.0",
+    "yarn": "1.22.17"
   }
 }
