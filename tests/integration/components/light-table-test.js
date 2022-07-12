@@ -8,7 +8,7 @@ import {
 } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
-import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
+import { setupMirage } from 'ember-cli-mirage/test-support';
 import Table from 'ember-light-table';
 import Columns, { ResizableColumns } from '../../helpers/table-columns';
 import hasClass from '../../helpers/has-class';
@@ -18,7 +18,7 @@ import { computed } from '@ember/object';
 
 module('Integration | Component | light table', function (hooks) {
   setupRenderingTest(hooks);
-  setupMirageTest(hooks);
+  setupMirage(hooks);
 
   hooks.beforeEach(function () {
     this.actions = {};

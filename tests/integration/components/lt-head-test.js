@@ -112,7 +112,7 @@ module('Integration | Component | lt head', function (hooks) {
     assert.notOk(hasClass(sortIcon, 'fa-sort-up'));
   });
 
-  test('custom iconComponent has arguments', function (assert) {
+  test('custom iconComponent has arguments', async function (assert) {
     const sortableColumns = Columns.filter((column) => {
       return column.sortable !== false;
     });
@@ -145,8 +145,7 @@ module('Integration | Component | lt head', function (hooks) {
       })
     );
 
-    // eslint-disable-next-line
-    this.render(
+    await render(
       hbs`{{lt-head table=table renderInPlace=true iconSortable=iconSortable iconAscending=iconAscending iconDescending=iconDescending iconComponent=iconComponent}}`
     );
   }),

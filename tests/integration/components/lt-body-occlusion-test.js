@@ -8,7 +8,7 @@ import {
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
+import { setupMirage } from 'ember-cli-mirage/test-support';
 import Table from 'ember-light-table';
 import hasClass from '../../helpers/has-class';
 import Columns from '../../helpers/table-columns';
@@ -17,7 +17,7 @@ import registerWaiter from 'ember-raf-scheduler/test-support/register-waiter';
 
 module('Integration | Component | lt body | occlusion', function (hooks) {
   setupRenderingTest(hooks);
-  setupMirageTest(hooks);
+  setupMirage(hooks);
 
   hooks.beforeEach(function () {
     this.actions = {};
