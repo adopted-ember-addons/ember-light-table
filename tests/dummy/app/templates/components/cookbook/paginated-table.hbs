@@ -2,16 +2,16 @@
 <LightTable @table={{this.table}} @height="65vh" as |t|>
 
   {{!--
-    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
+    In order for `fa-sort-up` and `fa-sort-down` icons to work,
     you need to have ember-font-awesome installed or manually include
     the font-awesome assets, e.g. via a CDN.
   --}}
 
   <t.head
-    @onColumnClick={{pipe (fn this.onColumnClick) (fn this.setPage 1)}}
+    @onColumnClick={{pipe this.onColumnClick (fn this.setPage 1)}}
     @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-asc"
-    @iconDescending="fa fa-sort-desc"
+    @iconAscending="fa fa-sort-up"
+    @iconDescending="fa fa-sort-down"
     @fixed={{true}}
   />
 

@@ -18,19 +18,23 @@ export default Component.extend({
       viewportSpy: true,
 
       viewportTolerance: {
-        bottom: this.scrollBuffer
+        bottom: this.scrollBuffer,
       },
 
-      scrollableArea: this.scrollableContent
+      scrollableArea: this.scrollableContent,
     };
 
-    const { onEnter, onExit } = this.inViewport.watchElement(this.element, options);
+    const { onEnter, onExit } = this.inViewport.watchElement(
+      this.element,
+      options
+    );
 
     onEnter(this.didEnterViewport.bind(this));
     onExit(this.didExitViewport.bind(this));
   },
 
   willDestroyElement() {
+    this._super(...arguments);
     this.inViewport.stopWatching(this.element);
   },
 
@@ -40,5 +44,5 @@ export default Component.extend({
 
   didExitViewport() {
     this.exitViewport();
-  }
+  },
 });

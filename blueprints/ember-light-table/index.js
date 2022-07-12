@@ -6,5 +6,5 @@ module.exports = {
 
   beforeInstall() {
     return this.addAddonToProject('ember-responsive');
-  }
+  },
 };

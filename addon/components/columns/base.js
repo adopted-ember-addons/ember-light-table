@@ -1,3 +1,4 @@
+import { set } from '@ember/object';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
@@ -20,7 +21,17 @@ const Column = Component.extend(DraggableColumnMixin, {
   tagName: 'th',
   classNames: ['lt-column'],
   attributeBindings: ['style', 'colspan', 'rowspan'],
-  classNameBindings: ['align', 'isGroupColumn:lt-group-column', 'isHideable', 'isSortable', 'isSorted', 'isResizable', 'isResizing', 'isDraggable', 'column.classNames'],
+  classNameBindings: [
+    'align',
+    'isGroupColumn:lt-group-column',
+    'isHideable',
+    'isSortable',
+    'isSorted',
+    'isResizable',
+    'isResizing',
+    'isDraggable',
+    'column.classNames',
+  ],
 
   isGroupColumn: computed.readOnly('column.isGroupColumn'),
   isSortable: computed.readOnly('column.sortable'),
@@ -30,11 +41,11 @@ const Column = Component.extend(DraggableColumnMixin, {
   isDraggable: computed.readOnly('column.draggable'),
   isResizing: false,
 
-  style: computed('column.width', function() {
+  style: computed('column.width', function () {
     return cssStyleify(this.column.getProperties(['width']));
   }),
 
-  align: computed('column.align', function() {
+  align: computed('column.align', function () {
     return `align-${this.column.align}`;
   }),
 
@@ -79,7 +90,7 @@ const Column = Component.extend(DraggableColumnMixin, {
    * @type {String|null}
    * @private
    */
-  sortIconProperty: computed('column.{sortable,sorted,ascending}', function() {
+  sortIconProperty: computed('column.{sortable,sorted,ascending}', function () {
     let sorted = this.column.sorted;
 
     if (sorted) {
@@ -95,7 +106,7 @@ const Column = Component.extend(DraggableColumnMixin, {
    * @property colspan
    * @type {Number}
    */
-  colspan: computed('column', 'column.visibleSubColumns.[]', function() {
+  colspan: computed('column', 'column.visibleSubColumns.[]', function () {
     let subColumns = this.column.visibleSubColumns;
     return !isEmpty(subColumns) ? subColumns.length : 1;
   }),
@@ -115,13 +126,13 @@ const Column = Component.extend(DraggableColumnMixin, {
     },
 
     set(key, value) {
-      return this._rowspan = value;
-    }
-  })
+      return set(this, '_rowspan', value);
+    },
+  }),
 });
 
 Column.reopenClass({
-  positionalParams: ['column']
+  positionalParams: ['column'],
 });
 
 export default Column;

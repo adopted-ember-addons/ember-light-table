@@ -9,62 +9,71 @@ export default BaseTable.extend({
   // No need for `enableSync` here
   enableSync: false,
 
-  isLoading: computed.or('fetchRecords.isRunning', 'setRows.isRunning').readOnly(),
+  isLoading: computed
+    .or('fetchRecords.isRunning', 'setRows.isRunning')
+    .readOnly(),
 
   // Sort Logic
   sortedModel: computed.sort('model', 'sortBy').readOnly(),
-  sortBy: computed('dir', 'sort', function() {
+  sortBy: computed('dir', 'sort', function () {
     return [`${this.sort}:${this.dir}`];
   }).readOnly(),
 
   // Filter Input Setup
   selectedFilter: computed.oneWay('possibleFilters.firstObject'),
   // eslint-disable-next-line ember/require-computed-macros
-  possibleFilters: computed('table.columns', function() {
+  possibleFilters: computed('table.columns', function () {
     return this.table.columns.filterBy('sortable', true);
   }).readOnly(),
 
-  columns: computed(function() {
-    return [{
-      label: 'Avatar',
-      valuePath: 'avatar',
-      width: '60px',
-      sortable: false,
-      cellComponent: 'user-avatar'
-    }, {
-      label: 'First Name',
-      valuePath: 'firstName',
-      width: '150px'
-    }, {
-      label: 'Last Name',
-      valuePath: 'lastName',
-      width: '150px'
-    }, {
-      label: 'Address',
-      valuePath: 'address'
-    }, {
-      label: 'State',
-      valuePath: 'state'
-    }, {
-      label: 'Country',
-      valuePath: 'country'
-    }];
+  columns: computed(function () {
+    return [
+      {
+        label: 'Avatar',
+        valuePath: 'avatar',
+        width: '60px',
+        sortable: false,
+        cellComponent: 'user-avatar',
+      },
+      {
+        label: 'First Name',
+        valuePath: 'firstName',
+        width: '150px',
+      },
+      {
+        label: 'Last Name',
+        valuePath: 'lastName',
+        width: '150px',
+      },
+      {
+        label: 'Address',
+        valuePath: 'address',
+      },
+      {
+        label: 'State',
+        valuePath: 'state',
+      },
+      {
+        label: 'Country',
+        valuePath: 'country',
+      },
+    ];
   }),
 
-  fetchRecords: task(function*() {
+  fetchRecords: task(function* () {
     let records = yield this.store.query('user', { page: 1, limit: 100 });
     this.model.setObjects(records.toArray());
     this.set('meta', records.meta);
     yield this.filterAndSortModel.perform();
   }).on('init'),
 
-  setRows: task(function*(rows) {
+  setRows: task(function* (rows) {
     this.table.setRows([]);
     yield timeout(100); // Allows isLoading state to be shown
     this.table.setRows(rows);
   }).restartable(),
 
-  filterAndSortModel: task(function*(debounceMs = 200) {
+  filterAndSortModel: task(function* (debounceMs = 200) {
     yield timeout(debounceMs); // debounce
 
     let { query } = this;
@@ -87,17 +96,17 @@ export default BaseTable.extend({
       if (column.sorted) {
         this.setProperties({
           dir: column.ascending ? 'asc' : 'desc',
-          sort: column.valuePath
+          sort: column.valuePath,
         });
 
         this.filterAndSortModel.perform(0);
       }
-    }
+    },
   },
 
   @action
   onSearchChange() {
     this.filterAndSortModel.perform();
-  }
+  },
 });
 // END-SNIPPET

@@ -5,5 +5,5 @@ export default Component.extend({
   layout,
   colspan: 1,
   tagName: '',
-  visible: true
+  visible: true,
 });

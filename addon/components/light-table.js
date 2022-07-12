@@ -54,10 +54,10 @@ const LightTable = Component.extend({
    * As an example, lets say I have a table with a column defined with `cellComponent: 'delete-user'`
    *
    * ```hbs
-   *  <LightTable 
-   *    @table={{this.table}} 
-   *    @tableActions={{hash deleteUser=this.deleteUser}} 
-   *    as |t| 
+   *  <LightTable
+   *    @table={{this.table}}
+   *    @tableActions={{hash deleteUser=this.deleteUser}}
+   *    as |t|
    *  >
    *   <t.head />
    *   <t.body />
@@ -200,16 +200,22 @@ const LightTable = Component.extend({
    * @type {Object}
    * @private
    */
-  sharedOptions: computed('estimatedRowHeight', 'height', 'occlusion', 'shouldRecycle', function() {
-    return {
-      height: this.height,
-      fixedHeader: false,
-      fixedFooter: false,
-      occlusion: this.occlusion,
-      estimatedRowHeight: this.estimatedRowHeight,
-      shouldRecycle: this.shouldRecycle
-    };
-  }).readOnly(),
+  sharedOptions: computed(
+    'estimatedRowHeight',
+    'height',
+    'occlusion',
+    'shouldRecycle',
+    function () {
+      return {
+        height: this.height,
+        fixedHeader: false,
+        fixedFooter: false,
+        occlusion: this.occlusion,
+        estimatedRowHeight: this.estimatedRowHeight,
+        shouldRecycle: this.shouldRecycle,
+      };
+    }
+  ).readOnly(),
 
   visibleColumns: computed.readOnly('table.visibleColumns'),
 
@@ -226,7 +232,7 @@ const LightTable = Component.extend({
    * @type {Number}
    * @private
    */
-  totalWidth: computed('visibleColumns.@each.width', function() {
+  totalWidth: computed('visibleColumns.@each.width', function () {
     let visibleColumns = this.visibleColumns;
     let widths = visibleColumns.getEach('width');
     let unit = (widths[0] || '').match(/\D+$/);
@@ -255,23 +261,29 @@ const LightTable = Component.extend({
     return `${totalWidth}${unit}`;
   }),
 
-  style: computed('height', 'occlusion', 'scrollbarThickness.thickness', 'totalWidth', function() {
-    let totalWidth = this.totalWidth;
-    let style =  { height: this.height };
+  style: computed(
+    'height',
+    'occlusion',
+    'scrollbarThickness.thickness',
+    'totalWidth',
+    function () {
+      let totalWidth = this.totalWidth;
+      let style = { height: this.height };
 
-    if (totalWidth) {
-      if (this.occlusion) {
-        const scrollbarThickness = this.scrollbarThickness.thickness;
-        style.width = `calc(${totalWidth} + ${scrollbarThickness}px)`;
-      } else {
-        style.width = totalWidth;
+      if (totalWidth) {
+        if (this.occlusion) {
+          const scrollbarThickness = this.scrollbarThickness.thickness;
+          style.width = `calc(${totalWidth} + ${scrollbarThickness}px)`;
+        } else {
+          style.width = totalWidth;
+        }
+
+        style.overflowX = 'auto';
       }
 
-      style.overflowX = 'auto';
+      return cssStyleify(style);
     }
-
-    return cssStyleify(style);
-  }),
+  ),
 
   init() {
     this._super(...arguments);
@@ -279,7 +291,10 @@ const LightTable = Component.extend({
     let table = this.table;
     let media = this.media;
 
-    assert('[ember-light-table] table must be an instance of Table', table instanceof Table);
+    assert(
+      '[ember-light-table] table must be an instance of Table',
+      table instanceof Table
+    );
 
     if (isNone(media)) {
       this.set('responsive', false);
@@ -288,37 +303,43 @@ const LightTable = Component.extend({
     this.onMediaChange();
   },
 
-  onMediaChange: observer('media.matches.[]', 'table.allColumns.[]', function() {
-    let responsive = this.responsive;
-    let matches = this.media.matches;
-    let breakpoints = this.breakpoints;
-    let table = this.table;
-    let numColumns = 0;
+  onMediaChange: observer(
+    'media.matches.[]',
+    'table.allColumns.[]',
+    function () {
+      let responsive = this.responsive;
+      let matches = this.media.matches;
+      let breakpoints = this.breakpoints;
+      let table = this.table;
+      let numColumns = 0;
 
-    if (!responsive) {
-      return;
+      if (!responsive) {
+        return;
+      }
+
+      this.send('onBeforeResponsiveChange', matches);
+
+      if (!isNone(breakpoints)) {
+        Object.keys(breakpoints).forEach((b) => {
+          if (matches.indexOf(b) > -1) {
+            numColumns = Math.max(numColumns, breakpoints[b]);
+          }
+        });
+
+        this._displayColumns(numColumns);
+      } else {
+        table.get('allColumns').forEach((c) => {
+          let breakpoints = c.get('breakpoints');
+          let isMatch =
+            isEmpty(breakpoints) ||
+            intersections(matches, breakpoints).length > 0;
+          c.set('responsiveHidden', !isMatch);
+        });
+      }
+
+      this.send('onAfterResponsiveChange', matches);
     }
-
-    this.send('onBeforeResponsiveChange', matches);
-
-    if (!isNone(breakpoints)) {
-      Object.keys(breakpoints).forEach((b) => {
-        if (matches.indexOf(b) > -1) {
-          numColumns = Math.max(numColumns, breakpoints[b]);
-        }
-      });
-
-      this._displayColumns(numColumns);
-    } else {
-      table.get('allColumns').forEach((c) => {
-        let breakpoints = c.get('breakpoints');
-        let isMatch = isEmpty(breakpoints) || intersections(matches, breakpoints).length > 0;
-        c.set('responsiveHidden', !isMatch);
-      });
-    }
-
-    this.send('onAfterResponsiveChange', matches);
-  }),
+  ),
 
   _displayColumns(numColumns) {
     let table = this.table;
@@ -328,9 +349,13 @@ const LightTable = Component.extend({
     if (!numColumns) {
       hiddenColumns.setEach('responsiveHidden', false);
     } else if (visibleColumns.length > numColumns) {
-      emberArray(visibleColumns.slice(numColumns, visibleColumns.length)).setEach('responsiveHidden', true);
+      emberArray(
+        visibleColumns.slice(numColumns, visibleColumns.length)
+      ).setEach('responsiveHidden', true);
     } else if (visibleColumns.length < numColumns) {
-      emberArray(hiddenColumns.slice(0, numColumns - visibleColumns.length)).setEach('responsiveHidden', false);
+      emberArray(
+        hiddenColumns.slice(0, numColumns - visibleColumns.length)
+      ).setEach('responsiveHidden', false);
     }
   },
 
@@ -359,12 +384,12 @@ const LightTable = Component.extend({
      */
     onAfterResponsiveChange(/* matches */) {
       this.onAfterResponsiveChange(...arguments);
-    }
-  }
+    },
+  },
 });
 
 LightTable.reopenClass({
-  positionalParams: ['table']
+  positionalParams: ['table'],
 });
 
 export default LightTable;

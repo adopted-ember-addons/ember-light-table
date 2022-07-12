@@ -3,27 +3,27 @@
   @table={{this.table}}
   @height="65vh"
   @responsive={{true}}
-  @onAfterResponsiveChange={{fn this.onAfterResponsiveChange}}
+  @onAfterResponsiveChange={{this.onAfterResponsiveChange}}
 as |t|>
 
   {{!--
-    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
+    In order for `fa-sort-up` and `fa-sort-down` icons to work,
     you need to have ember-font-awesome installed or manually include
     the font-awesome assets, e.g. via a CDN.
   --}}
 
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-asc"
-    @iconDescending="fa fa-sort-desc"
+    @iconAscending="fa fa-sort-up"
+    @iconDescending="fa fa-sort-down"
     @fixed={{true}}
   />
 
   <t.body
     @canSelect={{false}}
     @expandOnClick={{false}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+    @onScrolledToBottom={{this.onScrolledToBottom}}
   as |body|>
     <body.expanded-row as |row|>
       <ResponsiveExpandedRow @table={{this.table}} @row={{row}}/>

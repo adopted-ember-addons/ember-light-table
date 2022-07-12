@@ -5,8 +5,8 @@ import { module, test } from 'qunit';
 import DS from 'ember-data';
 import EmberObject from '@ember/object';
 
-module('Unit | Classes | Table', function() {
-  test('create table - default options', function(assert) {
+module('Unit | Classes | Table', function () {
+  test('create table - default options', function (assert) {
     let table = Table.create();
 
     assert.ok(table);
@@ -14,7 +14,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('columns.length'), 0);
   });
 
-  test('create table - with options', function(assert) {
+  test('create table - with options', function (assert) {
     let table = Table.create({ columns: [{}, {}], rows: [{}] });
 
     assert.ok(table);
@@ -25,18 +25,26 @@ module('Unit | Classes | Table', function() {
     assert.ok(table.columns[0] instanceof Column);
   });
 
-  test('create table - invalid constructor', function(assert) {
+  test('create table - invalid constructor', function (assert) {
     assert.expect(2);
 
-    assert.throws(() => {
-      Table.create({ columns: [{}, {}], rows: null });
-    }, /\[ember-light-table] rows must be an array if defined/, 'rows is not an array');
-    assert.throws(() => {
-      Table.create({ columns: null, rows: [{}] });
-    }, /\[ember-light-table] columns must be an array if defined/, 'columns is not an array');
+    assert.throws(
+      () => {
+        Table.create({ columns: [{}, {}], rows: null });
+      },
+      /\[ember-light-table] rows must be an array if defined/,
+      'rows is not an array'
+    );
+    assert.throws(
+      () => {
+        Table.create({ columns: null, rows: [{}] });
+      },
+      /\[ember-light-table] columns must be an array if defined/,
+      'columns is not an array'
+    );
   });
 
-  test('create table - with RecordArray instance as rows', function(assert) {
+  test('create table - with RecordArray instance as rows', function (assert) {
     assert.expect(3);
 
     let models = ['Tom', 'Yehuda', 'Tomster'].map((name) => {
@@ -47,7 +55,7 @@ module('Unit | Classes | Table', function() {
       content: emberArray(models),
       objectAtContent(index) {
         return this.content[index];
-      }
+      },
     });
 
     let columns = [{ label: 'Name', valuePath: 'name' }];
@@ -58,16 +66,20 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('columns.length'), 1);
   });
 
-  test('reopen table', function(assert) {
+  test('reopen table', function (assert) {
     assert.equal(typeof Table.reopen, 'function', 'reopen is a function');
-    assert.equal(typeof Table.reopenClass, 'function', 'reopenClass is a function');
+    assert.equal(
+      typeof Table.reopenClass,
+      'function',
+      'reopenClass is a function'
+    );
   });
 
-  test('CP - visibleColumnGroups', function(assert) {
+  test('CP - visibleColumnGroups', function (assert) {
     let table = Table.create();
     let col = Column.create();
     let group = Column.create({
-      subColumns: [{}, {}]
+      subColumns: [{}, {}],
     });
 
     table.setColumns([col, group]);
@@ -80,13 +92,13 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('visibleColumnGroups.length'), 0);
   });
 
-  test('CP - visibleSubColumns', function(assert) {
+  test('CP - visibleSubColumns', function (assert) {
     let table = Table.create();
     let group = Column.create({
-      subColumns: [{}, {}]
+      subColumns: [{}, {}],
     });
     let group2 = Column.create({
-      subColumns: [{}, {}]
+      subColumns: [{}, {}],
     });
 
     table.setColumns([group, group2]);
@@ -96,44 +108,60 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('visibleSubColumns.length'), 2);
   });
 
-  test('CP - allColumns', function(assert) {
+  test('CP - allColumns', function (assert) {
     let table = Table.create();
     let col = Column.create();
     let group = Column.create({
-      subColumns: [{}, {}]
+      subColumns: [{}, {}],
     });
     let group2 = Column.create({
-      subColumns: [{}, {}]
+      subColumns: [{}, {}],
     });
 
     table.setColumns([col, group, group2]);
     assert.equal(table.get('allColumns.length'), 5);
   });
 
-  test('CP - isEmpty', function(assert) {
+  test('CP - isEmpty', function (assert) {
     let table = Table.create({ columns: [{}, {}], rows: [] });
 
     assert.ok(table, 'table is set up correctly');
     assert.ok(table.get('isEmpty'), 'table is initially empty');
     table.pushRow({});
-    assert.notOk(table.get('isEmpty'), 'table is not empty after a row was pushed');
+    assert.notOk(
+      table.get('isEmpty'),
+      'table is not empty after a row was pushed'
+    );
     table.setRows([]);
-    assert.ok(table.get('isEmpty'), 'table is empty again after the rows were cleared');
+    assert.ok(
+      table.get('isEmpty'),
+      'table is empty again after the rows were cleared'
+    );
   });
 
-  test('CP - isEmpty (enableSync = true)', function(assert) {
+  test('CP - isEmpty (enableSync = true)', function (assert) {
     let rowsArray = emberArray();
-    let table = Table.create({ columns: [{}, {}], rows: rowsArray, enableSync: true });
+    let table = Table.create({
+      columns: [{}, {}],
+      rows: rowsArray,
+      enableSync: true,
+    });
 
     assert.ok(table, 'table is set up correctly');
     assert.ok(table.get('isEmpty'), 'table is initially empty');
     rowsArray.pushObject({});
-    assert.notOk(table.get('isEmpty'), 'table is not empty after a row was pushed');
+    assert.notOk(
+      table.get('isEmpty'),
+      'table is not empty after a row was pushed'
+    );
     rowsArray.clear();
-    assert.ok(table.get('isEmpty'), 'table is empty again after the rows were cleared');
+    assert.ok(
+      table.get('isEmpty'),
+      'table is empty again after the rows were cleared'
+    );
   });
 
-  test('table method - setRows', function(assert) {
+  test('table method - setRows', function (assert) {
     let table = Table.create();
 
     assert.ok(table);
@@ -147,7 +175,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('rows.length'), 0);
   });
 
-  test('table method - addRow', function(assert) {
+  test('table method - addRow', function (assert) {
     let table = Table.create();
     let content = { name: 'Offir' };
     let row = Row.create({ content });
@@ -171,7 +199,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('rows.lastObject.name'), 'Offir');
   });
 
-  test('table method - addRows', function(assert) {
+  test('table method - addRows', function (assert) {
     let table = Table.create();
     let content = { name: 'Offir' };
     let row = Row.create({ content });
@@ -195,7 +223,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('rows.lastObject.name'), 'Offir');
   });
 
-  test('table method - pushRow', function(assert) {
+  test('table method - pushRow', function (assert) {
     let table = Table.create();
     let content = { name: 'Offir' };
     let row = Row.create({ content });
@@ -219,7 +247,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('rows.lastObject.name'), 'Offir');
   });
 
-  test('table method - pushRows', function(assert) {
+  test('table method - pushRows', function (assert) {
     let table = Table.create();
     let content = { name: 'Offir' };
     let row = Row.create({ content });
@@ -243,7 +271,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('rows.lastObject.name'), 'Offir');
   });
 
-  test('table method - insertRowAt', function(assert) {
+  test('table method - insertRowAt', function (assert) {
     let table = Table.create();
 
     assert.ok(table);
@@ -259,7 +287,7 @@ module('Unit | Classes | Table', function() {
     assert.ok(table.get('rows.1.selected'));
   });
 
-  test('table method - removeRow', function(assert) {
+  test('table method - removeRow', function (assert) {
     let table = Table.create();
     let content = { name: 'Offir' };
     let row = Row.create({ content });
@@ -288,7 +316,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('rows.length'), 0);
   });
 
-  test('table method - removeRows', function(assert) {
+  test('table method - removeRows', function (assert) {
     let table = Table.create();
     let row = Row.create();
     let row2 = Row.create();
@@ -303,7 +331,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('rows.length'), 0);
   });
 
-  test('table method - setColumns', function(assert) {
+  test('table method - setColumns', function (assert) {
     let table = Table.create();
 
     assert.ok(table);
@@ -316,7 +344,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('columns.length'), 0);
   });
 
-  test('table method - addColumn', function(assert) {
+  test('table method - addColumn', function (assert) {
     let table = Table.create();
     let col = Column.create({ label: 'Name' });
 
@@ -335,7 +363,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('columns.lastObject.label'), 'Name');
   });
 
-  test('table method - addColumns', function(assert) {
+  test('table method - addColumns', function (assert) {
     let table = Table.create();
     let col = Column.create({ label: 'Name' });
 
@@ -354,7 +382,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('columns.lastObject.label'), 'Name');
   });
 
-  test('table method - pushColumn', function(assert) {
+  test('table method - pushColumn', function (assert) {
     let table = Table.create();
     let content = { label: 'Name' };
     let col = Column.create(content);
@@ -377,7 +405,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('columns.lastObject.label'), 'Name');
   });
 
-  test('table method - pushColumns', function(assert) {
+  test('table method - pushColumns', function (assert) {
     let table = Table.create();
     let col = Column.create({ label: 'Name' });
 
@@ -396,7 +424,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('columns.lastObject.label'), 'Name');
   });
 
-  test('table method - insertColumnAt', function(assert) {
+  test('table method - insertColumnAt', function (assert) {
     let table = Table.create();
 
     assert.ok(table);
@@ -411,7 +439,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('columns.1.label'), 'Offir');
   });
 
-  test('table method - removeColumn', function(assert) {
+  test('table method - removeColumn', function (assert) {
     let table = Table.create();
     let col = Column.create({ label: 'Name' });
 
@@ -431,7 +459,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('columns.length'), 0);
   });
 
-  test('table method - removeColumns', function(assert) {
+  test('table method - removeColumns', function (assert) {
     let table = Table.create();
     let col = Column.create();
     let col2 = Column.create();
@@ -446,33 +474,33 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('columns.length'), 0);
   });
 
-  test('static table method - createRow', function(assert) {
+  test('static table method - createRow', function (assert) {
     let row = Table.createRow({ name: 'Offir' }, { selected: true });
     assert.ok(row instanceof Row);
     assert.equal(row.get('name'), 'Offir');
     assert.ok(row.get('selected'));
   });
 
-  test('static table method - createRows', function(assert) {
+  test('static table method - createRows', function (assert) {
     let rows = Table.createRows([{}, {}], { selected: true });
     assert.equal(rows.length, 2);
     assert.ok(rows[0] instanceof Row);
     assert.ok(rows[1].get('selected'));
   });
 
-  test('static table method - createColumn', function(assert) {
+  test('static table method - createColumn', function (assert) {
     let col = Table.createColumn({ label: 'Name' });
     assert.ok(col instanceof Column);
     assert.equal(col.get('label'), 'Name');
   });
 
-  test('static table method - createColumns', function(assert) {
+  test('static table method - createColumns', function (assert) {
     let cols = Table.createColumns([{}, {}]);
     assert.equal(cols.length, 2);
     assert.ok(cols[0] instanceof Column);
   });
 
-  test('table modifications with sync enabled - simple', function(assert) {
+  test('table modifications with sync enabled - simple', function (assert) {
     let rows = emberArray([]);
     let table = Table.create({ columns: [], rows, enableSync: true });
 
@@ -486,7 +514,10 @@ module('Unit | Classes | Table', function() {
     assert.equal(rows.get('length'), 2);
     assert.equal(table.get('rows.length'), rows.get('length'));
 
-    assert.deepEqual(table.get('rows').getEach('firstName'), rows.getEach('firstName'));
+    assert.deepEqual(
+      table.get('rows').getEach('firstName'),
+      rows.getEach('firstName')
+    );
 
     table.get('rows').clear();
 
@@ -494,7 +525,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('rows.length'), rows.get('length'));
   });
 
-  test('table modifications with sync enabled - stress', function(assert) {
+  test('table modifications with sync enabled - stress', function (assert) {
     let rows = emberArray([]);
     let table = Table.create({ columns: [], rows, enableSync: true });
 
@@ -503,28 +534,40 @@ module('Unit | Classes | Table', function() {
     }
 
     assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      rows.getEach('position')
+    );
 
     for (let i = 100; i < 200; i++) {
       rows.pushObject({ position: i });
     }
 
     assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      rows.getEach('position')
+    );
 
     table.removeRowAt(5);
     table.removeRowAt(10);
     table.removeRowAt(125);
 
     assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      rows.getEach('position')
+    );
 
     rows.removeAt(10);
     rows.removeAt(20);
     rows.removeAt(150);
 
     assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      rows.getEach('position')
+    );
 
     table.get('rows').clear();
 
@@ -532,7 +575,7 @@ module('Unit | Classes | Table', function() {
     assert.equal(table.get('rows.length'), rows.get('length'));
   });
 
-  test('table modifications with sync enabled - sort', function(assert) {
+  test('table modifications with sync enabled - sort', function (assert) {
     let rows = emberArray([]);
     let table = Table.create({ columns: [], rows, enableSync: true });
     let length = 5;
@@ -542,7 +585,10 @@ module('Unit | Classes | Table', function() {
     }
 
     assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      rows.getEach('position')
+    );
 
     rows.sort((a, b) => {
       return a.position > b.position ? -1 : 1;
@@ -551,18 +597,28 @@ module('Unit | Classes | Table', function() {
     rows.arrayContentDidChange(0, length, length);
 
     assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      rows.getEach('position')
+    );
 
     rows.reverseObjects();
 
     assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(table.get('rows').getEach('position'), rows.getEach('position'));
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      rows.getEach('position')
+    );
   });
 
-  test('setRowsSynced', function(assert) {
+  test('setRowsSynced', function (assert) {
     let initialRows = emberArray([]);
     let otherRows = emberArray([]);
-    let table = Table.create({ columns: [], rows: initialRows, enableSync: true });
+    let table = Table.create({
+      columns: [],
+      rows: initialRows,
+      enableSync: true,
+    });
     let initialLength = 5;
     let otherLength = 13;
 
@@ -570,18 +626,34 @@ module('Unit | Classes | Table', function() {
       initialRows.pushObject({ position: i });
     }
 
-    assert.deepEqual(table.get('rows').getEach('position'), initialRows.getEach('position'), 'the table is initialized with a synced array');
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      initialRows.getEach('position'),
+      'the table is initialized with a synced array'
+    );
 
     table.setRowsSynced(otherRows);
-    assert.deepEqual(table.get('rows').getEach('position'), otherRows.getEach('position'), 'the synced array may be replaced');
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      otherRows.getEach('position'),
+      'the synced array may be replaced'
+    );
 
     for (let i = 0; i < otherLength; i++) {
       otherRows.pushObject({ position: i });
     }
 
-    assert.deepEqual(table.get('rows').getEach('position'), otherRows.getEach('position'), 'the replacement array is correctly synced');
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      otherRows.getEach('position'),
+      'the replacement array is correctly synced'
+    );
 
     initialRows.popObject();
-    assert.deepEqual(table.get('rows').getEach('position'), otherRows.getEach('position'), 'mutating the replaced array has no effect');
+    assert.deepEqual(
+      table.get('rows').getEach('position'),
+      otherRows.getEach('position'),
+      'mutating the replaced array has no effect'
+    );
   });
 });

@@ -207,11 +207,15 @@ export default Component.extend({
    * @type {Number}
    * @default 500 / estimatedRowHeight
    */
-  scrollBufferRows: computed('scrollBuffer', 'sharedOptions.estimatedRowHeight', function() {
-    return Math.ceil(
-      this.scrollBuffer / (this.sharedOptions.estimatedRowHeight || 1)
-    );
-  }),
+  scrollBufferRows: computed(
+    'scrollBuffer',
+    'sharedOptions.estimatedRowHeight',
+    function () {
+      return Math.ceil(
+        this.scrollBuffer / (this.sharedOptions.estimatedRowHeight || 1)
+      );
+    }
+  ),
 
   /**
    * @property useVirtualScrollbar
@@ -289,7 +293,7 @@ export default Component.extend({
    * Allows to customize the component used to render spanned rows
    *
    * ```hbs
-  * <LightTable @table={{this.table}} as |t| >
+   * <LightTable @table={{this.table}} as |t| >
    *    <t.body @spannedRowComponent={{component 'my-spanned-row'}} />
    * </LightTable>
    * ```
@@ -321,12 +325,16 @@ export default Component.extend({
    * fills the screen with row items until lt-infinity component has exited the viewport
    * @property scheduleScrolledToBottom
    */
-  scheduleScrolledToBottom: observer('isInViewport', function() {
+  scheduleScrolledToBottom: observer('isInViewport', function () {
     if (this.isInViewport) {
       /*
        Continue scheduling onScrolledToBottom until no longer in viewport
        */
-      this._schedulerTimer = run.scheduleOnce('afterRender', this, this._debounceScrolledToBottom);
+      this._schedulerTimer = run.scheduleOnce(
+        'afterRender',
+        this,
+        this._debounceScrolledToBottom
+      );
     }
   }),
 
@@ -358,17 +366,16 @@ export default Component.extend({
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
   },
 
-  onRowsChange: observer('rows.[]', function() {
-    this._checkTargetOffsetTimer = run.scheduleOnce('afterRender', this, this.checkTargetScrollOffset);
+  onRowsChange: observer('rows.[]', function () {
+    this._checkTargetOffsetTimer = run.scheduleOnce(
+      'afterRender',
+      this,
+      this.checkTargetScrollOffset
+    );
   }),
 
   setupScrollOffset() {
-    let {
-      scrollTo,
-      _scrollTo,
-      scrollToRow,
-      _scrollToRow
-    } = this;
+    let { scrollTo, _scrollTo, scrollToRow, _scrollToRow } = this;
     let targetScrollOffset = null;
 
     this.setProperties({ _scrollTo: scrollTo, _scrollToRow: scrollToRow });
@@ -382,18 +389,23 @@ export default Component.extend({
 
       this.setProperties({
         targetScrollOffset,
-        hasReachedTargetScrollOffset: targetScrollOffset <= 0
+        hasReachedTargetScrollOffset: targetScrollOffset <= 0,
       });
     } else if (scrollToRow !== _scrollToRow) {
       if (scrollToRow instanceof Row) {
-        let rowElement = this.element.querySelector(`[data-row-id=${scrollToRow.get('rowId')}]`);
+        let rowElement = this.element.querySelector(
+          `[data-row-id=${scrollToRow.get('rowId')}]`
+        );
 
         if (rowElement instanceof Element) {
           targetScrollOffset = rowElement.offsetTop;
         }
       }
 
-      this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
+      this.setProperties({
+        targetScrollOffset,
+        hasReachedTargetScrollOffset: true,
+      });
     }
   },
 
@@ -473,7 +485,8 @@ export default Component.extend({
       let expandOnClick = this.expandOnClick;
       let isSelected = row.get('selected');
       let currIndex = rows.indexOf(row);
-      let prevIndex = this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
+      let prevIndex =
+        this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
 
       this._prevSelectedIndex = currIndex;
 
@@ -485,8 +498,16 @@ export default Component.extend({
 
       if (canSelect) {
         if (e.shiftKey && multiSelect) {
-          rows.slice(Math.min(currIndex, prevIndex), Math.max(currIndex, prevIndex) + 1).forEach((r) => r.set('selected', !isSelected));
-        } else if ((!multiSelectRequiresKeyboard || (e.ctrlKey || e.metaKey)) && multiSelect) {
+          rows
+            .slice(
+              Math.min(currIndex, prevIndex),
+              Math.max(currIndex, prevIndex) + 1
+            )
+            .forEach((r) => r.set('selected', !isSelected));
+        } else if (
+          (!multiSelectRequiresKeyboard || e.ctrlKey || e.metaKey) &&
+          multiSelect
+        ) {
           row.toggleProperty('selected');
         } else {
           if (selectOnClick) {
@@ -542,10 +563,14 @@ export default Component.extend({
     enterViewport() {
       const inViewport = this.inViewport;
       if (inViewport) {
-        deprecate('lt-infinity inViewport event is deprecated please use enterViewport instead', false, {
-          id: 'ember-light-table.inViewport',
-          until: '2.0.0'
-        });
+        deprecate(
+          'lt-infinity inViewport event is deprecated please use enterViewport instead',
+          false,
+          {
+            id: 'ember-light-table.inViewport',
+            until: '2.0.0',
+          }
+        );
         inViewport();
       } else {
         this.set('isInViewport', true);
@@ -562,7 +587,8 @@ export default Component.extend({
 
     firstVisibleChanged(item, index /* , key */) {
       this.firstVisibleChanged(...arguments);
-      const estimateScrollOffset = index * this.sharedOptions.estimatedRowHeight;
+      const estimateScrollOffset =
+        index * this.sharedOptions.estimatedRowHeight;
       this.onScroll(estimateScrollOffset, null);
     },
 
@@ -577,6 +603,6 @@ export default Component.extend({
     lastReached(/* item, index, key */) {
       this.lastReached(...arguments);
       this.onScrolledToBottom();
-    }
-  }
+    },
+  },
 });

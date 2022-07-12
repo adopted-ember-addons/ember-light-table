@@ -1,4 +1,5 @@
-import { dasherize, htmlSafe } from '@ember/string';
+import { dasherize } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 import { isPresent } from '@ember/utils';
 
 export default function cssStyleify(hash = {}) {

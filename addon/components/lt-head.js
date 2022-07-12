@@ -37,5 +37,5 @@ export default Component.extend(TableHeaderMixin, {
   classNames: ['lt-head-wrap'],
   table: null,
   sharedOptions: null,
-  sharedOptionsFixedKey: 'fixedHeader'
+  sharedOptionsFixedKey: 'fixedHeader',
 });
