@@ -1,6 +1,6 @@
 import { A as emberArray, isArray } from '@ember/array';
 import { assert } from '@ember/debug';
-import EmberObject, { computed, get } from '@ember/object';
+import EmberObject, { computed } from '@ember/object';
 import Row from 'ember-light-table/classes/Row';
 import Column from 'ember-light-table/classes/Column';
 import SyncArrayProxy from 'ember-light-table/-private/sync-array-proxy';
@@ -14,8 +14,8 @@ const RowSyncArrayProxy = SyncArrayProxy.extend({
   },
 
   serializeSyncArrayObjects(objects) {
-    return objects.map((o) => get(o, 'content'));
-  }
+    return objects.map((o) => o.content);
+  },
 });
 
 /**
@@ -70,7 +70,9 @@ export default class Table extends EmberObject.extend({
    * @property sortableColumns
    * @type {Ember.Array}
    */
-  sortableColumns: computed.filterBy('visibleColumns', 'sortable', true).readOnly(),
+  sortableColumns: computed
+    .filterBy('visibleColumns', 'sortable', true)
+    .readOnly(),
 
   /**
    * @property sortedColumns
@@ -94,7 +96,9 @@ export default class Table extends EmberObject.extend({
    * @property responsiveHiddenColumns
    * @type {Ember.Array}
    */
-  responsiveHiddenColumns: computed.filterBy('allColumns', 'responsiveHidden', true).readOnly(),
+  responsiveHiddenColumns: computed
+    .filterBy('allColumns', 'responsiveHidden', true)
+    .readOnly(),
 
   /**
    * @property visibleColumns
@@ -106,21 +110,28 @@ export default class Table extends EmberObject.extend({
    * @property visibleColumnGroups
    * @type {Ember.Array}
    */
-  visibleColumnGroups: computed('columns.[]', 'columns.@each.{isHidden,isVisibleGroupColumn}', function() {
-    return this.columns.reduce((arr, c) => {
-      if (c.get('isVisibleGroupColumn') || (!c.get('isGroupColumn') && !c.get('isHidden'))) {
-        arr.pushObject(c);
-      }
+  visibleColumnGroups: computed(
+    'columns.[]',
+    'columns.@each.{isHidden,isVisibleGroupColumn}',
+    function () {
+      return this.columns.reduce((arr, c) => {
+        if (
+          c.get('isVisibleGroupColumn') ||
+          (!c.get('isGroupColumn') && !c.get('isHidden'))
+        ) {
+          arr.pushObject(c);
+        }
 
-      return arr;
-    }, emberArray([]));
-  }).readOnly(),
+        return arr;
+      }, emberArray([]));
+    }
+  ).readOnly(),
 
   /**
    * @property visibleSubColumns
    * @type {Ember.Array}
    */
-  visibleSubColumns: computed('columns.@each.visibleSubColumns', function() {
+  visibleSubColumns: computed('columns.@each.visibleSubColumns', function () {
     return emberArray([].concat(...this.columns.getEach('visibleSubColumns')));
   }).readOnly(),
 
@@ -128,7 +139,7 @@ export default class Table extends EmberObject.extend({
    * @property allColumns
    * @type {Ember.Array}
    */
-  allColumns: computed('columns.@each.subColumns', function() {
+  allColumns: computed('columns.@each.subColumns', function () {
     return this.columns.reduce((arr, c) => {
       arr.pushObjects(c.get('isGroupColumn') ? c.get('subColumns') : [c]);
       return arr;
@@ -149,8 +160,14 @@ export default class Table extends EmberObject.extend({
    */
   init(options = {}) {
     let { columns = [], rows = [] } = options;
-    assert('[ember-light-table] columns must be an array if defined', isArray(columns));
-    assert('[ember-light-table] rows must be an array if defined', isArray(rows));
+    assert(
+      '[ember-light-table] columns must be an array if defined',
+      isArray(columns)
+    );
+    assert(
+      '[ember-light-table] rows must be an array if defined',
+      isArray(rows)
+    );
 
     this.setProperties(mergeOptionsWithGlobals(options));
 
@@ -161,12 +178,12 @@ export default class Table extends EmberObject.extend({
     if (this.enableSync) {
       _rows = RowSyncArrayProxy.create({
         syncArray: rows,
-        content: _rows
+        content: _rows,
       });
     }
 
     this.set('rows', _rows);
-  }
+  },
 }) {
   destroy() {
     super.destroy(...arguments);
@@ -205,7 +222,7 @@ export default class Table extends EmberObject.extend({
   setRowsSynced(rows = [], options = {}) {
     let _rows = RowSyncArrayProxy.create({
       syncArray: rows,
-      content: emberArray(Table.createRows(rows, options))
+      content: emberArray(Table.createRows(rows, options)),
     });
 
     return this.set('rows', _rows);

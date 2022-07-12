@@ -1,10 +1,6 @@
-module.exports = function() {
+module.exports = function () {
   return {
-    'free-brands-svg-icons': [
-      'facebook',
-      'github',
-      'twitter'
-    ],
+    'free-brands-svg-icons': ['facebook', 'github', 'twitter'],
     'free-solid-svg-icons': [
       'bell',
       'caret-down',
@@ -18,7 +14,7 @@ module.exports = function() {
       'sort-down',
       'sort-up',
       'square',
-      'trash'
-    ]
+      'trash',
+    ],
   };
 };

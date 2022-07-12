@@ -8,7 +8,7 @@
   --}}
 
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
     @iconAscending="fa fa-sort-up"
     @iconDescending="fa fa-sort-down"
@@ -20,7 +20,7 @@
     @scrollTo={{this.scrollTo}}
     @scrollToRow={{this.scrollToRow}}
     @onScroll={{fn (mut this.currentScrollOffset)}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+    @onScrolledToBottom={{this.onScrolledToBottom}}
   as |body|>
     {{#if this.isLoading}}
       <body.loader>
@@ -43,13 +43,12 @@
           <div class="form-group">
             <label for="scrollTo">Scroll To:</label>
             <Input
-              @key-down={{fn (mut this.scrollTo)}}
               @value={{this.scrollTo}}
               @type="number"
               name="scrollTo"
               min="0"
               step="10"
-              class="form-control"
+              class="form-control" {{on "keydown" (fn (mut this.scrollTo))}}
             />
           </div>
 

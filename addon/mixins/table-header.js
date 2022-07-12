@@ -132,23 +132,33 @@ export default Mixin.create({
   subColumns: computed.readOnly('table.visibleSubColumns'),
   columns: computed.readOnly('table.visibleColumns'),
 
-  sortIcons: computed('iconSortable', 'iconAscending', 'iconDescending', 'iconComponent', function() {
-    return { 
-      iconSortable: this.iconSortable, 
-      iconAscending: this.iconAscending, 
-      iconDescending: this.iconDescending, 
-      iconComponent: this.iconComponent 
+  sortIcons: computed(
+    'iconSortable',
+    'iconAscending',
+    'iconDescending',
+    'iconComponent',
+    function () {
+      return {
+        iconSortable: this.iconSortable,
+        iconAscending: this.iconAscending,
+        iconDescending: this.iconDescending,
+        iconComponent: this.iconComponent,
+      };
     }
-  }).readOnly(),
+  ).readOnly(),
 
-  style: computed('scrollbarThickness.thickness', 'sharedOptions.occlusion', function() {
-    if (this.sharedOptions?.occlusion) {
-      const scrollbarThickness = this.scrollbarThickness?.thickness;
-      return cssStyleify({ paddingRight: `${scrollbarThickness}px` });
+  style: computed(
+    'scrollbarThickness.thickness',
+    'sharedOptions.occlusion',
+    function () {
+      if (this.sharedOptions?.occlusion) {
+        const scrollbarThickness = this.scrollbarThickness?.thickness;
+        return cssStyleify({ paddingRight: `${scrollbarThickness}px` });
+      }
+
+      return;
     }
-
-    return;
-  }).readOnly(),
+  ).readOnly(),
 
   init() {
     this._super(...arguments);
@@ -161,7 +171,7 @@ export default Mixin.create({
 
     warn(
       'You did not set a `height` attribute for your table, but marked a header or footer to be fixed. This means that you have to set the table height via CSS. For more information please refer to: https://github.com/adopted-ember-addons/ember-light-table/issues/446',
-      !fixed || fixed && !isEmpty(height),
+      !fixed || (fixed && !isEmpty(height)),
       { id: 'ember-light-table.height-attribute' }
     );
   },
@@ -231,6 +241,6 @@ export default Mixin.create({
      */
     onColumnDrop(/* column, isSuccess */) {
       this.onColumnDrop && this.onColumnDrop(...arguments);
-    }
-  }
+    },
+  },
 });

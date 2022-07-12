@@ -5,5 +5,5 @@ export default Component.extend({
   layout,
   collapse: true,
   title: '',
-  snippets: null
+  snippets: null,
 });

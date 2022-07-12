@@ -4,6 +4,6 @@ import layout from '../templates/components/materialize-icon';
 
 export default Component.extend({
   tagName: 'span',
-  layout
+  layout,
 });
 // END-SNIPPET

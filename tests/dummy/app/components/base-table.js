@@ -26,7 +26,11 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    let table = Table.create({ columns: this.columns, rows: this.model, enableSync: this.enableSync });
+    let table = Table.create({
+      columns: this.columns,
+      rows: this.model,
+      enableSync: this.enableSync,
+    });
     let sortColumn = table.get('allColumns').findBy('valuePath', this.sort);
 
     // Setup initial sort column
@@ -37,8 +41,13 @@ export default Component.extend({
     this.set('table', table);
   },
 
-  fetchRecords: task(function*() {
-    let records = yield this.store.query('user', [this.page, this.limit, this.sort, this.dir]);
+  fetchRecords: task(function* () {
+    let records = yield this.store.query('user', [
+      this.page,
+      this.limit,
+      this.sort,
+      this.dir,
+    ]);
     this.model.pushObjects(records.toArray());
     this.set('meta', records.get('meta'));
     this.set('canLoadMore', !isEmpty(records));
@@ -59,10 +68,10 @@ export default Component.extend({
         dir: column.ascending ? 'asc' : 'desc',
         sort: column.get('valuePath'),
         canLoadMore: true,
-        page: 0
+        page: 0,
       });
       this.model.clear();
     }
-  }
+  },
 });
 // END-SNIPPET

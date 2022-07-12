@@ -11,18 +11,23 @@ export default Mixin.create({
   isDragging: false,
   isDragTarget: false,
 
-  dragDirection: computed('column', 'dragColumnGroup', 'isDragTarget', function() {
-    if (this.isDragTarget) {
-      let columns = this.dragColumnGroup;
-      let targetIdx = columns.indexOf(this.column);
-      let sourceIdx = columns.indexOf(sourceColumn);
-      let direction = (sourceIdx - targetIdx) < 0 ? 'right' : 'left';
+  dragDirection: computed(
+    'column',
+    'dragColumnGroup',
+    'isDragTarget',
+    function () {
+      if (this.isDragTarget) {
+        let columns = this.dragColumnGroup;
+        let targetIdx = columns.indexOf(this.column);
+        let sourceIdx = columns.indexOf(sourceColumn);
+        let direction = sourceIdx - targetIdx < 0 ? 'right' : 'left';
 
-      return `drag-${direction}`;
+        return `drag-${direction}`;
+      }
+
+      return '';
     }
-
-    return '';
-  }).readOnly(),
+  ).readOnly(),
 
   /**
    * Array of Columns indicating where the column can be potentially dragged.
@@ -33,7 +38,7 @@ export default Mixin.create({
    * @type Array
    * @readonly
    */
-  dragColumnGroup: computed('column.parent', 'table.columns', function() {
+  dragColumnGroup: computed('column.parent', 'table.columns', function () {
     let parent = this.column.get('parent');
     return parent ? parent.get('subColumns') : this.table.columns;
   }).readOnly(),
@@ -43,7 +48,11 @@ export default Mixin.create({
     /*
      A column is a valid drop target only if its in the same group
      */
-    return sourceColumn && column.get('droppable') && column.get('parent') === sourceColumn.get('parent');
+    return (
+      sourceColumn &&
+      column.get('droppable') &&
+      column.get('parent') === sourceColumn.get('parent')
+    );
   },
 
   dragStart(e) {
@@ -116,7 +125,7 @@ export default Mixin.create({
     /*
      Restore click event
      */
-    this._clickResetTimer = run.next(this, () => this.click = this.__click__);
+    this._clickResetTimer = run.next(this, () => (this.click = this.__click__));
   },
 
   drop(e) {
@@ -152,5 +161,5 @@ export default Mixin.create({
 
   // Noop for passed actions
   onColumnDrag() {},
-  onColumnDrop() {}
+  onColumnDrop() {},
 });

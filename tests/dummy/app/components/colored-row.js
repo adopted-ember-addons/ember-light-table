@@ -7,8 +7,8 @@ export default Row.extend({
   classNames: ['colored-row'],
   attributeBindings: ['style'],
 
-  style: computed('row.color', function() {
+  style: computed('row.color', function () {
     return htmlSafe(`background-color: ${this.row.color};`);
-  }).readOnly()
+  }).readOnly(),
 });
 // END-SNIPPET

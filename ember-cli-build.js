@@ -7,19 +7,17 @@ module.exports = function (defaults) {
     snippetSearchPaths: ['addon', 'tests/dummy/app'],
     snippetPaths: ['snippets', 'tests/dummy/snippets'],
     'ember-prism': {
-      'components': ['markup-templating', 'handlebars', 'javascript'],
-      plugins: [
-        'line-numbers'
-      ]
+      components: ['markup-templating', 'handlebars', 'javascript'],
+      plugins: ['line-numbers'],
     },
 
     'ember-power-select': {
-      theme: 'bootstrap'
+      theme: 'bootstrap',
     },
 
     'ember-cli-babel': {
-      includePolyfill: true
-    }
+      includePolyfill: true,
+    },
   });
 
   const { maybeEmbroider } = require('@embroider/test-setup');

@@ -1,8 +1,7 @@
 import { A as emberArray } from '@ember/array';
 import ENV from '../config/environment';
 
-export default function() {
-
+export default function () {
   // These comments are here to help you get started. Feel free to delete them.
 
   this.passthrough('/write-coverage');
@@ -16,7 +15,7 @@ export default function() {
   this.namespace = `${ENV.rootURL}/api`; // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
-  this.get('/users', function(schema, request) {
+  this.get('/users', function (schema, request) {
     let { page, limit, sort, dir } = request.queryParams;
     const collection = schema.users.all();
     let { models: users } = collection;
@@ -28,7 +27,7 @@ export default function() {
     let meta = {
       page,
       limit,
-      totalPages: Math.ceil(users.length / limit)
+      totalPages: Math.ceil(users.length / limit),
     };
 
     if (sort) {

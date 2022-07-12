@@ -10,5 +10,5 @@ export default Route.extend({
     if (isExiting) {
       controller.set('page', 1);
     }
-  }
+  },
 });

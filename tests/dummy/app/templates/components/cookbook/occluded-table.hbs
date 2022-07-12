@@ -17,7 +17,7 @@ as |t|>
   <t.body
     @canSelect={{false}}
     @scrollBuffer={{200}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+    @onScrolledToBottom={{this.onScrolledToBottom}}
   as |body|>
     {{#if this.isLoading}}
       <body.loader>

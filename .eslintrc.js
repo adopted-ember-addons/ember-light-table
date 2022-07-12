@@ -22,14 +22,20 @@ module.exports = {
   },
 
   rules: {
-    'generator-star-spacing': ['error', { before: false, after: false }],
+    // TODO: enable all these rules and fix the violations
+    'ember/classic-decorator-no-classic-methods': 'off',
+    'ember/classic-decorator-hooks': 'off',
+    'ember/no-actions-hash': 'off',
+    'ember/no-classic-classes': 'off',
+    'ember/no-classic-components': 'off',
+    'ember/no-component-lifecycle-hooks': 'off',
+    'ember/no-computed-properties-in-native-classes': 'off',
     'ember/no-observers': 'off',
     'ember/no-jquery': 'error',
     'ember/no-get': 'warn',
     'ember/no-mixins': 'off',
     'ember/no-new-mixins': 'off',
-    'ember/use-ember-data-rfc-395-imports': 'warn',
-    'ember/require-computed-property-dependencies': 'warn'
+    'ember/require-tagless-components': 'off',
   },
 
   overrides: [
@@ -63,6 +69,9 @@ module.exports = {
       // Test files:
       files: ['tests/**/*-test.{js,ts}'],
       extends: ['plugin:qunit/recommended'],
+      rules: {
+        'qunit/require-expect': 'off',
+      },
     },
   ],
 };

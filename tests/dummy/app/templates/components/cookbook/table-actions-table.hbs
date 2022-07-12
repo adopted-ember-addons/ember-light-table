@@ -3,8 +3,8 @@
   @table={{this.table}}
   @height="65vh"
   @tableActions={{hash
-    deleteUser=(fn this.deleteUser)
-    notifyUser=(fn this.notifyUser)
+    deleteUser=this.deleteUser
+    notifyUser=this.notifyUser
   }}
 as |t|>
 
@@ -15,7 +15,7 @@ as |t|>
   --}}
 
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
     @iconAscending="fa fa-sort-up"
     @iconDescending="fa fa-sort-down"
@@ -24,7 +24,7 @@ as |t|>
 
   <t.body
     @canSelect={{false}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+    @onScrolledToBottom={{this.onScrolledToBottom}}
   as |body|>
     {{#if this.isLoading}}
       <body.loader>

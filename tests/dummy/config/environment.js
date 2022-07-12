@@ -52,7 +52,7 @@ module.exports = function (environment) {
     ENV.locationType = 'hash';
     ENV.rootURL = '/ember-light-table/';
     ENV['ember-cli-mirage'] = {
-      enabled: true
+      enabled: true,
     };
   }
 

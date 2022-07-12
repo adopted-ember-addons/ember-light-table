@@ -5,27 +5,27 @@
       class="table-action fa fa-check-square"
       title="Deselect all"
       role="button"
-      {{on "click" (fn this.deselectAll)}}
+      {{on "click" this.deselectAll}}
     ></div>
     <div
       class="table-action fa fa-trash delete"
       title="Delete selected"
       role="button"
-      {{on "click" (fn this.deleteAll)}}
+      {{on "click" this.deleteAll}}
     ></div>
   {{else}}
     <div
       class="table-action fa fa-square"
       title="Select all"
       role="button"
-      {{on "click" (fn this.selectAll)}}
+      {{on "click" this.selectAll}}
     ></div>
   {{/if}}
 </div>
 
 <LightTable @table={{this.table}} @height="65vh" as |t|>
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
     @iconAscending="fa fa-sort-up"
     @iconDescending="fa fa-sort-down"
@@ -34,7 +34,7 @@
 
   <t.body
     @multiSelect={{true}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}} as |body|
+    @onScrolledToBottom={{this.onScrolledToBottom}} as |body|
   >
     {{#if this.isLoading}}
       <body.loader>

@@ -1,7 +1,7 @@
 {{!-- BEGIN-SNIPPET expandable-table --}}
 <LightTable @table={{this.table}} @height="65vh" as |t|>
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
     @iconAscending="fa fa-sort-up"
     @iconDescending="fa fa-sort-down"
@@ -11,7 +11,7 @@
   <t.body
     @canExpand={{true}}
     @multiRowExpansion={{false}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+    @onScrolledToBottom={{this.onScrolledToBottom}}
   as |body|>
     <body.expanded-row as |row|>
       <ExpandedRow @row={{row}}/>

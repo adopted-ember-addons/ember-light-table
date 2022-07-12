@@ -5,5 +5,5 @@ export default Component.extend({
   layout,
   tagName: '',
   vertical: true,
-  horizontal: false
+  horizontal: false,
 });

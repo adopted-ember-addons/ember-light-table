@@ -3,7 +3,7 @@
     <tfoot class="lt-foot">
       {{!-- Scaffolding is needed here to allow use of colspan in the footer --}}
       {{lt-scaffolding-row columns=columns}}
-      {{#if hasBlock}}
+      {{#if (has-block)}}
         {{yield columns}}
       {{else}}
         <tr>

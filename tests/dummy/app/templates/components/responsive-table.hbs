@@ -3,7 +3,7 @@
   @table={{this.table}}
   @height="65vh"
   @responsive={{true}}
-  @onAfterResponsiveChange={{fn this.onAfterResponsiveChange}}
+  @onAfterResponsiveChange={{this.onAfterResponsiveChange}}
 as |t|>
 
   {{!--
@@ -13,7 +13,7 @@ as |t|>
   --}}
 
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
     @iconAscending="fa fa-sort-up"
     @iconDescending="fa fa-sort-down"
@@ -23,7 +23,7 @@ as |t|>
   <t.body
     @canSelect={{false}}
     @expandOnClick={{false}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+    @onScrolledToBottom={{this.onScrolledToBottom}}
   as |body|>
     <body.expanded-row as |row|>
       <ResponsiveExpandedRow @table={{this.table}} @row={{row}}/>

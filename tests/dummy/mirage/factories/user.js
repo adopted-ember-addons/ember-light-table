@@ -8,7 +8,17 @@ import { faker } from '@faker-js/faker';
 
 faker.locale = 'en_US';
 
-const MATERIAL_UI_COLORS = ['#F44336', '#E91E63', '#9C27B0', '#009688', '#2196F3', '#4CAF50', '#FFC107', '#FF5722', '#607D8B'];
+const MATERIAL_UI_COLORS = [
+  '#F44336',
+  '#E91E63',
+  '#9C27B0',
+  '#009688',
+  '#2196F3',
+  '#4CAF50',
+  '#FFC107',
+  '#FF5722',
+  '#607D8B',
+];
 
 export default Factory.extend({
   firstName: () => faker.name.firstName(),
@@ -21,5 +31,5 @@ export default Factory.extend({
   username: () => faker.internet.userName(),
   avatar: () => faker.internet.avatar(),
   bio: () => faker.lorem.paragraph(),
-  color: () => faker.helpers.arrayElement(MATERIAL_UI_COLORS)
+  color: () => faker.helpers.arrayElement(MATERIAL_UI_COLORS),
 });
