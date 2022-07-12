@@ -6114,14 +6114,6 @@ ember-modifier-manager-polyfill@^1.2.0:
     ember-cli-typescript "^5.0.0"
     ember-compatibility-helpers "^1.2.5"
 
-ember-notify-property-change-polyfill@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/ember-notify-property-change-polyfill/-/ember-notify-property-change-polyfill-0.0.2.tgz#4fd9012c23b9f6a8ee8e73e27989ac946f00b3fb"
-  integrity sha512-TZhq7PYBwK3GWeuY32DMH5cwzxWlN+pRUquXG+GY8/o6rvrMw+hPrPHDv3uy11it9fO6M2FpHq6UxfV+i714Jw==
-  dependencies:
-    ember-cli-babel "^6.6.0"
-    ember-cli-version-checker "^2.1.0"
-
 ember-one-way-controls@^3.0.1:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/ember-one-way-controls/-/ember-one-way-controls-3.1.0.tgz#5037d024aea0466a1dd787a79fbfd82b5df8c71e"
