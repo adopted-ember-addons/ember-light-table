@@ -1,34 +1,30 @@
 // BEGIN-SNIPPET client-side-table
 import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { action } from '@ember/object';
+import { computed, action } from '@ember/object';
 import { task, restartableTask, timeout } from 'ember-concurrency';
-import { tracked } from '@glimmer/tracking';
 
 @classic
 export default class PaginatedTable extends BaseTable {
   query = '';
 
   // No need for `enableSync` here
-  enableSync = false;
+  enableSync = false
 
-  @tracked model;
+  isLoading = computed.or('fetchRecords.isRunning', 'setRows.isRunning').readOnly();
 
-  get sortedModel() {
-    if (this.dir === 'asc') return this.model.sortBy(this.sort);
-    else return this.model.sortBy(this.sort).reverse();
-  }
+  // Sort Logic
+  sortedModel = computed.sort('model', 'sortBy').readOnly();
+  sortBy =  computed('dir', 'sort', function() {
+    return [`${this.sort}:${this.dir}`];
+  }).readOnly();
 
-  get isLoading() {
-    return this.fetchRecord?.isRunning || this.setRows?.isRunning;
-  }
-
-  // Filter Input
-  @tracked selectedFilter = this.possibleFilters.firstObject;
-
-  get possibleFilters() {
+  // Filter Input Setup
+  selectedFilte = computed.oneWay('possibleFilters.firstObject')
+  // eslint-disable-next-line ember/require-computed-macros
+  possibleFilters = computed('table.columns', function() {
     return this.table.columns.filterBy('sortable', true);
-  }
+  }).readOnly()
 
   get columns() {
     return [{
@@ -58,7 +54,7 @@ export default class PaginatedTable extends BaseTable {
   }
 
   @task({ on: 'init' }) *fetchRecords() {
-    const records = yield this.store.query('user', { page: 1, limit: 100 });
+    let records = yield this.store.query('user', { page: 1, limit: 100 });
     this.model.setObjects(records.toArray());
     this.set('meta', records.meta);
     yield this.filterAndSortModel.perform();
@@ -73,12 +69,12 @@ export default class PaginatedTable extends BaseTable {
   @restartableTask *filterAndSortModel(debounceMs = 200) {
     yield timeout(debounceMs); // debounce
 
-    const { query } = this;
-    const model = this.sortedModel;
+    let { query } = this;
+    let model = this.sortedModel;
     let result = model;
 
     if (query !== '' && this.selectedFilter !== undefined) {
-      const { valuePath } = this.selectedFilter;
+      let { valuePath } = this.selectedFilter;
 
       result = model.filter((m) => {
         return m.get(valuePath).toLowerCase().includes(query.toLowerCase());
@@ -91,12 +87,15 @@ export default class PaginatedTable extends BaseTable {
   @action
   onColumnClick(column) {
     if (column.sorted) {
-      this.dir = column.ascending ? 'asc' : 'desc';
-      this.sort = column.valuePath;
-      this.filterAndSortModel.perform(100);
+      this.setProperties({
+        dir: column.ascending ? 'asc' : 'desc',
+        sort: column.valuePath
+      });
+
+      this.filterAndSortModel.perform(0);
     }
   }
-
+  
   @action
   onSearchChange() {
     this.filterAndSortModel.perform();

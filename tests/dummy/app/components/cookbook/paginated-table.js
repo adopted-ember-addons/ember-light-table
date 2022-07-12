@@ -5,8 +5,6 @@ import { action } from '@ember/object';
 
 @classic
 export default class PaginatedTable extends BaseTable {
-  limit = 10;
-  
   get columns() {
     return [{
       label: 'Avatar',
@@ -41,8 +39,8 @@ export default class PaginatedTable extends BaseTable {
 
   @action
   setPage(page) {
-    const totalPages = this.meta?.totalPages;
-    const currPage = this.page;
+    let totalPages = this.meta.totalPages;
+    let currPage = this.page;
 
     if (page < 1 || page > totalPages || page === currPage) {
       return;
