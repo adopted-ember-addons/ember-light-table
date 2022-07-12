@@ -1,13 +1,16 @@
-@import "ember-power-select";
-@import "./loader.less";
-@import "./table.less";
+@import 'ember-power-select';
+
 $accent-color: #dd6a58;
 
-html,body {
+@import './loader.scss';
+@import './table.scss';
+
+html,
+body {
   min-height: 100%;
   min-width: 100%;
   font-family: 'Open Sans', sans-serif;
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
   height: 100%;
 }
 
@@ -15,13 +18,13 @@ label {
   font-weight: 600;
 }
 
-.ember-power-select-trigger{
+.ember-power-select-trigger {
   height: 35px;
 }
 
 .scrolling-select-control {
   width: 40%;
-  label{
+  label {
     float: left;
     margin-right: 3px;
     margin-bottom: 0;
@@ -29,7 +32,7 @@ label {
   }
 }
 
-.pagination{
+.pagination {
   button {
     color: #d95743;
     padding: 5px 10px;
@@ -56,38 +59,39 @@ label {
   margin: 0;
 
   .navbar-brand {
-      color: #797979;
-      font-size: 16px;
-      font-weight: 400;
+    color: #797979;
+    font-size: 16px;
+    font-weight: 400;
 
-      img {
-        height: 32px;
-        display: inline-block;
-        margin-top: -15px;
-      }
+    img {
+      height: 32px;
+      display: inline-block;
+      margin-top: -15px;
+    }
 
-      span {
-        font-size: 12px;
-        vertical-align: super;
-        text-transform: uppercase;
-        color: #444444;
-      }
+    span {
+      font-size: 12px;
+      vertical-align: super;
+      text-transform: uppercase;
+      color: #444444;
+    }
   }
 
-  .navbar-nav>li>a {
-      font-size: 14px;
-      font-weight: 200;
+  .navbar-nav > li > a {
+    font-size: 14px;
+    font-weight: 200;
 
-      &.github {
-        font-size: 24px;
-      }
+    &.github {
+      font-size: 24px;
+    }
   }
 
   .navbar-nav.dropdown-menu li a {
     font-size: 13px;
   }
 
-  .navbar-nav>li>a:focus, .navbar-nav>li>a:hover {
+  .navbar-nav > li > a:focus,
+  .navbar-nav > li > a:hover {
     color: $accent-color;
   }
 
@@ -124,7 +128,8 @@ label {
       color: #191919;
       opacity: 0.8;
 
-      &:hover, &:active {
+      &:hover,
+      &:active {
         opacity: 1;
       }
 
@@ -138,7 +143,7 @@ label {
     background-color: $accent-color;
     padding: 0;
     a {
-      color: #F9F9F9;
+      color: #f9f9f9;
       text-decoration: none;
 
       .panel-title {
@@ -155,7 +160,7 @@ label {
 
     .nav-tabs {
       li > a {
-        color: #8A8A8A;
+        color: #8a8a8a;
         border-radius: 2px 2px 0 0;
         font-size: 12px;
       }
@@ -199,8 +204,10 @@ label {
     cursor: pointer;
     padding-top: 10px;
 
-    &:hover, &:active, &:focus {
-      color: darken($accent-color, 5%)
+    &:hover,
+    &:active,
+    &:focus {
+      color: darken($accent-color, 5%);
     }
   }
 }
@@ -215,15 +222,17 @@ label {
   cursor: pointer;
   background-color: #fff;
   border: 0;
-  &:hover, &:active, &:focus {
-    color: darken($accent-color, 5%)
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($accent-color, 5%);
   }
 }
 
 .tip {
   text-align: center;
   font-size: 13px;
-  color: #4E4E4E;
+  color: #4e4e4e;
 
   .icon-info {
     color: $accent-color;
@@ -232,13 +241,14 @@ label {
 }
 
 form .form-group {
-  input, select {
+  input,
+  select {
     outline: none;
     display: block;
     width: 100%;
     padding: 0 15px;
     border: 1px solid #d9d9d9;
-    color: #6E6E6E;
+    color: #6e6e6e;
     font-family: 'Roboto', sans-serif;
     -webkti-box-sizing: border-box;
     box-sizing: border-box;

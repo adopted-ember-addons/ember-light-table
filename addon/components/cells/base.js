@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from 'ember-light-table/templates/components/cells/base';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 
 /**
  * @module Light Table
