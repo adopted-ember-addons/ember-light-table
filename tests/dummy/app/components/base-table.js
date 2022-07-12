@@ -1,7 +1,7 @@
 // BEGIN-SNIPPET base-table
 import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
-import { action } from '@ember/object';
+import { computed, action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import Table from 'ember-light-table';
@@ -12,10 +12,11 @@ export default class BaseTable extends Component {
   @service store;
 
   page = 0;
-  limit = 15;
+  limit = 10;
   dir = 'asc';
   sort = 'firstName';
 
+  isLoading = computed.oneWay('fetchRecords.isRunning');
   canLoadMore = true;
   enableSync = true;
 
@@ -37,29 +38,20 @@ export default class BaseTable extends Component {
       sortColumn.set('sorted', true);
     }
 
-    this.table = table;
-  }
-
-  get isLoading() {
-    return this.fetchRecords.isRunning;
+    this.set('table', table);
   }
 
   @restartableTask *fetchRecords() {
-    const records = yield this.store.query('user', {
-      page: this.page,
-      limit: this.limit,
-      sort: this.sort,
-      dir: this.dir,
-    });
+    const records = yield this.store.query('user', [this.page, this.limit, this.sort, this.dir]);
     this.model.pushObjects(records.toArray());
-    this.meta = records.get('meta');
-    this.canLoadMore = !isEmpty(records);
+    this.set('meta', records.get('meta'));
+    this.set('canLoadMore', !isEmpty(records));
   }
 
   @action
   onScrolledToBottom() {
     if (this.canLoadMore) {
-      this.page = this.page + 1;
+      this.incrementProperty('page');
       this.fetchRecords.perform();
     }
   }

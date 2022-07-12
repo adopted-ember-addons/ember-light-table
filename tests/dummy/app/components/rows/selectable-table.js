@@ -1,15 +1,11 @@
 // BEGIN-SNIPPET selectable-table
 import BaseTable from '../base-table';
-import { action } from '@ember/object';
+import { computed, action } from '@ember/object';
 import classic from 'ember-classic-decorator';
 
 @classic
 export default class ExpandableTable extends BaseTable {
-
-  // At least one table row is selected.
-  get hasSelection() {
-    return this.table.selectedRows;
-  }
+  hasSelection = computed.notEmpty('table.selectedRows')
 
   get columns() {
     return [{
