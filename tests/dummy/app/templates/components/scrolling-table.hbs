@@ -40,7 +40,7 @@
             </span>
           </div>
 
-          <div class="form-group">
+          <div class="form-group scroll-to-control">
             <label for="scrollTo">Scroll To:</label>
             <Input
               @value={{this.scrollTo}}
@@ -57,7 +57,6 @@
             <PowerSelect @selected={{this.scrollToRow}}
               @options={{this.table.visibleRows}}
               @onChange={{fn (mut this.scrollToRow)}}
-              class="form-control"
               name="scrollToRow"
             as |row|>
               {{row.id}} - {{row.firstName}} {{row.lastName}}
