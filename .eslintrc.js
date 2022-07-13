@@ -37,11 +37,6 @@ module.exports = {
     'ember/no-mixins': 'off',
     'ember/no-new-mixins': 'off',
     'ember/require-tagless-components': 'off',
-    // Remove when addon code is updated
-    'ember/no-classic-components': 'warn',
-    'ember/no-classic-classes': 'warn',
-    'ember/no-component-lifecycle-hooks': 'warn',
-    'ember/no-actions-hash': 'warn',
   },
 
   overrides: [

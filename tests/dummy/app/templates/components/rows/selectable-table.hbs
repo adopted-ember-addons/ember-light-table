@@ -1,40 +1,62 @@
 {{! BEGIN-SNIPPET selectable-table }}
-<div class="table-actions">
+<div class='table-actions'>
   {{#if this.hasSelection}}
     <div
-      class="table-action fa fa-check-square"
-      title="Deselect all"
-      role="button"
-      {{on "click" this.deselectAll}}
-    ></div>
+      class='table-action'
+      title='Deselect all'
+      role='button'
+      {{on 'click' this.deselectAll}}
+    >
+      <img
+        class='selectable-icon'
+        alt=''
+        role='presentation'
+        src='/images/square-check.svg'
+      />
+    </div>
     <div
-      class="table-action fa fa-trash delete"
-      title="Delete selected"
-      role="button"
-      {{on "click" this.deleteAll}}
-    ></div>
+      class='table-action'
+      title='Delete selected'
+      role='button'
+      {{on 'click' this.deleteAll}}
+    >
+      <img
+        class='selectable-icon'
+        alt=''
+        role='presentation'
+        src='/images/trash-can-red.svg'
+      />
+    </div>
   {{else}}
     <div
-      class="table-action fa fa-square"
-      title="Select all"
-      role="button"
-      {{on "click" this.selectAll}}
-    ></div>
+      class='table-action'
+      title='Select all'
+      role='button'
+      {{on 'click' this.selectAll}}
+    >
+      <img
+        class='selectable-icon'
+        alt=''
+        role='presentation'
+        src='/images/square.svg'
+      />
+    </div>
   {{/if}}
 </div>
 
-<LightTable @table={{this.table}} @height="65vh" as |t|>
+<LightTable @table={{this.table}} @height='65vh' as |t|>
   <t.head
     @onColumnClick={{this.onColumnClick}}
-    @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconSortable='fa fa-sort'
+    @iconAscending='fa fa-sort-up'
+    @iconDescending='fa fa-sort-down'
     @fixed={{true}}
   />
 
   <t.body
     @multiSelect={{true}}
-    @onScrolledToBottom={{this.onScrolledToBottom}} as |body|
+    @onScrolledToBottom={{this.onScrolledToBottom}}
+    as |body|
   >
     {{#if this.isLoading}}
       <body.loader>
