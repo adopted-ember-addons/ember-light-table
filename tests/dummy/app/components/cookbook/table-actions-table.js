@@ -1,47 +1,41 @@
 // BEGIN-SNIPPET table-actions-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed, action } from '@ember/object';
+import { action } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function () {
-    return [
-      {
-        label: 'Avatar',
-        valuePath: 'avatar',
-        width: '60px',
-        sortable: false,
-        cellComponent: 'user-avatar',
-      },
-      {
-        label: 'First Name',
-        valuePath: 'firstName',
-        width: '150px',
-      },
-      {
-        label: 'Last Name',
-        valuePath: 'lastName',
-        width: '150px',
-      },
-      {
-        label: 'Address',
-        valuePath: 'address',
-      },
-      {
-        label: 'State',
-        valuePath: 'state',
-      },
-      {
-        label: 'Country',
-        valuePath: 'country',
-      },
-      {
-        label: 'Actions',
-        width: '100px',
-        sortable: false,
-        cellComponent: 'user-actions',
-      },
-    ];
-  }),
+@classic
+export default class TableActionsTable extends BaseTable {
+  get columns() {
+    return [{
+      label: 'Avatar',
+      valuePath: 'avatar',
+      width: '60px',
+      sortable: false,
+      cellComponent: 'user-avatar'
+    }, {
+      label: 'First Name',
+      valuePath: 'firstName',
+      width: '150px'
+    }, {
+      label: 'Last Name',
+      valuePath: 'lastName',
+      width: '150px'
+    }, {
+      label: 'Address',
+      valuePath: 'address'
+    }, {
+      label: 'State',
+      valuePath: 'state'
+    }, {
+      label: 'Country',
+      valuePath: 'country'
+    }, {
+      label: 'Actions',
+      width: '100px',
+      sortable: false,
+      cellComponent: 'user-actions'
+    }];
+  }
 
   @action
   deleteUser(row) {
@@ -55,13 +49,11 @@ export default BaseTable.extend({
       this.table.removeRow(row);
       row.get('content').deleteRecord();
     }
-  },
+  }
 
   @action
   notifyUser(row) {
-    window.alert(
-      `${row.get('firstName')} ${row.get('lastName')} has been notified.`
-    );
-  },
-});
+    window.alert(`${row.get('firstName')} ${row.get('lastName')} has been notified.`);
+  }
+}
 // END-SNIPPET

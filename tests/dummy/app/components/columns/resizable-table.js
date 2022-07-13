@@ -1,14 +1,14 @@
 // BEGIN-SNIPPET resizable-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function () {
-    return [
-      {
-        label: 'User Details',
-        sortable: false,
-        align: 'center',
+@classic
+export default class ResizableTable extends BaseTable {
+  get columns() {
+    return [{
+      label: 'User Details',
+      sortable: false,
+      align: 'center',
 
         subColumns: [
           {
@@ -39,28 +39,23 @@ export default BaseTable.extend({
         sortable: false,
         align: 'center',
 
-        subColumns: [
-          {
-            label: 'Address',
-            resizable: true,
-            valuePath: 'address',
-            minResizeWidth: 100,
-          },
-          {
-            label: 'State',
-            resizable: true,
-            valuePath: 'state',
-            minResizeWidth: 100,
-          },
-          {
-            label: 'Country',
-            resizable: true,
-            valuePath: 'country',
-            minResizeWidth: 100,
-          },
-        ],
-      },
-    ];
-  }),
-});
+      subColumns: [{
+        label: 'Address',
+        resizable: true,
+        valuePath: 'address',
+        minResizeWidth: 100
+      }, {
+        label: 'State',
+        resizable: true,
+        valuePath: 'state',
+        minResizeWidth: 100
+      }, {
+        label: 'Country',
+        resizable: true,
+        valuePath: 'country',
+        minResizeWidth: 100
+      }]
+    }];
+  }
+}
 // END-SNIPPET

@@ -22,14 +22,7 @@ module.exports = {
   },
 
   rules: {
-    // TODO: enable all these rules and fix the violations
-    'ember/classic-decorator-no-classic-methods': 'off',
-    'ember/classic-decorator-hooks': 'off',
-    'ember/no-actions-hash': 'off',
-    'ember/no-classic-classes': 'off',
-    'ember/no-classic-components': 'off',
-    'ember/no-component-lifecycle-hooks': 'off',
-    'ember/no-computed-properties-in-native-classes': 'off',
+    'generator-star-spacing': ['error', { before: true, after: false }],
     'ember/no-observers': 'off',
     'ember/no-jquery': 'error',
     'ember/no-get': 'warn',

@@ -1,40 +1,35 @@
 // BEGIN-SNIPPET custom-sort-icon-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function () {
-    return [
-      {
-        label: 'Avatar',
-        valuePath: 'avatar',
-        width: '60px',
-        sortable: false,
-        cellComponent: 'user-avatar',
-      },
-      {
-        label: 'First Name',
-        valuePath: 'firstName',
-        width: '150px',
-      },
-      {
-        label: 'Last Name',
-        valuePath: 'lastName',
-        width: '150px',
-      },
-      {
-        label: 'Address',
-        valuePath: 'address',
-      },
-      {
-        label: 'State',
-        valuePath: 'state',
-      },
-      {
-        label: 'Country',
-        valuePath: 'country',
-      },
-    ];
-  }),
-});
+@classic
+export default class CustomSortIconTable extends BaseTable {
+
+  get columns() {
+    return [{
+      label: 'Avatar',
+      valuePath: 'avatar',
+      width: '60px',
+      sortable: false,
+      cellComponent: 'user-avatar'
+    }, {
+      label: 'First Name',
+      valuePath: 'firstName',
+      width: '150px'
+    }, {
+      label: 'Last Name',
+      valuePath: 'lastName',
+      width: '150px'
+    }, {
+      label: 'Address',
+      valuePath: 'address'
+    }, {
+      label: 'State',
+      valuePath: 'state'
+    }, {
+      label: 'Country',
+      valuePath: 'country'
+    }];
+  }
+}
 // END-SNIPPET
