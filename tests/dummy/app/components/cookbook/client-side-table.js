@@ -1,6 +1,7 @@
 // BEGIN-SNIPPET client-side-table
 import BaseTable from '../base-table';
 import { computed, action } from '@ember/object';
+import { oneWay, or, sort } from '@ember/object/computed';
 import { task, timeout } from 'ember-concurrency';
 
 export default BaseTable.extend({
@@ -9,18 +10,16 @@ export default BaseTable.extend({
   // No need for `enableSync` here
   enableSync: false,
 
-  isLoading: computed
-    .or('fetchRecords.isRunning', 'setRows.isRunning')
-    .readOnly(),
+  isLoading: or('fetchRecords.isRunning', 'setRows.isRunning'),
 
   // Sort Logic
-  sortedModel: computed.sort('model', 'sortBy').readOnly(),
+  sortedModel: sort('model', 'sortBy'),
   sortBy: computed('dir', 'sort', function () {
     return [`${this.sort}:${this.dir}`];
   }).readOnly(),
 
   // Filter Input Setup
-  selectedFilter: computed.oneWay('possibleFilters.firstObject'),
+  selectedFilter: oneWay('possibleFilters.firstObject'),
   // eslint-disable-next-line ember/require-computed-macros
   possibleFilters: computed('table.columns', function () {
     return this.table.columns.filterBy('sortable', true);

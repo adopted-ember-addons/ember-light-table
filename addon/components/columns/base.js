@@ -1,6 +1,7 @@
 import { set } from '@ember/object';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { oneWay, readOnly } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
 import layout from 'ember-light-table/templates/components/columns/base';
 import DraggableColumnMixin from 'ember-light-table/mixins/draggable-column';
@@ -33,12 +34,12 @@ const Column = Component.extend(DraggableColumnMixin, {
     'column.classNames',
   ],
 
-  isGroupColumn: computed.readOnly('column.isGroupColumn'),
-  isSortable: computed.readOnly('column.sortable'),
-  isSorted: computed.readOnly('column.sorted'),
-  isHideable: computed.readOnly('column.hideable'),
-  isResizable: computed.readOnly('column.resizable'),
-  isDraggable: computed.readOnly('column.draggable'),
+  isGroupColumn: readOnly('column.isGroupColumn'),
+  isSortable: readOnly('column.sortable'),
+  isSorted: readOnly('column.sorted'),
+  isHideable: readOnly('column.hideable'),
+  isResizable: readOnly('column.resizable'),
+  isDraggable: readOnly('column.draggable'),
   isResizing: false,
 
   style: computed('column.width', function () {
@@ -53,7 +54,7 @@ const Column = Component.extend(DraggableColumnMixin, {
    * @property label
    * @type {String}
    */
-  label: computed.oneWay('column.label'),
+  label: oneWay('column.label'),
 
   /**
    * @property table

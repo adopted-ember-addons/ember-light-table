@@ -5360,7 +5360,7 @@ ember-cli-babel-plugin-helpers@^1.0.0, ember-cli-babel-plugin-helpers@^1.1.0, em
   resolved "https://registry.yarnpkg.com/ember-cli-babel-plugin-helpers/-/ember-cli-babel-plugin-helpers-1.1.1.tgz#5016b80cdef37036c4282eef2d863e1d73576879"
   integrity sha512-sKvOiPNHr5F/60NLd7SFzMpYPte/nnGkq/tMIfXejfKHIhaiIkYFqX8Z9UFTKWLLn+V7NOaby6niNPZUdvKCRw==
 
-ember-cli-babel@^6.0.0, ember-cli-babel@^6.16.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.0, ember-cli-babel@^6.9.0:
+ember-cli-babel@^6.16.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.18.0.tgz#3f6435fd275172edeff2b634ee7b29ce74318957"
   integrity sha512-7ceC8joNYxY2wES16iIBlbPSxwKDBhYwC8drU3ZEvuPDMwVv1KzxCNu1fvxyFEBWhwaRNTUxSCsEVoTd9nosGA==
@@ -6051,13 +6051,6 @@ ember-in-viewport@^4.0.2:
   dependencies:
     ember-cli-babel "^7.26.5"
 
-ember-invoke-action@^1.5.0:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/ember-invoke-action/-/ember-invoke-action-1.5.1.tgz#b6cad51ee729fc227cdbdba83b2b5486f0fa5834"
-  integrity sha512-co6Yg9r5qtK4LvZTZHk+u02YLPbnM2c5ZkXvundxEj3V7qdZg7RULfjU09LmohD+rxW5ADZlwgBi/32XIEWTlw==
-  dependencies:
-    ember-cli-babel "^6.6.0"
-
 ember-lifeline@^4.1.5:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/ember-lifeline/-/ember-lifeline-4.1.5.tgz#a3db0c2357b533c65e1396c1c1d70609c2cd7276"
@@ -6113,16 +6106,6 @@ ember-modifier-manager-polyfill@^1.2.0:
     ember-cli-string-utils "^1.1.0"
     ember-cli-typescript "^5.0.0"
     ember-compatibility-helpers "^1.2.5"
-
-ember-one-way-controls@^3.0.1:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/ember-one-way-controls/-/ember-one-way-controls-3.1.0.tgz#5037d024aea0466a1dd787a79fbfd82b5df8c71e"
-  integrity sha512-SH/BcT7WWUWBuabOZ6TEPLrpG/FxL7MEIcXWjSzA6E0gCsIrB87jJL5uM12cwBjF9o3hEDUN/y5zNu1D8Wfomw==
-  dependencies:
-    ember-cli-babel "^6.0.0"
-    ember-cli-htmlbars "^2.0.1"
-    ember-invoke-action "^1.5.0"
-    ember-runtime-enumerable-includes-polyfill "^2.0.0"
 
 ember-power-select@^4.0.0:
   version "4.1.7"
@@ -6208,14 +6191,6 @@ ember-router-generator@^2.0.0:
     "@babel/parser" "^7.4.5"
     "@babel/traverse" "^7.4.5"
     recast "^0.18.1"
-
-ember-runtime-enumerable-includes-polyfill@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/ember-runtime-enumerable-includes-polyfill/-/ember-runtime-enumerable-includes-polyfill-2.1.0.tgz#dc6d4a028471e4acc350dfd2a149874fb20913f5"
-  integrity sha512-au18iI8VbEDYn3jLFZzETnKN5ciPgCUxMRucEP3jkq7qZ6sE0FVKpWMPY/h9tTND3VOBJt6fgPpEBJoJVCUudg==
-  dependencies:
-    ember-cli-babel "^6.9.0"
-    ember-cli-version-checker "^2.1.0"
 
 ember-scrollable@^1.0.2:
   version "1.0.2"
