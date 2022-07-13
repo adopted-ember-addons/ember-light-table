@@ -91,13 +91,6 @@ You don't have a specific feature in mind but want to help out anyways? Awesome!
 
 Issues marked with [**help wanted**][help-wanted] are generally agreed upon and ready to get implemented. Oftentimes we have clearly outlined how these issues should get resolved.
 
-We try hard to accurately estimate the overall difficulty and scope of issues and organize them with labels:
-
-- :relaxed: [**difficulty-easy**][difficulty-easy]: Perfect for beginners or if you don't have much time on your hands.
-- :wink: [**difficulty-medium**][difficulty-medium]: A fair knowledge of *ember-light-table* and Ember.js / ember-cli is recommended. The higher level plan or expected API has been clearly outlined. The implementation details should be pretty easy to figure out.
-- :thinking: [**difficulty-hard**][difficulty-hard]: For the experienced. Implementation details are important to get right as to not wreak havoc or kill performance. Still the overall plan should be clearly outlined.
-- :scream: [**difficulty-epic**][difficulty-epic]: Up for a challenge, eh? Either this issue has a really broad scope, requires substantial refactoring and rewrites or we know what we want to achieve, but are not quite sure how.
-
 #### :handshake: Got Stuck?
 
 We're here to help! It's a good idea to submit you're pull request (PR) right away. Just prefix the title with `[WIP]` (work in progress) so we know that you're not done yet.
@@ -116,14 +109,6 @@ If a pull request is marked with [**help wanted**][pr-help-wanted] we just don't
 [pr-ideas-wanted]: https://github.com/offirgolan/ember-light-table/pulls?q=is%3Apr+is%3Aopen+label%ideas-wanted
 [pr-help-wanted]: https://github.com/offirgolan/ember-light-table/pulls?q=is%3Apr+is%3Aopen+label%3Ahelp+wanted
 
-[difficulty-easy]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3Adifficulty-easy
-[difficulty-medium]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3Adifficulty-medium
-[difficulty-hard]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3Adifficulty-hard
-[difficulty-epic]: https://github.com/offirgolan/ember-light-table/issues?q=is%3Aissue+is%3Aopen+label%3Adifficulty-epic
-
 [demo]: https://adopted-ember-addons.github.io/ember-light-table/
 [cookbook]: https://adopted-ember-addons.github.io/ember-light-table/#/cookbook
 [docs]: https://adopted-ember-addons.github.io/ember-light-table/docs/
-
-[slack]: https://embercommunity.slack.com/messages/C615THVGF
-[slackin]: https://ember-community-slackin.herokuapp.com/
