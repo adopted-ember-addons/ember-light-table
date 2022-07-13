@@ -6,7 +6,6 @@ import Row from 'ember-light-table/classes/Row';
 import Column from 'ember-light-table/classes/Column';
 import SyncArrayProxy from 'ember-light-table/-private/sync-array-proxy';
 import { mergeOptionsWithGlobals } from 'ember-light-table/-private/global-options';
-import { assign } from '@ember/polyfills';
 import { isNone } from '@ember/utils';
 
 const RowSyncArrayProxy = SyncArrayProxy.extend({
@@ -430,7 +429,7 @@ export default class Table extends EmberObject.extend({
     if (content instanceof Row) {
       return content;
     } else {
-      return Row.create(assign({}, options, { content }));
+      return Row.create(Object.assign({}, options, { content }));
     }
   }
 
