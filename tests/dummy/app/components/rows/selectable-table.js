@@ -5,33 +5,40 @@ import classic from 'ember-classic-decorator';
 
 @classic
 export default class ExpandableTable extends BaseTable {
-  hasSelection = computed.notEmpty('table.selectedRows')
+  hasSelection = computed.notEmpty('table.selectedRows');
 
   get columns() {
-    return [{
-      label: 'Avatar',
-      valuePath: 'avatar',
-      width: '60px',
-      sortable: false,
-      cellComponent: 'user-avatar'
-    }, {
-      label: 'First Name',
-      valuePath: 'firstName',
-      width: '150px'
-    }, {
-      label: 'Last Name',
-      valuePath: 'lastName',
-      width: '150px'
-    }, {
-      label: 'Address',
-      valuePath: 'address'
-    }, {
-      label: 'State',
-      valuePath: 'state'
-    }, {
-      label: 'Country',
-      valuePath: 'country'
-    }];
+    return [
+      {
+        label: 'Avatar',
+        valuePath: 'avatar',
+        width: '60px',
+        sortable: false,
+        cellComponent: 'user-avatar',
+      },
+      {
+        label: 'First Name',
+        valuePath: 'firstName',
+        width: '150px',
+      },
+      {
+        label: 'Last Name',
+        valuePath: 'lastName',
+        width: '150px',
+      },
+      {
+        label: 'Address',
+        valuePath: 'address',
+      },
+      {
+        label: 'State',
+        valuePath: 'state',
+      },
+      {
+        label: 'Country',
+        valuePath: 'country',
+      },
+    ];
   }
 
   @action

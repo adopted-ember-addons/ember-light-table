@@ -43,7 +43,12 @@ export default class BaseTable extends Component {
   }
 
   @restartableTask *fetchRecords() {
-    const records = yield this.store.query('user', [this.page, this.limit, this.sort, this.dir]);
+    const records = yield this.store.query('user', [
+      this.page,
+      this.limit,
+      this.sort,
+      this.dir,
+    ]);
     this.model.pushObjects(records.toArray());
     this.set('meta', records.get('meta'));
     this.set('canLoadMore', !isEmpty(records));
