@@ -5,10 +5,11 @@ import BaseTable from '../base-table';
 @classic
 export default class GroupedTable extends BaseTable {
   get columns() {
-    return [{
-      label: 'User Details',
-      sortable: false,
-      align: 'center',
+    return [
+      {
+        label: 'User Details',
+        sortable: false,
+        align: 'center',
 
         subColumns: [
           {
@@ -35,17 +36,22 @@ export default class GroupedTable extends BaseTable {
         sortable: false,
         align: 'center',
 
-      subColumns: [{
-        label: 'Address',
-        valuePath: 'address'
-      }, {
-        label: 'State',
-        valuePath: 'state'
-      }, {
-        label: 'Country',
-        valuePath: 'country'
-      }]
-    }];
+        subColumns: [
+          {
+            label: 'Address',
+            valuePath: 'address',
+          },
+          {
+            label: 'State',
+            valuePath: 'state',
+          },
+          {
+            label: 'Country',
+            valuePath: 'country',
+          },
+        ],
+      },
+    ];
   }
 }
 // END-SNIPPET

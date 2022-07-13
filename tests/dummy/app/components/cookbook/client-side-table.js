@@ -9,48 +9,57 @@ export default class PaginatedTable extends BaseTable {
   query = '';
 
   // No need for `enableSync` here
-  enableSync = false
+  enableSync = false;
 
-  isLoading = computed.or('fetchRecords.isRunning', 'setRows.isRunning').readOnly();
+  isLoading = computed
+    .or('fetchRecords.isRunning', 'setRows.isRunning')
+    .readOnly();
 
   // Sort Logic
   sortedModel = computed.sort('model', 'sortBy').readOnly();
-  sortBy =  computed('dir', 'sort', function() {
+  sortBy = computed('dir', 'sort', function () {
     return [`${this.sort}:${this.dir}`];
   }).readOnly();
 
   // Filter Input Setup
-  selectedFilte = computed.oneWay('possibleFilters.firstObject')
+  selectedFilte = computed.oneWay('possibleFilters.firstObject');
   // eslint-disable-next-line ember/require-computed-macros
-  possibleFilters = computed('table.columns', function() {
+  possibleFilters = computed('table.columns', function () {
     return this.table.columns.filterBy('sortable', true);
-  }).readOnly()
+  }).readOnly();
 
   get columns() {
-    return [{
-      label: 'Avatar',
-      valuePath: 'avatar',
-      width: '60px',
-      sortable: false,
-      cellComponent: 'user-avatar'
-    }, {
-      label: 'First Name',
-      valuePath: 'firstName',
-      width: '150px'
-    }, {
-      label: 'Last Name',
-      valuePath: 'lastName',
-      width: '150px'
-    }, {
-      label: 'Address',
-      valuePath: 'address'
-    }, {
-      label: 'State',
-      valuePath: 'state'
-    }, {
-      label: 'Country',
-      valuePath: 'country'
-    }];
+    return [
+      {
+        label: 'Avatar',
+        valuePath: 'avatar',
+        width: '60px',
+        sortable: false,
+        cellComponent: 'user-avatar',
+      },
+      {
+        label: 'First Name',
+        valuePath: 'firstName',
+        width: '150px',
+      },
+      {
+        label: 'Last Name',
+        valuePath: 'lastName',
+        width: '150px',
+      },
+      {
+        label: 'Address',
+        valuePath: 'address',
+      },
+      {
+        label: 'State',
+        valuePath: 'state',
+      },
+      {
+        label: 'Country',
+        valuePath: 'country',
+      },
+    ];
   }
 
   @task({ on: 'init' }) *fetchRecords() {
@@ -89,13 +98,13 @@ export default class PaginatedTable extends BaseTable {
     if (column.sorted) {
       this.setProperties({
         dir: column.ascending ? 'asc' : 'desc',
-        sort: column.valuePath
+        sort: column.valuePath,
       });
 
       this.filterAndSortModel.perform(0);
     }
   }
-  
+
   @action
   onSearchChange() {
     this.filterAndSortModel.perform();

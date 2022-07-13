@@ -5,10 +5,11 @@ import BaseTable from '../base-table';
 @classic
 export default class ResizableTable extends BaseTable {
   get columns() {
-    return [{
-      label: 'User Details',
-      sortable: false,
-      align: 'center',
+    return [
+      {
+        label: 'User Details',
+        sortable: false,
+        align: 'center',
 
         subColumns: [
           {
@@ -39,23 +40,28 @@ export default class ResizableTable extends BaseTable {
         sortable: false,
         align: 'center',
 
-      subColumns: [{
-        label: 'Address',
-        resizable: true,
-        valuePath: 'address',
-        minResizeWidth: 100
-      }, {
-        label: 'State',
-        resizable: true,
-        valuePath: 'state',
-        minResizeWidth: 100
-      }, {
-        label: 'Country',
-        resizable: true,
-        valuePath: 'country',
-        minResizeWidth: 100
-      }]
-    }];
+        subColumns: [
+          {
+            label: 'Address',
+            resizable: true,
+            valuePath: 'address',
+            minResizeWidth: 100,
+          },
+          {
+            label: 'State',
+            resizable: true,
+            valuePath: 'state',
+            minResizeWidth: 100,
+          },
+          {
+            label: 'Country',
+            resizable: true,
+            valuePath: 'country',
+            minResizeWidth: 100,
+          },
+        ],
+      },
+    ];
   }
 }
 // END-SNIPPET
