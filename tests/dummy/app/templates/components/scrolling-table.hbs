@@ -8,7 +8,7 @@
   --}}
 
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
     @iconAscending="fa fa-sort-asc"
     @iconDescending="fa fa-sort-desc"
@@ -20,7 +20,7 @@
     @scrollTo={{this.scrollTo}}
     @scrollToRow={{this.scrollToRow}}
     @onScroll={{fn (mut this.currentScrollOffset)}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+    @onScrolledToBottom={{this.onScrolledToBottom}}
   as |body|>
     {{#if this.isLoading}}
       <body.loader>
