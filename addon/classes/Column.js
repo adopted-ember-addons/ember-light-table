@@ -1,5 +1,6 @@
 import { A as emberArray, makeArray } from '@ember/array';
 import EmberObject, { computed } from '@ember/object';
+import { notEmpty, or } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
 import { guidFor } from '@ember/object/internals';
 
@@ -284,14 +285,14 @@ export default class Column extends EmberObject.extend({
    * @property isHidden
    * @type {Boolean}
    */
-  isHidden: computed.or('hidden', 'responsiveHidden').readOnly(),
+  isHidden: or('hidden', 'responsiveHidden'),
 
   /**
    * @property isGroupColumn
    * @type {Boolean}
    * @private
    */
-  isGroupColumn: computed.notEmpty('subColumns').readOnly(),
+  isGroupColumn: notEmpty('subColumns'),
 
   /**
    * @property isVisibleGroupColumn

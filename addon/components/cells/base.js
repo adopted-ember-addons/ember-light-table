@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import layout from 'ember-light-table/templates/components/cells/base';
 import { htmlSafe } from '@ember/template';
 
@@ -22,7 +23,7 @@ const Cell = Component.extend({
 
   enableScaffolding: false,
 
-  isSorted: computed.readOnly('column.sorted'),
+  isSorted: readOnly('column.sorted'),
 
   style: computed('enableScaffolding', 'column.width', function () {
     let column = this.column;

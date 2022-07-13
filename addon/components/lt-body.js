@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { deprecate } from '@ember/application/deprecations';
 import { computed, observer } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import layout from 'ember-light-table/templates/components/lt-body';
 import { run } from '@ember/runloop';
 import Row from 'ember-light-table/classes/Row';
@@ -317,9 +318,9 @@ export default Component.extend({
    */
   infinityComponent: null,
 
-  rows: computed.readOnly('table.visibleRows'),
-  columns: computed.readOnly('table.visibleColumns'),
-  colspan: computed.readOnly('columns.length'),
+  rows: readOnly('table.visibleRows'),
+  columns: readOnly('table.visibleColumns'),
+  colspan: readOnly('columns.length'),
 
   /**
    * fills the screen with row items until lt-infinity component has exited the viewport

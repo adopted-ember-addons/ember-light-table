@@ -1,5 +1,6 @@
 import Mixin from '@ember/object/mixin';
 import { computed, trySet } from '@ember/object';
+import { oneWay, readOnly } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
 import { warn } from '@ember/debug';
 import { inject as service } from '@ember/service';
@@ -127,10 +128,10 @@ export default Mixin.create({
    */
   tableId: null,
 
-  renderInPlace: computed.oneWay('fixed'),
-  columnGroups: computed.readOnly('table.visibleColumnGroups'),
-  subColumns: computed.readOnly('table.visibleSubColumns'),
-  columns: computed.readOnly('table.visibleColumns'),
+  renderInPlace: oneWay('fixed'),
+  columnGroups: readOnly('table.visibleColumnGroups'),
+  subColumns: readOnly('table.visibleSubColumns'),
+  columns: readOnly('table.visibleColumns'),
 
   sortIcons: computed(
     'iconSortable',
