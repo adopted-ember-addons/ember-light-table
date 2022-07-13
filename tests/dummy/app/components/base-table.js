@@ -1,7 +1,7 @@
 // BEGIN-SNIPPET base-table
 import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
-import { computed, action } from '@ember/object';
+import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import Table from 'ember-light-table';
@@ -12,11 +12,10 @@ export default class BaseTable extends Component {
   @service store;
 
   page = 0;
-  limit = 10;
+  limit = 15;
   dir = 'asc';
   sort = 'firstName';
 
-  isLoading = computed.oneWay('fetchRecords.isRunning');
   canLoadMore = true;
   enableSync = true;
 
@@ -26,38 +25,41 @@ export default class BaseTable extends Component {
 
   init() {
     super.init(...arguments);
-
-    let table = Table.create({
+    const table = Table.create({
       columns: this.columns,
       rows: this.model,
       enableSync: this.enableSync,
     });
-    let sortColumn = table.get('allColumns').findBy('valuePath', this.sort);
+    const sortColumn = table.get('allColumns').findBy('valuePath', this.sort);
 
     // Setup initial sort column
     if (sortColumn) {
       sortColumn.set('sorted', true);
     }
 
-    this.set('table', table);
+    this.table = table;
+  }
+
+  get isLoading() {
+    return this.fetchRecords.isRunning;
   }
 
   @restartableTask *fetchRecords() {
-    const records = yield this.store.query('user', [
-      this.page,
-      this.limit,
-      this.sort,
-      this.dir,
-    ]);
+    const records = yield this.store.query('user', {
+      page: this.page,
+      limit: this.limit,
+      sort: this.sort,
+      dir: this.dir,
+    });
     this.model.pushObjects(records.toArray());
-    this.set('meta', records.get('meta'));
-    this.set('canLoadMore', !isEmpty(records));
+    this.meta = records.get('meta');
+    this.canLoadMore = !isEmpty(records);
   }
 
   @action
   onScrolledToBottom() {
     if (this.canLoadMore) {
-      this.incrementProperty('page');
+      this.page = this.page + 1;
       this.fetchRecords.perform();
     }
   }
@@ -65,12 +67,10 @@ export default class BaseTable extends Component {
   @action
   onColumnClick(column) {
     if (column.sorted) {
-      this.setProperties({
-        dir: column.ascending ? 'asc' : 'desc',
-        sort: column.get('valuePath'),
-        canLoadMore: true,
-        page: 0,
-      });
+      this.dir = column.ascending ? 'asc' : 'desc';
+      this.sort = column.get('valuePath');
+      this.canLoadMore = true;
+      this.page = 0;
       this.model.clear();
     }
   }

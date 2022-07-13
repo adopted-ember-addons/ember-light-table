@@ -47,7 +47,7 @@ export default class TableActionsTable extends BaseTable {
 
   @action
   deleteUser(row) {
-    let confirmed = window.confirm(
+    const confirmed = window.confirm(
       `Are you sure you want to delete ${row.get('firstName')} ${row.get(
         'lastName'
       )}?`

@@ -33,7 +33,7 @@ module.exports = {
     'ember/no-classic-components': 'warn',
     'ember/no-classic-classes': 'warn',
     'ember/no-component-lifecycle-hooks': 'warn',
-    'ember/no-actions-hash': 'warn'
+    'ember/no-actions-hash': 'warn',
   },
 
   overrides: [

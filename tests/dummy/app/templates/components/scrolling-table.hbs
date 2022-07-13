@@ -2,16 +2,16 @@
 <LightTable @table={{this.table}} @height="65vh" as |t|>
 
   {{!--
-    In order for `fa-sort-up` and `fa-sort-down` icons to work,
+    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
     you need to have ember-font-awesome installed or manually include
     the font-awesome assets, e.g. via a CDN.
   --}}
 
   <t.head
-    @onColumnClick={{this.onColumnClick}}
+    @onColumnClick={{fn this.onColumnClick}}
     @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconAscending="fa fa-sort-asc"
+    @iconDescending="fa fa-sort-desc"
     @fixed={{true}}
   />
 
@@ -20,7 +20,7 @@
     @scrollTo={{this.scrollTo}}
     @scrollToRow={{this.scrollToRow}}
     @onScroll={{fn (mut this.currentScrollOffset)}}
-    @onScrolledToBottom={{this.onScrolledToBottom}}
+    @onScrolledToBottom={{fn this.onScrolledToBottom}}
   as |body|>
     {{#if this.isLoading}}
       <body.loader>
@@ -40,15 +40,16 @@
             </span>
           </div>
 
-          <div class="form-group">
+          <div class="form-group scroll-to-control">
             <label for="scrollTo">Scroll To:</label>
             <Input
+              @key-down={{fn (mut this.scrollTo)}}
               @value={{this.scrollTo}}
               @type="number"
               name="scrollTo"
               min="0"
               step="10"
-              class="form-control" {{on "keydown" (fn (mut this.scrollTo))}}
+              class="form-control"
             />
           </div>
 
@@ -57,7 +58,6 @@
             <PowerSelect @selected={{this.scrollToRow}}
               @options={{this.table.visibleRows}}
               @onChange={{fn (mut this.scrollToRow)}}
-              class="form-control"
               name="scrollToRow"
             as |row|>
               {{row.id}} - {{row.firstName}} {{row.lastName}}
