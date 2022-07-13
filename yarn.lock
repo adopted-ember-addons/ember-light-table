@@ -6004,9 +6004,9 @@ ember-router-generator@^2.0.0:
     "@babel/traverse" "^7.4.5"
     recast "^0.18.1"
 
-ember-scrollable@rwwagner90/ember-scrollable#85077c5bceee674f0c804aafc69a74604ddee6d8:
+ember-scrollable@rwwagner90/ember-scrollable#c721e5875b3a33d975014d6f4d3a51ee134882e0:
   version "1.0.2"
-  resolved "https://codeload.github.com/rwwagner90/ember-scrollable/tar.gz/85077c5bceee674f0c804aafc69a74604ddee6d8"
+  resolved "https://codeload.github.com/rwwagner90/ember-scrollable/tar.gz/c721e5875b3a33d975014d6f4d3a51ee134882e0"
   dependencies:
     "@ember/render-modifiers" "^2.0.4"
     ember-cli-babel "^7.26.6"
