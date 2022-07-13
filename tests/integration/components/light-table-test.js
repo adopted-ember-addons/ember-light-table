@@ -51,7 +51,7 @@ module('Integration | Component | light table', function (hooks) {
     await render(hbs`
       {{#light-table this.table height='40vh' as |t|}}
         {{t.head fixed=true}}
-        {{t.body onScrolledToBottom=(action onScrolledToBottom)}}
+        {{t.body onScrolledToBottom=this.onScrolledToBottom}}
       {{/light-table}}
     `);
 
@@ -219,7 +219,7 @@ module('Integration | Component | light table', function (hooks) {
       <div style="height: 500px">
         {{#light-table this.table id='lightTable' as |t|}}
           {{t.body}}
-          {{t.foot fixed=fixed}}
+          {{t.foot fixed=this.fixed}}
         {{/light-table}}
       </div>
     `);
@@ -305,7 +305,7 @@ module('Integration | Component | light table', function (hooks) {
     await render(hbs`
       {{#light-table this.table as |t|}}
         {{t.body
-          rowComponent=(component "custom-row" classNames="custom-row" current=current)
+          rowComponent=(component "custom-row" classNames="custom-row" current=this.current)
         }}
       {{/light-table}}
     `);

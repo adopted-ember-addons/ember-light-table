@@ -149,9 +149,9 @@ module('Integration | Component | light table | occlusion', function (hooks) {
 
     await render(hbs`
       <div style="height: 500px">
-        {{#light-table table id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
+        {{#light-table this.table id='lightTable' occlusion=true estimatedRowHeight=30 as |t|}}
           {{t.body}}
-          {{t.foot fixed=fixed}}
+          {{t.foot fixed=this.fixed}}
         {{/light-table}}
       </div>
     `);
@@ -237,7 +237,7 @@ module('Integration | Component | light table | occlusion', function (hooks) {
     await render(hbs`
       {{#light-table this.table height='500px' occlusion=true estimatedRowHeight=30 as |t|}}
         {{t.body
-          rowComponent=(component "custom-row" classNames="custom-row" current=current)
+          rowComponent=(component "custom-row" classNames="custom-row" current=this.current)
         }}
       {{/light-table}}
     `);
