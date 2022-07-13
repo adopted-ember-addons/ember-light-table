@@ -1,26 +1,29 @@
 {{#with
   (hash
-    row=(or rowComponent (component 'lt-row'))
-    spanned-row=(or spannedRowComponent (component 'lt-spanned-row'))
-    infinity=(or infinityComponent (component 'lt-infinity'))
+    row=(or this.rowComponent (component 'lt-row'))
+    spanned-row=(or this.spannedRowComponent (component 'lt-spanned-row'))
+    infinity=(or this.infinityComponent (component 'lt-infinity'))
   ) as |lt|
 }}
-  {{#if sharedOptions.occlusion}}
+  {{#if this.sharedOptions.occlusion}}
     <div class='lt-scrollable tse-scrollable vertical-collection'>
-      <div id={{concat tableId '_inline_head'}} class='lt-inline lt-head'></div>
+      <div
+        id={{concat this.tableId '_inline_head'}}
+        class='lt-inline lt-head'
+      ></div>
 
-      <table class={{tableClassNames}}>
+      <table class={{this.tableClassNames}}>
         <tbody class='lt-body'>
-          {{#if overwrite}}
-            {{yield columns rows}}
+          {{#if this.overwrite}}
+            {{yield this.columns this.rows}}
           {{else}}
             {{#vertical-collection
-              rows
+              this.rows
               tagName='vertical-collection'
-              estimateHeight=sharedOptions.estimatedRowHeight
-              shouldRecycle=sharedOptions.shouldRecycle
+              estimateHeight=this.sharedOptions.estimatedRowHeight
+              shouldRecycle=this.sharedOptions.shouldRecycle
               staticHeight=true
-              bufferSize=scrollBufferRows
+              bufferSize=this.scrollBufferRows
               containerSelector='.lt-scrollable'
               firstVisibleChanged=(action 'firstVisibleChanged')
               lastVisibleChanged=(action 'lastVisibleChanged')
@@ -29,14 +32,14 @@
             }}
               {{lt.row
                 row
-                columns
+                this.columns
                 data-row-id=row.rowId
-                table=table
-                tableActions=tableActions
-                extra=extra
-                enableScaffolding=enableScaffolding
-                canExpand=canExpand
-                canSelect=canSelect
+                table=this.table
+                tableActions=this.tableActions
+                extra=this.extra
+                enableScaffolding=this.enableScaffolding
+                canExpand=this.canExpand
+                canSelect=this.canSelect
                 click=(action 'onRowClick' row)
                 doubleClick=(action 'onRowDoubleClick' row)
               }}
@@ -47,29 +50,35 @@
                 no-data=(component lt.spanned-row classes='lt-no-data')
                 expanded-row=(component lt.spanned-row visible=false)
               )
-              rows
+              this.rows
             }}
           {{/if}}
         </tbody>
       </table>
 
-      <div id={{concat tableId '_inline_foot'}} class='lt-inline lt-foot'></div>
+      <div
+        id={{concat this.tableId '_inline_foot'}}
+        class='lt-inline lt-foot'
+      ></div>
     </div>
   {{else}}
-    {{#lt-scrollable
-      tagName=''
-      virtualScrollbar=useVirtualScrollbar
-      autoHide=autoHideScrollbar
-      scrollTo=targetScrollOffset
-      onScrollY=(action 'onScroll') as |scrollbar|
-    }}
-      <div id={{concat tableId '_inline_head'}} class='lt-inline lt-head'></div>
+    <LtScrollable
+      @tagName=''
+      @virtualScrollbar={{this.useVirtualScrollbar}}
+      @autoHide={{this.autoHideScrollbar}}
+      @scrollTo={{this.targetScrollOffset}}
+      @onScrollY={{action 'onScroll'}} as |scrollbar|
+    >
+      <div
+        id={{concat this.tableId '_inline_head'}}
+        class='lt-inline lt-head'
+      ></div>
 
-      <table class={{tableClassNames}}>
+      <table class={{this.tableClassNames}}>
         <tbody class='lt-body'>
-          {{#if enableScaffolding}}
+          {{#if this.enableScaffolding}}
             <tr class='lt-scaffolding-row'>
-              {{#each columns as |column|}}
+              {{#each this.columns as |column|}}
                 {{! template-lint-disable no-inline-styles }}
                 <td
                   style={{
@@ -82,21 +91,24 @@
             </tr>
           {{/if}}
 
-          {{#if overwrite}}
-            {{yield columns rows}}
+          {{#if this.overwrite}}
+            {{yield this.columns this.rows}}
           {{else}}
-            {{#each (if scrollbar (compute scrollbar.update rows) rows) as |row|
+            {{#each
+              (if
+                scrollbar (compute scrollbar.update this.rows) this.rows
+              ) as |row|
             }}
               {{lt.row
                 row
-                columns
+                this.columns
                 data-row-id=row.rowId
-                table=table
-                tableActions=tableActions
-                extra=extra
-                enableScaffolding=enableScaffolding
-                canExpand=canExpand
-                canSelect=canSelect
+                table=this.table
+                tableActions=this.tableActions
+                extra=this.extra
+                enableScaffolding=this.enableScaffolding
+                canExpand=this.canExpand
+                canSelect=this.canSelect
                 click=(action 'onRowClick' row)
                 doubleClick=(action 'onRowDoubleClick' row)
               }}
@@ -106,42 +118,45 @@
                   expanded-row=(component
                     lt.spanned-row
                     classes='lt-expanded-row'
-                    colspan=colspan
+                    colspan=this.colspan
                     yield=row
                     visible=row.expanded
                   )
                   loader=(component lt.spanned-row visible=false)
                   no-data=(component lt.spanned-row visible=false)
                 )
-                rows
+                this.rows
               }}
             {{/each}}
 
             {{yield
               (hash
                 loader=(component
-                  lt.spanned-row classes='lt-is-loading' colspan=colspan
+                  lt.spanned-row classes='lt-is-loading' colspan=this.colspan
                 )
                 no-data=(component
-                  lt.spanned-row classes='lt-no-data' colspan=colspan
+                  lt.spanned-row classes='lt-no-data' colspan=this.colspan
                 )
                 expanded-row=(component lt.spanned-row visible=false)
               )
-              rows
+              this.rows
             }}
           {{/if}}
         </tbody>
       </table>
 
-      {{#if onScrolledToBottom}}
-        {{lt.infinity
-          enterViewport=(action 'enterViewport')
-          exitViewport=(action 'exitViewport')
-          scrollableContent=(concat '#' tableId ' .lt-scrollable')
-        }}
+      {{#if this.onScrolledToBottom}}
+        <lt.infinity
+          @enterViewport={{action 'enterViewport'}}
+          @exitViewport={{action 'exitViewport'}}
+          @scrollableContent={{concat '#' this.tableId ' .lt-scrollable'}}
+        />
       {{/if}}
 
-      <div id={{concat tableId '_inline_foot'}} class='lt-inline lt-foot'></div>
-    {{/lt-scrollable}}
+      <div
+        id={{concat this.tableId '_inline_foot'}}
+        class='lt-inline lt-foot'
+      ></div>
+    </LtScrollable>
   {{/if}}
 {{/with}}

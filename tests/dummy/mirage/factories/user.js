@@ -3,7 +3,7 @@
 
   Create more files in this directory to define additional factories.
 */
-import { Factory } from 'ember-cli-mirage';
+import { Factory } from 'miragejs';
 import { faker } from '@faker-js/faker';
 
 faker.locale = 'en_US';

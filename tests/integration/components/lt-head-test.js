@@ -26,7 +26,11 @@ module('Integration | Component | lt head', function (hooks) {
   test('render columns', async function (assert) {
     this.set('table', Table.create({ columns: Columns }));
 
-    await render(hbs`{{lt-head table=table renderInPlace=true}}`);
+    await render(hbs`
+    {{lt-head 
+      table=this.table 
+      renderInPlace=true
+    }}`);
 
     assert.dom('tr > th').exists({ count: 6 });
   });
@@ -34,7 +38,7 @@ module('Integration | Component | lt head', function (hooks) {
   test('render grouped columns', async function (assert) {
     this.set('table', Table.create({ columns: GroupedColumns }));
 
-    await render(hbs`{{lt-head table=table renderInPlace=true}}`);
+    await render(hbs`{{lt-head table=this.table renderInPlace=true}}`);
 
     assert.dom('tr:nth-child(2) > th').hasAttribute('colspan', '3');
     assert.dom('tr:nth-child(2) > th').hasClass('lt-group-column');
@@ -51,7 +55,12 @@ module('Integration | Component | lt head', function (hooks) {
     });
 
     await render(
-      hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action onColumnClick)}}`
+      hbs`
+      {{lt-head 
+        table=this.table 
+        renderInPlace=true 
+        onColumnClick=this.onColumnClick
+      }}`
     );
 
     assert.dom('tr > th').exists({ count: 6 });
@@ -71,7 +80,12 @@ module('Integration | Component | lt head', function (hooks) {
     });
 
     await render(
-      hbs`{{lt-head table=table renderInPlace=true onColumnClick=(action onColumnClick)}}`
+      hbs`
+      {{lt-head 
+        table=this.table
+        renderInPlace=true 
+        onColumnClick=this.onColumnClick
+      }}`
     );
     let allHeaders = findAll('tr > th');
     let sortableHeader = allHeaders[allHeaders.length - 1];
@@ -85,7 +99,14 @@ module('Integration | Component | lt head', function (hooks) {
     this.set('table', Table.create({ columns: Columns }));
 
     await render(
-      hbs`{{lt-head table=table renderInPlace=true iconSortable='fa-sort' iconAscending='fa-sort-up' iconDescending='fa-sort-down'}}`
+      hbs`
+      {{lt-head 
+        table=this.table 
+        renderInPlace=true 
+        iconSortable='fa-sort' 
+        iconAscending='fa-sort-up' 
+        iconDescending='fa-sort-down'
+      }}`
     );
 
     const allHeaders = findAll('tr > th');
@@ -146,7 +167,15 @@ module('Integration | Component | lt head', function (hooks) {
     );
 
     await render(
-      hbs`{{lt-head table=table renderInPlace=true iconSortable=iconSortable iconAscending=iconAscending iconDescending=iconDescending iconComponent=iconComponent}}`
+      hbs`
+      {{lt-head 
+        table=this.table 
+        renderInPlace=true 
+        iconSortable=this.iconSortable 
+        iconAscending=this.iconAscending 
+        iconDescending=this.iconDescending 
+        iconComponent=this.iconComponent
+      }}`
     );
   }),
     test('double click', async function (assert) {
@@ -160,7 +189,12 @@ module('Integration | Component | lt head', function (hooks) {
       });
 
       await render(
-        hbs`{{lt-head table=table renderInPlace=true onColumnDoubleClick=(action  onColumnDoubleClick)}}`
+        hbs`
+        {{lt-head 
+          table=this.table 
+          renderInPlace=true 
+          onColumnDoubleClick=(action this.onColumnDoubleClick)
+        }}`
       );
 
       const allHeaders = findAll('tr > th');

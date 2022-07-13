@@ -23,7 +23,7 @@ module('Integration | Component | lt spanned row', function (hooks) {
     this.set('visible', true);
 
     await render(hbs`
-      {{#lt-spanned-row visible=visible}}
+      {{#lt-spanned-row visible=this.visible}}
         template block text
       {{/lt-spanned-row}}
     `);

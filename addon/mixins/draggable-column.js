@@ -1,6 +1,6 @@
 import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
-import { run } from '@ember/runloop';
+import { cancel, next } from '@ember/runloop';
 
 let sourceColumn;
 
@@ -125,7 +125,7 @@ export default Mixin.create({
     /*
      Restore click event
      */
-    this._clickResetTimer = run.next(this, () => (this.click = this.__click__));
+    this._clickResetTimer = next(this, () => (this.click = this.__click__));
   },
 
   drop(e) {
@@ -156,7 +156,7 @@ export default Mixin.create({
 
   destroy() {
     this._super(...arguments);
-    run.cancel(this._clickResetTimer);
+    cancel(this._clickResetTimer);
   },
 
   // Noop for passed actions

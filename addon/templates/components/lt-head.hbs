@@ -1,53 +1,61 @@
-{{#ember-wormhole to=(concat tableId "_inline_head") renderInPlace=renderInPlace}}
-  <table class={{tableClassNames}}>
-    <thead class="lt-head">
+<EmberWormhole
+  @to={{concat this.tableId '_inline_head'}}
+  @renderInPlace={{this.renderInPlace}}
+>
+  <table class={{this.tableClassNames}}>
+    <thead class='lt-head'>
       {{#if (has-block)}}
-        {{yield columnGroups subColumns}}
+        {{yield this.columnGroups this.subColumns}}
       {{else}}
-
-        {{!- There is an issue where if there are more than 1 row and the first has a colspan,
+        {{! There is an issue where if there are more than 1 row and the first has a colspan,
            the td's fail to hold their width. Creating a scaffolding will setup the table columns correctly
-        --}}
-        {{#if subColumns.length}}
-          {{lt-scaffolding-row columns=subColumns}}
+        }}
+        {{#if this.subColumns.length}}
+          <LtScaffoldingRow @columns={{this.subColumns}} />
         {{else}}
-          {{lt-scaffolding-row columns=columnGroups}}
+          <LtScaffoldingRow @columns={{this.columnGroups}} />
         {{/if}}
 
         <tr>
-          {{#each columnGroups as |column|}}
-            {{component (concat "light-table/columns/" column.type) column
-              table=table
-              tableActions=tableActions
-              extra=extra
-              sortIcons=sortIcons
-              resizeOnDrag=resizeOnDrag
-              click=(action "onColumnClick" column)
-              doubleClick=(action "onColumnDoubleClick" column)
-              onColumnResized=(action "onColumnResized")
-              onColumnDrag=(action "onColumnDrag")
-              onColumnDrop=(action "onColumnDrop")}}
+          {{#each this.columnGroups as |column|}}
+            {{component
+              (concat 'light-table/columns/' column.type)
+              column
+              table=this.table
+              tableActions=this.tableActions
+              extra=this.extra
+              sortIcons=this.sortIcons
+              resizeOnDrag=this.resizeOnDrag
+              click=(action 'onColumnClick' column)
+              doubleClick=(action 'onColumnDoubleClick' column)
+              onColumnResized=(action 'onColumnResized')
+              onColumnDrag=(action 'onColumnDrag')
+              onColumnDrop=(action 'onColumnDrop')
+            }}
           {{/each}}
         </tr>
 
         <tr>
-          {{#each subColumns as |column|}}
-            {{component (concat "light-table/columns/" column.type) column
-              table=table
+          {{#each this.subColumns as |column|}}
+            {{component
+              (concat 'light-table/columns/' column.type)
+              column
+              table=this.table
               rowspan=1
-              classNames="lt-sub-column"
-              tableActions=tableActions
-              extra=extra
-              sortIcons=sortIcons
-              resizeOnDrag=resizeOnDrag
-              click=(action "onColumnClick" column)
-              doubleClick=(action "onColumnDoubleClick" column)
-              onColumnResized=(action "onColumnResized")
-              onColumnDrag=(action "onColumnDrag")
-              onColumnDrop=(action "onColumnDrop")}}
+              classNames='lt-sub-column'
+              tableActions=this.tableActions
+              extra=this.extra
+              sortIcons=this.sortIcons
+              resizeOnDrag=this.resizeOnDrag
+              click=(action 'onColumnClick' column)
+              doubleClick=(action 'onColumnDoubleClick' column)
+              onColumnResized=(action 'onColumnResized')
+              onColumnDrag=(action 'onColumnDrag')
+              onColumnDrop=(action 'onColumnDrop')
+            }}
           {{/each}}
         </tr>
       {{/if}}
     </thead>
   </table>
-{{/ember-wormhole}}
+</EmberWormhole>

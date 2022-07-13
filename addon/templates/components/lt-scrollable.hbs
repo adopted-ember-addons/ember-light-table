@@ -1,15 +1,14 @@
-{{#if virtualScrollbar}}
-  {{#ember-scrollable
-    classNames="lt-scrollable"
-    autoHide=autoHide
-    horizontal=horizontal
-    vertical=vertical
-    scrollToY=scrollTo
-    onScrollY=onScrollY
-    as |scrollbar|
-  }}
+{{#if this.virtualScrollbar}}
+  <EmberScrollable
+    @classNames='lt-scrollable'
+    @autoHide={{this.autoHide}}
+    @horizontal={{this.horizontal}}
+    @vertical={{this.vertical}}
+    @scrollToY={{this.scrollTo}}
+    @onScrollY={{this.onScrollY}} as |scrollbar|
+  >
     {{yield scrollbar}}
-  {{/ember-scrollable}}
+  </EmberScrollable>
 {{else}}
   {{yield}}
 {{/if}}

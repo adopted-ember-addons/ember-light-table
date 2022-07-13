@@ -1,19 +1,31 @@
-{{#if column.component}}
-  {{component column.component column=column table=table tableActions=tableActions extra=extra sortIcons=sortIcons}}
+{{#if this.column.component}}
+  {{component
+    this.column.component
+    column=this.column
+    table=this.table
+    tableActions=this.tableActions
+    extra=this.extra
+    sortIcons=this.sortIcons
+  }}
 {{else}}
-  {{#if (and sortIcons.iconComponent sortIconProperty)}}
-    {{component sortIcons.iconComponent sortIcons=sortIcons sortIconProperty=sortIconProperty}}
-  {{else if sortIconProperty}}
-    <i class="lt-sort-icon {{get sortIcons sortIconProperty}}"></i>
+  {{#if (and this.sortIcons.iconComponent this.sortIconProperty)}}
+    {{component
+      this.sortIcons.iconComponent
+      sortIcons=this.sortIcons
+      sortIconProperty=this.sortIconProperty
+    }}
+  {{else if this.sortIconProperty}}
+    <i class='lt-sort-icon {{get this.sortIcons this.sortIconProperty}}'></i>
   {{/if}}
-  {{label}}
+  {{this.label}}
 {{/if}}
 
-{{#if isResizable}}
-  {{lt-column-resizer
-    column=column
-    table=table
-    resizeOnDrag=resizeOnDrag
-    isResizing=(mut isResizing)
-    onColumnResized=(action onColumnResized column)}}
+{{#if this.isResizable}}
+  <LtColumnResizer
+    @column={{this.column}}
+    @table={{this.table}}
+    @resizeOnDrag={{this.resizeOnDrag}}
+    @isResizing={{mut this.isResizing}}
+    @onColumnResized={{action this.onColumnResized this.column}}
+  />
 {{/if}}

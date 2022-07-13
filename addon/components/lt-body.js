@@ -3,7 +3,7 @@ import { deprecate } from '@ember/application/deprecations';
 import { computed, observer } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import layout from 'ember-light-table/templates/components/lt-body';
-import { run } from '@ember/runloop';
+import { cancel, debounce, once, schedule, scheduleOnce } from '@ember/runloop';
 import Row from 'ember-light-table/classes/Row';
 
 /**
@@ -331,7 +331,7 @@ export default Component.extend({
       /*
        Continue scheduling onScrolledToBottom until no longer in viewport
        */
-      this._schedulerTimer = run.scheduleOnce(
+      this._schedulerTimer = scheduleOnce(
         'afterRender',
         this,
         this._debounceScrolledToBottom
@@ -349,7 +349,7 @@ export default Component.extend({
       been initialized since fixedHeader and fixedFooter are set on t.head and t.foot
       initialization.
      */
-    run.once(this, this._setupVirtualScrollbar);
+    once(this, this._setupVirtualScrollbar);
   },
 
   didReceiveAttrs() {
@@ -368,7 +368,7 @@ export default Component.extend({
   },
 
   onRowsChange: observer('rows.[]', function () {
-    this._checkTargetOffsetTimer = run.scheduleOnce(
+    this._checkTargetOffsetTimer = scheduleOnce(
       'afterRender',
       this,
       this.checkTargetScrollOffset
@@ -417,7 +417,7 @@ export default Component.extend({
 
       if (targetScrollOffset > currentScrollOffset) {
         this.set('targetScrollOffset', null);
-        this._setTargetOffsetTimer = run.schedule('render', null, () => {
+        this._setTargetOffsetTimer = schedule('render', null, () => {
           this.set('targetScrollOffset', targetScrollOffset);
         });
       } else {
@@ -446,17 +446,17 @@ export default Component.extend({
      This debounce is needed when there is not enough delay between onScrolledToBottom calls.
      Without this debounce, all rows will be rendered causing immense performance problems
      */
-    this._debounceTimer = run.debounce(this, this.onScrolledToBottom, delay);
+    this._debounceTimer = debounce(this, this.onScrolledToBottom, delay);
   },
 
   /**
    * @method _cancelTimers
    */
   _cancelTimers() {
-    run.cancel(this._checkTargetOffsetTimer);
-    run.cancel(this._setTargetOffsetTimer);
-    run.cancel(this._schedulerTimer);
-    run.cancel(this._debounceTimer);
+    cancel(this._checkTargetOffsetTimer);
+    cancel(this._setTargetOffsetTimer);
+    cancel(this._schedulerTimer);
+    cancel(this._debounceTimer);
   },
 
   // Noop for closure actions

@@ -10,7 +10,7 @@ module('Integration | Component | lt infinity', function (hooks) {
     this.enterViewport = () => {};
     this.exitViewport = () => {};
     await render(
-      hbs`{{lt-infinity enterViewport=enterViewport exitViewport=exitViewport}}`
+      hbs`{{lt-infinity enterViewport=this.enterViewport exitViewport=this.exitViewport}}`
     );
     assert.dom('*').hasText('');
   });

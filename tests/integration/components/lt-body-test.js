@@ -34,7 +34,7 @@ module('Integration | Component | lt body', function (hooks) {
 
   test('it renders', async function (assert) {
     await render(
-      hbs`{{lt-body sharedOptions=sharedOptions tableId="light-table"}}`
+      hbs`{{lt-body sharedOptions=this.sharedOptions tableId="light-table"}}`
     );
     assert.dom('*').hasText('');
   });
@@ -50,7 +50,13 @@ module('Integration | Component | lt body', function (hooks) {
     this.set('canSelect', false);
 
     await render(
-      hbs`{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect tableId="light-table"}}`
+      hbs`
+      {{lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        canSelect=this.canSelect 
+        tableId="light-table"
+      }}`
     );
 
     let row = find('tr');
@@ -78,7 +84,14 @@ module('Integration | Component | lt body', function (hooks) {
     );
 
     await render(
-      hbs`{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true tableId="light-table"}}`
+      hbs`
+      {{lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        canSelect=true 
+        multiSelect=true 
+        tableId="light-table"
+      }}`
     );
     let firstRow = find('tr:first-child');
     let middleRow = find('tr:nth-child(4)');
@@ -120,7 +133,15 @@ module('Integration | Component | lt body', function (hooks) {
     );
 
     await render(
-      hbs`{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false tableId="light-table"}}`
+      hbs`
+      {{lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        canSelect=true 
+        multiSelect=true 
+        multiSelectRequiresKeyboard=false 
+        tableId="light-table"
+      }}`
     );
 
     let firstRow = find('tr:first-child');
@@ -170,7 +191,14 @@ module('Integration | Component | lt body', function (hooks) {
     this.set('canExpand', false);
 
     await render(hbs`
-      {{#lt-body table=table sharedOptions=sharedOptions canSelect=false canExpand=canExpand multiRowExpansion=false tableId="light-table" as |b|}}
+      {{#lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        canSelect=false 
+        canExpand=this.canExpand 
+        multiRowExpansion=false 
+        tableId="light-table" as |b|
+      }}
         {{#b.expanded-row}} Hello {{/b.expanded-row}}
       {{/lt-body}}
     `);
@@ -209,7 +237,12 @@ module('Integration | Component | lt body', function (hooks) {
       })
     );
     await render(hbs`
-      {{#lt-body table=table sharedOptions=sharedOptions canExpand=true tableId="light-table" as |b|}}
+      {{#lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        canExpand=true 
+        tableId="light-table" as |b|
+      }}
         {{#b.expanded-row}} Hello {{/b.expanded-row}}
       {{/lt-body}}
     `);
@@ -241,7 +274,14 @@ module('Integration | Component | lt body', function (hooks) {
     this.actions.onRowClick = (row) => assert.ok(row);
     this.actions.onRowDoubleClick = (row) => assert.ok(row);
     await render(
-      hbs`{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick') tableId="light-table"}}`
+      hbs`
+      {{lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        onRowClick=(action 'onRowClick') 
+        onRowDoubleClick=(action 'onRowDoubleClick') 
+        tableId="light-table"
+      }}`
     );
 
     let row = find('tr');
@@ -259,7 +299,12 @@ module('Integration | Component | lt body', function (hooks) {
     );
 
     await render(
-      hbs`{{lt-body table=table sharedOptions=sharedOptions tableId="light-table"}}`
+      hbs`
+      {{lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        tableId="light-table"
+      }}`
     );
 
     assert.dom('tbody > tr').exists({ count: 5 });
@@ -283,7 +328,13 @@ module('Integration | Component | lt body', function (hooks) {
     this.set('table', Table.create({ columns: Columns, rows: users }));
 
     await render(
-      hbs`{{lt-body table=table sharedOptions=sharedOptions enableScaffolding=true tableId="light-table"}}`
+      hbs`
+      {{lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        enableScaffolding=true 
+        tableId="light-table"
+      }}`
     );
 
     const [scaffoldingRow, userRow] = findAll('tr');
@@ -323,7 +374,12 @@ module('Integration | Component | lt body', function (hooks) {
     );
 
     await render(hbs`
-      {{#lt-body table=table sharedOptions=sharedOptions overwrite=true tableId="light-table" as |columns rows|}}
+      {{#lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        overwrite=true 
+        tableId="light-table" as |columns rows|
+      }}
         {{columns.length}}, {{rows.length}}
       {{/lt-body}}
     `);

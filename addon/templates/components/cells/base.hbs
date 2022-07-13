@@ -1,5 +1,14 @@
-{{#if column.cellComponent}}
-  {{component column.cellComponent tableActions=tableActions extra=extra table=table column=column row=row value=value rawValue=rawValue}}
+{{#if this.column.cellComponent}}
+  {{component
+    this.column.cellComponent
+    tableActions=this.tableActions
+    extra=this.extra
+    table=this.table
+    column=this.column
+    row=this.row
+    value=this.value
+    rawValue=this.rawValue
+  }}
 {{else}}
-  {{value}}
+  {{this.value}}
 {{/if}}
