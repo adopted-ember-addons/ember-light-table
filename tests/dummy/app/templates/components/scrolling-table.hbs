@@ -43,7 +43,7 @@
           <div class="form-group scroll-to-control">
             <label for="scrollTo">Scroll To:</label>
             <Input
-              @key-down={{fn (mut this.scrollTo)}}
+              {{on 'keydown' this.updateScrollPos}}
               @value={{this.scrollTo}}
               @type="number"
               name="scrollTo"

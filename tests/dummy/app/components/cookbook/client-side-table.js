@@ -12,7 +12,7 @@ export default class PaginatedTable extends BaseTable {
   // No need for `enableSync` here
   enableSync = false;
 
-  @tracked model;
+  model = [];
 
   get sortedModel() {
     if (this.dir === 'asc') return this.model.sortBy(this.sort);
@@ -80,7 +80,7 @@ export default class PaginatedTable extends BaseTable {
   @restartableTask *filterAndSortModel(debounceMs = 200) {
     yield timeout(debounceMs); // debounce
 
-    const { query } = this;
+    const query = this.query;
     const model = this.sortedModel;
     let result = model;
 
@@ -102,6 +102,11 @@ export default class PaginatedTable extends BaseTable {
       this.sort = column.valuePath;
       this.filterAndSortModel.perform(100);
     }
+  }
+
+  @action
+  updateQuery(event) {
+    this.query = event.target.value;
   }
 
   @action

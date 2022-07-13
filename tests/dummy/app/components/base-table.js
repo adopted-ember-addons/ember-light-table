@@ -25,6 +25,7 @@ export default class BaseTable extends Component {
 
   init() {
     super.init(...arguments);
+
     const table = Table.create({
       columns: this.columns,
       rows: this.model,

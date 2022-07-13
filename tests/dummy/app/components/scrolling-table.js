@@ -1,6 +1,7 @@
 // BEGIN-SNIPPET scrolling-table
 import classic from 'ember-classic-decorator';
 import BaseTable from './base-table';
+import { action } from '@ember/object';
 
 @classic
 export default class ScrollingTable extends BaseTable {
@@ -40,6 +41,11 @@ export default class ScrollingTable extends BaseTable {
         valuePath: 'country',
       },
     ];
+  }
+
+  @action
+  updateScrollPos(event) {
+    this.scrollTo = event.target.value;
   }
 }
 // END-SNIPPET
