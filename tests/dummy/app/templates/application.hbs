@@ -1,83 +1,124 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+<nav class='navbar navbar-default'>
+  <div class='container-fluid'>
+    <div class='navbar-header'>
+      <button
+        type='button'
+        class='navbar-toggle collapsed'
+        data-toggle='collapse'
+        data-target='#bs-example-navbar-collapse-1'
+        aria-expanded='false'
+      >
+        <span class='sr-only'>Toggle navigation</span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
       </button>
-      <LinkTo @route="index" class="navbar-brand">
-        <img src="images/ember-logo.png" alt="emberJs">
+      <LinkTo @route='index' class='navbar-brand'>
+        <img src='images/ember-logo.png' alt='emberJs' />
         <span>Light Table</span>
       </LinkTo>
     </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav" role="navigation">
-        <li><LinkTo @route="index">Home</LinkTo></li>
-        <li><LinkTo @route="responsive" class="navbar-item">Responsive</LinkTo></li>
-        <li><LinkTo @route="scrolling" class="navbar-item">Scrolling</LinkTo></li>
+    <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
+      <ul class='nav navbar-nav' role='navigation'>
+        <li><LinkTo @route='index'>Home</LinkTo></li>
+        <li><LinkTo
+            @route='responsive'
+            class='navbar-item'
+          >Responsive</LinkTo></li>
+        <li><LinkTo
+            @route='scrolling'
+            class='navbar-item'
+          >Scrolling</LinkTo></li>
 
-        <li class="dropdown {{if (eq this.router.currentRoute.parent.name "columns") "active"}}">
-          <a class="dropdown-toggle"
-             data-toggle="dropdown"
-             role="button"
-             aria-haspopup="true"
-             aria-expanded="false"
-             href="#"
+        <li
+          class='dropdown
+            {{if (eq this.router.currentRoute.parent.name "columns") "active"}}'
+        >
+          <a
+            class='dropdown-toggle'
+            data-toggle='dropdown'
+            role='button'
+            aria-haspopup='true'
+            aria-expanded='false'
+            href='#'
           >
-            Columns <span class="fa fa-caret-down"></span>
+            Columns
+            <span class='fa fa-caret-down'></span>
           </a>
-          <ul class="nav navbar-nav dropdown-menu">
-            <li><LinkTo @route="columns.draggable">Draggable Columns</LinkTo></li>
-            <li><LinkTo @route="columns.grouped">Grouped Columns</LinkTo></li>
-            <li><LinkTo @route="columns.resizable">Resizable Columns</LinkTo></li>
+          <ul class='nav navbar-nav dropdown-menu'>
+            <li><LinkTo @route='columns.draggable'>Draggable Columns</LinkTo></li>
+            <li><LinkTo @route='columns.grouped'>Grouped Columns</LinkTo></li>
+            <li><LinkTo @route='columns.resizable'>Resizable Columns</LinkTo></li>
           </ul>
         </li>
 
-        <li class="dropdown {{if (eq this.router.currentRoute.parent.name "rows") "active"}}">
-          <a class="dropdown-toggle"
-             data-toggle="dropdown"
-             role="button"
-             aria-haspopup="true"
-             aria-expanded="false"
-             href="#"
+        <li
+          class='dropdown
+            {{if (eq this.router.currentRoute.parent.name "rows") "active"}}'
+        >
+          <a
+            class='dropdown-toggle'
+            data-toggle='dropdown'
+            role='button'
+            aria-haspopup='true'
+            aria-expanded='false'
+            href='#'
           >
-            Rows <span class="fa fa-caret-down"></span>
+            Rows
+            <span class='fa fa-caret-down'></span>
           </a>
-          <ul class="nav navbar-nav dropdown-menu">
-            <li><LinkTo @route="rows.expandable">Expandable Rows</LinkTo></li>
-            <li><LinkTo @route="rows.selectable">Selectable Rows</LinkTo></li>
+          <ul class='nav navbar-nav dropdown-menu'>
+            <li><LinkTo @route='rows.expandable'>Expandable Rows</LinkTo></li>
+            <li><LinkTo @route='rows.selectable'>Selectable Rows</LinkTo></li>
           </ul>
         </li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown {{if (eq this.router.currentRoute.parent.name "cookbook") "active"}}">
-          <a class="dropdown-toggle"
-             data-toggle="dropdown"
-             role="button"
-             aria-haspopup="true"
-             aria-expanded="false"
-             href="#"
+      <ul class='nav navbar-nav navbar-right'>
+        <li
+          class='dropdown
+            {{if
+              (eq this.router.currentRoute.parent.name "cookbook")
+              "active"
+            }}'
+        >
+          <a
+            class='dropdown-toggle'
+            data-toggle='dropdown'
+            role='button'
+            aria-haspopup='true'
+            aria-expanded='false'
+            href='#'
           >
-            Cookbook <span class="fa fa-caret-down"></span>
+            Cookbook
+            <span class='fa fa-caret-down'></span>
           </a>
-          <ul class="nav navbar-nav dropdown-menu">
-            <li><LinkTo @route="cookbook.index">Cookbook</LinkTo></li>
-            <li><LinkTo @route="cookbook.client-side">Client Side Search & Sort</LinkTo></li>
-            <li><LinkTo @route="cookbook.custom-row">Custom Row Component</LinkTo></li>
-            <li><LinkTo @route="cookbook.custom-sort-icon">Custom Sort Icon</LinkTo></li>
-            <li><LinkTo @route="cookbook.horizontal-scrolling">Horizontal Scrolling</LinkTo></li>
-            <li><LinkTo @route="cookbook.occlusion-rendering">Occlusion Rendering</LinkTo></li>
-            <li><LinkTo @route="cookbook.pagination">Pagination</LinkTo></li>
-            <li><LinkTo @route="cookbook.table-actions">Table Actions</LinkTo></li>
+          <ul class='nav navbar-nav dropdown-menu'>
+            <li><LinkTo @route='cookbook.index'>Cookbook</LinkTo></li>
+            <li><LinkTo @route='cookbook.client-side'>Client Side Search & Sort</LinkTo></li>
+            <li><LinkTo @route='cookbook.custom-row'>Custom Row Component</LinkTo></li>
+            <li><LinkTo @route='cookbook.custom-sort-icon'>Custom Sort Icon</LinkTo></li>
+            <li><LinkTo @route='cookbook.horizontal-scrolling'>Horizontal
+                Scrolling</LinkTo></li>
+            <li><LinkTo @route='cookbook.occlusion-rendering'>Occlusion
+                Rendering</LinkTo></li>
+            <li><LinkTo @route='cookbook.pagination'>Pagination</LinkTo></li>
+            <li><LinkTo @route='cookbook.table-actions'>Table Actions</LinkTo></li>
           </ul>
         </li>
 
-        <li><a href="docs">Documentation</a></li>
-        <li><a href="https://github.com/adopted-ember-addons/ember-light-table" class="fa fa-github github"></a></li>
+        <li><a href='docs'>Documentation</a></li>
+        <li>
+          <a href='https://github.com/adopted-ember-addons/ember-light-table'>
+            <img
+              class='github'
+              alt=''
+              role='presentation'
+              src='/images/GitHub-Mark.png'
+            />
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -85,6 +126,9 @@
 
 {{outlet}}
 
-<div class="tip">
-  <i class="fa fa-info-circle icon-info"></i> Click on the panel header with the <i class="fa fa-code"></i> icon to see code snippets associated with this table.
+<div class='tip'>
+  <i class='fa fa-info-circle icon-info'></i>
+  Click on the panel header with the
+  <i class='fa fa-code'></i>
+  icon to see code snippets associated with this table.
 </div>
