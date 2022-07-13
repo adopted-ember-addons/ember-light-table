@@ -71,9 +71,7 @@ export default class Table extends EmberObject.extend({
    * @property sortableColumns
    * @type {Ember.Array}
    */
-  sortableColumns: computed
-    .filterBy('visibleColumns', 'sortable', true)
-    .readOnly(),
+  sortableColumns: filterBy('visibleColumns', 'sortable', true).readOnly(),
 
   /**
    * @property sortedColumns
@@ -97,9 +95,11 @@ export default class Table extends EmberObject.extend({
    * @property responsiveHiddenColumns
    * @type {Ember.Array}
    */
-  responsiveHiddenColumns: computed
-    .filterBy('allColumns', 'responsiveHidden', true)
-    .readOnly(),
+  responsiveHiddenColumns: filterBy(
+    'allColumns',
+    'responsiveHidden',
+    true
+  ).readOnly(),
 
   /**
    * @property visibleColumns
