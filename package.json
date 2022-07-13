@@ -6,6 +6,7 @@
     "ember-addon",
     "table"
   ],
+  "homepage": "https://github.com/adopted-ember-addons/ember-light-table",
   "repository": {
     "type": "git",
     "url": "https://github.com/adopted-ember-addons/ember-light-table.git"
@@ -16,7 +17,6 @@
     "doc": "doc",
     "test": "tests"
   },
-  "homepage": "https://github.com/adopted-ember-addons/ember-light-table",
   "scripts": {
     "build": "ember build --environment=production",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
@@ -94,11 +94,16 @@
     "prettier": "^2.3.2",
     "qunit": "^2.16.0",
     "qunit-dom": "^1.6.0",
+    "release-it": "^14.2.1",
+    "release-it-lerna-changelog": "^3.1.0",
     "sass": "^1.53.0",
     "webpack": "^5.73.0"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "ember": {
     "edition": "octane"
@@ -110,13 +115,19 @@
       "ember": ">=3.16.0 <4.0.0"
     }
   },
-  "changelog": {
-    "labels": {
-      "breaking": ":boom: Breaking Change",
-      "enhancement": "Features",
-      "bug": "Bug Fixes",
-      "documentation": "Documentation",
-      "internal": "Internal"
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
     }
   },
   "volta": {
