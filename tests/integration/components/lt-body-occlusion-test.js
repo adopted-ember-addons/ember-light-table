@@ -37,7 +37,7 @@ module('Integration | Component | lt body | occlusion', function (hooks) {
   });
 
   test('it renders', async function (assert) {
-    await render(hbs`{{lt-body sharedOptions=sharedOptions}}`);
+    await render(hbs`{{lt-body sharedOptions=this.sharedOptions}}`);
     assert.dom('*').hasText('');
   });
 
@@ -52,7 +52,12 @@ module('Integration | Component | lt body | occlusion', function (hooks) {
     this.set('canSelect', false);
 
     await render(
-      hbs`{{lt-body table=table sharedOptions=sharedOptions canSelect=canSelect}}`
+      hbs`
+      {{lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        canSelect=this.canSelect
+      }}`
     );
 
     let row = find('tr');
@@ -80,7 +85,14 @@ module('Integration | Component | lt body | occlusion', function (hooks) {
     );
 
     await render(
-      hbs`{{lt-body table=table scrollBuffer=200 sharedOptions=sharedOptions canSelect=true multiSelect=true}}`
+      hbs`
+      {{lt-body 
+        table=this.table 
+        scrollBuffer=200 
+        sharedOptions=this.sharedOptions 
+        canSelect=true 
+        multiSelect=true
+      }}`
     );
     let firstRow = find('tr:nth-child(2)');
     let middleRow = find('tr:nth-child(4)');
@@ -122,7 +134,14 @@ module('Integration | Component | lt body | occlusion', function (hooks) {
     );
 
     await render(
-      hbs`{{lt-body table=table sharedOptions=sharedOptions canSelect=true multiSelect=true multiSelectRequiresKeyboard=false}}`
+      hbs`
+      {{lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        canSelect=true 
+        multiSelect=true 
+        multiSelectRequiresKeyboard=false
+      }}`
     );
 
     let firstRow = find('tr:nth-child(2)');
@@ -174,7 +193,13 @@ module('Integration | Component | lt body | occlusion', function (hooks) {
     this.actions.onRowClick = (row) => assert.ok(row);
     this.actions.onRowDoubleClick = (row) => assert.ok(row);
     await render(
-      hbs`{{lt-body table=table sharedOptions=sharedOptions onRowClick=(action 'onRowClick') onRowDoubleClick=(action 'onRowDoubleClick')}}`
+      hbs`
+      {{lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        onRowClick=(action 'onRowClick') 
+        onRowDoubleClick=(action 'onRowDoubleClick')
+      }}`
     );
 
     let row = find('tr');
@@ -191,7 +216,11 @@ module('Integration | Component | lt body | occlusion', function (hooks) {
       })
     );
 
-    await render(hbs`{{lt-body table=table sharedOptions=sharedOptions}}`);
+    await render(hbs`
+    {{lt-body 
+      table=this.table 
+      sharedOptions=this.sharedOptions
+    }}`);
 
     assert.dom('tbody tr').exists({ count: 5 });
 
@@ -221,7 +250,11 @@ module('Integration | Component | lt body | occlusion', function (hooks) {
     );
 
     await render(hbs`
-      {{#lt-body table=table sharedOptions=sharedOptions overwrite=true as |columns rows|}}
+      {{#lt-body 
+        table=this.table 
+        sharedOptions=this.sharedOptions 
+        overwrite=true as |columns rows|
+      }}
         {{columns.length}}, {{rows.length}}
       {{/lt-body}}
     `);

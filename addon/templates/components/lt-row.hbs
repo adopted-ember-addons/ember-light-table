@@ -1,8 +1,11 @@
-{{#each columns as |column|}}
-  {{component (concat "light-table/cells/" column.cellType) column row
-    table=table
-    rawValue=(get row column.valuePath)
-    tableActions=tableActions
-    extra=extra
+{{#each this.columns as |column|}}
+  {{component
+    (concat 'light-table/cells/' column.cellType)
+    column
+    this.row
+    table=this.table
+    rawValue=(get this.row column.valuePath)
+    tableActions=this.tableActions
+    extra=this.extra
   }}
 {{/each}}

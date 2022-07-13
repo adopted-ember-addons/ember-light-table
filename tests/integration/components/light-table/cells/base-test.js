@@ -10,7 +10,7 @@ module('Integration | Component | Cells | base', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('column', Column.create());
-    await render(hbs`{{light-table/cells/base column=column}}`);
+    await render(hbs`{{light-table/cells/base column=this.column}}`);
 
     assert.dom('*').hasText('');
   });
@@ -28,7 +28,9 @@ module('Integration | Component | Cells | base', function (hooks) {
 
     this.set('row', Row.create());
 
-    await render(hbs`{{light-table/cells/base column row rawValue=2}}`);
+    await render(hbs`
+    {{light-table/cells/base this.column this.row rawValue=2}}
+    `);
 
     assert.dom('*').hasText('4');
   });
@@ -45,7 +47,7 @@ module('Integration | Component | Cells | base', function (hooks) {
 
     this.set('row', Row.create({ content: { num: 2 } }));
 
-    await render(hbs`{{light-table/cells/base column row}}`);
+    await render(hbs`{{light-table/cells/base this.column this.row}}`);
 
     assert.dom('*').hasText('4');
   });
@@ -75,7 +77,7 @@ module('Integration | Component | Cells | base', function (hooks) {
     );
 
     await render(
-      hbs`{{light-table/cells/base column row rawValue=(get row column.valuePath)}}`
+      hbs`{{light-table/cells/base this.column this.row rawValue=(get this.row this.column.valuePath)}}`
     );
 
     assert.dom('*').hasText('4');

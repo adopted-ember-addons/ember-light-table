@@ -11,7 +11,6 @@ module.exports = {
     'no-down-event-binding': false,
     'no-duplicate-landmark-elements': false,
     'no-heading-inside-button': false,
-    'no-implicit-this': false,
     'no-nested-landmark': false,
     'no-passed-in-event-handlers': false,
     'no-yield-only': false,

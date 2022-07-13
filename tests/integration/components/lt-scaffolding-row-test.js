@@ -49,7 +49,7 @@ module('Integration | Component | lt-scaffolding-row', function (hooks) {
       },
     ];
     this.set('columns', columns);
-    await render(hbs`{{lt-scaffolding-row columns=columns}}`);
+    await render(hbs`{{lt-scaffolding-row columns=this.columns}}`);
     assert.equal(findAll('td').length, columns.length);
   });
 });

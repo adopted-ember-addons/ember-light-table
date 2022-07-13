@@ -1,7 +1,7 @@
-{{#if visible}}
-  <tr class="lt-row {{html-safe classes}}">
-    <td colspan={{colspan}}>
-      {{yield yield}}
+{{#if this.visible}}
+  <tr class="lt-row {{html-safe this.classes}}">
+    <td colspan={{this.colspan}}>
+      {{yield this.yield}}
     </td>
   </tr>
 {{/if}}

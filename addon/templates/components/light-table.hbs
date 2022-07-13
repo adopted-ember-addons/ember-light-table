@@ -1,26 +1,31 @@
-{{yield (hash
-  head=(component "lt-head"
-    tableId=elementId
-    table=table
-    tableActions=tableActions
-    extra=extra
-    tableClassNames=tableClassNames
-    sharedOptions=sharedOptions
+{{yield
+  (hash
+    head=(component
+      'lt-head'
+      tableId=this.elementId
+      table=this.table
+      tableActions=this.tableActions
+      extra=this.extra
+      tableClassNames=this.tableClassNames
+      sharedOptions=this.sharedOptions
+    )
+    body=(component
+      'lt-body'
+      tableId=this.elementId
+      table=this.table
+      tableActions=this.tableActions
+      extra=this.extra
+      tableClassNames=this.tableClassNames
+      sharedOptions=this.sharedOptions
+    )
+    foot=(component
+      'lt-foot'
+      tableId=this.elementId
+      table=this.table
+      tableActions=this.tableActions
+      extra=this.extra
+      tableClassNames=this.tableClassNames
+      sharedOptions=this.sharedOptions
+    )
   )
-  body=(component "lt-body"
-    tableId=elementId
-    table=table
-    tableActions=tableActions
-    extra=extra
-    tableClassNames=tableClassNames
-    sharedOptions=sharedOptions
-  )
-  foot=(component "lt-foot"
-    tableId=elementId
-    table=table
-    tableActions=tableActions
-    extra=extra
-    tableClassNames=tableClassNames
-    sharedOptions=sharedOptions
-  )
-)}}
+}}
