@@ -1,6 +1,7 @@
 import { A as emberArray, isArray } from '@ember/array';
 import { assert } from '@ember/debug';
 import EmberObject, { computed } from '@ember/object';
+import { empty, filterBy } from '@ember/object/computed';
 import Row from 'ember-light-table/classes/Row';
 import Column from 'ember-light-table/classes/Column';
 import SyncArrayProxy from 'ember-light-table/-private/sync-array-proxy';
@@ -46,65 +47,65 @@ export default class Table extends EmberObject.extend({
    * @property isEmpty
    * @type {Boolean}
    */
-  isEmpty: computed.empty('rows').readOnly(),
+  isEmpty: empty('rows').readOnly(),
 
   /**
    * @property expandedRows
    * @type {Ember.Array}
    */
-  expandedRows: computed.filterBy('rows', 'expanded', true).readOnly(),
+  expandedRows: filterBy('rows', 'expanded', true).readOnly(),
 
   /**
    * @property selectedRows
    * @type {Ember.Array}
    */
-  selectedRows: computed.filterBy('rows', 'selected', true).readOnly(),
+  selectedRows: filterBy('rows', 'selected', true).readOnly(),
 
   /**
    * @property visibleRows
    * @type {Ember.Array}
    */
-  visibleRows: computed.filterBy('rows', 'hidden', false).readOnly(),
+  visibleRows: filterBy('rows', 'hidden', false).readOnly(),
 
   /**
    * @property sortableColumns
    * @type {Ember.Array}
    */
-  sortableColumns: computed
-    .filterBy('visibleColumns', 'sortable', true)
-    .readOnly(),
+  sortableColumns: filterBy('visibleColumns', 'sortable', true).readOnly(),
 
   /**
    * @property sortedColumns
    * @type {Ember.Array}
    */
-  sortedColumns: computed.filterBy('visibleColumns', 'sorted', true).readOnly(),
+  sortedColumns: filterBy('visibleColumns', 'sorted', true).readOnly(),
 
   /**
    * @property hideableColumns
    * @type {Ember.Array}
    */
-  hideableColumns: computed.filterBy('allColumns', 'hideable', true).readOnly(),
+  hideableColumns: filterBy('allColumns', 'hideable', true).readOnly(),
 
   /**
    * @property hiddenColumns
    * @type {Ember.Array}
    */
-  hiddenColumns: computed.filterBy('allColumns', 'hidden', true).readOnly(),
+  hiddenColumns: filterBy('allColumns', 'hidden', true).readOnly(),
 
   /**
    * @property responsiveHiddenColumns
    * @type {Ember.Array}
    */
-  responsiveHiddenColumns: computed
-    .filterBy('allColumns', 'responsiveHidden', true)
-    .readOnly(),
+  responsiveHiddenColumns: filterBy(
+    'allColumns',
+    'responsiveHidden',
+    true
+  ).readOnly(),
 
   /**
    * @property visibleColumns
    * @type {Ember.Array}
    */
-  visibleColumns: computed.filterBy('allColumns', 'isHidden', false).readOnly(),
+  visibleColumns: filterBy('allColumns', 'isHidden', false).readOnly(),
 
   /**
    * @property visibleColumnGroups

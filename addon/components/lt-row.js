@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import layout from 'ember-light-table/templates/components/lt-row';
 
 const Row = Component.extend({
@@ -23,8 +23,8 @@ const Row = Component.extend({
   canSelect: false,
   colspan: 1,
 
-  isSelected: computed.readOnly('row.selected'),
-  isExpanded: computed.readOnly('row.expanded'),
+  isSelected: readOnly('row.selected'),
+  isExpanded: readOnly('row.expanded'),
 });
 
 Row.reopenClass({

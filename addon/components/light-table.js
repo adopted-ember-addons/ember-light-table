@@ -1,6 +1,7 @@
 import { A as emberArray } from '@ember/array';
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import { isEmpty, isNone } from '@ember/utils';
 import { assert } from '@ember/debug';
 import { inject as service } from '@ember/service';
@@ -217,7 +218,7 @@ const LightTable = Component.extend({
     }
   ).readOnly(),
 
-  visibleColumns: computed.readOnly('table.visibleColumns'),
+  visibleColumns: readOnly('table.visibleColumns'),
 
   /**
    * Calculates the total width of the visible columns via their `width`
