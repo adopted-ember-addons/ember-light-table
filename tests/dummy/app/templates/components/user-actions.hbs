@@ -1,26 +1,12 @@
-{{! BEGIN-SNIPPET user-actions }}
+{{!-- BEGIN-SNIPPET user-actions --}}
 <button
-  type='button'
-  class='btn btn-sm btn-default'
-  {{on 'click' (fn @tableActions.notifyUser @row bubbles=false)}}
->
-  <img
-    class='btn-icon'
-    alt=''
-    role='presentation'
-    src='/images/bell-solid.svg'
-  />
-</button>
+    type="button"
+    class="btn btn-sm btn-default fa fa-bell"
+    {{on "click" (fn @tableActions.notifyUser @row bubbles=false)}}
+></button>
 <button
-  type='button'
-  class='btn btn-sm btn-danger'
-  {{on 'click' (fn @tableActions.deleteUser @row bubbles=false)}}
->
-  <img
-    class='btn-icon'
-    alt=''
-    role='presentation'
-    src='/images/trash-can-regular.svg'
-  />
-</button>
-{{! END-SNIPPET }}
+    type="button"
+    class="btn btn-sm btn-danger fa fa-trash"
+    {{on "click" (fn @tableActions.deleteUser @row bubbles=false)}}
+></button>
+{{!-- END-SNIPPET --}}

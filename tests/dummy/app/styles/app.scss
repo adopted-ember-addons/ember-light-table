@@ -89,10 +89,10 @@ label {
   .navbar-nav > li > a {
     font-size: 14px;
     font-weight: 200;
-  }
 
-  .github {
-    height: 20px;
+    &.github {
+      font-size: 24px;
+    }
   }
 
   .navbar-nav.dropdown-menu li a {
@@ -162,10 +162,6 @@ label {
     }
   }
 
-  .code-icon {
-    width: 17px;
-  }
-
   .code-snippet {
     background-color: #f8f8f8;
     max-height: 500px;
@@ -223,19 +219,6 @@ label {
       color: darken($accent-color, 5%);
     }
   }
-}
-
-.btn-icon {
-  height: 12px;
-  width: 12px;
-}
-
-.selectable-icon {
-  height: 20px;
-}
-
-.trash-can {
-  color: white;
 }
 
 .user-avatar {
