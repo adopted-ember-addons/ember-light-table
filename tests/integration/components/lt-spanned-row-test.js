@@ -3,10 +3,10 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | lt spanned row', function(hooks) {
+module('Integration | Component | lt spanned row', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     await render(hbs`{{lt-spanned-row}}`);
     assert.dom(this.element).hasText('');
 
@@ -19,7 +19,7 @@ module('Integration | Component | lt spanned row', function(hooks) {
     assert.dom(this.element).hasText('template block text');
   });
 
-  test('visiblity', async function(assert) {
+  test('visiblity', async function (assert) {
     this.set('visible', true);
 
     await render(hbs`
@@ -33,7 +33,7 @@ module('Integration | Component | lt spanned row', function(hooks) {
     assert.dom(this.element).hasText('');
   });
 
-  test('colspan', async function(assert) {
+  test('colspan', async function (assert) {
     await render(hbs`
       {{#lt-spanned-row colspan=4}}
         template block text
@@ -43,8 +43,7 @@ module('Integration | Component | lt spanned row', function(hooks) {
     assert.dom('td').hasAttribute('colspan', '4');
   });
 
-  test('yield', async function(assert) {
-
+  test('yield', async function (assert) {
     await render(hbs`
       {{#lt-spanned-row yield=(hash name="Offir") as |row|}}
         {{row.name}}

@@ -1,4 +1,3 @@
-
 /**
  * A polyfill for jQuery .closest() method
  * @param  { Object } el     Dom element to start from

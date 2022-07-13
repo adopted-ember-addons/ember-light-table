@@ -1,4 +1,4 @@
-@loader-color: #dd6a58;
+$loader-color: #dd6a58;
 
 .spinner {
   margin: 15px auto;
@@ -9,7 +9,7 @@
 }
 
 .spinner > div {
-  background-color: @loader-color;
+  background-color: $loader-color;
   height: 100%;
   width: 4px;
   display: inline-block;

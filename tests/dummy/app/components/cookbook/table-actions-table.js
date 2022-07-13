@@ -39,7 +39,11 @@ export default class TableActionsTable extends BaseTable {
 
   @action
   deleteUser(row) {
-    let confirmed = window.confirm(`Are you sure you want to delete ${row.get('firstName')} ${row.get('lastName')}?`);
+    let confirmed = window.confirm(
+      `Are you sure you want to delete ${row.get('firstName')} ${row.get(
+        'lastName'
+      )}?`
+    );
 
     if (confirmed) {
       this.table.removeRow(row);

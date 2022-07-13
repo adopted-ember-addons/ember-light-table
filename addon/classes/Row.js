@@ -73,7 +73,7 @@ export default class Row extends ObjectProxy.extend({
    * @type {String}
    * @readOnly
    */
-  rowId: computed(function() {
+  rowId: computed(function () {
     return guidFor(this);
-  }).readOnly()
+  }).readOnly(),
 }) {}

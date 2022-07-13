@@ -1,8 +1,14 @@
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll, find, click, triggerEvent } from '@ember/test-helpers';
+import {
+  render,
+  findAll,
+  find,
+  click,
+  triggerEvent,
+} from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
-import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
+import { setupMirage } from 'ember-cli-mirage/test-support';
 import Table from 'ember-light-table';
 import Columns, { ResizableColumns } from '../../helpers/table-columns';
 import hasClass from '../../helpers/has-class';
@@ -10,32 +16,39 @@ import RowComponent from 'ember-light-table/components/lt-row';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 
-module('Integration | Component | light table', function(hooks) {
+module('Integration | Component | light table', function (hooks) {
   setupRenderingTest(hooks);
-  setupMirageTest(hooks);
+  setupMirage(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.actions = {};
-    this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
+    this.send = (actionName, ...args) =>
+      this.actions[actionName].apply(this, args);
   });
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     this.set('table', Table.create());
-    await render(hbs `{{light-table table}}`);
+    await render(hbs`{{light-table table}}`);
 
     assert.dom('*').hasText('');
   });
 
-  test('scrolled to bottom', async function(assert) {
+  test('scrolled to bottom', async function (assert) {
     assert.expect(4);
 
-    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 50) }));
+    this.set(
+      'table',
+      Table.create({
+        columns: Columns,
+        rows: this.server.createList('user', 50),
+      })
+    );
 
     this.set('onScrolledToBottom', () => {
       assert.ok(true);
     });
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table height='40vh' as |t|}}
         {{t.head fixed=true}}
         {{t.body onScrolledToBottom=(action onScrolledToBottom)}}
@@ -47,16 +60,26 @@ module('Integration | Component | light table', function(hooks) {
     let scrollContainer = find('.tse-scroll-content');
     assert.ok(scrollContainer, 'scroll container was rendered');
     let expectedScroll = 2501;
-    assert.equal(scrollContainer.scrollHeight, expectedScroll, 'scroll height is 2500 + 1px for height of lt-infinity');
+    assert.equal(
+      scrollContainer.scrollHeight,
+      expectedScroll,
+      'scroll height is 2500 + 1px for height of lt-infinity'
+    );
 
     scrollContainer.scrollTop = expectedScroll;
     await triggerEvent(scrollContainer, 'scroll');
   });
 
-  test('scrolled to bottom (multiple tables)', async function(assert) {
+  test('scrolled to bottom (multiple tables)', async function (assert) {
     assert.expect(4);
 
-    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 50) }));
+    this.set(
+      'table',
+      Table.create({
+        columns: Columns,
+        rows: this.server.createList('user', 50),
+      })
+    );
 
     this.set('onScrolledToBottomTable1', () => {
       assert.ok(false);
@@ -66,7 +89,7 @@ module('Integration | Component | light table', function(hooks) {
       assert.ok(true);
     });
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table height='40vh' id='table-1' as |t|}}
         {{t.head fixed=true}}
         {{t.body onScrolledToBottom=(action onScrolledToBottomTable1)}}
@@ -78,20 +101,32 @@ module('Integration | Component | light table', function(hooks) {
       {{/light-table}}
     `);
 
-    assert.dom('#table-2 tbody > tr').exists({ count: 50 }, '50 rows are rendered');
+    assert
+      .dom('#table-2 tbody > tr')
+      .exists({ count: 50 }, '50 rows are rendered');
 
     let scrollContainer = find('#table-2 .tse-scroll-content');
     assert.ok(scrollContainer, 'scroll container was rendered');
     let expectedScroll = 2501;
-    assert.equal(scrollContainer.scrollHeight, expectedScroll, 'scroll height is 2500 + 1px for height of lt-infinity');
+    assert.equal(
+      scrollContainer.scrollHeight,
+      expectedScroll,
+      'scroll height is 2500 + 1px for height of lt-infinity'
+    );
 
     scrollContainer.scrollTop = expectedScroll;
     await triggerEvent(scrollContainer, 'scroll');
   });
 
-  test('lt-body inViewport event deprecated', async function(assert) {
+  test('lt-body inViewport event deprecated', async function (assert) {
     assert.expect(2);
-    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
+    this.set(
+      'table',
+      Table.create({
+        columns: Columns,
+        rows: this.server.createList('user', 5),
+      })
+    );
     this.set('isInViewport', false);
     this.set('inViewport', () => {
       assert.ok(true);
@@ -101,7 +136,7 @@ module('Integration | Component | light table', function(hooks) {
       assert.ok(true);
     });
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table height='40vh' id="table" as |t|}}
         {{t.head fixed=true}}
         {{t.body isInViewport=isInViewport inViewport=(action inViewport) onScrolledToBottom=(action onScrolledToBottom)}}
@@ -112,11 +147,17 @@ module('Integration | Component | light table', function(hooks) {
     await triggerEvent(scrollContainer, 'scroll');
   });
 
-  test('fixed header', async function(assert) {
+  test('fixed header', async function (assert) {
     assert.expect(2);
-    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
+    this.set(
+      'table',
+      Table.create({
+        columns: Columns,
+        rows: this.server.createList('user', 5),
+      })
+    );
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table height='500px' id='lightTable' as |t|}}
         {{t.head fixed=true}}
         {{t.body}}
@@ -125,7 +166,7 @@ module('Integration | Component | light table', function(hooks) {
 
     assert.dom('#lightTable_inline_head thead').doesNotExist();
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table height='500px' id='lightTable' as |t|}}
         {{t.head fixed=false}}
         {{t.body}}
@@ -135,11 +176,17 @@ module('Integration | Component | light table', function(hooks) {
     assert.dom('#lightTable_inline_head thead').exists({ count: 1 });
   });
 
-  test('fixed footer', async function(assert) {
+  test('fixed footer', async function (assert) {
     assert.expect(2);
-    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
+    this.set(
+      'table',
+      Table.create({
+        columns: Columns,
+        rows: this.server.createList('user', 5),
+      })
+    );
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table height='500px' id='lightTable' as |t|}}
         {{t.body}}
         {{t.foot fixed=true}}
@@ -148,7 +195,7 @@ module('Integration | Component | light table', function(hooks) {
 
     assert.dom('#lightTable_inline_foot tfoot').doesNotExist();
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table height='500px' id='lightTable' as |t|}}
         {{t.body}}
         {{t.foot fixed=false}}
@@ -158,12 +205,17 @@ module('Integration | Component | light table', function(hooks) {
     assert.dom('#lightTable_inline_foot tfoot').exists({ count: 1 });
   });
 
-  test('table assumes height of container', async function(assert) {
-
-    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 5) }));
+  test('table assumes height of container', async function (assert) {
+    this.set(
+      'table',
+      Table.create({
+        columns: Columns,
+        rows: this.server.createList('user', 5),
+      })
+    );
     this.set('fixed', true);
 
-    await render(hbs `
+    await render(hbs`
       <div style="height: 500px">
         {{#light-table table id='lightTable' as |t|}}
           {{t.body}}
@@ -172,15 +224,24 @@ module('Integration | Component | light table', function(hooks) {
       </div>
     `);
 
-    assert.equal(find('#lightTable').offsetHeight, 500, 'table is 500px height');
-
+    assert.equal(
+      find('#lightTable').offsetHeight,
+      500,
+      'table is 500px height'
+    );
   });
 
-  test('table body should consume all available space when not enough content to fill it', async function(assert) {
-    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 1) }));
+  test('table body should consume all available space when not enough content to fill it', async function (assert) {
+    this.set(
+      'table',
+      Table.create({
+        columns: Columns,
+        rows: this.server.createList('user', 1),
+      })
+    );
     this.set('fixed', true);
 
-    await render(hbs `
+    await render(hbs`
       <div style="height: 500px">
         {{#light-table table id='lightTable' as |t|}}
           {{t.head fixed=true}}
@@ -196,39 +257,52 @@ module('Integration | Component | light table', function(hooks) {
     const headHeight = find('.lt-head-wrap').offsetHeight;
     const footHeight = find('.lt-foot-wrap').offsetHeight;
 
-    assert.equal(bodyHeight + headHeight + footHeight, 500, 'combined table content is 500px tall');
-    assert.ok(bodyHeight > (headHeight + footHeight), 'body is tallest element');
+    assert.equal(
+      bodyHeight + headHeight + footHeight,
+      500,
+      'combined table content is 500px tall'
+    );
+    assert.ok(bodyHeight > headHeight + footHeight, 'body is tallest element');
   });
 
-  test('accepts components that are used in the body', async function(assert) {
-
+  test('accepts components that are used in the body', async function (assert) {
     this.owner.register('component:custom-row', RowComponent);
 
-    this.set('table', Table.create({ columns: Columns, rows: this.server.createList('user', 1) }));
+    this.set(
+      'table',
+      Table.create({
+        columns: Columns,
+        rows: this.server.createList('user', 1),
+      })
+    );
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table as |t|}}
         {{t.body rowComponent=(component "custom-row" classNames="custom-row")}}
       {{/light-table}}
     `);
 
-    assert.dom('.lt-row.custom-row').exists({ count: 1 }, 'row has custom-row class');
+    assert
+      .dom('.lt-row.custom-row')
+      .exists({ count: 1 }, 'row has custom-row class');
   });
 
-  test('passed in components can have computed properties', async function(assert) {
-
-    this.owner.register('component:custom-row', RowComponent.extend({
-      classNameBindings: ['isActive'],
-      current: null,
-      isActive: computed('row.content', 'current', function() {
-        return this.row?.content === this.current;
+  test('passed in components can have computed properties', async function (assert) {
+    this.owner.register(
+      'component:custom-row',
+      RowComponent.extend({
+        classNameBindings: ['isActive'],
+        current: null,
+        isActive: computed('row.content', 'current', function () {
+          return this.row?.content === this.current;
+        }),
       })
-    }));
+    );
 
     let users = this.server.createList('user', 3);
     this.set('table', Table.create({ columns: Columns, rows: users }));
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table as |t|}}
         {{t.body
           rowComponent=(component "custom-row" classNames="custom-row" current=current)
@@ -236,8 +310,12 @@ module('Integration | Component | light table', function(hooks) {
       {{/light-table}}
     `);
 
-    assert.dom('.custom-row').exists({ count: 3 }, 'three custom rows were rendered');
-    assert.dom('.custom-row.is-active').doesNotExist('none of the items are active');
+    assert
+      .dom('.custom-row')
+      .exists({ count: 3 }, 'three custom rows were rendered');
+    assert
+      .dom('.custom-row.is-active')
+      .doesNotExist('none of the items are active');
 
     this.set('current', users[0]);
     let [firstRow] = findAll('.custom-row');
@@ -249,22 +327,31 @@ module('Integration | Component | light table', function(hooks) {
 
     this.set('current', null);
 
-    assert.dom('.custom-row.is-active').doesNotExist('none of the items are active');
+    assert
+      .dom('.custom-row.is-active')
+      .doesNotExist('none of the items are active');
   });
 
-  test('onScroll', async function(assert) {
-    let table = Table.create({ columns: Columns, rows: this.server.createList('user', 10) });
+  test('onScroll', async function (assert) {
+    let table = Table.create({
+      columns: Columns,
+      rows: this.server.createList('user', 10),
+    });
     let expectedScroll = 50;
 
     this.setProperties({
       table,
       onScroll(actualScroll) {
         assert.ok(true, 'onScroll worked');
-        assert.equal(actualScroll, expectedScroll, 'scroll position is correct');
-      }
+        assert.equal(
+          actualScroll,
+          expectedScroll,
+          'scroll position is correct'
+        );
+      },
     });
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table height='40vh' as |t|}}
         {{t.head fixed=true}}
         {{t.body
@@ -279,25 +366,35 @@ module('Integration | Component | light table', function(hooks) {
     await triggerEvent(scrollContainer, 'scroll');
   });
 
-  test('extra data and tableActions', async function(assert) {
+  test('extra data and tableActions', async function (assert) {
     assert.expect(4);
 
-    this.owner.register('component:some-component', Component.extend({
-      classNames: 'some-component',
+    this.owner.register(
+      'component:some-component',
+      Component.extend({
+        classNames: 'some-component',
 
-      didReceiveAttrs() {
-        assert.equal(this.extra.someData, 'someValue', 'extra data is passed');
+        didReceiveAttrs() {
+          this._super();
+          assert.equal(
+            this.extra.someData,
+            'someValue',
+            'extra data is passed'
+          );
+        },
+
+        click() {
+          this.tableActions.someAction();
+        },
+      })
+    );
+
+    const columns = [
+      {
+        component: 'some-component',
+        cellComponent: 'some-component',
       },
-
-      click() {
-        this.tableActions.someAction();
-      }
-    }));
-
-    const columns = [{
-      component: 'some-component',
-      cellComponent: 'some-component'
-    }];
+    ];
 
     this.set('table', Table.create({ columns, rows: [{}] }));
 
@@ -305,7 +402,7 @@ module('Integration | Component | light table', function(hooks) {
       assert.ok(true, 'table action is passed');
     };
 
-    await render(hbs `
+    await render(hbs`
       {{#light-table table
         extra=(hash someData="someValue")
         tableActions=(hash
@@ -324,10 +421,13 @@ module('Integration | Component | light table', function(hooks) {
     }
   });
 
-  test('dragging resizes columns', async function(assert) {
-    let table = Table.create({ columns: ResizableColumns, rows: this.server.createList('user', 10) });
+  test('dragging resizes columns', async function (assert) {
+    let table = Table.create({
+      columns: ResizableColumns,
+      rows: this.server.createList('user', 10),
+    });
     this.setProperties({ table });
-    await render(hbs `
+    await render(hbs`
       {{#light-table table height='40vh' as |t|}}
         {{t.head fixed=true}}
         {{t.body}}

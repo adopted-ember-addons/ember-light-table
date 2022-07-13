@@ -7,7 +7,7 @@
 as |t|>
 
   {{!--
-    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
+    In order for `fa-sort-up` and `fa-sort-down` icons to work,
     you need to have ember-font-awesome installed or manually include
     the font-awesome assets, e.g. via a CDN.
   --}}
@@ -17,7 +17,7 @@ as |t|>
   <t.body
     @canSelect={{false}}
     @scrollBuffer={{200}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+    @onScrolledToBottom={{this.onScrolledToBottom}}
   as |body|>
     {{#if this.isLoading}}
       <body.loader>

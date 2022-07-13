@@ -1,7 +1,7 @@
 import classic from 'ember-classic-decorator';
 import { classNames, attributeBindings } from '@ember-decorators/component';
 import { computed } from '@ember/object';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 import Row from 'ember-light-table/components/lt-row';
 
 @classic

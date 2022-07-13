@@ -10,29 +10,34 @@ export default class ResizableTable extends BaseTable {
       sortable: false,
       align: 'center',
 
-      subColumns: [{
-        label: 'Avatar',
-        valuePath: 'avatar',
-        width: '60px',
+        subColumns: [
+          {
+            label: 'Avatar',
+            valuePath: 'avatar',
+            width: '60px',
+            sortable: false,
+            cellComponent: 'user-avatar',
+          },
+          {
+            label: 'First',
+            resizable: true,
+            valuePath: 'firstName',
+            width: '150px',
+            minResizeWidth: 75,
+          },
+          {
+            label: 'Last',
+            resizable: true,
+            valuePath: 'lastName',
+            width: '150px',
+            minResizeWidth: 75,
+          },
+        ],
+      },
+      {
+        label: 'Contact Information',
         sortable: false,
-        cellComponent: 'user-avatar'
-      }, {
-        label: 'First',
-        resizable: true,
-        valuePath: 'firstName',
-        width: '150px',
-        minResizeWidth: 75
-      }, {
-        label: 'Last',
-        resizable: true,
-        valuePath: 'lastName',
-        width: '150px',
-        minResizeWidth: 75
-      }]
-    }, {
-      label: 'Contact Information',
-      sortable: false,
-      align: 'center',
+        align: 'center',
 
       subColumns: [{
         label: 'Address',

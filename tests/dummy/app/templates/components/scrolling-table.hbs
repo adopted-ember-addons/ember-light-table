@@ -2,16 +2,16 @@
 <LightTable @table={{this.table}} @height="65vh" as |t|>
 
   {{!--
-    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
+    In order for `fa-sort-up` and `fa-sort-down` icons to work,
     you need to have ember-font-awesome installed or manually include
     the font-awesome assets, e.g. via a CDN.
   --}}
 
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-asc"
-    @iconDescending="fa fa-sort-desc"
+    @iconAscending="fa fa-sort-up"
+    @iconDescending="fa fa-sort-down"
     @fixed={{true}}
   />
 
@@ -20,7 +20,7 @@
     @scrollTo={{this.scrollTo}}
     @scrollToRow={{this.scrollToRow}}
     @onScroll={{fn (mut this.currentScrollOffset)}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+    @onScrolledToBottom={{this.onScrolledToBottom}}
   as |body|>
     {{#if this.isLoading}}
       <body.loader>
@@ -43,13 +43,12 @@
           <div class="form-group">
             <label for="scrollTo">Scroll To:</label>
             <Input
-              @key-down={{fn (mut this.scrollTo)}}
               @value={{this.scrollTo}}
               @type="number"
               name="scrollTo"
               min="0"
               step="10"
-              class="form-control"
+              class="form-control" {{on "keydown" (fn (mut this.scrollTo))}}
             />
           </div>
 

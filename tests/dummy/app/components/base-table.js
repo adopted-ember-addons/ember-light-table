@@ -27,7 +27,11 @@ export default class BaseTable extends Component {
   init() {
     super.init(...arguments);
 
-    let table = Table.create({ columns: this.columns, rows: this.model, enableSync: this.enableSync });
+    let table = Table.create({
+      columns: this.columns,
+      rows: this.model,
+      enableSync: this.enableSync,
+    });
     let sortColumn = table.get('allColumns').findBy('valuePath', this.sort);
 
     // Setup initial sort column
@@ -60,7 +64,7 @@ export default class BaseTable extends Component {
         dir: column.ascending ? 'asc' : 'desc',
         sort: column.get('valuePath'),
         canLoadMore: true,
-        page: 0
+        page: 0,
       });
       this.model.clear();
     }

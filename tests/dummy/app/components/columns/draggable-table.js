@@ -15,6 +15,7 @@ export default class DraggableTable extends BaseTable {
         valuePath: 'avatar',
         width: '60px',
         sortable: false,
+        align: 'center',
         draggable: true,
         cellComponent: 'user-avatar'
       }, {

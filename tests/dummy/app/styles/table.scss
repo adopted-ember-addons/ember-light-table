@@ -1,4 +1,4 @@
-@border-color: #DADADA;
+$border-color: #DADADA;
 
 .ember-light-table {
   width: 95%;
@@ -16,11 +16,11 @@
   }
 
   tfoot .lt-column {
-    border-top: 1px solid @border-color;
+    border-top: 1px solid $border-color;
   }
 
   thead .lt-column {
-    border-bottom: 1px solid @border-color;
+    border-bottom: 1px solid $border-color;
   }
 
   thead th,
@@ -32,11 +32,11 @@
 
     &.is-drag-target {
       &.drag-right {
-        border-right: 1px dotted @border-color;
+        border-right: 1px dotted $border-color;
       }
 
       &.drag-left {
-        border-left: 1px dotted @border-color;
+        border-left: 1px dotted $border-color;
       }
     }
   }
@@ -97,7 +97,7 @@
     }
 
     td {
-      border-color: @border-color;
+      border-color: $border-color;
       border-width: 0;
       border-bottom-width: 1px;
       border-style: solid;
@@ -122,7 +122,7 @@ tfoot {
   .pagination {
     margin: 5px 0;
     li > a {
-      color: darken(@accent-color, 5%);
+      color: darken($accent-color, 5%);
     }
 
     li > a:hover,
@@ -131,8 +131,8 @@ tfoot {
     li.active > a:focus,
     li.active > a {
       color: white;
-      background: darken(@accent-color, 10%);
-      border-color: darken(@accent-color, 15%);
+      background: darken($accent-color, 10%);
+      border-color: darken($accent-color, 15%);
 
     }
   }

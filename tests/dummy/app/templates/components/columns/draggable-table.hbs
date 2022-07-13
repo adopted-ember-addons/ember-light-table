@@ -1,16 +1,16 @@
 {{!-- BEGIN-SNIPPET draggable-table --}}
 <LightTable @table={{this.table}} @height="65vh" as |t|>
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-asc"
-    @iconDescending="fa fa-sort-desc"
+    @iconAscending="fa fa-sort-up"
+    @iconDescending="fa fa-sort-down"
     @fixed={{true}}
   />
 
   <t.body
     @canSelect={{false}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
+    @onScrolledToBottom={{this.onScrolledToBottom}}
   as |body|>
     {{#if this.isLoading}}
       <body.loader>

@@ -7,22 +7,22 @@ export default class Router extends EmberRouter {
   rootURL = config.rootURL;
 }
 
-Router.map(function() {
+Router.map(function () {
   this.route('responsive');
   this.route('scrolling');
 
-  this.route('columns', function() {
+  this.route('columns', function () {
     this.route('draggable');
     this.route('grouped');
     this.route('resizable');
   });
 
-  this.route('rows', function() {
+  this.route('rows', function () {
     this.route('expandable');
     this.route('selectable');
   });
 
-  this.route('cookbook', function() {
+  this.route('cookbook', function () {
     this.route('client-side');
     this.route('custom-row');
     this.route('custom-sort-icon');

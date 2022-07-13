@@ -2,16 +2,16 @@
 <LightTable @table={{this.table}} @height="65vh" as |t|>
 
   {{!--
-    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
+    In order for `fa-sort-up` and `fa-sort-down` icons to work,
     you need to have ember-font-awesome installed or manually include
     the font-awesome assets, e.g. via a CDN.
   --}}
 
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-asc"
-    @iconDescending="fa fa-sort-desc"
+    @iconAscending="fa fa-sort-up"
+    @iconDescending="fa fa-sort-down"
     @fixed={{true}}
   />
 
@@ -29,7 +29,7 @@
         <div class="col-md-6">
           <PowerSelect @selected={{this.selectedFilter}}
             @options={{this.possibleFilters}}
-            @onChange={{pipe-action (fn (mut this.selectedFilter)) (fn this.onSearchChange)}}
+            @onChange={{pipe-action (fn (mut this.selectedFilter)) this.onSearchChange}}
             @placeholder="Select filter column..."
             class="form-control"
             name="scrollToRow"
@@ -39,10 +39,8 @@
         </div>
         <div class="col-md-6">
           <Input
-            @value={{this.query}}
-            @key-down={{pipe-action (fn (mut this.query)) (fn this.onSearchChange)}}
-            placeholder="Search..."
-            class="form-control"
+            @value={{this.query}} placeholder="Search..."
+            class="form-control" {{on "keydown" (pipe-action (fn (mut this.query)) this.onSearchChange)}}
           />
         </div>
       </td>

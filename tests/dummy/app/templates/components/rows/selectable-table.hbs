@@ -1,37 +1,52 @@
-{{!-- BEGIN-SNIPPET selectable-table --}}
+{{! BEGIN-SNIPPET selectable-table }}
 <div class="table-actions">
   {{#if this.hasSelection}}
-    <div class="table-action fa fa-check-square-o" title="Deselect all" {{on "click" (fn this.deselectAll)}} role="button"></div>
-    <div class="table-action fa fa-trash-o delete" title="Delete selected" {{on "click" (fn this.deleteAll)}} role="button"></div>
+    <div
+      class="table-action fa fa-check-square"
+      title="Deselect all"
+      role="button"
+      {{on "click" this.deselectAll}}
+    ></div>
+    <div
+      class="table-action fa fa-trash delete"
+      title="Delete selected"
+      role="button"
+      {{on "click" this.deleteAll}}
+    ></div>
   {{else}}
-    <div class="table-action fa fa-square-o" title="Select all" {{on "click" (fn this.selectAll)}} role="button"></div>
+    <div
+      class="table-action fa fa-square"
+      title="Select all"
+      role="button"
+      {{on "click" this.selectAll}}
+    ></div>
   {{/if}}
 </div>
 
 <LightTable @table={{this.table}} @height="65vh" as |t|>
   <t.head
-    @onColumnClick={{fn this.onColumnClick}}
+    @onColumnClick={{this.onColumnClick}}
     @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-asc"
-    @iconDescending="fa fa-sort-desc"
+    @iconAscending="fa fa-sort-up"
+    @iconDescending="fa fa-sort-down"
     @fixed={{true}}
   />
 
   <t.body
     @multiSelect={{true}}
-    @onScrolledToBottom={{fn this.onScrolledToBottom}}
-  as |body|>
+    @onScrolledToBottom={{this.onScrolledToBottom}} as |body|
+  >
     {{#if this.isLoading}}
       <body.loader>
-        <TableLoader/>
+        <TableLoader />
       </body.loader>
     {{/if}}
 
     {{#if (and (not this.isLoading) this.table.isEmpty)}}
       <body.no-data>
-        <NoData/>
+        <NoData />
       </body.no-data>
     {{/if}}
   </t.body>
 </LightTable>
-{{!-- END-SNIPPET --}}
+{{! END-SNIPPET }}

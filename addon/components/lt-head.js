@@ -8,21 +8,21 @@ import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 
 /**
  * ```hbs
- * {{#light-table table as |t|}}
- *   {{t.head onColumnClick=(action 'sortByColumn')}}
- * {{/light-table}}
+ * <LightTable @table={{this.table}} as |t|>
+ *   {{t.head @onColumnClick=(action 'sortByColumn')}}
+ * </LightTable>
  * ```
  *
  * If you want to define your own thead, just declare the contextual component in a block.
  *
  * ```hbs
- * {{#light-table table as |t|}}
- *   {{#t.head onColumnClick=(action 'sortByColumn') as |groups subColumns|}}
+ * <LightTable @table={{this.table}} as |t|>
+ *   <t.head @onColumnClick={{this.sortByColumn}} as |groups subColumns|>
  *     {{#each groups as |group|}}
  *       {{!-- ... --}}
  *     {{/each}}
- *   {{/t.head}}
- * {{/light-table}}
+ *   </t.head>
+ * </LightTable>
  * ```
  *
  * If you dont have grouped columns, the yielded `groups` will be an array of all visibile columns and `subColumns`
@@ -37,5 +37,5 @@ export default Component.extend(TableHeaderMixin, {
   classNames: ['lt-head-wrap'],
   table: null,
   sharedOptions: null,
-  sharedOptionsFixedKey: 'fixedHeader'
+  sharedOptionsFixedKey: 'fixedHeader',
 });

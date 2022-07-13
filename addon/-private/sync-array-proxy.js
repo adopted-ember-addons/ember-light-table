@@ -23,23 +23,26 @@ export default ArrayProxy.extend({
 
     let syncArray = this.syncArray;
 
-    assert('[ember-light-table] enableSync requires the passed array to be an instance of Ember.A', isArray(syncArray) && typeof syncArray.addArrayObserver === 'function');
+    assert(
+      '[ember-light-table] enableSync requires the passed array to be an instance of Ember.A',
+      isArray(syncArray) && typeof syncArray.addArrayObserver === 'function'
+    );
 
     syncArray.addArrayObserver(this, {
       willChange: 'syncArrayWillChange',
-      didChange: 'syncArrayDidChange'
+      didChange: 'syncArrayDidChange',
     });
   },
 
   destroy() {
     this.syncArray.removeArrayObserver(this, {
       willChange: 'syncArrayWillChange',
-      didChange: 'syncArrayDidChange'
+      didChange: 'syncArrayDidChange',
     });
 
     this.setProperties({
       syncArray: null,
-      content: null
+      content: null,
     });
   },
 
@@ -63,7 +66,9 @@ export default ArrayProxy.extend({
     return objects;
   },
 
-  syncArrayWillChange() { /* Not needed */ },
+  syncArrayWillChange() {
+    /* Not needed */
+  },
 
   syncArrayDidChange(syncArray, start, removeCount, addCount) {
     let content = this.content;
@@ -74,7 +79,9 @@ export default ArrayProxy.extend({
     }
 
     if (addCount > 0) {
-      objectsToAdd = this.serializeContentObjects(syncArray.slice(start, start + addCount));
+      objectsToAdd = this.serializeContentObjects(
+        syncArray.slice(start, start + addCount)
+      );
     }
 
     content.replace(start, removeCount, objectsToAdd);
@@ -87,6 +94,10 @@ export default ArrayProxy.extend({
       return this._super(...arguments);
     }
 
-    syncArray.replace(start, removeCount, this.serializeSyncArrayObjects(objectsToAdd));
-  }
+    syncArray.replace(
+      start,
+      removeCount,
+      this.serializeSyncArrayObjects(objectsToAdd)
+    );
+  },
 });

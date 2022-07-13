@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from 'ember-light-table/templates/components/cells/base';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 
 /**
  * @module Light Table
@@ -24,7 +24,7 @@ const Cell = Component.extend({
 
   isSorted: computed.readOnly('column.sorted'),
 
-  style: computed('enableScaffolding', 'column.width', function() {
+  style: computed('enableScaffolding', 'column.width', function () {
     let column = this.column;
     let columnWidth = column.get('width');
 
@@ -38,7 +38,7 @@ const Cell = Component.extend({
     return columnWidth ? htmlSafe(`width: ${columnWidth};`) : null;
   }),
 
-  align: computed('column.align', function() {
+  align: computed('column.align', function () {
     return `align-${this.column.align}`;
   }),
 
@@ -82,7 +82,7 @@ const Cell = Component.extend({
    * @property value
    * @type {Mixed}
    */
-  value: computed('column.format', 'rawValue', function() {
+  value: computed('column.format', 'rawValue', function () {
     let rawValue = this.rawValue;
     let format = this.column.format;
 
@@ -91,11 +91,11 @@ const Cell = Component.extend({
     }
 
     return rawValue;
-  })
+  }),
 });
 
 Cell.reopenClass({
-  positionalParams: ['column', 'row']
+  positionalParams: ['column', 'row'],
 });
 
 export default Cell;

@@ -51,7 +51,7 @@ export default Component.extend({
     this.setProperties({
       isResizing: true,
       startWidth: column.offsetWidth,
-      startX: e.pageX
+      startX: e.pageX,
     });
 
     let topLevel = closest(this.element, TOP_LEVEL_CLASS);
@@ -83,19 +83,26 @@ export default Component.extend({
       let resizeOnDrag = this.resizeOnDrag;
       let minResizeWidth = this.column.minResizeWidth;
       let { startX, startWidth } = this;
-      let width = `${Math.max(startWidth + (e.pageX - startX), minResizeWidth)}px`;
+      let width = `${Math.max(
+        startWidth + (e.pageX - startX),
+        minResizeWidth
+      )}px`;
 
       let column = this.colElement();
       let index = this.table.visibleColumns.indexOf(this.column) + 1;
       let table = closest(this.element, TOP_LEVEL_CLASS);
 
       column.style.width = width;
-      const headerScaffoldingCell = table.querySelector(`thead td.lt-scaffolding:nth-child(${index})`);
+      const headerScaffoldingCell = table.querySelector(
+        `thead td.lt-scaffolding:nth-child(${index})`
+      );
       if (headerScaffoldingCell) {
         headerScaffoldingCell.style.width = width;
       }
 
-      const footerScaffoldingCell = table.querySelector(`tfoot td.lt-scaffolding:nth-child(${index})`);
+      const footerScaffoldingCell = table.querySelector(
+        `tfoot td.lt-scaffolding:nth-child(${index})`
+      );
       if (footerScaffoldingCell) {
         footerScaffoldingCell.style.width = width;
       }
@@ -110,5 +117,5 @@ export default Component.extend({
   },
 
   // No-op for closure actions
-  onColumnResized() {}
+  onColumnResized() {},
 });
