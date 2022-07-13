@@ -40,7 +40,7 @@
         <div class="col-md-6">
           <Input
             @value={{this.query}} placeholder="Search..."
-            class="form-control" {{on "keydown" (pipe-action (fn (mut this.query)) this.onSearchChange)}}
+            class="form-control" {{on "keydown" (pipe-action (fn this.updateQuery) this.onSearchChange)}}
           />
         </div>
       </td>
