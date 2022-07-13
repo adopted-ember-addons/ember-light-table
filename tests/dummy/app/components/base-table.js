@@ -1,6 +1,7 @@
 // BEGIN-SNIPPET base-table
 import Component from '@ember/component';
-import { computed, action } from '@ember/object';
+import { action } from '@ember/object';
+import { oneWay } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import Table from 'ember-light-table';
@@ -14,7 +15,7 @@ export default Component.extend({
   dir: 'asc',
   sort: 'firstName',
 
-  isLoading: computed.oneWay('fetchRecords.isRunning'),
+  isLoading: oneWay('fetchRecords.isRunning'),
   canLoadMore: true,
   enableSync: true,
 

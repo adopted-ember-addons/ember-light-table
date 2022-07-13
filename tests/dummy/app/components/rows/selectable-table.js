@@ -1,9 +1,10 @@
 // BEGIN-SNIPPET selectable-table
 import BaseTable from '../base-table';
 import { computed, action } from '@ember/object';
+import { notEmpty } from '@ember/object/computed';
 
 export default BaseTable.extend({
-  hasSelection: computed.notEmpty('table.selectedRows'),
+  hasSelection: notEmpty('table.selectedRows'),
 
   columns: computed(function () {
     return [
