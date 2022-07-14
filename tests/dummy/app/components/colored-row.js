@@ -1,3 +1,4 @@
+// BEGIN-SNIPPET colored-row
 import classic from 'ember-classic-decorator';
 import { classNames, attributeBindings } from '@ember-decorators/component';
 import { computed } from '@ember/object';
