@@ -6,12 +6,13 @@ import { isEmpty } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import Table from 'ember-light-table';
 import { restartableTask } from 'ember-concurrency';
+import { tracked } from '@glimmer/tracking';
 
 @classic
 export default class BaseTable extends Component {
   @service store;
 
-  page = 0;
+  @tracked page = 0;
   limit = 15;
   dir = 'asc';
   sort = 'firstName';
@@ -20,7 +21,8 @@ export default class BaseTable extends Component {
   enableSync = true;
 
   model = null;
-  meta = null;
+  @tracked meta = null;
+
   table = null;
 
   init() {
