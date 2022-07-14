@@ -1,9 +1,13 @@
 // BEGIN-SNIPPET paginated-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed, action } from '@ember/object';
+import { action } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function () {
+@classic
+export default class PaginatedTable extends BaseTable {
+  limit = 12;
+
+  get columns() {
     return [
       {
         label: 'Avatar',
@@ -35,25 +39,25 @@ export default BaseTable.extend({
         valuePath: 'country',
       },
     ];
-  }),
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.send('setPage', 1);
-  },
+  }
 
   @action
   setPage(page) {
-    let totalPages = this.meta.totalPages;
-    let currPage = this.page;
+    const totalPages = this.meta?.totalPages;
+    const currPage = this.page;
 
     if (page < 1 || page > totalPages || page === currPage) {
       return;
     }
 
-    this.set('page', page);
+    this.page = page;
     this.model.clear();
     this.fetchRecords.perform();
-  },
-});
+  }
+}
 // END-SNIPPET

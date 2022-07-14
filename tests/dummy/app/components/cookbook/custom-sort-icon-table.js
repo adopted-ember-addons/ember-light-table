@@ -1,9 +1,10 @@
 // BEGIN-SNIPPET custom-sort-icon-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function () {
+@classic
+export default class CustomSortIconTable extends BaseTable {
+  get columns() {
     return [
       {
         label: 'Avatar',
@@ -35,6 +36,6 @@ export default BaseTable.extend({
         valuePath: 'country',
       },
     ];
-  }),
-});
+  }
+}
 // END-SNIPPET

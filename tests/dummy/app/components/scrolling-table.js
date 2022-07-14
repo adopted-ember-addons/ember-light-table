@@ -1,13 +1,15 @@
 // BEGIN-SNIPPET scrolling-table
+import classic from 'ember-classic-decorator';
 import BaseTable from './base-table';
-import { computed } from '@ember/object';
+import { action } from '@ember/object';
 
-export default BaseTable.extend({
-  currentScrollOffset: 0,
-  scrollTo: 0,
-  scrollToRow: null,
+@classic
+export default class ScrollingTable extends BaseTable {
+  currentScrollOffset = 0;
+  scrollTo = 0;
+  scrollToRow = null;
 
-  columns: computed(function () {
+  get columns() {
     return [
       {
         label: 'Avatar',
@@ -39,6 +41,11 @@ export default BaseTable.extend({
         valuePath: 'country',
       },
     ];
-  }),
-});
+  }
+
+  @action
+  updateScrollPos(event) {
+    this.scrollTo = event.target.value;
+  }
+}
 // END-SNIPPET

@@ -1,10 +1,12 @@
 // BEGIN-SNIPPET occluded-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed } from '@ember/object';
 
-export default BaseTable.extend({
-  limit: 100,
-  columns: computed(function () {
+@classic
+export default class OccludedTable extends BaseTable {
+  limit = 100;
+
+  get columns() {
     return [
       {
         label: 'Avatar',
@@ -36,12 +38,12 @@ export default BaseTable.extend({
         valuePath: 'country',
       },
     ];
-  }),
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.set('page', 1);
     this.fetchRecords.perform();
-  },
-});
+  }
+}
 // END-SNIPPET

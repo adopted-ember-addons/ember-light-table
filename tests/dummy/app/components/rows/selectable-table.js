@@ -1,12 +1,13 @@
 // BEGIN-SNIPPET selectable-table
 import BaseTable from '../base-table';
 import { computed, action } from '@ember/object';
-import { notEmpty } from '@ember/object/computed';
+import classic from 'ember-classic-decorator';
 
-export default BaseTable.extend({
-  hasSelection: notEmpty('table.selectedRows'),
+@classic
+export default class ExpandableTable extends BaseTable {
+  hasSelection = computed.notEmpty('table.selectedRows');
 
-  columns: computed(function () {
+  get columns() {
     return [
       {
         label: 'Avatar',
@@ -38,21 +39,21 @@ export default BaseTable.extend({
         valuePath: 'country',
       },
     ];
-  }),
+  }
 
   @action
   selectAll() {
     this.table.rows.setEach('selected', true);
-  },
+  }
 
   @action
   deselectAll() {
     this.table.selectedRows.setEach('selected', false);
-  },
+  }
 
   @action
   deleteAll() {
     this.table.removeRows(this.table.selectedRows);
-  },
-});
+  }
+}
 // END-SNIPPET

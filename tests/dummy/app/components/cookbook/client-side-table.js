@@ -1,31 +1,36 @@
 // BEGIN-SNIPPET client-side-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed, action } from '@ember/object';
-import { oneWay, or, sort } from '@ember/object/computed';
-import { task, timeout } from 'ember-concurrency';
+import { action } from '@ember/object';
+import { restartableTask, timeout } from 'ember-concurrency';
+import { tracked } from '@glimmer/tracking';
 
-export default BaseTable.extend({
-  query: '',
+@classic
+export default class PaginatedTable extends BaseTable {
+  query = '';
 
   // No need for `enableSync` here
-  enableSync: false,
+  enableSync = false;
 
-  isLoading: or('fetchRecords.isRunning', 'setRows.isRunning'),
+  model = [];
 
-  // Sort Logic
-  sortedModel: sort('model', 'sortBy'),
-  sortBy: computed('dir', 'sort', function () {
-    return [`${this.sort}:${this.dir}`];
-  }).readOnly(),
+  get sortedModel() {
+    if (this.dir === 'asc') return this.model.sortBy(this.sort);
+    else return this.model.sortBy(this.sort).reverse();
+  }
 
-  // Filter Input Setup
-  selectedFilter: oneWay('possibleFilters.firstObject'),
-  // eslint-disable-next-line ember/require-computed-macros
-  possibleFilters: computed('table.columns', function () {
+  get isLoading() {
+    return this.fetchRecord?.isRunning || this.setRows?.isRunning;
+  }
+
+  // Filter Input
+  @tracked selectedFilter = this.possibleFilters.firstObject;
+
+  get possibleFilters() {
     return this.table.columns.filterBy('sortable', true);
-  }).readOnly(),
+  }
 
-  columns: computed(function () {
+  get columns() {
     return [
       {
         label: 'Avatar',
@@ -57,30 +62,35 @@ export default BaseTable.extend({
         valuePath: 'country',
       },
     ];
-  }),
+  }
 
-  fetchRecords: task(function* () {
-    let records = yield this.store.query('user', { page: 1, limit: 100 });
+  init() {
+    super.init(...arguments);
+    this.fetchRecords.perform();
+  }
+
+  @restartableTask *fetchRecords() {
+    const records = yield this.store.query('user', { page: 1, limit: 100 });
     this.model.setObjects(records.toArray());
-    this.set('meta', records.meta);
+    this.meta = records.meta;
     yield this.filterAndSortModel.perform();
-  }).on('init'),
+  }
 
-  setRows: task(function* (rows) {
+  @restartableTask *setRows(rows) {
     this.table.setRows([]);
     yield timeout(100); // Allows isLoading state to be shown
     this.table.setRows(rows);
-  }).restartable(),
+  }
 
-  filterAndSortModel: task(function* (debounceMs = 200) {
+  @restartableTask *filterAndSortModel(debounceMs = 200) {
     yield timeout(debounceMs); // debounce
 
-    let { query } = this;
-    let model = this.sortedModel;
+    const query = this.query;
+    const model = this.sortedModel;
     let result = model;
 
     if (query !== '' && this.selectedFilter !== undefined) {
-      let { valuePath } = this.selectedFilter;
+      const { valuePath } = this.selectedFilter;
 
       result = model.filter((m) => {
         return m.get(valuePath).toLowerCase().includes(query.toLowerCase());
@@ -88,24 +98,25 @@ export default BaseTable.extend({
     }
 
     yield this.setRows.perform(result);
-  }).restartable(),
+  }
 
-  actions: {
-    onColumnClick(column) {
-      if (column.sorted) {
-        this.setProperties({
-          dir: column.ascending ? 'asc' : 'desc',
-          sort: column.valuePath,
-        });
+  @action
+  onColumnClick(column) {
+    if (column.sorted) {
+      this.dir = column.ascending ? 'asc' : 'desc';
+      this.sort = column.valuePath;
+      this.filterAndSortModel.perform(100);
+    }
+  }
 
-        this.filterAndSortModel.perform(0);
-      }
-    },
-  },
+  @action
+  updateQuery(event) {
+    this.query = event.target.value;
+  }
 
   @action
   onSearchChange() {
     this.filterAndSortModel.perform();
-  },
-});
+  }
+}
 // END-SNIPPET

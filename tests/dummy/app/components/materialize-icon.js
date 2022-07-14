@@ -1,9 +1,7 @@
 // BEGIN-SNIPPET materialize-icon
+import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
-import layout from '../templates/components/materialize-icon';
 
-export default Component.extend({
-  tagName: 'span',
-  layout,
-});
+@classic
+export default class MaterializeIcon extends Component {}
 // END-SNIPPET

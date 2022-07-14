@@ -1,14 +1,15 @@
 // BEGIN-SNIPPET colored-row
-import { computed } from '@ember/object';
+import classic from 'ember-classic-decorator';
+import { classNames, attributeBindings } from '@ember-decorators/component';
 import { htmlSafe } from '@ember/template';
 import Row from 'ember-light-table/components/lt-row';
 
-export default Row.extend({
-  classNames: ['colored-row'],
-  attributeBindings: ['style'],
-
-  style: computed('row.color', function () {
-    return htmlSafe(`background-color: ${this.row.color};`);
-  }).readOnly(),
-});
+@classic
+@classNames('colored-row')
+@attributeBindings('style')
+export default class ColoredRow extends Row {
+  get style() {
+    return htmlSafe(`background-color: ${this.row.get('color')};`);
+  }
+}
 // END-SNIPPET

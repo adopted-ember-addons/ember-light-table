@@ -1,9 +1,11 @@
 // BEGIN-SNIPPET table-actions-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed, action } from '@ember/object';
+import { action } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function () {
+@classic
+export default class TableActionsTable extends BaseTable {
+  get columns() {
     return [
       {
         label: 'Avatar',
@@ -41,11 +43,11 @@ export default BaseTable.extend({
         cellComponent: 'user-actions',
       },
     ];
-  }),
+  }
 
   @action
   deleteUser(row) {
-    let confirmed = window.confirm(
+    const confirmed = window.confirm(
       `Are you sure you want to delete ${row.get('firstName')} ${row.get(
         'lastName'
       )}?`
@@ -55,13 +57,13 @@ export default BaseTable.extend({
       this.table.removeRow(row);
       row.get('content').deleteRecord();
     }
-  },
+  }
 
   @action
   notifyUser(row) {
     window.alert(
       `${row.get('firstName')} ${row.get('lastName')} has been notified.`
     );
-  },
-});
+  }
+}
 // END-SNIPPET
