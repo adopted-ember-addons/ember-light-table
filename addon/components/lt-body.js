@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { deprecate } from '@ember/application/deprecations';
+import { deprecate } from '@ember/debug';
 import { computed, observer } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import layout from 'ember-light-table/templates/components/lt-body';
