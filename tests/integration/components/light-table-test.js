@@ -139,7 +139,7 @@ module('Integration | Component | light table', function (hooks) {
     await render(hbs`
       {{#light-table this.table height='40vh' id="table" as |t|}}
         {{t.head fixed=true}}
-        {{t.body isInViewport=isInViewport inViewport=(action inViewport) onScrolledToBottom=(action onScrolledToBottom)}}
+        {{t.body isInViewport=this.isInViewport inViewport=this.inViewport onScrolledToBottom=this.onScrolledToBottom}}
       {{/light-table}}
     `);
     let scrollContainer = find('#table .tse-scroll-content');
