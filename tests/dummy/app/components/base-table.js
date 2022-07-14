@@ -53,7 +53,7 @@ export default class BaseTable extends Component {
       dir: this.dir,
     });
     this.model.pushObjects(records.toArray());
-    this.meta = records.get('meta');
+    this.meta = records.meta;
     this.canLoadMore = !isEmpty(records);
   }
 
