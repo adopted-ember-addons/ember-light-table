@@ -2,7 +2,7 @@
 import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
 import { action } from '@ember/object';
-import { task, restartableTask, timeout } from 'ember-concurrency';
+import { restartableTask, timeout } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 
 @classic
@@ -64,7 +64,12 @@ export default class PaginatedTable extends BaseTable {
     ];
   }
 
-  @task({ on: 'init' }) *fetchRecords() {
+  init() {
+    super.init(...arguments);
+    this.fetchRecords.perform();
+  }
+
+  @restartableTask *fetchRecords() {
     const records = yield this.store.query('user', { page: 1, limit: 100 });
     this.model.setObjects(records.toArray());
     this.meta = records.meta;
