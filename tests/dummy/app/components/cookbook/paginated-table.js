@@ -5,6 +5,8 @@ import { action } from '@ember/object';
 
 @classic
 export default class PaginatedTable extends BaseTable {
+  limit = 12;
+
   get columns() {
     return [
       {
