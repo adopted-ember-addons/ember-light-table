@@ -1,9 +1,10 @@
 // BEGIN-SNIPPET draggable-table
+import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
-import { computed } from '@ember/object';
 
-export default BaseTable.extend({
-  columns: computed(function () {
+@classic
+export default class DraggableTable extends BaseTable {
+  get columns() {
     return [
       {
         label: 'User Details',
@@ -16,6 +17,7 @@ export default BaseTable.extend({
             valuePath: 'avatar',
             width: '60px',
             sortable: false,
+            align: 'center',
             draggable: true,
             cellComponent: 'user-avatar',
           },
@@ -57,6 +59,6 @@ export default BaseTable.extend({
         ],
       },
     ];
-  }),
-});
+  }
+}
 // END-SNIPPET
