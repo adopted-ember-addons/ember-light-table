@@ -1,29 +1,29 @@
-{{!-- BEGIN-SNIPPET simple-table --}}
+{{! BEGIN-SNIPPET simple-table }}
 <LightTable @table={{this.table}} @height="65vh" as |t|>
-
-  {{!--
-    In order for `fa-sort-up` and `fa-sort-down` icons to work,
+  {{!
+    In order for `sort-up` and `sort-down` icons to work,
     you need to have ember-font-awesome installed or manually include
     the font-awesome assets, e.g. via a CDN.
-  --}}
+  }}
 
   <t.head
     @onColumnClick={{this.onColumnClick}}
-    @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconSortable="sort"
+    @iconAscending="sort-up"
+    @iconDescending="sort-down"
+    @iconComponent="fa-icon-wrapper"
     @fixed={{true}}
   />
 
   <t.body
     @canSelect={{false}}
-    @onScrolledToBottom={{this.onScrolledToBottom}}
-  as |body|>
+    @onScrolledToBottom={{this.onScrolledToBottom}} as |body|
+  >
     {{#if this.isLoading}}
       <body.loader>
-        <TableLoader/>
+        <TableLoader />
       </body.loader>
     {{/if}}
   </t.body>
 </LightTable>
-{{!-- END-SNIPPET --}}
+{{! END-SNIPPET }}

@@ -1,24 +1,24 @@
-{{!-- BEGIN-SNIPPET client-side-table --}}
+{{! BEGIN-SNIPPET client-side-table }}
 <LightTable @table={{this.table}} @height="65vh" as |t|>
-
-  {{!--
-    In order for `fa-sort-up` and `fa-sort-down` icons to work,
+  {{!
+    In order for `sort-up` and `sort-down` icons to work,
     you need to have ember-font-awesome installed or manually include
     the font-awesome assets, e.g. via a CDN.
-  --}}
+  }}
 
   <t.head
     @onColumnClick={{this.onColumnClick}}
-    @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconSortable="sort"
+    @iconAscending="sort-up"
+    @iconDescending="sort-down"
+    @iconComponent="fa-icon-wrapper"
     @fixed={{true}}
   />
 
   <t.body @canSelect={{false}} as |body|>
     {{#if this.isLoading}}
       <body.loader>
-        <TableLoader/>
+        <TableLoader />
       </body.loader>
     {{/if}}
   </t.body>
@@ -27,24 +27,29 @@
     <tr>
       <td class="row" colspan={{columns.length}}>
         <div class="col-md-6">
-          <PowerSelect @selected={{this.selectedFilter}}
+          <PowerSelect
+            @selected={{this.selectedFilter}}
             @options={{this.possibleFilters}}
-            @onChange={{pipe-action (fn (mut this.selectedFilter)) this.onSearchChange}}
+            @onChange={{
+              pipe-action (fn (mut this.selectedFilter)) this.onSearchChange
+            }}
             @placeholder="Select filter column..."
             class="form-control"
-            name="scrollToRow"
-          as |option|>
+            name="scrollToRow" as |option|
+          >
             {{option.label}}
           </PowerSelect>
         </div>
         <div class="col-md-6">
           <Input
-            @value={{this.query}} placeholder="Search..."
-            class="form-control" {{on "keydown" (pipe-action this.updateQuery this.onSearchChange)}}
+            @value={{this.query}}
+            placeholder="Search..."
+            class="form-control"
+            {{on "keydown" (pipe-action this.updateQuery this.onSearchChange)}}
           />
         </div>
       </td>
     </tr>
   </t.foot>
 </LightTable>
-{{!-- END-SNIPPET --}}
+{{! END-SNIPPET }}

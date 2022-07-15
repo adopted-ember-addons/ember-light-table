@@ -20,7 +20,7 @@ export default class PaginatedTable extends BaseTable {
   }
 
   get isLoading() {
-    return this.fetchRecord?.isRunning || this.setRows?.isRunning;
+    return this.fetchRecords?.isRunning || this.setRows?.isRunning;
   }
 
   // Filter Input

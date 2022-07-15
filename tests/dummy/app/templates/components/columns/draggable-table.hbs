@@ -1,20 +1,21 @@
-{{!-- BEGIN-SNIPPET draggable-table --}}
+{{! BEGIN-SNIPPET draggable-table }}
 <LightTable @table={{this.table}} @height="65vh" as |t|>
   <t.head
     @onColumnClick={{this.onColumnClick}}
-    @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconSortable="sort"
+    @iconAscending="sort-up"
+    @iconDescending="sort-down"
+    @iconComponent="fa-icon-wrapper"
     @fixed={{true}}
   />
 
   <t.body
     @canSelect={{false}}
-    @onScrolledToBottom={{this.onScrolledToBottom}}
-  as |body|>
+    @onScrolledToBottom={{this.onScrolledToBottom}} as |body|
+  >
     {{#if this.isLoading}}
       <body.loader>
-        <TableLoader/>
+        <TableLoader />
       </body.loader>
     {{/if}}
   </t.body>
@@ -27,4 +28,4 @@
     </tr>
   </t.foot>
 </LightTable>
-{{!-- END-SNIPPET --}}
+{{! END-SNIPPET }}

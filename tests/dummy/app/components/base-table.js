@@ -12,16 +12,15 @@ import { tracked } from '@glimmer/tracking';
 export default class BaseTable extends Component {
   @service store;
 
-  @tracked page = 0;
-  limit = 15;
-  dir = 'asc';
-  sort = 'firstName';
-
-  canLoadMore = true;
   enableSync = true;
-
   model = null;
+
+  @tracked canLoadMore = true;
+  @tracked dir = 'asc';
+  @tracked limit = 10;
   @tracked meta = null;
+  @tracked page = 0;
+  @tracked sort = 'firstName';
 
   table = null;
 

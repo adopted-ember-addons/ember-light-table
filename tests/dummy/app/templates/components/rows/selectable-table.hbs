@@ -2,33 +2,40 @@
 <div class="table-actions">
   {{#if this.hasSelection}}
     <div
-      class="table-action fa fa-check-square"
+      class="table-action"
       title="Deselect all"
       role="button"
       {{on "click" this.deselectAll}}
-    ></div>
+    >
+      <FaIcon @icon="check-square" />
+    </div>
     <div
-      class="table-action fa fa-trash delete"
+      class="table-action delete"
       title="Delete selected"
       role="button"
       {{on "click" this.deleteAll}}
-    ></div>
+    >
+      <FaIcon @icon="trash" />
+    </div>
   {{else}}
     <div
-      class="table-action fa fa-square"
+      class="table-action"
       title="Select all"
       role="button"
       {{on "click" this.selectAll}}
-    ></div>
+    >
+      <FaIcon @icon="square" />
+    </div>
   {{/if}}
 </div>
 
 <LightTable @table={{this.table}} @height="65vh" as |t|>
   <t.head
     @onColumnClick={{this.onColumnClick}}
-    @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconSortable="sort"
+    @iconAscending="sort-up"
+    @iconDescending="sort-down"
+    @iconComponent="fa-icon-wrapper"
     @fixed={{true}}
   />
 

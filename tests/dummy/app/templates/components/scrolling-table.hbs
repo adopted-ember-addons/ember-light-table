@@ -1,17 +1,17 @@
-{{!-- BEGIN-SNIPPET scrolling-table --}}
+{{! BEGIN-SNIPPET scrolling-table }}
 <LightTable @table={{this.table}} @height="65vh" as |t|>
-
-  {{!--
-    In order for `fa-sort-asc` and `fa-sort-desc` icons to work,
+  {{!
+    In order for `sort-up` and `sort-down` icons to work,
     you need to have ember-font-awesome installed or manually include
     the font-awesome assets, e.g. via a CDN.
-  --}}
+  }}
 
   <t.head
     @onColumnClick={{this.onColumnClick}}
-    @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconSortable="sort"
+    @iconAscending="sort-up"
+    @iconDescending="sort-down"
+    @iconComponent="fa-icon-wrapper"
     @fixed={{true}}
   />
 
@@ -20,11 +20,11 @@
     @scrollTo={{this.scrollTo}}
     @scrollToRow={{this.scrollToRow}}
     @onScroll={{fn (mut this.currentScrollOffset)}}
-    @onScrolledToBottom={{this.onScrolledToBottom}}
-  as |body|>
+    @onScrolledToBottom={{this.onScrolledToBottom}} as |body|
+  >
     {{#if this.isLoading}}
       <body.loader>
-        <TableLoader/>
+        <TableLoader />
       </body.loader>
     {{/if}}
   </t.body>
@@ -34,32 +34,43 @@
       <td colspan={{columns.length}}>
         <form class="form-inline" onsubmit="return false;">
           <div class="form-group">
-            <label>Current Scroll Position:</label>
+            <label>
+              Current Scroll Position:
+            </label>
             <span class="form-control-static">
-              {{if (eq this.currentScrollOffset null) "N/A" (concat this.currentScrollOffset "px")}}
+              {{if
+                (eq this.currentScrollOffset null)
+                "N/A"
+                (concat this.currentScrollOffset "px")
+              }}
             </span>
           </div>
 
           <div class="form-group scroll-to-control">
-            <label for="scrollTo">Scroll To:</label>
+            <label for="scrollTo">
+              Scroll To:
+            </label>
             <Input
-              {{on 'keydown' this.updateScrollPos}}
               @value={{this.scrollTo}}
               @type="number"
               name="scrollTo"
               min="0"
               step="10"
               class="form-control"
+              {{on "keydown" this.updateScrollPos}}
             />
           </div>
 
           <div class="form-group scrolling-select-control">
-            <label for="scrollToRow">Scroll To Row:</label>
-            <PowerSelect @selected={{this.scrollToRow}}
+            <label for="scrollToRow">
+              Scroll To Row:
+            </label>
+            <PowerSelect
+              @selected={{this.scrollToRow}}
               @options={{this.table.visibleRows}}
               @onChange={{fn (mut this.scrollToRow)}}
-              name="scrollToRow"
-            as |row|>
+              name="scrollToRow" as |row|
+            >
               {{row.id}} - {{row.firstName}} {{row.lastName}}
             </PowerSelect>
           </div>
@@ -67,6 +78,5 @@
       </td>
     </tr>
   </t.foot>
-
 </LightTable>
-{{!-- END-SNIPPET --}}
+{{! END-SNIPPET }}

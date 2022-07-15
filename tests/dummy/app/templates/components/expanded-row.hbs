@@ -7,9 +7,9 @@
     <p>{{@row.bio}}</p>
 
     <div class="user-actions">
-      <a class="fa fa-envelope" href="mailto:{{@row.email}}"></a>
-      <a class="fa fa-facebook" href="#"></a>
-      <a class="fa fa-twitter" href="#"></a>
+      <a href="mailto:{{@row.email}}"><FaIcon @icon="envelope"/></a>
+      <a href="#"><FaIcon @icon="facebook" @prefix="fab"/></a>
+      <a href="#"><FaIcon @icon="twitter" @prefix="fab" /></a>
     </div>
   </div>
 </div>

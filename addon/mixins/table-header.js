@@ -84,8 +84,8 @@ export default Mixin.create({
    *
    * For instance, if you have installed `ember-font-awesome` or include the
    * `font-awesome` assets manually (e.g. via a CDN), you can set
-   * `iconSortable` to `'fa fa-sort'`, which would yield this markup:
-   * `<i class="lt-sort-icon fa fa-sort"></i>`
+   * `iconSortable` to `'sort'`, which would yield this markup:
+   * `<i class="lt-sort-icon sort"></i>`
    *
    * @property iconSortable
    * @type {String}
