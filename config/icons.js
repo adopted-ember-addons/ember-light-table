@@ -10,6 +10,7 @@ module.exports = function () {
       'chevron-right',
       'code',
       'envelope',
+      'info-circle',
       'sort',
       'sort-down',
       'sort-up',

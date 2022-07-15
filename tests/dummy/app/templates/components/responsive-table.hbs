@@ -1,37 +1,37 @@
-{{!-- BEGIN-SNIPPET responsive-table --}}
+{{! BEGIN-SNIPPET responsive-table }}
 <LightTable
   @table={{this.table}}
   @height="65vh"
   @responsive={{true}}
-  @onAfterResponsiveChange={{this.onAfterResponsiveChange}}
-as |t|>
-
-  {{!--
-    In order for `fa-sort-up` and `fa-sort-down` icons to work,
+  @onAfterResponsiveChange={{this.onAfterResponsiveChange}} as |t|
+>
+  {{!
+    In order for `sort-up` and `sort-down` icons to work,
     you need to have ember-font-awesome installed or manually include
     the font-awesome assets, e.g. via a CDN.
-  --}}
+  }}
 
   <t.head
     @onColumnClick={{this.onColumnClick}}
-    @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconSortable="sort"
+    @iconAscending="sort-up"
+    @iconDescending="sort-down"
+    @iconComponent="fa-icon-wrapper"
     @fixed={{true}}
   />
 
   <t.body
     @canSelect={{false}}
     @expandOnClick={{false}}
-    @onScrolledToBottom={{this.onScrolledToBottom}}
-  as |body|>
+    @onScrolledToBottom={{this.onScrolledToBottom}} as |body|
+  >
     <body.expanded-row as |row|>
-      <ResponsiveExpandedRow @table={{this.table}} @row={{row}}/>
+      <ResponsiveExpandedRow @table={{this.table}} @row={{row}} />
     </body.expanded-row>
 
     {{#if this.isLoading}}
       <body.loader>
-        <TableLoader/>
+        <TableLoader />
       </body.loader>
     {{/if}}
   </t.body>
@@ -39,12 +39,11 @@ as |t|>
   <t.foot @fixed={{true}} as |columns|>
     <tr>
       <td class="align-center" colspan={{columns.length}}>
-        <i class="fa fa-chevron-left pull-left" aria-hidden="true"></i>
+        <FaIcon aria-hidden="true" class="pull-left" @icon="chevron-left" />
         Resize your browser to check out the responsive behavior
-        <i class="fa fa-chevron-right pull-right" aria-hidden="true"></i>
+        <FaIcon aria-hidden="true" class="pull-right" @icon="chevron-right" />
       </td>
     </tr>
   </t.foot>
-
 </LightTable>
-{{!-- END-SNIPPET --}}
+{{! END-SNIPPET }}

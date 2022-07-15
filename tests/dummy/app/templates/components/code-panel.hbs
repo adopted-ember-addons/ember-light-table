@@ -1,17 +1,36 @@
-<div class="panel-group" id={{concat this.elementId "-code-panel"}} role="tablist">
+<div
+  class="panel-group"
+  id={{concat this.elementId "-code-panel"}}
+  role="tablist"
+>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <a role="button" data-toggle="collapse" data-parent="#{{concat this.elementId "-code-panel"}}" href="#{{concat this.elementId "-code-snippet"}}">
-        <h4 class="panel-title">{{@title}} <span class="code-icon fa fa-code pull-right"></span></h4>
+      <a
+        role="button"
+        data-toggle="collapse"
+        data-parent="#{{concat this.elementId "-code-panel"}}"
+        href="#{{concat this.elementId "-code-snippet"}}"
+      >
+        <h4 class="panel-title">
+          {{@title}}
+          <span class="code-icon pull-right">
+            <FaIcon @icon="code" />
+          </span>
+        </h4>
       </a>
     </div>
 
-    <div id={{concat this.elementId "-code-snippet"}} class="panel-collapse {{if this.collapse "collapse"}}" role="tabpanel">
+    <div
+      id={{concat this.elementId "-code-snippet"}}
+      class="panel-collapse {{if this.collapse "collapse"}}"
+      role="tabpanel"
+    >
       <div class="panel-body code-snippet">
         <ul class="nav nav-tabs" role="tablist">
           {{#each @snippets as |snippet index|}}
             <li class={{if (eq index 0) "active"}}>
-              <a href="#{{classify snippet}}"
+              <a
+                href="#{{classify snippet}}"
                 aria-controls={{classify snippet}}
                 role="tab"
                 data-toggle="tab"
@@ -23,11 +42,12 @@
         </ul>
         <div class="tab-content">
           {{#each @snippets as |snippet index|}}
-            <div role="tabpanel"
+            <div
+              role="tabpanel"
               class="tab-pane fade {{if (eq index 0) "in active"}}"
               id={{classify snippet}}
             >
-              <CodeSnippet @name={{snippet}}/>
+              <CodeSnippet @name={{snippet}} />
             </div>
           {{/each}}
         </div>

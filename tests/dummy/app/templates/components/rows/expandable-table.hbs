@@ -1,27 +1,28 @@
-{{!-- BEGIN-SNIPPET expandable-table --}}
+{{! BEGIN-SNIPPET expandable-table }}
 <LightTable @table={{this.table}} @height="65vh" as |t|>
   <t.head
     @onColumnClick={{this.onColumnClick}}
-    @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconSortable="sort"
+    @iconAscending="sort-up"
+    @iconDescending="sort-down"
+    @iconComponent="fa-icon-wrapper"
     @fixed={{true}}
   />
 
   <t.body
     @canExpand={{true}}
     @multiRowExpansion={{false}}
-    @onScrolledToBottom={{this.onScrolledToBottom}}
-  as |body|>
+    @onScrolledToBottom={{this.onScrolledToBottom}} as |body|
+  >
     <body.expanded-row as |row|>
-      <ExpandedRow @row={{row}}/>
+      <ExpandedRow @row={{row}} />
     </body.expanded-row>
 
     {{#if this.isLoading}}
       <body.loader>
-        <TableLoader/>
+        <TableLoader />
       </body.loader>
     {{/if}}
   </t.body>
 </LightTable>
-{{!-- END-SNIPPET --}}
+{{! END-SNIPPET }}

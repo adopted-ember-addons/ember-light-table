@@ -1,32 +1,33 @@
-{{!-- BEGIN-SNIPPET resizable-table --}}
+{{! BEGIN-SNIPPET resizable-table }}
 <LightTable @table={{this.table}} @height="65vh" as |t|>
-
   <t.head
     @onColumnClick={{this.onColumnClick}}
-    @iconSortable="fa fa-sort"
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconSortable="sort"
+    @iconAscending="sort-up"
+    @iconDescending="sort-down"
+    @iconComponent="fa-icon-wrapper"
     @resizeOnDrag={{true}}
     @fixed={{true}}
   />
 
   <t.body
     @canSelect={{false}}
-    @onScrolledToBottom={{this.onScrolledToBottom}}
-  as |body|>
+    @onScrolledToBottom={{this.onScrolledToBottom}} as |body|
+  >
     {{#if this.isLoading}}
       <body.loader>
-        <TableLoader/>
+        <TableLoader />
       </body.loader>
     {{/if}}
   </t.body>
 
   <t.foot
     @onColumnClick={{this.onColumnClick}}
-    @iconAscending="fa fa-sort-up"
-    @iconDescending="fa fa-sort-down"
+    @iconAscending="sort-up"
+    @iconDescending="sort-down"
+    @iconComponent="fa-icon-wrapper"
     @resizeOnDrag={{true}}
     @fixed={{true}}
   />
 </LightTable>
-{{!-- END-SNIPPET --}}
+{{! END-SNIPPET }}
