@@ -15,7 +15,12 @@
       sortIconProperty=this.sortIconProperty
     }}
   {{else if this.sortIconProperty}}
-    <i class='lt-sort-icon {{get this.sortIcons this.sortIconProperty}}'></i>
+    <i class="lt-sort-icon">
+      <FaIcon
+        @prefix="fas"
+        @icon={{get this.sortIcons this.sortIconProperty}}
+      />
+    </i>
   {{/if}}
   {{this.label}}
 {{/if}}
