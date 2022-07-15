@@ -2,24 +2,30 @@
 <div class="table-actions">
   {{#if this.hasSelection}}
     <div
-      class="table-action fa fa-check-square"
+      class="table-action"
       title="Deselect all"
       role="button"
       {{on "click" this.deselectAll}}
-    ></div>
+    >
+      <FaIcon @prefix="far" @icon="check-square" />
+    </div>
     <div
-      class="table-action fa fa-trash delete"
+      class="table-action"
       title="Delete selected"
       role="button"
       {{on "click" this.deleteAll}}
-    ></div>
+    >
+      <FaIcon @prefix="far" @icon="trash-alt" />
+    </div>
   {{else}}
     <div
-      class="table-action fa fa-square"
+      class="table-action"
       title="Select all"
       role="button"
       {{on "click" this.selectAll}}
-    ></div>
+    >
+      <FaIcon @prefix="far" @icon="square" />
+    </div>
   {{/if}}
 </div>
 
@@ -34,7 +40,8 @@
 
   <t.body
     @multiSelect={{true}}
-    @onScrolledToBottom={{this.onScrolledToBottom}} as |body|
+    @onScrolledToBottom={{this.onScrolledToBottom}}
+    as |body|
   >
     {{#if this.isLoading}}
       <body.loader>
