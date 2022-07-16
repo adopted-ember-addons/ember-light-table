@@ -1,8 +1,15 @@
-{{!-- BEGIN-SNIPPET row-toggle --}}
-<button class="row-toggle"
+{{! BEGIN-SNIPPET row-toggle }}
+<button
+  class="row-toggle"
   type="button"
   {{on "click" (fn (toggle "expanded" @row))}}
 >
-  <i class="fa {{if @row.expanded "fa-chevron-down" "fa-chevron-right"}}"></i>
+  <i>
+    {{#if (get @row "expanded")}}
+      <FaIcon @icon="chevron-down" />
+    {{else}}
+      <FaIcon @icon="chevron-right" />
+    {{/if}}
+  </i>
 </button>
-{{!-- END-SNIPPET --}}
+{{! END-SNIPPET }}
