@@ -7,7 +7,7 @@
       role="button"
       {{on "click" this.deselectAll}}
     >
-      <FaIcon @icon="check-square" />
+      <FaIcon @icon="check-square" @prefix="far" />
     </div>
     <div
       class="table-action delete"
@@ -15,7 +15,7 @@
       role="button"
       {{on "click" this.deleteAll}}
     >
-      <FaIcon @icon="trash" />
+      <FaIcon @icon="trash-alt" @prefix="far" />
     </div>
   {{else}}
     <div
@@ -24,7 +24,7 @@
       role="button"
       {{on "click" this.selectAll}}
     >
-      <FaIcon @icon="square" />
+      <FaIcon @icon="square" @prefix="far" />
     </div>
   {{/if}}
 </div>

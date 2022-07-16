@@ -34,6 +34,7 @@
   "dependencies": {
     "@fortawesome/ember-fontawesome": "^0.2.2",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
+    "@fortawesome/free-regular-svg-icons": "^5.15.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@html-next/vertical-collection": "^3.0.0",
     "ember-cli-babel": "^7.26.6",
