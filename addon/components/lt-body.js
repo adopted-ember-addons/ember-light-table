@@ -1,6 +1,5 @@
 import Component from '@ember/component';
-import { deprecate } from '@ember/debug';
-import { computed, observer } from '@ember/object';
+import { action, computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import layout from 'ember-light-table/templates/components/lt-body';
 import { cancel, debounce, once, schedule, scheduleOnce } from '@ember/runloop';
@@ -38,8 +37,7 @@ import Row from 'ember-light-table/classes/Row';
 
 export default Component.extend({
   layout,
-  classNames: ['lt-body-wrap'],
-  classNameBindings: ['canSelect', 'multiSelect', 'canExpand'],
+  tagName: '',
 
   /**
    * @property table
@@ -326,8 +324,8 @@ export default Component.extend({
    * fills the screen with row items until lt-infinity component has exited the viewport
    * @property scheduleScrolledToBottom
    */
-  scheduleScrolledToBottom: observer('isInViewport', function () {
-    if (this.isInViewport) {
+  scheduleScrolledToBottom: action(function () {
+    if (this.isInViewport && this.onScrolledToBottom) {
       /*
        Continue scheduling onScrolledToBottom until no longer in viewport
        */
@@ -367,7 +365,7 @@ export default Component.extend({
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
   },
 
-  onRowsChange: observer('rows.[]', function () {
+  onRowsChange: action(function () {
     this._checkTargetOffsetTimer = scheduleOnce(
       'afterRender',
       this,
@@ -467,7 +465,22 @@ export default Component.extend({
   lastVisibleChanged() {},
   firstReached() {},
   lastReached() {},
-  onScrolledToBottom() {},
+
+  /**
+   * lt-infinity action to determine if component is still in viewport
+   * @event enterViewport
+   */
+  enterViewport: action(function () {
+    this.set('isInViewport', true);
+  }),
+
+  /**
+   * lt-infinity action to determine if component has exited the viewport
+   * @event exitViewport
+   */
+  exitViewport: action(function () {
+    this.set('isInViewport', false);
+  }),
 
   actions: {
     /**
@@ -550,42 +563,6 @@ export default Component.extend({
       this.onScroll(...arguments);
     },
 
-    /**
-     * lt-infinity action to determine if component is still in viewport. Deprecated - please use enterViewport
-     * @event inViewport
-     * @deprecated Use `enterViewport` instead.
-     */
-    inViewport: null,
-
-    /**
-     * lt-infinity action to determine if component is still in viewport
-     * @event enterViewport
-     */
-    enterViewport() {
-      const inViewport = this.inViewport;
-      if (inViewport) {
-        deprecate(
-          'lt-infinity inViewport event is deprecated please use enterViewport instead',
-          false,
-          {
-            id: 'ember-light-table.inViewport',
-            until: '2.0.0',
-          }
-        );
-        inViewport();
-      } else {
-        this.set('isInViewport', true);
-      }
-    },
-
-    /**
-     * lt-infinity action to determine if component has exited the viewport
-     * @event exitViewport
-     */
-    exitViewport() {
-      this.set('isInViewport', false);
-    },
-
     firstVisibleChanged(item, index /* , key */) {
       this.firstVisibleChanged(...arguments);
       const estimateScrollOffset =
@@ -603,7 +580,7 @@ export default Component.extend({
 
     lastReached(/* item, index, key */) {
       this.lastReached(...arguments);
-      this.onScrolledToBottom();
+      this.onScrolledToBottom?.();
     },
   },
 });
