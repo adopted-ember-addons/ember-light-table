@@ -118,35 +118,6 @@ module('Integration | Component | light table', function (hooks) {
     await triggerEvent(scrollContainer, 'scroll');
   });
 
-  test('lt-body inViewport event deprecated', async function (assert) {
-    assert.expect(2);
-    this.set(
-      'table',
-      Table.create({
-        columns: Columns,
-        rows: this.server.createList('user', 5),
-      })
-    );
-    this.set('isInViewport', false);
-    this.set('inViewport', () => {
-      assert.ok(true);
-      this.set('isInViewport', true);
-    });
-    this.set('onScrolledToBottom', () => {
-      assert.ok(true);
-    });
-
-    await render(hbs`
-      {{#light-table this.table height='40vh' id="table" as |t|}}
-        {{t.head fixed=true}}
-        {{t.body isInViewport=this.isInViewport inViewport=this.inViewport onScrolledToBottom=this.onScrolledToBottom}}
-      {{/light-table}}
-    `);
-    let scrollContainer = find('#table .tse-scroll-content');
-    scrollContainer.scrollTop = 2501;
-    await triggerEvent(scrollContainer, 'scroll');
-  });
-
   test('fixed header', async function (assert) {
     assert.expect(2);
     this.set(
