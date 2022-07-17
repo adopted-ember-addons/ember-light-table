@@ -5,7 +5,7 @@ import { classify } from '@ember/string';
 import { computed } from '@ember/object';
 import { getOwner } from '@ember/application';
 import { registerAsyncHelper } from '@ember/test';
-import MediaService from 'ember-responsive/media';
+import MediaService from 'ember-responsive/services/media';
 
 MediaService.reopen({
   // Change this if you want a different default breakpoint in tests.

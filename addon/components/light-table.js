@@ -290,57 +290,54 @@ const LightTable = Component.extend({
     this._super(...arguments);
 
     let table = this.table;
-    let media = this.media;
 
     assert(
       '[ember-light-table] table must be an instance of Table',
       table instanceof Table
     );
 
-    if (isNone(media)) {
+    if (isNone(this.media)) {
       this.set('responsive', false);
+    } else {
+      this.media.on('mediaChanged', () => this.onMediaChange());
     }
 
     this.onMediaChange();
   },
 
-  onMediaChange: observer(
-    'media.matches.[]',
-    'table.allColumns.[]',
-    function () {
-      let responsive = this.responsive;
-      let matches = this.media.matches;
-      let breakpoints = this.breakpoints;
-      let table = this.table;
-      let numColumns = 0;
+  onMediaChange: observer('table.allColumns.[]', function () {
+    let responsive = this.responsive;
+    let matches = this.media.matches;
+    let breakpoints = this.breakpoints;
+    let table = this.table;
+    let numColumns = 0;
 
-      if (!responsive) {
-        return;
-      }
-
-      this.send('onBeforeResponsiveChange', matches);
-
-      if (!isNone(breakpoints)) {
-        Object.keys(breakpoints).forEach((b) => {
-          if (matches.indexOf(b) > -1) {
-            numColumns = Math.max(numColumns, breakpoints[b]);
-          }
-        });
-
-        this._displayColumns(numColumns);
-      } else {
-        table.get('allColumns').forEach((c) => {
-          let breakpoints = c.get('breakpoints');
-          let isMatch =
-            isEmpty(breakpoints) ||
-            intersections(matches, breakpoints).length > 0;
-          c.set('responsiveHidden', !isMatch);
-        });
-      }
-
-      this.send('onAfterResponsiveChange', matches);
+    if (!responsive) {
+      return;
     }
-  ),
+
+    this.send('onBeforeResponsiveChange', matches);
+
+    if (!isNone(breakpoints)) {
+      Object.keys(breakpoints).forEach((b) => {
+        if (matches.indexOf(b) > -1) {
+          numColumns = Math.max(numColumns, breakpoints[b]);
+        }
+      });
+
+      this._displayColumns(numColumns);
+    } else {
+      table.get('allColumns').forEach((c) => {
+        let breakpoints = c.get('breakpoints');
+        let isMatch =
+          isEmpty(breakpoints) ||
+          intersections(matches, breakpoints).length > 0;
+        c.set('responsiveHidden', !isMatch);
+      });
+    }
+
+    this.send('onAfterResponsiveChange', matches);
+  }),
 
   _displayColumns(numColumns) {
     let table = this.table;
