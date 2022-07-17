@@ -3,11 +3,13 @@ import EmberObject, { computed } from '@ember/object';
 import { notEmpty, or } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
 import { guidFor } from '@ember/object/internals';
+import classic from 'ember-classic-decorator';
 
 /**
  * @module Table
  * @class Column
  */
+@classic
 export default class Column extends EmberObject.extend({
   /**
    * Whether the column can be hidden.

@@ -1,12 +1,14 @@
 import ObjectProxy from '@ember/object/proxy';
 import { computed } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
+import classic from 'ember-classic-decorator';
 
 /**
  * @module Table
  * @extends Ember.ObjectProxy
  * @class Row
  */
+@classic
 export default class Row extends ObjectProxy.extend({
   /**
    * Whether the row is hidden.
