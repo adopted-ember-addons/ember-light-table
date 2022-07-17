@@ -1,9 +1,7 @@
 import Component from '@ember/component';
 import { readOnly } from '@ember/object/computed';
-import layout from 'ember-light-table/templates/components/lt-row';
 
 const Row = Component.extend({
-  layout,
   tagName: 'tr',
   classNames: ['lt-row'],
   classNameBindings: [

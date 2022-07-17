@@ -1,11 +1,9 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
-import template from 'ember-light-table/templates/components/cells/base';
 import { htmlSafe } from '@ember/template';
 import { ensureSafeComponent } from '@embroider/util';
 import classic from 'ember-classic-decorator';
-import { layout } from '@ember-decorators/component';
 
 /**
  * @module Light Table
@@ -18,7 +16,6 @@ import { layout } from '@ember-decorators/component';
  */
 
 @classic
-@layout(template)
 class Cell extends Component {
   enableScaffolding = false;
 

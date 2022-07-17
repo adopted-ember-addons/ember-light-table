@@ -3,7 +3,6 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { oneWay, readOnly } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
-import layout from 'ember-light-table/templates/components/columns/base';
 import DraggableColumnMixin from 'ember-light-table/mixins/draggable-column';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
 
@@ -18,7 +17,6 @@ import cssStyleify from 'ember-light-table/utils/css-styleify';
  */
 
 const Column = Component.extend(DraggableColumnMixin, {
-  layout,
   tagName: 'th',
   classNames: ['lt-column'],
   attributeBindings: ['style', 'colspan', 'rowspan'],

@@ -56,9 +56,9 @@
               {{/vertical-collection}}
               {{yield
                 (hash
-                  loader=(component lt.spanned-row classes="lt-is-loading")
-                  no-data=(component lt.spanned-row classes="lt-no-data")
-                  expanded-row=(component lt.spanned-row visible=false)
+                  loader=(component (ensure-safe-component lt.spanned-row) classes="lt-is-loading")
+                  no-data=(component (ensure-safe-component lt.spanned-row) classes="lt-no-data")
+                  expanded-row=(component (ensure-safe-component lt.spanned-row) visible=false)
                 )
                 this.rows
               }}
@@ -133,8 +133,8 @@
                       yield=row
                       visible=row.expanded
                     )
-                    loader=(component lt.spanned-row visible=false)
-                    no-data=(component lt.spanned-row visible=false)
+                    loader=(component (ensure-safe-component lt.spanned-row) visible=false)
+                    no-data=(component (ensure-safe-component lt.spanned-row) visible=false)
                   )
                   this.rows
                 }}
@@ -143,12 +143,12 @@
               {{yield
                 (hash
                   loader=(component
-                    lt.spanned-row classes="lt-is-loading" colspan=this.colspan
+                    (ensure-safe-component lt.spanned-row) classes="lt-is-loading" colspan=this.colspan
                   )
                   no-data=(component
-                    lt.spanned-row classes="lt-no-data" colspan=this.colspan
+                    (ensure-safe-component lt.spanned-row) classes="lt-no-data" colspan=this.colspan
                   )
-                  expanded-row=(component lt.spanned-row visible=false)
+                  expanded-row=(component (ensure-safe-component lt.spanned-row) visible=false)
                 )
                 this.rows
               }}
