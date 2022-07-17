@@ -1,8 +1,11 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
-import layout from 'ember-light-table/templates/components/cells/base';
+import template from 'ember-light-table/templates/components/cells/base';
 import { htmlSafe } from '@ember/template';
+import { ensureSafeComponent } from '@embroider/util';
+import classic from 'ember-classic-decorator';
+import { layout } from '@ember-decorators/component';
 
 /**
  * @module Light Table
@@ -14,76 +17,48 @@ import { htmlSafe } from '@ember/template';
  * @class Base Cell
  */
 
-const Cell = Component.extend({
-  layout,
-  tagName: 'td',
-  classNames: ['lt-cell'],
-  attributeBindings: ['style'],
-  classNameBindings: ['align', 'isSorted', 'column.cellClassNames'],
+@classic
+@layout(template)
+class Cell extends Component {
+  enableScaffolding = false;
 
-  enableScaffolding: false,
+  @readOnly('column.sorted')
+  isSorted;
 
-  isSorted: readOnly('column.sorted'),
+  get cellComponent() {
+    if (this.column.cellComponent) {
+      return ensureSafeComponent(this.column.cellComponent, this);
+    }
 
-  style: computed('enableScaffolding', 'column.width', function () {
+    return undefined;
+  }
+
+  @computed('enableScaffolding', 'column.width')
+  get style() {
     let column = this.column;
     let columnWidth = column.get('width');
 
     if (this.enableScaffolding || !column) {
-      return;
+      return undefined;
     }
 
     // For performance reasons, it's more interesting to bypass cssStyleify
     // since it leads to a lot of garbage collections
     // when displaying many cells
     return columnWidth ? htmlSafe(`width: ${columnWidth};`) : null;
-  }),
+  }
 
-  align: computed('column.align', function () {
+  @computed('column.align')
+  get align() {
     return `align-${this.column.align}`;
-  }),
-
-  /**
-   * @property table
-   * @type {Table}
-   */
-  table: null,
-
-  /**
-   * @property column
-   * @type {Column}
-   */
-  column: null,
-
-  /**
-   * @property row
-   * @type {Row}
-   */
-  row: null,
-
-  /**
-   * @property tableActions
-   * @type {Object}
-   */
-  tableActions: null,
-
-  /**
-   * @property extra
-   * @type {Object}
-   */
-  extra: null,
-
-  /**
-   * @property rawValue
-   * @type {Mixed}
-   */
-  rawValue: null,
+  }
 
   /**
    * @property value
    * @type {Mixed}
    */
-  value: computed('column.format', 'rawValue', function () {
+  @computed('column.format', 'rawValue')
+  get value() {
     let rawValue = this.rawValue;
     let format = this.column.format;
 
@@ -92,8 +67,8 @@ const Cell = Component.extend({
     }
 
     return rawValue;
-  }),
-});
+  }
+}
 
 Cell.reopenClass({
   positionalParams: ['column', 'row'],

@@ -32,6 +32,7 @@
     "changelog": "lerna-changelog"
   },
   "dependencies": {
+    "@embroider/util": "^1.8.3",
     "@fortawesome/ember-fontawesome": "^0.2.2",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
     "@fortawesome/free-regular-svg-icons": "^5.15.2",

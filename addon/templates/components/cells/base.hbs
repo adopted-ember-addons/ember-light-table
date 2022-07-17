@@ -1,14 +1,20 @@
-{{#if this.column.cellComponent}}
-  {{component
-    this.column.cellComponent
-    tableActions=this.tableActions
-    extra=this.extra
-    table=this.table
-    column=this.column
-    row=this.row
-    value=this.value
-    rawValue=this.rawValue
-  }}
-{{else}}
-  {{this.value}}
-{{/if}}
+<td
+  class="lt-cell {{if this.align "align"}} {{if this.isSorted "is-sorted"}} {{
+    this.column.cellClassNames
+  }}"
+  style={{this.style}}
+>
+  {{#if this.cellComponent}}
+    <this.cellComponent
+      @tableActions={{@tableActions}}
+      @extra={{@extra}}
+      @table={{@table}}
+      @column={{@column}}
+      @row={{@row}}
+      @value={{this.value}}
+      @rawValue={{this.rawValue}}
+    />
+  {{else}}
+    {{this.value}}
+  {{/if}}
+</td>
