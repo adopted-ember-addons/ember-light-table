@@ -30,7 +30,6 @@ module.exports = {
     'ember/no-classic-components': 'off',
     'ember/no-component-lifecycle-hooks': 'off',
     'ember/no-computed-properties-in-native-classes': 'off',
-    'ember/no-observers': 'off',
     'ember/no-jquery': 'error',
     'ember/no-get': 'warn',
     'ember/no-mixins': 'off',

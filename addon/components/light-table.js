@@ -1,6 +1,6 @@
 import { A as emberArray } from '@ember/array';
 import Component from '@ember/component';
-import { computed, observer } from '@ember/object';
+import { computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import { isEmpty, isNone } from '@ember/utils';
 import { assert } from '@ember/debug';
@@ -305,7 +305,7 @@ const LightTable = Component.extend({
     this.onMediaChange();
   },
 
-  onMediaChange: observer('table.allColumns.[]', function () {
+  onMediaChange() {
     let responsive = this.responsive;
     let matches = this.media.matches;
     let breakpoints = this.breakpoints;
@@ -337,7 +337,7 @@ const LightTable = Component.extend({
     }
 
     this.send('onAfterResponsiveChange', matches);
-  }),
+  },
 
   _displayColumns(numColumns) {
     let table = this.table;
