@@ -3,10 +3,12 @@
   {{if this.canSelect "can-select"}}
    {{if this.multiSelect "multi-select"}}
    {{if this.canExpand "can-expand"}}"
-   {{did-insert this.onRowsChange this.rows}}
-   {{did-update this.onRowsChange this.rows}}
-   {{did-insert this.scheduleScrolledToBottom this.rows this.isInViewport}}
-   {{did-update this.scheduleScrolledToBottom this.rows this.isInViewport}}
+  {{did-insert this.onRowsChange this.rows}}
+  {{did-update this.onRowsChange this.rows}}
+  {{did-insert this.scheduleScrolledToBottom this.rows this.isInViewport}}
+  {{did-update this.scheduleScrolledToBottom this.rows this.isInViewport}}
+  {{did-insert this.setupScrollOffset this.scrollTo this.scrollToRow}}
+  {{did-update this.setupScrollOffset this.scrollTo this.scrollToRow}}
 >
   {{#let
     (hash
@@ -56,9 +58,16 @@
               {{/vertical-collection}}
               {{yield
                 (hash
-                  loader=(component (ensure-safe-component lt.spanned-row) classes="lt-is-loading")
-                  no-data=(component (ensure-safe-component lt.spanned-row) classes="lt-no-data")
-                  expanded-row=(component (ensure-safe-component lt.spanned-row) visible=false)
+                  loader=(component
+                    (ensure-safe-component lt.spanned-row)
+                    classes="lt-is-loading"
+                  )
+                  no-data=(component
+                    (ensure-safe-component lt.spanned-row) classes="lt-no-data"
+                  )
+                  expanded-row=(component
+                    (ensure-safe-component lt.spanned-row) visible=false
+                  )
                 )
                 this.rows
               }}
@@ -133,8 +142,12 @@
                       yield=row
                       visible=row.expanded
                     )
-                    loader=(component (ensure-safe-component lt.spanned-row) visible=false)
-                    no-data=(component (ensure-safe-component lt.spanned-row) visible=false)
+                    loader=(component
+                      (ensure-safe-component lt.spanned-row) visible=false
+                    )
+                    no-data=(component
+                      (ensure-safe-component lt.spanned-row) visible=false
+                    )
                   )
                   this.rows
                 }}
@@ -143,12 +156,18 @@
               {{yield
                 (hash
                   loader=(component
-                    (ensure-safe-component lt.spanned-row) classes="lt-is-loading" colspan=this.colspan
+                    (ensure-safe-component lt.spanned-row)
+                    classes="lt-is-loading"
+                    colspan=this.colspan
                   )
                   no-data=(component
-                    (ensure-safe-component lt.spanned-row) classes="lt-no-data" colspan=this.colspan
+                    (ensure-safe-component lt.spanned-row)
+                    classes="lt-no-data"
+                    colspan=this.colspan
                   )
-                  expanded-row=(component (ensure-safe-component lt.spanned-row) visible=false)
+                  expanded-row=(component
+                    (ensure-safe-component lt.spanned-row) visible=false
+                  )
                 )
                 this.rows
               }}
