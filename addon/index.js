@@ -64,37 +64,6 @@ import Row from './classes/Row';
  * });
  * ```
  *
- * ## Implicit Row Creation
- *
- * To enable synchronization between the table's rows and a model, the `enableSync` flag
- * must be set to __true__.
- *
- * ```javascript
- * import Table from 'ember-light-table';
- *
- * const table = Table.create({ columns: columns, rows: model, enableSync: true });
- * ```
- *
- * The `enableSync` options creates a __two way__ sync. This means that any manipulation
- * that occurs on the model will also take place on the table's rows collection and vice versa.
- *
- * To default `enableSync` to always be true, you can add the following in your __config/environment.js__
- *
- * ```javascript
- * module.exports = function(environment) {
- *   var ENV = {
- *    // ...
- *     'ember-light-table': {
- *       enableSync: true
- *     }
- *   };
- *
- *   // ...
- *
- *   return ENV;
- * };
- * ```
- *
  * @module Usage
  * @submodule Table Declaration
  */

@@ -139,28 +139,6 @@ module('Unit | Classes | Table', function () {
     );
   });
 
-  test('CP - isEmpty (enableSync = true)', function (assert) {
-    let rowsArray = emberArray();
-    let table = Table.create({
-      columns: [{}, {}],
-      rows: rowsArray,
-      enableSync: true,
-    });
-
-    assert.ok(table, 'table is set up correctly');
-    assert.ok(table.get('isEmpty'), 'table is initially empty');
-    rowsArray.pushObject({});
-    assert.notOk(
-      table.get('isEmpty'),
-      'table is not empty after a row was pushed'
-    );
-    rowsArray.clear();
-    assert.ok(
-      table.get('isEmpty'),
-      'table is empty again after the rows were cleared'
-    );
-  });
-
   test('table method - setRows', function (assert) {
     let table = Table.create();
 
@@ -500,160 +478,75 @@ module('Unit | Classes | Table', function () {
     assert.ok(cols[0] instanceof Column);
   });
 
-  test('table modifications with sync enabled - simple', function (assert) {
+  test('table modifications - simple', function (assert) {
     let rows = emberArray([]);
-    let table = Table.create({ columns: [], rows, enableSync: true });
+    let table = Table.create({ columns: [], rows });
 
     table.addRow({ firstName: 'Offir' });
 
     assert.equal(table.get('rows.length'), 1);
-    assert.equal(table.get('rows.length'), rows.get('length'));
 
-    rows.pushObject({ firstName: 'Taras' });
+    table.addRow({ firstName: 'Taras' });
 
-    assert.equal(rows.get('length'), 2);
-    assert.equal(table.get('rows.length'), rows.get('length'));
-
-    assert.deepEqual(
-      table.get('rows').getEach('firstName'),
-      rows.getEach('firstName')
-    );
+    assert.equal(table.get('rows.length'), 2);
 
     table.get('rows').clear();
 
     assert.equal(table.get('rows.length'), 0);
-    assert.equal(table.get('rows.length'), rows.get('length'));
   });
 
-  test('table modifications with sync enabled - stress', function (assert) {
+  test('table modifications - stress', function (assert) {
     let rows = emberArray([]);
-    let table = Table.create({ columns: [], rows, enableSync: true });
+    let table = Table.create({ columns: [], rows });
 
     for (let i = 0; i < 100; i++) {
       table.addRow({ position: i });
     }
 
-    assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      rows.getEach('position')
-    );
+    assert.equal(table.get('rows.length'), 100);
 
     for (let i = 100; i < 200; i++) {
-      rows.pushObject({ position: i });
+      table.addRow({ position: i });
     }
 
-    assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      rows.getEach('position')
-    );
+    assert.equal(table.get('rows.length'), 200);
 
     table.removeRowAt(5);
     table.removeRowAt(10);
     table.removeRowAt(125);
 
-    assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      rows.getEach('position')
-    );
+    assert.equal(table.get('rows.length'), 197);
 
-    rows.removeAt(10);
-    rows.removeAt(20);
-    rows.removeAt(150);
+    table.removeRowAt(10);
+    table.removeRowAt(20);
+    table.removeRowAt(150);
 
-    assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      rows.getEach('position')
-    );
+    assert.equal(table.get('rows.length'), 194);
 
     table.get('rows').clear();
 
     assert.equal(table.get('rows.length'), 0);
-    assert.equal(table.get('rows.length'), rows.get('length'));
   });
 
-  test('table modifications with sync enabled - sort', function (assert) {
+  test('table modifications - sort', function (assert) {
     let rows = emberArray([]);
     let table = Table.create({ columns: [], rows, enableSync: true });
     let length = 5;
 
     for (let i = 0; i < length; i++) {
-      rows.pushObject({ position: i });
+      table.addRow({ position: i });
     }
 
-    assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      rows.getEach('position')
-    );
+    assert.equal(table.get('rows.length'), 5);
 
-    rows.sort((a, b) => {
-      return a.position > b.position ? -1 : 1;
+    table.rows.sort((a, b) => {
+      return a.get('position') > b.get('position') ? -1 : 1;
     });
 
-    rows.arrayContentDidChange(0, length, length);
+    assert.equal(table.get('rows.length'), 5);
 
-    assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      rows.getEach('position')
-    );
+    table.rows.reverseObjects();
 
-    rows.reverseObjects();
-
-    assert.equal(table.get('rows.length'), rows.get('length'));
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      rows.getEach('position')
-    );
-  });
-
-  test('setRowsSynced', function (assert) {
-    let initialRows = emberArray([]);
-    let otherRows = emberArray([]);
-    let table = Table.create({
-      columns: [],
-      rows: initialRows,
-      enableSync: true,
-    });
-    let initialLength = 5;
-    let otherLength = 13;
-
-    for (let i = 0; i < initialLength; i++) {
-      initialRows.pushObject({ position: i });
-    }
-
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      initialRows.getEach('position'),
-      'the table is initialized with a synced array'
-    );
-
-    table.setRowsSynced(otherRows);
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      otherRows.getEach('position'),
-      'the synced array may be replaced'
-    );
-
-    for (let i = 0; i < otherLength; i++) {
-      otherRows.pushObject({ position: i });
-    }
-
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      otherRows.getEach('position'),
-      'the replacement array is correctly synced'
-    );
-
-    initialRows.popObject();
-    assert.deepEqual(
-      table.get('rows').getEach('position'),
-      otherRows.getEach('position'),
-      'mutating the replaced array has no effect'
-    );
+    assert.equal(table.get('rows.length'), 5);
   });
 });

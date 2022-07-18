@@ -12,7 +12,6 @@ import { tracked } from '@glimmer/tracking';
 export default class BaseTable extends Component {
   @service store;
 
-  enableSync = true;
   model = null;
 
   @tracked canLoadMore = true;
@@ -30,7 +29,6 @@ export default class BaseTable extends Component {
     const table = Table.create({
       columns: this.columns,
       rows: this.model,
-      enableSync: this.enableSync,
     });
     const sortColumn = table.get('allColumns').findBy('valuePath', this.sort);
 
@@ -53,7 +51,9 @@ export default class BaseTable extends Component {
       sort: this.sort,
       dir: this.dir,
     });
-    this.model.pushObjects(records.toArray());
+    const recordsArray = records.toArray();
+    this.model.pushObjects(recordsArray);
+    this.table.addRows(recordsArray);
     this.meta = records.meta;
     this.canLoadMore = !isEmpty(records);
   }
