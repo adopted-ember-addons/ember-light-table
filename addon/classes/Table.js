@@ -7,6 +7,7 @@ import Column from 'ember-light-table/classes/Column';
 import SyncArrayProxy from 'ember-light-table/-private/sync-array-proxy';
 import { mergeOptionsWithGlobals } from 'ember-light-table/-private/global-options';
 import { isNone } from '@ember/utils';
+import classic from 'ember-classic-decorator';
 
 const RowSyncArrayProxy = SyncArrayProxy.extend({
   serializeContentObjects(objects) {
@@ -27,6 +28,7 @@ const RowSyncArrayProxy = SyncArrayProxy.extend({
  * @module Table
  * @class Table
  */
+@classic
 export default class Table extends EmberObject.extend({
   /**
    * @property columns

@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import layout from 'ember-light-table/templates/components/lt-foot';
 import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 
 /**
@@ -31,7 +30,6 @@ import TableHeaderMixin from 'ember-light-table/mixins/table-header';
  */
 
 export default Component.extend(TableHeaderMixin, {
-  layout,
   classNames: ['lt-foot-wrap'],
   table: null,
   sharedOptions: null,

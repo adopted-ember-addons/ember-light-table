@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import { action, computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
-import layout from 'ember-light-table/templates/components/lt-body';
 import { cancel, debounce, once, schedule, scheduleOnce } from '@ember/runloop';
 import Row from 'ember-light-table/classes/Row';
 
@@ -36,7 +35,6 @@ import Row from 'ember-light-table/classes/Row';
  */
 
 export default Component.extend({
-  layout,
   tagName: '',
 
   /**

@@ -1,6 +1,6 @@
 import Component from '@ember/component';
-import layout from 'ember-light-table/templates/components/lt-head';
 import TableHeaderMixin from 'ember-light-table/mixins/table-header';
+import classic from 'ember-classic-decorator';
 
 /**
  * @module Light Table
@@ -32,10 +32,11 @@ import TableHeaderMixin from 'ember-light-table/mixins/table-header';
  * @uses TableHeaderMixin
  */
 
-export default Component.extend(TableHeaderMixin, {
-  layout,
-  classNames: ['lt-head-wrap'],
-  table: null,
-  sharedOptions: null,
-  sharedOptionsFixedKey: 'fixedHeader',
-});
+@classic
+export default class LtHeadComponent extends Component.extend(
+  TableHeaderMixin
+) {
+  table = null;
+  sharedOptions = null;
+  sharedOptionsFixedKey = 'fixedHeader';
+}

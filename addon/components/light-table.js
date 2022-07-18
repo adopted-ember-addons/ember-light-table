@@ -5,7 +5,6 @@ import { readOnly } from '@ember/object/computed';
 import { isEmpty, isNone } from '@ember/utils';
 import { assert } from '@ember/debug';
 import { inject as service } from '@ember/service';
-import layout from 'ember-light-table/templates/components/light-table';
 import Table from 'ember-light-table/classes/Table';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
 
@@ -37,7 +36,6 @@ function intersections(array1, array2) {
  */
 
 const LightTable = Component.extend({
-  layout,
   classNameBindings: [':ember-light-table', 'occlusion'],
   attributeBindings: ['style'],
 

@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
-import layout from 'ember-light-table/templates/components/cells/base';
 import { htmlSafe } from '@ember/template';
 
 /**
@@ -15,7 +14,6 @@ import { htmlSafe } from '@ember/template';
  */
 
 const Cell = Component.extend({
-  layout,
   tagName: 'td',
   classNames: ['lt-cell'],
   attributeBindings: ['style'],

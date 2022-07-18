@@ -1,11 +1,9 @@
 import Component from '@ember/component';
 import closest from 'ember-light-table/utils/closest';
-import layout from '../templates/components/lt-column-resizer';
 
 const TOP_LEVEL_CLASS = '.ember-light-table';
 
 export default Component.extend({
-  layout,
   classNameBindings: [':lt-column-resizer', 'isResizing'],
   column: null,
   resizeOnDrag: false,

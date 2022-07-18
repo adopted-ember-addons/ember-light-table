@@ -1,0 +1,63 @@
+<div class="lt-head-wrap">
+  <EmberWormhole
+    @to={{concat this.tableId "_inline_head"}}
+    @renderInPlace={{this.renderInPlace}}
+  >
+    <table class={{this.tableClassNames}}>
+      <thead class="lt-head">
+        {{#if (has-block)}}
+          {{yield this.columnGroups this.subColumns}}
+        {{else}}
+          {{! There is an issue where if there are more than 1 row and the first has a colspan,
+           the td's fail to hold their width. Creating a scaffolding will setup the table columns correctly
+        }}
+          {{#if this.subColumns.length}}
+            <LtScaffoldingRow @columns={{this.subColumns}} />
+          {{else}}
+            <LtScaffoldingRow @columns={{this.columnGroups}} />
+          {{/if}}
+
+          <tr>
+            {{#each this.columnGroups as |column|}}
+              {{component
+                (concat "light-table/columns/" column.type)
+                column
+                table=this.table
+                tableActions=this.tableActions
+                extra=this.extra
+                sortIcons=this.sortIcons
+                resizeOnDrag=this.resizeOnDrag
+                click=(action "onColumnClick" column)
+                doubleClick=(action "onColumnDoubleClick" column)
+                onColumnResized=(action "onColumnResized")
+                onColumnDrag=(action "onColumnDrag")
+                onColumnDrop=(action "onColumnDrop")
+              }}
+            {{/each}}
+          </tr>
+
+          <tr>
+            {{#each this.subColumns as |column|}}
+              {{component
+                (concat "light-table/columns/" column.type)
+                column
+                table=this.table
+                rowspan=1
+                classNames="lt-sub-column"
+                tableActions=this.tableActions
+                extra=this.extra
+                sortIcons=this.sortIcons
+                resizeOnDrag=this.resizeOnDrag
+                click=(action "onColumnClick" column)
+                doubleClick=(action "onColumnDoubleClick" column)
+                onColumnResized=(action "onColumnResized")
+                onColumnDrag=(action "onColumnDrag")
+                onColumnDrop=(action "onColumnDrop")
+              }}
+            {{/each}}
+          </tr>
+        {{/if}}
+      </thead>
+    </table>
+  </EmberWormhole>
+</div>
