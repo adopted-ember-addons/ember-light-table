@@ -2,8 +2,6 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import { htmlSafe } from '@ember/template';
-import { ensureSafeComponent } from '@embroider/util';
-import classic from 'ember-classic-decorator';
 
 /**
  * @module Light Table
@@ -15,47 +13,75 @@ import classic from 'ember-classic-decorator';
  * @class Base Cell
  */
 
-@classic
-class Cell extends Component {
-  enableScaffolding = false;
+const Cell = Component.extend({
+  tagName: 'td',
+  classNames: ['lt-cell'],
+  attributeBindings: ['style'],
+  classNameBindings: ['align', 'isSorted', 'column.cellClassNames'],
 
-  @readOnly('column.sorted')
-  isSorted;
+  enableScaffolding: false,
 
-  get cellComponent() {
-    if (this.column.cellComponent) {
-      return ensureSafeComponent(this.column.cellComponent, this);
-    }
+  isSorted: readOnly('column.sorted'),
 
-    return undefined;
-  }
-
-  @computed('enableScaffolding', 'column.width')
-  get style() {
+  style: computed('enableScaffolding', 'column.width', function () {
     let column = this.column;
     let columnWidth = column.get('width');
 
     if (this.enableScaffolding || !column) {
-      return undefined;
+      return;
     }
 
     // For performance reasons, it's more interesting to bypass cssStyleify
     // since it leads to a lot of garbage collections
     // when displaying many cells
     return columnWidth ? htmlSafe(`width: ${columnWidth};`) : null;
-  }
+  }),
 
-  @computed('column.align')
-  get align() {
+  align: computed('column.align', function () {
     return `align-${this.column.align}`;
-  }
+  }),
+
+  /**
+   * @property table
+   * @type {Table}
+   */
+  table: null,
+
+  /**
+   * @property column
+   * @type {Column}
+   */
+  column: null,
+
+  /**
+   * @property row
+   * @type {Row}
+   */
+  row: null,
+
+  /**
+   * @property tableActions
+   * @type {Object}
+   */
+  tableActions: null,
+
+  /**
+   * @property extra
+   * @type {Object}
+   */
+  extra: null,
+
+  /**
+   * @property rawValue
+   * @type {Mixed}
+   */
+  rawValue: null,
 
   /**
    * @property value
    * @type {Mixed}
    */
-  @computed('column.format', 'rawValue')
-  get value() {
+  value: computed('column.format', 'rawValue', function () {
     let rawValue = this.rawValue;
     let format = this.column.format;
 
@@ -64,8 +90,8 @@ class Cell extends Component {
     }
 
     return rawValue;
-  }
-}
+  }),
+});
 
 Cell.reopenClass({
   positionalParams: ['column', 'row'],
