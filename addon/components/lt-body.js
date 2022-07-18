@@ -348,11 +348,6 @@ export default Component.extend({
     once(this, this._setupVirtualScrollbar);
   },
 
-  didReceiveAttrs() {
-    this._super(...arguments);
-    this.setupScrollOffset();
-  },
-
   destroy() {
     this._super(...arguments);
     this._cancelTimers();
@@ -371,7 +366,7 @@ export default Component.extend({
     );
   }),
 
-  setupScrollOffset() {
+  setupScrollOffset: action(function (element) {
     let { scrollTo, _scrollTo, scrollToRow, _scrollToRow } = this;
     let targetScrollOffset = null;
 
@@ -390,7 +385,7 @@ export default Component.extend({
       });
     } else if (scrollToRow !== _scrollToRow) {
       if (scrollToRow instanceof Row) {
-        let rowElement = this.element.querySelector(
+        let rowElement = element.querySelector(
           `[data-row-id=${scrollToRow.get('rowId')}]`
         );
 
@@ -404,7 +399,7 @@ export default Component.extend({
         hasReachedTargetScrollOffset: true,
       });
     }
-  },
+  }),
 
   checkTargetScrollOffset() {
     if (!this.hasReachedTargetScrollOffset) {
