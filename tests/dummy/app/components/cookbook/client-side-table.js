@@ -9,9 +9,6 @@ import { tracked } from '@glimmer/tracking';
 export default class PaginatedTable extends BaseTable {
   query = '';
 
-  // No need for `enableSync` here
-  enableSync = false;
-
   model = [];
 
   get sortedModel() {
@@ -71,7 +68,9 @@ export default class PaginatedTable extends BaseTable {
 
   @restartableTask *fetchRecords() {
     const records = yield this.store.query('user', { page: 1, limit: 100 });
-    this.model.setObjects(records.toArray());
+    const recordsArray = records.toArray();
+    this.model.setObjects(recordsArray);
+
     this.meta = records.meta;
     yield this.filterAndSortModel.perform();
   }
