@@ -1,6 +1,61 @@
 Changelog
 =========
 
+
+## v3.0.0-beta.1 (2022-07-21)
+
+#### :boom: Breaking Change
+* [#805](https://github.com/adopted-ember-addons/ember-light-table/pull/805) Make light-table tagless ([@rwwagner90](https://github.com/rwwagner90))
+* [#804](https://github.com/adopted-ember-addons/ember-light-table/pull/804) Remove enableSync option, require updating table rows manually ([@rwwagner90](https://github.com/rwwagner90))
+* [#757](https://github.com/adopted-ember-addons/ember-light-table/pull/757) Bump deps, update GitHub actions ([@rwwagner90](https://github.com/rwwagner90))
+* [#784](https://github.com/adopted-ember-addons/ember-light-table/pull/784) Remove fix-proto - Drop support for IE < 10 ([@maxwondercorn](https://github.com/maxwondercorn))
+* [#780](https://github.com/adopted-ember-addons/ember-light-table/pull/780) Drop node 10 ([@maxwondercorn](https://github.com/maxwondercorn))
+* [#775](https://github.com/adopted-ember-addons/ember-light-table/pull/775) Merge post 2.0.0-beta.5 branches ([@maxwondercorn](https://github.com/maxwondercorn))
+* [#755](https://github.com/adopted-ember-addons/ember-light-table/pull/755) Merge 3-x into master ([@rwwagner90](https://github.com/rwwagner90))
+
+#### :rocket: Enhancement
+* [#601](https://github.com/adopted-ember-addons/ember-light-table/pull/601) Avoid breaking line with sort icon in narrow columns ([@Gorzas](https://github.com/Gorzas))
+* [#648](https://github.com/adopted-ember-addons/ember-light-table/pull/648) Expose shouldRecycle property of vertical-collection ([@Gaurav0](https://github.com/Gaurav0))
+* [#584](https://github.com/adopted-ember-addons/ember-light-table/pull/584) Improve cells performance ([@mostafa-sakhiri](https://github.com/mostafa-sakhiri))
+
+#### :bug: Bug Fix
+* [#803](https://github.com/adopted-ember-addons/ember-light-table/pull/803) Fix scroll to row ([@rwwagner90](https://github.com/rwwagner90))
+* [#800](https://github.com/adopted-ember-addons/ember-light-table/pull/800) Fix responsive functionality ([@rwwagner90](https://github.com/rwwagner90))
+* [#798](https://github.com/adopted-ember-addons/ember-light-table/pull/798) Fix onScrolledToBottom / use render modifiers ([@rwwagner90](https://github.com/rwwagner90))
+* [#790](https://github.com/adopted-ember-addons/ember-light-table/pull/790) Import computed macros directly ([@rwwagner90](https://github.com/rwwagner90))
+* [#681](https://github.com/adopted-ember-addons/ember-light-table/pull/681) use `assign` instead of `merge` ([@bekzod](https://github.com/bekzod))
+* [#664](https://github.com/adopted-ember-addons/ember-light-table/pull/664) Fixing issue with multiple tables and onScrolledToBottom. ([@gmurphey](https://github.com/gmurphey))
+* [#666](https://github.com/adopted-ember-addons/ember-light-table/pull/666) Pinning ip-regex to fix build issue. ([@gmurphey](https://github.com/gmurphey))
+* [#596](https://github.com/adopted-ember-addons/ember-light-table/pull/596) [Draggable Column] Error when dragging column; "removeObject is not a function" ([@msenevir](https://github.com/msenevir))
+* [#586](https://github.com/adopted-ember-addons/ember-light-table/pull/586) FIX - Incomplete use of htmlSafe() on Cell.style ([@ghost](https://github.com/ghost))
+
+#### :house: Internal
+* [#806](https://github.com/adopted-ember-addons/ember-light-table/pull/806) Convert dummy app to glimmer components ([@rwwagner90](https://github.com/rwwagner90))
+* [#801](https://github.com/adopted-ember-addons/ember-light-table/pull/801) Make embroider-safe ([@rwwagner90](https://github.com/rwwagner90))
+* [#799](https://github.com/adopted-ember-addons/ember-light-table/pull/799) Tweak some icons ([@rwwagner90](https://github.com/rwwagner90))
+* [#797](https://github.com/adopted-ember-addons/ember-light-table/pull/797) Minor icon fixes ([@maxwondercorn](https://github.com/maxwondercorn))
+* [#796](https://github.com/adopted-ember-addons/ember-light-table/pull/796) Fix font-awesome icons, fix some build issues ([@rwwagner90](https://github.com/rwwagner90))
+* [#793](https://github.com/adopted-ember-addons/ember-light-table/pull/793) Convert dummy app ([@maxwondercorn](https://github.com/maxwondercorn))
+* [#792](https://github.com/adopted-ember-addons/ember-light-table/pull/792) Update ember-scrollable ([@rwwagner90](https://github.com/rwwagner90))
+* [#791](https://github.com/adopted-ember-addons/ember-light-table/pull/791) Fix implicit `this`, runloop, and assign issues ([@rwwagner90](https://github.com/rwwagner90))
+* [#779](https://github.com/adopted-ember-addons/ember-light-table/pull/779) Remove Bower configuration ([@maxwondercorn](https://github.com/maxwondercorn))
+* [#653](https://github.com/adopted-ember-addons/ember-light-table/pull/653) Fix scroll to bottom test ([@Gaurav0](https://github.com/Gaurav0))
+* [#649](https://github.com/adopted-ember-addons/ember-light-table/pull/649) Write integration tests for occlusion rendering ([@Gaurav0](https://github.com/Gaurav0))
+* [#598](https://github.com/adopted-ember-addons/ember-light-table/pull/598) Stop using nativeDomClick which is deprecated. ([@plcarmel](https://github.com/plcarmel))
+
+#### Committers: 11
+- Chris Thoburn ([@runspired](https://github.com/runspired))
+- Deleted user ([@ghost](https://github.com/ghost))
+- Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
+- Gaurav Munjal ([@Gaurav0](https://github.com/Gaurav0))
+- José David Cano Pérez ([@Gorzas](https://github.com/Gorzas))
+- Mahen Seneviratne ([@msenevir](https://github.com/msenevir))
+- Pierre-Luc Carmel Biron ([@plcarmel](https://github.com/plcarmel))
+- Robert Wagner ([@rwwagner90](https://github.com/rwwagner90))
+- [@bekzod](https://github.com/bekzod)
+- [@mostafa-sakhiri](https://github.com/mostafa-sakhiri)
+- maxwondercorn ([@maxwondercorn](https://github.com/maxwondercorn))
+
 ## UNRELEASED 2.X
 
 #### Bug Fixes
