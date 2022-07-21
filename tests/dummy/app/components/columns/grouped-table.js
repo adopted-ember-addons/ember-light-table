@@ -1,8 +1,6 @@
 // BEGIN-SNIPPET grouped-table
-import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
 
-@classic
 export default class GroupedTable extends BaseTable {
   get columns() {
     return [

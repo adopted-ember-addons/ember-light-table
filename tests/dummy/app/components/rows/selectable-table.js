@@ -1,9 +1,7 @@
 // BEGIN-SNIPPET selectable-table
 import BaseTable from '../base-table';
 import { action } from '@ember/object';
-import classic from 'ember-classic-decorator';
 
-@classic
 export default class ExpandableTable extends BaseTable {
   get hasSelection() {
     return this.table.selectedRows;

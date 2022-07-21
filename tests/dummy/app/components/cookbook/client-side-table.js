@@ -1,11 +1,9 @@
 // BEGIN-SNIPPET client-side-table
-import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
 import { action } from '@ember/object';
 import { restartableTask, timeout } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class PaginatedTable extends BaseTable {
   query = '';
 
@@ -61,8 +59,8 @@ export default class PaginatedTable extends BaseTable {
     ];
   }
 
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
     this.fetchRecords.perform();
   }
 

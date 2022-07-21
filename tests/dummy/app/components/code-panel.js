@@ -1,9 +1,8 @@
-import classic from 'ember-classic-decorator';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { guidFor } from '@ember/object/internals';
 
-@classic
 export default class CodePanel extends Component {
-  collapse = true;
-  title = '';
-  snippets = null;
+  @tracked collapse = true;
+  elementId = guidFor(this);
 }

@@ -1,8 +1,6 @@
 // BEGIN-SNIPPET resizable-table
-import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
 
-@classic
 export default class ResizableTable extends BaseTable {
   get columns() {
     return [

@@ -1,6 +1,5 @@
 // BEGIN-SNIPPET base-table
-import classic from 'ember-classic-decorator';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import { inject as service } from '@ember/service';
@@ -8,11 +7,8 @@ import Table from 'ember-light-table';
 import { restartableTask } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class BaseTable extends Component {
   @service store;
-
-  model = null;
 
   @tracked canLoadMore = true;
   @tracked dir = 'asc';
@@ -21,14 +17,12 @@ export default class BaseTable extends Component {
   @tracked page = 0;
   @tracked sort = 'firstName';
 
-  table = null;
-
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
 
     const table = Table.create({
       columns: this.columns,
-      rows: this.model,
+      rows: this.args.model,
     });
     const sortColumn = table.get('allColumns').findBy('valuePath', this.sort);
 
@@ -52,7 +46,7 @@ export default class BaseTable extends Component {
       dir: this.dir,
     });
     const recordsArray = records.toArray();
-    this.model.pushObjects(recordsArray);
+    this.args.model.pushObjects(recordsArray);
     this.table.addRows(recordsArray);
     this.meta = records.meta;
     this.canLoadMore = !isEmpty(records);
@@ -73,7 +67,7 @@ export default class BaseTable extends Component {
       this.sort = column.get('valuePath');
       this.canLoadMore = true;
       this.page = 0;
-      this.model.clear();
+      this.args.model.clear();
     }
   }
 }
