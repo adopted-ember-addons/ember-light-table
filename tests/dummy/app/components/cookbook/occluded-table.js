@@ -1,8 +1,6 @@
 // BEGIN-SNIPPET occluded-table
-import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
 
-@classic
 export default class OccludedTable extends BaseTable {
   limit = 100;
 
@@ -40,9 +38,9 @@ export default class OccludedTable extends BaseTable {
     ];
   }
 
-  init() {
-    super.init(...arguments);
-    this.set('page', 1);
+  constructor() {
+    super(...arguments);
+    this.page = 1;
     this.fetchRecords.perform();
   }
 }

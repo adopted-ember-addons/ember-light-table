@@ -1,9 +1,7 @@
 // BEGIN-SNIPPET table-actions-table
-import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
 import { action } from '@ember/object';
 
-@classic
 export default class TableActionsTable extends BaseTable {
   get columns() {
     return [

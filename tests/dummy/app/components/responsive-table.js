@@ -1,9 +1,7 @@
 // BEGIN-SNIPPET responsive-table
-import classic from 'ember-classic-decorator';
 import BaseTable from './base-table';
 import { action } from '@ember/object';
 
-@classic
 export default class ResponsiveTable extends BaseTable {
   get columns() {
     return [

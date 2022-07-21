@@ -1,9 +1,7 @@
 // BEGIN-SNIPPET paginated-table
-import classic from 'ember-classic-decorator';
 import BaseTable from '../base-table';
 import { action } from '@ember/object';
 
-@classic
 export default class PaginatedTable extends BaseTable {
   limit = 12;
 
@@ -41,9 +39,9 @@ export default class PaginatedTable extends BaseTable {
     ];
   }
 
-  init() {
-    super.init(...arguments);
-    this.send('setPage', 1);
+  constructor() {
+    super(...arguments);
+    this.setPage(1);
   }
 
   @action

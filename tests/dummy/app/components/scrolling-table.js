@@ -1,9 +1,7 @@
 // BEGIN-SNIPPET scrolling-table
-import classic from 'ember-classic-decorator';
 import BaseTable from './base-table';
 import { action } from '@ember/object';
 
-@classic
 export default class ScrollingTable extends BaseTable {
   currentScrollOffset = 0;
   scrollTo = 0;
