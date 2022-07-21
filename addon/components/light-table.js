@@ -2,6 +2,7 @@ import { A as emberArray } from '@ember/array';
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
+import { guidFor } from '@ember/object/internals';
 import { isEmpty, isNone } from '@ember/utils';
 import { assert } from '@ember/debug';
 import { inject as service } from '@ember/service';
@@ -36,8 +37,7 @@ function intersections(array1, array2) {
  */
 
 const LightTable = Component.extend({
-  classNameBindings: [':ember-light-table', 'occlusion'],
-  attributeBindings: ['style'],
+  tagName: '',
 
   media: service(),
   scrollbarThickness: service(),
@@ -293,6 +293,8 @@ const LightTable = Component.extend({
       '[ember-light-table] table must be an instance of Table',
       table instanceof Table
     );
+
+    this.set('tableId', guidFor(this));
 
     if (isNone(this.media)) {
       this.set('responsive', false);
