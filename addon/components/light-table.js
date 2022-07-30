@@ -289,7 +289,6 @@ export default Component.extend({
 
     let table = this.table;
 
-    debugger
     assert(
       '[ember-light-table] table must be an instance of Table',
       table instanceof Table
