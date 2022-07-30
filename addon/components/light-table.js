@@ -36,7 +36,7 @@ function intersections(array1, array2) {
  * @main Components
  */
 
-const LightTable = Component.extend({
+export default Component.extend({
   tagName: '',
 
   media: service(),
@@ -289,6 +289,7 @@ const LightTable = Component.extend({
 
     let table = this.table;
 
+    debugger
     assert(
       '[ember-light-table] table must be an instance of Table',
       table instanceof Table
@@ -385,9 +386,3 @@ const LightTable = Component.extend({
     },
   },
 });
-
-LightTable.reopenClass({
-  positionalParams: ['table'],
-});
-
-export default LightTable;

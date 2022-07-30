@@ -29,7 +29,7 @@ module('Integration | Component | Cells | base', function (hooks) {
     this.set('row', Row.create());
 
     await render(hbs`
-    {{light-table/cells/base this.column this.row rawValue=2}}
+    {{light-table/cells/base column=this.column row=this.row rawValue=2}}
     `);
 
     assert.dom('*').hasText('4');
@@ -47,7 +47,9 @@ module('Integration | Component | Cells | base', function (hooks) {
 
     this.set('row', Row.create({ content: { num: 2 } }));
 
-    await render(hbs`{{light-table/cells/base this.column this.row}}`);
+    await render(
+      hbs`{{light-table/cells/base column=this.column row=this.row}}`
+    );
 
     assert.dom('*').hasText('4');
   });
@@ -77,7 +79,12 @@ module('Integration | Component | Cells | base', function (hooks) {
     );
 
     await render(
-      hbs`{{light-table/cells/base this.column this.row rawValue=(get this.row this.column.valuePath)}}`
+      hbs`
+        {{light-table/cells/base 
+          column=this.column 
+          row=this.row 
+          rawValue=(get this.row this.column.valuePath)}}
+        `
     );
 
     assert.dom('*').hasText('4');
