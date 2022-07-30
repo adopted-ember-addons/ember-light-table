@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { readOnly } from '@ember/object/computed';
 
-const Row = Component.extend({
+export default Component.extend({
   tagName: 'tr',
   classNames: ['lt-row'],
   classNameBindings: [
@@ -24,9 +24,3 @@ const Row = Component.extend({
   isSelected: readOnly('row.selected'),
   isExpanded: readOnly('row.expanded'),
 });
-
-Row.reopenClass({
-  positionalParams: ['row', 'columns'],
-});
-
-export default Row;
