@@ -13,7 +13,7 @@
           {{#each this.columns as |column|}}
             {{component
               (concat "light-table/columns/" column.type)
-              column
+              column=column
               table=this.table
               tableActions=this.tableActions
               extra=this.extra

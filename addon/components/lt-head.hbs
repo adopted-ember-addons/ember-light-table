@@ -21,7 +21,7 @@
             {{#each this.columnGroups as |column|}}
               {{component
                 (concat "light-table/columns/" column.type)
-                column
+                column=column
                 table=this.table
                 tableActions=this.tableActions
                 extra=this.extra
@@ -40,7 +40,7 @@
             {{#each this.subColumns as |column|}}
               {{component
                 (concat "light-table/columns/" column.type)
-                column
+                column=column
                 table=this.table
                 rowspan=1
                 classNames="lt-sub-column"
