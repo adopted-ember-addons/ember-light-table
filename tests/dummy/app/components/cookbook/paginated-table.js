@@ -54,7 +54,8 @@ export default class PaginatedTable extends BaseTable {
     }
 
     this.page = page;
-    this.model.clear();
+    const currentRecordsArray = this.table.rows.toArray();
+    this.table.removeRows(currentRecordsArray);
     this.fetchRecords.perform();
   }
 }
