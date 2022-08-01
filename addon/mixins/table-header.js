@@ -78,14 +78,13 @@ export default Mixin.create({
   resizeOnDrag: false,
 
   /**
-   * CSS classes to be applied to an `<i class="lt-sort-icon"></i>` tag that is
-   * inserted into the column's `<th>` element when the column is sortable but
-   * not yet sorted.
+   * Name of the icon that is inserted into the column's `<th>`
+   * element when the column is sortable but not yet sorted.
    *
-   * For instance, if you have installed `ember-font-awesome` or include the
-   * `font-awesome` assets manually (e.g. via a CDN), you can set
-   * `iconSortable` to `'sort'`, which would yield this markup:
-   * `<i class="lt-sort-icon sort"></i>`
+   * The name is passed to the component assigned to the
+   * iconComponent property when the table is rendered.
+   *
+   * The addon includes the Font Awesome icon `sort`.
    *
    * @property iconSortable
    * @type {String}
@@ -94,8 +93,10 @@ export default Mixin.create({
   iconSortable: '',
 
   /**
-   * See `iconSortable`.  CSS classes to apply to `<i class="lt-sort-icon"></i>`
-   * when the column is sorted ascending.
+   * See `iconSortable`. Icon name to use when the
+   * column is sorted ascending.
+   *
+   * The addon includes the Font Awesome icon `sort-up`.
    *
    * @property iconAscending
    * @type {String}
@@ -104,8 +105,10 @@ export default Mixin.create({
   iconAscending: '',
 
   /**
-   * See `iconSortable`.  CSS classes to apply to `<i class="lt-sort-icon"></i>`
-   * when the column is sorted descending.
+   * See `iconSortable`. Icon name to use when the
+   * column is sorted descending.
+   *
+   * The addon includes the Font Awesome icon `sort-down`.
    *
    * @property iconDescending
    * @type {String}
@@ -114,7 +117,10 @@ export default Mixin.create({
   iconDescending: '',
 
   /**
-   * Custom sorting component name to use instead of the default `<i class="lt-sort-icon"></i>` template.
+   * Name of custom component to render the sorting icons template. This component
+   * is required to render sorting icons. Duplicate the `fa-icon-wrapper` from the
+   * dummy app to use the included Font Awesome icons.
+   *
    * See `iconSortable`, `iconAsending`, or `iconDescending`.
    * @property iconComponent
    * @type {String}
