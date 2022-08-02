@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import Table from 'ember-light-table';
-import { restartableTask } from 'ember-concurrency';
+import { restartableTask, timeout } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 
 export default class BaseTable extends Component {
@@ -52,6 +52,12 @@ export default class BaseTable extends Component {
     this.canLoadMore = !isEmpty(records);
   }
 
+  @restartableTask *setRows(rows) {
+    this.table.setRows([]);
+    yield timeout(100); // Allows isLoading state to be shown
+    this.table.setRows(rows);
+  }
+
   @action
   onScrolledToBottom() {
     if (this.canLoadMore) {
@@ -64,10 +70,10 @@ export default class BaseTable extends Component {
   onColumnClick(column) {
     if (column.sorted) {
       this.dir = column.ascending ? 'asc' : 'desc';
-      this.sort = column.get('valuePath');
+      this.sort = column.valuePath;
       this.canLoadMore = true;
       this.page = 0;
-      this.args.model.clear();
+      this.setRows.perform(this.table.rows);
     }
   }
 }
