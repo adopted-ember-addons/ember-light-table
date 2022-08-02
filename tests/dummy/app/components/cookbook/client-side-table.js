@@ -2,9 +2,12 @@
 import BaseTable from '../base-table';
 import { action } from '@ember/object';
 import { restartableTask, timeout } from 'ember-concurrency';
+import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class PaginatedTable extends BaseTable {
+  @service store;
+
   query = '';
 
   model = [];
