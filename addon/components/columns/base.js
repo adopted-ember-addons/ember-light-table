@@ -16,7 +16,7 @@ import cssStyleify from 'ember-light-table/utils/css-styleify';
  * @class Base Column
  */
 
-const Column = Component.extend(DraggableColumnMixin, {
+export default Component.extend(DraggableColumnMixin, {
   tagName: 'th',
   classNames: ['lt-column'],
   attributeBindings: ['style', 'colspan', 'rowspan'],
@@ -129,9 +129,3 @@ const Column = Component.extend(DraggableColumnMixin, {
     },
   }),
 });
-
-Column.reopenClass({
-  positionalParams: ['column'],
-});
-
-export default Column;

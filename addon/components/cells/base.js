@@ -13,7 +13,7 @@ import { htmlSafe } from '@ember/template';
  * @class Base Cell
  */
 
-const Cell = Component.extend({
+export default Component.extend({
   tagName: 'td',
   classNames: ['lt-cell'],
   attributeBindings: ['style'],
@@ -92,9 +92,3 @@ const Cell = Component.extend({
     return rawValue;
   }),
 });
-
-Cell.reopenClass({
-  positionalParams: ['column', 'row'],
-});
-
-export default Cell;

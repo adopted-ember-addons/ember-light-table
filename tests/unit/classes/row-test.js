@@ -8,13 +8,4 @@ module('Unit | Classes | Row', function () {
     assert.false(row.expanded);
     assert.false(row.selected);
   });
-
-  test('reopen row', function (assert) {
-    assert.equal(typeof Row.reopen, 'function', 'reopen is a function');
-    assert.equal(
-      typeof Row.reopenClass,
-      'function',
-      'reopenClass is a function'
-    );
-  });
 });

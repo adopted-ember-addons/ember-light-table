@@ -66,15 +66,6 @@ module('Unit | Classes | Table', function () {
     assert.equal(table.get('columns.length'), 1);
   });
 
-  test('reopen table', function (assert) {
-    assert.equal(typeof Table.reopen, 'function', 'reopen is a function');
-    assert.equal(
-      typeof Table.reopenClass,
-      'function',
-      'reopenClass is a function'
-    );
-  });
-
   test('CP - visibleColumnGroups', function (assert) {
     let table = Table.create();
     let col = Column.create();

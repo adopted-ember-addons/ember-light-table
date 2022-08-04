@@ -28,7 +28,7 @@ module('Integration | Component | light table', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('table', Table.create());
-    await render(hbs`{{light-table this.table}}`);
+    await render(hbs`{{light-table table=this.table}}`);
 
     assert.dom('*').hasText('');
   });
@@ -49,7 +49,7 @@ module('Integration | Component | light table', function (hooks) {
     });
 
     await render(hbs`
-      {{#light-table this.table height='40vh' as |t|}}
+      {{#light-table table=this.table height='40vh' as |t|}}
         {{t.head fixed=true}}
         {{t.body onScrolledToBottom=this.onScrolledToBottom}}
       {{/light-table}}
@@ -90,12 +90,12 @@ module('Integration | Component | light table', function (hooks) {
     });
 
     await render(hbs`
-      {{#light-table this.table height='40vh' id='table-1' as |t|}}
+      {{#light-table table=this.table height='40vh' id='table-1' as |t|}}
         {{t.head fixed=true}}
         {{t.body onScrolledToBottom=this.onScrolledToBottomTable1}}
       {{/light-table}}
 
-      {{#light-table this.table height='40vh' id='table-2' as |t|}}
+      {{#light-table table=this.table height='40vh' id='table-2' as |t|}}
         {{t.head fixed=true}}
         {{t.body onScrolledToBottom=this.onScrolledToBottomTable2}}
       {{/light-table}}
@@ -129,7 +129,7 @@ module('Integration | Component | light table', function (hooks) {
     );
 
     await render(hbs`
-      {{#light-table this.table height='500px' id='lightTable' as |t|}}
+      {{#light-table table=this.table height='500px' id='lightTable' as |t|}}
         {{t.head fixed=true}}
         {{t.body}}
       {{/light-table}}
@@ -138,7 +138,7 @@ module('Integration | Component | light table', function (hooks) {
     assert.dom('#lightTable_inline_head thead').doesNotExist();
 
     await render(hbs`
-      {{#light-table this.table height='500px' id='lightTable' as |t|}}
+      {{#light-table table=this.table height='500px' id='lightTable' as |t|}}
         {{t.head fixed=false}}
         {{t.body}}
       {{/light-table}}
@@ -158,7 +158,7 @@ module('Integration | Component | light table', function (hooks) {
     );
 
     await render(hbs`
-      {{#light-table this.table height='500px' id='lightTable' as |t|}}
+      {{#light-table table=this.table height='500px' id='lightTable' as |t|}}
         {{t.body}}
         {{t.foot fixed=true}}
       {{/light-table}}
@@ -167,7 +167,7 @@ module('Integration | Component | light table', function (hooks) {
     assert.dom('#lightTable_inline_foot tfoot').doesNotExist();
 
     await render(hbs`
-      {{#light-table this.table height='500px' id='lightTable' as |t|}}
+      {{#light-table table=this.table height='500px' id='lightTable' as |t|}}
         {{t.body}}
         {{t.foot fixed=false}}
       {{/light-table}}
@@ -188,7 +188,7 @@ module('Integration | Component | light table', function (hooks) {
 
     await render(hbs`
       <div style="height: 500px">
-        {{#light-table this.table id='lightTable' as |t|}}
+        {{#light-table table=this.table id='lightTable' as |t|}}
           {{t.body}}
           {{t.foot fixed=this.fixed}}
         {{/light-table}}
@@ -214,7 +214,7 @@ module('Integration | Component | light table', function (hooks) {
 
     await render(hbs`
       <div style="height: 500px">
-        {{#light-table this.table id='lightTable' as |t|}}
+        {{#light-table table=this.table id='lightTable' as |t|}}
           {{t.head fixed=true}}
           {{t.body}}
           {{#t.foot fixed=true}}
@@ -248,7 +248,7 @@ module('Integration | Component | light table', function (hooks) {
     );
 
     await render(hbs`
-      {{#light-table this.table as |t|}}
+      {{#light-table table=this.table as |t|}}
         {{t.body rowComponent=(component "custom-row" classNames="custom-row")}}
       {{/light-table}}
     `);
@@ -274,7 +274,7 @@ module('Integration | Component | light table', function (hooks) {
     this.set('table', Table.create({ columns: Columns, rows: users }));
 
     await render(hbs`
-      {{#light-table this.table as |t|}}
+      {{#light-table table=this.table as |t|}}
         {{t.body
           rowComponent=(component "custom-row" classNames="custom-row" current=this.current)
         }}
@@ -323,7 +323,7 @@ module('Integration | Component | light table', function (hooks) {
     });
 
     await render(hbs`
-      {{#light-table this.table height='40vh' as |t|}}
+      {{#light-table table=this.table height='40vh' as |t|}}
         {{t.head fixed=true}}
         {{t.body
           useVirtualScrollbar=true
@@ -374,7 +374,7 @@ module('Integration | Component | light table', function (hooks) {
     };
 
     await render(hbs`
-      {{#light-table this.table
+      {{#light-table table=this.table
         extra=(hash someData="someValue")
         tableActions=(hash
           someAction=(action "someAction")
@@ -399,7 +399,7 @@ module('Integration | Component | light table', function (hooks) {
     });
     this.setProperties({ table });
     await render(hbs`
-      {{#light-table this.table height='40vh' as |t|}}
+      {{#light-table table=this.table height='40vh' as |t|}}
         {{t.head fixed=true}}
         {{t.body}}
       {{/light-table}}

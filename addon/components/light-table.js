@@ -36,7 +36,7 @@ function intersections(array1, array2) {
  * @main Components
  */
 
-const LightTable = Component.extend({
+export default Component.extend({
   tagName: '',
 
   media: service(),
@@ -385,9 +385,3 @@ const LightTable = Component.extend({
     },
   },
 });
-
-LightTable.reopenClass({
-  positionalParams: ['table'],
-});
-
-export default LightTable;

@@ -30,7 +30,7 @@
               {{yield this.columns this.rows}}
             {{else}}
               {{#vertical-collection
-                this.rows
+                items=this.rows
                 tagName="vertical-collection"
                 estimateHeight=this.sharedOptions.estimatedRowHeight
                 shouldRecycle=this.sharedOptions.shouldRecycle
@@ -43,8 +43,8 @@
                 lastReached=(action "lastReached") as |row|
               }}
                 {{lt.row
-                  row
-                  this.columns
+                  row=row
+                  columns=this.columns
                   data-row-id=row.rowId
                   table=this.table
                   tableActions=this.tableActions
@@ -120,8 +120,8 @@
                 ) as |row|
               }}
                 {{lt.row
-                  row
-                  this.columns
+                  row=row
+                  columns=this.columns
                   data-row-id=row.rowId
                   table=this.table
                   tableActions=this.tableActions

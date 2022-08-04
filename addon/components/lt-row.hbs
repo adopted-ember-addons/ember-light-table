@@ -1,8 +1,8 @@
 {{#each this.columns as |column|}}
   {{component
     (concat 'light-table/cells/' column.cellType)
-    column
-    this.row
+    column=column
+    row=this.row
     table=this.table
     rawValue=(get this.row column.valuePath)
     tableActions=this.tableActions
