@@ -43,7 +43,6 @@
     "ember-classic-decorator": "^3.0.0",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-htmlbars": "^5.7.1",
-    "ember-cli-string-helpers": "^6.1.0",
     "ember-get-config": "^2.1.1",
     "ember-in-viewport": "^4.0.2",
     "ember-responsive": "^5.0.0",
