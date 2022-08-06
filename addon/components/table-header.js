@@ -131,6 +131,10 @@ export default class TableHeader extends Component {
     return this.fixed;
   }
 
+  set renderInPlace(value) {
+    this.fixed = value;
+  }
+
   get columnGroups() {
     return this.table.visibleColumnGroups;
   }
