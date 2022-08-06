@@ -17,8 +17,6 @@ import cssStyleify from 'ember-light-table/utils/css-styleify';
  */
 
 export default Mixin.create({
-  attributeBindings: ['style'],
-
   scrollbarThickness: service(),
 
   /**

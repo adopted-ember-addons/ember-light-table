@@ -1,33 +1,35 @@
-<EmberWormhole
-  @to={{concat this.tableId "_inline_foot"}}
-  @renderInPlace={{this.renderInPlace}}
->
-  <table class={{this.tableClassNames}}>
-    <tfoot class="lt-foot">
-      {{! Scaffolding is needed here to allow use of colspan in the footer }}
-      <LtScaffoldingRow @columns={{this.columns}} />
-      {{#if (has-block)}}
-        {{yield this.columns}}
-      {{else}}
-        <tr>
-          {{#each this.columns as |column|}}
-            {{component
-              (concat "light-table/columns/" column.type)
-              column=column
-              table=this.table
-              tableActions=this.tableActions
-              extra=this.extra
-              sortIcons=this.sortIcons
-              resizeOnDrag=this.resizeOnDrag
-              click=(action "onColumnClick" column)
-              doubleClick=(action "onColumnDoubleClick" column)
-              onColumnResized=(action "onColumnResized")
-              onColumnDrag=(action "onColumnDrag")
-              onColumnDrop=(action "onColumnDrop")
-            }}
-          {{/each}}
-        </tr>
-      {{/if}}
-    </tfoot>
-  </table>
-</EmberWormhole>
+<div class="lt-foot-wrap" style={{this.style}}>
+  <EmberWormhole
+    @to={{concat this.tableId "_inline_foot"}}
+    @renderInPlace={{this.renderInPlace}}
+  >
+    <table class={{this.tableClassNames}}>
+      <tfoot class="lt-foot">
+        {{! Scaffolding is needed here to allow use of colspan in the footer }}
+        <LtScaffoldingRow @columns={{this.columns}} />
+        {{#if (has-block)}}
+          {{yield this.columns}}
+        {{else}}
+          <tr>
+            {{#each this.columns as |column|}}
+              {{component
+                (concat "light-table/columns/" column.type)
+                column=column
+                table=this.table
+                tableActions=this.tableActions
+                extra=this.extra
+                sortIcons=this.sortIcons
+                resizeOnDrag=this.resizeOnDrag
+                click=(action "onColumnClick" column)
+                doubleClick=(action "onColumnDoubleClick" column)
+                onColumnResized=(action "onColumnResized")
+                onColumnDrag=(action "onColumnDrag")
+                onColumnDrop=(action "onColumnDrop")
+              }}
+            {{/each}}
+          </tr>
+        {{/if}}
+      </tfoot>
+    </table>
+  </EmberWormhole>
+</div>
