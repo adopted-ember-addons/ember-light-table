@@ -136,7 +136,7 @@ export default class TableHeader extends Component {
   }
 
   get columnGroups() {
-    return this.table.visibleColumnGroups;
+    return this.table?.visibleColumnGroups;
   }
 
   set columnGroups(value) {
@@ -144,7 +144,7 @@ export default class TableHeader extends Component {
   }
 
   get subColumns() {
-    return this.table.visibleSubColumns;
+    return this.table?.visibleSubColumns;
   }
 
   set subColumns(value) {
@@ -152,7 +152,7 @@ export default class TableHeader extends Component {
   }
 
   get columns() {
-    return this.table.visibleColumns;
+    return this?.table?.visibleColumns;
   }
 
   set columns(value) {
