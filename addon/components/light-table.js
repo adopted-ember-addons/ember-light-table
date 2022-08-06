@@ -316,7 +316,7 @@ export default Component.extend({
       return;
     }
 
-    this.send('onBeforeResponsiveChange', matches);
+    this.send('beforeResponsiveChange', matches);
 
     if (!isNone(breakpoints)) {
       Object.keys(breakpoints).forEach((b) => {
@@ -336,7 +336,7 @@ export default Component.extend({
       });
     }
 
-    this.send('onAfterResponsiveChange', matches);
+    this.send('afterResponsiveChange', matches);
   }),
 
   _displayColumns(numColumns) {
@@ -357,10 +357,6 @@ export default Component.extend({
     }
   },
 
-  // No-ops for closure actions
-  onBeforeResponsiveChange() {},
-  onAfterResponsiveChange() {},
-
   actions: {
     /**
      * onBeforeResponsiveChange action.
@@ -369,8 +365,9 @@ export default Component.extend({
      * @event onBeforeResponsiveChange
      * @param  {Array} matches list of matching breakpoints
      */
-    onBeforeResponsiveChange(/* matches */) {
-      this.onBeforeResponsiveChange(...arguments);
+    beforeResponsiveChange(/* matches */) {
+      this.onBeforeResponsiveChange &&
+        this.onBeforeResponsiveChange(...arguments);
     },
 
     /**
@@ -380,8 +377,9 @@ export default Component.extend({
      * @event onAfterResponsiveChange
      * @param  {Array} matches list of matching breakpoints
      */
-    onAfterResponsiveChange(/* matches */) {
-      this.onAfterResponsiveChange(...arguments);
+    afterResponsiveChange(/* matches */) {
+      this.onAfterResponsiveChange &&
+        this.onAfterResponsiveChange(...arguments);
     },
   },
 });
