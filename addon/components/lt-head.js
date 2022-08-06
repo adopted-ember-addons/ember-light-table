@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import TableHeaderMixin from 'ember-light-table/mixins/table-header';
 import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
 
 /**
  * @module Light Table
@@ -33,6 +34,7 @@ import classic from 'ember-classic-decorator';
  */
 
 @classic
+@tagName('')
 export default class LtHeadComponent extends Component.extend(
   TableHeaderMixin
 ) {
