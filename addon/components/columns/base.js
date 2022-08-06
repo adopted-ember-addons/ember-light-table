@@ -1,3 +1,4 @@
+import DraggableColumn from '../draggable-column';
 import classic from 'ember-classic-decorator';
 import {
   classNames,
@@ -6,10 +7,8 @@ import {
   tagName,
 } from '@ember-decorators/component';
 import { set } from '@ember/object';
-import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
-import DraggableColumnMixin from 'ember-light-table/mixins/draggable-column';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
 
 /**
@@ -37,7 +36,7 @@ import cssStyleify from 'ember-light-table/utils/css-styleify';
   'isDraggable',
   'column.classNames'
 )
-export default class Base extends Component.extend(DraggableColumnMixin) {
+export default class Base extends DraggableColumn {
   get isGroupColumn() {
     return this.column.isGroupColumn;
   }

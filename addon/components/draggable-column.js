@@ -1,33 +1,34 @@
-import Mixin from '@ember/object/mixin';
+import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import {
+  attributeBindings,
+  classNameBindings,
+} from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { cancel, next } from '@ember/runloop';
 
 let sourceColumn;
 
-export default Mixin.create({
-  classNameBindings: ['isDragging', 'isDragTarget', 'dragDirection'],
-  attributeBindings: ['isDraggable:draggable'],
+@classic
+@classNameBindings('isDragging', 'isDragTarget', 'dragDirection')
+@attributeBindings('isDraggable:draggable')
+export default class TableHeader extends Component {
+  isDragging = false;
+  isDragTarget = false;
 
-  isDragging: false,
-  isDragTarget: false,
+  @computed('column', 'dragColumnGroup', 'isDragTarget')
+  get dragDirection() {
+    if (this.isDragTarget) {
+      let columns = this.dragColumnGroup;
+      let targetIdx = columns.indexOf(this.column);
+      let sourceIdx = columns.indexOf(sourceColumn);
+      let direction = sourceIdx - targetIdx < 0 ? 'right' : 'left';
 
-  dragDirection: computed(
-    'column',
-    'dragColumnGroup',
-    'isDragTarget',
-    function () {
-      if (this.isDragTarget) {
-        let columns = this.dragColumnGroup;
-        let targetIdx = columns.indexOf(this.column);
-        let sourceIdx = columns.indexOf(sourceColumn);
-        let direction = sourceIdx - targetIdx < 0 ? 'right' : 'left';
-
-        return `drag-${direction}`;
-      }
-
-      return '';
+      return `drag-${direction}`;
     }
-  ).readOnly(),
+
+    return '';
+  }
 
   /**
    * Array of Columns indicating where the column can be potentially dragged.
@@ -38,10 +39,11 @@ export default Mixin.create({
    * @type Array
    * @readonly
    */
-  dragColumnGroup: computed('column.parent', 'table.columns', function () {
+  @computed('column.parent', 'table.columns')
+  get dragColumnGroup() {
     let parent = this.column.get('parent');
     return parent ? parent.get('subColumns') : this.table.columns;
-  }).readOnly(),
+  }
 
   isDropTarget() {
     let column = this.column;
@@ -53,11 +55,9 @@ export default Mixin.create({
       column.get('droppable') &&
       column.get('parent') === sourceColumn.get('parent')
     );
-  },
+  }
 
   dragStart(e) {
-    this._super(...arguments);
-
     let column = this.column;
 
     /*
@@ -76,20 +76,16 @@ export default Mixin.create({
      */
     this.__click__ = this.click;
     this.click = undefined;
-  },
+  }
 
   dragEnter(e) {
-    this._super(...arguments);
-
     if (this.isDropTarget()) {
       e.preventDefault();
       this.set('isDragTarget', this.column !== sourceColumn);
     }
-  },
+  }
 
   dragOver(e) {
-    this._super(...arguments);
-
     if (this.isDropTarget()) {
       e.preventDefault();
       /*
@@ -101,16 +97,13 @@ export default Mixin.create({
         this.set('isDragTarget', this.column !== sourceColumn);
       }
     }
-  },
+  }
 
   dragLeave() {
-    this._super(...arguments);
     this.set('isDragTarget', false);
-  },
+  }
 
   dragEnd() {
-    this._super(...arguments);
-
     this.setProperties({ isDragTarget: false, isDragging: false });
 
     /*
@@ -126,11 +119,9 @@ export default Mixin.create({
      Restore click event
      */
     this._clickResetTimer = next(this, () => (this.click = this.__click__));
-  },
+  }
 
   drop(e) {
-    this._super(...arguments);
-
     let targetColumn = this.column;
     if (targetColumn.droppable) {
       let table = this.table;
@@ -152,14 +143,14 @@ export default Mixin.create({
       this.onColumnDrop(sourceColumn, true, ...arguments);
       sourceColumn = null;
     }
-  },
+  }
 
   destroy() {
-    this._super(...arguments);
+    super.destroy(...arguments);
     cancel(this._clickResetTimer);
-  },
+  }
 
   // Noop for passed actions
-  onColumnDrag() {},
-  onColumnDrop() {},
-});
+  onColumnDrag() {}
+  onColumnDrop() {}
+}
