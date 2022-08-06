@@ -450,15 +450,6 @@ export default Component.extend({
     cancel(this._debounceTimer);
   },
 
-  // Noop for closure actions
-  onRowClick() {},
-  onRowDoubleClick() {},
-  onScroll() {},
-  firstVisibleChanged() {},
-  lastVisibleChanged() {},
-  firstReached() {},
-  lastReached() {},
-
   /**
    * lt-infinity action to determine if component is still in viewport
    * @event enterViewport
@@ -482,7 +473,7 @@ export default Component.extend({
      * @param  {Row}   row The row that was clicked
      * @param  {Event}   event   The click event
      */
-    onRowClick(row, e) {
+    ltBodyRowClick(row, e) {
       let rows = this.table.rows;
       let multiSelect = this.multiSelect;
       let multiSelectRequiresKeyboard = this.multiSelectRequiresKeyboard;
@@ -528,7 +519,7 @@ export default Component.extend({
         toggleExpandedRow();
       }
 
-      this.onRowClick(...arguments);
+      this.onRowClick && this.onRowClick(...arguments);
     },
 
     /**
@@ -537,8 +528,8 @@ export default Component.extend({
      * @param  {Row}   row The row that was clicked
      * @param  {Event}   event   The click event
      */
-    onRowDoubleClick(/* row */) {
-      this.onRowDoubleClick(...arguments);
+    ltBodyRowDoubleClick(/* row */) {
+      this.onRowDoubleClick && this.onRowDoubleClick(...arguments);
     },
 
     /**
@@ -551,28 +542,28 @@ export default Component.extend({
      * @param {Number} scrollOffset The scroll offset in px
      * @param {Event} event The scroll event
      */
-    onScroll(scrollOffset /* , event */) {
+    scroll(scrollOffset /* , event */) {
       this.set('currentScrollOffset', scrollOffset);
-      this.onScroll(...arguments);
+      this.onScroll && this.onScroll(...arguments);
     },
 
-    firstVisibleChanged(item, index /* , key */) {
-      this.firstVisibleChanged(...arguments);
+    ltBodyFirstVisibleChanged(item, index /* , key */) {
+      this.firstVisibleChanged && this.firstVisibleChanged(...arguments);
       const estimateScrollOffset =
         index * this.sharedOptions.estimatedRowHeight;
-      this.onScroll(estimateScrollOffset, null);
+      this.onScroll && this.onScroll(estimateScrollOffset, null);
     },
 
-    lastVisibleChanged(/* item, index, key */) {
-      this.lastVisibleChanged(...arguments);
+    ltBodyLastVisibleChanged(/* item, index, key */) {
+      this.lastVisibleChanged && this.lastVisibleChanged(...arguments);
     },
 
-    firstReached(/* item, index, key */) {
-      this.firstReached(...arguments);
+    ltBodyFirstReached(/* item, index, key */) {
+      this.firstReached && this.firstReached(...arguments);
     },
 
-    lastReached(/* item, index, key */) {
-      this.lastReached(...arguments);
+    ltBodyLastReached(/* item, index, key */) {
+      this.lastReached && this.lastReached(...arguments);
       this.onScrolledToBottom?.();
     },
   },

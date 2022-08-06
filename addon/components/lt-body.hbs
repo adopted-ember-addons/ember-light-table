@@ -38,10 +38,10 @@
                 @staticHeight={{true}}
                 @bufferSize={{this.scrollBufferRows}}
                 @containerSelector=".lt-scrollable"
-                @firstVisibleChanged={{action "firstVisibleChanged"}}
-                @lastVisibleChanged={{action "lastVisibleChanged"}}
-                @firstReached={{action "firstReached"}}
-                @lastReached={{action "lastReached"}}
+                @firstVisibleChanged={{action "ltBodyFirstVisibleChanged"}}
+                @lastVisibleChanged={{action "ltBodyLastVisibleChanged"}}
+                @firstReached={{action "ltBodyFirstReached"}}
+                @lastReached={{action "ltBodyLastReached"}}
                 as |row|
               >
                 <lt.row
@@ -54,8 +54,8 @@
                   @enableScaffolding={{this.enableScaffolding}}
                   @canExpand={{this.canExpand}}
                   @canSelect={{this.canSelect}}
-                  @click={{action "onRowClick" row}}
-                  @doubleClick={{action "onRowDoubleClick" row}}
+                  @click={{action "ltBodyRowClick" row}}
+                  @doubleClick={{action "ltBodyRowDoubleClick" row}}
                 />
               </VerticalCollection>
               {{yield
@@ -88,7 +88,7 @@
         @virtualScrollbar={{this.useVirtualScrollbar}}
         @autoHide={{this.autoHideScrollbar}}
         @scrollTo={{this.targetScrollOffset}}
-        @onScrollY={{action "onScroll"}}
+        @onScrollY={{action "scroll"}}
         as |scrollbar|
       >
         <div
@@ -130,8 +130,8 @@
                   @enableScaffolding={{this.enableScaffolding}}
                   @canExpand={{this.canExpand}}
                   @canSelect={{this.canSelect}}
-                  @click={{action "onRowClick" row}}
-                  @doubleClick={{action "onRowDoubleClick" row}}
+                  @click={{action "ltBodyRowClick" row}}
+                  @doubleClick={{action "ltBodyRowDoubleClick" row}}
                 />
 
                 {{yield
