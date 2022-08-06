@@ -1,36 +1,38 @@
+import classic from 'ember-classic-decorator';
+import { classNameBindings } from '@ember-decorators/component';
 import Component from '@ember/component';
 import closest from 'ember-light-table/utils/closest';
 
 const TOP_LEVEL_CLASS = '.ember-light-table';
 
-export default Component.extend({
-  classNameBindings: [':lt-column-resizer', 'isResizing'],
-  column: null,
-  resizeOnDrag: false,
-
-  isResizing: false,
-  startWidth: null,
-  startX: null,
+@classic
+@classNameBindings(':lt-column-resizer', 'isResizing')
+export default class LtColumnResizer extends Component {
+  column = null;
+  resizeOnDrag = false;
+  isResizing = false;
+  startWidth = null;
+  startX = null;
 
   colElement() {
     return this.element.parentNode;
-  },
+  }
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
 
     this.__mouseMove = this._mouseMove.bind(this);
     this.__mouseUp = this._mouseUp.bind(this);
 
     document.addEventListener('mousemove', this.__mouseMove);
     document.addEventListener('mouseup', this.__mouseUp);
-  },
+  }
 
   willDestroyElement() {
-    this._super(...arguments);
+    super.willDestroyElement(...arguments);
     document.removeEventListener('mousemove', this.__mouseMove);
     document.removeEventListener('mouseip', this.__mouseUp);
-  },
+  }
 
   click(e) {
     /*
@@ -38,7 +40,7 @@ export default Component.extend({
      */
     e.preventDefault();
     e.stopPropagation();
-  },
+  }
 
   mouseDown(e) {
     let column = this.colElement();
@@ -54,7 +56,7 @@ export default Component.extend({
 
     let topLevel = closest(this.element, TOP_LEVEL_CLASS);
     topLevel.classList.add('is-resizing');
-  },
+  }
 
   _mouseUp(e) {
     if (this.isResizing) {
@@ -71,7 +73,7 @@ export default Component.extend({
       topLevel.classList.remove('is-resizing');
       this.onColumnResized(width);
     }
-  },
+  }
 
   _mouseMove(e) {
     if (this.isResizing) {
@@ -112,8 +114,8 @@ export default Component.extend({
         });
       }
     }
-  },
+  }
 
   // No-op for closure actions
-  onColumnResized() {},
-});
+  onColumnResized() {}
+}
