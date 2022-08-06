@@ -1,5 +1,4 @@
-import Component from '@ember/component';
-import TableHeaderMixin from 'ember-light-table/mixins/table-header';
+import TableHeader from './table-header';
 import classic from 'ember-classic-decorator';
 import { tagName } from '@ember-decorators/component';
 
@@ -35,9 +34,7 @@ import { tagName } from '@ember-decorators/component';
 
 @classic
 @tagName('')
-export default class LtHeadComponent extends Component.extend(
-  TableHeaderMixin
-) {
+export default class LtHead extends TableHeader {
   table = null;
   sharedOptions = null;
   sharedOptionsFixedKey = 'fixedHeader';
