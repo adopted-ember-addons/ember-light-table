@@ -1,11 +1,13 @@
+import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
+import { action, computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { A as emberArray } from '@ember/array';
 import Component from '@ember/component';
-import { computed, observer } from '@ember/object';
-import { readOnly } from '@ember/object/computed';
 import { guidFor } from '@ember/object/internals';
 import { isEmpty, isNone } from '@ember/utils';
 import { assert } from '@ember/debug';
-import { inject as service } from '@ember/service';
 import Table from 'ember-light-table/classes/Table';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
 
@@ -36,17 +38,20 @@ function intersections(array1, array2) {
  * @main Components
  */
 
-export default Component.extend({
-  tagName: '',
+@classic
+@tagName('')
+export default class LightTable extends Component {
+  @service
+  media;
 
-  media: service(),
-  scrollbarThickness: service(),
+  @service
+  scrollbarThickness;
 
   /**
    * @property table
    * @type {Table}
    */
-  table: null,
+  table = null;
 
   /**
    * This is used to propagate custom user defined actions to custom cell and header components.
@@ -75,7 +80,7 @@ export default Component.extend({
    * @property tableActions
    * @type {Object}
    */
-  tableActions: null,
+  tableActions = null;
 
   /**
    * Object to store any arbitrary configuration meant to be used by custom
@@ -103,7 +108,7 @@ export default Component.extend({
    * @property extra
    * @type {Object}
    */
-  extra: null,
+  extra = null;
 
   /**
    * Table height.
@@ -112,7 +117,7 @@ export default Component.extend({
    * @type {String}
    * @default null
    */
-  height: null,
+  height = null;
 
   /**
    * Class names that will be added to all <table> tags
@@ -121,7 +126,7 @@ export default Component.extend({
    * @type {String}
    * @default ''
    */
-  tableClassNames: '',
+  tableClassNames = '';
 
   /**
    * Enable responsive behavior
@@ -130,7 +135,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default false
    */
-  responsive: false,
+  responsive = false;
 
   /**
    * A hash to determine the number of columns to show per given breakpoint.
@@ -158,7 +163,7 @@ export default Component.extend({
    * @type {Object}
    * @default null
    */
-  breakpoints: null,
+  breakpoints = null;
 
   /**
    * Toggles occlusion rendering functionality. Currently experimental.
@@ -169,7 +174,7 @@ export default Component.extend({
    * @type Boolean
    * @default False
    */
-  occlusion: false,
+  occlusion = false;
 
   /**
    * Estimated size of a row. Used in `vertical-collection` to determine roughly the number
@@ -179,7 +184,7 @@ export default Component.extend({
    * @type Number
    * @default false
    */
-  estimatedRowHeight: 0,
+  estimatedRowHeight = 0;
 
   /**
    * Whether `vertical-collection` should recycle table rows. This speeds up performance with occlusion
@@ -190,7 +195,7 @@ export default Component.extend({
    * @type Boolean
    * @default true
    */
-  shouldRecycle: true,
+  shouldRecycle = true;
 
   /**
    * Table component shared options
@@ -199,24 +204,21 @@ export default Component.extend({
    * @type {Object}
    * @private
    */
-  sharedOptions: computed(
-    'estimatedRowHeight',
-    'height',
-    'occlusion',
-    'shouldRecycle',
-    function () {
-      return {
-        height: this.height,
-        fixedHeader: false,
-        fixedFooter: false,
-        occlusion: this.occlusion,
-        estimatedRowHeight: this.estimatedRowHeight,
-        shouldRecycle: this.shouldRecycle,
-      };
-    }
-  ).readOnly(),
+  @computed('estimatedRowHeight', 'height', 'occlusion', 'shouldRecycle')
+  get sharedOptions() {
+    return {
+      height: this.height,
+      fixedHeader: false,
+      fixedFooter: false,
+      occlusion: this.occlusion,
+      estimatedRowHeight: this.estimatedRowHeight,
+      shouldRecycle: this.shouldRecycle,
+    };
+  }
 
-  visibleColumns: readOnly('table.visibleColumns'),
+  get visibleColumns() {
+    return this.table.visibleColumns;
+  }
 
   /**
    * Calculates the total width of the visible columns via their `width`
@@ -231,7 +233,7 @@ export default Component.extend({
    * @type {Number}
    * @private
    */
-  totalWidth: computed('visibleColumns.@each.width', function () {
+  get totalWidth() {
     let visibleColumns = this.visibleColumns;
     let widths = visibleColumns.getEach('width');
     let unit = (widths[0] || '').match(/\D+$/);
@@ -258,34 +260,28 @@ export default Component.extend({
     }
 
     return `${totalWidth}${unit}`;
-  }),
+  }
 
-  style: computed(
-    'height',
-    'occlusion',
-    'scrollbarThickness.thickness',
-    'totalWidth',
-    function () {
-      let totalWidth = this.totalWidth;
-      let style = { height: this.height };
+  get style() {
+    let totalWidth = this.totalWidth;
+    let style = { height: this.height };
 
-      if (totalWidth) {
-        if (this.occlusion) {
-          const scrollbarThickness = this.scrollbarThickness.thickness;
-          style.width = `calc(${totalWidth} + ${scrollbarThickness}px)`;
-        } else {
-          style.width = totalWidth;
-        }
-
-        style.overflowX = 'auto';
+    if (totalWidth) {
+      if (this.occlusion) {
+        const scrollbarThickness = this.scrollbarThickness.thickness;
+        style.width = `calc(${totalWidth} + ${scrollbarThickness}px)`;
+      } else {
+        style.width = totalWidth;
       }
 
-      return cssStyleify(style);
+      style.overflowX = 'auto';
     }
-  ),
+
+    return cssStyleify(style);
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     let table = this.table;
 
@@ -303,9 +299,10 @@ export default Component.extend({
     }
 
     this.onMediaChange();
-  },
+  }
 
-  onMediaChange: observer('table.allColumns.[]', function () {
+  @observes('table.allColumns.[]')
+  onMediaChange() {
     let responsive = this.responsive;
     let matches = this.media.matches;
     let breakpoints = this.breakpoints;
@@ -316,7 +313,7 @@ export default Component.extend({
       return;
     }
 
-    this.send('beforeResponsiveChange', matches);
+    this.tableBeforeResponsiveChange(matches);
 
     if (!isNone(breakpoints)) {
       Object.keys(breakpoints).forEach((b) => {
@@ -336,8 +333,8 @@ export default Component.extend({
       });
     }
 
-    this.send('afterResponsiveChange', matches);
-  }),
+    this.tableAfterResponsiveChange(matches);
+  }
 
   _displayColumns(numColumns) {
     let table = this.table;
@@ -355,31 +352,30 @@ export default Component.extend({
         hiddenColumns.slice(0, numColumns - visibleColumns.length)
       ).setEach('responsiveHidden', false);
     }
-  },
+  }
 
-  actions: {
-    /**
-     * onBeforeResponsiveChange action.
-     * Called before any column visibility is altered.
-     *
-     * @event onBeforeResponsiveChange
-     * @param  {Array} matches list of matching breakpoints
-     */
-    beforeResponsiveChange(/* matches */) {
-      this.onBeforeResponsiveChange &&
-        this.onBeforeResponsiveChange(...arguments);
-    },
+  /**
+   * onBeforeResponsiveChange action.
+   * Called before any column visibility is altered.
+   *
+   * @event onBeforeResponsiveChange
+   * @param  {Array} matches list of matching breakpoints
+   */
+  @action
+  tableBeforeResponsiveChange(/* matches */) {
+    this.onBeforeResponsiveChange &&
+      this.onBeforeResponsiveChange(...arguments);
+  }
 
-    /**
-     * onAfterResponsiveChange action.
-     * Called after all column visibility has been altered.
-     *
-     * @event onAfterResponsiveChange
-     * @param  {Array} matches list of matching breakpoints
-     */
-    afterResponsiveChange(/* matches */) {
-      this.onAfterResponsiveChange &&
-        this.onAfterResponsiveChange(...arguments);
-    },
-  },
-});
+  /**
+   * onAfterResponsiveChange action.
+   * Called after all column visibility has been altered.
+   *
+   * @event onAfterResponsiveChange
+   * @param  {Array} matches list of matching breakpoints
+   */
+  @action
+  tableAfterResponsiveChange(/* matches */) {
+    this.onAfterResponsiveChange && this.onAfterResponsiveChange(...arguments);
+  }
+}
