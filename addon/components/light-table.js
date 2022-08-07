@@ -1,6 +1,5 @@
 import classic from 'ember-classic-decorator';
 import { tagName } from '@ember-decorators/component';
-import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { A as emberArray } from '@ember/array';
@@ -292,6 +291,10 @@ export default class LightTable extends Component {
 
     this.set('tableId', guidFor(this));
 
+    this.addObserver('table.allColumns.[]', (...args) => {
+      this.onMediaChange(...args);
+    });
+
     if (isNone(this.media)) {
       this.set('responsive', false);
     } else {
@@ -301,7 +304,6 @@ export default class LightTable extends Component {
     this.onMediaChange();
   }
 
-  @observes('table.allColumns.[]')
   onMediaChange() {
     let responsive = this.responsive;
     let matches = this.media.matches;
@@ -377,5 +379,10 @@ export default class LightTable extends Component {
   @action
   tableAfterResponsiveChange(/* matches */) {
     this.onAfterResponsiveChange && this.onAfterResponsiveChange(...arguments);
+  }
+
+  willDestroy() {
+    super.willDestroy(...arguments);
+    this.removeObserver('table.allColuns.[]', this, 'onMediaChange');
   }
 }
