@@ -27,11 +27,11 @@
                 extra=this.extra
                 sortIcons=this.sortIcons
                 resizeOnDrag=this.resizeOnDrag
-                click=(action "columnClick" column)
-                doubleClick=(action "columnDoubleClick" column)
-                columnResized=(action "columnResized")
-                columnDrag=(action "columnDrag")
-                columnDrop=(action "columnDrop")
+                click=(fn this.columnClick column)
+                doubleClick=(fn this.columnDoubleClick column)
+                columnResized=this.columnResized
+                columnDrag=this.columnDrag
+                columnDrop=this.columnDrop
               }}
             {{/each}}
           </tr>
@@ -48,11 +48,11 @@
                 extra=this.extra
                 sortIcons=this.sortIcons
                 resizeOnDrag=this.resizeOnDrag
-                click=(action "columnClick" column)
-                doubleClick=(action "columnDoubleClick" column)
-                columnResized=(action "columnResized")
-                columnDrag=(action "columnDrag")
-                columnDrop=(action "columnDrop")
+                click=(fn this.columnClick column)
+                doubleClick=(fn this.columnDoubleClick column)
+                columnResized=this.columnResized
+                columnDrag=this.columnDrag
+                columnDrop=this.columnDrop
               }}
             {{/each}}
           </tr>

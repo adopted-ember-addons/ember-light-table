@@ -38,10 +38,10 @@
                 @staticHeight={{true}}
                 @bufferSize={{this.scrollBufferRows}}
                 @containerSelector=".lt-scrollable"
-                @firstVisibleChanged={{action "ltBodyFirstVisibleChanged"}}
-                @lastVisibleChanged={{action "ltBodyLastVisibleChanged"}}
-                @firstReached={{action "ltBodyFirstReached"}}
-                @lastReached={{action "ltBodyLastReached"}}
+                @firstVisibleChanged={{this.ltBodyFirstVisibleChanged}}
+                @lastVisibleChanged={{this.ltBodyLastVisibleChanged}}
+                @firstReached={{this.ltBodyFirstReached}}
+                @lastReached={{this.ltBodyLastReached}}
                 as |row|
               >
                 <lt.row
@@ -54,8 +54,8 @@
                   @enableScaffolding={{this.enableScaffolding}}
                   @canExpand={{this.canExpand}}
                   @canSelect={{this.canSelect}}
-                  @click={{action "ltBodyRowClick" row}}
-                  @doubleClick={{action "ltBodyRowDoubleClick" row}}
+                  @click={{fn this.ltBodyRowClick row}}
+                  @doubleClick={{fn this.ltBodyRowDoubleClick row}}
                 />
               </VerticalCollection>
               {{yield
@@ -88,7 +88,7 @@
         @virtualScrollbar={{this.useVirtualScrollbar}}
         @autoHide={{this.autoHideScrollbar}}
         @scrollTo={{this.targetScrollOffset}}
-        @onScrollY={{action "scroll"}}
+        @onScrollY={{this.scroll}}
         as |scrollbar|
       >
         <div
@@ -130,8 +130,8 @@
                   @enableScaffolding={{this.enableScaffolding}}
                   @canExpand={{this.canExpand}}
                   @canSelect={{this.canSelect}}
-                  @click={{action "ltBodyRowClick" row}}
-                  @doubleClick={{action "ltBodyRowDoubleClick" row}}
+                  @click={{fn this.ltBodyRowClick row}}
+                  @doubleClick={{fn this.ltBodyRowDoubleClick row}}
                 />
 
                 {{yield
