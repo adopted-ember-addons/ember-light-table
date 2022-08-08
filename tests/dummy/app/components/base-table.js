@@ -25,7 +25,7 @@ export default class BaseTable extends Component {
     this.model = this.args.model;
 
     const table = Table.create({
-      columns: this.args.columns,
+      columns: this.columns,
       rows: this.model,
     });
     const sortColumn = table.get('allColumns').findBy('valuePath', this.sort);
@@ -50,7 +50,7 @@ export default class BaseTable extends Component {
       dir: this.dir,
     });
     const recordsArray = records.toArray();
-    this.model.pushObjects(recordsArray);
+    this.model.push(...recordsArray);
     this.table.addRows(recordsArray);
     this.meta = records.meta;
     this.canLoadMore = !isEmpty(records);

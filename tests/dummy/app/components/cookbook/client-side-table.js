@@ -71,7 +71,7 @@ export default class PaginatedTable extends BaseTable {
   @restartableTask *fetchRecords() {
     const records = yield this.store.query('user', { page: 1, limit: 100 });
     const recordsArray = records.toArray();
-    this.model.pushObjects(recordsArray);
+    this.model.push(...recordsArray);
 
     this.meta = records.meta;
     yield this.filterAndSortModel.perform();
