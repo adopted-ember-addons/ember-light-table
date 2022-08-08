@@ -2,16 +2,19 @@
 import BaseTable from '../base-table';
 import { action } from '@ember/object';
 import { restartableTask, timeout } from 'ember-concurrency';
+import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class PaginatedTable extends BaseTable {
+  @service store;
+
   query = '';
 
   model = [];
 
   get sortedModel() {
-    if (this.dir === 'asc') return this.model.sortBy(this.sort);
-    else return this.model.sortBy(this.sort).reverse();
+    if (this.dir === 'asc') return this.args.model.sortBy(this.sort);
+    else return this.args.model.sortBy(this.sort).reverse();
   }
 
   get isLoading() {
@@ -67,7 +70,7 @@ export default class PaginatedTable extends BaseTable {
   @restartableTask *fetchRecords() {
     const records = yield this.store.query('user', { page: 1, limit: 100 });
     const recordsArray = records.toArray();
-    this.model.setObjects(recordsArray);
+    this.args.model.pushObjects(recordsArray);
 
     this.meta = records.meta;
     yield this.filterAndSortModel.perform();
