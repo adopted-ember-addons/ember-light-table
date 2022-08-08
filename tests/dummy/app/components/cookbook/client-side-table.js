@@ -10,19 +10,19 @@ export default class PaginatedTable extends BaseTable {
 
   query = '';
 
-  model = [];
+  @tracked meta;
+
+  // Filter Input
+  @tracked selectedFilter = this.possibleFilters.firstObject;
 
   get sortedModel() {
-    if (this.dir === 'asc') return this.args.model.sortBy(this.sort);
-    else return this.args.model.sortBy(this.sort).reverse();
+    if (this.dir === 'asc') return this.model.sortBy(this.sort);
+    else return this.model.sortBy(this.sort).reverse();
   }
 
   get isLoading() {
     return this.fetchRecords?.isRunning || this.setRows?.isRunning;
   }
-
-  // Filter Input
-  @tracked selectedFilter = this.possibleFilters.firstObject;
 
   get possibleFilters() {
     return this.table.columns.filterBy('sortable', true);
@@ -64,13 +64,14 @@ export default class PaginatedTable extends BaseTable {
 
   constructor() {
     super(...arguments);
+
     this.fetchRecords.perform();
   }
 
   @restartableTask *fetchRecords() {
     const records = yield this.store.query('user', { page: 1, limit: 100 });
     const recordsArray = records.toArray();
-    this.args.model.pushObjects(recordsArray);
+    this.model.pushObjects(recordsArray);
 
     this.meta = records.meta;
     yield this.filterAndSortModel.perform();

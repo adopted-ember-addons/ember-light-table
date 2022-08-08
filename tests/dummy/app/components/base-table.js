@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import Table from 'ember-light-table';
-import { restartableTask, timeout } from 'ember-concurrency';
+import { restartableTask } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 
 export default class BaseTable extends Component {
@@ -14,15 +14,19 @@ export default class BaseTable extends Component {
   @tracked dir = 'asc';
   @tracked limit = 10;
   @tracked meta = null;
+  @tracked model = [];
   @tracked page = 0;
   @tracked sort = 'firstName';
+  @tracked table;
 
   constructor() {
     super(...arguments);
 
+    this.model = this.args.model;
+
     const table = Table.create({
-      columns: this.columns,
-      rows: this.args.model,
+      columns: this.args.columns,
+      rows: this.model,
     });
     const sortColumn = table.get('allColumns').findBy('valuePath', this.sort);
 
@@ -46,16 +50,10 @@ export default class BaseTable extends Component {
       dir: this.dir,
     });
     const recordsArray = records.toArray();
-    this.args.model.pushObjects(recordsArray);
+    this.model.pushObjects(recordsArray);
     this.table.addRows(recordsArray);
     this.meta = records.meta;
     this.canLoadMore = !isEmpty(records);
-  }
-
-  @restartableTask *setRows(rows) {
-    this.table.setRows([]);
-    yield timeout(100); // Allows isLoading state to be shown
-    this.table.setRows(rows);
   }
 
   @action
@@ -73,7 +71,8 @@ export default class BaseTable extends Component {
       this.sort = column.valuePath;
       this.canLoadMore = true;
       this.page = 0;
-      this.setRows.perform(this.table.rows);
+      this.model = [];
+      this.table.setRows(this.model);
     }
   }
 }

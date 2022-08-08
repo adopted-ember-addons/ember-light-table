@@ -41,6 +41,7 @@ export default class PaginatedTable extends BaseTable {
 
   constructor() {
     super(...arguments);
+
     this.setPage(1);
   }
 
@@ -54,7 +55,8 @@ export default class PaginatedTable extends BaseTable {
     }
 
     this.page = page;
-    this.table.removeRows(this.args.model);
+    this.model = [];
+    this.table.setRows(this.model);
     this.fetchRecords.perform();
   }
 }
