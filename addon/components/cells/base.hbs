@@ -1,6 +1,6 @@
 {{#if this.column.cellComponent}}
   {{component
-    this.column.cellComponent
+    (ensure-safe-component this.column.cellComponent)
     tableActions=this.tableActions
     extra=this.extra
     table=this.table

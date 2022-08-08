@@ -1,6 +1,6 @@
 {{#if this.column.component}}
   {{component
-    this.column.component
+    (ensure-safe-component this.column.component)
     column=this.column
     table=this.table
     tableActions=this.tableActions
@@ -10,7 +10,7 @@
 {{else}}
   {{#if (and this.sortIcons.iconComponent this.sortIconProperty)}}
     {{component
-      this.sortIcons.iconComponent
+      (ensure-safe-component this.sortIcons.iconComponent)
       sortIcons=this.sortIcons
       sortIconProperty=this.sortIconProperty
     }}
