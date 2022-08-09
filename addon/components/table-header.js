@@ -203,7 +203,7 @@ export default class TableHeader extends Component {
    * @param  {Event} event The click event
    */
   @action
-  columnClick(column) {
+  thOnColumnClick(column) {
     if (column.sortable && this.sortOnClick) {
       if (column.sorted) {
         column.toggleProperty('ascending');
@@ -227,7 +227,7 @@ export default class TableHeader extends Component {
    * @param  {Event} event   The click event
    */
   @action
-  columnDoubleClick(/* column */) {
+  thOnColumnDoubleClick(/* column */) {
     this.onColumnDoubleClick && this.onColumnDoubleClick(...arguments);
   }
 
@@ -239,7 +239,7 @@ export default class TableHeader extends Component {
    * @param  {String} width  The final width of the column
    */
   @action
-  columnResized(/* column, width */) {
+  thOnColumnResized(/* column, width */) {
     this.onColumnResized && this.onColumnResized(...arguments);
   }
 
@@ -250,7 +250,7 @@ export default class TableHeader extends Component {
    * @param  {Column} column The column that is being dragged
    */
   @action
-  columnDrag(/* column */) {
+  thOnColumnDrag(/* column */) {
     this.onColumnDrag && this.onColumnDrag(...arguments);
   }
 
@@ -262,7 +262,7 @@ export default class TableHeader extends Component {
    * @param  {Boolean} isSuccess The column was successfully dropped and sorted
    */
   @action
-  columnDrop(/* column, isSuccess */) {
+  thOnColumnDrop(/* column, isSuccess */) {
     this.onColumnDrop && this.onColumnDrop(...arguments);
   }
 }
