@@ -71,7 +71,7 @@ export default class LtColumnResizer extends Component {
 
       let topLevel = closest(this.element, TOP_LEVEL_CLASS);
       topLevel.classList.remove('is-resizing');
-      this.onColumnResized(width);
+      this.onColumnResized && this.onColumnResized(width);
     }
   }
 
@@ -115,7 +115,4 @@ export default class LtColumnResizer extends Component {
       }
     }
   }
-
-  // No-op for closure actions
-  onColumnResized() {}
 }

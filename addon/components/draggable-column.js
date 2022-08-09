@@ -58,6 +58,8 @@ export default class TableHeader extends Component {
   }
 
   dragStart(e) {
+    // super.dragStart(...arguments);
+
     let column = this.column;
 
     /*
@@ -68,7 +70,7 @@ export default class TableHeader extends Component {
 
     sourceColumn = column;
     this.set('isDragging', true);
-    this.onColumnDrag(sourceColumn, ...arguments);
+    this.onColumnDrag && this.onColumnDrag(sourceColumn, ...arguments);
 
     /*
      NOTE: This is a fix for Firefox to prevent the click event
@@ -79,6 +81,8 @@ export default class TableHeader extends Component {
   }
 
   dragEnter(e) {
+    // super.dragEnter(...arguments);
+
     if (this.isDropTarget()) {
       e.preventDefault();
       this.set('isDragTarget', this.column !== sourceColumn);
@@ -86,6 +90,8 @@ export default class TableHeader extends Component {
   }
 
   dragOver(e) {
+    // super.dragOver(...arguments);
+
     if (this.isDropTarget()) {
       e.preventDefault();
       /*
@@ -100,10 +106,13 @@ export default class TableHeader extends Component {
   }
 
   dragLeave() {
+    // super.dragLeave(...arguments);
     this.set('isDragTarget', false);
   }
 
   dragEnd() {
+    // super.dragEnter(...arguments);
+
     this.setProperties({ isDragTarget: false, isDragging: false });
 
     /*
@@ -111,7 +120,7 @@ export default class TableHeader extends Component {
      drop did not happen.
      */
     if (sourceColumn) {
-      this.onColumnDrop(sourceColumn, false, ...arguments);
+      this.onColumnDrop && this.onColumnDrop(sourceColumn, false, ...arguments);
       sourceColumn = null;
     }
 
@@ -122,6 +131,8 @@ export default class TableHeader extends Component {
   }
 
   drop(e) {
+    // super.drop(...arguments);
+
     let targetColumn = this.column;
     if (targetColumn.droppable) {
       let table = this.table;
@@ -140,7 +151,7 @@ export default class TableHeader extends Component {
 
       this.setProperties({ isDragTarget: false, isDragging: false });
 
-      this.onColumnDrop(sourceColumn, true, ...arguments);
+      this.onColumnDrop && this.onColumnDrop(sourceColumn, true, ...arguments);
       sourceColumn = null;
     }
   }
@@ -149,8 +160,4 @@ export default class TableHeader extends Component {
     super.destroy(...arguments);
     cancel(this._clickResetTimer);
   }
-
-  // Noop for passed actions
-  onColumnDrag() {}
-  onColumnDrop() {}
 }
