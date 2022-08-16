@@ -151,7 +151,7 @@ export default class TableHeader extends Component {
 
       this.setProperties({ isDragTarget: false, isDragging: false });
 
-      this.onColumnDrop && this.onColumnDrop(sourceColumn, true, ...arguments);
+      this.onColumnDrop?.(sourceColumn, true, ...arguments);
       sourceColumn = null;
     }
   }
