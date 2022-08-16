@@ -70,7 +70,7 @@ export default class TableHeader extends Component {
 
     sourceColumn = column;
     this.set('isDragging', true);
-    this.onColumnDrag && this.onColumnDrag(sourceColumn, ...arguments);
+    this.onColumnDrag?.(sourceColumn, ...arguments);
 
     /*
      NOTE: This is a fix for Firefox to prevent the click event
