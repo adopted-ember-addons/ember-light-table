@@ -2,6 +2,7 @@ import classic from 'ember-classic-decorator';
 import { classNameBindings } from '@ember-decorators/component';
 import Component from '@ember/component';
 import closest from 'ember-light-table/utils/closest';
+import { tracked } from '@glimmer/tracking';
 
 const TOP_LEVEL_CLASS = '.ember-light-table';
 
@@ -9,8 +10,8 @@ const TOP_LEVEL_CLASS = '.ember-light-table';
 @classNameBindings(':lt-column-resizer', 'isResizing')
 export default class LtColumnResizer extends Component {
   column = null;
-  resizeOnDrag = false;
-  isResizing = false;
+  @tracked resizeOnDrag = false;
+  @tracked isResizing = false;
   startWidth = null;
   startX = null;
 
