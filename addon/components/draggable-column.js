@@ -58,8 +58,6 @@ export default class TableHeader extends Component {
   }
 
   dragStart(e) {
-    // super.dragStart(...arguments);
-
     let column = this.column;
 
     /*
@@ -81,8 +79,6 @@ export default class TableHeader extends Component {
   }
 
   dragEnter(e) {
-    // super.dragEnter(...arguments);
-
     if (this.isDropTarget()) {
       e.preventDefault();
       this.set('isDragTarget', this.column !== sourceColumn);
@@ -90,8 +86,6 @@ export default class TableHeader extends Component {
   }
 
   dragOver(e) {
-    // super.dragOver(...arguments);
-
     if (this.isDropTarget()) {
       e.preventDefault();
       /*
@@ -106,13 +100,10 @@ export default class TableHeader extends Component {
   }
 
   dragLeave() {
-    // super.dragLeave(...arguments);
     this.set('isDragTarget', false);
   }
 
   dragEnd() {
-    // super.dragEnter(...arguments);
-
     this.setProperties({ isDragTarget: false, isDragging: false });
 
     /*
@@ -131,8 +122,6 @@ export default class TableHeader extends Component {
   }
 
   drop(e) {
-    // super.drop(...arguments);
-
     let targetColumn = this.column;
     if (targetColumn.droppable) {
       let table = this.table;
