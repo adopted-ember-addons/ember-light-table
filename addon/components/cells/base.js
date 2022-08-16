@@ -37,7 +37,7 @@ export default class Base extends Component {
     let columnWidth = column.get('width');
 
     if (this.enableScaffolding || !column) {
-      return null;
+      return undefined;
     }
 
     // For performance reasons, it's more interesting to bypass cssStyleify
