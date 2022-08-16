@@ -120,7 +120,7 @@ export default class TableHeader extends Component {
      drop did not happen.
      */
     if (sourceColumn) {
-      this.onColumnDrop && this.onColumnDrop(sourceColumn, false, ...arguments);
+      this.onColumnDrop?.(sourceColumn, false, ...arguments);
       sourceColumn = null;
     }
 
