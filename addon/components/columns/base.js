@@ -45,6 +45,7 @@ export default class Base extends DraggableColumn {
     return this.column.sortable;
   }
 
+  @computed('column.sorted')
   get isSorted() {
     return this.column.sorted;
   }
