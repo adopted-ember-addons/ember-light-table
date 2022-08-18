@@ -529,7 +529,7 @@ export default class LtBody extends Component {
       toggleExpandedRow();
     }
 
-    this.onRowClick && this.onRowClick(...arguments);
+    this.onRowClick?.(...arguments);
   }
 
   /**
@@ -540,10 +540,10 @@ export default class LtBody extends Component {
    */
   @action
   ltBodyRowDoubleClick /* row */() {
-    this.onRowDoubleClick && this.onRowDoubleClick(...arguments);
+    this.onRowDoubleClick?.(...arguments);
   }
 
-  /**
+  /*.
    * onScroll action - sent when user scrolls in the Y direction
    *
    * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
@@ -556,29 +556,29 @@ export default class LtBody extends Component {
   @action
   scroll(scrollOffset /* , event */) {
     this.set('currentScrollOffset', scrollOffset);
-    this.onScroll && this.onScroll(...arguments);
+    this.onScroll?.(...arguments);
   }
 
   @action
   ltBodyFirstVisibleChanged(item, index /* , key */) {
-    this.firstVisibleChanged && this.firstVisibleChanged(...arguments);
+    this.firstVisibleChanged?.(...arguments);
     const estimateScrollOffset = index * this.sharedOptions.estimatedRowHeight;
-    this.onScroll && this.onScroll(estimateScrollOffset, null);
+    this.onScroll?.(estimateScrollOffset, null);
   }
 
   @action
   ltBodyLastVisibleChanged /* item, index, key */() {
-    this.lastVisibleChanged && this.lastVisibleChanged(...arguments);
+    this.lastVisibleChanged?.(...arguments);
   }
 
   @action
   ltBodyFirstReached /* item, index, key */() {
-    this.firstReached && this.firstReached(...arguments);
+    this.firstReached?.(...arguments);
   }
 
   @action
   ltBodyLastReached /* item, index, key */() {
-    this.lastReached && this.lastReached(...arguments);
+    this.lastReached?.(...arguments);
     this.onScrolledToBottom?.();
   }
 }

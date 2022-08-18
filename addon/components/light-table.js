@@ -365,8 +365,7 @@ export default class LightTable extends Component {
    */
   @action
   tableBeforeResponsiveChange(/* matches */) {
-    this.onBeforeResponsiveChange &&
-      this.onBeforeResponsiveChange(...arguments);
+    this.onBeforeResponsiveChange?.(...arguments);
   }
 
   /**
@@ -378,7 +377,7 @@ export default class LightTable extends Component {
    */
   @action
   tableAfterResponsiveChange(/* matches */) {
-    this.onAfterResponsiveChange && this.onAfterResponsiveChange(...arguments);
+    this.onAfterResponsiveChange?.(...arguments);
   }
 
   willDestroy() {

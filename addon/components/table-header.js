@@ -216,7 +216,7 @@ export default class TableHeader extends Component {
       }
     }
 
-    this.onColumnClick && this.onColumnClick(...arguments);
+    this.onColumnClick?.(...arguments);
   }
 
   /**
@@ -228,7 +228,7 @@ export default class TableHeader extends Component {
    */
   @action
   thOnColumnDoubleClick(/* column */) {
-    this.onColumnDoubleClick && this.onColumnDoubleClick(...arguments);
+    this.onColumnDoubleClick?.(...arguments);
   }
 
   /**
@@ -240,7 +240,7 @@ export default class TableHeader extends Component {
    */
   @action
   thOnColumnResized(/* column, width */) {
-    this.onColumnResized && this.onColumnResized(...arguments);
+    this.onColumnResized?.(...arguments);
   }
 
   /**
@@ -251,7 +251,7 @@ export default class TableHeader extends Component {
    */
   @action
   thOnColumnDrag(/* column */) {
-    this.onColumnDrag && this.onColumnDrag(...arguments);
+    this.onColumnDrag?.(...arguments);
   }
 
   /**
@@ -263,6 +263,6 @@ export default class TableHeader extends Component {
    */
   @action
   thOnColumnDrop(/* column, isSuccess */) {
-    this.onColumnDrop && this.onColumnDrop(...arguments);
+    this.onColumnDrop?.(...arguments);
   }
 }
