@@ -483,7 +483,7 @@ export default class LtBody extends Component {
    * @param  {Event}   event   The click event
    */
   @action
-  ltBodyRowClick(row, e) {
+  rowClicked(row, e) {
     let rows = this.table.rows;
     let multiSelect = this.multiSelect;
     let multiSelectRequiresKeyboard = this.multiSelectRequiresKeyboard;
@@ -539,7 +539,7 @@ export default class LtBody extends Component {
    * @param  {Event}   event   The click event
    */
   @action
-  ltBodyRowDoubleClick /* row */() {
+  rowDoubleClicked /* row */() {
     this.onRowDoubleClick?.(...arguments);
   }
 
@@ -559,25 +559,29 @@ export default class LtBody extends Component {
     this.onScroll?.(...arguments);
   }
 
+  // Note: Component parameter @firtVisbleChaned is not documented
   @action
-  ltBodyFirstVisibleChanged(item, index /* , key */) {
+  firstVisibleRowChanged(item, index /* , key */) {
     this.firstVisibleChanged?.(...arguments);
     const estimateScrollOffset = index * this.sharedOptions.estimatedRowHeight;
     this.onScroll?.(estimateScrollOffset, null);
   }
 
+  // Note: Component parameter @lastVisibleChanged is not documented
   @action
-  ltBodyLastVisibleChanged /* item, index, key */() {
+  lastVisibleRowChanged /* item, index, key */() {
     this.lastVisibleChanged?.(...arguments);
   }
 
+  // Note: Component parameter @firstReached is not documented
   @action
-  ltBodyFirstReached /* item, index, key */() {
+  firstRowReached /* item, index, key */() {
     this.firstReached?.(...arguments);
   }
 
+  // Note: Component parameter @lastReached is not documented
   @action
-  ltBodyLastReached /* item, index, key */() {
+  lastRowReached /* item, index, key */() {
     this.lastReached?.(...arguments);
     this.onScrolledToBottom?.();
   }

@@ -38,10 +38,10 @@
                 @staticHeight={{true}}
                 @bufferSize={{this.scrollBufferRows}}
                 @containerSelector=".lt-scrollable"
-                @firstVisibleChanged={{this.ltBodyFirstVisibleChanged}}
-                @lastVisibleChanged={{this.ltBodyLastVisibleChanged}}
-                @firstReached={{this.ltBodyFirstReached}}
-                @lastReached={{this.ltBodyLastReached}}
+                @firstVisibleChanged={{this.firstVisibleRowChanged}}
+                @lastVisibleChanged={{this.lastVisibleRowChanged}}
+                @firstReached={{this.firstRowReached}}
+                @lastReached={{this.lastRowReached}}
                 as |row|
               >
                 <lt.row
@@ -54,8 +54,8 @@
                   @enableScaffolding={{this.enableScaffolding}}
                   @canExpand={{this.canExpand}}
                   @canSelect={{this.canSelect}}
-                  @click={{fn this.ltBodyRowClick row}}
-                  @doubleClick={{fn this.ltBodyRowDoubleClick row}}
+                  @click={{fn this.rowClicked row}}
+                  @doubleClick={{fn this.rowDoubleClicked row}}
                 />
               </VerticalCollection>
               {{yield
@@ -130,8 +130,8 @@
                   @enableScaffolding={{this.enableScaffolding}}
                   @canExpand={{this.canExpand}}
                   @canSelect={{this.canSelect}}
-                  @click={{fn this.ltBodyRowClick row}}
-                  @doubleClick={{fn this.ltBodyRowDoubleClick row}}
+                  @click={{fn this.rowClicked row}}
+                   @doubleClick={{fn this.rowDoubleClicked row}}
                 />
 
                 {{yield
