@@ -46,6 +46,7 @@ export default class Base extends Component {
     return columnWidth ? htmlSafe(`width: ${columnWidth};`) : null;
   }
 
+  @computed('column.align')
   get align() {
     return `align-${this.column.align}`;
   }

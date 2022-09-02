@@ -11,6 +11,8 @@ import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import cssStyleify from 'ember-light-table/utils/css-styleify';
 
+import { readOnly } from '@ember/object/computed';
+
 /**
  * @module Light Table
  * @submodule Column Types
@@ -37,10 +39,12 @@ import cssStyleify from 'ember-light-table/utils/css-styleify';
   'column.classNames'
 )
 export default class Base extends DraggableColumn {
+  @computed('column.isGroupColumn')
   get isGroupColumn() {
     return this.column.isGroupColumn;
   }
 
+  @readOnly('column.sortable')
   get isSortable() {
     return this.column.sortable;
   }
@@ -50,14 +54,17 @@ export default class Base extends DraggableColumn {
     return this.column.sorted;
   }
 
+  @computed('column.hideable')
   get isHideable() {
     return this.column.hideable;
   }
 
+  @computed('column.resizable')
   get isResizable() {
     return this.column.resizable;
   }
 
+  @computed('column.draggable')
   get isDraggable() {
     return this.column.draggable;
   }
@@ -68,6 +75,7 @@ export default class Base extends DraggableColumn {
     return cssStyleify(this.column.getProperties(['width']));
   }
 
+  @computed('column.align')
   get align() {
     return `align-${this.column.align}`;
   }
@@ -76,7 +84,7 @@ export default class Base extends DraggableColumn {
    * @property label
    * @type {String}
    */
-
+  @computed('column.label')
   get label() {
     return this.column.label;
   }
@@ -133,9 +141,11 @@ export default class Base extends DraggableColumn {
    * @property colspan
    * @type {Number}
    */
-  @computed('column', 'column.visibleSubColumns.[]', function () {
-    let subColumns = this.column.visibleSubColumns;
-    return !isEmpty(subColumns) ? subColumns.length : 1;
+  @computed('column', 'column.visibleSubColumns.[]', {
+    get() {
+      let subColumns = this.column.visibleSubColumns;
+      return !isEmpty(subColumns) ? subColumns.length : 1;
+    },
   })
   colspan;
 
