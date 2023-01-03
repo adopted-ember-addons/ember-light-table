@@ -39,7 +39,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
-    "@html-next/vertical-collection": "^3.1.0",
+    "@html-next/vertical-collection": "^4.0.2",
     "ember-classic-decorator": "^3.0.0",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-htmlbars": "^5.7.1",
