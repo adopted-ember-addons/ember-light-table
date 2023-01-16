@@ -10,12 +10,12 @@ module('Unit | Classes | Column', function () {
     assert.true(col.sortable);
     assert.false(col.sorted);
     assert.false(col.sorted);
-    assert.equal(col.label, '');
+    assert.strictEqual(col.label, '');
     assert.deepEqual(col.subColumns, []);
-    assert.equal(col.component, null);
-    assert.equal(col.cellComponent, null);
-    assert.equal(col.valuePath, null);
-    assert.equal(col.width, null);
+    assert.strictEqual(col.component, null);
+    assert.strictEqual(col.cellComponent, null);
+    assert.strictEqual(col.valuePath, null);
+    assert.strictEqual(col.width, null);
   });
 
   test('CP - isGroupColumn', function (assert) {
@@ -25,7 +25,7 @@ module('Unit | Classes | Column', function () {
     assert.false(col.get('isGroupColumn'));
 
     col.set('subColumns', [Column.create()]);
-    assert.equal(col.subColumns.length, 1);
+    assert.strictEqual(col.subColumns.length, 1);
     assert.true(col.get('isGroupColumn'));
   });
 
@@ -34,7 +34,7 @@ module('Unit | Classes | Column', function () {
       subColumns: [{}, {}],
     });
     assert.ok(col);
-    assert.equal(col.subColumns.length, 2);
+    assert.strictEqual(col.subColumns.length, 2);
     assert.true(col.get('isVisibleGroupColumn'));
 
     col.set('hidden', true);
@@ -52,14 +52,14 @@ module('Unit | Classes | Column', function () {
       subColumns: [{}, {}],
     });
     assert.ok(col);
-    assert.equal(col.subColumns.length, 2);
-    assert.equal(col.get('visibleSubColumns.length'), 2);
+    assert.strictEqual(col.subColumns.length, 2);
+    assert.strictEqual(col.get('visibleSubColumns.length'), 2);
 
     col.subColumns[0].set('hidden', true);
-    assert.equal(col.get('visibleSubColumns.length'), 1);
+    assert.strictEqual(col.get('visibleSubColumns.length'), 1);
 
     col.set('hidden', true);
-    assert.equal(col.get('visibleSubColumns.length'), 0);
+    assert.strictEqual(col.get('visibleSubColumns.length'), 0);
   });
 
   test('subColumns / parent', function (assert) {
@@ -67,8 +67,8 @@ module('Unit | Classes | Column', function () {
       subColumns: [{}],
     });
     assert.ok(col);
-    assert.equal(col.subColumns.length, 1);
+    assert.strictEqual(col.subColumns.length, 1);
 
-    assert.equal(col.subColumns[0].get('parent'), col);
+    assert.strictEqual(col.subColumns[0].get('parent'), col);
   });
 });

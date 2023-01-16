@@ -248,7 +248,7 @@ module('Integration | Component | lt body', function (hooks) {
     `);
 
     let rows = findAll('tr');
-    assert.equal(rows.length, 2);
+    assert.strictEqual(rows.length, 2);
 
     await all(
       rows.map(async (row) => {

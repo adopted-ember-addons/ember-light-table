@@ -60,7 +60,7 @@ module('Integration | Component | light table', function (hooks) {
     let scrollContainer = find('.tse-scroll-content');
     assert.ok(scrollContainer, 'scroll container was rendered');
     let expectedScroll = 2501;
-    assert.equal(
+    assert.strictEqual(
       scrollContainer.scrollHeight,
       expectedScroll,
       'scroll height is 2500 + 1px for height of lt-infinity'
@@ -108,7 +108,7 @@ module('Integration | Component | light table', function (hooks) {
     let scrollContainer = find('#table-2 .tse-scroll-content');
     assert.ok(scrollContainer, 'scroll container was rendered');
     let expectedScroll = 2501;
-    assert.equal(
+    assert.strictEqual(
       scrollContainer.scrollHeight,
       expectedScroll,
       'scroll height is 2500 + 1px for height of lt-infinity'
@@ -195,7 +195,7 @@ module('Integration | Component | light table', function (hooks) {
       </div>
     `);
 
-    assert.equal(
+    assert.strictEqual(
       find('#lightTable').offsetHeight,
       500,
       'table is 500px height'
@@ -228,7 +228,7 @@ module('Integration | Component | light table', function (hooks) {
     const headHeight = find('.lt-head-wrap').offsetHeight;
     const footHeight = find('.lt-foot-wrap').offsetHeight;
 
-    assert.equal(
+    assert.strictEqual(
       bodyHeight + headHeight + footHeight,
       500,
       'combined table content is 500px tall'
@@ -314,7 +314,7 @@ module('Integration | Component | light table', function (hooks) {
       table,
       onScroll(actualScroll) {
         assert.ok(true, 'onScroll worked');
-        assert.equal(
+        assert.strictEqual(
           actualScroll,
           expectedScroll,
           'scroll position is correct'
@@ -347,7 +347,7 @@ module('Integration | Component | light table', function (hooks) {
 
         didReceiveAttrs() {
           this._super();
-          assert.equal(
+          assert.strictEqual(
             this.extra.someData,
             'someValue',
             'extra data is passed'
@@ -405,6 +405,6 @@ module('Integration | Component | light table', function (hooks) {
       {{/light-table}}
     `);
     let ths = this.element.querySelectorAll('th.is-resizable');
-    assert.equal(ths.length, 5);
+    assert.strictEqual(ths.length, 5);
   });
 });

@@ -2,15 +2,14 @@
 
 ## Installation
 
-* `git clone https://github.com/adopted-ember-addons/ember-light-table`
+* `git clone <repository-url>`
 * `cd ember-light-table`
 * `yarn install`
 
 ## Linting
 
-* `yarn run lint:hbs`
-* `yarn run lint:js`
-* `yarn run lint:js -- --fix`
+* `yarn lint`
+* `yarn lint:fix`
 
 ## Running tests
 
@@ -23,4 +22,4 @@
 * `ember serve`
 * Visit the dummy application at [http://localhost:4200](http://localhost:4200).
 
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+For more information on using ember-cli, visit [https://cli.emberjs.com/release/](https://cli.emberjs.com/release/).
