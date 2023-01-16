@@ -2,15 +2,14 @@
 
 ## Installation
 
-* `git clone https://github.com/adopted-ember-addons/ember-light-table`
+* `git clone <repository-url>`
 * `cd ember-light-table`
 * `yarn install`
 
 ## Linting
 
-* `yarn run lint:hbs`
-* `yarn run lint:js`
-* `yarn run lint:js -- --fix`
+* `yarn lint`
+* `yarn lint:fix`
 
 ## Running tests
 
