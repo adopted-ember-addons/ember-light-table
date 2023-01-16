@@ -9,7 +9,7 @@ module('Integration | Component | Cells | <%= dasherizedModuleName %>', (hooks) 
 
   test('it renders', async function (assert) {
     await render(hbs`{{light-table/cells/<%= dasherizedModuleName %>}}`);
-    assert.equal(this.element.textContent.trim(), '');
+    assert.strictEqual(this.element.textContent.trim(), '');
   });
 
   test('it renders value', async function (assert) {
@@ -18,7 +18,7 @@ module('Integration | Component | Cells | <%= dasherizedModuleName %>', (hooks) 
 
     await render(hbs`{{light-table/cells/<%= dasherizedModuleName %> column row rawValue=(get row column.valuePath)}}`);
 
-    assert.equal(this.element.textContent.trim(), 'bar');
+    assert.strictEqual(this.element.textContent.trim(), 'bar');
   });
 });
 

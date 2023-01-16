@@ -51,7 +51,7 @@ module('Integration | Component | lt head', function (hooks) {
     this.set('onColumnClick', (column) => {
       assert.ok(column);
       assert.notOk(column.sortable);
-      assert.equal(column.label, 'Avatar');
+      assert.strictEqual(column.label, 'Avatar');
     });
 
     await render(
@@ -75,8 +75,8 @@ module('Integration | Component | lt head', function (hooks) {
       assert.ok(column);
       assert.ok(column.sortable);
       assert.ok(column.sorted);
-      assert.equal(column.label, 'Country');
-      assert.equal(column.ascending, asc);
+      assert.strictEqual(column.label, 'Country');
+      assert.strictEqual(column.ascending, asc);
     });
 
     await render(
@@ -158,10 +158,10 @@ module('Integration | Component | lt head', function (hooks) {
           this._super(...arguments);
           assert.ok(isPresent(this.sortIconProperty));
           assert.ok(isPresent(this.sortIcons));
-          assert.equal(this.sortIcons.iconSortable, iconSortable);
-          assert.equal(this.sortIcons.iconAscending, iconAscending);
-          assert.equal(this.sortIcons.iconDescending, iconDescending);
-          assert.equal(this.sortIcons.iconComponent, iconComponent);
+          assert.strictEqual(this.sortIcons.iconSortable, iconSortable);
+          assert.strictEqual(this.sortIcons.iconAscending, iconAscending);
+          assert.strictEqual(this.sortIcons.iconDescending, iconDescending);
+          assert.strictEqual(this.sortIcons.iconComponent, iconComponent);
         },
       })
     );
@@ -185,7 +185,7 @@ module('Integration | Component | lt head', function (hooks) {
       this.set('onColumnDoubleClick', (column) => {
         assert.ok(column);
         assert.notOk(column.sortable);
-        assert.equal(column.label, 'Avatar');
+        assert.strictEqual(column.label, 'Avatar');
       });
 
       await render(
@@ -200,7 +200,7 @@ module('Integration | Component | lt head', function (hooks) {
       const allHeaders = findAll('tr > th');
       const [avatarHeader] = allHeaders;
 
-      assert.equal(allHeaders.length, 6);
+      assert.strictEqual(allHeaders.length, 6);
 
       await triggerEvent(avatarHeader, 'dblclick');
     });
