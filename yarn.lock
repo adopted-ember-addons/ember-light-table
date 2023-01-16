@@ -10694,7 +10694,7 @@ miragejs@^0.1.43:
     lodash.values "^4.3.0"
     pretender "^3.4.7"
 
-miragejs@^0.1.47:
+miragejs@^0.1.45:
   version "0.1.47"
   resolved "https://registry.yarnpkg.com/miragejs/-/miragejs-0.1.47.tgz#c4a8dff21adfc0ce3181d78987f11848d74c6869"
   integrity sha512-99tuCbIAlMhNhyF3s5d3+5/FdJ7O4jSq/5e3e+sDv7L8dZdwJuwutXe0pobJ7hm6yRChTDjK+Nn8dZZd175wbg==
