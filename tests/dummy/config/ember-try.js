@@ -8,18 +8,18 @@ module.exports = async function () {
     useYarn: true,
     scenarios: [
       {
-        name: 'ember-lts-3.20',
+        name: 'ember-lts-3.28',
         npm: {
           devDependencies: {
-            'ember-source': '~3.20.5',
+            'ember-source': '~3.28.0',
           },
         },
       },
       {
-        name: 'ember-lts-3.24',
+        name: 'ember-lts-4.4',
         npm: {
           devDependencies: {
-            'ember-source': '~3.24.3',
+            'ember-source': '~4.4.0',
           },
         },
       },
@@ -56,19 +56,6 @@ module.exports = async function () {
         },
       },
       {
-        name: 'ember-default-with-jquery',
-        env: {
-          EMBER_OPTIONAL_FEATURES: JSON.stringify({
-            'jquery-integration': true,
-          }),
-        },
-        npm: {
-          devDependencies: {
-            '@ember/jquery': '^1.1.0',
-          },
-        },
-      },
-      {
         name: 'ember-classic',
         env: {
           EMBER_OPTIONAL_FEATURES: JSON.stringify({
@@ -78,6 +65,9 @@ module.exports = async function () {
           }),
         },
         npm: {
+          devDependencies: {
+            'ember-source': '~3.28.0',
+          },
           ember: {
             edition: 'classic',
           },
