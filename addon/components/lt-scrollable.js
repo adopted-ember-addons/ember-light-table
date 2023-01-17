@@ -1,7 +1,10 @@
+import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 
-export default Component.extend({
-  tagName: '',
-  vertical: true,
-  horizontal: false,
-});
+@classic
+@tagName('')
+export default class LtScrollable extends Component {
+  vertical = true;
+  horizontal = false;
+}

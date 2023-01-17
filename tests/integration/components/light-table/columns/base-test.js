@@ -11,7 +11,7 @@ module('Integration | Component | Columns | base', function (hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });"
     this.set('column', Column.create());
-    await render(hbs`{{light-table/columns/base column=this.column}}`);
+    await render(hbs`<LightTable::Columns::Base @column={{this.column}} />`);
     assert.dom('*').hasText('');
   });
 });

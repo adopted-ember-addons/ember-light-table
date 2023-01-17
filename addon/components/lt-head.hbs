@@ -1,4 +1,4 @@
-<div class="lt-head-wrap">
+<div class="lt-head-wrap" style={{this.style}}>
   <EmberWormhole
     @to={{concat this.tableId "_inline_head"}}
     @renderInPlace={{this.renderInPlace}}
@@ -27,11 +27,11 @@
                 extra=this.extra
                 sortIcons=this.sortIcons
                 resizeOnDrag=this.resizeOnDrag
-                click=(action "onColumnClick" column)
-                doubleClick=(action "onColumnDoubleClick" column)
-                onColumnResized=(action "onColumnResized")
-                onColumnDrag=(action "onColumnDrag")
-                onColumnDrop=(action "onColumnDrop")
+                click=(fn this.columnClicked column)
+                doubleClick=(fn this.columnDoubleClicked column)
+                columnResized=this.columnResized
+                columnDrag=this.columnDragged
+                columnDrop=this.columnDropped
               }}
             {{/each}}
           </tr>
@@ -48,11 +48,11 @@
                 extra=this.extra
                 sortIcons=this.sortIcons
                 resizeOnDrag=this.resizeOnDrag
-                click=(action "onColumnClick" column)
-                doubleClick=(action "onColumnDoubleClick" column)
-                onColumnResized=(action "onColumnResized")
-                onColumnDrag=(action "onColumnDrag")
-                onColumnDrop=(action "onColumnDrop")
+                click=(fn this.columnClicked column)
+                doubleClick=(fn this.columnDoubleClicked column)
+                columnResized=this.columnResized
+                columnDrag=this.columnDragged
+                columnDrop=this.columnDropped
               }}
             {{/each}}
           </tr>

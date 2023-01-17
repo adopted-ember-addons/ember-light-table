@@ -1,6 +1,7 @@
+import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
-import { action, computed } from '@ember/object';
-import { readOnly } from '@ember/object/computed';
+import { action } from '@ember/object';
 import { cancel, debounce, once, schedule, scheduleOnce } from '@ember/runloop';
 import Row from 'ember-light-table/classes/Row';
 
@@ -34,41 +35,41 @@ import Row from 'ember-light-table/classes/Row';
  * @class t.body
  */
 
-export default Component.extend({
-  tagName: '',
-
+@classic
+@tagName('')
+export default class LtBody extends Component {
   /**
    * @property table
    * @type {Table}
    * @private
    */
-  table: null,
+  table = null;
 
   /**
    * @property sharedOptions
    * @type {Object}
    * @private
    */
-  sharedOptions: null,
+  sharedOptions = null;
 
   /**
    * @property tableActions
    * @type {Object}
    */
-  tableActions: null,
+  tableActions = null;
 
   /**
    * @property extra
    * @type {Object}
    */
-  extra: null,
+  extra = null;
 
   /**
    * @property isInViewport
    * @default false
    * @type {Boolean}
    */
-  isInViewport: false,
+  isInViewport = false;
 
   /**
    * Allows a user to select a row on click. All this will do is apply the necessary
@@ -79,7 +80,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default true
    */
-  canSelect: true,
+  canSelect = true;
 
   /**
    * Select a row on click. If this is set to `false` and multiSelect is
@@ -90,7 +91,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default true
    */
-  selectOnClick: true,
+  selectOnClick = true;
 
   /**
    * Allows for expanding row. This will create a new row under the row that was
@@ -106,7 +107,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default false
    */
-  canExpand: false,
+  canExpand = false;
 
   /**
    * Allows a user to select multiple rows with the `ctrl`, `cmd`, and `shift` keys.
@@ -116,7 +117,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default false
    */
-  multiSelect: false,
+  multiSelect = false;
 
   /**
    * When multiSelect is true, this property determines whether or not `ctrl`
@@ -129,7 +130,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default true
    */
-  multiSelectRequiresKeyboard: true,
+  multiSelectRequiresKeyboard = true;
 
   /**
    * Hide scrollbar when not scrolling
@@ -138,7 +139,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default true
    */
-  autoHideScrollbar: true,
+  autoHideScrollbar = true;
 
   /**
    * Allows multiple rows to be expanded at once
@@ -147,7 +148,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default true
    */
-  multiRowExpansion: true,
+  multiRowExpansion = true;
 
   /**
    * Expand a row on click
@@ -156,7 +157,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default true
    */
-  expandOnClick: true,
+  expandOnClick = true;
 
   /**
    * If true, the body block will yield columns and rows, allowing you
@@ -166,7 +167,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default false
    */
-  overwrite: false,
+  overwrite = false;
 
   /**
    * If true, the body will prepend an invisible `<tr>` that scaffolds the
@@ -181,7 +182,7 @@ export default Component.extend({
    * @type {Boolean}
    * @default false
    */
-  enableScaffolding: false,
+  enableScaffolding = false;
 
   /**
    * ID of main table component. Used to generate divs for ember-wormhole and set scope for scroll observers
@@ -190,29 +191,25 @@ export default Component.extend({
    * @type {String}
    * @private
    */
-  tableId: null,
+  tableId = null;
 
   /**
    * @property scrollBuffer
    * @type {Number}
    * @default 500
    */
-  scrollBuffer: 500,
+  scrollBuffer = 500;
 
   /**
    * @property scrollBufferRows
    * @type {Number}
    * @default 500 / estimatedRowHeight
    */
-  scrollBufferRows: computed(
-    'scrollBuffer',
-    'sharedOptions.estimatedRowHeight',
-    function () {
-      return Math.ceil(
-        this.scrollBuffer / (this.sharedOptions.estimatedRowHeight || 1)
-      );
-    }
-  ),
+  get scrollBufferRows() {
+    return Math.ceil(
+      this.scrollBuffer / (this.sharedOptions.estimatedRowHeight || 1)
+    );
+  }
 
   /**
    * @property useVirtualScrollbar
@@ -220,7 +217,7 @@ export default Component.extend({
    * @default false
    * @private
    */
-  useVirtualScrollbar: false,
+  useVirtualScrollbar = false;
 
   /**
    * Set this property to scroll to a specific px offset.
@@ -232,8 +229,8 @@ export default Component.extend({
    * @type {Number}
    * @default null
    */
-  scrollTo: null,
-  _scrollTo: null,
+  scrollTo = null;
+  _scrollTo = null;
 
   /**
    * Set this property to a `Row` to scroll that `Row` into view.
@@ -245,8 +242,8 @@ export default Component.extend({
    * @type {Row}
    * @default null
    */
-  scrollToRow: null,
-  _scrollToRow: null,
+  scrollToRow = null;
+  _scrollToRow = null;
 
   /**
    * @property targetScrollOffset
@@ -254,7 +251,7 @@ export default Component.extend({
    * @default 0
    * @private
    */
-  targetScrollOffset: 0,
+  targetScrollOffset = 0;
 
   /**
    * @property currentScrollOffset
@@ -262,7 +259,7 @@ export default Component.extend({
    * @default 0
    * @private
    */
-  currentScrollOffset: 0,
+  currentScrollOffset = 0;
 
   /**
    * @property hasReachedTargetScrollOffset
@@ -270,7 +267,7 @@ export default Component.extend({
    * @default true
    * @private
    */
-  hasReachedTargetScrollOffset: true,
+  hasReachedTargetScrollOffset = true;
 
   /**
    * Allows to customize the component used to render rows
@@ -284,7 +281,7 @@ export default Component.extend({
    * @type {Ember.Component}
    * @default null
    */
-  rowComponent: null,
+  rowComponent = null;
 
   /**
    * Allows to customize the component used to render spanned rows
@@ -298,7 +295,7 @@ export default Component.extend({
    * @type {Ember.Component}
    * @default null
    */
-  spannedRowComponent: null,
+  spannedRowComponent = null;
 
   /**
    * Allows to customize the component used to render infinite loader
@@ -312,61 +309,72 @@ export default Component.extend({
    * @type {Ember.Component}
    * @default null
    */
-  infinityComponent: null,
+  infinityComponent = null;
 
-  rows: readOnly('table.visibleRows'),
-  columns: readOnly('table.visibleColumns'),
-  colspan: readOnly('columns.length'),
+  get rows() {
+    return this.table?.visibleRows;
+  }
+
+  get columns() {
+    return this.table.visibleColumns;
+  }
+
+  get colspan() {
+    return this.columns.length;
+  }
 
   /**
    * fills the screen with row items until lt-infinity component has exited the viewport
    * @property scheduleScrolledToBottom
    */
-  scheduleScrolledToBottom: action(function () {
+  @action
+  scheduleScrolledToBottom() {
     if (this.isInViewport && this.onScrolledToBottom) {
       /*
-       Continue scheduling onScrolledToBottom until no longer in viewport
-       */
+      Continue scheduling onScrolledToBottom until no longer in viewport
+      */
       this._schedulerTimer = scheduleOnce(
         'afterRender',
         this,
         this._debounceScrolledToBottom
       );
     }
-  }),
+  }
 
-  _prevSelectedIndex: -1,
+  _prevSelectedIndex = -1;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     /*
-      We can only set `useVirtualScrollbar` once all contextual components have
-      been initialized since fixedHeader and fixedFooter are set on t.head and t.foot
-      initialization.
-     */
+     We can only set `useVirtualScrollbar` once all contextual components have
+     been initialized since fixedHeader and fixedFooter are set on t.head and t.foot
+     initialization.
+    */
     once(this, this._setupVirtualScrollbar);
-  },
+  }
 
   destroy() {
-    this._super(...arguments);
+    super.destroy(...arguments);
     this._cancelTimers();
-  },
+  }
 
   _setupVirtualScrollbar() {
     let { fixedHeader, fixedFooter } = this.sharedOptions;
     this.set('useVirtualScrollbar', fixedHeader || fixedFooter);
-  },
+  }
 
-  onRowsChange: action(function () {
+  @action
+  onRowsChange() {
     this._checkTargetOffsetTimer = scheduleOnce(
       'afterRender',
       this,
       this.checkTargetScrollOffset
     );
-  }),
+  }
 
-  setupScrollOffset: action(function (element) {
+  @action
+  setupScrollOffset(element) {
     let { scrollTo, _scrollTo, scrollToRow, _scrollToRow } = this;
     let targetScrollOffset = null;
 
@@ -399,7 +407,7 @@ export default Component.extend({
         hasReachedTargetScrollOffset: true,
       });
     }
-  }),
+  }
 
   checkTargetScrollOffset() {
     if (!this.hasReachedTargetScrollOffset) {
@@ -415,7 +423,7 @@ export default Component.extend({
         this.set('hasReachedTargetScrollOffset', true);
       }
     }
-  },
+  }
 
   toggleExpandedRow(row) {
     let multiRowExpansion = this.multiRowExpansion;
@@ -427,18 +435,18 @@ export default Component.extend({
       this.table.expandedRows.setEach('expanded', false);
       row.set('expanded', shouldExpand);
     }
-  },
+  }
 
   /**
    * @method _debounceScrolledToBottom
    */
   _debounceScrolledToBottom(delay = 100) {
     /*
-     This debounce is needed when there is not enough delay between onScrolledToBottom calls.
-     Without this debounce, all rows will be rendered causing immense performance problems
-     */
+    This debounce is needed when there is not enough delay between onScrolledToBottom calls.
+    Without this debounce, all rows will be rendered causing immense performance problems
+    */
     this._debounceTimer = debounce(this, this.onScrolledToBottom, delay);
-  },
+  }
 
   /**
    * @method _cancelTimers
@@ -448,132 +456,133 @@ export default Component.extend({
     cancel(this._setTargetOffsetTimer);
     cancel(this._schedulerTimer);
     cancel(this._debounceTimer);
-  },
-
-  // Noop for closure actions
-  onRowClick() {},
-  onRowDoubleClick() {},
-  onScroll() {},
-  firstVisibleChanged() {},
-  lastVisibleChanged() {},
-  firstReached() {},
-  lastReached() {},
+  }
 
   /**
    * lt-infinity action to determine if component is still in viewport
    * @event enterViewport
    */
-  enterViewport: action(function () {
+  @action
+  enterViewport() {
     this.set('isInViewport', true);
-  }),
+  }
 
   /**
    * lt-infinity action to determine if component has exited the viewport
    * @event exitViewport
    */
-  exitViewport: action(function () {
+  @action
+  exitViewport() {
     this.set('isInViewport', false);
-  }),
+  }
 
-  actions: {
-    /**
-     * onRowClick action. Handles selection, and row expansion.
-     * @event onRowClick
-     * @param  {Row}   row The row that was clicked
-     * @param  {Event}   event   The click event
-     */
-    onRowClick(row, e) {
-      let rows = this.table.rows;
-      let multiSelect = this.multiSelect;
-      let multiSelectRequiresKeyboard = this.multiSelectRequiresKeyboard;
-      let canSelect = this.canSelect;
-      let selectOnClick = this.selectOnClick;
-      let canExpand = this.canExpand;
-      let expandOnClick = this.expandOnClick;
-      let isSelected = row.get('selected');
-      let currIndex = rows.indexOf(row);
-      let prevIndex =
-        this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
+  /**
+   * onRowClick action. Handles selection, and row expansion.
+   * @event onRowClick
+   * @param  {Row}   row The row that was clicked
+   * @param  {Event}   event   The click event
+   */
+  @action
+  rowClicked(row, e) {
+    let rows = this.table.rows;
+    let multiSelect = this.multiSelect;
+    let multiSelectRequiresKeyboard = this.multiSelectRequiresKeyboard;
+    let canSelect = this.canSelect;
+    let selectOnClick = this.selectOnClick;
+    let canExpand = this.canExpand;
+    let expandOnClick = this.expandOnClick;
+    let isSelected = row.get('selected');
+    let currIndex = rows.indexOf(row);
+    let prevIndex =
+      this._prevSelectedIndex === -1 ? currIndex : this._prevSelectedIndex;
 
-      this._prevSelectedIndex = currIndex;
+    this._prevSelectedIndex = currIndex;
 
-      let toggleExpandedRow = () => {
-        if (canExpand && expandOnClick) {
-          this.toggleExpandedRow(row);
-        }
-      };
+    let toggleExpandedRow = () => {
+      if (canExpand && expandOnClick) {
+        this.toggleExpandedRow(row);
+      }
+    };
 
-      if (canSelect) {
-        if (e.shiftKey && multiSelect) {
-          rows
-            .slice(
-              Math.min(currIndex, prevIndex),
-              Math.max(currIndex, prevIndex) + 1
-            )
-            .forEach((r) => r.set('selected', !isSelected));
-        } else if (
-          (!multiSelectRequiresKeyboard || e.ctrlKey || e.metaKey) &&
-          multiSelect
-        ) {
-          row.toggleProperty('selected');
-        } else {
-          if (selectOnClick) {
-            this.table.selectedRows.setEach('selected', false);
-            row.set('selected', !isSelected);
-          }
-
-          toggleExpandedRow();
-        }
+    if (canSelect) {
+      if (e.shiftKey && multiSelect) {
+        rows
+          .slice(
+            Math.min(currIndex, prevIndex),
+            Math.max(currIndex, prevIndex) + 1
+          )
+          .forEach((r) => r.set('selected', !isSelected));
+      } else if (
+        (!multiSelectRequiresKeyboard || e.ctrlKey || e.metaKey) &&
+        multiSelect
+      ) {
+        row.toggleProperty('selected');
       } else {
+        if (selectOnClick) {
+          this.table.selectedRows.setEach('selected', false);
+          row.set('selected', !isSelected);
+        }
+
         toggleExpandedRow();
       }
+    } else {
+      toggleExpandedRow();
+    }
 
-      this.onRowClick(...arguments);
-    },
+    this.onRowClick?.(...arguments);
+  }
 
-    /**
-     * onRowDoubleClick action.
-     * @event onRowDoubleClick
-     * @param  {Row}   row The row that was clicked
-     * @param  {Event}   event   The click event
-     */
-    onRowDoubleClick(/* row */) {
-      this.onRowDoubleClick(...arguments);
-    },
+  /**
+   * onRowDoubleClick action.
+   * @event onRowDoubleClick
+   * @param  {Row}   row The row that was clicked
+   * @param  {Event}   event   The click event
+   */
+  @action
+  rowDoubleClicked /* row */() {
+    this.onRowDoubleClick?.(...arguments);
+  }
 
-    /**
-     * onScroll action - sent when user scrolls in the Y direction
-     *
-     * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
-     * using fixed headers / footers.
-     *
-     * @event onScroll
-     * @param {Number} scrollOffset The scroll offset in px
-     * @param {Event} event The scroll event
-     */
-    onScroll(scrollOffset /* , event */) {
-      this.set('currentScrollOffset', scrollOffset);
-      this.onScroll(...arguments);
-    },
+  /*.
+   * onScroll action - sent when user scrolls in the Y direction
+   *
+   * This only works when `useVirtualScrollbar` is `true`, i.e. when you are
+   * using fixed headers / footers.
+   *
+   * @event onScroll
+   * @param {Number} scrollOffset The scroll offset in px
+   * @param {Event} event The scroll event
+   */
+  @action
+  scroll(scrollOffset /* , event */) {
+    this.set('currentScrollOffset', scrollOffset);
+    this.onScroll?.(...arguments);
+  }
 
-    firstVisibleChanged(item, index /* , key */) {
-      this.firstVisibleChanged(...arguments);
-      const estimateScrollOffset =
-        index * this.sharedOptions.estimatedRowHeight;
-      this.onScroll(estimateScrollOffset, null);
-    },
+  // Note: Component parameter @firtVisbleChaned is not documented
+  @action
+  firstVisibleRowChanged(item, index /* , key */) {
+    this.firstVisibleChanged?.(...arguments);
+    const estimateScrollOffset = index * this.sharedOptions.estimatedRowHeight;
+    this.onScroll?.(estimateScrollOffset, null);
+  }
 
-    lastVisibleChanged(/* item, index, key */) {
-      this.lastVisibleChanged(...arguments);
-    },
+  // Note: Component parameter @lastVisibleChanged is not documented
+  @action
+  lastVisibleRowChanged /* item, index, key */() {
+    this.lastVisibleChanged?.(...arguments);
+  }
 
-    firstReached(/* item, index, key */) {
-      this.firstReached(...arguments);
-    },
+  // Note: Component parameter @firstReached is not documented
+  @action
+  firstRowReached /* item, index, key */() {
+    this.firstReached?.(...arguments);
+  }
 
-    lastReached(/* item, index, key */) {
-      this.lastReached(...arguments);
-      this.onScrolledToBottom?.();
-    },
-  },
-});
+  // Note: Component parameter @lastReached is not documented
+  @action
+  lastRowReached /* item, index, key */() {
+    this.lastReached?.(...arguments);
+    this.onScrolledToBottom?.();
+  }
+}

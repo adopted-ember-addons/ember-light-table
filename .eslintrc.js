@@ -33,8 +33,8 @@ module.exports = {
     'ember/no-observers': 'off',
     'ember/no-jquery': 'error',
     'ember/no-get': 'warn',
-    'ember/no-mixins': 'off',
-    'ember/no-new-mixins': 'off',
+    'ember/no-mixins': 'error',
+    'ember/no-new-mixins': 'error',
     'ember/require-tagless-components': 'off',
   },
 
