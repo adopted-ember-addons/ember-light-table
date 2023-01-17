@@ -1,9 +1,16 @@
 {{! BEGIN-SNIPPET simple-table }}
 <LightTable @table={{this.table}} @height="65vh" as |t|>
   {{!
-    In order for `sort-up` and `sort-down` icons to work,
-    you need to have ember-font-awesome installed or manually include
-    the font-awesome assets, e.g. via a CDN.
+    The `sort`, `sort-up` and `sort-down` Font Awesome icons are 
+    rendered by the `fa-icon-wrapper` component. The 
+    component uses the @fortawesome/ember-fontawesome addon.
+
+    The 'fa-icon-wrapper` component may be used with other
+    Font Awesome icons by installing the appropiate icon 
+    package.
+
+    Other icon systems can be used with a custom icon 
+    component. See the custom sort icon cookbook example.
   }}
 
   <t.head
