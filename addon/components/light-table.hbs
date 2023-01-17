@@ -1,6 +1,6 @@
 <div
   class="ember-light-table {{if this.occlusion "occlusion"}}"
-  id={{or this.attrs.id this.tableId}}
+  id={{or @id this.tableId}}
   style={{this.style}}
   ...attributes
 >
@@ -8,7 +8,7 @@
     (hash
       head=(component
         "lt-head"
-        tableId=(or this.attrs.id this.tableId)
+        tableId=(or @id this.tableId)
         table=this.table
         tableActions=this.tableActions
         extra=this.extra
@@ -17,7 +17,7 @@
       )
       body=(component
         "lt-body"
-        tableId=(or this.attrs.id this.tableId)
+        tableId=(or @id this.tableId)
         table=this.table
         tableActions=this.tableActions
         extra=this.extra
@@ -26,7 +26,7 @@
       )
       foot=(component
         "lt-foot"
-        tableId=(or this.attrs.id this.tableId)
+        tableId=(or @id this.tableId)
         table=this.table
         tableActions=this.tableActions
         extra=this.extra

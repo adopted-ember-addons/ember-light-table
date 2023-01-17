@@ -23,7 +23,7 @@ const MATERIAL_UI_COLORS = [
 export default Factory.extend({
   firstName: () => faker.name.firstName(),
   lastName: () => faker.name.firstName(),
-  company: () => faker.company.companyName(),
+  company: () => faker.company.name(),
   address: () => faker.address.streetAddress(),
   country: () => faker.address.country(),
   state: () => faker.address.state(),

@@ -156,7 +156,7 @@ module('Integration | Component | light table | occlusion', function (hooks) {
       </div>
     `);
 
-    assert.equal(
+    assert.strictEqual(
       find('#lightTable').offsetHeight,
       500,
       'table is 500px height'
@@ -189,7 +189,7 @@ module('Integration | Component | light table | occlusion', function (hooks) {
     const headHeight = find('.lt-head-wrap').offsetHeight;
     const footHeight = find('.lt-foot-wrap').offsetHeight;
 
-    assert.equal(
+    assert.strictEqual(
       bodyHeight + headHeight + footHeight,
       500,
       'combined table content is 500px tall'
@@ -280,7 +280,7 @@ module('Integration | Component | light table | occlusion', function (hooks) {
 
         didReceiveAttrs() {
           this._super();
-          assert.equal(
+          assert.strictEqual(
             this.extra.someData,
             'someValue',
             'extra data is passed'
