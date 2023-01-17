@@ -2,6 +2,26 @@ Changelog
 =========
 
 
+
+## v3.0.0-beta.2 (2023-01-17)
+
+#### :boom: Breaking Change
+* [#809](https://github.com/adopted-ember-addons/ember-light-table/pull/809) Convert positional params to named params ([@maxwondercorn](https://github.com/maxwondercorn))
+* [#807](https://github.com/adopted-ember-addons/ember-light-table/pull/807) Create local html-safe helper/remove ember-cli-string-helpers ([@maxwondercorn](https://github.com/maxwondercorn))
+
+#### :bug: Bug Fix
+* [#825](https://github.com/adopted-ember-addons/ember-light-table/pull/825) Fix: Add ...attributes to lt-body ([@IgnaceMaes](https://github.com/IgnaceMaes))
+* [#824](https://github.com/adopted-ember-addons/ember-light-table/pull/824) FIx deprecation for using this.attrs for arguments in template ([@vstefanovic97](https://github.com/vstefanovic97))
+
+#### :house: Internal
+* [#815](https://github.com/adopted-ember-addons/ember-light-table/pull/815) Update examples ([@rwwagner90](https://github.com/rwwagner90))
+
+#### Committers: 4
+- Gregg Martell ([@maxwondercorn](https://github.com/maxwondercorn))
+- Ignace Maes ([@IgnaceMaes](https://github.com/IgnaceMaes))
+- Robert Wagner ([@rwwagner90](https://github.com/rwwagner90))
+- Vuk ([@vstefanovic97](https://github.com/vstefanovic97))
+
 ## v3.0.0-beta.1 (2022-07-21)
 
 #### :boom: Breaking Change
