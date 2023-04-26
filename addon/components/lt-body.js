@@ -249,6 +249,16 @@ export default Component.extend({
   _scrollToRow: null,
 
   /**
+   * Indicates that the scrollToRow is not yet rendered.
+   *
+   * @property scrollPending
+   * @type {Boolean}
+   * @default false
+   * @private
+   */
+  scrollPending: false,
+
+  /**
    * @property targetScrollOffset
    * @type {Number}
    * @default 0
@@ -348,6 +358,13 @@ export default Component.extend({
     once(this, this._setupVirtualScrollbar);
   },
 
+  didRender() {
+    this._super(...arguments);
+    if (this.get('scrollPending')) {
+      this.setupScrollOffset();
+    }
+  },
+
   destroy() {
     this._super(...arguments);
     this._cancelTimers();
@@ -383,7 +400,7 @@ export default Component.extend({
         targetScrollOffset,
         hasReachedTargetScrollOffset: targetScrollOffset <= 0,
       });
-    } else if (scrollToRow !== _scrollToRow) {
+    } else if (scrollToRow !== _scrollToRow || this.get('scrollPending')) {
       if (scrollToRow instanceof Row) {
         let rowElement = element.querySelector(
           `[data-row-id=${scrollToRow.get('rowId')}]`
@@ -391,6 +408,9 @@ export default Component.extend({
 
         if (rowElement instanceof Element) {
           targetScrollOffset = rowElement.offsetTop;
+          this.set('scrollPending', false);
+        } else {
+          this.set('scrollPending', true);
         }
       }
 
