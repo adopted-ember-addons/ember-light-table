@@ -5118,16 +5118,6 @@ ember-classic-decorator@^3.0.0:
     ember-cli-babel "^7.26.11"
     ember-cli-htmlbars "^6.0.1"
 
-ember-classic-decorator@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/ember-classic-decorator/-/ember-classic-decorator-3.0.1.tgz#13acf53e5fdb1f867919765853eb3592380ed1ef"
-  integrity sha512-IoocHPX1cY93Sma7VeDGbF0M1+TkBWDJLus+RD01902eD+KHEL2+diwM+iayCyO+1/xaUzdzNGh35J+i+TCxoA==
-  dependencies:
-    "@embroider/macros" "^1.0.0"
-    babel-plugin-filter-imports "^4.0.0"
-    ember-cli-babel "^7.26.11"
-    ember-cli-htmlbars "^6.0.1"
-
 ember-cli-babel-plugin-helpers@^1.0.0, ember-cli-babel-plugin-helpers@^1.1.0, ember-cli-babel-plugin-helpers@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ember-cli-babel-plugin-helpers/-/ember-cli-babel-plugin-helpers-1.1.1.tgz#5016b80cdef37036c4282eef2d863e1d73576879"
