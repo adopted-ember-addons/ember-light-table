@@ -250,7 +250,7 @@ export default class Column extends EmberObject.extend({
    * Class names to be applied to header and footer cells of this column
    *
    * @property classNames
-   * @type {String | Array}
+   * @type {String}
    */
   classNames: null,
 
@@ -258,7 +258,7 @@ export default class Column extends EmberObject.extend({
    * Class names to be applied to all cells of this column
    *
    * @property cellClassNames
-   * @type {String | Array}
+   * @type {String}
    */
   cellClassNames: null,
 
