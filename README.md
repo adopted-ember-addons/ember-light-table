@@ -1,14 +1,13 @@
 <div align="center">
   <a href="https://adopted-ember-addons.github.io/ember-light-table/">
     <img
-      src="https://github.com/adopted-ember-addons/ember-light-table/master/docs/readme-logo.png"
+      src="https://github.com/adopted-ember-addons/ember-light-table/blob/master/docs/readme-logo.png"
       alt="Ember Light Table"
     >
   </a>
 </div>
 
 [![Ember Versions](https://img.shields.io/badge/Ember.js%20Versions-%5E3.4%20and%20%5E4.0-brightgreen.svg)](https://travis-ci.org/offirgolan/ember-light-table)
-[![Build Status](https://travis-ci.org/offirgolan/ember-light-table.svg)](https://travis-ci.org/offirgolan/ember-light-table)
 [![npm version](https://badge.fury.io/js/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
 [![Download Total](https://img.shields.io/npm/dt/ember-light-table.svg)](http://badge.fury.io/js/ember-light-table)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-light-table.svg)](https://emberobserver.com/addons/ember-light-table)
@@ -16,8 +15,9 @@
 
 **Ember Light Table** is a  lightweight contextual component based table addon that follows Ember's actions up, data down ideology.
 
-# WARNING
-_The API for initializing Ember Light Table (v2.x) has recently changed. Please review the [Pull Request](https://github.com/adopted-ember-addons/ember-light-table/pull/701) for more information._
+## Warning
+
+Version 3.x has significant updates including breaking changes. See the  [upgrade guide](https://github.com/adopted-ember-addons/ember-light-table/master/docs/upgrade-quide.md).
 
 ## Features
 
