@@ -34,34 +34,38 @@ import Row from './classes/Row';
  *
  * ```javascript
  * // components/my-table.js
- * import { computed } from '@ember/object';
+ * import Component from '@glimmer/component';
  * import Table from 'ember-light-table';
  *
- * export default Ember.Component.extend({
- *   model: null,
+ * export default class MyTable extends Component {
+ *   model = null;
  *
- *   columns: computed(function() {
- *     return [{
- *       label: 'Avatar',
- *       valuePath: 'avatar',
- *       width: '60px',
- *       sortable: false,
- *       cellComponent: 'user-avatar'
- *     }, {
- *       label: 'First Name',
- *       valuePath: 'firstName',
- *       width: '150px'
- *     }, {
- *       label: 'Last Name',
- *       valuePath: 'lastName',
- *       width: '150px'
- *     }];
- *   }),
+ *  get columns() {
+ *     return [
+ *       {
+ *         label: 'Avatar',
+ *         valuePath: 'avatar',
+ *         width: '60px',
+ *         sortable: false,
+ *         cellComponent: 'user-avatar',
+ *       },
+ *       {
+ *        label: 'First Name',
+ *         valuePath: 'firstName',
+ *         width: '150px',
+ *       },
+ *       {
+ *         label: 'Last Name',
+ *         valuePath: 'lastName',
+ *         width: '150px',
+ *        },
+ *      ];
+ *   }
  *
- *   table: computed('model', function() {
- *    return Table.create({ columns: this.get('columns'), rows: this.get('model') });
- *   })
- * });
+ *   get table() {
+ *     return Table.create({ columns: this.columns, rows: this.model });
+ *   }
+ * }
  * ```
  *
  * @module Usage
@@ -72,31 +76,31 @@ import Row from './classes/Row';
  * The `light-table` component exposes 3 contextual component (head, body, and foot).
  *
  * ```hbs
- * {{#light-table table as |t|}}
+ * <LightTable @table={{this.table}} as |t|>
  *
- *   {{t.head}}
+ *   <t.head />
  *
- *   {{#t.body as |body|}}
- *     {{#body.expanded-row as |row|}}
+ *   {<t.body as |body|>
+ *     <body.expanded-row as |row|>
  *       Hello <b>{{row.firstName}}</b>
- *     {{/body.expanded-row}}
+ *     </body.expanded-row>
  *
  *     {{#if isLoading}}
- *       {{#body.loader}}
+ *       <body.loader>
  *         Loading...
- *       {{/body.loader}}
+ *       </body.loader>
  *     {{/if}}
  *
  *     {{#if table.isEmpty}}
- *       {{#body.no-data}}
+ *       <body.no-data>
  *         No users found.
- *       {{/body.no-data}}
+ *       </body.no-data>
  *     {{/if}}
- *   {{/t.body}}
+ *   </t.body>
  *
- *   {{t.foot}}
+ *   <t.foot />
  *
- * {{/light-table}}
+ * </LightTable>
  * ```
  *
  * Each of these contextual components have a wide array of options so it is advised to look
