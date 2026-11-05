@@ -55,7 +55,7 @@
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.8.1",
     "@embroider/test-setup": "^2.0.2",
-    "@faker-js/faker": "^7.6.0",
+    "@faker-js/faker": "^10.6.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^7.6.0",
