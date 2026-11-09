@@ -6,7 +6,6 @@ import Row from 'ember-light-table/classes/Row';
 import Column from 'ember-light-table/classes/Column';
 import { mergeOptionsWithGlobals } from 'ember-light-table/-private/global-options';
 import { isNone } from '@ember/utils';
-import classic from 'ember-classic-decorator';
 
 /**
  * @module Table
@@ -17,7 +16,6 @@ import classic from 'ember-classic-decorator';
  * @module Table
  * @class Table
  */
-@classic
 export default class Table extends EmberObject.extend({
   /**
    * @property columns

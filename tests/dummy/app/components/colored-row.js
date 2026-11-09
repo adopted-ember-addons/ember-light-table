@@ -1,10 +1,8 @@
 // BEGIN-SNIPPET colored-row
-import classic from 'ember-classic-decorator';
 import { classNames, attributeBindings } from '@ember-decorators/component';
 import { htmlSafe } from '@ember/template';
 import Row from 'ember-light-table/components/lt-row';
 
-@classic
 @classNames('colored-row')
 @attributeBindings('style')
 export default class ColoredRow extends Row {
