@@ -1,5 +1,4 @@
 import ObjectProxy from '@ember/object/proxy';
-import { computed } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 import classic from 'ember-classic-decorator';
 
@@ -75,7 +74,7 @@ export default class Row extends ObjectProxy.extend({
    * @type {String}
    * @readOnly
    */
-  rowId: computed(function () {
+  get rowId() {
     return guidFor(this);
-  }).readOnly(),
+  },
 }) {}

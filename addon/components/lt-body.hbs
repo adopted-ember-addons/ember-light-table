@@ -1,8 +1,8 @@
 <div
   class="lt-body-wrap
-  {{if this.canSelect "can-select"}}
-   {{if this.multiSelect "multi-select"}}
-   {{if this.canExpand "can-expand"}}"
+    {{if this.canSelect 'can-select'}}
+    {{if this.multiSelect 'multi-select'}}
+    {{if this.canExpand 'can-expand'}}"
   {{did-insert this.onRowsChange this.rows}}
   {{did-update this.onRowsChange this.rows}}
   {{did-insert this.scheduleScrolledToBottom this.rows this.isInViewport}}
@@ -16,7 +16,8 @@
       row=(or this.rowComponent (component "lt-row"))
       spanned-row=(or this.spannedRowComponent (component "lt-spanned-row"))
       infinity=(or this.infinityComponent (component "lt-infinity"))
-    ) as |lt|
+    )
+    as |lt|
   }}
     {{#if this.sharedOptions.occlusion}}
       <div class="lt-scrollable tse-scrollable vertical-collection">
@@ -30,33 +31,34 @@
             {{#if this.overwrite}}
               {{yield this.columns this.rows}}
             {{else}}
-              {{#vertical-collection
-                items=this.rows
-                tagName="vertical-collection"
-                estimateHeight=this.sharedOptions.estimatedRowHeight
-                shouldRecycle=this.sharedOptions.shouldRecycle
-                staticHeight=true
-                bufferSize=this.scrollBufferRows
-                containerSelector=".lt-scrollable"
-                firstVisibleChanged=(action "firstVisibleChanged")
-                lastVisibleChanged=(action "lastVisibleChanged")
-                firstReached=(action "firstReached")
-                lastReached=(action "lastReached") as |row|
-              }}
-                {{lt.row
-                  row=row
-                  columns=this.columns
-                  data-row-id=row.rowId
-                  table=this.table
-                  tableActions=this.tableActions
-                  extra=this.extra
-                  enableScaffolding=this.enableScaffolding
-                  canExpand=this.canExpand
-                  canSelect=this.canSelect
-                  click=(action "onRowClick" row)
-                  doubleClick=(action "onRowDoubleClick" row)
-                }}
-              {{/vertical-collection}}
+              <VerticalCollection
+                @items={{this.rows}}
+                @tagName="vertical-collection"
+                @estimateHeight={{this.sharedOptions.estimatedRowHeight}}
+                @shouldRecycle={{this.sharedOptions.shouldRecycle}}
+                @staticHeight={{true}}
+                @bufferSize={{this.scrollBufferRows}}
+                @containerSelector=".lt-scrollable"
+                @firstVisibleChanged={{this.firstVisibleRowChanged}}
+                @lastVisibleChanged={{this.lastVisibleRowChanged}}
+                @firstReached={{this.firstRowReached}}
+                @lastReached={{this.lastRowReached}}
+                as |row|
+              >
+                <lt.row
+                  @row={{row}}
+                  @columns={{this.columns}}
+                  @data-row-id={{row.rowId}}
+                  @table={{this.table}}
+                  @tableActions={{this.tableActions}}
+                  @extra={{this.extra}}
+                  @enableScaffolding={{this.enableScaffolding}}
+                  @canExpand={{this.canExpand}}
+                  @canSelect={{this.canSelect}}
+                  @click={{fn this.rowClicked row}}
+                  @doubleClick={{fn this.rowDoubleClicked row}}
+                />
+              </VerticalCollection>
               {{yield
                 (hash
                   loader=(component
@@ -87,7 +89,8 @@
         @virtualScrollbar={{this.useVirtualScrollbar}}
         @autoHide={{this.autoHideScrollbar}}
         @scrollTo={{this.targetScrollOffset}}
-        @onScrollY={{action "onScroll"}} as |scrollbar|
+        @onScrollY={{this.scroll}}
+        as |scrollbar|
       >
         <div
           id={{concat this.tableId "_inline_head"}}
@@ -101,8 +104,7 @@
                 {{#each this.columns as |column|}}
                   {{! template-lint-disable no-inline-styles }}
                   <td
-                    style={{
-                      html-safe
+                    style={{html-safe
                       (if column.width (concat "width: " column.width))
                     }}
                     class="lt-scaffolding"
@@ -116,23 +118,22 @@
               {{yield this.columns this.rows}}
             {{else}}
               {{#each
-                (if
-                  scrollbar (compute scrollbar.update this.rows) this.rows
-                ) as |row|
+                (if scrollbar (compute scrollbar.update this.rows) this.rows)
+                as |row|
               }}
-                {{lt.row
-                  row=row
-                  columns=this.columns
-                  data-row-id=row.rowId
-                  table=this.table
-                  tableActions=this.tableActions
-                  extra=this.extra
-                  enableScaffolding=this.enableScaffolding
-                  canExpand=this.canExpand
-                  canSelect=this.canSelect
-                  click=(action "onRowClick" row)
-                  doubleClick=(action "onRowDoubleClick" row)
-                }}
+                <lt.row
+                  @row={{row}}
+                  @columns={{this.columns}}
+                  @data-row-id={{row.rowId}}
+                  @table={{this.table}}
+                  @tableActions={{this.tableActions}}
+                  @extra={{this.extra}}
+                  @enableScaffolding={{this.enableScaffolding}}
+                  @canExpand={{this.canExpand}}
+                  @canSelect={{this.canSelect}}
+                  @click={{fn this.rowClicked row}}
+                   @doubleClick={{fn this.rowDoubleClicked row}}
+                />
 
                 {{yield
                   (hash

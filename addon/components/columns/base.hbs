@@ -26,6 +26,6 @@
     @table={{this.table}}
     @resizeOnDrag={{this.resizeOnDrag}}
     @isResizing={{mut this.isResizing}}
-    @onColumnResized={{action this.onColumnResized this.column}}
+    @onColumnResized={{fn this.columnResized this.column}}
   />
 {{/if}}

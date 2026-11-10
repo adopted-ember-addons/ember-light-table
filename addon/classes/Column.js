@@ -278,9 +278,9 @@ export default class Column extends EmberObject.extend({
    * @type {String}
    * @private
    */
-  columnId: computed(function () {
+  get columnId() {
     return guidFor(this);
-  }).readOnly(),
+  },
 
   /**
    * True if `hidden` or `responsiveHidden` is true.
